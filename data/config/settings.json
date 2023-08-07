@@ -1,0 +1,10 @@
+{
+	"graphics": {
+		"ui": {
+            "dough_hullmod_incompatible":"graphics/dough/icons/tooltip/hullmod_incompatible.png",
+        }
+	},
+	"plugins": {
+		"combatReadinessPlugin":"data.scripts.sd_CRPluginImpl",
+	}
+}

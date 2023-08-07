@@ -1,0 +1,182 @@
+{
+  "hullName": "Vacuum Destroyer",
+  "hullId": "sd_destroyervacuum",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/sd_destroyervacuum.png",
+  "style": "SD_SPEC",
+  "height": 190,
+  "width": 190,
+  "center": [95, 92.5],
+  "collisionRadius": 121.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 115.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "sd_design",
+    "pointdefenseai",
+    "nav_relay"
+  ],
+  "builtInWeapons": {
+    "WS0008": "sd_magicThruster",
+    "WS0009": "sd_magicThruster",
+    "WS0010": "sd_magicThruster",
+    "WS0011": "sd_magicThruster",
+    "WS0012": "sd_blinker",
+    "WS0013": "sd_blinker",
+    "WS0014": "sd_blinker",
+    "WS0015": "sd_blinker"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 240,
+      "angle": 90,
+      "locations": [2.5, 38]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 240,
+      "angle": -90,
+      "locations": [2.5, -38]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 240,
+      "angle": 90,
+      "locations": [2.5, 58]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 240,
+      "angle": -90,
+      "locations": [2.5, -58]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [67.5, -0]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -142,
+      "locations": [-73, -31.5]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 142,
+      "locations": [-73, 31.5]
+    },
+    {
+      "id": "WS0010",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 43,
+      "locations": [69.5, 16.5]
+    },
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -45,
+      "locations": [69.5, -16.5]
+    },
+    {
+      "id": "WS0012",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [8, 82.5]
+    },
+    {
+      "id": "WS0013",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [-30, 58]
+    },
+    {
+      "id": "WS0014",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -90,
+      "locations": [26, -61.5]
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [40, -49.5]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-79.5, -0],
+      "length": 43.5,
+      "width": 14,
+      "angle": 180,
+      "contrailSize": 14,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-78.5, 10],
+      "length": 30,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-78.5, -10],
+      "length": 30,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    3.5, 79.5,
+    -76, 23.5,
+    -75.5, -22,
+    3.5, -77,
+    70.5, -12,
+    70, 12
+  ]
+}

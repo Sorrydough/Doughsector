@@ -1,0 +1,16 @@
+{
+	"id":"sd",
+	"name":"Doughpack",
+	"author":"Sorrydough",
+	"version":"69",
+	"description":"Lol quirky self-insert faction",
+    "gameVersion": "0.96a-RC7",
+  	"jars":["jars/doughsector.jar"],
+    "dependencies": [
+        {
+            "id": "lw_lazylib",
+            "name": "LazyLib",
+        },
+    ],
+	"modPlugin":"data.scripts.sd_modPlugin"
+}

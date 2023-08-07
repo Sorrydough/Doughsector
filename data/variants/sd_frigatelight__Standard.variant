@@ -1,0 +1,16 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 10,
+    "fluxVents": 6,
+    "hullId": "sd_frigatelight",
+    "hullMods": ["high_scatter_amp"],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigatelight_Standard",
+    "weaponGroups": [{
+        "autofire": false,
+        "mode": "LINKED",
+        "weapons": {"WS0001": "phasebeam"}
+    }]
+}

@@ -1,0 +1,24 @@
+{
+  "displayName": "Kinetic Blaster Drone",
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "goalVariant": true,
+  "hullId": "sd_droneblaster",
+  "hullMods": [],
+  "permaMods": [],
+  "quality": 0,
+  "variantId": "sd_droneblaster_Standard",
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": { "WS0001": "sd_kineticblaster_fighter" }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": { "WS0002": "pdburst_fighter" }
+    }
+  ],
+  "wings": []
+}

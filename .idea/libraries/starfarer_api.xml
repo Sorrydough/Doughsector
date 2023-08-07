@@ -1,0 +1,27 @@
+<component name="libraryTable">
+  <library name="starfarer.api">
+    <CLASSES>
+      <root url="jar:///home/david/Games/starsector/commons-compiler-jdk.jar!/" />
+      <root url="jar:///home/david/Games/starsector/commons-compiler.jar!/" />
+      <root url="jar:///home/david/Games/starsector/fs.common_obf.jar!/" />
+      <root url="jar:///home/david/Games/starsector/fs.sound_obf.jar!/" />
+      <root url="jar:///home/david/Games/starsector/janino.jar!/" />
+      <root url="jar:///home/david/Games/starsector/jinput.jar!/" />
+      <root url="jar:///home/david/Games/starsector/jogg-0.0.7.jar!/" />
+      <root url="jar:///home/david/Games/starsector/jorbis-0.0.15.jar!/" />
+      <root url="jar:///home/david/Games/starsector/json.jar!/" />
+      <root url="jar:///home/david/Games/starsector/log4j-1.2.9.jar!/" />
+      <root url="jar:///home/david/Games/starsector/lwjgl_util.jar!/" />
+      <root url="jar:///home/david/Games/starsector/lwjgl.jar!/" />
+      <root url="jar:///home/david/Games/starsector/starfarer_obf.jar!/" />
+      <root url="jar:///home/david/Games/starsector/starfarer.api.jar!/" />
+      <root url="jar:///home/david/Games/starsector/xstream-1.4.10.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="https://fractalsoftworks.com/starfarer.api/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///home/david/Games/starsector/starfarer.api.zip!/" />
+    </SOURCES>
+  </library>
+</component>

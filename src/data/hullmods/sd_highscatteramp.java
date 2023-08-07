@@ -1,0 +1,83 @@
+package data.hullmods;
+
+import com.fs.starfarer.api.combat.BaseHullMod;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.listeners.WeaponBaseRangeModifier;
+import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
+
+public class sd_highscatteramp extends BaseHullMod {
+
+	public static float RANGE_THRESHOLD = 300f;
+	public static float RANGE_MULT = 0.50f;
+
+	public static float DAMAGE_BONUS_PERCENT = 50f;
+	public static float SMOD_MODIFIER = 15f;
+
+	@Override
+	public boolean isApplicableToShip(ShipAPI ship) {
+		return !ship.getVariant().getHullMods().contains(HullMods.ADVANCEDOPTICS);
+	}
+
+	public String getUnapplicableReason(ShipAPI ship) {
+		if (ship.getVariant().getHullMods().contains(HullMods.ADVANCEDOPTICS)) {
+			return "Incompatible with Advanced Optics";
+		}
+		return null;
+	}
+
+	public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
+		boolean sMod = isSMod(stats);
+		stats.getBeamWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT + (sMod ? SMOD_MODIFIER : 0));
+	}
+
+	public String getSModDescriptionParam(int index, HullSize hullSize, ShipAPI ship) {
+		if (index == 0) return Math.round(SMOD_MODIFIER) + "%";
+		return null;
+	}
+
+	@Override
+	public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+		ship.addListener(new HighScatterAmpRangeMod());
+	}
+
+	public static class HighScatterAmpRangeMod implements WeaponBaseRangeModifier {
+		public HighScatterAmpRangeMod() {
+		}
+		public float getWeaponBaseRangePercentMod(ShipAPI ship, WeaponAPI weapon) {
+			return 0;
+		}
+		public float getWeaponBaseRangeMultMod(ShipAPI ship, WeaponAPI weapon) {
+			return 1f;
+		}
+		public float getWeaponBaseRangeFlatMod(ShipAPI ship, WeaponAPI weapon) {
+			if (weapon.isBeam()) {
+				float range = weapon.getSpec().getMaxRange();
+				if (range < RANGE_THRESHOLD) return 0;
+
+				float past = range - RANGE_THRESHOLD;
+				float penalty = past * (1f - RANGE_MULT);
+				return -penalty;
+			}
+			return 0f;
+		}
+	}
+
+	@Override
+	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
+		return false;
+	}
+
+	@Override
+	public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+		tooltip.addPara("Beam weapons deal "+ (int)DAMAGE_BONUS_PERCENT + "%% more damage.", 10f, Misc.getHighlightColor(), (int)DAMAGE_BONUS_PERCENT + "%");
+		tooltip.addPara("Reduces the portion of the range of beam weapons that is above "+ (int)RANGE_THRESHOLD +" range by " + Math.round((1f - RANGE_MULT) * 100f) + "%%. The base range is affected.", 10f, Misc.getNegativeHighlightColor(), String.valueOf((int) RANGE_THRESHOLD), Math.round((1f - RANGE_MULT) * 100f) + "%");
+		tooltip.addSectionHeading("Interactions with other modifiers", Alignment.MID, 10f);
+		tooltip.addPara("The base range is reduced, thus percentage and multiplicative modifiers apply to the reduced base value.", 10f);
+	}
+}

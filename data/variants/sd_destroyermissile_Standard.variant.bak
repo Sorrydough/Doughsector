@@ -1,0 +1,35 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 1,
+    "fluxVents": 0,
+    "hullId": "sd_destroyermissile",
+    "hullMods": [
+        "eccm",
+        "converted_hangar",
+        "missleracks"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_destroyermissile_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0001": "gazerpod",
+                "WS0002": "gazerpod"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "irautolance",
+                "WS0005": "lrpdlaser",
+                "WS0009": "lrpdlaser"
+            }
+        }
+    ],
+    "wings": ["sd_droneionWing"]
+}

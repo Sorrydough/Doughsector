@@ -1,0 +1,7 @@
+{
+	"id":"sd_decoylauncher_fighter",
+	"type":"WEAPON",
+	"aiType":"FLARE_JAMMER",
+	"weaponDataId":"sd_decoyflare_fighter",
+	"outOfUsesSound":"gun_out_of_ammo",
+}

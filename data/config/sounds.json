@@ -1,0 +1,27 @@
+{
+	#####VENTING######
+	
+	"sd_vent_loop":{
+		"sounds":[
+                        {"file":"sounds/sd_spec/sd_vent_loop.ogg","pitch":1,"volume":1},
+                ],
+		"SD_SPEC":{"sounds":[0], "pitch":1, "volume":0.5},
+		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
+		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.6},
+		"CRUISER":{"sounds":[0], "pitch":0.9, "volume":0.7},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":0.8, "volume":0.8},
+	},
+	"sd_vent_start":{
+		"sounds":[
+                        {"file":"sounds/sd_spec/sd_vent_start.ogg","pitch":1,"volume":1},
+                ],
+		"SD_SPEC":{"sounds":[0], "pitch":1, "volume":0.5},
+		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
+		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.6},
+		"CRUISER":{"sounds":[0], "pitch":0.9, "volume":0.7},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":0.8, "volume":0.8},
+	},
+}
+

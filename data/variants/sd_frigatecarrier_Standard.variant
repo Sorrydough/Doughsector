@@ -1,0 +1,27 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 10,
+    "fluxVents": 5,
+    "hullId": "sd_frigatecarrier",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigatecarrier_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0001": "sabot_single",
+                "WS0005": "sabot_single"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"WS0003": "amblaster"}
+        }
+    ],
+    "wings": ["sd_droneionWing"]
+}

@@ -1,0 +1,221 @@
+{
+  "hullName": "Light Frigate",
+  "hullId": "sd_frigatelight",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/sd_frigatelight.png",
+  "style": "SD_SPEC",
+  "height": 84,
+  "width": 48,
+  "center": [24, 42],
+  "collisionRadius": 55.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 50.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "sd_design"
+  ],
+  "builtInWeapons": {
+    "WS0014": "sd_blinker",
+    "WS0015": "sd_magicThruster",
+    "WS0016": "sd_magicThruster",
+    "WS0017": "sd_magicThruster",
+    "WS0018": "sd_magicThruster"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [-2, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 170,
+      "locations": [-20, 15]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -170,
+      "locations": [-20, -15]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -123.5,
+      "locations": [-11, -12]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -105,
+      "locations": [-8, -14]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 105,
+      "locations": [-8, 14]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 123.5,
+      "locations": [-11, 12]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 24,
+      "locations": [23, 9]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 16,
+      "locations": [26, 9]
+    },
+    {
+      "id": "WS0010",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 8,
+      "locations": [23, 6]
+    },
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -5,
+      "locations": [26, 6]
+    },
+    {
+      "id": "WS0012",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -9.5,
+      "locations": [26, 3]
+    },
+    {
+      "id": "WS0013",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -23,
+      "locations": [23, 3]
+    },
+    {
+      "id": "WS0014",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [35, -5.5]
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -30.5,
+      "locations": [-6.5, -19.5]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 30.5,
+      "locations": [-6.5, 19.5]
+    },
+    {
+      "id": "WS0017",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 142.5,
+      "locations": [-26.5, 13.5]
+    },
+    {
+      "id": "WS0018",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -142.5,
+      "locations": [-26.5, -13.5]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-32, -0],
+      "length": 36,
+      "width": 12,
+      "angle": 180,
+      "contrailSize": 12,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-32, -2.5],
+      "length": 24,
+      "width": 8,
+      "angle": 180,
+      "contrailSize": 8,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-32, 2.5],
+      "length": 24,
+      "width": 8,
+      "angle": 180,
+      "contrailSize": 8,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    -38.5, 16.5,
+    -38.5, -16.5,
+    10.5, -16.5,
+    24, -3.5,
+    11.5, 16.5
+  ]
+}

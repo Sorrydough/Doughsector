@@ -1,0 +1,26 @@
+- magicthrusters need to generate smoke and glow; fer_EnginePlugin.addFlare(engine, flareData, shipAPI);
+- fix fleetwide logistic stats
+- rename corvette
+- create a custom faction start
+- housecleaning file structure and naming schemes
+- descriptions please, rename to morphic armor/design
+- create a custom ship style - mix of shadowyards sounds, custom vent colour, other stuff
+- remove static methods because apparently that causes memory leaks
+- get custom hullmod icons somehow
+
+- carrier "morphic damper field" system - nearby allied fighters recieve damper effect
+- custom fortress shield - increases shield arc, boosts efficiency, & regenerates armor based on damage blocked
+
+- figure out a system for fighters
+- make the flare launcher's everyframescript boost its ammo capacity if expanded missile racks is present
+
+- crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
+- global combatplugin for RTS mode
+    5% range?
+    very good autofire accuracy?
+    25% less recoil?
+    free target anal?
+- create a plugin for patching the OP cost of hullmods; https://fractalsoftworks.com/starfarer.api/com/fs/starfarer/api/loading/HullModSpecAPI.html
+- figure out how to deal with UGH and geodesic shield
+
+API database with a search bar: https://jaghaimo.github.io/starsector-api/index.html

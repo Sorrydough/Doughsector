@@ -1,0 +1,85 @@
+{
+  "hullName": "Graviton Bomber Drone",
+  "hullId": "sd_dronebomber",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/sd_dronebomber.png",
+  "style": "SD_SPEC",
+  "height": 36,
+  "width": 36,
+  "center": [17.5, 16.5],
+  "collisionRadius": 25,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 22.5,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0001": "sd_gravitoncharge_fighter"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [5.5, 3.5]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-12.5, 8.5],
+      "length": 15,
+      "width": 5,
+      "angle": 180,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, -7.5],
+      "length": 15,
+      "width": 5,
+      "angle": 180,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, -9],
+      "length": 10,
+      "width": 5,
+      "angle": 180,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, 10],
+      "length": 10,
+      "width": 5,
+      "angle": 180,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, -6],
+      "length": 10,
+      "width": 5,
+      "angle": 180,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, 7],
+      "length": 10,
+      "width": 5,
+      "angle": 180,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    -12, -8.5,
+    3, -14.5,
+    14, -7,
+    8, 13.5,
+    -12, 9
+  ]
+}

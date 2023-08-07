@@ -1,0 +1,4 @@
+id,variant,tags,tier,rarity,fleet pts,op cost,formation,range,attackRunRange,attackPositionOffset,num,role,role desc,refit,base value,,,,,,,,,,,,,number
+sd_droneblasterWing,sd_droneblaster_Standard,"fighter, fighter3, auto_fighter",2,,3,10,V,2000,500,400,3,FIGHTER,Fighter,10,7500,,,,,,,,,,,,,2.1
+sd_droneionWing,sd_droneion_Standard,"interceptor, interceptor3, auto_fighter",2,,5,13,BOX,2000,300,200,6,INTERCEPTOR,Suppression Drone,8,5000,,,,,,,,,,,,,2.1
+sd_dronebomberWing,sd_dronebomber_Standard,"bomber, bomber3, auto_fighter",2,,7,16,CLAW,4000,2000,600,3,BOMBER,Bomber,15,10000,,,,,,,,,,,,,2.1

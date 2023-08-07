@@ -1,0 +1,153 @@
+{
+  "hullName": "Kite [???]",
+  "hullId": "sd_retrofitkite",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/sd_retrofitkite.png",
+  "style": "SD_SPEC",
+  "height": 66,
+  "width": 82,
+  "center": [41, 28],
+  "collisionRadius": 64,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 58,
+  "viewOffset": 0,
+  "builtInMods": [
+    "sd_groundsupport",
+    "insulatedengine",
+    "ecm"
+  ],
+  "builtInWeapons": {
+    "DECO01": "sd_blinker",
+    "DECO02": "sd_blinker"
+  },
+  "weaponSlots": [
+    {
+      "id": "SYS01",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 69.5,
+      "locations": [23.5, 16]
+    },
+    {
+      "id": "DECO01",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [3, 38.5]
+    },
+    {
+      "id": "DECO02",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [3, -38.5]
+    },
+    {
+      "id": "SYS02",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 35.5,
+      "locations": [24, 15]
+    },
+    {
+      "id": "SYS03",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 7,
+      "locations": [24.5, 13.5]
+    },
+    {
+      "id": "SYS04",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -6,
+      "locations": [25, -13.5]
+    },
+    {
+      "id": "SYS05",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -35,
+      "locations": [24, -15]
+    },
+    {
+      "id": "SYS06",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -68.5,
+      "locations": [23, -16]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-22, 27.5],
+      "length": 30,
+      "width": 8,
+      "angle": 180,
+      "contrailSize": 50,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-26, 12],
+      "length": 40,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 68,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-26, -12],
+      "length": 40,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 68,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-22, -27.5],
+      "length": 30,
+      "width": 8,
+      "angle": 180,
+      "contrailSize": 50,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-21, -20],
+      "length": 20,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 50,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-21, 20],
+      "length": 20,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 50,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    37, 0,
+    -5.5, 38.5,
+    -23.5, -0,
+    -4.5, -39
+  ]
+}

@@ -1,0 +1,255 @@
+{
+  "hullName": "Fast Carrier",
+  "hullId": "sd_destroyercarrier",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/sd_destroyercarrier.png",
+  "style": "SD_SPEC",
+  "height": 192,
+  "width": 92,
+  "center": [45, 93.5],
+  "collisionRadius": 128.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 125,
+  "viewOffset": 0,
+  "builtInMods": [
+    "sd_design"
+  ],
+  "builtInWeapons": {
+    "WS0004": "sd_destroyercarrier_hangar",
+    "WS0005": "sd_blinker",
+    "WS0006": "sd_blinker",
+    "WS0007": "sd_blinker",
+    "WS0008": "sd_blinker"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [87.5, -17]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [79.5, 17]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 261,
+      "angle": -72,
+      "locations": [-25.5, -24]
+    },
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 122.5,
+      "locations": [-49.5, 25]
+    },
+    {
+      "id": "WS0010",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 62,
+      "locations": [-45.5, 25]
+    },
+    {
+      "id": "WS008",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -63,
+      "locations": [39.5, -14]
+    },
+    {
+      "id": "WS009",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -108.5,
+      "locations": [35.5, -15]
+    },
+    {
+      "id": "WS004",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 42.5,
+      "locations": [-60, 32.5]
+    },
+    {
+      "id": "WS006",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -45,
+      "locations": [-60, -32.5]
+    },
+    {
+      "id": "WS005",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 133,
+      "locations": [-76, 32.5]
+    },
+    {
+      "id": "WS007",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -138.5,
+      "locations": [-76, -32.5]
+    },
+    {
+      "id": "WS0012",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -97,
+      "locations": [-49.5, -25]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-45.5, -1]
+    },
+    {
+      "id": "LB 1",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        1.5, -0,
+        37, -0
+      ]
+    },
+    {
+      "id": "LB 2",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        39.5, -0,
+        73.5, -0
+      ]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-38.5, 32.5]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [25, 31]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [58.5, -26.5]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [79.5, 27.5]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-90.5, -17],
+      "length": 30,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-90.5, 17],
+      "length": 30,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-90.5, 20.5],
+      "length": 30,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-90.5, -20.5],
+      "length": 30,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    32, 23.5,
+    20.5, 31.5,
+    -5.5, 31,
+    -23.5, 41,
+    -44.5, 26,
+    -67, 33.5,
+    -89.5, 21,
+    -89.5, -22,
+    -67.5, -33.5,
+    -51, -27,
+    -26, -41.5,
+    -3, -30.5,
+    53.5, -27.5,
+    66.5, -21,
+    93.5, -24,
+    85, 24
+  ]
+}
