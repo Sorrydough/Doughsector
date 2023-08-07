@@ -15,14 +15,9 @@
             "weapons": {"WS0001": "tachyonlance"}
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
-            "weapons": {
-                "WS0002": "gravitonbeam",
-                "WS0004": "taclaser",
-                "WS0005": "taclaser",
-                "WS0006": "taclaser"
-            }
+            "weapons": {"WS0008": "sabot_single"}
         },
         {
             "autofire": true,
@@ -34,9 +29,14 @@
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS0008": "sabot_single"}
+            "weapons": {
+                "WS0002": "gravitonbeam",
+                "WS0004": "taclaser",
+                "WS0005": "taclaser",
+                "WS0006": "taclaser"
+            }
         }
     ]
 }

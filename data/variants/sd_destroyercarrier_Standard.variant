@@ -1,0 +1,30 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 0,
+    "fluxVents": 8,
+    "hullId": "sd_destroyercarrier",
+    "hullMods": ["expanded_deck_crew"],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_destroyercarrier_Standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"WS0003": "phasebeam"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "annihilator",
+                "WS0002": "annihilator"
+            }
+        }
+    ],
+    "wings": [
+        "sd_droneblasterWing",
+        "sd_droneionWing"
+    ]
+}

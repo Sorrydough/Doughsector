@@ -1,0 +1,28 @@
+{
+    "displayName": "Standard",
+    "fluxCapacitors": 0,
+    "fluxVents": 20,
+    "hullId": "sd_destroyervacuum",
+    "hullMods": ["fluxbreakers"],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_destroyervacuum_Standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "lrpdlaser",
+                "WS0002": "lrpdlaser",
+                "WS0003": "lrpdlaser",
+                "WS0004": "lrpdlaser"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"WS0005": "heatseeker"}
+        }
+    ],
+    "wings": ["sd_dronebomberWing"]
+}

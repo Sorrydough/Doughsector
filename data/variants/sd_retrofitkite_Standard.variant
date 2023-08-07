@@ -1,0 +1,16 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 10,
+    "fluxVents": 3,
+    "hullId": "sd_retrofitkite",
+    "hullMods": [
+        "insulatedengine",
+        "ecm",
+        "heavyarmor"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_retrofitkite_Standard",
+    "weaponGroups": []
+}

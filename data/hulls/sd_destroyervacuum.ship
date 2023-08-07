@@ -13,7 +13,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_ai",
-    "sd_design"
+    "sd_design",
+    "pointdefenseai"
   ],
   "builtInWeapons": {
     "WS0008": "sd_magicThruster",
@@ -142,6 +143,18 @@
       "arc": 0,
       "angle": 0,
       "locations": [40, -49.5]
+    },
+    {
+      "id": "LB 1",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        -54, 33.5,
+        -54, -33.5
+      ]
     }
   ],
   "engineSlots": [

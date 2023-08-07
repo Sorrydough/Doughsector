@@ -1,0 +1,38 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 0,
+    "fluxVents": 23,
+    "hullId": "sd_retrofitstarliner",
+    "hullMods": ["missile_autoloader"],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_retrofitstarliner_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0001": "amblaster",
+                "WS0002": "amblaster"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0003": "gazer",
+                "WS0004": "gazer"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "pdburst",
+                "WS0006": "pdburst"
+            }
+        }
+    ],
+    "wings": ["sd_droneblasterWing"]
+}
