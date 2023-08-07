@@ -7,12 +7,10 @@ import com.fs.starfarer.api.characters.PersonalityAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
