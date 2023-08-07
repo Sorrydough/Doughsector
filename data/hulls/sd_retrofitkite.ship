@@ -12,9 +12,7 @@
   "shieldRadius": 58,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_groundsupport",
-    "insulatedengine",
-    "ecm"
+    "sd_groundsupport"
   ],
   "builtInWeapons": {
     "DECO01": "sd_blinker",

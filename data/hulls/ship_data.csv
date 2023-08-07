@@ -17,6 +17,6 @@ name,id,designation,tech/manufacturer,system id,fleet pts,hitpoints,armor rating
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #???,sd_capitalbattleship,Fast Battleship,???,sd_metabolicdamper,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Kite [???],sd_retrofitkite,Dropship,???,maneuveringjets,3,900,300,1400,1000,80,20,,180,180,90,45,85,150,OMNI,,75,0.2,0.7,,,2,30,30,15,1,15,9,4000,5,20,180,0.25,2,2,,,,,,,CIVILIAN,sd_ship_bp,,0.45,2,3,,
+Kite [???],sd_retrofitkite,Dropship,???,maneuveringjets,3,900,300,1400,1000,80,30,,180,180,90,45,85,150,OMNI,,75,0.2,0.7,,,2,30,30,15,1,15,9,4000,5,20,180,0.25,2,2,,,,,,,CIVILIAN,sd_ship_bp,,0.45,2,3,,
 Nebula [???],sd_retrofitnebula,Auxiliary,???,flarelauncher,5,3000,175,1500,1700,85,40,,55,35,20,20,12,450,OMNI,,150,0.5,1,,,15,400,120,80,2,40,8,20000,4,20,240,0.25,4,4,,,,,,,CIVILIAN,sd_ship_bp,,0.45,2,3,,
 Starliner [???},sd_retrofitstarliner,Auxiliary,???,flarelauncher,7,5500,225,2500,2500,125,60,,45,20,10,10,10,900,OMNI,,150,0.5,1,,,50,1500,300,120,3,40,7,50000,3,20,480,0.25,10,10,,,,,,,CIVILIAN,sd_ship_bp,,0.45,2,3,,
