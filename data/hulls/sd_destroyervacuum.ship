@@ -13,9 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_ai",
-    "sd_design",
-    "pointdefenseai",
-    "nav_relay"
+    "sd_design"
   ],
   "builtInWeapons": {
     "WS0008": "sd_magicThruster",

@@ -20,9 +20,7 @@ public class sd_design extends BaseHullMod {
     }
 
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        //TODO: Pearlescent shields -> OpenGL bullshit? Fix agility stats.
-        //TODO: Fix the light frigate's OP budget.
-        //TODO:
+        //TODO: Pearlescent shields -> OpenGL bullshit? Fix agility stats. Rename all instances of sd_design to sd_beamintegration.
         //beam discount
         stats.getDynamic().getMod(Stats.SMALL_BEAM_MOD).modifyFlat(id, -1);
         stats.getDynamic().getMod(Stats.MEDIUM_BEAM_MOD).modifyFlat(id, -2);
