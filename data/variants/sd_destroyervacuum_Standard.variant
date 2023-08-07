@@ -1,5 +1,6 @@
 {
     "displayName": "Standard",
+    "goalVariant": true,
     "fluxCapacitors": 0,
     "fluxVents": 20,
     "hullId": "sd_destroyervacuum",

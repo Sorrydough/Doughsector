@@ -1,5 +1,6 @@
 {
     "displayName": "Standard",
+    "goalVariant": true,
     "fluxCapacitors": 0,
     "fluxVents": 9,
     "hullId": "sd_destroyermissile",

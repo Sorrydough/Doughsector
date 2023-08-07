@@ -2,7 +2,7 @@
     "displayName": "Standard",
     "goalVariant": true,
     "fluxCapacitors": 0,
-    "fluxVents": 23,
+    "fluxVents": 27,
     "hullId": "sd_retrofitstarliner",
     "hullMods": ["missile_autoloader"],
     "permaMods": [],
@@ -29,8 +29,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "pdburst",
-                "WS0006": "pdburst"
+                "WS0005": "lrpdlaser",
+                "WS0006": "lrpdlaser"
             }
         }
     ],
