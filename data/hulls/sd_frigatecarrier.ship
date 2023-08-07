@@ -12,6 +12,7 @@
   "shieldRadius": 70.5,
   "viewOffset": 0,
   "builtInMods": [
+    "sd_ai",
     "sd_design",
     "defensive_targeting_array"
   ],

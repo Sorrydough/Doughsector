@@ -12,6 +12,7 @@
   "shieldRadius": 58,
   "viewOffset": 0,
   "builtInMods": [
+    "sd_ai",
     "sd_groundsupport"
   ],
   "builtInWeapons": {

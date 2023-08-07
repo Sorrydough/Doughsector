@@ -12,7 +12,8 @@
   "shieldRadius": 120,
   "viewOffset": 0,
   "builtInMods": [
-    "civgrade"
+    "sd_ai",
+    "sd_design"
   ],
   "builtInWeapons": {
     "WS0011": "sd_blinker",
