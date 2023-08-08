@@ -2,7 +2,6 @@ package data.scripts.weapons;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
-import org.lazywizard.console.Console;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.HashSet;
