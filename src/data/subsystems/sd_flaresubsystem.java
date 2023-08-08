@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class sd_flaresubsystem extends CombatActivator
 {
-    final int BASEACTIVEDURATION = 1, COOLDOWNDURATION = 10, FLARESTOFIRE = 3;
+    final int ACTIVEDURATION = 1, COOLDOWNDURATION = 10, FLARESTOFIRE = 3;
     final IntervalUtil FLAREINTERVAL = new IntervalUtil(0.1f, 0.1f), AITIMER = new IntervalUtil(0.25f, 1f);
     boolean flareDoOnce = true;
     int firedFlares = 0;
@@ -44,16 +44,13 @@ public class sd_flaresubsystem extends CombatActivator
     public sd_flaresubsystem(ShipAPI ship) { super(ship); }
 
     @Override
-    public float getBaseActiveDuration() { return BASEACTIVEDURATION; }
+    public float getBaseActiveDuration() { return ACTIVEDURATION; }
 
     @Override
     public float getBaseCooldownDuration() { return COOLDOWNDURATION; }
 
     @Override
-    public String getDisplayText()
-    {
-        return "Active Flare Launcher";
-    }
+    public String getDisplayText() { return "Active Flare Launcher"; }
 
     @Override
     public String getStateText()

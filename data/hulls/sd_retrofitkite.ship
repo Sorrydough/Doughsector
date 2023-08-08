@@ -26,8 +26,8 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 69.5,
-      "locations": [23.5, 16]
+      "angle": 64.5,
+      "locations": [16, 14]
     },
     {
       "id": "DECO01",
@@ -53,8 +53,8 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 35.5,
-      "locations": [24, 15]
+      "angle": 45,
+      "locations": [19, 14]
     },
     {
       "id": "SYS03",
@@ -62,8 +62,8 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 7,
-      "locations": [24.5, 13.5]
+      "angle": -5,
+      "locations": [25, 14]
     },
     {
       "id": "SYS04",
@@ -71,8 +71,8 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -6,
-      "locations": [25, -13.5]
+      "angle": -23,
+      "locations": [22, -14]
     },
     {
       "id": "SYS05",
@@ -80,8 +80,8 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -35,
-      "locations": [24, -15]
+      "angle": -45,
+      "locations": [19, -14]
     },
     {
       "id": "SYS06",
@@ -89,8 +89,26 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -68.5,
-      "locations": [23, -16]
+      "angle": -67.5,
+      "locations": [16, -14]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 5,
+      "locations": [25, -14]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 22,
+      "locations": [22, 14]
     }
   ],
   "engineSlots": [
