@@ -3,6 +3,6 @@
 	"type":"WEAPON",
 	"aiType":"CANISTER_FLAK",
 	
-	"weaponDataId":"canister_flak",
+	"weaponDataId":"sd_plasmadischarge",
 	"outOfUsesSound":"gun_out_of_ammo",
 }

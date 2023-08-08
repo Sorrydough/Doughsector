@@ -23,6 +23,10 @@ public class sd_damperfield extends BaseShipSystemScript {
 	}
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
+		if (Global.getCombatEngine() == null)
+			return;
+		if (stats.getEntity().getOwner() == -1)
+			return;
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		if (ship.getSystem().isActive()) {
 			ship.fadeToColor(id, new Color(75, 75, 75, 255), 0.1f, 0.1f, effectLevel);

@@ -2,6 +2,7 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 #MISC,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Flare Launcher,sd_flarelauncher,,,,300,,10,200,,,,12,0.25,3,ENERGY,,,,0.5,5,0.1,40,90,10,0,,100,150,3,1,,,"SYSTEM, PD",,,,,Anti Missile,,,,,Each flare has a %s chance to divert nearby missiles.,10%,,,TRUE,
 Decoy Flare Launcher (Single),sd_decoyflare_fighter,,,,200,,10,0,,,,,0,,ENERGY,0,0,0,0.1,1,,30,30,0,0,,200,100,5,500,,,SYSTEM,,,,,,,,,,,,,,,
+Plasma Discharge,sd_plasmadischarge,,,,200,,200,,,,,,0,,ENERGY,0,0,0,0.1,5,0.5,150,150,0,0,,50,200,2,100,,,SYSTEM,,,,,,,,,,,,,,,35.5
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #FIGHTERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Kinetic Blaster (High Delay),sd_kineticblaster_fighter,,,,600,,250,,0,15,,,,,KINETIC,300,,,2,,,,,,,,750,,,,,,SYSTEM,,,,,Anti Shield,,,,,,,,,,
