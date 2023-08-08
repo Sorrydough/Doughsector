@@ -12,8 +12,8 @@
   "shieldRadius": 180.5,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_ai",
-    "sd_design",
+    "sd_customai",
+    "sd_beamintegration",
     "missile_autoloader"
   ],
   "builtInWeapons": {

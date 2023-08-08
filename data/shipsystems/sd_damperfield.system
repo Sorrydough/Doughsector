@@ -1,0 +1,26 @@
+{
+	"id":"sd_damperfield",
+	"type":"STAT_MOD",
+	"aiType":"DAMPER_FIELD",
+	
+	"statsScript":"data.shipsystems.sd_damperfield",
+
+	"runScriptWhileIdle":true, # unapply() never gets called
+
+	"soundFilterType":"LOWPASS",
+	"soundFilterGain":0.75,
+	"soundFilterGainHF":0.25,
+		
+	"fadeActivationSoundOnChargedown":true,
+	"useSound":"system_damper_omega",
+	"loopSound":"system_damper_omega_loop",
+	"deactivateSound":"system_damper_omega_off",
+	"outOfUsesSound":"gun_out_of_ammo",
+	
+	"aiHints":{
+	}
+
+}
+
+
+

@@ -12,8 +12,8 @@
   "shieldRadius": 125,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_ai",
-    "sd_design"
+    "sd_customai",
+    "sd_beamintegration"
   ],
   "builtInWeapons": {
     "WS0004": "sd_destroyercarrier_hangar",

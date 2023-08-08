@@ -1,6 +1,7 @@
  
 package data.hullmods;
 
+import activators.ActivatorManager;
 import com.fs.starfarer.api.Global;
 
 import com.fs.starfarer.api.characters.PersonalityAPI;
@@ -11,15 +12,17 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
+import data.subsystems.sd_flaresubsystem;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.util.*;
 
-public class sd_ai extends BaseHullMod {
+public class sd_customai extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+        ActivatorManager.addActivator(ship, new sd_flaresubsystem(ship));
         ship.removeListenerOfClass(sd_aiListener.class);
         ship.addListener(new sd_aiListener(ship));
     }
