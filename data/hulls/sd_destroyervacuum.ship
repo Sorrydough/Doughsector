@@ -17,6 +17,8 @@
     "pointdefenseai"
   ],
   "builtInWeapons": {
+    "WS0006": "sd_destroyervacuum_hangarL",
+    "WS0007": "sd_destroyervacuum_hangarR",
     "WS0008": "sd_magicThruster",
     "WS0009": "sd_magicThruster",
     "WS0010": "sd_magicThruster",
@@ -155,6 +157,24 @@
         -54, 33.5,
         -54, -33.5
       ]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-56.5, 34]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-56.5, -34]
     }
   ],
   "engineSlots": [
