@@ -22,7 +22,7 @@ public class sd_customai extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ActivatorManager.addActivator(ship, new sd_flaresubsystem(ship));
+        //ActivatorManager.addActivator(ship, new sd_flaresubsystem(ship));
         ship.removeListenerOfClass(sd_aiListener.class);
         ship.addListener(new sd_aiListener(ship));
     }

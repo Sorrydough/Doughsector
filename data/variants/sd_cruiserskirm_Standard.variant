@@ -1,7 +1,7 @@
 {
     "displayName": "Standard",
     "goalVariant": true,
-    "fluxCapacitors": 10,
+    "fluxCapacitors": 15,
     "fluxVents": 30,
     "hullId": "sd_cruiserskirm",
     "hullMods": ["high_scatter_amp"],
