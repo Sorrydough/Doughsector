@@ -62,12 +62,13 @@ public class sd_customai extends BaseHullMod {
                 if (ship.getFluxTracker().isOverloadedOrVenting()) {
                     return;
                 }
-                MissileAPI closest= AIUtils.getNearestEnemyMissile(ship);
-                if (closest!=null && MathUtils.isWithinRange(ship, closest,500)){
+
+                MissileAPI closest = AIUtils.getNearestEnemyMissile(ship);
+                if (closest != null && MathUtils.isWithinRange(ship, closest,500)){
                     return;
                 }
 
-                if ( ship.getFluxTracker().getFluxLevel() < 0.5 && AIUtils.getNearbyEnemies(ship, maxRange) != null) {
+                if ( ship.getFluxTracker().getFluxLevel() < 0.5 && AIUtils.getNearbyEnemies(ship, maxRange).size() > 0) {
                     return;
                 }
 
