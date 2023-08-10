@@ -137,7 +137,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -30.5,
+      "angle": -45,
       "locations": [-6.5, -19.5]
     },
     {
@@ -146,7 +146,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 30.5,
+      "angle": 45,
       "locations": [-6.5, 19.5]
     },
     {
@@ -155,7 +155,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 140.5,
+      "angle": 135,
       "locations": [-26.5, 13.5]
     },
     {
@@ -164,7 +164,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -142.5,
+      "angle": -135,
       "locations": [-26.5, -13.5]
     }
   ],

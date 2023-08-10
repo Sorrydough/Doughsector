@@ -13,25 +13,79 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_groundsupport",
-    "heavyarmor"
+    "sd_beamintegration",
+    "sd_groundsupport"
   ],
   "builtInWeapons": {
-    "DECO01": "sd_blinker",
-    "DECO02": "sd_blinker"
+    "DEC01": "sd_blinker",
+    "DEC02": "sd_blinker"
   },
   "weaponSlots": [
+      {
+      "id": "HRP01",
+      "size": "SMALL",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 10,
+      "angle": 0,
+      "locations": [-6.5, -0]
+    },
     {
       "id": "SYS01",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 64.5,
-      "locations": [16, 14]
+      "angle": -6,
+      "locations": [15, 21]
     },
     {
-      "id": "DECO01",
+      "id": "SYS02",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 10.5,
+      "locations": [15, -21]
+    },
+    {
+      "id": "SYS03",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 59,
+      "locations": [11, 21]
+    },
+    {
+      "id": "SYS04",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -60.5,
+      "locations": [11, -21]
+    },
+    {
+      "id": "SYS05",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 141,
+      "locations": [-22, 5]
+    },
+    {
+      "id": "SYS06",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -142.5,
+      "locations": [-22, -5]
+    },
+    {
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -40,85 +94,13 @@
       "locations": [3, 38.5]
     },
     {
-      "id": "DECO02",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
       "locations": [3, -38.5]
-    },
-    {
-      "id": "SYS02",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 45,
-      "locations": [19, 14]
-    },
-    {
-      "id": "SYS03",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -5,
-      "locations": [25, 14]
-    },
-    {
-      "id": "SYS04",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -23,
-      "locations": [22, -14]
-    },
-    {
-      "id": "SYS05",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -45,
-      "locations": [19, -14]
-    },
-    {
-      "id": "SYS06",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -67.5,
-      "locations": [16, -14]
-    },
-    {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 5,
-      "locations": [25, -14]
-    },
-    {
-      "id": "WS0002",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 22,
-      "locations": [22, 14]
-    },
-    {
-      "id": "HP01",
-      "size": "SMALL",
-      "type": "SYNERGY",
-      "mount": "HARDPOINT",
-      "arc": 10,
-      "angle": 0,
-      "locations": [-7, -0]
     }
   ],
   "engineSlots": [

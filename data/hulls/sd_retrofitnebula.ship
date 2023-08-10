@@ -7,22 +7,17 @@
   "height": 200,
   "width": 120,
   "center": [60, 99],
-  "collisionRadius": 121,
+  "collisionRadius": 131,
   "shieldCenter": [1, 0],
-  "shieldRadius": 120,
+  "shieldRadius": 122.5,
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration",
-    "heavyarmor"
+    "sd_beamintegration"
   ],
-  "builtInWeapons": {
-    "WS0011": "sd_blinker",
-    "WS0012": "sd_blinker"
-  },
   "weaponSlots": [
     {
-      "id": "WS0001",
+      "id": "HRP01",
       "size": "SMALL",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -31,7 +26,7 @@
       "locations": [77, 27]
     },
     {
-      "id": "WS0002",
+      "id": "HRP02",
       "size": "SMALL",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -40,79 +35,169 @@
       "locations": [77, -27]
     },
     {
-      "id": "WS0003",
+      "id": "TRT01",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 195,
-      "angle": 95,
+      "arc": 220,
+      "angle": 105,
       "locations": [-28, 38]
     },
     {
-      "id": "WS0004",
+      "id": "TRT02",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 195,
-      "angle": -95,
+      "arc": 220,
+      "angle": -105,
       "locations": [-28, -38]
     },
     {
-      "id": "WS0005",
+      "id": "SYS01",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 5,
-      "angle": 125,
-      "locations": [-68, 31]
+      "angle": 0,
+      "locations": [93, 6]
     },
     {
-      "id": "WS0006",
+      "id": "SYS02",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 5,
-      "angle": -125,
-      "locations": [-68, -31]
+      "angle": 0,
+      "locations": [93, -6]
     },
     {
-      "id": "WS0007",
+      "id": "SYS03",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 5,
-      "angle": 174.5,
-      "locations": [-71, 32]
+      "angle": 31,
+      "locations": [90, 6]
     },
     {
-      "id": "WS0008",
+      "id": "SYS04",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 5,
-      "angle": -174.5,
-      "locations": [-71, -32]
+      "angle": -36,
+      "locations": [90, -6]
     },
     {
-      "id": "WS0009",
+      "id": "SYS05",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 5,
-      "angle": 76.5,
+      "angle": 61,
+      "locations": [87, 6]
+    },
+    {
+      "id": "SYS06",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -67.5,
+      "locations": [87, -6]
+    },
+    {
+      "id": "SYS07",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 61.5,
+      "locations": [40, 43]
+    },
+    {
+      "id": "SYS08",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -49.5,
+      "locations": [40, -43]
+    },
+    {
+      "id": "SYS09",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 120,
+      "locations": [37, 43]
+    },
+    {
+      "id": "SYS10",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -129.5,
+      "locations": [37, -43]
+    },
+    {
+      "id": "SYS11",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 66.5,
       "locations": [-68, 34]
     },
     {
-      "id": "WS0010",
+      "id": "SYS12",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 5,
-      "angle": -76.5,
+      "angle": 130.5,
+      "locations": [-68, 31]
+    },
+    {
+      "id": "SYS13",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -128.5,
+      "locations": [-68, -31]
+    },
+    {
+      "id": "SYS14",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -56.5,
       "locations": [-68, -34]
     },
     {
-      "id": "WS0011",
+      "id": "SYS15",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -171,
+      "locations": [-71, 32]
+    },
+    {
+      "id": "SYS16",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 167.5,
+      "locations": [-71, -32]
+    },
+    {
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -121,7 +206,7 @@
       "locations": [93.5, 14.5]
     },
     {
-      "id": "WS0012",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
