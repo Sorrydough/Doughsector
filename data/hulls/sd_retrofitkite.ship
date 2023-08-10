@@ -110,6 +110,15 @@
       "arc": 5,
       "angle": 22,
       "locations": [22, 14]
+    },
+    {
+      "id": "HP01",
+      "size": "SMALL",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 10,
+      "angle": 0,
+      "locations": [-7, -0]
     }
   ],
   "engineSlots": [
