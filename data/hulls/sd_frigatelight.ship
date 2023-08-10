@@ -33,30 +33,12 @@
       "locations": [-2, -0]
     },
     {
-      "id": "WS0002",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 170,
-      "locations": [-20, 15]
-    },
-    {
-      "id": "WS0003",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -170,
-      "locations": [-20, -15]
-    },
-    {
       "id": "WS0004",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -123.5,
+      "angle": -148,
       "locations": [-11, -12]
     },
     {
@@ -83,7 +65,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 123.5,
+      "angle": 148,
       "locations": [-11, 12]
     },
     {
@@ -173,7 +155,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 142.5,
+      "angle": 140.5,
       "locations": [-26.5, 13.5]
     },
     {

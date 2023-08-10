@@ -13,7 +13,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration"
+    "sd_beamintegration",
+    "heavyarmor"
   ],
   "builtInWeapons": {
     "WS0011": "sd_blinker",

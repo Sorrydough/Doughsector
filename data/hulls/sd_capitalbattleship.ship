@@ -1,0 +1,415 @@
+{
+  "hullName": "Capital Battleship",
+  "hullId": "sd_capitalbattleship",
+  "hullSize": "CAPITAL_SHIP",
+  "spriteName": "graphics/ships/sd_capitalbattleship.png",
+  "style": "SD_SPEC",
+  "height": 440,
+  "width": 220,
+  "center": [110, 223],
+  "collisionRadius": 273,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 257,
+  "viewOffset": 0,
+  "builtInMods": [
+    "sd_customai",
+    "sd_beamintegration"
+  ],
+  "builtInWeapons": {
+    "WS0001": "sd_blinker",
+    "WS0002": "sd_blinker",
+    "WS0011": "sd_blinker",
+    "WS0012": "sd_blinker",
+    "WS0013": "sd_blinker",
+    "WS0014": "sd_blinker",
+    "WS0015": "sd_blinker",
+    "WS0016": "sd_blinker",
+    "WS0017": "sd_magicThruster",
+    "WS0018": "sd_magicThruster",
+    "WS0019": "sd_magicThruster",
+    "WS0020": "sd_magicThruster"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [-77.5, 101]
+    },
+    {
+      "id": "WS0012",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [-27.5, 91]
+    },
+    {
+      "id": "WS0013",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [-3.5, 78]
+    },
+    {
+      "id": "WS0014",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [182.5, 83]
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [205, -41.5]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -90,
+      "locations": [85.5, -92]
+    },
+    {
+      "id": "WS0017",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [145, 86]
+    },
+    {
+      "id": "WS0018",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 137,
+      "locations": [-176.5, 82.5]
+    },
+    {
+      "id": "WS0019",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -90,
+      "locations": [145, -87]
+    },
+    {
+      "id": "WS0020",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -135,
+      "locations": [-176.5, -82.5]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -90,
+      "locations": [122.5, -92]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 90,
+      "locations": [-107.5, 100]
+    },
+    {
+      "id": "WS0003",
+      "size": "LARGE",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [150, 0]
+    },
+    {
+      "id": "WS0004",
+      "size": "LARGE",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [187, 0]
+    },
+    {
+      "id": "WS0005",
+      "size": "MEDIUM",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [160, -51]
+    },
+    {
+      "id": "WS0006",
+      "size": "MEDIUM",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [190, -51]
+    },
+    {
+      "id": "WS0007",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 73.5,
+      "locations": [164, 51]
+    },
+    {
+      "id": "WS0008",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": -90,
+      "locations": [104, -60]
+    },
+    {
+      "id": "WS0009",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 180,
+      "locations": [-139, 0]
+    },
+    {
+      "id": "WS0010",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 90,
+      "locations": [103, 11]
+    },
+    {
+      "id": "WS0021",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 90,
+      "locations": [61, 11]
+    },
+    {
+      "id": "WS0022",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 90,
+      "locations": [19, 11]
+    },
+    {
+      "id": "WS0023",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 90,
+      "locations": [-43, 67]
+    },
+    {
+      "id": "WS0024",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 90,
+      "locations": [-93, 77]
+    },
+    {
+      "id": "WS0025",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": -90,
+      "locations": [-70, -37]
+    },
+    {
+      "id": "WS0026",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": -90,
+      "locations": [122, -16]
+    },
+    {
+      "id": "WS0027",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": -90,
+      "locations": [80, -16]
+    },
+    {
+      "id": "WS0028",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": -90,
+      "locations": [38, -16]
+    },
+    {
+      "id": "WS0029",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": -90,
+      "locations": [-12, -56]
+    },
+    {
+      "id": "WS0030",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 90,
+      "locations": [-70, 38]
+    },
+    {
+      "id": "WS0031",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": 90,
+      "locations": [-130, 44]
+    },
+    {
+      "id": "WS0032",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 232,
+      "angle": -90,
+      "locations": [-130, -44]
+    },
+    {
+      "id": "WS0033",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -90,
+      "locations": [-44, -79]
+    },
+    {
+      "id": "WS0034",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -90,
+      "locations": [-64, -79]
+    },
+    {
+      "id": "WS0035",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -90,
+      "locations": [-86, -80]
+    },
+    {
+      "id": "WS0036",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -90,
+      "locations": [-106, -80]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-215, 13],
+      "length": 54,
+      "width": 18,
+      "angle": 180,
+      "contrailSize": 18,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-218, 0],
+      "length": 54,
+      "width": 18,
+      "angle": 180,
+      "contrailSize": 18,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-193, 49],
+      "length": 54,
+      "width": 18,
+      "angle": 180,
+      "contrailSize": 18,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-193, -49],
+      "length": 54,
+      "width": 18,
+      "angle": 180,
+      "contrailSize": 18,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-215, -13],
+      "length": 54,
+      "width": 18,
+      "angle": 180,
+      "contrailSize": 18,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    193.5, -80.5,
+    195.5, 65.5,
+    165.5, 84.5,
+    117.5, 60,
+    10.5, 68,
+    -83.5, 100,
+    -166.5, 77.5,
+    -208, 30.5,
+    -208.5, -30.5,
+    -181, -69,
+    -144, -83,
+    67.5, -68,
+    100.5, -90.5
+  ]
+}

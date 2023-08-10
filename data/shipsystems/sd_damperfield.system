@@ -5,8 +5,6 @@
 	
 	"statsScript":"data.shipsystems.sd_damperfield",
 
-	"runScriptWhileIdle":true, # unapply() never gets called
-
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.75,
 	"soundFilterGainHF":0.25,
