@@ -15,7 +15,7 @@ name,id,designation,tech/manufacturer,system id,fleet pts,hitpoints,armor rating
 ???,sd_cruiserskirm,Fast Cruiser,???,sd_plasmadischarge,20,8000,1000,9000,11000,550,130,,80,80,40,40,80,1500,OMNI,,75,0.2,0.7,,,300,450,500,120,3,40,9,150000,5,15,480,0.25,20,20,,,,,,,,sd_ship_bp,,0.45,2,3,,
 ???,sd_cruiserheavy,Heavy Cruiser,???,sd_heavyskimmer,30,10000,1250,12000,13000,650,175,,50,50,25,25,50,2000,OMNI,,90,0.2,0.7,,,300,450,500,120,3,40,8,150000,5,15,540,0.25,30,30,,,,,,,,sd_ship_bp,,0.45,2,3,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-#???,sd_capitalbattleship,Fast Battleship,???,sd_plasmadischarge,60,20000,1650,20000,31250,1250,410,,50,50,25,25,50,3500,OMNI,,90,0.2,0.7,,,,,,,,,8,500000,5,15,720,0.25,60,60,,,,,,,,sd_ship_bp,,0.45,2,3,,
+???,sd_capitalbattleship,Fast Battleship,???,sd_plasmadischarge,60,20000,1650,20000,31250,1250,410,,50,50,25,25,50,3500,OMNI,,90,0.2,0.7,,,1,1,1,1,1,1,8,500000,5,15,720,0.25,60,60,,,,,,,,sd_ship_bp,,0.45,2,3,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Kite [???],sd_retrofitkite,Dropship,???,sd_plasmadischarge,2,1000,300,1400,1000,80,30,,180,180,90,90,90,150,PHASE,sd_damperfield,,,,,,2,30,30,15,1,15,10,4000,5,15,180,0.25,2,2,,,,,,,"COMBAT, CIVILIAN",sd_ship_bp,,0.65,2,3,,
 Nebula [???],sd_retrofitnebula,Auxiliary,???,sd_plasmadischarge,6,3000,650,1600,1500,90,65,,60,60,30,30,60,450,PHASE,sd_damperfield,,,,,,15,400,120,80,2,40,9,20000,5,15,240,0.25,6,6,,,,,,,"COMBAT, CIVILIAN",sd_ship_bp,,0.65,2,3,,
