@@ -8,14 +8,14 @@ sd_frigateskirm,ship,,1,normal,graphics/ships/normals/sd_frigateskirm_normal.png
 sd_frigatecarrier,ship,,1,normal,graphics/ships/normals/sd_frigatecarrier_normal.png
 sd_frigatelarge,ship,,1,normal,graphics/ships/normals/sd_frigatelarge_normal.png
 ,,,,,
-sd_destroyermissile,ship,,1,normal,graphics/ships/normals/sd_destroyermissile_normal.png
+sd_destroyersiege,ship,,1,normal,graphics/ships/normals/sd_destroyersiege_normal.png
 sd_destroyercarrier,ship,,1,normal,graphics/ships/normals/sd_destroyercarrier_normal.png
 sd_destrouervacuum,ship,,1,normal,graphics/ships/normals/sd_destroyervacuum_normal.png
 ,,,,,
 sd_cruiserskirm,ship,,1,normal,graphics/ships/normals/sd_cruiserskirm_normal.png
 sd_cruiserheavy,ship,,1,normal,graphics/ships/normals/sd_cruiserfatfuck_normal.png
 ,,,,,
-,,,,,
+sd_capitalbattleship,ship,,1,normal,graphics/ships/normals/sd_capitalbattleship_normal.png
 ,,,,,
 sd_retrofitkite,ship,,1,normal,graphics/ships/normals/sd_retrofitkite_normal.png
 sd_retrofitnebula,ship,,1,normal,graphics/ships/normals/sd_retrofitnebula_normal.png

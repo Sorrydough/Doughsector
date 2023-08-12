@@ -20,14 +20,14 @@ public class sd_beamintegration extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         //give free beam ITU, bonus not cumulative with targeting computer modifications
         //this needs to be here instead of applyEffectsBeforeShipCreation to avoid an ordering issue
-        float bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max( ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0); //ie player uses overclocked targeting unit to get 10%, so we give 30%, so 40% total
-        //check whether the bonus is positive, we don't want to accidentally subtract bonus instead if the player gets insane base targeting somehow
+        float bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max( ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0);
+        //also check whether the bonus is positive, we don't want to accidentally subtract bonus instead if the player overcomes our targeting bonus somehow
         if (bonusToGive > 0) {  ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive); }
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         tooltip.addPara("Beams recieve a 10/20/40/60%% range bonus by hull size.", 5f, Misc.getHighlightColor(), "10/20/40/60%");
-        tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage bonuses combined will apply.", 1f,
+        tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage bonuses combined will apply.", 5f,
                 Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage bonuses combined will apply.");
     }
     @Override

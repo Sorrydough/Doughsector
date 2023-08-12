@@ -1,8 +1,8 @@
 {
-  "hullName": "Missile Destroyer",
-  "hullId": "sd_destroyermissile",
+  "hullName": "Siege Destroyer",
+  "hullId": "sd_destroyersiege",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/sd_destroyermissile.png",
+  "spriteName": "graphics/ships/sd_destroyersiege.png",
   "style": "SD_SPEC",
   "height": 210,
   "width": 120,
