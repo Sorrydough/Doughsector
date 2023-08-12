@@ -4,6 +4,7 @@ Do These Right Now:
 - Custom weapon slot IDs
 - Name the fuckin ships
 - Update fighter and hull IDs
+- Add a blinker to capital
 
 Do These Later:
 - magicthrusters need to generate smoke and glow; fer_EnginePlugin.addFlare(engine, flareData, shipAPI);
@@ -18,4 +19,4 @@ Shit for Art Man:
 - Really Converted Hangars
 - Export, Pirate, Path skin variants
 - Hullmod icons
-
+- Maybe revive that old frigate carrier as a battle wall thingie?

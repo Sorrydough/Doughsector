@@ -56,19 +56,18 @@ public class sd_customai extends BaseHullMod {
             }
             timer.advance(amount);
             if (timer.intervalElapsed()) {
-                if (ship.getFluxTracker().isOverloadedOrVenting()) {
+                if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getFluxTracker().getFluxLevel() < 0.2)
                     return;
-                }
 
                 MissileAPI closest = AIUtils.getNearestEnemyMissile(ship);
-                if (closest != null && MathUtils.isWithinRange(ship, closest,500)){
+                if (closest != null && MathUtils.isWithinRange(ship, closest,500))
                     return;
-                }
 
                 for (WeaponAPI wep : ship.getAllWeapons()) {
                     if (wep.isFiring() && wep.isInBurst())
                         return;
                 }
+
 //                if ( ship.getFluxTracker().getFluxLevel() < 0.5 && AIUtils.getNearbyEnemies(ship, maxRange).size() > 0) {
 //                    return;
 //                }
