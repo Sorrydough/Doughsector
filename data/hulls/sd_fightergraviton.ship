@@ -1,8 +1,8 @@
 {
-  "hullName": "Graviton Bomber Drone",
-  "hullId": "sd_dronebomber",
+  "hullName": "Graviton Bomber",
+  "hullId": "sd_fightergraviton",
   "hullSize": "FIGHTER",
-  "spriteName": "graphics/ships/sd_dronebomber.png",
+  "spriteName": "graphics/ships/sd_fightergraviton.png",
   "style": "SD_SPEC",
   "height": 36,
   "width": 36,

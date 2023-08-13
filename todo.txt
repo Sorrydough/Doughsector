@@ -19,4 +19,5 @@ Shit for Art Man:
 - Really Converted Hangars
 - Export, Pirate, Path skin variants
 - Hullmod icons
-- Maybe revive that old frigate carrier as a battle wall thingie?
+- Maybe revive the old frigate carrier as a battle wall thingie?
+- Reskins for certain fighters - wasp, dagger

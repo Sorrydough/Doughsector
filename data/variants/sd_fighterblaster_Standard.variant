@@ -1,13 +1,13 @@
 {
-  "displayName": "Kinetic Blaster Drone",
+  "displayName": "Kinetic Blaster Fighter",
   "fluxCapacitors": 0,
   "fluxVents": 0,
   "goalVariant": true,
-  "hullId": "sd_droneblaster",
+  "hullId": "sd_fighterblaster",
   "hullMods": [],
   "permaMods": [],
   "quality": 0,
-  "variantId": "sd_droneblaster_Standard",
+  "variantId": "sd_fighterblaster_Standard",
   "weaponGroups": [
     {
       "autofire": false,

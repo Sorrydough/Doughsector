@@ -1,19 +1,19 @@
 {
-  "displayName": "Graviton Bomber Drone",
+  "displayName": "Ion Interceptor Drone",
   "fluxCapacitors": 0,
   "fluxVents": 0,
   "goalVariant": true,
-  "hullId": "sd_dronebomber",
+  "hullId": "sd_fighterion",
   "hullMods": [],
   "permaMods": [],
   "quality": 0,
-  "variantId": "sd_dronebomber_Standard",
+  "variantId": "sd_fighterion_Standard",
   "weaponGroups": [
     {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
-        "WS0001": "sd_gravitoncharge_fighter"
+        "WS0001": "sd_ionbeam_fighter"
       }
     }
   ],

@@ -1,8 +1,8 @@
 {
-  "hullName": "Kinetic Blaster Drone",
-  "hullId": "sd_droneblaster",
+  "hullName": "Kinetic Blaster Fighter",
+  "hullId": "sd_fighterblaster",
   "hullSize": "FIGHTER",
-  "spriteName": "graphics/ships/sd_droneblaster.png",
+  "spriteName": "graphics/ships/sd_fighterblaster.png",
   "style": "SD_SPEC",
   "height": 38,
   "width": 32,
