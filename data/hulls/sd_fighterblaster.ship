@@ -14,24 +14,20 @@
   "builtInMods": [
     "insulatedengine"
   ],
-  "builtInWeapons": {
-    "WS0001": "sd_kineticblaster_fighter",
-    "WS0002": "pdburst_fighter"
-  },
   "weaponSlots": [
     {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "BUILT_IN",
+      "id": "NRG01",
+      "size": "MEDIUM",
+      "type": "ENERGY",
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
       "locations": [10, -3]
     },
     {
-      "id": "WS0002",
+      "id": "NRG02",
       "size": "SMALL",
-      "type": "BUILT_IN",
+      "type": "ENERGY",
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
@@ -41,50 +37,50 @@
   "engineSlots": [
     {
       "location": [-15.5, 8],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-15.5, -7],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-15.5, 7],
-      "length": 15,
-      "width": 5,
+      "length": 24,
+      "width": 6,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 6,
       "style": "sd_blockThruster"
     },
     {
       "location": [-15.5, -6],
-      "length": 15,
-      "width": 5,
+      "length": 24,
+      "width": 6,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 6,
       "style": "sd_blockThruster"
     },
     {
       "location": [-15.5, -5],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-15.5, 6],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     }
   ],

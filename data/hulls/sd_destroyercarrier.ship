@@ -16,15 +16,19 @@
     "sd_beamintegration"
   ],
   "builtInWeapons": {
-    "WS0004": "sd_destroyercarrier_hangar",
-    "WS0005": "sd_blinker",
-    "WS0006": "sd_blinker",
-    "WS0007": "sd_blinker",
-    "WS0008": "sd_blinker"
+    "DEC01": "sd_blinker",
+    "DEC02": "sd_blinker",
+    "DEC03": "sd_blinker",
+    "DEC04": "sd_blinker",
+    "DEC05": "sd_destroyercarrier_hangar",
+    "THR01": "sd_magicThruster",
+    "THR02": "sd_magicThruster",
+    "THR03": "sd_magicThruster",
+    "THR04": "sd_magicThruster"
   },
   "weaponSlots": [
     {
-      "id": "WS0001",
+      "id": "SYN02",
       "size": "SMALL",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -33,7 +37,7 @@
       "locations": [87.5, -17]
     },
     {
-      "id": "WS0002",
+      "id": "SYN01",
       "size": "SMALL",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -42,7 +46,7 @@
       "locations": [79.5, 17]
     },
     {
-      "id": "WS0003",
+      "id": "NRG01",
       "size": "MEDIUM",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -51,43 +55,7 @@
       "locations": [-25.5, -24]
     },
     {
-      "id": "WS0011",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 122.5,
-      "locations": [-49.5, 25]
-    },
-    {
-      "id": "WS0010",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 62,
-      "locations": [-45.5, 25]
-    },
-    {
-      "id": "WS008",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -63,
-      "locations": [39.5, -14]
-    },
-    {
-      "id": "WS009",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -108.5,
-      "locations": [35.5, -15]
-    },
-    {
-      "id": "WS004",
+      "id": "THR01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -96,7 +64,7 @@
       "locations": [-60, 32.5]
     },
     {
-      "id": "WS006",
+      "id": "THR02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -105,7 +73,7 @@
       "locations": [-60, -32.5]
     },
     {
-      "id": "WS005",
+      "id": "THR03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -114,7 +82,7 @@
       "locations": [-76, 32.5]
     },
     {
-      "id": "WS007",
+      "id": "THR04",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -123,16 +91,7 @@
       "locations": [-76, -32.5]
     },
     {
-      "id": "WS0012",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -97,
-      "locations": [-49.5, -25]
-    },
-    {
-      "id": "WS0004",
+      "id": "DEC05",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -165,7 +124,7 @@
       ]
     },
     {
-      "id": "WS0005",
+      "id": "DEC04",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -174,7 +133,7 @@
       "locations": [-38.5, 32.5]
     },
     {
-      "id": "WS0006",
+      "id": "DEC03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -183,7 +142,7 @@
       "locations": [25, 31]
     },
     {
-      "id": "WS0007",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -192,7 +151,7 @@
       "locations": [58.5, -26.5]
     },
     {
-      "id": "WS0008",
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -203,35 +162,51 @@
   ],
   "engineSlots": [
     {
-      "location": [-90.5, -17],
-      "length": 30,
-      "width": 10,
+      "location": [-90.5, 18.5],
+      "length": 60,
+      "width": 12,
       "angle": 180,
-      "contrailSize": 10,
+      "contrailSize": 12,
       "style": "sd_blockThruster"
     },
     {
-      "location": [-90.5, 17],
-      "length": 30,
-      "width": 10,
+      "location": [-90.5, -18.5],
+      "length": 60,
+      "width": 12,
       "angle": 180,
-      "contrailSize": 10,
+      "contrailSize": 12,
       "style": "sd_blockThruster"
     },
     {
-      "location": [-90.5, 20.5],
-      "length": 30,
-      "width": 10,
+      "location": [-90.5, 21.5],
+      "length": 36,
+      "width": 9,
       "angle": 180,
-      "contrailSize": 10,
+      "contrailSize": 9,
       "style": "sd_blockThruster"
     },
     {
-      "location": [-90.5, -20.5],
-      "length": 30,
-      "width": 10,
+      "location": [-90.5, 15.5],
+      "length": 36,
+      "width": 9,
       "angle": 180,
-      "contrailSize": 10,
+      "contrailSize": 9,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-90.5, -15.5],
+      "length": 36,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-90.5, -21.5],
+      "length": 36,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
       "style": "sd_blockThruster"
     }
   ],

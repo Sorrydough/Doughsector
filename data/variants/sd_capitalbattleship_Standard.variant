@@ -1,0 +1,75 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 40,
+    "fluxVents": 50,
+    "hullId": "sd_capitalbattleship",
+    "hullMods": [
+        "fluxbreakers",
+        "armoredweapons",
+        "pointdefenseai",
+        "eccm",
+        "targetingunit"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_capitalbattleship_Standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "UNI01": "gauss",
+                "UNI02": "gauss"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "MSL01": "heatseeker",
+                "MSL02": "heatseeker",
+                "MSL03": "heatseeker",
+                "MSL04": "heatseeker"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "NRG03": "guardian",
+                "NRG04": "heavyburst",
+                "NRG05": "heavyburst",
+                "NRG06": "heavyburst",
+                "NRG07": "irautolance",
+                "NRG08": "irautolance",
+                "NRG09": "irautolance",
+                "NRG10": "lrpdlaser",
+                "NRG11": "lrpdlaser",
+                "NRG12": "lrpdlaser",
+                "NRG13": "lrpdlaser",
+                "NRG14": "lrpdlaser",
+                "NRG15": "lrpdlaser",
+                "NRG16": "lrpdlaser"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "SYN01": "gravitonbeam",
+                "SYN02": "gravitonbeam"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"NRG01": "tachyonlance"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"NRG02": "hil"}
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "displayName": "Standard",
+    "goalVariant": true,
+    "fluxCapacitors": 0,
+    "fluxVents": 4,
+    "hullId": "sd_destroyersiege",
+    "hullMods": [
+        "fluxbreakers",
+        "advancedoptics",
+        "converted_hangar"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_destroyersiege_Standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "SYN01": "gravitonbeam",
+                "SYN02": "gravitonbeam"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"MSL01": "heatseeker"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "NRG01": "lrpdlaser",
+                "NRG02": "lrpdlaser",
+                "NRG03": "lrpdlaser"
+            }
+        }
+    ],
+    "wings": ["sd_fighterblasterWing"]
+}

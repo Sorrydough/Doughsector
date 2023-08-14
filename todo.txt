@@ -1,10 +1,6 @@
 Do These Right Now:
-- Update sprites with less-compressed versions
-- Implement proper thrusters
-- Custom weapon slot IDs
 - Name the fuckin ships
-- Update fighter and hull IDs
-- Add a blinker to capital
+- Blinkers blink based on flux level and not health
 
 Do These Later:
 - magicthrusters need to generate smoke and glow; fer_EnginePlugin.addFlare(engine, flareData, shipAPI);
@@ -14,6 +10,7 @@ Do These Later:
     very good autofire accuracy?
     25% less recoil?
     free target anal?
+- some sort of ship marriage system to capture the hearts and dicks of redditors
 
 Shit for Art Man:
 - Really Converted Hangars
@@ -21,3 +18,9 @@ Shit for Art Man:
 - Hullmod icons
 - Maybe revive the old frigate carrier as a battle wall thingie?
 - Reskins for certain fighters - wasp, dagger
+- Destroyer carrier needs an extra engine in the middle
+
+Requirements for first release:
+- Set up descriptions for systems, ships, fighters
+- Finish the flak system
+- Sort out systems for the siege and vacuum destroyers

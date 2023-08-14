@@ -16,17 +16,17 @@
     "sd_beamintegration"
   ],
   "builtInWeapons": {
-    "WS0006": "sd_magicThruster",
-    "WS0007": "sd_magicThruster",
-    "WS0008": "sd_magicThruster",
-    "WS0009": "sd_magicThruster",
-    "WS0010": "sd_blinker",
-    "WS0011": "sd_blinker",
-    "WS0012": "sd_blinker"
+    "DEC01": "sd_blinker",
+    "DEC02": "sd_blinker",
+    "DEC03": "sd_blinker",
+    "THR01": "sd_magicThruster",
+    "THR02": "sd_magicThruster",
+    "THR03": "sd_magicThruster",
+    "THR04": "sd_magicThruster"
   },
   "weaponSlots": [
     {
-      "id": "WS0001",
+      "id": "NRG01",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -35,7 +35,7 @@
       "locations": [22.5, -16.5]
     },
     {
-      "id": "WS0002",
+      "id": "NRG02",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -44,7 +44,7 @@
       "locations": [-10.5, 12.5]
     },
     {
-      "id": "WS0003",
+      "id": "NRG03",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -53,7 +53,7 @@
       "locations": [-21.5, -9.5]
     },
     {
-      "id": "WS0004",
+      "id": "SYN01",
       "size": "SMALL",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -62,7 +62,7 @@
       "locations": [38.5, -0.5]
     },
     {
-      "id": "WS0005",
+      "id": "SYN02",
       "size": "SMALL",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -71,7 +71,7 @@
       "locations": [16.5, 20.5]
     },
     {
-      "id": "WS0006",
+      "id": "THR01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -80,7 +80,7 @@
       "locations": [18.5, 34.5]
     },
     {
-      "id": "WS0007",
+      "id": "THR02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -89,7 +89,7 @@
       "locations": [20.5, -31.5]
     },
     {
-      "id": "WS0008",
+      "id": "THR03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -98,7 +98,7 @@
       "locations": [13.5, 34.5]
     },
     {
-      "id": "WS0009",
+      "id": "THR04",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -107,7 +107,7 @@
       "locations": [15.5, -31.5]
     },
     {
-      "id": "WS0010",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -116,7 +116,7 @@
       "locations": [48.5, -14]
     },
     {
-      "id": "WS0011",
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -125,49 +125,13 @@
       "locations": [48.5, 13]
     },
     {
-      "id": "WS0012",
+      "id": "DEC03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
       "locations": [-0.5, -23]
-    },
-    {
-      "id": "WS0013",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 0,
-      "angle": 100,
-      "locations": [2.5, 25.5]
-    },
-    {
-      "id": "WS0014",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 0,
-      "angle": -97.5,
-      "locations": [-8.5, -14.5]
-    },
-    {
-      "id": "WS0015",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 0,
-      "angle": -126,
-      "locations": [-35.5, -13.5]
-    },
-    {
-      "id": "WS0016",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 0,
-      "angle": 120.5,
-      "locations": [-35.5, 16.5]
     }
   ],
   "engineSlots": [

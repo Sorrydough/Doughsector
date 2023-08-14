@@ -11,12 +11,9 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 13.5,
   "viewOffset": 0,
-  "builtInWeapons": {
-    "WS0001": "sd_ionbeam_fighter"
-  },
   "weaponSlots": [
     {
-      "id": "WS0001",
+      "id": "NRG01",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "HIDDEN",
@@ -25,7 +22,7 @@
       "locations": [-0.5, -0]
     },
     {
-      "id": "WS0002",
+      "id": "SYS01",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HARDPOINT",
@@ -37,34 +34,34 @@
   "engineSlots": [
     {
       "location": [-6, 5],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-6, -4],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-6, -2],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-6, 3],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     }
   ],

@@ -11,14 +11,11 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 22.5,
   "viewOffset": 0,
-  "builtInWeapons": {
-    "WS0001": "sd_gravitoncharge_fighter"
-  },
   "weaponSlots": [
     {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "BUILT_IN",
+      "id": "MSL01",
+      "size": "MEDIUM",
+      "type": "MISSILE",
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
@@ -28,50 +25,50 @@
   "engineSlots": [
     {
       "location": [-12.5, 8.5],
-      "length": 15,
-      "width": 5,
+      "length": 24,
+      "width": 6,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 6,
       "style": "sd_blockThruster"
     },
     {
       "location": [-12.5, -7.5],
-      "length": 15,
-      "width": 5,
+      "length": 24,
+      "width": 6,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 6,
       "style": "sd_blockThruster"
     },
     {
       "location": [-12.5, -9],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-12.5, 10],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-12.5, -6],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     },
     {
       "location": [-12.5, 7],
-      "length": 10,
-      "width": 5,
+      "length": 12,
+      "width": 3,
       "angle": 180,
-      "contrailSize": 5,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     }
   ],

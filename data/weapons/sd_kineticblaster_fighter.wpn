@@ -2,7 +2,7 @@
 	"id":"sd_kineticblaster_fighter",  # this id must match what's in the spreadsheet
 	"specClass":"projectile",
 	"type":"ENERGY",
-	"size":"SMALL",
+	"size":"MEDIUM",
 	"turretSprite":"graphics/weapons/kinetic_blaster_turret_base.png",
 	"turretGlowSprite":"graphics/weapons/kinetic_blaster_turret_glow.png",
 	"hardpointSprite":"graphics/weapons/kinetic_blaster_hardpoint_base.png",

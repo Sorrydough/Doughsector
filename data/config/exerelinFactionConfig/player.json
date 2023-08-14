@@ -1,5 +1,3 @@
 {
-  "startShipsCombatLarge":[
-    ["sd_frigateskirm_Standard", "sd_frigatelight_Standard", "sd_frigatelight_Standard"]
-  ],
+  "startShipsCombatSmall":[[ "sd_retrofitnebula_Standard", "sd_frigateskirm_Standard", "sd_frigatelight_Standard", "sd_frigatelight_Standard"]]
 }
