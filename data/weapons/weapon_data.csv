@@ -4,7 +4,7 @@ Plasma Discharge,sd_plasmadischarge,,,,150,,200,,,,,,0,,ENERGY,0,0,0,0.1,3,0.5,1
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Kinetic Blaster (High Delay),sd_kineticblaster_fighter,,,,600,,250,,0,15,,,,,KINETIC,300,,,2,,,,,,,,750,,,,,,SYSTEM,,,,,Anti Shield,,,,,,,,,,
 Ion Beam (Low Power),sd_ionbeam_fighter,,,,400,25,,75,0,100,,,,,ENERGY,,20,,0.25,,,,,,,2400,,,,,,,"SYSTEM, PD, PD_ALSO",,,???,,Suppression,,,,,,,,,,
-Graviton Charge Launcher,sd_gravitoncharge_fighter,,,,2000,,25,,25,15,,12,,,KINETIC,,,,5,12,0.15,45,90,3,5,,50,250,60,150,,,"SYSTEM, STRIKE, BOMB",,,,,Strike,Very Slow,None,,,"If the target’s shields are up, does additional flat hardflux equivalent to triple its damage.",,,,TRUE,
+Graviton Charge Launcher,sd_gravitoncharge_fighter,,,,2000,,25,,25,15,,12,,,KINETIC,,,,5,12,0.15,45,90,3,5,,50,250,30,100,,,"SYSTEM, STRIKE, BOMB",,,,,Strike,Very Slow,None,,,"If the target’s shields are up, does additional flat hardflux equivalent to triple its damage.",,,,TRUE,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,sd_magicThruster,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,sd_blinker,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,

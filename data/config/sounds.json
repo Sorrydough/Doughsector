@@ -1,8 +1,8 @@
 {
 	"sd_plasmadischarge_fire":[
-		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_01.ogg","pitch":0.4,"volume":0.1},
-		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_02.ogg","pitch":0.4,"volume":0.1},
-		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_03.ogg","pitch":0.4,"volume":0.1}
+		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_01.ogg","pitch":0.35,"volume":0.1},
+		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_02.ogg","pitch":0.35,"volume":0.1},
+		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_03.ogg","pitch":0.35,"volume":0.1}
     ],
 
     "sd_plasmadischarge_explosion":{
