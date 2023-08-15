@@ -1,6 +1,6 @@
 Do These Right Now:
 - Name the fuckin ships
-- Blinkers blink based on flux level and not health
+- Finish the flak system
 
 Do These Later:
 - magicthrusters need to generate smoke and glow; fer_EnginePlugin.addFlare(engine, flareData, shipAPI);
@@ -22,5 +22,4 @@ Shit for Art Man:
 
 Requirements for first release:
 - Set up descriptions for systems, ships, fighters
-- Finish the flak system
 - Sort out systems for the siege and vacuum destroyers

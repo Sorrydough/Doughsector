@@ -19,21 +19,21 @@ import java.util.List;
 public class sd_blinkerScript implements EveryFrameWeaponEffectPlugin {
 
     //The minimum and maximum duration the lights are "completely off" during the animation (how long they stay at the final animation frame)
-    private static final float MAX_OFF_DURATION = 5f;
-    private static final float MIN_OFF_DURATION = 1f;
+    final float MAX_OFF_DURATION = 5f;
+    final float MIN_OFF_DURATION = 1f;
 
     //The minimum and maximum chance for a blink cycle to occur each time interval: minimum is at 100% hull level, maximum is at 0% hull level
-    private static final float MAX_BLINK_CHANCE = 0.5f;
-    private static final float MIN_BLINK_CHANCE = 0.05f;
+    final float MAX_BLINK_CHANCE = 0.5f;
+    final float MIN_BLINK_CHANCE = 0.05f;
 
     //How often the script checks to start a new blink cycle
-    private IntervalUtil blinkInterval = new IntervalUtil(1f, 2f);
+    final IntervalUtil blinkInterval = new IntervalUtil(1f, 2f);
 
     //Lists all the animations of the script: one of these is chosen randomly each time the light goes off
     //Note that the last frame of the animation is the state which it will keep until being played in reverse
     //The same animation will then be played again, in reverse, once the lights go back on
-    private static final List<AnimFrameHolder> ALL_ANIMATIONS = new ArrayList<>();
-    static {
+    final List<AnimFrameHolder> ALL_ANIMATIONS = new ArrayList<>();
+    {
         
                 //Instant Turnoff
         ALL_ANIMATIONS.add(new AnimFrameHolder(
@@ -67,12 +67,12 @@ public class sd_blinkerScript implements EveryFrameWeaponEffectPlugin {
     }
 
     //The color of the deco weapon, not including opacity
-    private static final float[] COLOR = { 1f, 1f, 1f};
+    final float[] COLOR = { 1f, 1f, 1f};
 
     //Internal script variables
-    private float counter = 0f;
-    private float currentBlinkOffDuration = 0f;
-    private int currentBlinkType = -1;
+    float counter = 0f;
+    float currentBlinkOffDuration = 0f;
+    int currentBlinkType = -1;
 
     
     @Override
@@ -151,7 +151,7 @@ public class sd_blinkerScript implements EveryFrameWeaponEffectPlugin {
                 brightnessThisFrame = 1f;
                 blinkInterval.advance(amount);
                 if (blinkInterval.intervalElapsed()) {
-                    if (Math.random() < ((ship.getHullLevel() * MIN_BLINK_CHANCE) + ((1f- ship.getHullLevel()) * MAX_BLINK_CHANCE))) {
+                    if (Math.random() < ((ship.getHardFluxLevel() * MIN_BLINK_CHANCE) + ((1f- ship.getHardFluxLevel()) * MAX_BLINK_CHANCE))) {
                         counter = 0f;
                         //Chooses a random blink type for this cycle
                         currentBlinkType = MathUtils.getRandomNumberInRange(0, ALL_ANIMATIONS.size()-1);
@@ -169,16 +169,14 @@ public class sd_blinkerScript implements EveryFrameWeaponEffectPlugin {
     }
 
     //Keeps track of animation frames
-    private static class AnimFrameHolder {
+    static class AnimFrameHolder {
         List<AnimFrame> frames = new ArrayList<>();
-        AnimFrameHolder (AnimFrame... frames) {
-            this.frames.addAll(Arrays.asList(frames));
-        }
+        AnimFrameHolder (AnimFrame... frames) { this.frames.addAll(Arrays.asList(frames)); }
     }
 
 
     //Keeps track of animation pairs
-    private static class AnimFrame {
+    static class AnimFrame {
         float time;
         float opacity;
         AnimFrame (float time, float opacity) {
