@@ -18,11 +18,11 @@ public class sd_beamintegration extends BaseHullMod {
     }
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        //give free beam ITU, bonus not cumulative with targeting computer modifications
+        //bonus not cumulative with targeting computer modifications
         //this needs to be here instead of applyEffectsBeforeShipCreation to avoid an ordering issue
-        float bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max( ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0);
+        float bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0);
         //also check whether the bonus is positive, we don't want to accidentally subtract bonus instead if the player overcomes our targeting bonus somehow
-        if (bonusToGive > 0) {  ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive); }
+        if (bonusToGive > 0) { ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive); }
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
