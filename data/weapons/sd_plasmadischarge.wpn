@@ -12,18 +12,6 @@
 	"barrelMode":"ALTERNATING",
 	"animationType":"SMOKE",
 	"interruptibleBurst":false,
-	"smokeSpec":{
-		"particleSizeMin":10.0,
-		"particleSizeRange":10.0,
-		"cloudParticleCount":3,
-		"cloudDuration":1.0,
-		"cloudRadius":10.0,
-		"blowbackParticleCount":0,
-		"blowbackDuration":2.0,
-		"blowbackLength":30.0,
-		"blowbackSpread":10.0,
-		"particleColor":[255,60,100,150]
-	},
 	"projectileSpecId":"sd_plasmadischarge_proj",
-	"fireSoundTwo":"system_canister_flak_fire",
+	"fireSoundTwo":"sd_plasmadischarge_fire",
 }
