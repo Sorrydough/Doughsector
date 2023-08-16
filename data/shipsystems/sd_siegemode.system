@@ -1,0 +1,17 @@
+{
+	"id":"sd_siegemode",
+	"type":"STAT_MOD",
+	"aiType":"LIDAR_ARRAY",
+	
+	"statsScript":"data.shipsystems.sd_siegemode",
+
+	"fadeActivationSoundOnChargedown":true,
+	"outOfUsesSound":"gun_out_of_ammo",
+	
+	"aiHints":{
+	}
+
+}
+
+
+

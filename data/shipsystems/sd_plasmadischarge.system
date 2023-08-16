@@ -5,4 +5,11 @@
 	
 	"weaponDataId":"sd_plasmadischarge",
 	"outOfUsesSound":"gun_out_of_ammo",
+
+	"aiHints":{
+		"threatRange":200,
+		"threatAmount":2,
+		"threatAngle":0,
+		"threatArc":360,
+	}
 }
