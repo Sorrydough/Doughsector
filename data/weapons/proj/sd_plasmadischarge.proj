@@ -9,14 +9,21 @@
 	"fadeTime":0.5,
 	"fringeColor":[100,100,255,150],
 	"coreColor":[255,100,100,150],
+	"explosionSpec":{
+		"duration":0.15f, # not visual
+		"radius":66,
+		"coreRadius":44, # full damage within core radius
+		"collisionClass":MISSILE_FF,
+		"collisionClassByFighter":MISSILE_FF
+	},
 	"behaviorSpec":{
 		"behavior":"PROXIMITY_FUSE",
 		"slowToMaxSpeed":true,
-		"range":35,
+		"range":33,
 		"explosionSpec":{
-			"duration":0.12f,
-			"radius":50,
-			"coreRadius":35, # full damage within core radius - at least equal to proximity fuse range
+			"duration":0.15f,
+			"radius":66,
+			"coreRadius":44, # full damage within core radius - at least equal to proximity fuse range
 			"collisionClass":PROJECTILE_NO_FF,
 			"collisionClassByFighter":PROJECTILE_FIGHTER,
 			"particleSizeMin":6.0,
