@@ -17,11 +17,12 @@
     "ecm"
   ],
   "builtInWeapons": {
+    "DEC01": "sd_blinker",
     "DEC02": "sd_blinker",
     "DEC03": "sd_blinker",
     "DEC04": "sd_blinker",
     "DEC05": "sd_blinker",
-    "DEC01": "sd_blinker",
+    "DEC06": "sd_destroyersiege_sensor",
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
@@ -182,6 +183,15 @@
       "arc": 5,
       "angle": -127,
       "locations": [-53.5, -37.5]
+    },
+    {
+      "id": "DEC06",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [13, -0]
     }
   ],
   "engineSlots": [

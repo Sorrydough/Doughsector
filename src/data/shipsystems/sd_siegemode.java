@@ -2,6 +2,8 @@ package data.shipsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MissileAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 
@@ -13,7 +15,7 @@ public class sd_siegemode extends BaseShipSystemScript {
 	final float MISSILE_TURNACCEL_BONUS = 50f;
 	final float MISSILE_TURNRATE_BONUS = 20f;
 	final float ENERGY_RANGE_BONUS = 25;
-	final float SHIP_MANEUVER_PENALTY = 25f;
+	final float SHIP_MANEUVER_PENALTY = 20f;
 	float energyRangeBonusModifier;
 	boolean doOnce = true;
 
@@ -48,6 +50,13 @@ public class sd_siegemode extends BaseShipSystemScript {
 		stats.getDeceleration().modifyMult(id, 1f - (SHIP_MANEUVER_PENALTY * effectLevel) * 0.01f);
 		stats.getTurnAcceleration().modifyMult(id, 1f - (SHIP_MANEUVER_PENALTY * effectLevel) * 0.01f);
 		stats.getMaxTurnRate().modifyMult(id, 1f - (SHIP_MANEUVER_PENALTY * effectLevel) * 0.01f);
+
+		ShipAPI ship = (ShipAPI) stats.getEntity();
+		for (WeaponAPI weapon : ship.getAllWeapons()) {
+			if (weapon.getSpec().hasTag("sd_sensor")) {
+				weapon.setForceFireOneFrame(true);
+			}
+		}
 	}
 	public void unapply(MutableShipStatsAPI stats, String id) {
 
@@ -77,6 +86,13 @@ public class sd_siegemode extends BaseShipSystemScript {
 		stats.getDeceleration().unmodify(id);
 		stats.getTurnAcceleration().unmodify(id);
 		stats.getMaxTurnRate().unmodify(id);
+
+		ShipAPI ship = (ShipAPI) stats.getEntity();
+		for (WeaponAPI weapon : ship.getAllWeapons()) {
+			if (weapon.getSpec().hasTag("sd_sensor")) {
+				weapon.setForceFireOneFrame(false);
+			}
+		}
 
 		doOnce = true;
 	}
