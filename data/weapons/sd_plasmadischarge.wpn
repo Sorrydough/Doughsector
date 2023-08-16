@@ -1,7 +1,7 @@
 {
 	"id":"sd_plasmadischarge",
 	"specClass":"projectile",
-	"type":"SYSTEM",
+	"type":"ENERGY",
 	"size":"SMALL",
 	"turretSprite":"",
 	"hardpointSprite":"",
