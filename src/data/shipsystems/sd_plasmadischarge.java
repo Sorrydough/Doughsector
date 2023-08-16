@@ -11,8 +11,7 @@ import java.awt.*;
 
 public class sd_plasmadischarge implements OnFireEffectPlugin {
 	public void onFire(DamagingProjectileAPI projectile, WeaponAPI weapon, CombatEngineAPI engine) {
-		//make this influenced by systems expertise range mult
-		//verify that energy weapon mastery boosts damage
+		//makes it influenced by systems expertise range mult, randomize the velocity a bit as well, so it looks nicer
 		float rangeBonus = weapon.getShip().getMutableStats().getSystemRangeBonus().computeEffective(weapon.getRange()) / weapon.getRange();
 		float speedMult = (0.25f + 0.75f * (float) Math.random()) * rangeBonus;
 		projectile.getVelocity().scale(speedMult);
