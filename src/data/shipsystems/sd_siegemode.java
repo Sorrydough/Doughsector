@@ -87,13 +87,6 @@ public class sd_siegemode extends BaseShipSystemScript {
 		stats.getTurnAcceleration().unmodify(id);
 		stats.getMaxTurnRate().unmodify(id);
 
-		ShipAPI ship = (ShipAPI) stats.getEntity();
-		for (WeaponAPI weapon : ship.getAllWeapons()) {
-			if (weapon.getSpec().hasTag("sd_sensor")) {
-				weapon.setForceFireOneFrame(false);
-			}
-		}
-
 		doOnce = true;
 	}
 
