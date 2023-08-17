@@ -4,6 +4,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
+import org.lazywizard.lazylib.combat.WeaponUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import static com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags.NEEDS_HELP;
@@ -30,64 +31,51 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            desire = 0;
+            //immediately shut off the system if: there's no enemies, we have no target, or we're panicking
             CombatEntityAPI nearestEnemy = AIUtils.getNearestEnemy(ship);
-            //float nearestEnemyDistance =
-            //float targetDistance =
-            //float
-
+            if (nearestEnemy == null || target == null || ship.getAIFlags().hasFlag(NEEDS_HELP) && ship.getSystem().isOn())
+                ship.useSystem();
+            //don't bother even calculating whether to turn the system on if: there's no enemies, we have no target, we're panicking, or the system is on cooldown
+            if (nearestEnemy == null || target == null || ship.getAIFlags().hasFlag(NEEDS_HELP) || system.getCooldownRemaining() > 0)
+                return;
+            float nearestEnemyDistance = MathUtils.getDistance(ship, nearestEnemy);
+            float targetDistance = MathUtils.getDistance(ship, target);
+            //create a paired list of nearby enemy ships, their flux levels, and their hull sizes
 
             if (!system.isOn()) {
                 //we don't want to turn the system on if:
-                //we have no target
-                //the system is on cooldown
-                //an enemy is too close
+                //desire -= enemy is too close or too far - find the deviation between the target and our optimal range and subtract desire based on that
                 //
 
-                if (target == null)
-                    return;
-                if (system.getCooldownRemaining() > 0)
-                    return;
-                if (nearestEnemy != null && MathUtils.getDistance(ship, nearestEnemy) < 1000)
+                if (nearestEnemyDistance < 1000)
                     return;
 
-                //we want to turn the system on if:
-                //1. An enemy is within 1.25x of our weapon range
-                //2. within missile range
-                //3. we have a missile currently in flight
                 //4.
 
 
-                //if (target.getdistance > ship.getlongestrangeweapon * 1.25)
-                //  return;
+                //if (targetDistance > ship.getbestweapon'srange * 1.25)
+                //I need to
 
 
-
-
-                if (desire >= 100)
-                    ship.useSystem();
+                //desire += 100 if the enemy ship is within optimal range +25%
+                //desire += 100 if we've fired missiles and those missiles have a chance of reaching the target
 
             } else if (system.isOn()) {
-                //we want to turn the system off if:
-                //1. We have no target
-                //2. The target that we do have is too far
-                //3. We're under threat
-                //4. Our hard flux level is too high
-                //5. An enemy is so close that we don't need the system to hit them
-                //6.
-                if (target == null)
-                    desire += 100;
-                if (target != null && MathUtils.getDistance(ship, target) > 1500)
-                    desire += 100;
-                if (ship.getAIFlags().hasFlag(NEEDS_HELP))
-                    desire += 100;
-                if (ship.getHardFluxLevel() > 0.5)
-                    desire += ship.getHardFluxLevel() * 100;
-                if (nearestEnemy != null && MathUtils.getDistance(ship, nearestEnemy) < 500)
-                    desire += 100;
-                if (desire >= 100)
-                    ship.useSystem();
+
+
+
+                //don't want to turn system off if we have missiles in flight that might hit their target
+                //desire -=
+                //want to turn system off if target is deviating significantly outside our optimal range
+                //desire +=
+                //want to turn system off if enemy is nearby, more if it's a bigger ship, more if there are many, less if they are getting fucked up
+                //desire +=
+                //want to turn system off if hard flux is high
+                desire += ship.getHardFluxLevel() * 133;
             }
+            if (desire >= 100)
+                ship.useSystem();
+            desire = 0;
         }
     }
 }
