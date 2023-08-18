@@ -28,15 +28,15 @@ public class sd_siegemode extends BaseShipSystemScript {
 		stats.getMissileWeaponRangeBonus().modifyMult(id, MISSILE_RANGE_MULT);
 
 		if (doOnce) {
-			for (MissileAPI tmp : Global.getCombatEngine().getMissiles())
+			for (MissileAPI missile : Global.getCombatEngine().getMissiles())
 			{
-				if (tmp.getSource() == stats.getEntity())
+				if (missile.getSource() == stats.getEntity())
 				{
-					tmp.getEngineStats().getMaxSpeed().modifyPercent(id, MISSILE_SPEED_BONUS);
-					tmp.getEngineStats().getAcceleration().modifyPercent(id, MISSILE_ACCEL_BONUS);
-					tmp.getEngineStats().getMaxTurnRate().modifyPercent(id, MISSILE_TURNRATE_BONUS);
-					tmp.getEngineStats().getTurnAcceleration().modifyPercent(id, MISSILE_TURNACCEL_BONUS);
-					tmp.setMaxFlightTime(tmp.getMaxFlightTime() * MISSILE_RANGE_MULT);
+					missile.getEngineStats().getMaxSpeed().modifyPercent(id, MISSILE_SPEED_BONUS);
+					missile.getEngineStats().getAcceleration().modifyPercent(id, MISSILE_ACCEL_BONUS);
+					missile.getEngineStats().getMaxTurnRate().modifyPercent(id, MISSILE_TURNRATE_BONUS);
+					missile.getEngineStats().getTurnAcceleration().modifyPercent(id, MISSILE_TURNACCEL_BONUS);
+					missile.setMaxFlightTime(missile.getMaxFlightTime() * MISSILE_RANGE_MULT);
 				}
 			}
 			doOnce = false;
@@ -67,15 +67,15 @@ public class sd_siegemode extends BaseShipSystemScript {
 		stats.getMissileTurnAccelerationBonus().unmodify(id);
 		stats.getMissileWeaponRangeBonus().unmodify(id);
 
-		for (MissileAPI tmp : Global.getCombatEngine().getMissiles())
+		for (MissileAPI missile : Global.getCombatEngine().getMissiles())
 		{
-			if (tmp.getSource() == stats.getEntity())
+			if (missile.getSource() == stats.getEntity())
 			{
-				tmp.getEngineStats().getMaxSpeed().unmodify(id);
-				tmp.getEngineStats().getAcceleration().unmodify(id);
-				tmp.getEngineStats().getMaxTurnRate().unmodify(id);
-				tmp.getEngineStats().getTurnAcceleration().unmodify(id);
-				tmp.setMaxFlightTime(tmp.getMaxFlightTime() / MISSILE_RANGE_MULT);
+				missile.getEngineStats().getMaxSpeed().unmodify(id);
+				missile.getEngineStats().getAcceleration().unmodify(id);
+				missile.getEngineStats().getMaxTurnRate().unmodify(id);
+				missile.getEngineStats().getTurnAcceleration().unmodify(id);
+				missile.setMaxFlightTime(missile.getMaxFlightTime() / MISSILE_RANGE_MULT);
 			}
 		}
 
