@@ -3,6 +3,7 @@ package data.shipsystems.ai;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -15,7 +16,7 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
     ShipwideAIFlags flags;
     ShipSystemAPI system;
     float desire;
-    final IntervalUtil interval = new IntervalUtil(0.5f, 1f);
+    final IntervalUtil interval = new IntervalUtil(2f, 2f);
 
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
@@ -25,7 +26,9 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
         this.system = system;
     }
 
-    //NOTE: CHECK WHETHER THE CRITICAL DPS DANGER FLAG IS ACTUALLY USED BY NORMAL SHIPS
+    //Things to debug: 1. Whether critical DPS danger flag is used by non-phase ships
+    //2. Whether the ship is targeting anything beyond 1300 range
+    //3. Whether the optimal DPS distance calculation is working properly
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
@@ -62,12 +65,19 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
             float targetDistance = MathUtils.getDistance(ship, target);
             //weighted by how far the deviation is from the preferred range instead of a flat "is it in or is it out?"
             float deviation = Math.abs(targetDistance - optimalWeaponRange);
-            float deviationFactor = 1.0f - (deviation / optimalWeaponRange);
-            if (targetDistance <= optimalWeaponRange * 1.33 || targetDistance >= optimalWeaponRange * 0.75) {
-                desire += 50 * deviationFactor;
-            } else if (targetDistance >= optimalWeaponRange * 1.33 || targetDistance <= optimalWeaponRange * 0.75) {
+            float deviationFactor = 1 - (deviation / optimalWeaponRange);
+            if (targetDistance <= optimalWeaponRange * 1.33 && targetDistance >= optimalWeaponRange * 0.8) {
+                desire += 100 * deviationFactor;
+            } else if (targetDistance > optimalWeaponRange * 1.33 || targetDistance < optimalWeaponRange * 0.8) {
                 desire -= 50 * deviationFactor;
             }
+
+            //want system off if the target is faster than us
+            if (target.getHullSpec().getEngineSpec().getMaxSpeed() > ship.getHullSpec().getEngineSpec().getMaxSpeed() * 0.8)
+                desire -= 75;
+            //more likely to want system on if they're going to kite us even if the system is off
+            if (target.getHullSpec().getEngineSpec().getMaxSpeed() > ship.getHullSpec().getEngineSpec().getMaxSpeed())
+                desire += 25;
 
             //want system on if we have various flags
             if (ship.getAIFlags().hasFlag(MAINTAINING_STRIKE_RANGE))
@@ -101,7 +111,7 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
                 desire += 50;
 
             //want system off if enemy is too close, more if it's a bigger ship, more if there are many, less if they are getting fucked up
-            for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, optimalWeaponRange)) {
+            for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, optimalWeaponRange * 0.8f)) {
                 if (enemy.getAIFlags().hasFlag(NEEDS_HELP))
                     break;
                 if (enemy.getHullSize() == ShipAPI.HullSize.FRIGATE)
@@ -116,6 +126,8 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
 
             //want system off if hard flux is high
             desire -= ship.getHardFluxLevel() * 133;
+
+            Console.showMessage("Optimal Range: "+ Math.round(optimalWeaponRange) +", Target Distance: "+ Math.round(targetDistance) +", Desire: "+ Math.round(desire));
 
             if (desire >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();
