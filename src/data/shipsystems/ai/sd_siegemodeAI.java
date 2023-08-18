@@ -3,7 +3,6 @@ package data.shipsystems.ai;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -140,7 +139,7 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
             //want system off if hard flux is high
             desire -= ship.getHardFluxLevel() * 133;
 
-            Console.showMessage("Optimal Range: "+ Math.round(optimalWeaponRange) +", Target Distance: "+ Math.round(targetDistance) +", Desire: "+ Math.round(desire));
+            //Console.showMessage("Optimal Range: "+ Math.round(optimalWeaponRange) +", Target Distance: "+ Math.round(targetDistance) +", Desire: "+ Math.round(desire));
 
             if (desire >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();

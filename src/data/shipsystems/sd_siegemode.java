@@ -55,6 +55,7 @@ public class sd_siegemode extends BaseShipSystemScript {
 		for (WeaponAPI weapon : ship.getAllWeapons()) {
 			if (weapon.getSpec().hasTag("sd_sensor")) {
 				weapon.setForceFireOneFrame(true);
+				weapon.setCurrAngle(weapon.getCurrAngle() + 135 * Global.getCombatEngine().getElapsedInLastFrame());
 			}
 		}
 	}
@@ -86,6 +87,13 @@ public class sd_siegemode extends BaseShipSystemScript {
 		stats.getDeceleration().unmodify(id);
 		stats.getTurnAcceleration().unmodify(id);
 		stats.getMaxTurnRate().unmodify(id);
+
+		ShipAPI ship = (ShipAPI) stats.getEntity();
+		for (WeaponAPI weapon : ship.getAllWeapons()) {
+			if (weapon.getSpec().hasTag("sd_sensor")) {
+				weapon.setCurrAngle(0);
+			}
+		}
 
 		doOnce = true;
 	}
