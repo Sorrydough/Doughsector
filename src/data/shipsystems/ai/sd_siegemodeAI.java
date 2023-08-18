@@ -16,7 +16,7 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
     ShipwideAIFlags flags;
     ShipSystemAPI system;
     float desire;
-    final IntervalUtil interval = new IntervalUtil(2f, 2f);
+    final IntervalUtil interval = new IntervalUtil(1.5f, 3f);
 
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
@@ -61,7 +61,7 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
                 optimalWeaponRange = totalWeightedRange / totalDPS;
             }
 
-            //add desire if the enemy is within our optimal range (base weapon range +33% or -25%), otherwise subtract desire
+            //add desire if the enemy is within our optimal range, otherwise subtract desire
             float targetDistance = MathUtils.getDistance(ship, target);
             //weighted by how far the deviation is from the preferred range instead of a flat "is it in or is it out?"
             float deviation = Math.abs(targetDistance - optimalWeaponRange);
@@ -72,27 +72,40 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
                 desire -= 50 * deviationFactor;
             }
 
-            //want system off if the target is faster than us
-            if (target.getHullSpec().getEngineSpec().getMaxSpeed() > ship.getHullSpec().getEngineSpec().getMaxSpeed() * 0.8)
-                desire -= 75;
-            //more likely to want system on if they're going to kite us even if the system is off
-            if (target.getHullSpec().getEngineSpec().getMaxSpeed() > ship.getHullSpec().getEngineSpec().getMaxSpeed())
+            float targetSpeed = target.getHullSpec().getEngineSpec().getMaxSpeed();
+
+            float ourSpeedSystemOff = ship.getMaxSpeed();
+            if (ship.getSystem().isOn())
+                ourSpeedSystemOff *= 1.25f;
+
+            float ourSpeedSystemOn = ship.getMaxSpeed();
+            if (!ship.getSystem().isOn())
+                ourSpeedSystemOn *= 0.8;
+
+            //want system off if the target is going to just run away when it's on, and we could otherwise catch it
+            if (targetSpeed > ourSpeedSystemOn)
+                desire -= 50;
+            //cancel out a bit of that earlier desire reduction if they're going to kite us even if the system is off, so we can zone them out instead
+            if (targetSpeed > ourSpeedSystemOff)
+                desire += 25;
+            //want system on if we can kite the target when it's active
+            if (ourSpeedSystemOn > targetSpeed)
                 desire += 25;
 
             //want system on if we have various flags
             if (ship.getAIFlags().hasFlag(MAINTAINING_STRIKE_RANGE))
                 desire += 33;
-            if (ship.getAIFlags().hasFlag(CAMP_LOCATION))
-                desire += 33;
             if (ship.getAIFlags().hasFlag(ESCORT_OTHER_SHIP))
+                desire += 33;
+            if (ship.getAIFlags().hasFlag(CAMP_LOCATION))
                 desire += 33;
 
             //want system off if we have various flags
+            if (ship.getAIFlags().hasFlag(BACKING_OFF))
+                desire -= 33;
             if (ship.getAIFlags().hasFlag(AVOIDING_BORDER))
                 desire -= 33;
             if (ship.getAIFlags().hasFlag(HAS_POTENTIAL_MINE_TRIGGER_NEARBY))
-                desire -= 33;
-            if (ship.getAIFlags().hasFlag(BACKING_OFF))
                 desire -= 33;
 
             //want system on if target is getting fucked up
