@@ -3,6 +3,7 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
+	"everyFrameEffect":"data.scripts.weapons.sd_siegeSensorRotation",
 	"showDamageWhenDecorative":"true",
 	"turretSprite":"graphics/ships/decos/sd_destroyersiege_sensor.png",
 	"hardpointSprite":"graphics/ships/decos/sd_destroyersiege_sensor.png",
