@@ -19,6 +19,10 @@ public class sd_siegemode extends BaseShipSystemScript {
 	float energyRangeBonusModifier;
 	boolean doOnce = true;
 
+	float currAngle = 0f;
+	final float rotationSpeed = 135f;
+	boolean rotatingClockwise = true;
+
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 
 		stats.getMissileMaxSpeedBonus().modifyPercent(id, MISSILE_SPEED_BONUS);
@@ -51,11 +55,33 @@ public class sd_siegemode extends BaseShipSystemScript {
 		stats.getTurnAcceleration().modifyMult(id, 1f - (SHIP_MANEUVER_PENALTY * effectLevel) * 0.01f);
 		stats.getMaxTurnRate().modifyMult(id, 1f - (SHIP_MANEUVER_PENALTY * effectLevel) * 0.01f);
 
+
+		if (Global.getCombatEngine().isPaused())
+			return;
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		for (WeaponAPI weapon : ship.getAllWeapons()) {
 			if (weapon.getSpec().hasTag("sd_sensor")) {
 				weapon.setForceFireOneFrame(true);
-				weapon.setCurrAngle(weapon.getCurrAngle() + 135 * Global.getCombatEngine().getElapsedInLastFrame());
+
+				float arc = weapon.getArc();
+				float facing = weapon.getArcFacing() + (weapon.getShip() != null ? weapon.getShip().getFacing() : 0);
+
+				if (rotatingClockwise) {
+					currAngle += rotationSpeed * Global.getCombatEngine().getElapsedInLastFrame();
+					if (currAngle >= arc / 2) {
+						currAngle = arc / 2;
+						rotatingClockwise = false;
+					}
+				} else {
+					currAngle -= rotationSpeed * Global.getCombatEngine().getElapsedInLastFrame();
+					if (currAngle <= -arc / 2) {
+						currAngle = -arc / 2;
+						rotatingClockwise = true;
+					}
+				}
+
+				float newFacing = facing + currAngle;
+				weapon.setFacing(newFacing);
 			}
 		}
 	}
@@ -105,7 +131,7 @@ public class sd_siegemode extends BaseShipSystemScript {
 		if (index == 1) {
 			return new StatusData("Missile speed and manueverability +" + Math.round(MISSILE_SPEED_BONUS) + "%", false);
 		}
-		if (index == 3) {
+		if (index == 2) {
 			return new StatusData("Ship speed and maneuverability -" + Math.round(SHIP_MANEUVER_PENALTY * effectLevel) + "%", true);
 		}
 		return null;

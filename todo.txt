@@ -1,9 +1,18 @@
 Do These Right Now:
-- Name the fuckin ships
-- Finish the flak system
+- Name ships
+- Description strings for everything
+- Move the sensor rotating code into an EFS, yoink it from the vanilla sensordish deco weapon
+- Write the flux vacuum script
+- Set up FER vector thruster rendering
+- Use FER to dynamically render flares to add splash of pink and purple
+- Make arthr blow the sensor up to XL size
+- Implement glowmaps for blinkers and sensor
+- Make a placeholder faction with the fleets randomly patrolling near caches
+- Fix siegemode bug with missiles getting bonuses applied twice
+- Make siege sensor go back and forth instead of 360 degrees
+- Script to make weapons look nice in the refit screen
 
 Do These Later:
-- magicthrusters need to generate smoke and glow; fer_EnginePlugin.addFlare(engine, flareData, shipAPI);
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
 - global combatplugin for RTS mode
     5% range?
@@ -18,8 +27,5 @@ Shit for Art Man:
 - Hullmod icons
 - Maybe revive the old frigate carrier as a battle wall thingie?
 - Reskins for certain fighters - wasp, dagger
-- Destroyer carrier needs an extra engine in the middle
-
-Requirements for first release:
-- Set up descriptions for systems, ships, fighters
-- Sort out systems for the siege and vacuum destroyers
+- Destroyer carrier might need an extra engine in the middle
+- Siege destroyer looks a bit goofy with 2 extra aux thrusters

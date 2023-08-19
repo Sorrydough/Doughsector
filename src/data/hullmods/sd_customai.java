@@ -56,7 +56,7 @@ public class sd_customai extends BaseHullMod {
             }
             timer.advance(amount);
             if (timer.intervalElapsed()) {
-                if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getFluxTracker().getFluxLevel() < 0.2)
+                if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getFluxTracker().getFluxLevel() < 0.2 || ship.getSystem().isActive())
                     return;
 
                 MissileAPI closest = AIUtils.getNearestEnemyMissile(ship);

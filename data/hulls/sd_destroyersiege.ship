@@ -189,7 +189,7 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 360,
+      "arc": 90,
       "angle": 0,
       "locations": [13, -0]
     }
