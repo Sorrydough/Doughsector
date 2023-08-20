@@ -1,13 +1,12 @@
 {
     "displayName": "Standard",
     "goalVariant": true,
-    "fluxCapacitors": 0,
-    "fluxVents": 4,
+    "fluxCapacitors": 2,
+    "fluxVents": 20,
     "hullId": "sd_destroyersiege",
     "hullMods": [
         "fluxbreakers",
-        "advancedoptics",
-        "converted_hangar"
+        "advancedoptics"
     ],
     "permaMods": [],
     "sMods": [],
@@ -17,8 +16,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "SYN01": "gravitonbeam",
-                "SYN02": "gravitonbeam"
+                "SYN01": "phasebeam",
+                "SYN02": "phasebeam"
             }
         },
         {
@@ -30,11 +29,10 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "NRG01": "lrpdlaser",
-                "NRG02": "lrpdlaser",
-                "NRG03": "lrpdlaser"
+                "NRG01": "pdlaser",
+                "NRG02": "pdlaser",
+                "NRG03": "pdlaser"
             }
         }
-    ],
-    "wings": ["sd_fighterblasterWing"]
+    ]
 }

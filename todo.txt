@@ -1,16 +1,14 @@
 Do These Right Now:
 - Name ships
 - Description strings for everything
-- Move the sensor rotating code into an EFS, yoink it from the vanilla sensordish deco weapon
 - Write the flux vacuum script
 - Set up FER vector thruster rendering
 - Use FER to dynamically render flares to add splash of pink and purple
 - Make arthr blow the sensor up to XL size
 - Implement glowmaps for blinkers and sensor
 - Make a placeholder faction with the fleets randomly patrolling near caches
-- Fix siegemode bug with missiles getting bonuses applied twice
-- Make siege sensor go back and forth instead of 360 degrees
 - Script to make weapons look nice in the refit screen
+- Reduce the volume of the graviton charge explosion
 
 Do These Later:
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)

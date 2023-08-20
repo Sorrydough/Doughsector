@@ -1,10 +1,13 @@
 {
     "displayName": "Standard",
     "goalVariant": true,
-    "fluxCapacitors": 6,
+    "fluxCapacitors": 0,
     "fluxVents": 0,
     "hullId": "sd_destroyercarrier",
-    "hullMods": ["fluxbreakers"],
+    "hullMods": [
+    "fluxbreakers",
+    "eccm"
+    ],
     "permaMods": [],
     "sMods": [],
     "variantId": "sd_destroyercarrier_Standard",
@@ -13,14 +16,14 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "SYN01": "harpoon",
-                "SYN02": "harpoon"
+                "SYN01": "annihilator",
+                "SYN02": "annihilator"
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"NRG01": "phasebeam"}
+            "weapons": {"NRG01": "irautolance"}
         }
     ],
     "wings": [

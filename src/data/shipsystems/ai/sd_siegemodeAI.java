@@ -3,6 +3,7 @@ package data.shipsystems.ai;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -33,8 +34,13 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            CombatEntityAPI nearestEnemy = AIUtils.getNearestEnemy(ship);
-            boolean systemNeedsOffNow = (nearestEnemy == null || target == null || ship.getAIFlags().hasFlag(NEEDS_HELP));
+            ShipAPI nearestEnemy = AIUtils.getNearestEnemy(ship);
+
+            //if the AI is misbehaving and not picking a target when it should have one, then give it one
+//            if (target == null)
+//                ship.setShipTarget(nearestEnemy);
+
+            boolean systemNeedsOffNow = (nearestEnemy == null || target == null || target.isFighter() ||ship.getAIFlags().hasFlag(NEEDS_HELP));
 
             //immediately shut off the system if: there's no enemies, we have no target, or we're panicking
             if (systemNeedsOffNow && ship.getSystem().isOn()) {
@@ -109,7 +115,7 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
 
             //want system on if target is getting fucked up
             if (target.getAIFlags().hasFlag(NEEDS_HELP))
-                desire += 50;
+                desire += 25;
 
             //want system on if we have missiles in flight
             boolean firedMissiles = false;
@@ -136,10 +142,10 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
                     desire -= 150 / (optimalWeaponRange / MathUtils.getDistance(ship, enemy));
             }
 
-            //want system off if hard flux is high
-            desire -= ship.getHardFluxLevel() * 133;
+            //want system off if flux is high
+            desire -= ship.getFluxLevel() * 100;
 
-            //Console.showMessage("Optimal Range: "+ Math.round(optimalWeaponRange) +", Target Distance: "+ Math.round(targetDistance) +", Desire: "+ Math.round(desire));
+            Console.showMessage("Optimal Range: "+ Math.round(optimalWeaponRange) +", Target Distance: "+ Math.round(targetDistance) +", Desire: "+ Math.round(desire));
 
             if (desire >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();

@@ -20,6 +20,7 @@ public class sd_siegemode extends BaseShipSystemScript {
 	float energyRangeBonusModifier;
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
+
 		boolean isMissileModified = false;
 		for (MissileAPI missile : Global.getCombatEngine().getMissiles()) {
 			if (missile.getSource() == stats.getEntity()) {
