@@ -9,6 +9,7 @@ Do These Right Now:
 - Make a placeholder faction with the fleets randomly patrolling near caches
 - Script to make weapons look nice in the refit screen
 - Reduce the volume of the graviton charge explosion
+- Add songs
 
 Do These Later:
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
@@ -25,5 +26,4 @@ Shit for Art Man:
 - Hullmod icons
 - Maybe revive the old frigate carrier as a battle wall thingie?
 - Reskins for certain fighters - wasp, dagger
-- Destroyer carrier might need an extra engine in the middle
 - Siege destroyer looks a bit goofy with 2 extra aux thrusters

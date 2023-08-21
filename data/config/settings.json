@@ -1,10 +1,11 @@
 {
 	"graphics": {
-		"ui": {
-            "dough_hullmod_incompatible":"graphics/dough/icons/tooltip/hullmod_incompatible.png",
+        "fer": {
+			"sd_blockthruster_fer":"graphics/fx/thrusters/sd_blockthruster_fer.png"
         }
 	},
 	"plugins": {
 		"combatReadinessPlugin":"data.scripts.sd_CRPluginImpl",
+		#"sd_flareTrackerPlugin":"data.scripts.shaders.sd_flareTrackerPlugin"
 	}
 }
