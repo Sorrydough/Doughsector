@@ -26,9 +26,7 @@ public class sd_siegemodeAI implements ShipSystemAIScript {
         this.system = system;
     }
 
-    //Things to debug: 1. Whether critical DPS danger flag is used by non-phase ships
-    //2. Whether the ship is targeting anything beyond 1300 range
-    //3. Whether the optimal DPS distance calculation is working properly
+    //Things to debug: Whether critical DPS danger flag is used by non-phase ships
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
