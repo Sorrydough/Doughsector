@@ -44,7 +44,7 @@
 			"detailedExplosionFlashDuration":0.5,
 			"detailedExplosionFlashColorFringe":[55,160,210,150],
 			"detailedExplosionFlashColorCore":[55,160,210,150],
-			"sound":"prox_charge_explosion"
+			"sound":"sd_gravcharge_explosion"
 		}
 	}
 }

@@ -1,14 +1,11 @@
 Do These Right Now:
-- Name ships
+- Name ships - north american flowers? pair of two words?
 - Description strings for everything
 - Write the flux vacuum script
 - Set up FER vector thruster rendering
 - Use FER to dynamically render flares to add splash of pink and purple
-- Make arthr blow the sensor up to XL size
 - Implement glowmaps for blinkers and sensor
 - Make a placeholder faction with the fleets randomly patrolling near caches
-- Script to make weapons look nice in the refit screen
-- Reduce the volume of the graviton charge explosion
 - Add songs
 
 Do These Later:
@@ -19,6 +16,7 @@ Do These Later:
     25% less recoil?
     free target anal?
 - some sort of ship marriage system to capture the hearts and dicks of redditors
+- Script to make weapons look nice in the refit screen
 
 Shit for Art Man:
 - Really Converted Hangars
@@ -27,3 +25,4 @@ Shit for Art Man:
 - Maybe revive the old frigate carrier as a battle wall thingie?
 - Reskins for certain fighters - wasp, dagger
 - Siege destroyer looks a bit goofy with 2 extra aux thrusters
+- Make arthr blow the sensor up to XL size

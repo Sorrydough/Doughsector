@@ -16,5 +16,6 @@
     <orderEntry type="library" name="ExerelinCore" level="project" />
     <orderEntry type="library" name="FastEngineRendering" level="project" />
     <orderEntry type="library" name="CMUtils" level="project" />
+    <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
   </component>
 </module>

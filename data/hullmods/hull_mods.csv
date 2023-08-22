@@ -4,5 +4,3 @@ High Scatter Amplifier,high_scatter_amp,3,,Common,,Weapons,5000,,,,4,8,12,20,dat
 Improved Ship AI,sd_customai,,,???,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/automated.png
 Beam Targeting Integration,sd_beamintegration,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_beamintegration,<tooltip created in the script>,,,graphics/hullmods/sd_beamintegration.png
 Light Ground Support,sd_groundsupport,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/ground_support.png
-,,,,,,,,,,,,,,,,,,,
-Improved Spall Protection,sd_spallprotection,0,,Common,defensive,Defenses,2500,TRUE,,,2,4,8,12,data.hullmods.sd_spallprotection,Installation of redundant spall protection improves crew survivability and overall resistance to fragmentation damage.,,,graphics/hullmods/sd_spallprotection.png
