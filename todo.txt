@@ -7,6 +7,7 @@ Do These Right Now:
 - Implement glowmaps for blinkers and sensor
 - Make a placeholder faction with the fleets randomly patrolling near caches
 - Add songs
+- Add a shielded holds that only shields a portion of the cargo instead of the entire ship
 
 Do These Later:
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
@@ -25,4 +26,4 @@ Shit for Art Man:
 - Maybe revive the old frigate carrier as a battle wall thingie?
 - Reskins for certain fighters - wasp, dagger
 - Siege destroyer looks a bit goofy with 2 extra aux thrusters
-- Make arthr blow the sensor up to XL size
+- Make him blow the sensor

@@ -1,7 +1,7 @@
 {
 	"graphics": {
         "fer": {
-			"sd_blockthruster_fer":"graphics/fx/thrusters/sd_blockthruster_fer.png"
+			"sd_blockThruster":"graphics/fx/thrusters/sd_blockThruster.png"
         }
 	},
 	"plugins": {

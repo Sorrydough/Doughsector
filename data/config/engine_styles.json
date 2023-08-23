@@ -15,16 +15,5 @@
 		"contrailMaxSpeedMult":0.5,
 		"contrailAngularVelocityMult":0.5,
 		"type":"GLOW"
-	},
-	"sd_flare":{
-		"engineColor":[250,235,215,255],
-		"glowAlternateColor":[250,235,215,100],
-		"contrailColor":[55,55,55,100],
-		"contrailParticleSizeMult":8,
-		"contrailParticleDuration":2,
-		"contrailParticleFinalSizeMult":0.5,
-		"contrailMaxSpeedMult":0.1,
-		"contrailAngularVelocityMult":0,
-		"type":"GLOW"
-	},
+	}
 }

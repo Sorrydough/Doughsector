@@ -4,7 +4,7 @@
 			"id":"sd_customStartPlaceholder",
 			"name":"???",
 			"difficulty":"???",
-			"desc":"Systems in your home sector going dark, one after another - like a tidal wave. It was now or never. Powering a Gate just for a moment, it's enough for your group to slip through with a few ships. Hopefully wherever you end up is better than where you came from.\n\nBegin with a small number of unique ships, and the blueprints to construct more. You just need to find a nanoforge...\n\nTo play this start as intended, never salvage any persean sector ships. Exclusively construct those belonging to the blueprint package you start with. Indevo highly recommended, as constructing ships earlygame without a salvage yards is pretty much impossible.",
+			"desc":"Systems in your home sector going dark, one after another - like a tidal wave. It was now or never. Powering a Gate just for a moment, it's enough for your group to slip through with a few surplus ships. Hopefully wherever you end up is better than where you came from.\n\nBegin with a small number of unique ships, and the blueprints to construct more. You just need to find a nanoforge...\n\nTo play this start as intended, never salvage any persean sector ships. Exclusively construct those belonging to the blueprint package you start with. Indevo highly recommended, as constructing ships earlygame without a salvage yards is pretty much impossible.",
 			"className":"data.scripts.campaign.customstart.sd_customStartPlaceholder"
 		}
 	]

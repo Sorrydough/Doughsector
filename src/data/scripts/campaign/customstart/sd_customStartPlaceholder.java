@@ -44,7 +44,8 @@ public class sd_customStartPlaceholder extends CustomStart {
                             List<String> themes = new ArrayList<>();
                             themes.add(Tags.THEME_REMNANT_SECONDARY);
                             themes.add(Tags.THEME_REMNANT_SUPPRESSED);
-                            themes.add(Tags.THEME_REMNANT_RESURGENT);
+                            themes.add(Tags.THEME_REMNANT_NO_FLEETS);
+                            themes.add(Tags.THEME_REMNANT_DESTROYED);
 
                             List<String> notThemes = new ArrayList<>();
                             notThemes.add(MagicVariables.AVOID_COLONIZED_SYSTEM);
@@ -88,8 +89,8 @@ public class sd_customStartPlaceholder extends CustomStart {
         addFleetMember("sd_frigatelight_Standard", dialog, data, tempFleet, "none");
 
 
-        data.getStartingCargo().getCredits().add(25000);
-        AddRemoveCommodity.addCreditsGainText(25000, dialog.getTextPanel());
+        data.getStartingCargo().getCredits().add(10000);
+        AddRemoveCommodity.addCreditsGainText(10000, dialog.getTextPanel());
         MutableCharacterStatsAPI stats = data.getPerson().getStats();
         stats.addPoints(1);
 
@@ -100,18 +101,22 @@ public class sd_customStartPlaceholder extends CustomStart {
         int crew = 0;
         int fuel = 0;
         int supplies = 0;
+        int machinery = 0;
         for (FleetMemberAPI member : tempFleet.getFleetData().getMembersListCopy()) {
-            crew += member.getMinCrew() + (int) ((member.getMaxCrew() - member.getMinCrew()) * 0.1f);
-            fuel += (int) member.getFuelCapacity() * 0.35f;
-            supplies += (int) member.getBaseDeploymentCostSupplies() * 2;
+            crew += member.getMinCrew() * 1.5;
+            fuel += (int) member.getFuelCapacity() * 0.75;
+            supplies += (int) member.getBaseDeploymentCostSupplies() * 3;
+            machinery += (int) member.getBaseDeploymentCostSupplies() * 2;
         }
         data.getStartingCargo().addItems(CargoAPI.CargoItemType.RESOURCES, Commodities.CREW, crew);
         data.getStartingCargo().addItems(CargoAPI.CargoItemType.RESOURCES, Commodities.FUEL, fuel);
         data.getStartingCargo().addItems(CargoAPI.CargoItemType.RESOURCES, Commodities.SUPPLIES, supplies);
+        data.getStartingCargo().addItems(CargoAPI.CargoItemType.RESOURCES, Commodities.HEAVY_MACHINERY, machinery);
 
         AddRemoveCommodity.addCommodityGainText(Commodities.CREW, crew, dialog.getTextPanel());
         AddRemoveCommodity.addCommodityGainText(Commodities.FUEL, fuel, dialog.getTextPanel());
         AddRemoveCommodity.addCommodityGainText(Commodities.SUPPLIES, supplies, dialog.getTextPanel());
+        AddRemoveCommodity.addCommodityGainText(Commodities.HEAVY_MACHINERY, machinery, dialog.getTextPanel());
 
         SpecialItemData urmum = new SpecialItemData("sd_blueprintspackage", null);
         data.getStartingCargo().addSpecial(urmum, 1);
