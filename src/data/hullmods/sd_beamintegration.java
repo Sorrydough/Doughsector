@@ -9,27 +9,28 @@ import java.util.*;
 
 public class sd_beamintegration extends BaseHullMod {
     final Map<HullSize, Integer> BEAM_ITU_PERCENT = new HashMap<>();
-    {	//free ITU bonus for beams
+
+    {    //free ITU bonus for beams
         BEAM_ITU_PERCENT.put(HullSize.FIGHTER, 0);
         BEAM_ITU_PERCENT.put(HullSize.FRIGATE, 10);
         BEAM_ITU_PERCENT.put(HullSize.DESTROYER, 20);
         BEAM_ITU_PERCENT.put(HullSize.CRUISER, 40);
         BEAM_ITU_PERCENT.put(HullSize.CAPITAL_SHIP, 60);
     }
-
-    float extra = 0;
-
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         //bonus not cumulative with targeting computer modifications
         //this needs to be here instead of applyEffectsBeforeShipCreation to avoid an ordering issue
-        float bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0);
+        float bonusToGive;
         //need a special case for gunnery implants
-        if (ship.getCaptain().getStats().hasSkill("gunnery_implants"))
-           extra += 15;
-        //also check whether the bonus is positive, we don't want to accidentally subtract bonus instead if the player overcomes our targeting bonus somehow
+        if (ship.getCaptain().getStats().hasSkill("gunnery_implants")) {
+            bonusToGive = (BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod() - 15, -15)) + 15;
+        } else {
+            bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0);
+        }
+        //make sure to check whether the bonus is positive, we don't want to accidentally subtract bonus instead if the player overcomes our targeting bonus somehow
         if (bonusToGive > 0)
-            ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive + extra);
+            ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive);
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
