@@ -16,13 +16,20 @@ public class sd_beamintegration extends BaseHullMod {
         BEAM_ITU_PERCENT.put(HullSize.CRUISER, 40);
         BEAM_ITU_PERCENT.put(HullSize.CAPITAL_SHIP, 60);
     }
+
+    float extra = 0;
+
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         //bonus not cumulative with targeting computer modifications
         //this needs to be here instead of applyEffectsBeforeShipCreation to avoid an ordering issue
         float bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0);
+        //need a special case for gunnery implants
+        if (ship.getCaptain().getStats().hasSkill("gunnery_implants"))
+           extra += 15;
         //also check whether the bonus is positive, we don't want to accidentally subtract bonus instead if the player overcomes our targeting bonus somehow
-        if (bonusToGive > 0) { ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive); }
+        if (bonusToGive > 0)
+            ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive + extra);
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {

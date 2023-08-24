@@ -20,6 +20,15 @@
       "arc": 10,
       "angle": 0,
       "locations": [5.5, 3.5]
+    },
+    {
+      "id": "SYS1",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [4.5, -8]
     }
   ],
   "engineSlots": [

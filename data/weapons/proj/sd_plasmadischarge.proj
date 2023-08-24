@@ -13,8 +13,16 @@
 		"duration":0.15f, # not visual
 		"radius":66,
 		"coreRadius":44, # full damage within core radius
-		"collisionClass":MISSILE_FF,
-		"collisionClassByFighter":MISSILE_FF
+			"collisionClass":PROJECTILE_NO_FF,
+			"collisionClassByFighter":PROJECTILE_FIGHTER,
+			"particleSizeMin":6.0,
+			"particleSizeRange":2.0,
+			"particleDuration":1,
+			"particleCount":100,
+			"particleColor":[255,100,100,150],
+			"explosionColor":[100,100,255,150],
+			"useDetailedExplosion":false,
+			"sound":"sd_plasmadischarge_explosion"
 	},
 	"behaviorSpec":{
 		"behavior":"PROXIMITY_FUSE",

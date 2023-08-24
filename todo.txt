@@ -8,6 +8,8 @@ Do These Right Now:
 - Make a placeholder faction with the fleets randomly patrolling near caches
 - Add songs
 - Add a shielded holds that only shields a portion of the cargo instead of the entire ship
+- Weaker phase field for auxiliaries?
+- Add a hard check for gunnery implants
 
 Do These Later:
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
@@ -18,6 +20,7 @@ Do These Later:
     free target anal?
 - some sort of ship marriage system to capture the hearts and dicks of redditors
 - Script to make weapons look nice in the refit screen
+- Combat warning noise for missiles hitting your flagship
 
 Shit for Art Man:
 - Really Converted Hangars
