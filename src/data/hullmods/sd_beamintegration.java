@@ -21,14 +21,13 @@ public class sd_beamintegration extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         //bonus not cumulative with targeting computer modifications
         //this needs to be here instead of applyEffectsBeforeShipCreation to avoid an ordering issue
-        float bonusToGive;
-        //need a special case for gunnery implants
-        if (ship.getCaptain().getStats().hasSkill("gunnery_implants")) {
-            bonusToGive = (BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod() - 15, -15)) + 15;
-        } else {
-            bonusToGive = BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod(), 0);
-        }
-        //make sure to check whether the bonus is positive, we don't want to accidentally subtract bonus instead if the player overcomes our targeting bonus somehow
+        float extra = 0;
+        //need an exception for gunnery implants
+        if (ship.getCaptain() != null && ship.getCaptain().getStats().hasSkill("gunnery_implants"))
+            extra += 15;
+
+        float bonusToGive = (BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod() - extra, -extra)) + extra;
+        //make sure to check whether the bonus is positive, we don't want to accidentally subtract if the player overcomes our targeting bonus
         if (bonusToGive > 0)
             ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive);
     }

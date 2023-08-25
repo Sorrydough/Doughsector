@@ -131,14 +131,6 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-26, -12],
-      "length": 24,
-      "width": 6,
-      "angle": 180,
-      "contrailSize": 6,
-      "style": "sd_blockThruster"
-    },
-    {
       "location": [-21, -19.5],
       "length": 36,
       "width": 9,
@@ -147,7 +139,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-26, 12],
+      "location": [-26, -12],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -155,23 +147,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-22, 27.5],
-      "length": 24,
-      "width": 6,
-      "angle": 180,
-      "contrailSize": 6,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-22, -27.5],
-      "length": 24,
-      "width": 6,
-      "angle": 180,
-      "contrailSize": 6,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-26, -10],
+      "location": [-22, -28.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -179,7 +155,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-26, -14],
+      "location": [-22, -26.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -187,7 +163,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-22, -29.5],
+      "location": [-22, 28.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -195,39 +171,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-22, -25.5],
-      "length": 12,
-      "width": 3,
-      "angle": 180,
-      "contrailSize": 3,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-26, 10],
-      "length": 12,
-      "width": 3,
-      "angle": 180,
-      "contrailSize": 3,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-26, 14],
-      "length": 12,
-      "width": 3,
-      "angle": 180,
-      "contrailSize": 3,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-22, 29.5],
-      "length": 12,
-      "width": 3,
-      "angle": 180,
-      "contrailSize": 3,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-22, 25.5],
+      "location": [-22, 26.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -260,6 +204,14 @@
     },
     {
       "location": [-21, -21.5],
+      "length": 24,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-26, 12],
       "length": 24,
       "width": 6,
       "angle": 180,
