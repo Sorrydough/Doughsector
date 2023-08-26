@@ -1,4 +1,0 @@
-id,variant,tags,tier,rarity,fleet pts,op cost,formation,range,attackRunRange,attackPositionOffset,num,role,role desc,refit,base value,,,,,,,,,,,,,number
-sd_fighterblasterWing,sd_fighterblaster_Standard,"fighter, fighter3, auto_fighter, sd_ship_bp",2,,3,10,V,2000,500,400,3,FIGHTER,Fighter,10,7500,,,,,,,,,,,,,2.1
-sd_fighterionWing,sd_fighterion_Standard,"interceptor, interceptor3, auto_fighter, sd_ship_bp",2,,5,15,BOX,2000,300,200,6,INTERCEPTOR,Suppression Drone,8,5000,,,,,,,,,,,,,2.1
-sd_fightergravitonWing,sd_fightergraviton_Standard,"bomber, bomber3, sd_ship_bp",2,,7,20,CLAW,4000,2000,600,4,BOMBER,Bomber,15,10000,,,,,,,,,,,,,2.1

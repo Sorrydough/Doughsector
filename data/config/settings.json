@@ -2,10 +2,11 @@
 	"graphics": {
         "fer": {
 			"sd_blockThruster":"graphics/fx/thrusters/sd_blockThruster.png"
-        }
+        },
+		"fighterSkinsPlayerAndNPC":{
+		}
 	},
 	"plugins": {
-		"combatReadinessPlugin":"data.scripts.sd_CRPluginImpl",
-		#"sd_flareTrackerPlugin":"data.scripts.shaders.sd_flareTrackerPlugin"
+		"combatReadinessPlugin":"data.scripts.sd_CRPluginImpl"
 	}
 }

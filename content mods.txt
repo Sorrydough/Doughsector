@@ -1,0 +1,36 @@
+S tier: Minimalistic mods that have a well-executed vision, good balance and great integration with the sector.
+The Vass
+Underworld
+Legacy of Arkgnesis
+prv Starworks & Extraworks
+Amazigh's Ship Foundry
+GMDA
+LOST_SECTOR?
+Seeker
+RAT
+SOTF
+Nes' gggggggg
+Shadowyards
+
+A tier: Mods with a well-executed vision but have bloat, questionable design decisions, or need improvements to their sector-wide integration.
+Bird's Collection
+Blackrock
+HMI supervillains
+Legio Shipworks
+Vayra's Sector
+Ship/Weapon Pack
+Roider Union
+Osiris Alliance
+Magellan                (good integration although a lot is still left on the table, weapon bloat)
+
+B tier: Mods with great ideas that are marred by bad balance, extreme bloat, art issues, or severe lack of integration.
+Bultach Coalition       (bad balance, huge amount of weapon bloat, but good integration)
+Diktat Enhancement      (I want a version that just does the campaign-level changes without adding any ships or weapon)
+DME                     (insane degree of weapon bloat, integration could use some work, art is great and BB are a fun boss faction tho)
+UAF                     (great ideas but the author seems to think that modding is done exclusively in the graphics folder)
+Scalartech              (great concise faction but it has zero integration whatsoever so it's just save bloat that doesn't interact with gameplay)
+Iron Shell              (I want the tax system standalone)
+HMI                     (extreme bloat, lots of amazing ideas left unfinished regarding HMI company and the mess)
+Interstellar Imperium   (weapon bloat, bad integration)
+VIC                     (weapon bloat, very bad integration)
+Scrapyard Armory        (Huge variations in quality of art, not much bloat, excellent integration)
