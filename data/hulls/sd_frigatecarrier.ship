@@ -13,8 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration",
-    "defensive_targeting_array"
+    "sd_beamintegration"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
