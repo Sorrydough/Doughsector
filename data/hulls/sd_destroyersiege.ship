@@ -26,9 +26,7 @@
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
-    "THR04": "sd_magicThruster",
-    "THR05": "sd_magicThruster",
-    "THR06": "sd_magicThruster"
+    "THR04": "sd_magicThruster"
   },
   "weaponSlots": [
     {
@@ -64,8 +62,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 58,
-      "locations": [11.5, 35.5]
+      "angle": 45,
+      "locations": [8.5, 37.5]
     },
     {
       "id": "THR02",
@@ -73,26 +71,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -63.5,
-      "locations": [11.5, -35.5]
-    },
-    {
-      "id": "THR05",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 133,
-      "locations": [-70.5, 26.5]
-    },
-    {
-      "id": "THR06",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -138.5,
-      "locations": [-70.5, -26.5]
+      "angle": -45,
+      "locations": [8.5, -37.5]
     },
     {
       "id": "MSL01",
@@ -172,8 +152,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 126.5,
-      "locations": [-53.5, 37.5]
+      "angle": 135,
+      "locations": [-52.5, 37.5]
     },
     {
       "id": "THR04",
@@ -181,8 +161,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -127,
-      "locations": [-53.5, -37.5]
+      "angle": -135,
+      "locations": [-52.5, -37.5]
     },
     {
       "id": "DEC06",
