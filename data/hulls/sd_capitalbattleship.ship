@@ -427,7 +427,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": -122.5,
+      "angle": -115,
       "locations": [168, -69]
     },
     {
@@ -436,7 +436,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": -59.5,
+      "angle": -65,
       "locations": [172, -69]
     },
     {
@@ -445,7 +445,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": 62.5,
+      "angle": 45,
       "locations": [138, 46]
     },
     {
@@ -454,7 +454,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": 109,
+      "angle": 0,
       "locations": [138, 43]
     },
     {
@@ -463,7 +463,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": 91.5,
+      "angle": 65,
       "locations": [98, 36]
     },
     {
@@ -472,7 +472,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": 117,
+      "angle": 115,
       "locations": [94, 36]
     },
     {
@@ -481,7 +481,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": -83.5,
+      "angle": -45,
       "locations": [49, -39]
     },
     {
@@ -490,7 +490,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": -119,
+      "angle": -135,
       "locations": [45, -39]
     },
     {
@@ -618,6 +618,15 @@
       "arc": 10,
       "angle": 178.5,
       "locations": [-211, -26]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 10,
+      "angle": -90,
+      "locations": [46.5, -33]
     }
   ],
   "engineSlots": [

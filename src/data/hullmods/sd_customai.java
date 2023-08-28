@@ -36,14 +36,31 @@ public class sd_customai extends BaseHullMod {
 
         @Override
         public void advance(float amount) {
-            if (!runOnce){
-                runOnce=true;
+
+            if (Global.getCombatEngine().isPaused() || ship.getShipAI() == null)
+                return;
+
+            //ok so if the enemy is currently phased, and they aren't about to flux out
+            if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getHardFluxLevel() < 0.9) {
+                //check if the ship has any strike weapons
+                for (WeaponAPI weapon : ship.getAllWeapons()) {
+                    if (weapon.hasAIHint(WeaponAPI.AIHints.STRIKE))
+                        //if it's selected the group with the strike weapon, force it to select nothing, so it can't fire the group.
+                        //this is necessary because the AI will fire its selected group regardless of whether it's on autofire
+                        //AND regardless of whether the ship is set to hold fire. Time taken to write these 5 lines of code: 2 hours.
+                        if (ship.getSelectedGroupAPI() == ship.getWeaponGroupFor(weapon))
+                            ship.giveCommand(ShipCommand.SELECT_GROUP, null, -1);
+                }
+            }
+
+            if (!runOnce) {
+                runOnce = true;
                 List<WeaponAPI> loadout = ship.getAllWeapons();
-                if (loadout!=null){
-                    for (WeaponAPI w : loadout){
-                        if (w.getType()!=WeaponAPI.WeaponType.MISSILE){
-                            if (w.getRange()>maxRange){
-                                maxRange=w.getRange();
+                if (loadout != null) {
+                    for (WeaponAPI w : loadout) {
+                        if (w.getType() != WeaponAPI.WeaponType.MISSILE) {
+                            if (w.getRange() > maxRange) {
+                                maxRange = w.getRange();
                             }
                         }
                     }
@@ -51,9 +68,6 @@ public class sd_customai extends BaseHullMod {
                 timer.randomize();
             }
 
-            if (Global.getCombatEngine().isPaused() || ship.getShipAI() == null) {
-                return;
-            }
             timer.advance(amount);
             if (timer.intervalElapsed()) {
                 if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getFluxTracker().getFluxLevel() < 0.2 || ship.getSystem().isActive())
