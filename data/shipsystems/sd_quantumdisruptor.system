@@ -4,7 +4,6 @@
 	"aiType":"ACAUSAL_DISRUPTOR",
 	
 	"statsScript":"data.shipsystems.sd_quantumdisruptor",
-	"runScriptWhileIdle":true,
 	
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"system_quantumdisruptor",
