@@ -1,8 +1,8 @@
 {
-  "hullName": "Disruption Destroyer",
-  "hullId": "sd_destroyerdisruption",
+  "hullName": "Interference Destroyer",
+  "hullId": "sd_destroyerinterference",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/sd_destroyerdisruption.png",
+  "spriteName": "graphics/ships/sd_destroyerinterference.png",
   "style": "SD_SPEC",
   "height": 210,
   "width": 120,
@@ -14,6 +14,7 @@
   "builtInMods": [
     "sd_customai",
     "sd_beamintegration",
+    "sd_crampedracks",
     "ecm"
   ],
   "builtInWeapons": {
@@ -22,7 +23,7 @@
     "DEC03": "sd_blinker",
     "DEC04": "sd_blinker",
     "DEC05": "sd_blinker",
-    "DEC06": "sd_destroyerdisruption_sensor",
+    "DEC06": "sd_destroyerinterference_sensor",
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",

@@ -3,14 +3,14 @@
     "goalVariant": true,
     "fluxCapacitors": 2,
     "fluxVents": 20,
-    "hullId": "sd_destroyerdisruption",
+    "hullId": "sd_destroyerinterference",
     "hullMods": [
         "fluxbreakers",
         "advancedoptics"
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_destroyerdisruption_Standard",
+    "variantId": "sd_destroyerinterference_Standard",
     "weaponGroups": [
         {
             "autofire": true,

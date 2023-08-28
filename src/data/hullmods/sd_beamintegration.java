@@ -11,7 +11,7 @@ public class sd_beamintegration extends BaseHullMod {
     final Map<HullSize, Integer> BEAM_ITU_PERCENT = new HashMap<>();
 
     {    //free ITU bonus for beams
-        BEAM_ITU_PERCENT.put(HullSize.FIGHTER, 0);
+        BEAM_ITU_PERCENT.put(HullSize.FIGHTER, 5);
         BEAM_ITU_PERCENT.put(HullSize.FRIGATE, 10);
         BEAM_ITU_PERCENT.put(HullSize.DESTROYER, 20);
         BEAM_ITU_PERCENT.put(HullSize.CRUISER, 40);
@@ -34,9 +34,11 @@ public class sd_beamintegration extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         tooltip.addPara("Beams recieve a 10/20/40/60%% range bonus by hull size.", 5f, Misc.getHighlightColor(), "10/20/40/60%");
-        tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage bonuses combined will apply.", 5f,
-                Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage bonuses combined will apply.");
+        tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined will apply.", 5f,
+                Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined will apply.");
     }
     @Override
-    public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) { return false; }
+    public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
+        return false;
+    }
 }

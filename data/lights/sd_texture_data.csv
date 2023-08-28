@@ -4,7 +4,7 @@ sd_frigateskirm,ship,,1,normal,graphics/ships/normals/sd_frigateskirm_normal.png
 sd_frigatecarrier,ship,,1,normal,graphics/ships/normals/sd_frigatecarrier_normal.png
 sd_frigatelarge,ship,,1,normal,graphics/ships/normals/sd_frigatelarge_normal.png
 ,,,,,
-sd_destroyerdisruption,ship,,1,normal,graphics/ships/normals/sd_destroyerdisruption_normal.png
+sd_destroyerinterference,ship,,1,normal,graphics/ships/normals/sd_destroyerinterference_normal.png
 sd_destroyercarrier,ship,,1,normal,graphics/ships/normals/sd_destroyercarrier_normal.png
 sd_destrouervacuum,ship,,1,normal,graphics/ships/normals/sd_destroyervacuum_normal.png
 ,,,,,
