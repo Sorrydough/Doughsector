@@ -8,6 +8,7 @@ import org.dark.shaders.util.TextureData;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class sd_modPlugin extends BaseModPlugin {
     @Override
     public void onApplicationLoad() {
@@ -54,7 +55,7 @@ public class sd_modPlugin extends BaseModPlugin {
         }
 
         for (String weapon : sd_weaponsList) {
-            Global.getSettings().getWeaponSpec(weapon).addTag("sd_arsenal_bp");
+            Global.getSettings().getWeaponSpec(weapon).addTag("sd_arsenal_package");
         }
     }
 }
