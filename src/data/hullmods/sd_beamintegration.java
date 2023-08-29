@@ -9,7 +9,6 @@ import java.util.*;
 
 public class sd_beamintegration extends BaseHullMod {
     final Map<HullSize, Integer> BEAM_ITU_PERCENT = new HashMap<>();
-
     {    //free ITU bonus for beams
         BEAM_ITU_PERCENT.put(HullSize.FIGHTER, 5);
         BEAM_ITU_PERCENT.put(HullSize.FRIGATE, 10);
