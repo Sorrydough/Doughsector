@@ -45,11 +45,10 @@ public class sd_customai extends BaseHullMod {
                 //check if the ship has any strike weapons
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
                     if (weapon.hasAIHint(WeaponAPI.AIHints.STRIKE))
-                        //if it's selected the group with the strike weapon, force it to select nothing, so it can't fire the group.
-                        //this is necessary because the AI will fire its selected group regardless of whether it's on autofire
-                        //AND regardless of whether the ship is set to hold fire. Time taken to write these 5 lines of code: 2 hours.
+                        //fun facts: the AI will still manually fire a weapon group even if autofire is disabled, AND even if the ship is set to hold fire.
+                        //Time taken to write these 5 lines of code: 2 hours.
                         if (ship.getSelectedGroupAPI() == ship.getWeaponGroupFor(weapon))
-                            ship.giveCommand(ShipCommand.SELECT_GROUP, null, -1);
+                            ship.blockCommandForOneFrame(ShipCommand.FIRE);
                 }
             }
 
