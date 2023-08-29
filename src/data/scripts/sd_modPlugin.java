@@ -41,14 +41,14 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("heatseeker");
             sd_weaponsList.add("salamanderpod");
             sd_weaponsList.add("gorgon");
-            sd_weaponsList.add("gorgon_pod");
+            sd_weaponsList.add("gorgonpod");
             sd_weaponsList.add("hydra");
             sd_weaponsList.add("gazer");
-            sd_weaponsList.add("gazer_pod");
+            sd_weaponsList.add("gazerpod");
             sd_weaponsList.add("sabot_single");
-            sd_weaponsList.add("sabot_pod");
+            sd_weaponsList.add("sabotpod");
             sd_weaponsList.add("breach");
-            sd_weaponsList.add("breach_pod");
+            sd_weaponsList.add("breachpod");
             sd_weaponsList.add("phasecl");
             sd_weaponsList.add("squall");
         }

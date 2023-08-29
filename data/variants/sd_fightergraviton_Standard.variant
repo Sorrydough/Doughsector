@@ -1,0 +1,21 @@
+{
+  "displayName": "Graviton Bomber",
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "goalVariant": true,
+  "hullId": "sd_fightergraviton",
+  "hullMods": [],
+  "permaMods": [],
+  "quality": 0,
+  "variantId": "sd_fightergraviton_Standard",
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "MSL01": "sd_gravitoncharge_fighter"
+      }
+    }
+  ],
+  "wings": []
+}

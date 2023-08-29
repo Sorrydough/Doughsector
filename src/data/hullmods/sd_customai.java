@@ -40,18 +40,6 @@ public class sd_customai extends BaseHullMod {
             if (Global.getCombatEngine().isPaused() || ship.getShipAI() == null)
                 return;
 
-            //ok so if the enemy is currently phased, and they aren't about to flux out
-            if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getHardFluxLevel() < 0.9) {
-                //check if the ship has any strike weapons
-                for (WeaponAPI weapon : ship.getAllWeapons()) {
-                    if (weapon.hasAIHint(WeaponAPI.AIHints.STRIKE))
-                        //fun facts: the AI will still manually fire a weapon group even if autofire is disabled, AND even if the ship is set to hold fire.
-                        //Time taken to write these 5 lines of code: 2 hours.
-                        if (ship.getSelectedGroupAPI() == ship.getWeaponGroupFor(weapon))
-                            ship.blockCommandForOneFrame(ShipCommand.FIRE);
-                }
-            }
-
             if (!runOnce) {
                 runOnce = true;
                 List<WeaponAPI> loadout = ship.getAllWeapons();
@@ -65,6 +53,23 @@ public class sd_customai extends BaseHullMod {
                     }
                 }
                 timer.randomize();
+            }
+
+            //ok so if our fighters aren't all healthy and our replacement rate isn't high, then we regroup until they are, unless the target is getting super fucked
+            //if (!ship.getShipTarget().getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.NEEDS_HELP))
+                //ship.getWing().getWingMembers()
+
+
+            //ok so if the enemy is currently phased, and they aren't about to flux out
+            if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getHardFluxLevel() < 0.9) {
+                //check if the ship has any strike weapons
+                for (WeaponAPI weapon : ship.getAllWeapons()) {
+                    if (weapon.hasAIHint(WeaponAPI.AIHints.STRIKE))
+                        //fun facts: the AI will still manually fire a weapon group even if autofire is disabled, AND even if the ship is set to hold fire.
+                        //Time taken to write these 5 lines of code: 2 hours.
+                        if (ship.getSelectedGroupAPI() == ship.getWeaponGroupFor(weapon))
+                            ship.blockCommandForOneFrame(ShipCommand.FIRE);
+                }
             }
 
             timer.advance(amount);

@@ -1,0 +1,91 @@
+{
+  "hullName": "Graviton Bomber",
+  "hullId": "sd_fightergraviton",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/sd_fightergraviton.png",
+  "style": "SD_SPEC",
+  "height": 36,
+  "width": 36,
+  "center": [17.5, 16.5],
+  "collisionRadius": 25,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 22.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "MSL01",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [5.5, 3.5]
+    },
+    {
+      "id": "SYS1",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [4.5, -8]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-12.5, 8.5],
+      "length": 24,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, -7.5],
+      "length": 24,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, -9],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, 10],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, -6],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-12.5, 7],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    -12, -8.5,
+    3, -14.5,
+    14, -7,
+    8, 13.5,
+    -12, 9
+  ]
+}
