@@ -22,7 +22,7 @@ public class sd_modPlugin extends BaseModPlugin {
         {
             //projectiles
             sd_weaponsList.add("amblaster");
-            sd_weaponsList.add("plasma");
+            sd_weaponsList.add("gigacannon");
 
             //beams
             sd_weaponsList.add("taclaser");
@@ -33,7 +33,6 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("hil");
 
             //point defense
-            sd_weaponsList.add("lrpdlaser");
             sd_weaponsList.add("pdburst");
             sd_weaponsList.add("heavyburst");
             sd_weaponsList.add("guardian");
@@ -41,16 +40,13 @@ public class sd_modPlugin extends BaseModPlugin {
             //missiles
             sd_weaponsList.add("heatseeker");
             sd_weaponsList.add("salamanderpod");
-            sd_weaponsList.add("gorgon");
-            sd_weaponsList.add("gorgonpod");
-            sd_weaponsList.add("hydra");
+            sd_weaponsList.add("reaper");
+            sd_weaponsList.add("typhoon");
+            sd_weaponsList.add("cyclone");
             sd_weaponsList.add("gazer");
             sd_weaponsList.add("gazerpod");
             sd_weaponsList.add("sabot_single");
             sd_weaponsList.add("sabotpod");
-            sd_weaponsList.add("breach");
-            sd_weaponsList.add("breachpod");
-            sd_weaponsList.add("phasecl");
             sd_weaponsList.add("squall");
         }
 

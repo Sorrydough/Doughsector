@@ -14,7 +14,8 @@
   "builtInMods": [
     "sd_customai",
     "sd_beamintegration",
-    "missile_autoloader"
+    "coherer",
+    "missile_autoloader",
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

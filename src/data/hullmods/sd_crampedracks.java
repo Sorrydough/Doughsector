@@ -8,7 +8,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class sd_crampedracks extends BaseHullMod
 {
-    public static final float PENALTY = 0.66f;
+    public static final float PENALTY = 0.67f;
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id)
