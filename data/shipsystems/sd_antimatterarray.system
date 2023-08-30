@@ -1,9 +1,9 @@
 {
-	"id":"sd_plasmadischarge",
+	"id":"sd_antimatterarray",
 	"type":"WEAPON",
 	"aiType":"CANISTER_FLAK",
 	
-	"weaponDataId":"sd_plasmadischarge",
+	"weaponDataId":"sd_antimatterarray",
 	"outOfUsesSound":"gun_out_of_ammo",
 
 	"aiHints":{

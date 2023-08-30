@@ -3,5 +3,5 @@ Decoy Flare Launcher (Single),sd_decoylauncher_fighter,,,,,,,,1,0.033,,,,5,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Damper Field,sd_damperfield,1,,,,,,,2,0.05,0.25,3,0.25,,,,,,TRUE,,,,TRUE,TRUE,,uses_damper_ai,graphics/icons/hullsys/damper_field.png
 Heavy Phase Skimmer,sd_heavyskimmer,,,,,,,,3,0.133,0.25,,0.25,,,TRUE,,TRUE,,,,,,,,,graphics/icons/hullsys/displacer.png
-Plasma Discharge Array,sd_plasmadischarge,,,,,,,,2,0.05,,,,3,,,,,,,,,,,,,graphics/icons/hullsys/high_energy_focus.png
+Antimatter Canister Array,sd_antimatterarray,,,,,,,,2,0.05,,,,3,,,,,,,,,,,,,graphics/icons/hullsys/high_energy_focus.png
 Quantum Disruptor,sd_quantumdisruptor,,,,,,0.33,,,,0.25,,1,30,,,,,,,,,,,,,graphics/icons/hullsys/quantum_disruptor.png

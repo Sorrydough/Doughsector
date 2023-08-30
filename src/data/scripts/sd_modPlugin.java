@@ -10,6 +10,10 @@ import java.util.List;
 
 @SuppressWarnings("unused")
 public class sd_modPlugin extends BaseModPlugin {
+//    public void
+//    when the player loads their save, if their phase ships doctrine is set to 0, it removes the gremlin blueprint
+    // maybe all the other bps too?
+
     @Override
     public void onApplicationLoad() {
         boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
