@@ -15,7 +15,7 @@
     "sd_customai",
     "sd_beamintegration",
     "coherer",
-    "missile_autoloader",
+    "missile_autoloader"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
