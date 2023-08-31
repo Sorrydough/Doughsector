@@ -1,12 +1,12 @@
 {
 	"id":"sd_antimatterlauncher_proj",
 	"specClass":"missile",
-	"missileType":"PHASE_CHARGE",
+	"missileType":"BOMB",
 	"sprite":"graphics/missiles/sd_antimattercanister_base.png",
     "glowSprite":"graphics/missiles/sd_antimattercanister_glow.png",
     "glowColor":[155,100,255,255],
-    "size":[6,10],
-    "center":[3,5],
+    "size":[8,12],
+    "center":[4,6],
     "collisionRadius":8,
 	"collisionClass":"MISSILE_FF",
 	"explosionSpec":{
@@ -22,7 +22,7 @@
 			"particleColor":[155,100,255,255],
 			"explosionColor":[150,100,255,150],
 			"useDetailedExplosion":false,
-			"sound":"sd_plasmadischarge_explosion"
+			"sound":"sd_antimattercanister_explosion"
 	},
 	"behaviorSpec":{
 		"behavior":"PROXIMITY_FUSE",
@@ -33,7 +33,7 @@
 			"radius":66,
 			"coreRadius":55,
 			"collisionClass":PROJECTILE_NO_FF,
-			"collisionClassByFighter":PROJECTILE_NO_FF,
+			"collisionClassByFighter":PROJECTILE_FIGHTER,
 			"particleSizeMin":6.0,
 			"particleSizeRange":2.0,
 			"particleDuration":1,
@@ -41,7 +41,7 @@
 			"particleColor":[155,100,255,255],
 			"explosionColor":[150,100,255,150],
 			"useDetailedExplosion":false,
-			"sound":"sd_plasmadischarge_explosion"
+			"sound":"sd_antimattercanister_explosion"
 		},
 	},
 	"engineSpec":{

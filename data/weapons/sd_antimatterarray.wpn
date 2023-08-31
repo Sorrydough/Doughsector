@@ -1,7 +1,7 @@
 {
 	"id":"sd_antimatterarray",
 	"specClass":"projectile",
-	"type":"MISSILE",
+	"type":"SYSTEM",
 	"size":"SMALL",
 	"turretSprite":"",
 	"hardpointSprite":"",

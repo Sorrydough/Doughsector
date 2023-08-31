@@ -1,32 +1,12 @@
 {
-	"sd_plasmadischarge_fire":[
-		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_01.ogg","pitch":1,"volume":0.1},
-		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_02.ogg","pitch":1,"volume":0.1},
-		{"file":"sounds/sfx_wpn_energy/plasma_cannon_fire_03.ogg","pitch":1,"volume":0.1}
-    ],
-
-    "sd_plasmadischarge_explosion":{
-            "sounds":[
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_01.ogg","pitch":2.5,"volume":0.2},
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_02.ogg","pitch":2.5,"volume":0.2},
+    "sd_antimattercanister_explosion":{
+		"sounds":[	{"file":"sounds/sfx_systems/mine_strike_explosion_01.ogg","pitch":2.5,"volume":0.2},
+					{"file":"sounds/sfx_systems/mine_strike_explosion_02.ogg","pitch":2.5,"volume":0.2},
                     {"file":"sounds/sfx_systems/mine_strike_explosion_03.ogg","pitch":2.5,"volume":0.2},
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_04.ogg","pitch":2.5,"volume":0.2}
-            ]
+                    {"file":"sounds/sfx_systems/mine_strike_explosion_04.ogg","pitch":2.5,"volume":0.2}]
     },
-
-	"sd_gravcharge_explosion":{
-            "sounds":[
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_01.ogg","pitch":1.2,"volume":0.25},
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_02.ogg","pitch":1.2,"volume":0.25},
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_03.ogg","pitch":1.2,"volume":0.25},
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_04.ogg","pitch":1.2,"volume":0.25}
-            ]
-    },
-	
 	"sd_vent_loop":{
-		"sounds":[
-                        {"file":"sounds/sd_spec/sd_vent_loop.ogg","pitch":1,"volume":1}
-                ],
+		"sounds":[	{"file":"sounds/sd_spec/sd_vent_loop.ogg","pitch":1,"volume":1}],
 		"SD_SPEC":{"sounds":[0], "pitch":1, "volume":0.5},
 		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
 		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
@@ -35,9 +15,7 @@
 		"CAPITAL_SHIP":{"sounds":[0], "pitch":0.8, "volume":0.8}
 	},
 	"sd_vent_start":{
-		"sounds":[
-                        {"file":"sounds/sd_spec/sd_vent_start.ogg","pitch":1,"volume":1}
-                ],
+		"sounds":[	{"file":"sounds/sd_spec/sd_vent_start.ogg","pitch":1,"volume":1}],
 		"SD_SPEC":{"sounds":[0], "pitch":1, "volume":0.5},
 		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
 		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
