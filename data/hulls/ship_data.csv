@@ -12,7 +12,7 @@ name,id,designation,tech/manufacturer,system id,fleet pts,hitpoints,armor rating
 ???,sd_destroyercarrier,Battlecarrier,???,sd_damperfield,12,5000,800,4000,,250,70,2,70,60,50,45,40,400,OMNI,,75,0.2,0.7,,,100,150,80,80,2,40,9,45000,4,12,420,0.25,12,12,,,,,,,"COMBAT, CARRIER, NO_AUTO_ESCORT",sd_arsenal_package,,,,,,
 ???,sd_destroyervacuum,Flux Battery,???,,15,4000,700,5000,,350,65,1,65,55,45,40,35,500,OMNI,,90,0.2,0.7,,,70,105,40,40,2,20,9,55000,4,20,360,0.25,15,15,,,,,,,CARRIER,sd_arsenal_package,,0.45,2,3,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-???,sd_cruiserskirm,Fast Cruiser,???,sd_antimatterarray,12,8000,1100,9000,,550,130,,80,60,45,35,30,1500,OMNI,,75,0.2,0.7,,,100,150,150,150,3,50,9,125000,4,12,480,0.25,20,20,,,,,,,,sd_arsenal_package,,0.45,2,3,,
+???,sd_cruiserskirm,Fast Cruiser,???,sd_antimatterarray,12,8000,1100,9000,,550,135,,80,60,45,35,30,1500,OMNI,,75,0.2,0.7,,,100,150,150,150,3,50,9,125000,4,12,480,0.25,20,20,,,,,,,,sd_arsenal_package,,0.45,2,3,,
 ???,sd_cruiserheavy,Heavy Cruiser,???,sd_heavyskimmer,18,10000,1300,12000,,650,175,,45,35,25,20,15,2000,OMNI,,90,0.2,0.7,,,200,300,120,160,4,40,8,200000,3,12,540,0.25,30,30,,,,,,,,sd_arsenal_package,,0.45,2,3,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ???,sd_capitalbattleship,Fast Battleship,???,sd_antimatterarray,30,20000,1750,20000,,1250,410,,45,30,20,15,10,3500,OMNI,,90,0.2,0.7,,,500,750,400,300,10,30,8,500000,3,15,720,0.25,60,60,,,,,,,,sd_arsenal_package,,0.45,2,3,,

@@ -75,7 +75,7 @@
       "locations": [86, 0]
     },
     {
-      "id": "NRG0",
+      "id": "NRG06",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -99,10 +99,10 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 90,
-      "locations": [-12, 26]
+      "locations": [-12, 38]
     },
     {
-      "id": "NRG08",
+      "id": "NRG09",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -116,7 +116,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 46.5,
+      "angle": 35,
       "locations": [138, 3]
     },
     {
@@ -125,7 +125,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 24.5,
+      "angle": 10,
       "locations": [138, -0]
     },
     {
@@ -134,7 +134,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -45,
+      "angle": -35,
       "locations": [138, -3]
     },
     {
@@ -143,7 +143,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -69,
+      "angle": -60,
       "locations": [135, -3]
     },
     {
@@ -152,7 +152,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": -17,
+      "angle": -10,
       "locations": [135, -0]
     },
     {
@@ -161,7 +161,7 @@
       "type": "SYSTEM",
       "mount": "HARDPOINT",
       "arc": 5,
-      "angle": 70,
+      "angle": 60,
       "locations": [135, 3]
     },
     {
@@ -370,6 +370,15 @@
       "arc": 5,
       "angle": 180,
       "locations": [-118, -0]
+    },
+    {
+      "id": "NRG08",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 116,
+      "angle": 83.5,
+      "locations": [-12, 22]
     }
   ],
   "engineSlots": [

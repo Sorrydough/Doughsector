@@ -17,13 +17,13 @@ public class sd_antimatterarray implements OnFireEffectPlugin {
 		RANGE_MULT.put(ShipAPI.HullSize.FRIGATE, 1f);
 		RANGE_MULT.put(ShipAPI.HullSize.DESTROYER, 1.1f);
 		RANGE_MULT.put(ShipAPI.HullSize.CRUISER, 1.15f);
-		RANGE_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, 1.25f);
+		RANGE_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, 1.2f);
 	}
 
 	public void onFire(DamagingProjectileAPI projectile, WeaponAPI weapon, CombatEngineAPI engine) {
 		MutableShipStatsAPI stats = weapon.getShip().getMutableStats();
 		//make projectile speed depend on hull size, randomize on top
-		float speedMult = (0.25f + 0.75f * (float)Math.random());
+		float speedMult = ((0.25f + 0.75f * (float)Math.random()) * RANGE_MULT.get(stats.getVariant().getHullSize()));
 		projectile.getVelocity().scale(speedMult);
 
 		//should it benefit from missile spec and EWM? not sure
