@@ -15,15 +15,15 @@ public class sd_antimatterarray implements OnFireEffectPlugin {
 	{
 		RANGE_MULT.put(ShipAPI.HullSize.FIGHTER, 0.95f);
 		RANGE_MULT.put(ShipAPI.HullSize.FRIGATE, 1f);
-		RANGE_MULT.put(ShipAPI.HullSize.DESTROYER, 1.05f);
-		RANGE_MULT.put(ShipAPI.HullSize.CRUISER, 1.1f);
-		RANGE_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, 1.15f);
+		RANGE_MULT.put(ShipAPI.HullSize.DESTROYER, 1.1f);
+		RANGE_MULT.put(ShipAPI.HullSize.CRUISER, 1.15f);
+		RANGE_MULT.put(ShipAPI.HullSize.CAPITAL_SHIP, 1.25f);
 	}
 
 	public void onFire(DamagingProjectileAPI projectile, WeaponAPI weapon, CombatEngineAPI engine) {
 		MutableShipStatsAPI stats = weapon.getShip().getMutableStats();
 		//make projectile speed depend on hull size, randomize on top
-		float speedMult = ((0.67f + 0.33f * (float)Math.random()) * RANGE_MULT.get(stats.getVariant().getHullSize()));
+		float speedMult = (0.25f + 0.75f * (float)Math.random());
 		projectile.getVelocity().scale(speedMult);
 
 		//should it benefit from missile spec and EWM? not sure
@@ -33,15 +33,15 @@ public class sd_antimatterarray implements OnFireEffectPlugin {
 		float angVel = (float)(Math.signum((float)Math.random() - 0.5f) * (0.5f + Math.random()) * 720f);
 		projectile.setAngularVelocity(angVel);
 
-		float delay = 0.25f + 0.75f * (float)Math.random();
+		float delay = 0.5f + 0.75f * (float)Math.random();
 		weapon.setRefireDelay(delay);
 
 		//makes it influenced by systems expertise range mult
 		//actually you know what fuck this bullshit what the FUCK is going on
-//		float rangeBonus = stats.getSystemRangeBonus().computeEffective(weapon.getRange()) / weapon.getRange();
-//		MissileAPI missile = (MissileAPI) projectile;
-//		float flightTimeMult = ((0.75f * rangeBonus) + 0.25f * (float)Math.random());
-//		missile.setMaxFlightTime(missile.getMaxFlightTime() * 0.1f);
+		float rangeBonus = stats.getSystemRangeBonus().computeEffective(weapon.getRange()) / weapon.getRange();
+		MissileAPI missile = (MissileAPI) projectile;
+		float flightTimeMult = ((0.75f + 0.25f * (float)Math.random()) * rangeBonus);
+		missile.setMaxFlightTime(missile.getMaxFlightTime() * RANGE_MULT.get(stats.getVariant().getHullSize()));
 
 		//loc, vel, size,
 		//brightness, duration, color

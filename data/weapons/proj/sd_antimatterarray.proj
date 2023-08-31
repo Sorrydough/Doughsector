@@ -45,10 +45,11 @@
 			"sound":"sd_antimattercanister_explosion"
 		},
 	},
+	"flameoutTime":0.5, #total time from flameout to full fadeout
 	"engineSpec":{
 	    "turnAcc":100,
         "turnRate":10,
-        "acc":100,
-        "dec":100
+        "acc":150,
+        "dec":150
     }
 }
