@@ -26,6 +26,7 @@ import java.util.Map;
 
 //Placeholder start for mod testing. Start with a small fleet, a blueprint package, and near a random gate in the sector.
 
+@SuppressWarnings("unused")
 public class sd_customStartPlaceholder extends CustomStart {
 
     @Override
@@ -118,8 +119,7 @@ public class sd_customStartPlaceholder extends CustomStart {
         AddRemoveCommodity.addCommodityGainText(Commodities.SUPPLIES, supplies, dialog.getTextPanel());
         AddRemoveCommodity.addCommodityGainText(Commodities.HEAVY_MACHINERY, machinery, dialog.getTextPanel());
 
-        SpecialItemData urmum = new SpecialItemData("sd_blueprintspackage", null);
-        data.getStartingCargo().addSpecial(urmum, 1);
+        data.getStartingCargo().addSpecial(new SpecialItemData("sd_arsenal_package", null), 1);
 
         // enforce normal difficulty
         data.setDifficulty("normal");

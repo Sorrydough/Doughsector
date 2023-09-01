@@ -37,7 +37,7 @@
       "id": "SYS10",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -150,
       "locations": [-11, -12]
@@ -46,7 +46,7 @@
       "id": "SYS08",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -105,
       "locations": [-8, -14]
@@ -55,7 +55,7 @@
       "id": "SYS07",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 105,
       "locations": [-8, 14]
@@ -64,7 +64,7 @@
       "id": "SYS09",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 150,
       "locations": [-11, 12]
@@ -73,7 +73,7 @@
       "id": "SYS04",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 50,
       "locations": [23, 9]
@@ -82,7 +82,7 @@
       "id": "SYS01",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 25,
       "locations": [26, 9]
@@ -91,7 +91,7 @@
       "id": "SYS05",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 10,
       "locations": [23, 6]
@@ -100,7 +100,7 @@
       "id": "SYS02",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -10,
       "locations": [26, 6]
@@ -109,7 +109,7 @@
       "id": "SYS03",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -25,
       "locations": [26, 3]
@@ -118,7 +118,7 @@
       "id": "SYS06",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -50,
       "locations": [23, 3]

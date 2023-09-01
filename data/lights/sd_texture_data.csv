@@ -6,7 +6,7 @@ sd_frigatelarge,ship,,1,normal,graphics/ships/normals/sd_frigatelarge_normal.png
 ,,,,,
 sd_destroyerinterference,ship,,1,normal,graphics/ships/normals/sd_destroyerinterference_normal.png
 sd_destroyercarrier,ship,,1,normal,graphics/ships/normals/sd_destroyercarrier_normal.png
-sd_destrouervacuum,ship,,1,normal,graphics/ships/normals/sd_destroyervacuum_normal.png
+sd_destrouervacuum,ship,,1,normal,graphics/ships/normals/sd_destroyersupport_normal.png
 ,,,,,
 sd_cruiserskirm,ship,,1,normal,graphics/ships/normals/sd_cruiserskirm_normal.png
 sd_cruiserheavy,ship,,1,normal,graphics/ships/normals/sd_cruiserfatfuck_normal.png

@@ -81,7 +81,7 @@
       "id": "SYS19",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 55,
       "locations": [-109, 45]
@@ -90,7 +90,7 @@
       "id": "SYS20",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -55,
       "locations": [-109, -45]
@@ -99,7 +99,7 @@
       "id": "SYS25",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -170,
       "locations": [-118, 42]
@@ -108,7 +108,7 @@
       "id": "SYS26",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 170,
       "locations": [-118, -42]
@@ -117,7 +117,7 @@
       "id": "SYS23",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 135,
       "locations": [-115, 42]
@@ -126,7 +126,7 @@
       "id": "SYS24",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -135,
       "locations": [-115, -42]
@@ -135,7 +135,7 @@
       "id": "SYS21",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 100,
       "locations": [-113, 45]
@@ -144,7 +144,7 @@
       "id": "SYS22",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -100,
       "locations": [-113, -45]
@@ -162,7 +162,7 @@
       "id": "SYS03",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -45,
       "locations": [136, -0]
@@ -171,7 +171,7 @@
       "id": "SYS04",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 45,
       "locations": [133, -0]
@@ -189,7 +189,7 @@
       "id": "SYS01",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 15,
       "locations": [142, -0]
@@ -246,7 +246,7 @@
       "id": "SYS09",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 85,
       "locations": [115, 24]
@@ -255,7 +255,7 @@
       "id": "SYS10",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -85,
       "locations": [115, -24]
@@ -264,7 +264,7 @@
       "id": "SYS07",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 60,
       "locations": [118, 24]
@@ -273,7 +273,7 @@
       "id": "SYS08",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -60,
       "locations": [118, -24]
@@ -282,7 +282,7 @@
       "id": "SYS05",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 25,
       "locations": [121, 24]
@@ -291,7 +291,7 @@
       "id": "SYS06",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -25,
       "locations": [121, -24]
@@ -300,7 +300,7 @@
       "id": "SYS11",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 85,
       "locations": [51, 52]
@@ -309,7 +309,7 @@
       "id": "SYS14",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -85,
       "locations": [51, -52]
@@ -318,7 +318,7 @@
       "id": "SYS12",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 55,
       "locations": [51, 49]
@@ -327,7 +327,7 @@
       "id": "SYS13",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -55,
       "locations": [51, -49]
@@ -336,7 +336,7 @@
       "id": "SYS15",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 125,
       "locations": [48, 52]
@@ -345,7 +345,7 @@
       "id": "SYS18",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -125,
       "locations": [48, -52]
@@ -354,7 +354,7 @@
       "id": "SYS16",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": 155,
       "locations": [48, 49]
@@ -363,7 +363,7 @@
       "id": "SYS17",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 10,
       "angle": -155,
       "locations": [48, -49]

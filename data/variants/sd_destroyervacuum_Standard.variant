@@ -3,14 +3,14 @@
     "goalVariant": true,
     "fluxCapacitors": 0,
     "fluxVents": 18,
-    "hullId": "sd_destroyervacuum",
+    "hullId": "sd_destroyersupport",
     "hullMods": [
         "fluxbreakers",
         "hardened_subsystems"
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_destroyervacuum_Standard",
+    "variantId": "sd_destroyersupport_Standard",
     "weaponGroups": [
         {
             "autofire": true,

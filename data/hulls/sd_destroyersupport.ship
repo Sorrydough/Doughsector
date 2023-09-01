@@ -1,8 +1,8 @@
 {
-  "hullName": "Vacuum Destroyer",
-  "hullId": "sd_destroyervacuum",
+  "hullName": "Excision",
+  "hullId": "sd_destroyersupport",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/sd_destroyervacuum.png",
+  "spriteName": "graphics/ships/sd_destroyersupport.png",
   "style": "SD_SPEC",
   "height": 190,
   "width": 190,
@@ -22,8 +22,9 @@
     "DEC02": "sd_blinker",
     "DEC03": "sd_blinker",
     "DEC04": "sd_blinker",
-    "DEC05": "sd_destroyervacuum_hangarL",
-    "DEC06": "sd_destroyervacuum_hangarR",
+    "DEC05": "sd_destroyersupport_hangarL",
+    "DEC06": "sd_destroyersupport_hangarR",
+    "DEC07": "sd_destroyersupport_glow",
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
@@ -176,6 +177,15 @@
       "arc": 0,
       "angle": 0,
       "locations": [-56.5, -34]
+    },
+    {
+      "id": "DEC07",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-46, -0]
     }
   ],
   "engineSlots": [

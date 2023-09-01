@@ -37,6 +37,7 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("hil");
 
             //point defense
+            sd_weaponsList.add("lrpdlaser");
             sd_weaponsList.add("pdburst");
             sd_weaponsList.add("heavyburst");
             sd_weaponsList.add("guardian");

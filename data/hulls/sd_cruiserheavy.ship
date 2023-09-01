@@ -29,16 +29,16 @@
   },
   "weaponSlots": [
     {
-      "id": "UNI01",
+      "id": "SYN01",
       "size": "LARGE",
-      "type": "UNIVERSAL",
+      "type": "SYNERGY",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
       "locations": [75, 47]
     },
     {
-      "id": "SYN01",
+      "id": "SYN02",
       "size": "MEDIUM",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
