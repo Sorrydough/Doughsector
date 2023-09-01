@@ -24,9 +24,8 @@ public class sd_damperfield extends BaseShipSystemScript {
 			return;
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
-		ship.fadeToColor(id, new Color(75, 75, 75, 255), 0.1f, 0.1f, effectLevel);
-		ship.getEngineController().fadeToOtherColor(id, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), effectLevel, 0.75f * effectLevel);
-		ship.setJitterUnder(id, new Color(250, 235, 215, 255), effectLevel, 10, 0f, 15f);
+		ship.setJitter(id, new Color(250, 235, 215, 50), effectLevel, 2, 0, 5);
+		ship.setJitterUnder(id, new Color(250, 235, 215, 150), effectLevel, 25, 0, 7);
 
 		float damperMult = DAMPER_MULT.get(stats.getVariant().getHullSize());
 		stats.getHullDamageTakenMult().modifyMult(id, 1f - (1f - damperMult) * effectLevel);

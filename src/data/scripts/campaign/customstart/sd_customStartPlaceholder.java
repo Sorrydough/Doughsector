@@ -28,7 +28,6 @@ import java.util.Map;
 
 @SuppressWarnings("unused")
 public class sd_customStartPlaceholder extends CustomStart {
-
     @Override
     public void execute(InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
         CharacterCreationData data = (CharacterCreationData) memoryMap.get(MemKeys.LOCAL).get("$characterData");

@@ -10,9 +10,9 @@
 	"soundFilterGainHF":0.25,
 		
 	"fadeActivationSoundOnChargedown":true,
-	"useSound":"system_damper_omega",
-	"loopSound":"system_damper_omega_loop",
-	"deactivateSound":"system_damper_omega_off",
+	"useSound":"system_damper",
+	"loopSound":"system_damper_loop",
+	"deactivateSound":"system_damper_off",
 	"outOfUsesSound":"gun_out_of_ammo",
 	
 	"aiHints":{

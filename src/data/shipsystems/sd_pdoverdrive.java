@@ -15,9 +15,8 @@ public class sd_pdoverdrive extends BaseShipSystemScript {
             return;
 
         ShipAPI ship = (ShipAPI) stats.getEntity();
-//        ship.fadeToColor(id, new Color(75, 75, 75, 255), 0.1f, 0.1f, effectLevel);
-//        ship.getEngineController().fadeToOtherColor(id, new Color(0, 0, 0, 0), new Color(0, 0, 0, 0), effectLevel, 0.75f * effectLevel);
-        ship.setJitterUnder(id, new Color(150,100,255, 150), effectLevel, 15, 0f, 20f);
+        ship.setJitter(id, new Color(150,100,255, 50), effectLevel, 1, 0, 5);
+        ship.setJitterUnder(id, new Color(150,100,255, 150), effectLevel, 10, 0f, 10f);
 
         if (doOnce) {
             for (WeaponAPI weapon : ship.getAllWeapons()) {
@@ -26,10 +25,10 @@ public class sd_pdoverdrive extends BaseShipSystemScript {
             }
             doOnce = false;
         }
-        stats.getBeamWeaponDamageMult().modifyMult(id, 2);
-        stats.getEnergyWeaponRangeBonus().modifyPercent(id, 100);
-        stats.getEnergyAmmoRegenMult().modifyMult(id, 3);
-        stats.getEnergyRoFMult().modifyMult(id, 3);
+        stats.getBeamWeaponDamageMult().modifyMult(id, 2 * effectLevel);
+        stats.getEnergyWeaponRangeBonus().modifyPercent(id, 100 * effectLevel);
+        stats.getEnergyAmmoRegenMult().modifyMult(id, 3 * effectLevel);
+        stats.getEnergyRoFMult().modifyMult(id, 3 * effectLevel);
     }
 
     public void unapply(MutableShipStatsAPI stats, String id) {
