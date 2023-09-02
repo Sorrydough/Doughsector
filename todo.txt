@@ -1,17 +1,42 @@
-Do These Right Now:
-- Name ships - north american flowers? pair of two words?
-- Description strings for everything
-- Write the flux vacuum script
-- Set up FER vector thruster rendering
-- Use FER to dynamically render flares to add splash of pink and purple
-- Implement glowmaps for blinkers and sensor
+Ship System Stuff:
+- Create a toggle system that doubles armor for damage calc, increases maxiumum damage blocked by armor to 100%, and generates 3x the ship's shield upkeep while active. Doesn't restrict weapons fire or block dissipation. Potential names: Force Cascade Matrix, Armor Polarization Field, Energized Integrity Screen...
+- Configure AI threat indicators for ship systems
+- Make the AM canisters go vaguely in the direction of the nearest threat instead of being completely random
+- Rename PD overdrive
+- Bash canister boxes onto everything
+- Write custom PD overdrive AI
+- Write custom quantum disruptor AI
+- Return overload color to quantum disruptor script
+- Figure out why the PD overdrive orb doesn't seem to rotate
+
+Campaign Stuff:
 - Make a placeholder faction with the fleets randomly patrolling near caches
 - Add songs
-- Add a shielded holds that only shields a portion of the cargo instead of the entire ship
-- Weaker phase field for auxiliaries?
-- Add a hard check for gunnery implants
 
-Do These Later:
+Misc Stuff:
+- Rename skirmish ships to "fast" ships in the files
+- Calculate effective DPS of soft flux vs. high compared to vs. low tech fopr my own sanity
+- Description strings for everything
+
+Aesthetic Stuff:
+- Use fade engines to color function to make them change color randomly in combat
+- Implement glowmaps for blinkers and sensor
+- Upgrade vector thrusters
+
+Generic AI Stuff:
+- rework the phase buster AI to block the fire command for individual weapons instead of send a ship flag
+- Improve venting behavior - needs to use starficz' calculate incoming damage utility
+- Figure out what AI flag is making battlecarriers flee, and fix it
+- Make carriers stop running their replacement rate into the floor
+
+Art Her Stuff:
+- Really Converted Hangars
+- Export, Pirate, Path skin variants
+- Hullmod icons
+- Make the sensor get blown
+- Fast cruiser resprite
+
+Post-Release Stuff:
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
 - global combatplugin for RTS mode
     5% range?
@@ -21,12 +46,5 @@ Do These Later:
 - some sort of ship marriage system to capture the hearts and dicks of redditors
 - Script to make weapons look nice in the refit screen
 - Combat warning noise for missiles hitting your flagship
-
-Shit for Art Man:
-- Really Converted Hangars
-- Export, Pirate, Path skin variants
-- Hullmod icons
-- Maybe revive the old frigate carrier as a battle wall thingie?
-- Reskins for certain fighters - wasp, dagger
-- Siege destroyer looks a bit goofy with 2 extra aux thrusters
-- Make him blow the sensor
+- Make sure the forum download link is hidden behind a simple riddle
+- When a fleet contests your salvagae, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)

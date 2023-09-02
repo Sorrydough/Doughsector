@@ -25,6 +25,7 @@ public class sd_pdoverdrive extends BaseShipSystemScript {
             }
             doOnce = false;
         }
+        stats.getBeamWeaponFluxCostMult().modifyMult(id, 2 * effectLevel);
         stats.getBeamWeaponDamageMult().modifyMult(id, 2 * effectLevel);
         stats.getEnergyWeaponRangeBonus().modifyPercent(id, 100 * effectLevel);
         stats.getEnergyAmmoRegenMult().modifyMult(id, 3 * effectLevel);
@@ -33,12 +34,10 @@ public class sd_pdoverdrive extends BaseShipSystemScript {
 
     public void unapply(MutableShipStatsAPI stats, String id) {
         doOnce = true;
+        stats.getBeamWeaponFluxCostMult().unmodifyMult(id);
         stats.getBeamWeaponDamageMult().unmodify(id);
         stats.getEnergyWeaponRangeBonus().unmodifyPercent(id);
         stats.getEnergyAmmoRegenMult().unmodify(id);
         stats.getEnergyRoFMult().unmodify(id);
     }
 }
-
-
-

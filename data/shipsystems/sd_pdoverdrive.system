@@ -1,7 +1,7 @@
 {
 	"id":"sd_pdoverdrive",
 	"type":"STAT_MOD",
-	"aiType":"DAMPER_FIELD",
+	"aiType":"LIDAR_ARRAY",
 	
 	"statsScript":"data.shipsystems.sd_pdoverdrive",
 
