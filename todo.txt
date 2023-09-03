@@ -1,34 +1,32 @@
 Ship System Stuff:
-- Create a toggle system that doubles armor for damage calc, increases maxiumum damage blocked by armor to 100%, and generates 3x the ship's shield upkeep while active. Doesn't restrict weapons fire or block dissipation. Potential names: Force Cascade Matrix, Armor Polarization Field, Energized Integrity Screen...
+- Create a toggle system that doubles armor for damage calc, increases maxiumum damage blocked by armor to 100%, and generates 3x the ship's shield upkeep while active. Doesn't restrict weapons fire or block dissipation. Potential names: Force Cascade Matrix, Armor Polarization Field, Energized Integrity Screen, Morphic...
 - Configure AI threat indicators for ship systems
 - Make the AM canisters go vaguely in the direction of the nearest threat instead of being completely random
 - Rename PD overdrive
-- Bash canister boxes onto everything
+- Bash canister boxes
 - Write custom PD overdrive AI
 - Write custom quantum disruptor AI
 - Return overload color to quantum disruptor script
 - Figure out why the PD overdrive orb doesn't seem to rotate
 
-Campaign Stuff:
-- Make a placeholder faction with the fleets randomly patrolling near caches
-- Add songs
-
 Misc Stuff:
 - Rename skirmish ships to "fast" ships in the files
 - Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
-- Description strings for everything
+- Description strings
 
 Aesthetic Stuff:
 - Use fade engines to color function to make them change color randomly in combat
-- Implement glowmaps for blinkers and sensor
-- Upgrade vector thrusters
+- Implement glowmaps for blinkers and friends
+- Upgrade (downgrade?) vector thrusters
 - Flip the heavy cruiser and large frigate
 
 Generic AI Stuff:
-- rework the phase buster AI to block the fire command for individual weapons instead of send a ship flag
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility
-- Figure out why battlecarriers get the DO NOT BACK OFF flag but CH ships don't
-- Make carriers stop running their replacement rate into the floor
+- Check whether CH ships get the DO NOT PURSUE flag like how battlecarriers do
+
+Campaign Stuff:
+- Make a placeholder faction with the fleets randomly patrolling near caches
+- Add songs
 
 Art Her Stuff:
 - Really Converted Hangars

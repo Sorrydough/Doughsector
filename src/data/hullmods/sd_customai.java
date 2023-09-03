@@ -34,6 +34,8 @@ public class sd_customai extends BaseHullMod {
             this.ship = ship;
         }
 
+        boolean pullback = false;
+
         @Override
         public void advance(float amount) {
 
@@ -55,20 +57,39 @@ public class sd_customai extends BaseHullMod {
                 timer.randomize();
             }
 
+            ////////////////////////////
+            //FIXES SUICIDING FIGHTERS//
+            ////////////////////////////
             //ok so if our fighters aren't all healthy and our replacement rate isn't high, then we regroup until they are, unless the target is getting super fucked
-            //if (!ship.getShipTarget().getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.NEEDS_HELP))
-                //ship.getWing().getWingMembers()
+            if (!ship.getWingLeader().getShipTarget().getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.NEEDS_HELP))
+                if (!pullback && ship.getSharedFighterReplacementRate() < 85) {
+                    ship.setPullBackFighters(true);
+                    pullback = true;
+                } else if (pullback && ship.getSharedFighterReplacementRate() == 100) {
+                    ship.setPullBackFighters(false);
+                    pullback = false;
+                }
 
+            /////////////////////////////////////
+            //FIXES BATTLECARRIERS RUNNING AWAY//
+            /////////////////////////////////////
+            if (ship.hasLaunchBays() && ship.hasTag("COMBAT"))
+                if (ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE) && ship.getSharedFighterReplacementRate() > 85)
+                    ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
 
+            /////////////////////////////////////////
+            //FIXES SHOOTING STRIKE AT PHASED SHIPS//
+            /////////////////////////////////////////
+            //need to switch this to force block fire for one from for all weapons with STRIKE tag
             //ok so if the enemy is currently phased, and they aren't about to flux out
-            if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getHardFluxLevel() < 0.9) {
-                //check if the ship has any strike weapons
+            if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getHardFluxLevel() < 0.95) {
+                //if the ship has any strike weapons, block them from firing when the target is phased
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
                     if (weapon.hasAIHint(WeaponAPI.AIHints.STRIKE))
+                        weapon.setForceNoFireOneFrame(true);
                         //fun facts: the AI will still manually fire a weapon group even if autofire is disabled, AND even if the ship is set to hold fire.
-                        //Time taken to write these 5 lines of code: 2 hours.
-                        if (ship.getSelectedGroupAPI() == ship.getWeaponGroupFor(weapon))
-                            ship.blockCommandForOneFrame(ShipCommand.FIRE);
+                        //additionally, if you block the fire command for the selected weapon group, then autofiring strike weapons will still shoot
+                        //Time taken to write these 4 lines of code: 2 hours.
                 }
             }
 
