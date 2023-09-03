@@ -15,18 +15,19 @@ Campaign Stuff:
 
 Misc Stuff:
 - Rename skirmish ships to "fast" ships in the files
-- Calculate effective DPS of soft flux vs. high compared to vs. low tech fopr my own sanity
+- Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
 - Description strings for everything
 
 Aesthetic Stuff:
 - Use fade engines to color function to make them change color randomly in combat
 - Implement glowmaps for blinkers and sensor
 - Upgrade vector thrusters
+- Flip the heavy cruiser and large frigate
 
 Generic AI Stuff:
 - rework the phase buster AI to block the fire command for individual weapons instead of send a ship flag
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility
-- Figure out what AI flag is making battlecarriers flee, and fix it
+- Figure out why battlecarriers get the DO NOT BACK OFF flag but CH ships don't
 - Make carriers stop running their replacement rate into the floor
 
 Art Her Stuff:
@@ -34,7 +35,6 @@ Art Her Stuff:
 - Export, Pirate, Path skin variants
 - Hullmod icons
 - Make the sensor get blown
-- Fast cruiser resprite
 
 Post-Release Stuff:
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
@@ -47,4 +47,4 @@ Post-Release Stuff:
 - Script to make weapons look nice in the refit screen
 - Combat warning noise for missiles hitting your flagship
 - Make sure the forum download link is hidden behind a simple riddle
-- When a fleet contests your salvagae, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
+- When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
