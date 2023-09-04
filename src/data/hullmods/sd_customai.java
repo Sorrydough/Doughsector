@@ -65,9 +65,7 @@ public class sd_customai extends BaseHullMod {
             ///////////////////////////////////////////////////////////////
             if (ship.getShipTarget() != null && ship.getFluxLevel() > 0.25 && ship.getShipTarget().getHullLevel() > 0.25)
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
-                    WeaponAPI.DerivedWeaponStatsAPI weaponStats = weapon.getDerivedStats();
-                    float fluxPerBurst = weaponStats.getBurstFireDuration() * weaponStats.getFluxPerSecond();
-                    if (fluxPerBurst + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.85)
+                    if (weapon.getFluxCostToFire() + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.85)
                         weapon.setForceNoFireOneFrame(true);
                 }
 
@@ -92,18 +90,35 @@ public class sd_customai extends BaseHullMod {
                     ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
 
             /////////////////////////////////////////
-            //FIXES SHOOTING STRIKE AT PHASED SHIPS//
-            /////////////////////////////////////////
-            //need to switch this to force block fire for one from for all weapons with STRIKE tag
-            //ok so if the enemy is currently phased, and they aren't about to flux out
-            if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getHardFluxLevel() < 0.9) {
-                //if the ship has any strike weapons, block them from firing when the target is phased
+            //FIXES SHOOTING STRIKE AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
+            ///////////////////////////////////////// TODO: DEBUG THIS FOR MODDED PHASE SYSTEMS SUCH AS SIERRA
+            boolean isPhaseEnemy = false;
+            for (ShipAPI enemy : AIUtils.getEnemiesOnMap(ship)) {
+                if (enemy.isPhased()) { //first, check if the enemy even has phase ships
+                    isPhaseEnemy = true;
+                    break;
+                }
+            }
+
+            if (isPhaseEnemy) {
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
-                    if (weapon.hasAIHint(WeaponAPI.AIHints.STRIKE) || weapon.getSpec().getDerivedStats().getRoF() < 60 || weapon.getRefireDelay() > 1)
-                        weapon.setForceNoFireOneFrame(true);
-                        //fun facts: the AI will still manually fire a weapon group even if autofire is disabled, AND even if the ship is set to hold fire.
-                        //additionally, if you block the fire command for the selected weapon group, then autofiring strike weapons will still shoot
-                        //Time taken to write these 4 lines of code: 2 hours.
+                    switch (weapon.getType()) { //NPEs can eat my ass
+                        case STATION_MODULE:
+                        case LAUNCH_BAY:
+                        case DECORATIVE:
+                        case SYSTEM:
+                            continue;
+                    }
+
+                    if (weapon.usesAmmo() || weapon.getCooldown() > 1) { //if the weapon is ammo-limited or refires slowly, don't shoot it at phased ships
+                        if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() < 0.9)
+                            weapon.setForceNoFireOneFrame(true);
+                        if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
+                            continue;
+                        ShipAPI autofireAITarget = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip(); //autofire is an entirely separate AI from the main ship
+                        if (autofireAITarget != null && autofireAITarget.isPhased() && autofireAITarget.getFluxLevel() < 0.9)
+                            weapon.setForceNoFireOneFrame(true);
+                    }
                 }
             }
 
