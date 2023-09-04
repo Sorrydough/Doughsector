@@ -11,7 +11,6 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
@@ -34,8 +33,6 @@ public class sd_customai extends BaseHullMod {
         public sd_aiListener(ShipAPI ship) {
             this.ship = ship;
         }
-
-        boolean pullback = false;
 
         @Override
         public void advance(float amount) {
@@ -60,10 +57,11 @@ public class sd_customai extends BaseHullMod {
 
             //TODO: ADD A FUNCTION THAT MAKES SHIPS SCARED OF ENEMIES WITH UNFIRED STRIKE WEAPONS
             //TODO: MAKE BATTLECARRIERS STOP GETTING SLAPPED WITH A DO NOT PURSUE FLAG
+            //TODO: CUSTOM REAPER TORPEDO AI
 
-            ///////////////////////////////////////////////////////////////
-            //HELPS ALLEVIATE SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
-            ///////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////
+            //ALLEVIATEs SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
+            //////////////////////////////////////////////////////////
             if (ship.getShipTarget() != null && ship.getFluxLevel() > 0.25 && ship.getShipTarget().getHullLevel() > 0.25)
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
                     if (weapon.getFluxCostToFire() + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.85)
@@ -87,7 +85,7 @@ public class sd_customai extends BaseHullMod {
             /////////////////////////////////////
             //FIXES BATTLECARRIERS RUNNING AWAY// IF OUR FIGHTERS ARE BEING AGGRESSIVE THEN WE WANT TO BE AGGRESSIVE
             ///////////////////////////////////// TODO: SWAP CAPTAIN TO AGGRESSIVE AND CHECK IF THIS CODE IS STILL NECESSARY
-            if (ship.hasLaunchBays() && ship.getHullSpec().hasTag("COMBAT")) //NEED TO FIX THE TAG CHECK NOT WORKING
+            if (ship.hasLaunchBays() && ship.getVariant().getHints().contains(ShipHullSpecAPI.ShipTypeHints.COMBAT))
                 if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
                     ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
 
