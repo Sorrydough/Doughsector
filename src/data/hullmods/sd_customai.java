@@ -79,8 +79,10 @@ public class sd_customai extends BaseHullMod {
 //                    ship.setPullBackFighters(false);
 //                    pullback = false;
 //                }
-            if (ship.getSharedFighterReplacementRate() < 0.85)
+            if (ship.getSharedFighterReplacementRate() < 0.85) {
                 ship.setPullBackFighters(true);
+                ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
+            }
 
             /////////////////////////////////////
             //FIXES BATTLECARRIERS RUNNING AWAY// IF OUR FIGHTERS ARE BEING AGGRESSIVE THEN WE WANT TO BE AGGRESSIVE
@@ -101,6 +103,11 @@ public class sd_customai extends BaseHullMod {
             }
 
             if (isPhaseEnemy) {
+                if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() > 0.85 && ship.getFluxLevel() < 0.75) {
+                    ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);  //REALLY horny to get overextended phase ships
+                    ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.PURSUING);
+                }
+
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
                     switch (weapon.getType()) { //NPEs can eat my ass
                         case STATION_MODULE:
@@ -110,7 +117,8 @@ public class sd_customai extends BaseHullMod {
                             continue;
                     }
 
-                    if (weapon.usesAmmo() || weapon.getCooldown() > 1) { //if the weapon is ammo-limited or refires slowly, don't shoot it at phased ships
+                    if (weapon.getCooldown() > 1) { //if the weapon is ammo-limited or refires slowly, don't shoot it at phased ships
+                        // ^ weapon.usesAmmo() || figure out how to incorporate this but still allow PD to engage missiles
                         if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() < 0.9)
                             weapon.setForceNoFireOneFrame(true);
                         if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
