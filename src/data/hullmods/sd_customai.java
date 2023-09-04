@@ -11,6 +11,7 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
@@ -57,8 +58,8 @@ public class sd_customai extends BaseHullMod {
                 timer.randomize();
             }
 
-            //ADD A FUNCTION THAT MAKES SHIPS SCARED OF ENEMIES WITH UNFIRED STRIKE WEAPONS
-
+            //TODO: ADD A FUNCTION THAT MAKES SHIPS SCARED OF ENEMIES WITH UNFIRED STRIKE WEAPONS
+            //TODO: MAKE BATTLECARRIERS STOP GETTING SLAPPED WITH A DO NOT PURSUE FLAG
 
             ///////////////////////////////////////////////////////////////
             //HELPS ALLEVIATE SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
@@ -69,29 +70,28 @@ public class sd_customai extends BaseHullMod {
                         weapon.setForceNoFireOneFrame(true);
                 }
 
-            ////////////////////////////
-            //FIXES SUICIDING FIGHTERS//
-            ////////////////////////////
+            ///////////////////////////////////////////////
+            //FIXES SUICIDING FIGHTERS AND TIMID BEHAVIOR//
+            ///////////////////////////////////////////////
             //ok so if our fighters aren't all healthy and our replacement rate isn't high, then we regroup until they are, unless the target is getting super fucked
-            if (ship.getWingLeader() != null && !ship.getWingLeader().getShipTarget().getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.NEEDS_HELP))
-                if (!pullback && ship.getSharedFighterReplacementRate() < 85) {
-                    ship.setPullBackFighters(true);
-                    pullback = true;
-                } else if (pullback && ship.getSharedFighterReplacementRate() == 100) {
-                    ship.setPullBackFighters(false);
-                    pullback = false;
-                }
+            //if (ship.getWingLeader() != null && !ship.getWingLeader().getShipTarget().getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.NEEDS_HELP))
+//                } else if (pullback && ship.getSharedFighterReplacementRate() == 1) {
+//                    ship.setPullBackFighters(false);
+//                    pullback = false;
+//                }
+            if (ship.getSharedFighterReplacementRate() < 0.85)
+                ship.setPullBackFighters(true);
 
             /////////////////////////////////////
-            //FIXES BATTLECARRIERS RUNNING AWAY//
-            /////////////////////////////////////
-            if (ship.hasLaunchBays() && ship.hasTag("COMBAT"))
-                if (ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE) && ship.getSharedFighterReplacementRate() > 85)
+            //FIXES BATTLECARRIERS RUNNING AWAY// IF OUR FIGHTERS ARE BEING AGGRESSIVE THEN WE WANT TO BE AGGRESSIVE
+            ///////////////////////////////////// TODO: SWAP CAPTAIN TO AGGRESSIVE AND CHECK IF THIS CODE IS STILL NECESSARY
+            if (ship.hasLaunchBays() && ship.getHullSpec().hasTag("COMBAT")) //NEED TO FIX THE TAG CHECK NOT WORKING
+                if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
                     ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
 
             /////////////////////////////////////////
             //FIXES SHOOTING STRIKE AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
-            ///////////////////////////////////////// TODO: DEBUG THIS FOR MODDED PHASE SYSTEMS SUCH AS SIERRA
+            ///////////////////////////////////////// TODO: DEBUG THIS FOR MODDED PHASE SYSTEMS LIKE SIERRA
             boolean isPhaseEnemy = false;
             for (ShipAPI enemy : AIUtils.getEnemiesOnMap(ship)) {
                 if (enemy.isPhased()) { //first, check if the enemy even has phase ships, so we don't run code frivilously
