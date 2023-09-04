@@ -94,7 +94,7 @@ public class sd_customai extends BaseHullMod {
             ///////////////////////////////////////// TODO: DEBUG THIS FOR MODDED PHASE SYSTEMS SUCH AS SIERRA
             boolean isPhaseEnemy = false;
             for (ShipAPI enemy : AIUtils.getEnemiesOnMap(ship)) {
-                if (enemy.isPhased()) { //first, check if the enemy even has phase ships
+                if (enemy.isPhased()) { //first, check if the enemy even has phase ships, so we don't run code frivilously
                     isPhaseEnemy = true;
                     break;
                 }
