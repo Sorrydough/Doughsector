@@ -1,12 +1,11 @@
 {
     "displayName": "Standard",
-    "goalVariant": true,
-    "fluxCapacitors": 0,
+    "fluxCapacitors": 7,
     "fluxVents": 0,
     "hullId": "sd_destroyercarrier",
     "hullMods": [
-    "fluxbreakers",
-    "eccm"
+        "fluxbreakers",
+        "eccm"
     ],
     "permaMods": [],
     "sMods": [],
@@ -14,20 +13,22 @@
     "weaponGroups": [
         {
             "autofire": false,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "SYN01": "annihilator",
-                "SYN02": "annihilator"
-            }
+            "mode": "LINKED",
+            "weapons": {"SYN02": "heatseeker"}
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
-            "weapons": {"NRG01": "irautolance"}
+            "weapons": {"SYN01": "heatseeker"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"NRG01": "heavyburst"}
         }
     ],
     "wings": [
-        "longbow_Wing",
-        "longbow_Wing"
+        "sd_fighterblasterWing",
+        "sd_fightergravitonWing"
     ]
 }

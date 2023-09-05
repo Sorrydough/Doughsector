@@ -1,0 +1,50 @@
+{
+    "displayName": "Standard",
+    "fluxCapacitors": 10,
+    "fluxVents": 15,
+    "hullId": "sd_cruiserheavy",
+    "hullMods": [
+        "fluxbreakers",
+        "advancedoptics",
+        "missleracks"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_cruiserheavy_Standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"NRG01": "tachyonlance"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"SYN02": "gorgonpod"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "NRG03": "gravitonbeam",
+                "NRG05": "pdburst",
+                "NRG06": "pdburst",
+                "NRG07": "pdburst",
+                "NRG08": "pdburst"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"SYN01": "squall"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "NRG02": "gravitonbeam",
+                "NRG04": "gravitonbeam"
+            }
+        }
+    ]
+}

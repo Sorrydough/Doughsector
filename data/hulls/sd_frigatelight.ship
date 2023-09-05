@@ -39,7 +39,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -150,
+      "angle": -120,
       "locations": [-11, -12]
     },
     {
@@ -48,7 +48,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -105,
+      "angle": -85,
       "locations": [-8, -14]
     },
     {
@@ -57,7 +57,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 105,
+      "angle": 85,
       "locations": [-8, 14]
     },
     {
@@ -66,7 +66,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 150,
+      "angle": 120,
       "locations": [-11, 12]
     },
     {
@@ -167,6 +167,24 @@
       "arc": 0,
       "angle": -145,
       "locations": [-26.5, -13.5]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 152.5,
+      "locations": [-20, 15]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": -152.5,
+      "locations": [-20, -15]
     }
   ],
   "engineSlots": [
