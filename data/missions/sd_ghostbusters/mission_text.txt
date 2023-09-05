@@ -1,8 +1,14 @@
-Location: Hyperspace outside Tri-Tachyon Blacksite
+Location: TT Frontier Hyperspace
 Date: 210.03.05
 
-After several skirmishes with ships of unknown design, Tri-Tachyon dispatch a phase contingent to their closest outpost intending to replicate the success they experienced against the Hegemony some months prior.
+After several skirmishes with ships of unknown design on the frontier, Tri-Tachyon dispatch a phase contingent to crush this new threat before it cuts into their bottom line.
 
-During routine patrols, they caught a small patrol fleet in-system. It escaped, but they learned their lesson - This site had to be held in hyperspace. A task they were uniquely suited for, they set up an ambush.
+During routine patrols at an outpost, a small fleet is caught shadowing you.
+The enemy is slippery and escapes to the jump point but the lesson is clear - This system has to be held in hyperspace. A task you're uniquely suited for, an ambush is set.
 
-It only took a couple days of waiting. Their wish was soon fulilled... although maybe not by the sort of fleet they hoped to see.
+It only took a couple weeks. You call general quarters as a warfleet screams in at full burn.
+
+- BLUFOR has Phase Coil Tuning. Your flagship has:
+Impact Mitigation, Systems Expertise and Elite Polarized Armor.
+- REDFOR has Electronic Warfare. Their admiral has:
+Gunnery Implants, Systems Expertise and Elite Target Analysis.
