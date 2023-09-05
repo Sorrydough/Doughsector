@@ -1,0 +1,33 @@
+{
+    "displayName": "Support",
+    "fluxCapacitors": 2,
+    "fluxVents": 0,
+    "hullId": "sd_destroyercarrier",
+    "hullMods": [
+        "fluxbreakers",
+        "expanded_deck_crew",
+        "advancedoptics"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_destroyercarrier_Support",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "SYN01": "gazer",
+                "SYN02": "gazer"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"NRG01": "ionbeam"}
+        }
+    ],
+    "wings": [
+        "sd_fighterblasterWing",
+        "sd_fighterblasterWing"
+    ]
+}

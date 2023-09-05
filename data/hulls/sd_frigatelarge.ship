@@ -33,7 +33,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [37.5, -19]
+      "locations": [37, -19]
     },
     {
       "id": "NRG01",

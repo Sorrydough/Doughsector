@@ -4,4 +4,4 @@ High Scatter Amplifier,high_scatter_amp,3,,Common,,Weapons,5000,,,,4,8,12,20,dat
 Improved Ship AI,sd_customai,,,Common,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/automated.png
 Beam Targeting Integration,sd_beamintegration,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_beamintegration,<tooltip created in the script>,,,graphics/hullmods/distributed_fire_control.png
 Light Ground Support,sd_groundsupport,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/ground_support.png
-Cramped Racks,sd_crampedracks,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedracks,<tooltip created in the script>,,,graphics/sd_crampedracks.png
+Cramped Racks,sd_crampedracks,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedracks,<tooltip created in the script>,,,graphics/hullmods/sd_crampedracks.png

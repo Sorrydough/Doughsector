@@ -60,7 +60,7 @@ public class sd_customai extends BaseHullMod {
             //TODO: CUSTOM REAPER TORPEDO AI
 
             //////////////////////////////////////////////////////////
-            //ALLEVIATEs SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
+            //ALLEVIATES SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
             //////////////////////////////////////////////////////////
             if (ship.getShipTarget() != null && ship.getFluxLevel() > 0.25 && ship.getShipTarget().getHullLevel() > 0.25)
                 for (WeaponAPI weapon : ship.getAllWeapons()) {

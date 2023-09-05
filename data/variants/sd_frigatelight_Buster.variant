@@ -1,0 +1,18 @@
+{
+    "displayName": "Buster",
+    "fluxCapacitors": 10,
+    "fluxVents": 7,
+    "hullId": "sd_frigatelight",
+    "hullMods": [
+        "fluxbreakers",
+        "advancedoptics"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigatelight_Buster",
+    "weaponGroups": [{
+        "autofire": true,
+        "mode": "LINKED",
+        "weapons": {"NRG01": "phasebeam"}
+    }]
+}

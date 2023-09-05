@@ -22,6 +22,9 @@
 		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.6},
 		"CRUISER":{"sounds":[0], "pitch":0.9, "volume":0.7},
 		"CAPITAL_SHIP":{"sounds":[0], "pitch":0.8, "volume":0.8}
+	},
+	"music":{
+		"sd_ghostbusters":[{"file":"sd_ghostbusters.ogg","source":"sounds/music/","volume":0.35,"randomStart":false}]
 	}
 }
 
