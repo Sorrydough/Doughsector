@@ -8,7 +8,8 @@ The enemy is slippery and escapes to the jump point but the lesson is clear - Th
 
 It only took a couple weeks. You call general quarters as a warfleet screams in at full burn.
 
-- BLUFOR has Phase Coil Tuning. Your flagship has:
-Impact Mitigation, Systems Expertise and Elite Polarized Armor.
-- REDFOR has Electronic Warfare. Their admiral has:
-Gunnery Implants, Systems Expertise and Elite Target Analysis.
+Analysis:
+- Most ships in both fleets are commanded by aggressive crew.
+- Your fleet benefits from phase coil tuning. The opposing fleet benefits from electronic warfare.
+- You personally have Impact Mitigation, Systems Expertise, Polarized Armor, Elite Helmsmanship and Elite Field Modulation.
+- REDFOR's flagship has Gunnery Implants, Systems Expertise, Helmsmanship and Elite Target Analysis. Their 2nd has Elite Point Defense.

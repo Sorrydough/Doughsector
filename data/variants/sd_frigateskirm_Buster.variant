@@ -1,0 +1,36 @@
+{
+    "displayName": "Buster",
+    "fluxCapacitors": 10,
+    "fluxVents": 1,
+    "hullId": "sd_frigateskirm",
+    "hullMods": [
+        "fluxbreakers",
+        "eccm"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigateskirm_Buster",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {"NRG01": "amblaster"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "SYN01": "heatseeker",
+                "SYN02": "heatseeker"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "NRG02": "pdburst",
+                "NRG03": "pdburst"
+            }
+        }
+    ]
+}

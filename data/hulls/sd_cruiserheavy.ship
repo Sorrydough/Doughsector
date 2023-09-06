@@ -36,7 +36,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [75, 47]
+      "locations": [75, -47]
     },
     {
       "id": "SYN02",
@@ -45,7 +45,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [78, 3]
+      "locations": [78, -3]
     },
     {
       "id": "NRG01",
@@ -53,8 +53,8 @@
       "type": "ENERGY",
       "mount": "TURRET",
       "arc": 260,
-      "angle": -53,
-      "locations": [23, -49]
+      "angle": 53,
+      "locations": [23, 49]
     },
     {
       "id": "NRG02",
@@ -63,7 +63,7 @@
       "mount": "TURRET",
       "arc": 126,
       "angle": 0,
-      "locations": [70.5, -43]
+      "locations": [70, 43]
     },
     {
       "id": "NRG04",
@@ -72,7 +72,7 @@
       "mount": "TURRET",
       "arc": 254,
       "angle": 0,
-      "locations": [21.5, 1]
+      "locations": [21, -1]
     },
     {
       "id": "NRG03",
@@ -81,7 +81,7 @@
       "mount": "TURRET",
       "arc": 96,
       "angle": 0,
-      "locations": [38.5, 47]
+      "locations": [38, -47]
     },
     {
       "id": "NRG06",
@@ -89,8 +89,8 @@
       "type": "ENERGY",
       "mount": "TURRET",
       "arc": 267,
-      "angle": -28.5,
-      "locations": [52, -64]
+      "angle": 28.5,
+      "locations": [52, 64]
     },
     {
       "id": "NRG05",
@@ -99,15 +99,15 @@
       "mount": "TURRET",
       "arc": 91,
       "angle": 0,
-      "locations": [56, 3]
+      "locations": [56, -3]
     },
     {
       "id": "NRG08",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 216,
-      "angle": -142,
+      "arc": 227,
+      "angle": -138,
       "locations": [-30, -35]
     },
     {
@@ -115,8 +115,8 @@
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 227,
-      "angle": 138.5,
+      "arc": 216,
+      "angle": 142,
       "locations": [-30, 35]
     },
     {
@@ -126,7 +126,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [31, -83.5]
+      "locations": [31, 83.5]
     },
     {
       "id": "DEC01",
@@ -135,7 +135,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [96.5, -56.5]
+      "locations": [96.5, 56.5]
     },
     {
       "id": "DEC02",
@@ -144,7 +144,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [94.5, -24.5]
+      "locations": [94.5, 24.5]
     },
     {
       "id": "DEC03",
@@ -153,7 +153,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [90.5, 22.5]
+      "locations": [90.5, -22.5]
     },
     {
       "id": "DEC05",
@@ -162,7 +162,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [42.5, 76.5]
+      "locations": [42, -76.5]
     },
     {
       "id": "DEC04",
@@ -171,7 +171,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [86.5, 71.5]
+      "locations": [86.5, -71.5]
     },
     {
       "id": "THR04",
@@ -179,7 +179,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -137,
+      "angle": -135,
       "locations": [-79.5, -74.5]
     },
     {
@@ -188,7 +188,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -44,
+      "angle": -45,
       "locations": [-33.5, -72.5]
     },
     {
@@ -206,7 +206,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 39.5,
+      "angle": 45,
       "locations": [-33.5, 72.5]
     }
   ],

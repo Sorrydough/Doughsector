@@ -1,3 +1,9 @@
+Mission Stuff:
+- Need to prevent ships from ever retreating during a mission cuz the player's certainly won't!
+- Need a custom AI admiral to prevent frigates from getting themselves singled out and killed
+- Fix squalls running dry - don't shoot at unshielded ships or frigates?
+
+
 Ship System Stuff:
 - Create a toggle system that doubles armor for damage calc, increases maxiumum damage blocked by armor to 100%, and generates 3x the ship's shield upkeep while active. Doesn't restrict weapons fire or block dissipation. Potential names: Force Cascade Matrix, Armor Polarization Field, Energized Integrity Screen, Morphic...
 - Configure AI threat indicators for ship systems

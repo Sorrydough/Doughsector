@@ -55,9 +55,45 @@ public class sd_customai extends BaseHullMod {
                 timer.randomize();
             }
 
-            //TODO: ADD A FUNCTION THAT MAKES SHIPS SCARED OF ENEMIES WITH UNFIRED STRIKE WEAPONS
-            //TODO: MAKE BATTLECARRIERS STOP GETTING SLAPPED WITH A DO NOT PURSUE FLAG
-            //TODO: CUSTOM REAPER TORPEDO AI
+            ////////////////////////////////////////////////////////
+            //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//
+            ////////////////////////////////////////////////////////
+            if (ship.getFluxLevel() < 0.2 && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE) && !ship.getSystem().isActive()) {
+                for (WeaponAPI weapon : ship.getAllWeapons()) {
+                    if (weapon.isInBurst())
+                        break;
+                    ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
+                }
+            }
+
+            ///////////////////////////////////////////////////////////////////////
+            //FIXES SHIPS SPAMMING THEIR SQUALLS AT FRIGATES AND UNSHIELDED SHIPS//
+            ///////////////////////////////////////////////////////////////////////
+            for (WeaponAPI weapon : ship.getAllWeapons()) {
+                switch (weapon.getType()) { //NPEs can eat my ass
+                    case STATION_MODULE:
+                    case LAUNCH_BAY:
+                    case DECORATIVE:
+                    case SYSTEM:
+                        continue;
+                }
+
+                if (weapon.usesAmmo() && weapon.getDamageType().equals(DamageType.KINETIC)) {
+                    if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == HullSize.FRIGATE)) {
+                        weapon.setForceNoFireOneFrame(true);
+                        if (weapon.isInBurst() && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)))
+                            ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
+                    }
+                    if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
+                        continue;
+                    ShipAPI autofireAITarget = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip(); //autofire is an entirely separate AI from the main ship
+                    if (autofireAITarget != null && (autofireAITarget.getShipTarget().getShield() == null || autofireAITarget.getShipTarget().getHullSize() == HullSize.FRIGATE)) {
+                        weapon.setForceNoFireOneFrame(true);
+                        if (weapon.isInBurst() && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)))
+                            ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
+                    }
+                }
+            }
 
             //////////////////////////////////////////////////////////
             //ALLEVIATES SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
@@ -68,17 +104,11 @@ public class sd_customai extends BaseHullMod {
                         weapon.setForceNoFireOneFrame(true);
                 }
 
-            ///////////////////////////////////////////////
-            //FIXES SUICIDING FIGHTERS AND TIMID BEHAVIOR//
-            ///////////////////////////////////////////////
-            //ok so if our fighters aren't all healthy and our replacement rate isn't high, then we regroup until they are, unless the target is getting super fucked
-            //if (ship.getWingLeader() != null && !ship.getWingLeader().getShipTarget().getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.NEEDS_HELP))
-//                } else if (pullback && ship.getSharedFighterReplacementRate() == 1) {
-//                    ship.setPullBackFighters(false);
-//                    pullback = false;
-//                }
+            ////////////////////////////
+            //FIXES SUICIDING FIGHTERS// IF OUR REPLACEMENT RATE SUCKS THEN PRESERVING IT SHOULD BE OUR TOP PRIORITY
+            ////////////////////////////
             if (ship.getSharedFighterReplacementRate() < 0.85) {
-                ship.setPullBackFighters(true);
+                ship.setPullBackFighters(true); //TODO: CHECK IF THIS EVEN DOES ANYTHING
                 ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
             }
 
@@ -89,9 +119,9 @@ public class sd_customai extends BaseHullMod {
                 if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
                     ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
 
-            /////////////////////////////////////////
-            //FIXES SHOOTING STRIKE AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
-            ///////////////////////////////////////// TODO: DEBUG THIS FOR MODDED PHASE SYSTEMS LIKE SIERRA
+            /////////////////////////////////////////////////
+            //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
+            ///////////////////////////////////////////////// TODO: DEBUG THIS FOR MODDED PHASE SYSTEMS LIKE SIERRA
             boolean isPhaseEnemy = false;
             for (ShipAPI enemy : AIUtils.getEnemiesOnMap(ship)) {
                 if (enemy.isPhased()) { //first, check if the enemy even has phase ships, so we don't run code frivilously
@@ -116,18 +146,21 @@ public class sd_customai extends BaseHullMod {
                     }
 
                     if (weapon.getCooldown() > 1) { //if the weapon is ammo-limited or refires slowly, don't shoot it at phased ships
-                        // ^ weapon.usesAmmo() || figure out how to incorporate this but still allow PD to engage missiles
-                        if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() < 0.9)
+                        //TODO: ^ weapon.usesAmmo() || figure out how to incorporate this but still allow PD to engage missiles
+                        if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() < 0.95)
                             weapon.setForceNoFireOneFrame(true);
                         if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
                             continue;
                         ShipAPI autofireAITarget = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip(); //autofire is an entirely separate AI from the main ship
-                        if (autofireAITarget != null && autofireAITarget.isPhased() && autofireAITarget.getFluxLevel() < 0.9)
+                        if (autofireAITarget != null && autofireAITarget.isPhased() && autofireAITarget.getFluxLevel() < 0.95)
                             weapon.setForceNoFireOneFrame(true);
                     }
                 }
             }
 
+            ////////////////////////////////////////////////////
+            //SCY'S VENTING CODE, PRACTICALLY UNCUSTOMIZED YET//
+            ////////////////////////////////////////////////////
             timer.advance(amount);
             if (timer.intervalElapsed()) {
                 if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getFluxTracker().getFluxLevel() < 0.2 || ship.getSystem().isActive())

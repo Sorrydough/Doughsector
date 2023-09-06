@@ -1,5 +1,6 @@
 package data.missions.sd_ghostbusters;
 
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.fleet.FleetGoal;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
@@ -7,6 +8,7 @@ import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.mission.MissionDefinitionAPI;
@@ -35,40 +37,53 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         FleetMemberAPI BLUFLAGSHIP = api.addToFleet(FleetSide.PLAYER, "doom_Attack", FleetMemberType.SHIP, "TTS Wraith Caller", true);
         api.addToFleet(FleetSide.PLAYER, "fury_Attack", FleetMemberType.SHIP, "TTS Raging Storm", false).getCaptain().setPersonality("aggressive");
         api.addToFleet(FleetSide.PLAYER, "fury_Attack", FleetMemberType.SHIP, "TTS Eclipsed Justice", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Pandemic Echo", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Archon's Wrath", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Soulweaver", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Pandemic Echo", false).getCaptain();
+        api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Archon's Wrath", false).getCaptain();
+        api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Soulweaver", false).getCaptain();
         api.defeatOnShipLoss("TTS Wraith Caller");
 
         PersonAPI BLUADMIRAL = OfficerManagerEvent.createOfficer(Global.getSector().getFaction(Factions.TRITACHYON), 0, FleetFactoryV3.getSkillPrefForShip(BLUFLAGSHIP), true, null, false, false, 0, new Random());
-        BLUADMIRAL.getStats().setLevel(3);
-        BLUADMIRAL.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
+        BLUADMIRAL.getStats().setLevel(5);
+        BLUADMIRAL.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
+        BLUADMIRAL.getStats().setSkillLevel(Skills.FIELD_MODULATION, 2);
+        BLUADMIRAL.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 1);
         BLUADMIRAL.getStats().setSkillLevel(Skills.IMPACT_MITIGATION, 1);
         BLUADMIRAL.getStats().setSkillLevel(Skills.SYSTEMS_EXPERTISE, 1);
-        BLUADMIRAL.setPersonality("aggressive");
+        BLUADMIRAL.setGender(FullName.Gender.MALE);
+        BLUADMIRAL.setPortraitSprite("graphics/portraits/portrait_corporate10.png");
+        BLUADMIRAL.setPersonality(Personalities.AGGRESSIVE);
         BLUFLAGSHIP.setCaptain(BLUADMIRAL);
-        //TODO: MIRROR PARHELION, UPDATE VARIANTS, NAME THE SHIPS, AND WE'RE GOOD TO GO
 
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
-        FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Standard", FleetMemberType.SHIP, "ʌЇҜↁϻ₸♆ʟ₮-Φ", true);
-        api.addToFleet(FleetSide.ENEMY, "sd_cruiserskirm_Buster", FleetMemberType.SHIP, "ʌЇҜↁϻ₸♆ʟ₮-Φ", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Standard", FleetMemberType.SHIP, "ʌЇҜↁϻ₸♆ʟ₮-Φ", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelarge_Buster", FleetMemberType.SHIP, "Ҥ₳ƱΩμΞѬ-4", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelarge_Buster", FleetMemberType.SHIP, "Ψl҉Ψl҉ⱠՃႸяΦЖ-9", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Standard", FleetMemberType.SHIP, "๏ԾⱠ⌘ᑕʞ⌂Σ-ψ", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Standard", FleetMemberType.SHIP, "₣ㄖ尺ʞȻ₮Σຮ-Ψ", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Buster", FleetMemberType.SHIP, "ἷЯĶ₲₥ዞ⏣⇀-Z", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Buster", FleetMemberType.SHIP, "௮乇ҜΔ⌘Æⱡⓔ-X", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Buster", FleetMemberType.SHIP, "₡ℓⱥᖇҜ₦ӨɄ⇌Ҭ-Я", false).getCaptain().setPersonality("aggressive");
+        FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Buster", FleetMemberType.SHIP, "Galactic Cloud", true);
+        FleetMemberAPI REDCOMMANDSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserskirm_Command", FleetMemberType.SHIP, "ʌЇҜↁϻ₸♆ʟ₮-Φ", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Strike", FleetMemberType.SHIP, "ʌЇҜↁϻ₸♆ʟ₮-Φ", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelarge_Buster", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelarge_Buster", FleetMemberType.SHIP, "Radial Impulse", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Buster", FleetMemberType.SHIP, "๏ԾⱠ⌘ᑕʞ⌂Σ-ψ", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Buster", FleetMemberType.SHIP, "₣ㄖ尺ʞȻ₮Σຮ-Ψ", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "ἷЯĶ₲₥ዞ⏣⇀-Z", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "௮乇ҜΔ⌘Æⱡⓔ-X", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "₡ℓⱥᖇҜ₦ӨɄ⇌Ҭ-Я", false).getCaptain().setPersonality("aggressive");
 
         PersonAPI REDADMIRAL = OfficerManagerEvent.createOfficer(Global.getSector().getFaction(Factions.INDEPENDENT), 0, FleetFactoryV3.getSkillPrefForShip(BLUFLAGSHIP), true, null, false, false, 0, new Random());
         REDADMIRAL.getStats().setLevel(3);
         REDADMIRAL.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 2);
+        REDADMIRAL.getStats().setSkillLevel(Skills.HELMSMANSHIP, 1);
         REDADMIRAL.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 1);
         REDADMIRAL.getStats().setSkillLevel(Skills.SYSTEMS_EXPERTISE, 1);
-        REDADMIRAL.setPersonality("aggressive");
+        REDADMIRAL.setGender(FullName.Gender.FEMALE);
+        REDADMIRAL.setPortraitSprite("graphics/portraits/sd_app_092.png");
+        REDADMIRAL.setPersonality(Personalities.AGGRESSIVE);
         REDFLAGSHIP.setCaptain(REDADMIRAL);
 
+        PersonAPI RED1STOFFICER = OfficerManagerEvent.createOfficer(Global.getSector().getFaction(Factions.INDEPENDENT), 0, FleetFactoryV3.getSkillPrefForShip(BLUFLAGSHIP), true, null, false, false, 0, new Random());
+        RED1STOFFICER.getStats().setLevel(1);
+        RED1STOFFICER.getStats().setSkillLevel(Skills.POINT_DEFENSE, 2);
+        RED1STOFFICER.setGender(FullName.Gender.MALE);
+        RED1STOFFICER.setPortraitSprite("graphics/portraits/sd_app_087.png");
+        RED1STOFFICER.setPersonality(Personalities.AGGRESSIVE);
+        REDCOMMANDSHIP.setCaptain(RED1STOFFICER);
 
         float width = 14000f;
         float height = 16000f;
@@ -91,10 +106,6 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                 Global.getSoundPlayer().playCustomMusic(3, 10, "sd_ghostbusters");
                 doOnce = false;
             }
-//            if (Global.getCombatEngine().isPaused()) {
-//                Global.getSoundPlayer().pauseCustomMusic();
-//                doOnce = true;
-//            }
         }
     }
 }

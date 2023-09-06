@@ -1,0 +1,47 @@
+{
+    "displayName": "Command",
+    "fluxCapacitors": 4,
+    "fluxVents": 0,
+    "hullId": "sd_cruiserskirm",
+    "hullMods": [
+        "fluxbreakers",
+        "advancedoptics",
+        "unstable_injector",
+        "nav_relay"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_cruiserskirm_Command",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "NRG01": "gravitonbeam",
+                "NRG02": "ionbeam"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"SYN01": "squall"}
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "NRG03": "pdburst",
+                "NRG04": "pdburst",
+                "NRG05": "pdburst",
+                "NRG06": "pdburst",
+                "NRG07": "pdburst",
+                "NRG08": "pdburst"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"MSL01": "gorgon"}
+        }
+    ]
+}

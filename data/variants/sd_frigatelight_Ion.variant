@@ -1,0 +1,18 @@
+{
+    "displayName": "Ion",
+    "fluxCapacitors": 10,
+    "fluxVents": 5,
+    "hullId": "sd_frigatelight",
+    "hullMods": [
+        "fluxbreakers",
+        "advancedoptics"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigatelight_Ion",
+    "weaponGroups": [{
+        "autofire": true,
+        "mode": "LINKED",
+        "weapons": {"NRG01": "ionbeam"}
+    }]
+}

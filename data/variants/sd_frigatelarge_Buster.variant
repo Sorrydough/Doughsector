@@ -1,23 +1,17 @@
 {
     "displayName": "Buster",
-    "fluxCapacitors": 8,
-    "fluxVents": 0,
+    "fluxCapacitors": 10,
+    "fluxVents": 5,
     "hullId": "sd_frigatelarge",
-    "hullMods": [
-        "fluxbreakers",
-        "missleracks"
-    ],
+    "hullMods": ["fluxbreakers"],
     "permaMods": [],
     "sMods": [],
     "variantId": "sd_frigatelarge_Buster",
     "weaponGroups": [
         {
             "autofire": false,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "NRG01": "amblaster",
-                "NRG02": "amblaster"
-            }
+            "mode": "LINKED",
+            "weapons": {"NRG02": "amblaster"}
         },
         {
             "autofire": false,
@@ -28,8 +22,9 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "NRG03": "lrpdlaser",
-                "NRG04": "lrpdlaser"
+                "NRG01": "pdburst",
+                "NRG03": "pdburst",
+                "NRG04": "pdburst"
             }
         }
     ]
