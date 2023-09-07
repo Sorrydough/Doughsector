@@ -7,6 +7,7 @@ import com.fs.starfarer.api.characters.PersonalityAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
+import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
@@ -63,16 +64,21 @@ public class sd_customai extends BaseHullMod {
             //TODO: WHEN CHASING A PHASED SHIP, DON'T AUTOFIRE AT IT SO YOU CAN GET YOUR 0-FLUX BONUS AND CATCH IT BETTER
 
 
+
+            if (Global.getCombatEngine().isSimulation())
+                ship.getCaptain().setPersonality(Personalities.AGGRESSIVE);
+
+
             ////////////////////////////////////////////////////////
             //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//
             ////////////////////////////////////////////////////////
-            if (ship.getFluxLevel() > 0.05 && ship.getFluxLevel() < 0.2 && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE) && !ship.getSystem().isActive()) {
-                for (WeaponAPI weapon : ship.getAllWeapons()) {
-                    if (weapon.isInBurst())
-                        break;
-                    ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
-                }
-            }
+//            if (ship.getHardFluxLevel() > 0.1 && ship.getHardFluxLevel() < 0.2 && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE) && !ship.getSystem().isActive()) {
+//                for (WeaponAPI weapon : ship.getAllWeapons()) {
+//                    if (weapon.isInBurst())
+//                        break;
+//                    ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
+//                }
+//            }
 
             ///////////////////////////////////////////////////////////////////////
             //FIXES SHIPS SPAMMING THEIR SQUALLS AT FRIGATES AND UNSHIELDED SHIPS//

@@ -13,7 +13,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class sd_highscatteramp extends BaseHullMod {
 
-	final float RANGE_THRESHOLD = 300;
+	final float RANGE_THRESHOLD = 500;
 	final float RANGE_MULT = 0.50f;
 	final float DAMAGE_BONUS_PERCENT = 50;
 	final float SMOD_MODIFIER = 15;

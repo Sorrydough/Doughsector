@@ -1,7 +1,8 @@
 {
 	"id":"sd_morphicscreen",
 	"type":"STAT_MOD",
-	"aiType":"DAMPER_FIELD",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_morphicscreenAI",
 	
 	"statsScript":"data.shipsystems.sd_morphicscreen",
 

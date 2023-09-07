@@ -16,8 +16,8 @@ public class sd_damperfield extends BaseShipSystemScript {
 		DAMPER_MULT.put(HullSize.FIGHTER, 0.33f);
 		DAMPER_MULT.put(HullSize.FRIGATE, 0.33f);
 		DAMPER_MULT.put(HullSize.DESTROYER, 0.33f);
-		DAMPER_MULT.put(HullSize.CRUISER, 0.5f);
-		DAMPER_MULT.put(HullSize.CAPITAL_SHIP, 0.5f);
+		DAMPER_MULT.put(HullSize.CRUISER, 0.33f);
+		DAMPER_MULT.put(HullSize.CAPITAL_SHIP, 0.33f);
 	}
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
