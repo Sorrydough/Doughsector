@@ -20,7 +20,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
 
         //CombatEngineAPI engine = Global.getCombatEngine();
         if (doInit) {
-            Console.showMessage("ur mum");
+            Console.showMessage("Admiral Init");
 //            for (ShipAPI ship : engine.getShips()) {
 //
 //

@@ -17,7 +17,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class sd_morphicscreen extends BaseShipSystemScript { //TODO: DEBUG THIS
 
-	final IntervalUtil interval = new IntervalUtil(0.1f, 0.5f);
+	final IntervalUtil interval = new IntervalUtil(0.01f, 0.1f);
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)

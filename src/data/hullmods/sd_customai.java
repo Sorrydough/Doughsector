@@ -12,7 +12,9 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.combat.ai.admiral.AdmiralAI;
 import data.scripts.sd_fleetAdmiralAI;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
@@ -30,6 +32,8 @@ public class sd_customai extends BaseHullMod {
     float maxRange= 0;
     final IntervalUtil timer = new IntervalUtil (0.5f, 1.5f);
 
+    AdmiralAIPlugin admiral = new sd_fleetAdmiralAI();
+
     public class sd_aiListener implements AdvanceableListener { //SCY's venting code
         protected ShipAPI ship;
         public sd_aiListener(ShipAPI ship) {
@@ -43,8 +47,10 @@ public class sd_customai extends BaseHullMod {
                 return;
 
             if (!runOnce) {
-//                if (ship.getCaptain() == ship.getFleetMember().getFleetCommander())
-//                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(new sd_fleetAdmiralAI());
+                if (Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
+                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
+                    Console.showMessage("Admiral Set");
+                }
 
                 runOnce = true;
                 List<WeaponAPI> loadout = ship.getAllWeapons();
@@ -60,18 +66,12 @@ public class sd_customai extends BaseHullMod {
                 timer.randomize();
             }
 
-
-            //TODO: WHEN CHASING A PHASED SHIP, DON'T AUTOFIRE AT IT SO YOU CAN GET YOUR 0-FLUX BONUS AND CATCH IT BETTER
-
-
-
             if (Global.getCombatEngine().isSimulation())
                 ship.getCaptain().setPersonality(Personalities.AGGRESSIVE);
 
-
             ////////////////////////////////////////////////////////
             //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//
-            ////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////// TODO: IMPROVE THIS BEHAVIOR TO ONLY HAPPEN WHEN THE TARGET IS TOO FAR AWAY TO BE THREATENING
 //            if (ship.getHardFluxLevel() > 0.1 && ship.getHardFluxLevel() < 0.2 && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE) && !ship.getSystem().isActive()) {
 //                for (WeaponAPI weapon : ship.getAllWeapons()) {
 //                    if (weapon.isInBurst())
@@ -129,9 +129,9 @@ public class sd_customai extends BaseHullMod {
 
             ////////////////////////////
             //FIXES SUICIDING FIGHTERS// IF OUR REPLACEMENT RATE SUCKS THEN PRESERVING IT SHOULD BE OUR TOP PRIORITY
-            ////////////////////////////
+            //////////////////////////// TODO: FIGURE OUT WHY THIS JUST DOESN'T WORK, AND FIGURE OUT WHY IT DOESN'T NPE
             if (ship.getSharedFighterReplacementRate() < 0.85) {
-                ship.setPullBackFighters(true); //TODO: CHECK IF THIS EVEN DOES ANYTHING
+                ship.setPullBackFighters(true);
                 ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
             }
 

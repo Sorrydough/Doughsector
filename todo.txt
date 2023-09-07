@@ -1,3 +1,8 @@
+- Put hexblade shields on fighters
+- Beam damage bonus in faction hullmod?
+- Missile reload speed bonus?
+- Bump speed up by 5 for everything after implementing vector thrusters
+
 Mission Stuff:
 - Need to prevent ships from ever retreating during a mission cuz the player's certainly won't!
 - Need a custom AI admiral to prevent frigates from getting themselves singled out and killed
