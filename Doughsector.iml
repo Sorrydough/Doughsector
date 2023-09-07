@@ -12,10 +12,7 @@
     <orderEntry type="library" name="MagicLib" level="project" />
     <orderEntry type="library" name="Graphics" level="project" />
     <orderEntry type="library" name="lw_Console" level="project" />
-    <orderEntry type="library" name="CombatActivators" level="project" />
     <orderEntry type="library" name="ExerelinCore" level="project" />
-    <orderEntry type="library" name="FastEngineRendering" level="project" />
-    <orderEntry type="library" name="CMUtils" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
   </component>
 </module>

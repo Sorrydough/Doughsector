@@ -39,7 +39,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -120,
+      "angle": -135,
       "locations": [-11, -12]
     },
     {
@@ -48,7 +48,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -85,
+      "angle": -90,
       "locations": [-8, -14]
     },
     {
@@ -57,7 +57,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 85,
+      "angle": 90,
       "locations": [-8, 14]
     },
     {
@@ -66,7 +66,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 120,
+      "angle": 135,
       "locations": [-11, 12]
     },
     {
@@ -75,7 +75,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 50,
+      "angle": 90,
       "locations": [23, 9]
     },
     {
@@ -84,7 +84,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 25,
+      "angle": 45,
       "locations": [26, 9]
     },
     {
@@ -93,7 +93,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 10,
+      "angle": 15,
       "locations": [23, 6]
     },
     {
@@ -102,7 +102,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -10,
+      "angle": -15,
       "locations": [26, 6]
     },
     {
@@ -111,7 +111,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -25,
+      "angle": -45,
       "locations": [26, 3]
     },
     {
@@ -120,7 +120,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -50,
+      "angle": -90,
       "locations": [23, 3]
     },
     {
@@ -174,7 +174,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 152.5,
+      "angle": 165,
       "locations": [-20, 15]
     },
     {
@@ -183,7 +183,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -152.5,
+      "angle": -165,
       "locations": [-20, -15]
     }
   ],

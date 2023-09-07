@@ -62,9 +62,9 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelarge_Buster", FleetMemberType.SHIP, "Radial Impulse", false).getCaptain().setPersonality("aggressive");
         api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Buster", FleetMemberType.SHIP, "๏ԾⱠ⌘ᑕʞ⌂Σ-ψ", false).getCaptain().setPersonality("aggressive");
         api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Buster", FleetMemberType.SHIP, "₣ㄖ尺ʞȻ₮Σຮ-Ψ", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "ἷЯĶ₲₥ዞ⏣⇀-Z", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "௮乇ҜΔ⌘Æⱡⓔ-X", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "₡ℓⱥᖇҜ₦ӨɄ⇌Ҭ-Я", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "ἷЯĶ₲₥ዞ⏣⇀-Z", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "௮乇ҜΔ⌘Æⱡⓔ-X", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "₡ℓⱥᖇҜ₦ӨɄ⇌Ҭ-Я", false);
 
         PersonAPI REDADMIRAL = OfficerManagerEvent.createOfficer(Global.getSector().getFaction(Factions.INDEPENDENT), 0, FleetFactoryV3.getSkillPrefForShip(BLUFLAGSHIP), true, null, false, false, 0, new Random());
         REDADMIRAL.getStats().setLevel(3);

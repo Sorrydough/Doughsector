@@ -11,6 +11,7 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
+import data.scripts.sd_fleetAdmiralAI;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
@@ -41,6 +42,9 @@ public class sd_customai extends BaseHullMod {
                 return;
 
             if (!runOnce) {
+//                if (ship.getCaptain() == ship.getFleetMember().getFleetCommander())
+//                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(new sd_fleetAdmiralAI());
+
                 runOnce = true;
                 List<WeaponAPI> loadout = ship.getAllWeapons();
                 if (loadout != null) {
@@ -55,10 +59,14 @@ public class sd_customai extends BaseHullMod {
                 timer.randomize();
             }
 
+
+            //TODO: WHEN CHASING A PHASED SHIP, DON'T AUTOFIRE AT IT SO YOU CAN GET YOUR 0-FLUX BONUS AND CATCH IT BETTER
+
+
             ////////////////////////////////////////////////////////
             //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//
             ////////////////////////////////////////////////////////
-            if (ship.getFluxLevel() < 0.2 && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE) && !ship.getSystem().isActive()) {
+            if (ship.getFluxLevel() > 0.05 && ship.getFluxLevel() < 0.2 && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE) && !ship.getSystem().isActive()) {
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
                     if (weapon.isInBurst())
                         break;
@@ -81,7 +89,7 @@ public class sd_customai extends BaseHullMod {
                 if (weapon.usesAmmo() && weapon.getDamageType().equals(DamageType.KINETIC)) {
                     if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == HullSize.FRIGATE)) {
                         weapon.setForceNoFireOneFrame(true);
-                        if (weapon.isInBurst() && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)))
+                        if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)))
                             ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
                     }
                     if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
@@ -103,6 +111,15 @@ public class sd_customai extends BaseHullMod {
                     if (weapon.getFluxCostToFire() + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.85)
                         weapon.setForceNoFireOneFrame(true);
                 }
+
+            ////////////////////////////////////////////////////////////////
+            //FIXES CARRIERS SENDING STRIKE BOMBERS AGAINST PHASE FRIGATES//
+            //////////////////////////////////////////////////////////////// TODO: THIS
+
+
+
+
+
 
             ////////////////////////////
             //FIXES SUICIDING FIGHTERS// IF OUR REPLACEMENT RATE SUCKS THEN PRESERVING IT SHOULD BE OUR TOP PRIORITY
@@ -134,6 +151,8 @@ public class sd_customai extends BaseHullMod {
                 if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() > 0.85 && ship.getFluxLevel() < 0.75) {
                     ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);  //REALLY horny to get overextended phase ships
                     ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.PURSUING);
+                    if (!ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))
+                        ship.getShield().toggleOff(); //Combines with later behavior to cause ships to preserve their 0-flux boost when chasing phased ships
                 }
 
                 for (WeaponAPI weapon : ship.getAllWeapons()) {
@@ -145,7 +164,7 @@ public class sd_customai extends BaseHullMod {
                             continue;
                     }
 
-                    if (weapon.getCooldown() > 1) { //if the weapon is ammo-limited or refires slowly, don't shoot it at phased ships
+                    if (weapon.getCooldown() > 1 || ship.getFluxLevel() < 0.1) { //if the weapon is ammo-limited or our flux is empty, don't shoot at phase ships
                         //TODO: ^ weapon.usesAmmo() || figure out how to incorporate this but still allow PD to engage missiles
                         if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() < 0.95)
                             weapon.setForceNoFireOneFrame(true);
