@@ -1,8 +1,8 @@
 {
   "hullName": "Skirmish Frigate",
-  "hullId": "sd_frigateskirm",
+  "hullId": "sd_frigate",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/sd_frigateskirm.png",
+  "spriteName": "graphics/ships/sd_frigate.png",
   "style": "SD_SPEC",
   "height": 112,
   "width": 70,

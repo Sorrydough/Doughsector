@@ -2,7 +2,7 @@
     "displayName": "Command",
     "fluxCapacitors": 4,
     "fluxVents": 0,
-    "hullId": "sd_cruiserskirm",
+    "hullId": "sd_cruiserlight",
     "hullMods": [
         "fluxbreakers",
         "advancedoptics",
@@ -11,7 +11,7 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_cruiserskirm_Command",
+    "variantId": "sd_cruiserlight_Command",
     "weaponGroups": [
         {
             "autofire": true,

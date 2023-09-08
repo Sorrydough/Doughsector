@@ -2,11 +2,11 @@
     "displayName": "Buster",
     "fluxCapacitors": 10,
     "fluxVents": 5,
-    "hullId": "sd_frigatelarge",
+    "hullId": "sd_frigateheavy",
     "hullMods": ["fluxbreakers"],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_frigatelarge_Buster",
+    "variantId": "sd_frigateheavy_Buster",
     "weaponGroups": [
         {
             "autofire": false,

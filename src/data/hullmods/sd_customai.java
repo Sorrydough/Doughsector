@@ -12,7 +12,6 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.combat.ai.admiral.AdmiralAI;
 import data.scripts.sd_fleetAdmiralAI;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;

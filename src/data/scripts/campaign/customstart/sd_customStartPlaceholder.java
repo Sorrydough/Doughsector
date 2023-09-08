@@ -84,7 +84,7 @@ public class sd_customStartPlaceholder extends CustomStart {
                 PlayerFactionStore.getPlayerFactionIdNGC(), FleetTypes.PATROL_SMALL, null);
 
         addFleetMember("sd_retrofitnebula_Standard", dialog, data, tempFleet, "none");
-        addFleetMember("sd_frigateskirm_Standard", dialog, data, tempFleet, "flagship");
+        addFleetMember("sd_frigate_Standard", dialog, data, tempFleet, "flagship");
         addFleetMember("sd_frigatelight_Standard", dialog, data, tempFleet, "none");
         addFleetMember("sd_frigatelight_Standard", dialog, data, tempFleet, "none");
 

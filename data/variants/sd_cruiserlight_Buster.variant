@@ -2,7 +2,7 @@
     "displayName": "Buster",
     "fluxCapacitors": 18,
     "fluxVents": 0,
-    "hullId": "sd_cruiserskirm",
+    "hullId": "sd_cruiserlight",
     "hullMods": [
         "fluxbreakers",
         "advancedshieldemitter",
@@ -12,7 +12,7 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_cruiserskirm_Buster",
+    "variantId": "sd_cruiserlight_Buster",
     "weaponGroups": [
         {
             "autofire": true,

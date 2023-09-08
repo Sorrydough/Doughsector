@@ -56,13 +56,13 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
         FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Buster", FleetMemberType.SHIP, "Radial Impulse", true);
-        FleetMemberAPI REDCOMMANDSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserskirm_Command", FleetMemberType.SHIP, "Shrivelled Mountain", false);
+        FleetMemberAPI REDCOMMANDSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Command", FleetMemberType.SHIP, "Shrivelled Mountain", false);
         api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Strike", FleetMemberType.SHIP, "Galactic Cloud", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelarge_Buster", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelarge_Buster", FleetMemberType.SHIP, "Chilled Nova", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Buster", FleetMemberType.SHIP, "Reconstructed Mind", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Buster", FleetMemberType.SHIP, "Sweating Heartbeat", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateskirm_Buster", FleetMemberType.SHIP, "Impulse Exploding", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Buster", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Buster", FleetMemberType.SHIP, "Chilled Nova", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Buster", FleetMemberType.SHIP, "Reconstructed Mind", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Buster", FleetMemberType.SHIP, "Sweating Heartbeat", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Buster", FleetMemberType.SHIP, "Impulse Exploding", false).getCaptain().setPersonality("aggressive");
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Direct Path", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Bombarded Signal", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Lightwave Instrument", false);

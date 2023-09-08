@@ -1,8 +1,8 @@
 id,type,text1
 sd_frigatelight,SHIP,"An agile light support frigate designed for fleet actions. Highly vulnerable to other frigates and strike craft on its own, its redundant subsystems and large weapon allow it to effectively plug holes and support allies."
-sd_frigateskirm,SHIP,"With excellent survivability against much larger ships than itself, this skirmish frigate is perfectly suited to delaying actions or sowing disarray in the opponent’s line of battle."
+sd_frigate,SHIP,"With excellent survivability against much larger ships than itself, this skirmish frigate is perfectly suited to delaying actions or sowing disarray in the opponent’s line of battle."
 sd_frigatecarrier,SHIP,"Due to the demanding logistics and high cost of autoforges, most navies opt to consolidate them into larger ships, leaving frigate-sized carriers an anomaly appropriate only for niche doctrines."
-sd_frigatelarge,SHIP,"A simple ship with excellent staying power, this abnormally large frigate is specialized for blockading pursuit ships."
+sd_frigateheavy,SHIP,"A simple ship with excellent staying power, this abnormally large frigate is specialized for blockading pursuit ships."
 ,,
 sd_microion,WEAPON,An ion beam unremarkable in all ways other than its miniaturization.
 sd_microblaster,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."

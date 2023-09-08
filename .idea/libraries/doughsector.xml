@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="doughsector">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/jars/doughsector.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

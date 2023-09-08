@@ -16,6 +16,7 @@ public class sd_highscatteramp extends BaseHullMod {
 	final float RANGE_THRESHOLD = 500;
 	final float RANGE_MULT = 0.50f;
 	final float DAMAGE_BONUS_PERCENT = 50;
+	final float FLUX_GENERATED_PERCENT = 25;
 	final float SMOD_MODIFIER = 15;
 
 	public String getUnapplicableReason(ShipAPI ship) {
@@ -29,6 +30,7 @@ public class sd_highscatteramp extends BaseHullMod {
 	public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
 		boolean sMod = isSMod(stats);
 		stats.getBeamWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT + (sMod ? SMOD_MODIFIER : 0));
+		stats.getBeamWeaponFluxCostMult().modifyPercent(id, FLUX_GENERATED_PERCENT);
 	}
 
 	@Override
@@ -59,8 +61,9 @@ public class sd_highscatteramp extends BaseHullMod {
 
 	@Override
 	public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-		tooltip.addPara("Beam weapons deal "+ (int)DAMAGE_BONUS_PERCENT + "%% more damage.", 10f, Misc.getHighlightColor(), (int)DAMAGE_BONUS_PERCENT + "%");
-		tooltip.addPara("Reduces the portion of the range of beam weapons that is above "+ (int)RANGE_THRESHOLD +" range by " + Math.round((1f - RANGE_MULT) * 100f) + "%%. The base range is affected.", 10f, Misc.getNegativeHighlightColor(), String.valueOf((int) RANGE_THRESHOLD), Math.round((1f - RANGE_MULT) * 100f) + "%");
+		tooltip.addPara("Beams deal "+ (int)DAMAGE_BONUS_PERCENT + "%% more damage.", 10f, Misc.getHighlightColor(), (int)DAMAGE_BONUS_PERCENT + "%");
+		tooltip.addPara("Beams generate "+ (int)FLUX_GENERATED_PERCENT + "%% more flux.", 10f, Misc.getNegativeHighlightColor(), (int)FLUX_GENERATED_PERCENT + "%");
+		tooltip.addPara("Reduces the portion of the range of beams that is above "+ (int)RANGE_THRESHOLD +" range by " + Math.round((1f - RANGE_MULT) * 100f) + "%%. The base range is affected.", 10f, Misc.getNegativeHighlightColor(), String.valueOf((int) RANGE_THRESHOLD), Math.round((1f - RANGE_MULT) * 100f) + "%");
 		tooltip.addSectionHeading("Interactions with other modifiers", Alignment.MID, 10f);
 		tooltip.addPara("The base range is reduced, thus percentage and multiplicative modifiers apply to the reduced base value.", 10f);
 	}

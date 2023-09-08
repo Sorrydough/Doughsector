@@ -3,7 +3,7 @@
     "goalVariant": true,
     "fluxCapacitors": 6,
     "fluxVents": 10,
-    "hullId": "sd_frigatelarge",
+    "hullId": "sd_frigateheavy",
     "hullMods": [
         "fluxbreakers",
         "fluxdistributor",
@@ -11,7 +11,7 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_frigatelarge_Standard",
+    "variantId": "sd_frigateheavy_Standard",
     "weaponGroups": [
         {
             "autofire": false,

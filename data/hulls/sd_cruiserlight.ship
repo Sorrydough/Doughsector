@@ -1,8 +1,8 @@
 {
   "hullName": "Skirmish Cruiser",
-  "hullId": "sd_cruiserskirm",
+  "hullId": "sd_cruiserlight",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/sd_cruiserskirm.png",
+  "spriteName": "graphics/ships/sd_cruiserlight.png",
   "style": "SD_SPEC",
   "height": 290,
   "width": 140,

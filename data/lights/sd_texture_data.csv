@@ -1,14 +1,14 @@
 id,type,frame,magnitude,map,path
 sd_frigatelight,ship,,1,normal,graphics/ships/normals/sd_frigatelight_normal.png
-sd_frigateskirm,ship,,1,normal,graphics/ships/normals/sd_frigateskirm_normal.png
+sd_frigate,ship,,1,normal,graphics/ships/normals/sd_frigate_normal.png
 sd_frigatecarrier,ship,,1,normal,graphics/ships/normals/sd_frigatecarrier_normal.png
-sd_frigatelarge,ship,,1,normal,graphics/ships/normals/sd_frigatelarge_normal.png
+sd_frigateheavy,ship,,1,normal,graphics/ships/normals/sd_frigateheavy_normal.png
 ,,,,,
 sd_destroyerinterference,ship,,1,normal,graphics/ships/normals/sd_destroyerinterference_normal.png
 sd_destroyercarrier,ship,,1,normal,graphics/ships/normals/sd_destroyercarrier_normal.png
 sd_destrouervacuum,ship,,1,normal,graphics/ships/normals/sd_destroyersupport_normal.png
 ,,,,,
-sd_cruiserskirm,ship,,1,normal,graphics/ships/normals/sd_cruiserskirm_normal.png
+sd_cruiserlight,ship,,1,normal,graphics/ships/normals/sd_cruiserlight_normal.png
 sd_cruiserheavy,ship,,1,normal,graphics/ships/normals/sd_cruiserfatfuck_normal.png
 ,,,,,
 sd_capitalbattleship,ship,,1,normal,graphics/ships/normals/sd_capitalbattleship_normal.png

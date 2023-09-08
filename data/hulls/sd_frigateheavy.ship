@@ -1,8 +1,8 @@
 {
   "hullName": "Parhelion",
-  "hullId": "sd_frigatelarge",
+  "hullId": "sd_frigateheavy",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/sd_frigatelarge.png",
+  "spriteName": "graphics/ships/sd_frigateheavy.png",
   "style": "SD_SPEC",
   "height": 136,
   "width": 96,

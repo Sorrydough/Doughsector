@@ -2,14 +2,14 @@
     "displayName": "Buster",
     "fluxCapacitors": 10,
     "fluxVents": 1,
-    "hullId": "sd_frigateskirm",
+    "hullId": "sd_frigate",
     "hullMods": [
         "fluxbreakers",
         "eccm"
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_frigateskirm_Buster",
+    "variantId": "sd_frigate_Buster",
     "weaponGroups": [
         {
             "autofire": false,
