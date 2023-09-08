@@ -1,6 +1,7 @@
 {
     "displayName": "Strike",
-    "fluxCapacitors": 1,
+    "goalVariant": true,
+    "fluxCapacitors": 5,
     "fluxVents": 0,
     "hullId": "sd_destroyercarrier",
     "hullMods": ["expanded_deck_crew"],
@@ -12,8 +13,8 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "SYN01": "gorgon",
-                "SYN02": "gorgon"
+                "SYN01": "breach",
+                "SYN02": "breach"
             }
         },
         {

@@ -1,12 +1,14 @@
 {
     "displayName": "Command",
-    "fluxCapacitors": 4,
-    "fluxVents": 0,
+    "goalVariant": true,
+    "fluxCapacitors": 5,
+    "fluxVents": 15,
     "hullId": "sd_cruiserlight",
     "hullMods": [
         "fluxbreakers",
+        "pointdefenseai",
+        "autorepair",
         "advancedoptics",
-        "unstable_injector",
         "nav_relay"
     ],
     "permaMods": [],
@@ -17,8 +19,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "NRG01": "gravitonbeam",
-                "NRG02": "ionbeam"
+                "NRG01": "ionbeam",
+                "NRG02": "gravitonbeam"
             }
         },
         {
@@ -28,20 +30,20 @@
         },
         {
             "autofire": true,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "NRG03": "pdburst",
-                "NRG04": "pdburst",
-                "NRG05": "pdburst",
-                "NRG06": "pdburst",
-                "NRG07": "pdburst",
-                "NRG08": "pdburst"
+                "NRG03": "lrpdlaser",
+                "NRG04": "lrpdlaser",
+                "NRG05": "lrpdlaser",
+                "NRG06": "lrpdlaser",
+                "NRG07": "lrpdlaser",
+                "NRG08": "lrpdlaser"
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"MSL01": "gorgon"}
+            "weapons": {"MSL01": "breach"}
         }
     ]
 }

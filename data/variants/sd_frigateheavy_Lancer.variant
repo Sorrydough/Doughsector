@@ -1,17 +1,17 @@
 {
-    "displayName": "Standard",
+    "displayName": "Lancer",
     "goalVariant": true,
-    "fluxCapacitors": 6,
-    "fluxVents": 10,
+    "fluxCapacitors": 10,
+    "fluxVents": 7,
     "hullId": "sd_frigateheavy",
     "hullMods": [
         "fluxbreakers",
-        "fluxdistributor",
+        "autorepair",
         "high_scatter_amp"
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_frigateheavy_Standard",
+    "variantId": "sd_frigateheavy_Lancer",
     "weaponGroups": [
         {
             "autofire": false,

@@ -58,19 +58,18 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Buster", FleetMemberType.SHIP, "Radial Impulse", true);
         FleetMemberAPI REDCOMMANDSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Command", FleetMemberType.SHIP, "Shrivelled Mountain", false);
         api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Strike", FleetMemberType.SHIP, "Galactic Cloud", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Buster", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Buster", FleetMemberType.SHIP, "Chilled Nova", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Sonic Disturbance", false).getCaptain().setPersonality("aggressive");
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Lightwave Instrument", false).getCaptain().setPersonality("aggressive");
         api.addToFleet(FleetSide.ENEMY, "sd_frigate_Buster", FleetMemberType.SHIP, "Reconstructed Mind", false).getCaptain().setPersonality("aggressive");
         api.addToFleet(FleetSide.ENEMY, "sd_frigate_Buster", FleetMemberType.SHIP, "Sweating Heartbeat", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Buster", FleetMemberType.SHIP, "Impulse Exploding", false).getCaptain().setPersonality("aggressive");
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Direct Path", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Bombarded Signal", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Lightwave Instrument", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Sonic Disturbance", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "At Last", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Direct Path", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Bombarded Signal", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Chilled Nova", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "At Last", false);
 
         PersonAPI REDADMIRAL = OfficerManagerEvent.createOfficer(Global.getSector().getFaction(Factions.INDEPENDENT), 0, FleetFactoryV3.getSkillPrefForShip(BLUFLAGSHIP), true, null, false, false, 0, new Random());
-        REDADMIRAL.getStats().setLevel(3);
+        REDADMIRAL.getStats().setLevel(4);
         REDADMIRAL.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 2);
         REDADMIRAL.getStats().setSkillLevel(Skills.HELMSMANSHIP, 1);
         REDADMIRAL.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 1);

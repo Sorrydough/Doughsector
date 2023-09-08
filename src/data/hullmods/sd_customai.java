@@ -169,7 +169,7 @@ public class sd_customai extends BaseHullMod {
                             continue;
                     }
 
-                    if (weapon.getCooldown() > 1 || ship.getFluxLevel() < 0.1) { //if the weapon is ammo-limited or our flux is empty, don't shoot at phase ships
+                    if (weapon.getCooldown() > 1 || ship.getFluxLevel() < 0.1) { //if the weapon is low rof or our flux is empty, don't shoot at phase ships
                         //TODO: ^ weapon.usesAmmo() || figure out how to incorporate this but still allow PD to engage missiles
                         if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() < 0.95)
                             weapon.setForceNoFireOneFrame(true);

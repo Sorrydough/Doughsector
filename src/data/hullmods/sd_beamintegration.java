@@ -33,8 +33,8 @@ public class sd_beamintegration extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         tooltip.addPara("Beams recieve a 10/20/40/60%% range bonus by hull size.", 5f, Misc.getHighlightColor(), "10/20/40/60%");
-        tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined will apply.", 5f,
-                Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined will apply.");
+        tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.", 5f,
+                Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
