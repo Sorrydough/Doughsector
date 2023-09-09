@@ -117,9 +117,9 @@ public class sd_customai extends BaseHullMod {
                         weapon.setForceNoFireOneFrame(true);
                 }
 
-            ////////////////////////////////////////////////////////////////
-            //FIXES CARRIERS SENDING STRIKE BOMBERS AGAINST PHASE FRIGATES//
-            //////////////////////////////////////////////////////////////// TODO: THIS
+            ///////////////////////////////////////////////////////////
+            //FIXES CARRIERS SENDING STRIKE BOMBERS AGAINST DUMB SHIT//
+            /////////////////////////////////////////////////////////// TODO: THIS
 
 
 
