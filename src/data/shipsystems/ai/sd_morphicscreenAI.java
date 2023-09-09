@@ -66,7 +66,10 @@ public class sd_morphicscreenAI implements ShipSystemAIScript {
 
 
 
-
+            //Temp stopgap: If we need help, activate the system
+            if (ship.getAIFlags().hasFlag(NEEDS_HELP)) {
+                desire += 100;
+            }
 
 
             if (desire >= 100 && !ship.getSystem().isOn())

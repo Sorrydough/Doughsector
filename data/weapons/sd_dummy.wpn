@@ -1,9 +1,8 @@
 {
-	"id":"sd_decoVectorEnginesController",
+	"id":"sd_dummy",
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"everyFrameEffect":"data.scripts.weapons.sd_decoVectorEnginesController",
 	"showDamageWhenDecorative":"false",
 	"turretSprite":"",
 	"hardpointSprite":"",

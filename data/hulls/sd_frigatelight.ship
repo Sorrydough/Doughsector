@@ -139,7 +139,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -45,
-      "locations": [-6.5, -19.5]
+      "locations": [-7, -19]
     },
     {
       "id": "THR01",
@@ -148,7 +148,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 45,
-      "locations": [-6.5, 19.5]
+      "locations": [-7, 19]
     },
     {
       "id": "THR03",
@@ -157,7 +157,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 145,
-      "locations": [-26.5, 13.5]
+      "locations": [-26, 14]
     },
     {
       "id": "THR04",
@@ -166,7 +166,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -145,
-      "locations": [-26.5, -13.5]
+      "locations": [-26, -14]
     },
     {
       "id": "WS0001",

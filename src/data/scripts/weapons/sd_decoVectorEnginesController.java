@@ -33,8 +33,6 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-
-        boolean skip = false;
         if (engine.isPaused() || weapon.getShip().getOwner() == -1) return;
 //        if (true) return;
         ShipAPI ship = weapon.getShip();
@@ -42,12 +40,6 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
             //Global.getLogger(ptes_decoEnginesController.class).info(Misc.getAngleInDegrees(new Vector2f(1,0))+ "/" +Misc.getAngleInDegrees(new Vector2f(0,1))+ "/" + MathUtils.getShortestRotation(Misc.getAngleInDegrees(new Vector2f(1,0)),Misc.getAngleInDegrees(new Vector2f(0,1))));
             for (WeaponAPI tempWeapon : ship.getAllWeapons()) {
                 if (tempWeapon.getSlot().getId().startsWith("THR")) {
-                    if (skip){
-                        skip = false;
-                        continue;
-                    } else {
-                        skip = true;
-                    }
                     ShipEngineControllerAPI.ShipEngineAPI thruster = null;
                     for (ShipEngineControllerAPI.ShipEngineAPI e : ship.getEngineController().getShipEngines()) {
                         if (MathUtils.isWithinRange(e.getLocation(), tempWeapon.getLocation(), 4)) {
@@ -58,7 +50,7 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
                     if (thruster == null)
                         return;
                     engines.add(new decoEngine(ship, thruster));
-                    engine.addFloatingText(thruster.getLocation(), tempWeapon.getSlot().getId(), 20, Color.white, ship, 0, 0);
+                    //engine.addFloatingText(thruster.getLocation(), tempWeapon.getSlot().getId(), 20, Color.white, ship, 0, 0);
                 }
             }
             doOnce = false;
@@ -130,6 +122,7 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
         Vector2f size = new Vector2f(15, 80);
         float smooth = 0.2f;
         if (data.engine.isDisabled()) thrust = 0f;
+        if (ship.getEngineController().isAccelerating()) thrust = 0f;
         //Global.getLogger(ptes_decoEnginesController.class).info(weapon.getSlot().getId());
 
 
