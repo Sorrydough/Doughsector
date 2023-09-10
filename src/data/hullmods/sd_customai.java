@@ -48,7 +48,6 @@ public class sd_customai extends BaseHullMod {
             if (!runOnce) {
                 if (Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
                     Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
-                    Console.showMessage("Admiral Set");
                 }
 
                 runOnce = true;

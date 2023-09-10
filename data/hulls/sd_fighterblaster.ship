@@ -7,12 +7,14 @@
   "height": 38,
   "width": 32,
   "center": [16.5, 18.5],
-  "collisionRadius": 25,
+  "collisionRadius": 28,
   "shieldCenter": [0, -0],
-  "shieldRadius": 23,
+  "shieldRadius": 26,
   "viewOffset": 0,
   "builtInMods": [
-    "insulatedengine"
+    "insulatedengine",
+    "no_weapon_flux",
+    "sd_hexshield"
   ],
   "weaponSlots": [
     {

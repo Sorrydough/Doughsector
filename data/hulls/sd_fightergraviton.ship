@@ -7,10 +7,14 @@
   "height": 36,
   "width": 36,
   "center": [17.5, 16.5],
-  "collisionRadius": 25,
+  "collisionRadius": 28,
   "shieldCenter": [0, -0],
-  "shieldRadius": 22.5,
+  "shieldRadius": 27,
   "viewOffset": 0,
+  "builtInMods": [
+    "no_weapon_flux",
+    "sd_hexshield"
+  ],
   "weaponSlots": [
     {
       "id": "MSL01",

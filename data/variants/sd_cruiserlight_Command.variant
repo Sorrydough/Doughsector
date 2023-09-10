@@ -1,14 +1,14 @@
 {
     "displayName": "Command",
     "goalVariant": true,
-    "fluxCapacitors": 5,
-    "fluxVents": 15,
+    "fluxCapacitors": 0,
+    "fluxVents": 9,
     "hullId": "sd_cruiserlight",
     "hullMods": [
         "fluxbreakers",
         "pointdefenseai",
-        "autorepair",
         "advancedoptics",
+        "ecm",
         "nav_relay"
     ],
     "permaMods": [],
@@ -43,7 +43,7 @@
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"MSL01": "breach"}
+            "weapons": {"MSL01": "gorgon"}
         }
     ]
 }

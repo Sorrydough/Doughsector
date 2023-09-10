@@ -6,7 +6,7 @@
     "hullId": "sd_frigateheavy",
     "hullMods": [
         "fluxbreakers",
-        "autorepair",
+        "armoredweapons",
         "high_scatter_amp"
     ],
     "permaMods": [],

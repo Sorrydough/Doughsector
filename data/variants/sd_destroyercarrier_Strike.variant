@@ -13,8 +13,8 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "SYN01": "breach",
-                "SYN02": "breach"
+                "SYN01": "heatseeker",
+                "SYN02": "heatseeker"
             }
         },
         {

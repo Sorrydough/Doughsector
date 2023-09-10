@@ -6,11 +6,14 @@
   "style": "SD_SPEC",
   "height": 18,
   "width": 18,
-  "center": [9.5, 8],
-  "collisionRadius": 15,
+  "center": [9.5, 8.5],
+  "collisionRadius": 16.5,
   "shieldCenter": [0, -0],
-  "shieldRadius": 13.5,
+  "shieldRadius": 15.5,
   "viewOffset": 0,
+  "builtInMods": [
+    "no_weapon_flux"
+  ],
   "weaponSlots": [
     {
       "id": "NRG01",
@@ -19,7 +22,7 @@
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
-      "locations": [-0.5, -0]
+      "locations": [-1, -0]
     },
     {
       "id": "SYS01",
@@ -28,12 +31,12 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [1, 4]
+      "locations": [0.5, 4]
     }
   ],
   "engineSlots": [
     {
-      "location": [-6, 5],
+      "location": [-6.5, 5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -41,7 +44,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-6, -4],
+      "location": [-6.5, -4],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -49,7 +52,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-6, -2],
+      "location": [-6.5, -2],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -57,7 +60,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-6, 3],
+      "location": [-6.5, 3],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -66,9 +69,9 @@
     }
   ],
   "bounds": [
-    -5.5, -5,
-    6.5, -6,
-    6.5, 7,
-    -5.5, 6
+    -6, -5,
+    6, -6,
+    6, 7,
+    -6, 6
   ]
 }
