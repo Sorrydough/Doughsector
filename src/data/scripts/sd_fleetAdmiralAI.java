@@ -8,6 +8,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.Objectives;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.campaign.ai.AssignmentModule;
 import com.fs.starfarer.combat.CombatFleetManager;
+import com.fs.starfarer.combat.P;
 import com.fs.starfarer.combat.entities.BattleObjective;
 import javafx.util.Pair;
 import org.lazywizard.console.Console;
@@ -39,6 +40,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
             engine = Global.getCombatEngine();
             fleetManager = engine.getFleetManager(1);
             taskManager = fleetManager.getTaskManager(true);
+            //enemyTaskManager = fleetManager.getTaskManager(false);
             //as part of init, we need to wipe all assignments that might've been created by alex's admiral
             for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
                 taskManager.removeAssignment(assignment);
@@ -80,7 +82,8 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
                 }
             }
 
-            //if there's an assignment on something that shouldn't have it, then remove it
+            //assign around and find out
+            isAttackingObjective = false;
             for (AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
                 if (assignment.getObject() instanceof ShipAPI) {
                     ShipAPI target = (ShipAPI) assignment.getObject();
@@ -89,18 +92,18 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
                         taskManager.removeAssignment(assignment.getAssignment());
                     }
                     //if an enemy ship had an engage order applied due to being fluxed out, check if it's time to rescind the order
-                    if (assignment.getAssignment().getType() == CombatAssignmentType.ENGAGE && target.getHardFluxLevel() < 0.75) {
+                    if (assignment.getAssignment().getType() == CombatAssignmentType.ENGAGE && (target.getFluxLevel() < 0.85 || target.getHardFluxLevel() < 0.75)) {
                         taskManager.removeAssignment(assignment.getAssignment());
                     }
                 }
                 if (assignment.getObject() instanceof BattleObjectiveAPI) {
                     //once we own an objective we can clear its associated order, this is done to keep the fleet from being strung out across multiple objectives
                     //this is also beneficial because if we own all the objectives our fleet will automatically free roam
-                    if (assignment.getAssignment().getType() == CombatAssignmentType.DEFEND) {
+                    if (assignment.getAssignment().getType() == CombatAssignmentType.CONTROL) {
                         taskManager.removeAssignment(assignment.getAssignment());
                     }
-                    //if we're attacking an objective set the flag, so we know not to set an objective to attack later
-                    if (assignment.getAssignment().getType() == CombatAssignmentType.ASSAULT) {
+                    //if we're attacking an objective set the flag, so we know not to attack a new objective later
+                    if (assignment.getAssignment().getType() == CombatAssignmentType.CAPTURE) {
                         isAttackingObjective = true;
                     }
                 }
@@ -115,46 +118,64 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
                 doHaveAllObjectives = true;
             }
 
+
+
             //if we're not attacking an objective, and we don't own all objectives then attack one
             if (engine.getObjectives().size() >= 1 && !isAttackingObjective && !doHaveAllObjectives) {
                 attackObjective();
-                isAttackingObjective = true;
             }
 
-            //set a defend order on the two largest allies if they don't already have one
-//            for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
-//                if (assignment.getTarget().getLocation() == allies.get(0).getLocation())
-//                    break;
-//                applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND);
-//            }
-//            for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
-//                if (assignment.getTarget().getLocation() == allies.get(1).getLocation())
-//                    break;
+
+
+            //check whether the two largest allies have a defend order
+            boolean largestally1 = false;
+//            boolean largestally2 = false;
+            for (AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
+                if (assignment.getObject() instanceof ShipAPI) {
+                    ShipAPI ship = (ShipAPI) assignment.getObject();
+                    if (ship == allies.get(0)) {
+                        largestally1 = true;
+                    }
+//                    if (ship == allies.get(1)) {
+//                        largestally2 = true;
+//                    }
+                }
+            }
+            //if they don't, apply a defend order to each
+            if (!largestally1) {
+                applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND, true);
+            }
+//            if (!largestally2) {
 //                applyAssignment(fleetManager.getDeployedFleetMember(allies.get(1)), CombatAssignmentType.DEFEND);
 //            }
 
-            //if an enemy ship is fluxed out, put an eliminate order on it if it doesn't already have one
-//            for (ShipAPI enemy : enemies) {
-//                if (enemy.getHardFluxLevel() > 0.75) {
-//                    for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
-//                        if (enemy.getLocation() == assignment.getTarget().getLocation())
-//                            break;
-//                        applyAssignment(fleetManager.getDeployedFleetMember(enemy), CombatAssignmentType.ENGAGE);
-//                    }
-//                }
-//            }
+            //if an enemy ship is fluxed out, put an engage order on it if it doesn't already have one
+            for (ShipAPI enemy : enemies) {
+                if (enemy.getFluxLevel() > 0.85 || enemy.getHardFluxLevel() > 0.75) {
+                    boolean isEnemyEngaged = false;
+                    for (AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
+                        if (enemy == assignment.getObject()) {
+                            isEnemyEngaged = true;
+                            break;
+                        }
+                    }
+                    if (!isEnemyEngaged) {
+                        applyAssignment(fleetManager.getDeployedFleetMember(enemy), CombatAssignmentType.ENGAGE, false);
+                    }
+                }
+            }
 
             //for debug. show all the current assignments
             if (debug) {
 //                Console.showMessage("Interval Elapsed");
 //                Console.showMessage(allies.toString());
                 for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
-                    //engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 10, Color.LIGHT_GRAY, null, 1, 10);
-                    Console.showMessage("Assignment Type: "+ assignment.getType());
-                    Console.showMessage("Assignment Location: "+ assignment.getTarget().getLocation());
-                    for (BattleObjectiveAPI objective : engine.getObjectives()) {
-                        Console.showMessage("Objective Location: "+ objective.getLocation());
-                    }
+                    engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 150, Color.LIGHT_GRAY, null, 1, 10);
+//                    Console.showMessage("Assignment Type: " + assignment.getType());
+//                    Console.showMessage("Assignment Location: "+ assignment.getTarget().getLocation());
+//                    for (BattleObjectiveAPI objective : engine.getObjectives()) {
+//                        Console.showMessage("Objective Location: "+ objective.getLocation());
+//                    }
 //                    for (ShipAPI ally : allies) {
 //                        Console.showMessage("Ally Location: "+ ally.getLocation());
 //                    }
@@ -168,7 +189,10 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
 //                    }
 //                    Console.showMessage("Assignment: "+ assignment.getType() +" Target: "+ name);
                 }
-                Console.showMessage("-----------------Break-----------------");
+                for (CombatFleetManagerAPI.AssignmentInfo assignment : fleetManager.getTaskManager(false).getAllAssignments()) {
+                    engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 150, Color.LIGHT_GRAY, null, 1, 10);
+                }
+//                Console.showMessage("-----------------Break-----------------");
             }
             assignmentsWithTargets.clear();
             allies.clear();
@@ -203,20 +227,20 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
         });
     }
 
-    static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment) {
-        Global.getCombatEngine().getFleetManager(1).getTaskManager(true).createAssignment(assignment, target, false);
+    static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment, boolean ally) {
+        Global.getCombatEngine().getFleetManager(1).getTaskManager(ally).createAssignment(assignment, target, false);
     }
 
     static void attackObjective() {
         for (BattleObjectiveAPI objective : Global.getCombatEngine().getObjectives()) {
-            if (Objects.equals(objective.getType(), BattleObjectives.SENSOR_JAMMER)) {
-                applyAssignment(objective, CombatAssignmentType.ASSAULT);
+            if (Objects.equals(objective.getType(), BattleObjectives.SENSOR_JAMMER) && objective.getOwner() != 1) {
+                applyAssignment(objective, CombatAssignmentType.CAPTURE, true);
                 break;
-            } else if (Objects.equals(objective.getType(), BattleObjectives.NAV_BUOY)) {
-                applyAssignment(objective, CombatAssignmentType.ASSAULT);
+            } else if (Objects.equals(objective.getType(), BattleObjectives.NAV_BUOY) && objective.getOwner() != 1) {
+                applyAssignment(objective, CombatAssignmentType.CAPTURE, true);
                 break;
-            } else if (Objects.equals(objective.getType(), BattleObjectives.COMM_RELAY)) {
-                applyAssignment(objective, CombatAssignmentType.ASSAULT);
+            } else if (Objects.equals(objective.getType(), BattleObjectives.COMM_RELAY) && objective.getOwner() != 1) {
+                applyAssignment(objective, CombatAssignmentType.CAPTURE, true);
                 break;
             }
         }
