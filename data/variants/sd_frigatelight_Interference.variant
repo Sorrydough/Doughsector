@@ -1,5 +1,5 @@
 {
-    "displayName": "Ion",
+    "displayName": "Interference",
     "goalVariant": true,
     "fluxCapacitors": 5,
     "fluxVents": 4,
@@ -11,7 +11,7 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_frigatelight_Ion",
+    "variantId": "sd_frigatelight_Interference",
     "weaponGroups": [{
         "autofire": true,
         "mode": "LINKED",

@@ -7,5 +7,5 @@ Antimatter Canisters,sd_antimatterarray,,,,,,,,2,0.05,,,,5,,,,,,,,,,,,,graphics/
 Quantum Disruptor,sd_quantumdisruptor,,,,,,0.33,,,,0.25,,1,30,,,,,,,,,,,,,graphics/icons/hullsys/quantum_disruptor.png
 Point Defense Overdrive,sd_pdoverdrive,,,0.05,,,,,,,0.25,3,0.25,15,,,,,,,,,,,,,graphics/icons/hullsys/high_energy_focus.png
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Morphic Screen,sd_morphicscreen,1,,,,,,,,,0.25,,0.25,,TRUE,,,,,,,,,,,,graphics/icons/hullsys/damper_field.png
-Assault Damper,sd_damperfield,1,,0.05,,,,,,,0.25,1,0.25,3,,,,,TRUE,,,,TRUE,TRUE,,uses_damper_ai,graphics/icons/hullsys/damper_field.png
+Morphic Screen,sd_morphicscreen,1,,,,,,,,,0.25,,0.25,,TRUE,,TRUE,,,,,,,,,,graphics/icons/hullsys/damper_field.png
+Assault Damper,sd_damperfield,1,,,,,,,,,0.25,1,0.25,3,,,,,TRUE,,,,TRUE,TRUE,,uses_damper_ai,graphics/icons/hullsys/damper_field.png

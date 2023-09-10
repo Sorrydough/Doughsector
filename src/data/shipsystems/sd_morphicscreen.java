@@ -27,8 +27,8 @@ public class sd_morphicscreen extends BaseShipSystemScript { //TODO: DEBUG THIS
 		ship.setJitter(id, new Color(250, 235, 215, 50), effectLevel, 2, 0, 5);
 		ship.setJitterUnder(id, new Color(250, 235, 215, 150), effectLevel, 25, 0, 7);
 
-		stats.getEmpDamageTakenMult().modifyMult(id, 0.33f * effectLevel);
-		stats.getArmorDamageTakenMult().modifyMult(id,0.33f * effectLevel);
+		stats.getEmpDamageTakenMult().modifyMult(id, 0.5f * effectLevel);
+		stats.getArmorDamageTakenMult().modifyMult(id,0.5f * effectLevel);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -119,7 +119,7 @@ public class sd_morphicscreen extends BaseShipSystemScript { //TODO: DEBUG THIS
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {
 		if (index == 0) {
-			return new StatusData("Armor hardness and emp resistance tripled", false);
+			return new StatusData("Armor hardness and emp resistance doubled", false);
 		}
 		if (index == 1) {
 			return new StatusData("Rebalancing armor", false);

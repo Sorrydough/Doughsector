@@ -1,12 +1,11 @@
 {
     "displayName": "Command",
     "goalVariant": true,
-    "fluxCapacitors": 5,
-    "fluxVents": 0,
+    "fluxCapacitors": 6,
+    "fluxVents": 2,
     "hullId": "sd_frigate",
     "hullMods": [
         "fluxbreakers",
-        "advancedoptics",
         "eccm",
         "nav_relay"
     ],
@@ -19,8 +18,7 @@
             "mode": "LINKED",
             "weapons": {
                 "NRG01": "taclaser",
-                "NRG02": "taclaser",
-                "NRG03": "taclaser"
+                "NRG02": "taclaser"
             }
         },
         {
@@ -31,5 +29,12 @@
                 "SYN02": "heatseeker"
             }
         }
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "NRG03": "pdburst"
+            }
+        },
     ]
 }

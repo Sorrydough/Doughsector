@@ -70,7 +70,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Direct Path", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Bombarded Signal", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Precisely Certain", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Ion", FleetMemberType.SHIP, "Chilled Nova", false).getCaptain().setPersonality(Personalities.CAUTIOUS);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Interference", FleetMemberType.SHIP, "Chilled Nova", false).getCaptain().setPersonality(Personalities.CAUTIOUS);
 
         HashMap<String, Integer> REDADMIRALSKILLS = new HashMap<>();
         REDADMIRALSKILLS.put(Skills.POINT_DEFENSE, 2);
