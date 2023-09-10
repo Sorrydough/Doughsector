@@ -30,8 +30,8 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.setFleetTagline(FleetSide.PLAYER, "Tri-Tachyon Phase Ambush");
         api.setFleetTagline(FleetSide.ENEMY, "Unknown Fleet");
 
-        api.addBriefingItem("The best scouting is done with your guns: Force them to fight and test their mettle.");
-        api.addBriefingItem("Losing a phase cruiser would be an embarrassment. The TTS Wraithcaller must survive.");
+        api.addBriefingItem("The best scouting is done with your guns. Force them to fight and test their mettle.");
+        api.addBriefingItem("Some of their ships are tailored to our fleet's weaknesses. You'll need to bring your A-game.");
 
         api.getDefaultCommander(FleetSide.PLAYER).getStats().setSkillLevel(Skills.PHASE_CORPS, 1);
         FleetMemberAPI BLUFLAGSHIP = api.addToFleet(FleetSide.PLAYER, "doom_Attack", FleetMemberType.SHIP, "TTS Wraithcaller", true);
@@ -40,7 +40,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Pandemic's Echo", false).getCaptain();
         api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Archon's Wrath", false).getCaptain();
         api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Soulweaver", false).getCaptain();
-        api.defeatOnShipLoss("TTS Wraithcaller");
+        //api.defeatOnShipLoss("TTS Wraithcaller");
 
         HashMap<String, Integer> BLUADMIRALSKILLS = new HashMap<>();
         BLUADMIRALSKILLS.put(Skills.HELMSMANSHIP, 2);
@@ -65,8 +65,8 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Sonic Disturbance", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Lightwave Instrument", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Command", FleetMemberType.SHIP, "Reconstructed Mind", false).getCaptain();
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Command", FleetMemberType.SHIP, "Sweating Heartbeat", false).getCaptain();
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Command", FleetMemberType.SHIP, "Reconstructed Mind", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Command", FleetMemberType.SHIP, "Sweating Heartbeat", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Direct Path", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Bombarded Signal", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Precisely Certain", false);
