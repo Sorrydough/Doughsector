@@ -9,8 +9,12 @@
     "dependencies": [
         {
             "id": "lw_lazylib",
-            "name": "LazyLib",
+            "name": "LazyLib"
         },
+        {
+            "id": "MagicLib",
+            "name": "MagicLib"
+        }
     ],
 	"modPlugin":"data.scripts.sd_modPlugin"
 }

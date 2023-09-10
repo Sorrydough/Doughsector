@@ -112,8 +112,7 @@ public class sd_morphicscreen extends BaseShipSystemScript { //TODO: DEBUG THIS
 	}
 
 	public void unapply(MutableShipStatsAPI stats, String id) {
-		stats.getEffectiveArmorBonus().unmodify(id);
-//		stats.getMaxArmorDamageReduction().unmodify(id);
+		stats.getArmorDamageTakenMult().unmodify(id);
 		stats.getEmpDamageTakenMult().unmodify(id);
 	}
 

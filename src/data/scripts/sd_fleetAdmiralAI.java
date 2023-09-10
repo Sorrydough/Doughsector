@@ -27,9 +27,8 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
     @Override
     public void advance(float amount) {
         if (doInit) {
-            if (debug) {
+            if (debug)
                 Console.showMessage("Admiral Init");
-            }
             engine = Global.getCombatEngine();
             fleetManager = engine.getFleetManager(1);
             taskManager = fleetManager.getTaskManager(true);

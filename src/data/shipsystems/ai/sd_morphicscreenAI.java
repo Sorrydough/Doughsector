@@ -56,9 +56,8 @@ public class sd_morphicscreenAI implements ShipSystemAIScript {
             //3. Mines are buttfucking us
             if (ship.getAIFlags().hasFlag(HAS_INCOMING_DAMAGE)) {
                 for (MissileAPI missile : AIUtils.getNearbyEnemyMissiles(ship, 500)) {
-                    if (!ship.getShield().isWithinArc(missile.getLocation()) && missile.isMine()) {
+                    if (!ship.getShield().isWithinArc(missile.getLocation()) && missile.isMine())
                         desire += 100;
-                    }
                 }
             }
 
@@ -67,10 +66,12 @@ public class sd_morphicscreenAI implements ShipSystemAIScript {
 
 
             //Temp stopgap: If we need help, activate the system
-            if (ship.getAIFlags().hasFlag(NEEDS_HELP)) {
+            if (ship.getAIFlags().hasFlag(NEEDS_HELP))
                 desire += 100;
-            }
 
+            //communicate to the ship that it shouldn't use shields while at high flux because it can use the system instead
+            if (ship.getSystem().isActive() && ship.getHardFluxLevel() > 0.9)
+                ship.getAIFlags().setFlag(DO_NOT_USE_SHIELDS);
 
             if (desire >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();

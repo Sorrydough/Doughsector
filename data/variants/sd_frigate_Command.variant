@@ -28,13 +28,13 @@
                 "SYN01": "heatseeker",
                 "SYN02": "heatseeker"
             }
-        }
+        },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "NRG03": "pdburst"
             }
-        },
+        }
     ]
 }

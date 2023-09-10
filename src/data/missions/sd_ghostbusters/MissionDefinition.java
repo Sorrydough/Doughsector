@@ -83,7 +83,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         PersonAPI REDADMIRAL = new MagicCaptainBuilder(Factions.NEUTRAL)
                 .setLevel(5)
                 .setGender(FullName.Gender.MALE)
-                .setPersonality(Personalities.RECKLESS)
+                .setPersonality(Personalities.AGGRESSIVE)
                 .setPortraitId("graphics/portraits/sd_app_087.png")
                 .setSkillLevels(REDADMIRALSKILLS)
                 .create();
