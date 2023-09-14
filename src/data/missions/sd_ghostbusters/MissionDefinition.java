@@ -60,13 +60,13 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
         FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Buster", FleetMemberType.SHIP, "Radial Impulse", true);
-        api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Command", FleetMemberType.SHIP, "Shrivelled Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Relay", FleetMemberType.SHIP, "Shrivelled Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Strike", FleetMemberType.SHIP, "Galactic Cloud", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Sonic Disturbance", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Lightwave Instrument", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Command", FleetMemberType.SHIP, "Reconstructed Mind", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Command", FleetMemberType.SHIP, "Sweating Heartbeat", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Relay", FleetMemberType.SHIP, "Reconstructed Mind", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Relay", FleetMemberType.SHIP, "Sweating Heartbeat", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Direct Path", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Bombarded Signal", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Precisely Certain", false);

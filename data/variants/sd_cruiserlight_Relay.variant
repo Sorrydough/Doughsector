@@ -1,5 +1,5 @@
 {
-    "displayName": "Command",
+    "displayName": "Relay",
     "goalVariant": true,
     "fluxCapacitors": 0,
     "fluxVents": 9,
@@ -13,7 +13,7 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_cruiserlight_Command",
+    "variantId": "sd_cruiserlight_Relay",
     "weaponGroups": [
         {
             "autofire": true,

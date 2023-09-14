@@ -1,5 +1,5 @@
 {
-    "displayName": "Command",
+    "displayName": "Relay",
     "goalVariant": true,
     "fluxCapacitors": 6,
     "fluxVents": 2,
@@ -11,7 +11,7 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_frigate_Command",
+    "variantId": "sd_frigate_Relay",
     "weaponGroups": [
         {
             "autofire": true,
