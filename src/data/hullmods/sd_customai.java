@@ -90,7 +90,7 @@ public class sd_customai extends BaseHullMod {
                         continue;
                 }
 
-                if (weapon.usesAmmo() && weapon.getDamageType().equals(DamageType.KINETIC)) {
+                if (weapon.usesAmmo() && weapon.getDamageType().equals(DamageType.KINETIC) && weapon.getSpec().getAIHints().contains(WeaponAPI.AIHints.STRIKE)) {
                     if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == HullSize.FRIGATE)) {
                         weapon.setForceNoFireOneFrame(true);
                         if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)))

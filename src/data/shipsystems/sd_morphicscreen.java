@@ -27,23 +27,24 @@ public class sd_morphicscreen extends BaseShipSystemScript { //TODO: IMPROVE VIS
 		ship.setJitter(id, new Color(250, 235, 215, 50), effectLevel, 2, 0, 5);
 		ship.setJitterUnder(id, new Color(250, 235, 215, 150), effectLevel, 25, 0, 7);
 
-		stats.getEmpDamageTakenMult().modifyMult(id, 0.5f * effectLevel);
-		stats.getArmorDamageTakenMult().modifyMult(id,0.5f * effectLevel);
+		stats.getEmpDamageTakenMult().modifyMult(id, 0.33f * effectLevel);
+		stats.getArmorDamageTakenMult().modifyMult(id,0.33f * effectLevel);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
 			//while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell per frame, so that complicates everything
-			//firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmor function
+			//firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
 			List<Vector2f> cellsAboveAverage = new ArrayList<>();
 			List<Vector2f> cellsBelowAverage = new ArrayList<>();
 			ArmorGridAPI grid = ship.getArmorGrid();
+			float averageArmorPerCell = getAverageArmorPerCell(grid);
 			//next we create a list of cells above average, and another list of cells below average
 			for (int ix = 0; ix < grid.getGrid().length; ix++) {
 				for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
 					float currentArmor = grid.getArmorValue(ix, iy);
-					if (currentArmor > getAverageArmorPerCell(grid)) {
+					if (currentArmor > averageArmorPerCell) {
 						cellsAboveAverage.add(new Vector2f(ix, iy));
-					} else if (currentArmor < getAverageArmorPerCell(grid)) {
+					} else if (currentArmor < averageArmorPerCell) {
 						cellsBelowAverage.add(new Vector2f(ix, iy));
 					}
 				}
@@ -57,7 +58,7 @@ public class sd_morphicscreen extends BaseShipSystemScript { //TODO: IMPROVE VIS
 
 			//find the amount we need to subtract from the cell - this the maximum of the amount needed or the amount the cell can provide
 			float amountNeededToTransfer = ship.getArmorGrid().getMaxArmorInCell() - ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y);
-			float amountAbleToTransfer = (ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - getAverageArmorPerCell(grid));
+			float amountAbleToTransfer = (ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - averageArmorPerCell);
 			if (amountAbleToTransfer < 1)
 				amountAbleToTransfer = 0;
 			if (amountAbleToTransfer == 0)
@@ -100,7 +101,6 @@ public class sd_morphicscreen extends BaseShipSystemScript { //TODO: IMPROVE VIS
 		}
 	}
 
-	//calculates total armor of the ship
 	public static float getAverageArmorPerCell(ArmorGridAPI grid) {
 		float armor = 0f;
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
@@ -118,7 +118,7 @@ public class sd_morphicscreen extends BaseShipSystemScript { //TODO: IMPROVE VIS
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {
 		if (index == 0) {
-			return new StatusData("Armor hardness and emp resistance doubled", false);
+			return new StatusData("Armor hardness and emp resistance tripled", false);
 		}
 		if (index == 1) {
 			return new StatusData("Rebalancing armor", false);

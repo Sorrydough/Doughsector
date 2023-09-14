@@ -69,8 +69,12 @@ public class sd_morphicscreenAI implements ShipSystemAIScript {
             if (ship.getAIFlags().hasFlag(NEEDS_HELP))
                 desire += 100;
 
-            //communicate to the ship that it shouldn't use shields while at high flux because it can use the system instead
-            if (ship.getSystem().isActive() && ship.getHardFluxLevel() > 0.9)
+            //Temp stopgap: If we're fluxed out, turn it on
+//            if (ship.getHardFluxLevel() >= 0.8)
+//                desire += 100;
+
+            //communicate to the ship that it shouldn't use shields while at high flux because it's very important to not get overloaded
+            if (ship.getSystem().isActive() && ship.getHardFluxLevel() >= 0.9)
                 ship.getAIFlags().setFlag(DO_NOT_USE_SHIELDS);
 
             if (desire >= 100 && !ship.getSystem().isOn())
