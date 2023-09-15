@@ -1,0 +1,37 @@
+{
+    "displayName": "Strike",
+    "goalVariant": true,
+    "fluxCapacitors": 10,
+    "fluxVents": 5,
+    "hullId": "sd_frigate",
+    "hullMods": [
+        "fluxbreakers",
+        "fluxcoil"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigate_Strike",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "NRG01": "amblaster",
+                "NRG02": "amblaster"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "SYN01": "sabot_single",
+                "SYN02": "sabot_single"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"NRG03": "pdburst"}
+        }
+    ]
+}

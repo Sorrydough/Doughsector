@@ -8,6 +8,8 @@ import org.dark.shaders.util.TextureData;
 import java.util.ArrayList;
 import java.util.List;
 
+import data.scripts.world.sd_moonGenerator;
+
 @SuppressWarnings("unused")
 public class sd_modPlugin extends BaseModPlugin {
 //    public void
@@ -58,5 +60,10 @@ public class sd_modPlugin extends BaseModPlugin {
         for (String weapon : sd_weaponsList) {
             Global.getSettings().getWeaponSpec(weapon).addTag("sd_arsenal_package");
         }
+    }
+
+    @Override
+    public void onNewGameAfterProcGen() {
+        new sd_moonGenerator().generate(Global.getSector());
     }
 }

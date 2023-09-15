@@ -83,10 +83,10 @@ public class sd_customStartPlaceholder extends CustomStart {
         CampaignFleetAPI tempFleet = FleetFactoryV3.createEmptyFleet(
                 PlayerFactionStore.getPlayerFactionIdNGC(), FleetTypes.PATROL_SMALL, null);
 
-        addFleetMember("sd_retrofitnebula_Standard", dialog, data, tempFleet, "none");
-        addFleetMember("sd_frigate_Standard", dialog, data, tempFleet, "flagship");
-        addFleetMember("sd_frigatelight_Standard", dialog, data, tempFleet, "none");
-        addFleetMember("sd_frigatelight_Standard", dialog, data, tempFleet, "none");
+        addFleetMember("sd_retrofitstarliner_Standard", dialog, data, tempFleet, "none");
+        addFleetMember("sd_frigate_Strike", dialog, data, tempFleet, "flagship");
+        addFleetMember("sd_frigatelight_Lancer", dialog, data, tempFleet, "none");
+        addFleetMember("sd_frigatelight_Lancer", dialog, data, tempFleet, "none");
 
 
         data.getStartingCargo().getCredits().add(10000);

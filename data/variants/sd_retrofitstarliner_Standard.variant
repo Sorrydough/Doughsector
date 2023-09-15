@@ -1,18 +1,18 @@
 {
-    "displayName": "Relay",
+    "displayName": "Standard",
     "goalVariant": true,
-    "fluxCapacitors": 6,
-    "fluxVents": 1,
-    "hullId": "sd_frigate",
+    "fluxCapacitors": 1,
+    "fluxVents": 0,
+    "hullId": "sd_retrofitstarliner",
     "hullMods": [
         "fluxbreakers",
-        "eccm",
-        "pointdefenseai",
-        "nav_relay"
+        "armoredweapons",
+        "missile_autoloader",
+        "heavyarmor"
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_frigate_Relay",
+    "variantId": "sd_retrofitstarliner_Standard",
     "weaponGroups": [
         {
             "autofire": true,
@@ -20,16 +20,18 @@
             "weapons": {
                 "NRG01": "lrpdlaser",
                 "NRG02": "lrpdlaser",
-                "NRG03": "lrpdlaser"
+                "NRG03": "lrpdlaser",
+                "NRG04": "lrpdlaser"
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "SYN01": "heatseeker",
-                "SYN02": "heatseeker"
+                "MSL01": "gorgon",
+                "MSL02": "gorgon"
             }
         }
-    ]
+    ],
+    "wings": ["sd_fighterblasterWing"]
 }

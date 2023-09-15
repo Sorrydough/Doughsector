@@ -1,9 +1,9 @@
 {
     "sd_antimattercanister_explosion":{
-		"sounds":[	{"file":"sounds/sfx_systems/mine_strike_explosion_01.ogg","pitch":2.5,"volume":0.2},
-					{"file":"sounds/sfx_systems/mine_strike_explosion_02.ogg","pitch":2.5,"volume":0.2},
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_03.ogg","pitch":2.5,"volume":0.2},
-                    {"file":"sounds/sfx_systems/mine_strike_explosion_04.ogg","pitch":2.5,"volume":0.2}]
+		"sounds":[	{"file":"sounds/sfx_systems/mine_strike_explosion_01.ogg","pitch":2.5,"volume":0.15},
+					{"file":"sounds/sfx_systems/mine_strike_explosion_02.ogg","pitch":2.5,"volume":0.15},
+                    {"file":"sounds/sfx_systems/mine_strike_explosion_03.ogg","pitch":2.5,"volume":0.15},
+                    {"file":"sounds/sfx_systems/mine_strike_explosion_04.ogg","pitch":2.5,"volume":0.15}]
     },
 	"sd_vent_loop":{
 		"sounds":[	{"file":"sounds/sd_spec/sd_vent_loop.ogg","pitch":1,"volume":1}],
