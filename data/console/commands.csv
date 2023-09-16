@@ -1,0 +1,2 @@
+command,class,tags,syntax,help
+addplanet,data.console.sd_addPlanet,"core, cheat, campaign",addplanet <string>,Spawns a planet of the specified type orbiting the local star

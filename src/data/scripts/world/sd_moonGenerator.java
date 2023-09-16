@@ -19,9 +19,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * code by tomatopaste. adds random moons to specific objects upon generation. majority of code is to assign appropriate conditions
  */
 public class sd_moonGenerator implements SectorGeneratorPlugin {
-    public static final float MIN_RADIUS_FOR_MOON_GEN = 150;
-    public static final float DIVISOR = 105;
-    public static final float HABITABLE_PROBABILITY = 8;
+    public static final float MIN_RADIUS_FOR_MOON_GEN = 145; //minimum radius a planet must have before the generator tries to put moons around it
+    public static final float DIVISOR = 95; //higher number means lower probability to generate moons
+    public static final float HABITABLE_PROBABILITY = 8; //higher is lower chance for habitable planets
 
     public static final Logger log = Global.getLogger(sd_moonGenerator.class);
 
@@ -37,12 +37,12 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         hotPlanetTypes.add("barren_venuslike");
         hotPlanetTypes.add("lava_minor");
         hotPlanetTypes.add("toxic");
-        hotPlanetTypes.add("US_lava");
-        hotPlanetTypes.add("US_volcanic");
-        hotPlanetTypes.add("US_green");
-        hotPlanetTypes.add("US_acid");
-        hotPlanetTypes.add("US_acidRain");
-        hotPlanetTypes.add("US_acidWind");
+//        hotPlanetTypes.add("US_lava");
+//        hotPlanetTypes.add("US_volcanic");
+//        hotPlanetTypes.add("US_green");
+//        hotPlanetTypes.add("US_acid");
+//        hotPlanetTypes.add("US_acidRain");
+//        hotPlanetTypes.add("US_acidWind");
     }
 
     public static final List<String> neutralPlanetTypes = new ArrayList<>();
@@ -54,16 +54,16 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         neutralPlanetTypes.add("rocky_metallic");
         neutralPlanetTypes.add("rocky_unstable");
         neutralPlanetTypes.add("barren-bombarded");
-        neutralPlanetTypes.add("US_azur");
-        neutralPlanetTypes.add("US_burnt");
-        neutralPlanetTypes.add("US_dust");
-        neutralPlanetTypes.add("US_barrenA");
-        neutralPlanetTypes.add("US_barrenB");
-        neutralPlanetTypes.add("US_barrenC");
-        neutralPlanetTypes.add("US_barrenD");
-        neutralPlanetTypes.add("US_barrenE");
-        neutralPlanetTypes.add("US_barrenF");
-        neutralPlanetTypes.add("US_artificial");
+//        neutralPlanetTypes.add("US_azur");
+//        neutralPlanetTypes.add("US_burnt");
+//        neutralPlanetTypes.add("US_dust");
+//        neutralPlanetTypes.add("US_barrenA");
+//        neutralPlanetTypes.add("US_barrenB");
+//        neutralPlanetTypes.add("US_barrenC");
+//        neutralPlanetTypes.add("US_barrenD");
+//        neutralPlanetTypes.add("US_barrenE");
+//        neutralPlanetTypes.add("US_barrenF");
+//        neutralPlanetTypes.add("US_artificial");
     }
 
     public static final List<String> habitablePlanetTypes = new ArrayList<>();
@@ -74,23 +74,23 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         habitablePlanetTypes.add("terran-eccentric");
         habitablePlanetTypes.add("water");
         habitablePlanetTypes.add("barren-desert");
-        habitablePlanetTypes.add("US_continent");
-        habitablePlanetTypes.add("US_water");
-        habitablePlanetTypes.add("US_waterB");
-        habitablePlanetTypes.add("US_alkali");
-        habitablePlanetTypes.add("US_jungle");
-        habitablePlanetTypes.add("US_auric");
-        habitablePlanetTypes.add("US_auricCloudy");
-        habitablePlanetTypes.add("US_magnetic");
-        habitablePlanetTypes.add("US_storm");
-        habitablePlanetTypes.add("US_lifelessarid");
-        habitablePlanetTypes.add("US_arid");
-        habitablePlanetTypes.add("US_crimson");
-        habitablePlanetTypes.add("US_desertA");
-        habitablePlanetTypes.add("US_desertB");
-        habitablePlanetTypes.add("US_desertC");
-        habitablePlanetTypes.add("US_red");
-        habitablePlanetTypes.add("US_redWind");
+//        habitablePlanetTypes.add("US_continent");
+//        habitablePlanetTypes.add("US_water");
+//        habitablePlanetTypes.add("US_waterB");
+//        habitablePlanetTypes.add("US_alkali");
+//        habitablePlanetTypes.add("US_jungle");
+//        habitablePlanetTypes.add("US_auric");
+//        habitablePlanetTypes.add("US_auricCloudy");
+//        habitablePlanetTypes.add("US_magnetic");
+//        habitablePlanetTypes.add("US_storm");
+//        habitablePlanetTypes.add("US_lifelessarid");
+//        habitablePlanetTypes.add("US_arid");
+//        habitablePlanetTypes.add("US_crimson");
+//        habitablePlanetTypes.add("US_desertA");
+//        habitablePlanetTypes.add("US_desertB");
+//        habitablePlanetTypes.add("US_desertC");
+//        habitablePlanetTypes.add("US_red");
+//        habitablePlanetTypes.add("US_redWind");
     }
 
     public static final List<String> coldPlanetTypes = new ArrayList<>();
@@ -102,10 +102,10 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         coldPlanetTypes.add("frozen2");
         coldPlanetTypes.add("frozen3");
         coldPlanetTypes.add("toxic_cold");
-        coldPlanetTypes.add("US_blue");
-        coldPlanetTypes.add("US_purple");
-        coldPlanetTypes.add("US_iceA");
-        coldPlanetTypes.add("US_iceB");
+//        coldPlanetTypes.add("US_blue"); //cryovolcanic
+//        coldPlanetTypes.add("US_purple"); //methane
+//        coldPlanetTypes.add("US_iceA"); //
+//        coldPlanetTypes.add("US_iceB");
     }
 
     public static final List<String> hotConditions = new ArrayList<>();
@@ -283,7 +283,7 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                     if (token instanceof PlanetAPI) {
                         PlanetAPI planet = (PlanetAPI) token;
 
-                        if (planet.getId().startsWith("sstc_moon")) {
+                        if (planet.getId().startsWith("sd_moon")) {
                             continue;
                         }
                         float planetRadius = planet.getRadius();
@@ -310,7 +310,7 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 
                         float orbitRadius = planetRadius * 1.5f;
                         for (int i = 0; i < numMoons; i++) {
-                            String id = "sstc_moon_" + i + "_" + planet.hashCode();
+                            String id = "sd_moon_" + i + "_" + planet.hashCode();
                             int radius = random.nextInt(25) + 25;
                             orbitRadius += random.nextInt(50) + radius + 75;
 
@@ -334,6 +334,7 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                             }
 
                             PlanetAPI moon = system.addPlanet(id, planet, planet.getFullName() + " M-" + toRoman(i + 1), type, planet.getSpec().getPitch(), radius, orbitRadius, orbitDays);
+                            //TODO: FIX THE SURVEY COST BEING WRONG. SHOULD HAPPEN HERE.
 
                             MarketAPI market = moon.getMarket();
                             String oreType;
@@ -613,6 +614,10 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                                 case "frozen1":
                                 case "frozen2":
                                 case "frozen3":
+                                case "US_blue":
+                                case "US_purple":
+                                case "US_iceA":
+                                case "US_iceB":
                                     for (String string : frozenConditions) {
                                         market.addCondition(string);
                                     }
@@ -690,6 +695,10 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 
                                 //HOT PLANETS
                                 case "toxic":
+                                case "US_green":
+                                case "US_acid":
+                                case "US_acidRain":
+                                case "US_acidWind":
                                     for (String string : hotConditions) {
                                         market.addCondition(string);
                                     }
@@ -718,6 +727,8 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 
                                     break;
                                 case "lava_minor":
+                                case "US_lava":
+                                case "US_volcanic":
                                     for (String string : hotConditions) {
                                         market.addCondition(string);
                                     }

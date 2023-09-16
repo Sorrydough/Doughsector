@@ -42,7 +42,6 @@ public class sd_customStartPlaceholder extends CustomStart {
                         for (int i = 0; i < 9; i++) {
 
                             List<String> themes = new ArrayList<>();
-                            themes.add(Tags.THEME_REMNANT_SECONDARY);
                             themes.add(Tags.THEME_REMNANT_SUPPRESSED);
                             themes.add(Tags.THEME_REMNANT_NO_FLEETS);
                             themes.add(Tags.THEME_REMNANT_DESTROYED);
