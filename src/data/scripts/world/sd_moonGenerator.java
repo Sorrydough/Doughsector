@@ -19,9 +19,10 @@ import java.util.Random;
 import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * code by tomatopaste. adds random moons to specific objects upon generation. majority of code is to assign appropriate conditions
- */
+
+    //very, very heavily modified version of tomatopaste's moon generator used in lights out
+    //his vision of the purpose for moons was very different from my own so I needed my own implementation
+
 public class sd_moonGenerator implements SectorGeneratorPlugin {
     public static final float MIN_RADIUS_FOR_MOON_GEN = 150; //minimum radius a planet must have before the generator tries to put moons around it
     public static final float DIVISOR = 100; //higher number means lower probability to generate moons
@@ -43,17 +44,17 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         gasGiants.add("US_gas_giantB");
     }
 
-    final List<String> coldPlanets = new ArrayList<>(); {
-        coldPlanets.add("frozen");
-        coldPlanets.add("frozen1");
-        coldPlanets.add("frozen2");
-        coldPlanets.add("frozen3");
-        coldPlanets.add("cryovolcanic");
-        coldPlanets.add("toxic_cold");
-        coldPlanets.add("US_purple"); //methane
-        coldPlanets.add("US_iceA");
-        coldPlanets.add("US_iceB");
-        coldPlanets.add("US_blue"); //cryovolcanic
+    final List<String> freezingPlanets = new ArrayList<>(); {
+        freezingPlanets.add("frozen");
+        freezingPlanets.add("frozen1");
+        freezingPlanets.add("frozen2");
+        freezingPlanets.add("frozen3");
+        freezingPlanets.add("cryovolcanic");
+        freezingPlanets.add("toxic_cold");
+        freezingPlanets.add("US_iceA");
+        freezingPlanets.add("US_iceB");
+        freezingPlanets.add("US_blue"); //cryovolcanic
+        freezingPlanets.add("US_purple"); //methane
     }
 
     final List<String> hotPlanets = new ArrayList<>(); {
@@ -74,7 +75,6 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         neutralPlanets.add("barren_castiron");
         neutralPlanets.add("barren_venuslike");
         neutralPlanets.add("rocky_metallic");
-        neutralPlanets.add("rocky_unstable");
         neutralPlanets.add("rocky_ice");
         neutralPlanets.add("US_barrenA");
         neutralPlanets.add("US_barrenB");
@@ -90,31 +90,38 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         neutralPlanets.add("US_acidWind");
     }
 
-    final List<String> goldilocksPlanets = new ArrayList<>(); {
-        goldilocksPlanets.add("terran");
-        goldilocksPlanets.add("terran-eccentric");
-        goldilocksPlanets.add("water");
-        goldilocksPlanets.add("jungle");
-        goldilocksPlanets.add("tundra");
-        goldilocksPlanets.add("arid");
-        goldilocksPlanets.add("desert");
-        goldilocksPlanets.add("desert1");
-        goldilocksPlanets.add("barren-desert");
-        goldilocksPlanets.add("US_continent");
-        goldilocksPlanets.add("US_water");
-        goldilocksPlanets.add("US_waterB");
-        goldilocksPlanets.add("US_alkali");
-        goldilocksPlanets.add("US_jungle");
-        goldilocksPlanets.add("US_auric");
-        goldilocksPlanets.add("US_auricCloudy");
-        goldilocksPlanets.add("US_lifelessarid");
-        goldilocksPlanets.add("US_arid");
-        goldilocksPlanets.add("US_crimson");
-        goldilocksPlanets.add("US_desertA");
-        goldilocksPlanets.add("US_desertB");
-        goldilocksPlanets.add("US_desertC");
-        goldilocksPlanets.add("US_red");
-        goldilocksPlanets.add("US_redWind");
+    final List<String> warmHabitablePlanets = new ArrayList<>(); {
+        warmHabitablePlanets.add("arid");
+        warmHabitablePlanets.add("desert");
+        warmHabitablePlanets.add("desert1");
+        warmHabitablePlanets.add("barren-desert");
+        warmHabitablePlanets.add("US_arid");
+        warmHabitablePlanets.add("US_crimson"); //bombarded lifeless
+        warmHabitablePlanets.add("US_desertA");
+        warmHabitablePlanets.add("US_desertB");
+        warmHabitablePlanets.add("US_desertC");
+        warmHabitablePlanets.add("US_red");      //crimson
+        warmHabitablePlanets.add("US_redWind");
+    }
+
+    final List<String> coldHabitablePlanets = new ArrayList<>(); {
+        coldHabitablePlanets.add("tundra");
+        coldHabitablePlanets.add("US_alkali");
+    }
+
+    final List<String> neutralHabitablePlanets = new ArrayList<>(); {
+        neutralHabitablePlanets.addAll(coldHabitablePlanets);
+        neutralHabitablePlanets.addAll(warmHabitablePlanets);
+        neutralHabitablePlanets.add("terran-eccentric");
+        neutralHabitablePlanets.add("water");
+        neutralHabitablePlanets.add("jungle");
+        neutralHabitablePlanets.add("US_continent");
+        neutralHabitablePlanets.add("US_water");
+        neutralHabitablePlanets.add("US_waterB");
+        neutralHabitablePlanets.add("US_jungle");
+        neutralHabitablePlanets.add("US_auric");
+        neutralHabitablePlanets.add("US_auricCloudy");
+        neutralHabitablePlanets.add("US_lifelessarid");
     }
 
     //Ok so here's how we need to structure it:
@@ -136,10 +143,9 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 //        habitableStars.add(StarTypes.ORANGE_GIANT);
 //    }
 
-    static Random random = new Random();
-
-    private final static TreeMap<Integer, String> map = new TreeMap<Integer, String>();
-    static {
+    final Random random = new Random();
+    //shamelessly stolen from soren
+    final static TreeMap<Integer, String> map = new TreeMap<Integer, String>(); static {
         map.put(1000, "M");
         map.put(900, "CM");
         map.put(500, "D");
@@ -186,7 +192,6 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                         numMoons = random.nextInt (1 + (int) (planetRadius / DIVISOR));
                         log.info("Adding " + numMoons + " moons to " + planet.getTypeId());
 
-
                         boolean isVeryHot = planet.getMarket().hasCondition(Conditions.VERY_HOT);
                         boolean isHot = planet.getMarket().hasCondition(Conditions.HOT) || isVeryHot;
                         boolean isVeryCold = planet.getMarket().hasCondition(Conditions.VERY_COLD);
@@ -195,7 +200,7 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                         float orbitRadius = planetRadius * 1.5f;
                         for (int i = 0; i < numMoons; i++) {
                             String id = "sd_moon_" + i + "_" + planet.hashCode();
-                            int radius = random.nextInt((int)(planet.getRadius() * 0.75)) + 25;
+                            int radius = random.nextInt((int)(planet.getRadius() * 0.2)) + 25;
                             orbitRadius += random.nextInt(50) + radius + 75;
 
                             int orbitDays = random.nextInt(20) + 20;
@@ -204,14 +209,14 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 
                             String type;
                             if (spawnHabitable && !isVeryHot && !isVeryCold) {
-                                int index = random.nextInt(goldilocksPlanets.size());
-                                type = goldilocksPlanets.get(index);
+                                int index = random.nextInt(neutralHabitablePlanets.size());
+                                type = neutralHabitablePlanets.get(index);
                             }  else if (isHot) {
                                 int index = random.nextInt(hotPlanets.size());
                                 type = hotPlanets.get(index);
                             } else if (isCold) {
-                                int index = random.nextInt(coldPlanets.size());
-                                type = coldPlanets.get(index);
+                                int index = random.nextInt(freezingPlanets.size());
+                                type = freezingPlanets.get(index);
                             } else {
                                 int index = random.nextInt(neutralPlanets.size());
                                 type = neutralPlanets.get(index);
