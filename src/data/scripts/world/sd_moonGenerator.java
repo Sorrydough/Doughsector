@@ -103,7 +103,7 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         warmHabitablePlanets.add("US_red");      //crimson
         warmHabitablePlanets.add("US_redWind");
     }
-
+    //TODO: SORT PLANETS BASED ON HAB OFFSET; -2, -1, 0, 1, 2
     final List<String> coldHabitablePlanets = new ArrayList<>(); {
         coldHabitablePlanets.add("tundra");
         coldHabitablePlanets.add("US_alkali");
