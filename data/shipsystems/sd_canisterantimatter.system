@@ -1,9 +1,9 @@
 {
-	"id":"sd_antimatterarray",
+	"id":"sd_canisterantimatter",
 	"type":"WEAPON",
 	"aiType":"CANISTER_FLAK",
 	
-	"weaponDataId":"sd_antimatterarray",
+	"weaponDataId":"sd_canisterantimatter",
 	"outOfUsesSound":"gun_out_of_ammo",
 
 	"aiHints":{

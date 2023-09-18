@@ -15,7 +15,7 @@ import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 
-public class sd_morphicscreen extends BaseShipSystemScript { //TODO: IMPROVE VISUALS WITH RANDOM VELOCITY ON PARTICLES, AND ADD EMP ARCS WHEN APPROPRIATE. MAYBE ALSO GENERATE SOFT FLUX PER CELL REBALANCED
+public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISUALS WITH RANDOM VELOCITY ON PARTICLES, AND ADD EMP ARCS WHEN APPROPRIATE. MAYBE ALSO GENERATE SOFT FLUX PER CELL REBALANCED
 
 	final IntervalUtil interval = new IntervalUtil(0.01f, 0.1f);
 

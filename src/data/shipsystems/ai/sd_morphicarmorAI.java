@@ -14,7 +14,7 @@ import java.util.List;
 
 import static com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags.*;
 
-public class sd_morphicscreenAI implements ShipSystemAIScript {
+public class sd_morphicarmorAI implements ShipSystemAIScript {
 
     ShipAPI ship;
     CombatEngineAPI engine;

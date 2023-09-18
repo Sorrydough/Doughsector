@@ -2,17 +2,12 @@ package data.scripts.world;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
-import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.econ.MarketConditionAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
-import com.fs.starfarer.api.impl.campaign.ids.StarTypes;
-import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch;
 import com.fs.starfarer.api.impl.campaign.procgen.PlanetConditionGenerator;
-import com.fs.starfarer.api.impl.campaign.procgen.PlanetGenDataSpec;
-import com.fs.starfarer.loading.specs.PlanetSpec;
 import org.apache.log4j.Logger;
-import org.lazywizard.lazylib.MathUtils;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -21,14 +16,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
     //very, very heavily modified version of tomatopaste's moon generator used in lights out
-    //his vision of the purpose for moons was very different from my own so I needed my own implementation
+    //his vision of the purpose for moons was very different from my own, so I needed my own implementation
 
 public class sd_moonGenerator implements SectorGeneratorPlugin {
-    public static final float MIN_RADIUS_FOR_MOON_GEN = 150; //minimum radius a planet must have before the generator tries to put moons around it
-    public static final float DIVISOR = 100; //higher number means lower probability to generate moons
-    public static final float SPECIAL_PROBABILITY = 10; //higher is lower chance for habitable or toxic planets
+    final float MIN_RADIUS_FOR_MOON_GEN = 150; //minimum radius a planet must have before the generator tries to put moons around it
+    final float DIVISOR = 100; //higher number means lower probability to generate moons
+    final float SPECIAL_PROBABILITY = 10; //higher is lower chance for habitable or toxic planets
 
-    public static final Logger log = Global.getLogger(sd_moonGenerator.class);
+    final Logger log = Global.getLogger(sd_moonGenerator.class);
 
     public static final List<String> ringBandTypes = new ArrayList<>();
     static {
@@ -121,7 +116,7 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         neutralHabitablePlanets.add("US_jungle");
         neutralHabitablePlanets.add("US_auric");
         neutralHabitablePlanets.add("US_auricCloudy");
-        neutralHabitablePlanets.add("US_lifelessarid");
+        neutralHabitablePlanets.add("US_lifelessArid");
     }
 
     //Ok so here's how we need to structure it:
@@ -177,19 +172,11 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                 for (SectorEntityToken token : entityTokens) {
                     if (token instanceof PlanetAPI) {
                         PlanetAPI planet = (PlanetAPI) token;
-
-                        if (planet.getId().startsWith("sd_moon")) {
+                        if (planet.isStar() || planet.getRadius() < MIN_RADIUS_FOR_MOON_GEN || planet.getId().startsWith("sd_moon"))
                             continue;
-                        }
-                        float planetRadius = planet.getRadius();
-                        if (planet.isStar()) {
-                            continue;
-                        } else if (planetRadius < MIN_RADIUS_FOR_MOON_GEN) {
-                            continue;
-                        }
 
                         int numMoons;
-                        numMoons = random.nextInt (1 + (int) (planetRadius / DIVISOR));
+                        numMoons = random.nextInt (1 + (int) (planet.getRadius() / DIVISOR));
                         log.info("Adding " + numMoons + " moons to " + planet.getTypeId());
 
                         boolean isVeryHot = planet.getMarket().hasCondition(Conditions.VERY_HOT);
@@ -197,9 +184,8 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                         boolean isVeryCold = planet.getMarket().hasCondition(Conditions.VERY_COLD);
                         boolean isCold = planet.getMarket().hasCondition(Conditions.COLD) || isVeryCold;
 
-                        float orbitRadius = planetRadius * 1.5f;
+                        float orbitRadius = planet.getRadius() * 1.5f;
                         for (int i = 0; i < numMoons; i++) {
-                            String id = "sd_moon_" + i + "_" + planet.hashCode();
                             int radius = random.nextInt((int)(planet.getRadius() * 0.2)) + 25;
                             orbitRadius += random.nextInt(50) + radius + 75;
 
@@ -222,7 +208,9 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                                 type = neutralPlanets.get(index);
                             }
 
-                            PlanetAPI moon = system.addPlanet(id, planet, planet.getFullName() + " M-" + toRoman(i + 1), type, planet.getSpec().getPitch(), radius, orbitRadius, orbitDays);
+                            //log.info("Attempting to add moon type " + type + " to planet type " + planet.getTypeId());
+
+                            PlanetAPI moon = system.addPlanet("sd_moon_" + i + "_" + planet.hashCode(), planet, planet.getFullName() + " M-" + toRoman(i + 1), type, planet.getSpec().getPitch(), radius, orbitRadius, orbitDays);
                             PlanetConditionGenerator.generateConditionsForPlanet(moon, system.getAge());
 
                             StringBuilder logs = new StringBuilder("Added moon to: " + planet.getTypeId() + " with orbit radius " + orbitRadius + ", with conditions :");

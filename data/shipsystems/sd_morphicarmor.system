@@ -1,11 +1,10 @@
 {
-	"id":"sd_morphicscreen",
+	"id":"sd_morphicarmor",
 	"type":"STAT_MOD",
-	"aiType":"DAMPER_FIELD",
-	#"aiType":"CUSTOM",
-	#"aiScript":"data.shipsystems.ai.sd_morphicscreenAI",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_morphicarmorAI",
 	
-	"statsScript":"data.shipsystems.sd_morphicscreen",
+	"statsScript":"data.shipsystems.sd_morphicarmor",
 
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.75,

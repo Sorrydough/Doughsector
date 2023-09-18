@@ -1,9 +1,9 @@
 {
-	"id":"sd_pdoverdrive",
+	"id":"sd_stasisfield",
 	"type":"STAT_MOD",
 	"aiType":"LIDAR_ARRAY",
 	
-	"statsScript":"data.shipsystems.sd_pdoverdrive",
+	"statsScript":"data.shipsystems.sd_stasisfield",
 
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.75,

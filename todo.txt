@@ -1,39 +1,21 @@
-- Put hexblade shields on fighters
-- Beam damage bonus in faction hullmod?
-- Missile reload speed bonus?
-- Bump speed up by 5 for everything after implementing vector thrusters
-
-Mission Stuff:
-- Need to prevent ships from ever retreating during a mission cuz the player's certainly won't!
-- Need a custom AI admiral to prevent frigates from getting themselves singled out and killed
-- Fix squalls running dry - don't shoot at unshielded ships or frigates?
-
-
 Ship System Stuff:
-- Create a toggle system that doubles armor for damage calc, increases maxiumum damage blocked by armor to 100%, and generates 3x the ship's shield upkeep while active. Doesn't restrict weapons fire or block dissipation. Potential names: Force Cascade Matrix, Armor Polarization Field, Energized Integrity Screen, Morphic...
 - Configure AI threat indicators for ship systems
 - Make the AM canisters go vaguely in the direction of the nearest threat instead of being completely random
-- Rename PD overdrive
-- Bash canister boxes
-- Write custom PD overdrive AI
 - Write custom quantum disruptor AI
-- Return overload color to quantum disruptor script
 - Figure out why the PD overdrive orb doesn't seem to rotate
 
 Misc Stuff:
-- Rename skirmish ships to "fast" ships in the files
 - Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
 - Description strings
 
 Aesthetic Stuff:
 - Use fade engines to color function to make them change color randomly in combat
 - Implement glowmaps for blinkers and friends
-- Upgrade (downgrade?) vector thrusters
-- Flip the heavy cruiser and large frigate
 
 Generic AI Stuff:
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility
-- Check whether CH ships get the DO NOT PURSUE flag like how battlecarriers do
+- Figure out how to fix the issue with carriers getting stuck in a flux dissipation loop
+- Alter squall weapons.csv data - DO NOT USE VS FRIGATES, and USE VS SHIELDS?
 
 Campaign Stuff:
 - Make a placeholder faction with the fleets randomly patrolling near caches
@@ -57,3 +39,35 @@ Post-Release Stuff:
 - Combat warning noise for missiles hitting your flagship
 - Make sure the forum download link is hidden behind a simple riddle
 - When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
+
+investigate stasis field for support destroyer - use custom data like on quantum disruptor, check if you can modify timescale on projectiles, cope with modifying velocity, speed and maneuverability if not
+return customdata to quantum disruptor, alter stats to have very short duration, scale its range based on the optimal range of installed weapons
+morphic cascade - rebalances ship's armor. generates hard flux based on amount of armor regenerated. Implement emp arcs, custom AI, make sure it's unusable if the armor grid is fully balanced
+have arthr whip up a version of the capital that doesn't have canisters
+implement carrier shipsystem - generates hardflux, instantly restores some fighter replacement rate, smoke comes from bays
+strings retard
+use orange as my "high-tech bullshit" color - emp arcs, hexshields, venting, etc
+compose ship name string file
+
+Marr
+Ontos
+Helion
+Parhelion
+Excision
+
+Corona
+Beacon
+Serenity
+Absolver
+Oculus
+Patron
+Solace
+Restorer
+Salvation
+Oblivion
+
+
+
+
+
+

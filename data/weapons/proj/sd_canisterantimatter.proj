@@ -1,5 +1,5 @@
 {
-	"id":"sd_antimatterarray_proj",
+	"id":"sd_canisterantimatter_proj",
 	"specClass":"missile",
 	"missileType":"BOMB",
 	"sprite":"graphics/missiles/sd_antimattercanister_base.png",
@@ -9,7 +9,7 @@
     "center":[4,6],
     "collisionRadius":8,
 	"collisionClass":"MISSILE_NO_FF",
-	"onFireEffect":"data.shipsystems.sd_antimatterarray",
+	"onFireEffect":"data.shipsystems.sd_canisterantimatter",
 	"explosionSpec":{
 			"duration":0.15f,
 			"radius":66,
@@ -23,7 +23,7 @@
 			"particleColor":[155,100,255,255],
 			"explosionColor":[150,100,255,150],
 			"useDetailedExplosion":false,
-			"sound":"sd_antimattercanister_explosion"
+			"sound":"sd_canisterantimatter_explosion"
 	},
 	"behaviorSpec":{
 		"behavior":"PROXIMITY_FUSE",
@@ -42,7 +42,7 @@
 			"particleColor":[155,100,255,255],
 			"explosionColor":[150,100,255,150],
 			"useDetailedExplosion":false,
-			"sound":"sd_antimattercanister_explosion"
+			"sound":"sd_canisterantimatter_explosion"
 		},
 	},
 	"flameoutTime":0.5, #total time from flameout to full fadeout

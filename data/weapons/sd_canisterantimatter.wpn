@@ -1,5 +1,5 @@
 {
-	"id":"sd_antimatterarray",
+	"id":"sd_canisterantimatter",
 	"specClass":"projectile",
 	"type":"SYSTEM",
 	"size":"SMALL",
@@ -12,6 +12,6 @@
 	"barrelMode":"ALTERNATING",
 	"animationType":"NONE",
 	"interruptibleBurst":false,
-	"projectileSpecId":"sd_antimatterarray_proj",
+	"projectileSpecId":"sd_canisterantimatter_proj",
 	"fireSoundTwo":"proximity_charge_launcher_fighter_fire",
 }

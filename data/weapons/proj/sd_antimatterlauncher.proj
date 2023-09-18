@@ -22,7 +22,7 @@
 			"particleColor":[155,100,255,255],
 			"explosionColor":[150,100,255,150],
 			"useDetailedExplosion":false,
-			"sound":"sd_antimattercanister_explosion"
+			"sound":"sd_canisterantimatter_explosion"
 	},
 	"behaviorSpec":{
 		"behavior":"PROXIMITY_FUSE",
@@ -41,9 +41,10 @@
 			"particleColor":[155,100,255,255],
 			"explosionColor":[150,100,255,150],
 			"useDetailedExplosion":false,
-			"sound":"sd_antimattercanister_explosion"
+			"sound":"sd_canisterantimatter_explosion"
 		},
 	},
+	"flameoutTime":0.5, #total time from flameout to full fadeout
 	"engineSpec":{
 		"turnAcc":500,
 		"turnRate":150,

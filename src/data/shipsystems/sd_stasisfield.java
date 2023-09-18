@@ -8,7 +8,7 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 
-public class sd_pdoverdrive extends BaseShipSystemScript {
+public class sd_stasisfield extends BaseShipSystemScript {
     boolean doOnce = true;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
