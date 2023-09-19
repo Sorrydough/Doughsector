@@ -15,21 +15,24 @@ import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 
-public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISUALS WITH RANDOM VELOCITY ON PARTICLES, AND ADD EMP ARCS WHEN APPROPRIATE. MAYBE ALSO GENERATE SOFT FLUX PER CELL REBALANCED
+public class sd_morphicarmor extends BaseShipSystemScript {
 
 	final IntervalUtil interval = new IntervalUtil(0.01f, 0.1f);
-	static final float DEVIATION_PERCENT = 10;
+	static final float DEVIATION_PERCENT = 5;
 	final Color Color1 = new Color(250, 235, 215, 50);
-	final Color Color2 = new Color(250, 235, 215, 150);
-	final Color Color3 = new Color(245,85,55,225);
+//	final Color Color2 = new Color(250, 235, 215, 200);
+	final Color Color3 = new Color(245,85,55,50);
+	final Color Color4 = new Color(245,85,55,200);
+//	final Color Color5 = new Color(175,235,250,50);
+//	final Color Color6 = new Color(175,235,250,200);
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
-		ship.setJitter(id, Color1, effectLevel, 1, 0, 5);
-		ship.setJitterUnder(id, Color2, effectLevel, 10, 0, 7);
+		ship.setJitter(id, Color3, effectLevel, 1, 0, 5);
+		ship.setJitterUnder(id, Color4, effectLevel, 10, 0, 7);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -45,9 +48,9 @@ public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISU
 			for (int ix = 0; ix < grid.getGrid().length; ix++) {
 				for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
 					float currentArmor = grid.getArmorValue(ix, iy);
-					if (currentArmor > averageArmorPerCell) {
+					if (currentArmor > averageArmorPerCell && !isNumberWithinRange(currentArmor, averageArmorPerCell, DEVIATION_PERCENT)) {
 						cellsAboveAverage.add(new Vector2f(ix, iy));
-					} else if (currentArmor < averageArmorPerCell) {
+					} else if (currentArmor < averageArmorPerCell && !isNumberWithinRange(currentArmor, averageArmorPerCell, DEVIATION_PERCENT)) {
 						cellsBelowAverage.add(new Vector2f(ix, iy));
 					}
 				}
@@ -71,6 +74,7 @@ public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISU
 //			Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
 
 			//TODO: MODIFY THE VISUALS TO VARY BY THE AMOUNT OF ARMOR BEING TRANSFERRED
+			//TODO: IMPROVE VISUALS WITH RANDOM VELOCITY ON PARTICLES
 			//vfx
 			//start with an emp arc from location a to location b if they're both in bounds
 			Vector2f toSubtractLoc = (grid.getLocation((int) cellToSubtract.x, (int) cellToSubtract.y));
@@ -78,7 +82,7 @@ public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISU
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
 			if (isToAddInBounds)
-				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, Color1, Color2);
+				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, Color1, Color4);
 			//next draw smoke effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
 				drawSmokeParticles(toSubtractLoc, ship, amountToTransfer);
@@ -86,6 +90,8 @@ public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISU
 				drawSmokeParticles(toAddLoc, ship, amountToTransfer);
 			ship.syncWithArmorGridState();
 			ship.syncWeaponDecalsWithArmorDamage();
+			//TODO: GENERATE FLUX BASED ON THE AMOUNT OF ARMOR TRANSFERRED
+
 		}
 	}
 
@@ -101,13 +107,17 @@ public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISU
 
 	public static boolean isArmorGridBalanced(ArmorGridAPI grid) {
 		float averageArmor = getAverageArmorPerCell(grid);
+		float numImbalanced = 0;
 		boolean balanced = true;
 		Outer:
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
 			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
 				if (!isNumberWithinRange(grid.getArmorValue(ix, iy), averageArmor, DEVIATION_PERCENT)) {
-					balanced = false;
-					break Outer;
+					numImbalanced += 1; //need to have this for the special case where we have the entire armor grid balanced except for a single cell
+					if (numImbalanced > 1) {
+						balanced = false;
+						break Outer;
+					}
 				}
 			}
 		}
@@ -123,10 +133,10 @@ public class sd_morphicarmor extends BaseShipSystemScript { //TODO: IMPROVE VISU
 	public static void drawSmokeParticles(Vector2f loc, ShipAPI ship, float size) {
 		for (int i = 0; i < 25; i++) {
 			//smoke
-			Vector2f nebVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(10f, 40f), MathUtils.getRandomNumberInRange(-180f, 180f));
-			float randomSize2 = MathUtils.getRandomNumberInRange(20f, 32f);
-			Color steamColor = new Color(100f / 255f, 110f / 255f, 100f / 255f, 0.25f);
-			Global.getCombatEngine().addNebulaParticle(MathUtils.getRandomPointOnCircumference(loc, 5f), nebVel, randomSize2, 1.8f, 0.6f, 0.7f, MathUtils.getRandomNumberInRange(0.3f, 0.6f), steamColor);
+//			Vector2f nebVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(10f, 40f), MathUtils.getRandomNumberInRange(-180f, 180f));
+//			float randomSize2 = MathUtils.getRandomNumberInRange(20f, 32f);
+//			Color steamColor = new Color(100f / 255f, 110f / 255f, 100f / 255f, 0.25f);
+//			Global.getCombatEngine().addNebulaParticle(MathUtils.getRandomPointOnCircumference(loc, 5f), nebVel, randomSize2, 1.8f, 0.6f, 0.7f, MathUtils.getRandomNumberInRange(0.3f, 0.6f), steamColor);
 			//sparks
 			Global.getCombatEngine().addSmoothParticle(loc, ship.getVelocity(), MathUtils.getRandomNumberInRange(25f, 35f), 0.8f, 0.1f, new Color(1f, 120f / 255f, 80f / 255f, 0.25f));
 			Vector2f fastParticleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(80f, 250f), MathUtils.getRandomNumberInRange(-180f, 180f));
