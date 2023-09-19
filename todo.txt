@@ -44,10 +44,13 @@ investigate stasis field for support destroyer - use custom data like on quantum
 return customdata to quantum disruptor, alter stats to have very short duration, scale its range based on the optimal range of installed weapons
 morphic cascade - rebalances ship's armor. generates hard flux based on amount of armor regenerated. Implement emp arcs, custom AI, make sure it's unusable if the armor grid is fully balanced
 have arthr whip up a version of the capital that doesn't have canisters
-implement carrier shipsystem - generates hardflux, instantly restores some fighter replacement rate, smoke comes from bays
+implement carrier shipsystem - generates hardflux, instantly restores some fighter replacement rate, smoke comes from bays, can also restore missiles, use the restoration costs of missile autoloader
 strings retard
 use orange as my "high-tech bullshit" color - emp arcs, hexshields, venting, etc
 compose ship name string file
+lunalib compatibility
+interfere with commissioned crews and substance abuse
+change AI flags on breach SRMs to make them suck less ass
 
 Marr
 Ontos

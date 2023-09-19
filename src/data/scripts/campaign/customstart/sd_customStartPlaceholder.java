@@ -119,7 +119,7 @@ public class sd_customStartPlaceholder extends CustomStart {
 
         data.getStartingCargo().addSpecial(new SpecialItemData("sd_arsenal_package", null), 1);
 
-        // enforce normal difficulty
+        // enforce corvus mode
         data.setDifficulty("normal");
         ExerelinSetupData.getInstance().easyMode = false;
         ExerelinSetupData.getInstance().hardMode = true;

@@ -25,20 +25,6 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 
     final Logger log = Global.getLogger(sd_moonGenerator.class);
 
-    public static final List<String> ringBandTypes = new ArrayList<>();
-    static {
-        ringBandTypes.add("rings_dust0");
-        ringBandTypes.add("rings_asteroids0");
-        ringBandTypes.add("rings_ice0");
-    }
-
-     final List<String> gasGiants = new ArrayList<>(); {
-        gasGiants.add("gas_giant");
-        gasGiants.add("ice_giant");
-        gasGiants.add("US_gas_giant");
-        gasGiants.add("US_gas_giantB");
-    }
-
     final List<String> freezingPlanets = new ArrayList<>(); {
         freezingPlanets.add("frozen");
         freezingPlanets.add("frozen1");
@@ -46,10 +32,14 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         freezingPlanets.add("frozen3");
         freezingPlanets.add("cryovolcanic");
         freezingPlanets.add("toxic_cold");
-        freezingPlanets.add("US_iceA");
-        freezingPlanets.add("US_iceB");
-        freezingPlanets.add("US_blue"); //cryovolcanic
-        freezingPlanets.add("US_purple"); //methane
+        freezingPlanets.add("rocky_ice");
+        if (Global.getSettings().getModManager().isModEnabled("US")) {
+            freezingPlanets.add("US_iceA");
+            freezingPlanets.add("US_iceB");
+            freezingPlanets.add("US_green");
+            freezingPlanets.add("US_blue"); //cryovolcanic
+            freezingPlanets.add("US_purple"); //methane
+        }
     }
 
     final List<String> hotPlanets = new ArrayList<>(); {
@@ -57,9 +47,13 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         hotPlanets.add("lava_minor");
         hotPlanets.add("toxic");
         hotPlanets.add("irradiated");
-        hotPlanets.add("US_lava");
-        hotPlanets.add("US_volcanic");
-        hotPlanets.add("US_green");
+        if (Global.getSettings().getModManager().isModEnabled("US")) {
+            hotPlanets.add("US_lava");
+            hotPlanets.add("US_volcanic");
+            hotPlanets.add("US_acid");
+            hotPlanets.add("US_acidRain");
+            hotPlanets.add("US_acidWind");
+        }
     }
 
     final List<String> neutralPlanets = new ArrayList<>(); {
@@ -70,53 +64,55 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
         neutralPlanets.add("barren_castiron");
         neutralPlanets.add("barren_venuslike");
         neutralPlanets.add("rocky_metallic");
-        neutralPlanets.add("rocky_ice");
-        neutralPlanets.add("US_barrenA");
-        neutralPlanets.add("US_barrenB");
-        neutralPlanets.add("US_barrenC");
-        neutralPlanets.add("US_barrenD");
-        neutralPlanets.add("US_barrenE");
-        neutralPlanets.add("US_barrenF");
-        neutralPlanets.add("US_azure");
-        neutralPlanets.add("US_burnt");
-        neutralPlanets.add("US_dust");
-        neutralPlanets.add("US_acid");
-        neutralPlanets.add("US_acidRain");
-        neutralPlanets.add("US_acidWind");
+        if (Global.getSettings().getModManager().isModEnabled("US")) {
+            neutralPlanets.add("US_barrenA");
+            neutralPlanets.add("US_barrenB");
+            neutralPlanets.add("US_barrenC");
+            neutralPlanets.add("US_barrenD");
+            neutralPlanets.add("US_barrenE");
+            neutralPlanets.add("US_barrenF");
+            neutralPlanets.add("US_azure");
+            neutralPlanets.add("US_burnt");
+            neutralPlanets.add("US_dust");
+        }
     }
 
-    final List<String> warmHabitablePlanets = new ArrayList<>(); {
-        warmHabitablePlanets.add("arid");
+    final List<String> warmHabitablePlanets = new ArrayList<>(); { //hab offset of -1:0 or warmer
         warmHabitablePlanets.add("desert");
         warmHabitablePlanets.add("desert1");
-        warmHabitablePlanets.add("barren-desert");
-        warmHabitablePlanets.add("US_arid");
-        warmHabitablePlanets.add("US_crimson"); //bombarded lifeless
-        warmHabitablePlanets.add("US_desertA");
-        warmHabitablePlanets.add("US_desertB");
-        warmHabitablePlanets.add("US_desertC");
-        warmHabitablePlanets.add("US_red");      //crimson
-        warmHabitablePlanets.add("US_redWind");
+        if (Global.getSettings().getModManager().isModEnabled("US")) {
+            warmHabitablePlanets.add("US_lifeless");
+            warmHabitablePlanets.add("US_desertA");
+            warmHabitablePlanets.add("US_desertB");
+            warmHabitablePlanets.add("US_desertC");
+        }
     }
-    //TODO: SORT PLANETS BASED ON HAB OFFSET; -2, -1, 0, 1, 2
-    final List<String> coldHabitablePlanets = new ArrayList<>(); {
+    final List<String> coldHabitablePlanets = new ArrayList<>(); { //hab offset of 0:1 or colder
         coldHabitablePlanets.add("tundra");
-        coldHabitablePlanets.add("US_alkali");
+        coldHabitablePlanets.add("barren-desert");
+        if (Global.getSettings().getModManager().isModEnabled("US")) {
+            coldHabitablePlanets.add("US_red");      //crimson
+            coldHabitablePlanets.add("US_redWind");
+            coldHabitablePlanets.add("US_water");
+            coldHabitablePlanets.add("US_waterB");
+        }
     }
 
-    final List<String> neutralHabitablePlanets = new ArrayList<>(); {
-        neutralHabitablePlanets.addAll(coldHabitablePlanets);
-        neutralHabitablePlanets.addAll(warmHabitablePlanets);
-        neutralHabitablePlanets.add("terran-eccentric");
+    final List<String> neutralHabitablePlanets = new ArrayList<>(); {   //hab offset not fitting the other two categories, ie -1:1 or -2:1
+        //neutralHabitablePlanets.addAll(coldHabitablePlanets);           //planets requiring a hab offset of 0:0 are too strict for my simple moon generator, they can be added later
+        //neutralHabitablePlanets.addAll(warmHabitablePlanets);           //TODO: when I figure out how to check a planet's current hab offset then I can more effectively choose what to put on it
+        neutralHabitablePlanets.add("arid");
         neutralHabitablePlanets.add("water");
         neutralHabitablePlanets.add("jungle");
-        neutralHabitablePlanets.add("US_continent");
-        neutralHabitablePlanets.add("US_water");
-        neutralHabitablePlanets.add("US_waterB");
-        neutralHabitablePlanets.add("US_jungle");
-        neutralHabitablePlanets.add("US_auric");
-        neutralHabitablePlanets.add("US_auricCloudy");
-        neutralHabitablePlanets.add("US_lifelessArid");
+        if (Global.getSettings().getModManager().isModEnabled("US")) {
+            neutralHabitablePlanets.add("US_alkali");
+            neutralHabitablePlanets.add("US_jungle");
+            neutralHabitablePlanets.add("US_auric");
+            neutralHabitablePlanets.add("US_auricCloudy");
+            neutralHabitablePlanets.add("US_lifelessArid");
+            neutralHabitablePlanets.add("US_arid");
+            neutralHabitablePlanets.add("US_crimson"); //bombarded lifeless
+        }
     }
 
     //Ok so here's how we need to structure it:
@@ -139,7 +135,7 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 //    }
 
     final Random random = new Random();
-    //shamelessly stolen from soren
+    //shamelessly stolen from tomato
     final static TreeMap<Integer, String> map = new TreeMap<Integer, String>(); static {
         map.put(1000, "M");
         map.put(900, "CM");
