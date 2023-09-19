@@ -78,9 +78,9 @@ public class sd_customai extends BaseHullMod {
 //                }
 //            }
 
-            ///////////////////////////////////////////////////////////////////////
-            //FIXES SHIPS SPAMMING THEIR SQUALLS AT FRIGATES AND UNSHIELDED SHIPS//
-            ///////////////////////////////////////////////////////////////////////
+            ////////////////////////////
+            //IMPROVES SQUALL BEHAVIOR//
+            ////////////////////////////
             for (WeaponAPI weapon : ship.getAllWeapons()) {
                 switch (weapon.getType()) { //NPEs can eat my ass
                     case STATION_MODULE:

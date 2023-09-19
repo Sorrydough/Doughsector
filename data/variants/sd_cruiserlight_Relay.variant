@@ -2,11 +2,10 @@
     "displayName": "Relay",
     "goalVariant": true,
     "fluxCapacitors": 0,
-    "fluxVents": 9,
+    "fluxVents": 7,
     "hullId": "sd_cruiserlight",
     "hullMods": [
         "fluxbreakers",
-        "pointdefenseai",
         "advancedoptics",
         "ecm",
         "nav_relay"
@@ -32,12 +31,12 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "NRG03": "lrpdlaser",
-                "NRG04": "lrpdlaser",
-                "NRG05": "lrpdlaser",
-                "NRG06": "lrpdlaser",
-                "NRG07": "lrpdlaser",
-                "NRG08": "lrpdlaser"
+                "NRG03": "pdburst",
+                "NRG04": "pdburst",
+                "NRG05": "pdburst",
+                "NRG06": "pdburst",
+                "NRG07": "pdburst",
+                "NRG08": "pdburst"
             }
         },
         {

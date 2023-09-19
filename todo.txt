@@ -2,21 +2,20 @@ Ship System Stuff:
 - Configure AI threat indicators for ship systems
 - Make the AM canisters go vaguely in the direction of the nearest threat instead of being completely random
 - Write custom quantum disruptor AI
-- Figure out why the PD overdrive orb doesn't seem to rotate
 
 Misc Stuff:
 - Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
-- Description strings
+- STRINGS
 
 Aesthetic Stuff:
-- Use fade engines to color function to make them change color randomly in combat
+- Use fade engines to color function to make them change color randomly in combat - blue blinker color and orange technobullshit color
 - Implement glowmaps for blinkers and friends
 
 Generic AI Stuff:
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility
 - Figure out how to fix the issue with carriers getting stuck in a flux dissipation loop
 - Alter squall weapons.csv data - DO NOT USE VS FRIGATES, and USE VS SHIELDS?
-
+- Alter breach SRMs behavior
 Campaign Stuff:
 - Make a placeholder faction with the fleets randomly patrolling near caches
 - Add songs
@@ -45,12 +44,10 @@ return customdata to quantum disruptor, alter stats to have very short duration,
 morphic cascade - rebalances ship's armor. generates hard flux based on amount of armor regenerated. Implement emp arcs, custom AI, make sure it's unusable if the armor grid is fully balanced
 have arthr whip up a version of the capital that doesn't have canisters
 implement carrier shipsystem - generates hardflux, instantly restores some fighter replacement rate, smoke comes from bays, can also restore missiles, use the restoration costs of missile autoloader
-strings retard
 use orange as my "high-tech bullshit" color - emp arcs, hexshields, venting, etc
 compose ship name string file
 lunalib compatibility
 interfere with commissioned crews and substance abuse
-change AI flags on breach SRMs to make them suck less ass
 
 Marr
 Ontos
