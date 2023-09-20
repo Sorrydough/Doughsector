@@ -49,6 +49,8 @@ compose ship name string file
 lunalib compatibility
 interfere with commissioned crews and substance abuse
 
+modify tags on various vanilla weapons to improve AI behavior
+
 Marr
 Ontos
 Helion

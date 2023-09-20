@@ -27,7 +27,7 @@ public class sd_customai extends BaseHullMod {
         ship.addListener(new sd_aiListener(ship));
     }
 
-    boolean runOnce = false;
+    boolean runOnce = true;
     float maxRange= 0;
     final IntervalUtil timer = new IntervalUtil (0.5f, 1.5f);
 
@@ -45,12 +45,12 @@ public class sd_customai extends BaseHullMod {
             if (Global.getCombatEngine().isPaused() || ship.getShipAI() == null)
                 return;
 
-            if (!runOnce) {
+            if (runOnce) {
                 if (Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
                     Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
                 }
 
-                runOnce = true;
+                runOnce = false;
                 List<WeaponAPI> loadout = ship.getAllWeapons();
                 if (loadout != null) {
                     for (WeaponAPI w : loadout) {

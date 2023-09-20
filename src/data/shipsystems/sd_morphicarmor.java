@@ -18,13 +18,13 @@ import org.lwjgl.util.vector.Vector2f;
 public class sd_morphicarmor extends BaseShipSystemScript {
 
 	final IntervalUtil interval = new IntervalUtil(0.01f, 0.1f);
+	final boolean debug = false;
 	static final float DEVIATION_PERCENT = 5;
-	final Color Color1 = new Color(250, 235, 215, 50);
-//	final Color Color2 = new Color(250, 235, 215, 200);
-	final Color Color3 = new Color(245,85,55,50);
-	final Color Color4 = new Color(245,85,55,200);
-//	final Color Color5 = new Color(175,235,250,50);
-//	final Color Color6 = new Color(175,235,250,200);
+	final float FLUX_GEN_DIVISOR = 10;
+	final Color Color1 = new Color(250, 235, 215, 15);
+	final Color Color2 = new Color(255,120,80,255);
+	final Color Color3 = new Color(255,120,80,50);
+	final Color Color4 = new Color(255,120,80,200);
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
@@ -71,27 +71,27 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			//subtract the amount from the donating cell and add it to the recieving cell
 			ship.getArmorGrid().setArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y, ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - amountToTransfer);
 			ship.getArmorGrid().setArmorValue((int) cellToAdd.x, (int) cellToAdd.y, ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y) + amountToTransfer);
-//			Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
+			if (debug)
+				Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
 
-			//TODO: MODIFY THE VISUALS TO VARY BY THE AMOUNT OF ARMOR BEING TRANSFERRED
-			//TODO: IMPROVE VISUALS WITH RANDOM VELOCITY ON PARTICLES
-			//vfx
-			//start with an emp arc from location a to location b if they're both in bounds
+			//start vfx: draw an emp arc to the target cell if it's within bounds
 			Vector2f toSubtractLoc = (grid.getLocation((int) cellToSubtract.x, (int) cellToSubtract.y));
 			Vector2f toAddLoc = (grid.getLocation((int) cellToAdd.x, (int) cellToAdd.y));
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
 			if (isToAddInBounds)
-				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, Color1, Color4);
-			//next draw smoke effects on the cell if it's within bounds
+				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, Color1, Color2);
+			//draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
-				drawSmokeParticles(toSubtractLoc, ship, amountToTransfer);
+				drawParticles(toSubtractLoc, ship, amountToTransfer);
 			if (isToAddInBounds)
-				drawSmokeParticles(toAddLoc, ship, amountToTransfer);
+				drawParticles(toAddLoc, ship, amountToTransfer);
+			//generate flux according to shield upkeep and amount of armor hp transferred
+			if (ship.getShield() != null)
+				ship.getFluxTracker().increaseFlux(amountToTransfer * ship.getShield().getUpkeep() / FLUX_GEN_DIVISOR, true);
+			//cleanup
 			ship.syncWithArmorGridState();
 			ship.syncWeaponDecalsWithArmorDamage();
-			//TODO: GENERATE FLUX BASED ON THE AMOUNT OF ARMOR TRANSFERRED
-
 		}
 	}
 
@@ -113,8 +113,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
 			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
 				if (!isNumberWithinRange(grid.getArmorValue(ix, iy), averageArmor, DEVIATION_PERCENT)) {
-					numImbalanced += 1; //need to have this for the special case where we have the entire armor grid balanced except for a single cell
-					if (numImbalanced > 1) {
+					numImbalanced += 1; //need to have this for the special case where we have the entire armor grid balanced except for a couple cells and they become unrestoreable
+					if (numImbalanced > 2) {
 						balanced = false;
 						break Outer;
 					}
@@ -130,29 +130,34 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		return numberA <= upperBound && numberA >= lowerBound;
 	}
 
-	public static void drawSmokeParticles(Vector2f loc, ShipAPI ship, float size) {
-		for (int i = 0; i < 25; i++) {
-			//smoke
-//			Vector2f nebVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(10f, 40f), MathUtils.getRandomNumberInRange(-180f, 180f));
-//			float randomSize2 = MathUtils.getRandomNumberInRange(20f, 32f);
-//			Color steamColor = new Color(100f / 255f, 110f / 255f, 100f / 255f, 0.25f);
-//			Global.getCombatEngine().addNebulaParticle(MathUtils.getRandomPointOnCircumference(loc, 5f), nebVel, randomSize2, 1.8f, 0.6f, 0.7f, MathUtils.getRandomNumberInRange(0.3f, 0.6f), steamColor);
+	public static void drawParticles(Vector2f loc, ShipAPI ship, float size) {
+		float sizeSqrt = (float) Math.sqrt(size);
+		float particleIntensity = 0.7f + (ship.getFluxLevel() * 0.3f);
+		Color particleColor = new Color(255,120,80, (int) Math.min(155 + (ship.getFluxLevel() * 100), 255));
+		for (int i = 0; i < Math.round(sizeSqrt * 2); i++) {
 			//sparks
-			Global.getCombatEngine().addSmoothParticle(loc, ship.getVelocity(), MathUtils.getRandomNumberInRange(25f, 35f), 0.8f, 0.1f, new Color(1f, 120f / 255f, 80f / 255f, 0.25f));
-			Vector2f fastParticleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(80f, 250f), MathUtils.getRandomNumberInRange(-180f, 180f));
-			float randomSize01 = MathUtils.getRandomNumberInRange(3f, 5f);
-			Global.getCombatEngine().addSmoothParticle(MathUtils.getRandomPointOnCircumference(loc, 4f), fastParticleVel, randomSize01, 0.8f, MathUtils.getRandomNumberInRange(0.2f, 0.25f), new Color(1f, 120f / 255f, 80f / 255f, 0.25f));
-			Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(35f, 125f), MathUtils.getRandomNumberInRange(-120f, 120f));
-			float randomSize1 = MathUtils.getRandomNumberInRange(3f, 5f);
-			Global.getCombatEngine().addSmoothParticle(MathUtils.getRandomPointOnCircumference(loc, 4f), particleVel, randomSize1, 0.8f, MathUtils.getRandomNumberInRange(0.35f, 0.5f), new Color(1f, 120f / 255f, 80f / 255f, 0.25f));
+			float particleSize = MathUtils.getRandomNumberInRange(sizeSqrt, sizeSqrt * 2);
+			float particleDuration = MathUtils.getRandomNumberInRange(sizeSqrt / 100, sizeSqrt / 50);
+			Vector2f particleLoc = MathUtils.getRandomPointOnCircumference(loc, sizeSqrt);
+			Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(sizeSqrt, size), MathUtils.getRandomNumberInRange(-180f, 180f));
+			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, particleIntensity, particleDuration, particleColor);
 		}
 	}
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {
 		if (index == 0) {
-			return new StatusData("Rebalancing armor", false); //TODO: CUSTOM READINESS/STATUS INDICATORS
+			return new StatusData("Rebalancing armor", false);
 		}
 		return null;
+	}
+
+	@Override
+	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
+		if (system.isOutOfAmmo() || system.getState() != ShipSystemAPI.SystemState.IDLE)
+			return null;
+		if (isArmorGridBalanced(ship.getArmorGrid()))
+			return "ARMOR BALANCED";
+		return "READY";
 	}
 
 	@Override
