@@ -19,7 +19,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	final static boolean debug = false;
 	final IntervalUtil interval = new IntervalUtil(0.02f, 0.2f);
 	static final float DEVIATION_PERCENT = 1;
-	final float FLUX_GEN_DIVISOR = 8;
+	final float FLUX_GEN_DIVISOR = 15;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
@@ -66,7 +66,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
 			if (isToAddInBounds)
-				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, new Color(255,120,80,255), new Color(250, 235, 215, 15));
+				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, new Color(255,120,80,100), new Color(250, 235, 215, 50));
 			//draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
 				drawParticles(toSubtractLoc, ship, amountToTransfer);
@@ -74,7 +74,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 				drawParticles(toAddLoc, ship, amountToTransfer);
 			//generate flux according to shield upkeep and amount of armor hp transferred
 			if (ship.getShield() != null)
-				ship.getFluxTracker().increaseFlux(amountToTransfer * ship.getShield().getUpkeep() / FLUX_GEN_DIVISOR, true);
+				ship.getFluxTracker().increaseFlux(amountToTransfer * (2 + (ship.getShield().getUpkeep() / FLUX_GEN_DIVISOR)), true);
 			//cleanup
 			ship.syncWithArmorGridState();
 			ship.syncWeaponDecalsWithArmorDamage();

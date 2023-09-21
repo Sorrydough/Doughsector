@@ -43,13 +43,13 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
 
             //We want the system off if:
             //1. Our flux level is too high
-            desire -= (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 100);
+            desire -= (ship.getFluxLevel() * 150 + ship.getHardFluxLevel() * 100);
 
             //TODO: CURRENTLY THIS MAKES THE AI NOT WANT TO USE THE SYSTEM IF ITS FLUX IS HIGH AND THE ARMOR ISN'T VERY DAMAGED, WHICH IS THE REVERSE OF WHAT I WANT
-            //I WANT IT TO USE THE SYSTEM MORE LIBERALLY IF ITS ARMOR HAS ONLY BEEN CHIPPED, TO KEEP IT TOPPED UP
-            
+            //I WANT IT TO USE THE SYSTEM MORE LIBERALLY IF ITS ARMOR HAS ONLY BEEN CHIPPED, TO KEEP IT TOPPED UP, WE CAN CHECK THIS BY LOOKING AT THE NUMBER OF BELOW AVERAGE CELLS
+
             if (debug)
-                Console.showMessage("Total: "+ desire + " Pos: "+ (imbalancedBelow.size() * 10) +" Neg: "+ (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 100));
+                Console.showMessage("Total: "+ desire + " Pos: "+ (imbalancedBelow.size() * 10) +" Neg: "+ (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 150));
 
             if (desire >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();
