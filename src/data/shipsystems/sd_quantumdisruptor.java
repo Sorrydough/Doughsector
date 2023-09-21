@@ -12,6 +12,7 @@ import org.lazywizard.lazylib.MathUtils;
 
 public class sd_quantumdisruptor extends BaseShipSystemScript {
 	static final float DISRUPTION_RANGE = 1000;
+	final float DISRUPTION_DURATION = 0.5f;
 	
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
@@ -28,7 +29,7 @@ public class sd_quantumdisruptor extends BaseShipSystemScript {
 
 		//overload the target, note we check effectLevel and not for active state because the system doesn't have an active duration
 		if (ship.getSystem().getEffectLevel() == 1) {
-			ship.getShipTarget().getFluxTracker().beginOverloadWithTotalBaseDuration(1); //<<- INPUT DISRUPTION DURATION HERE
+			ship.getShipTarget().getFluxTracker().beginOverloadWithTotalBaseDuration(DISRUPTION_DURATION);
 			ship.getShipTarget().getFluxTracker().playOverloadSound();
 			ship.getShipTarget().getFluxTracker().showOverloadFloatyIfNeeded("System Disruption!", new Color(250, 235, 215,155), 4f, true);
 		}

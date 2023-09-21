@@ -27,7 +27,7 @@
 		"sd_ghostbusters":[{"file":"sd_ghostbusters.ogg","source":"sounds/music/","volume":0.35,"randomStart":false}]
 	},
 	"system_morphicarmor":[
-		{"file":"sounds/sfx_systems/quantum_disruptor_oneshot.ogg","pitch":0.6,"volume":0.3},
+		{"file":"sounds/sfx_systems/damper_field_activate.ogg","pitch":0.8,"volume":0.4},
 	],
 	"system_morphicarmor_loop":[
 		{"file":"sounds/sfx_systems/damper_field_loop.ogg","pitch":0.6,"volume":0.7},

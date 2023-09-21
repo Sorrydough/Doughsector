@@ -4,7 +4,7 @@
 	"author":"Sorrydough",
 	"version":"69",
 	"description":"Lol quirky self-insert faction",
-    "gameVersion": "0.96a-RC7",
+    "gameVersion": "0.96",
   	"jars":["jars/doughsector.jar"],
     "dependencies": [
         {

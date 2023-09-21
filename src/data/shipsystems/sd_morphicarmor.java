@@ -17,7 +17,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class sd_morphicarmor extends BaseShipSystemScript {
 	final static boolean debug = false;
-	final IntervalUtil interval = new IntervalUtil(0.02f, 0.2f);
+	final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
 	static final float DEVIATION_PERCENT = 1;
 	final float FLUX_GEN_DIVISOR = 15;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
@@ -33,7 +33,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 
 		ship.setJitter(id, new Color(255,120,80,50), effectLevel, 1, 0, 5);
-		ship.setJitterUnder(id, new Color(255,120,80,200), effectLevel, 10, 0, 7);
+		ship.setJitterUnder(id, new Color(255,120,80,200), effectLevel, 10, 0, 5);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -65,16 +65,20 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			Vector2f toAddLoc = (grid.getLocation((int) cellToAdd.x, (int) cellToAdd.y));
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
-			if (isToAddInBounds)
+			if (isToAddInBounds) //TODO: CHANGE ARC THICKNESS BASED ON HULL SIZE OR ARMOR REPAIRED OR SOMETHING IDK
 				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, new Color(255,120,80,100), new Color(250, 235, 215, 50));
 			//draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
 				drawParticles(toSubtractLoc, ship, amountToTransfer);
 			if (isToAddInBounds)
 				drawParticles(toAddLoc, ship, amountToTransfer);
+
 			//generate flux according to shield upkeep and amount of armor hp transferred
+			float extraFlux = 0;
 			if (ship.getShield() != null)
-				ship.getFluxTracker().increaseFlux(amountToTransfer * (2 + (ship.getShield().getUpkeep() / FLUX_GEN_DIVISOR)), true);
+				extraFlux = ship.getShield().getUpkeep() / FLUX_GEN_DIVISOR;
+			ship.getFluxTracker().increaseFlux(amountToTransfer * (2 + extraFlux), true);
+
 			//cleanup
 			ship.syncWithArmorGridState();
 			ship.syncWeaponDecalsWithArmorDamage();
@@ -148,6 +152,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 		if (system.isOutOfAmmo() || system.getState() != ShipSystemAPI.SystemState.IDLE)
 			return null;
+		if (getAverageArmorPerCell(ship.getArmorGrid()) < ship.getArmorGrid().getMaxArmorInCell() / 10)
+			return "ARMOR DESTROYED";
 		if (isArmorGridBalanced(ship.getArmorGrid()))
 			return "ARMOR BALANCED";
 		return "READY";

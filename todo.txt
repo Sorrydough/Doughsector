@@ -39,7 +39,7 @@ Post-Release Stuff:
 - Make sure the forum download link is hidden behind a simple riddle
 - When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
 
-investigate stasis field for support destroyer - use custom data like on quantum disruptor, check if you can modify timescale on projectiles, cope with modifying velocity, speed and maneuverability if not
+investigate stasis field for support destroyer - use custom data like on quantum disruptor, check if you can modify timescale on projectiles, cope with modifying velocity speed and maneuverability if not
 return customdata to quantum disruptor, alter stats to have very short duration, scale its range based on the optimal range of installed weapons
 morphic cascade - rebalances ship's armor. generates hard flux based on amount of armor regenerated. Implement emp arcs, custom AI, make sure it's unusable if the armor grid is fully balanced
 have arthr whip up a version of the capital that doesn't have canisters
@@ -48,6 +48,7 @@ use orange as my "high-tech bullshit" color - emp arcs, hexshields, venting, etc
 compose ship name string file
 lunalib compatibility
 interfere with commissioned crews and substance abuse
+recolor everything to use orange as my techno bullshit color
 
 modify tags on various vanilla weapons to improve AI behavior
 
