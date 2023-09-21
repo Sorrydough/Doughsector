@@ -19,7 +19,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 
 	final IntervalUtil interval = new IntervalUtil(0.01f, 0.1f);
 	final static boolean debug = false;
-	static final float DEVIATION_PERCENT = 5;
+	static final float DEVIATION_PERCENT = 1;
 	final float FLUX_GEN_DIVISOR = 10;
 	final Color Color1 = new Color(250, 235, 215, 15);
 	final Color Color2 = new Color(255,120,80,255);
@@ -32,6 +32,11 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		ArmorGridAPI grid = ship.getArmorGrid();
+		//if the armor grid is balanced we should turn off the system
+		if (isArmorGridBalanced(grid)) {
+			ship.getSystem().deactivate();
+			return;
+		}
 
 		ship.setJitter(id, Color3, effectLevel, 1, 0, 5);
 		ship.setJitterUnder(id, Color4, effectLevel, 10, 0, 7);
@@ -39,16 +44,11 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
 			//while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
-			//if the armor grid is balanced we should turn off the system
-			if (isArmorGridBalanced(grid)) {
-				ship.getSystem().deactivate();
-				return;
-			}
 			//firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
 			float averageArmorPerCell = getAverageArmorPerCell(grid);
 			//next we create a list of cells above average, and another list of cells below average
-			List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, averageArmorPerCell, true);
-			List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, averageArmorPerCell, false);
+			List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, true);
+			List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, false);
 			//now that we have a list of cells above and below the average, we need to randomly choose one of the former and move the delta to the latter
 			Vector2f cellToSubtract = cellsAboveAverage.get(new Random().nextInt(cellsAboveAverage.size()));
 			Vector2f cellToAdd = cellsBelowAverage.get(new Random().nextInt(cellsBelowAverage.size()));
@@ -87,19 +87,20 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 	}
 
-	public static List<Vector2f> getCellsAroundAverage(ArmorGridAPI grid, float average, boolean above) {
+	public static List<Vector2f> getCellsAroundAverage(ArmorGridAPI grid, boolean above) {
 		List<Vector2f> cells = new ArrayList<>();
+		float average = getAverageArmorPerCell(grid);
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
 			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
 				float currentArmor = grid.getArmorValue(ix, iy);
-				boolean isAboveAverage = currentArmor > average;
-
 				float lowerBound = average - (average * (DEVIATION_PERCENT / 100));
 				float upperBound = average + (average * (DEVIATION_PERCENT / 100));
 				boolean isWithinRange = currentArmor <= upperBound && currentArmor >= lowerBound;
+				boolean isAboveAverage = currentArmor > average;
 
-				if ((above && isAboveAverage && isWithinRange) || (!above && !isAboveAverage && isWithinRange))
+				if ((above && isAboveAverage && !isWithinRange) || (!above && !isAboveAverage && !isWithinRange)) {
 					cells.add(new Vector2f(ix, iy));
+				}
 			}
 		}
 		return cells;
@@ -118,8 +119,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	public static boolean isArmorGridBalanced(ArmorGridAPI grid) {
 		float averageArmorPerCell = getAverageArmorPerCell(grid);
 		boolean balanced = false;
-		List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, averageArmorPerCell, true);
-		List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, averageArmorPerCell, false);
+		List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, true);
+		List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, false);
 
 		if (cellsAboveAverage.size() == 0 || cellsBelowAverage.size() == 0)
 			balanced = true;

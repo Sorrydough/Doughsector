@@ -1,18 +1,14 @@
 package data.shipsystems.ai;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
+import data.shipsystems.sd_morphicarmor;
 import org.lazywizard.console.Console;
-import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import data.shipsystems.sd_morphicarmor.*;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags.*;
 
 public class sd_morphicarmorAI implements ShipSystemAIScript {
 
@@ -31,51 +27,27 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
         this.engine = engine;
     }
 
+    boolean debug = false;
+
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
-
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            //Utilities we need:
-            //1. Calculate the maximum hit that the ship's armor can reduce
-
-            //2. We need to know whether damage is incoming from too many directions
-
-
-
-
+            //the system automatically shuts off when it does nothing, so we can just return in that case. Although I may change it.
+            //TODO: MAYBE HAVE SYSTEM GENERATE FLAT AMOUNT OF PASSIVE FLUX AND NOT AUTOMATICALLY TURN OFF TO AVOID PLAYER ANNOYANCE
+            if (sd_morphicarmor.isArmorGridBalanced(ship.getArmorGrid()) || ship.getFluxTracker().isOverloadedOrVenting())
+                return;
             //We want the system on if:
-            //1. We can flicker the incoming damage
+            //1. Our armor grid isn't balanced
+            List<Vector2f> imbalancedBelow = sd_morphicarmor.getCellsAroundAverage(ship.getArmorGrid(), false);
+            desire += imbalancedBelow.size() * 10;
 
-            //2. Incoming damage from multiple directions
+            //We want the system off if:
+            //1. Our flux level is too high
+            desire -= (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 100);
 
-
-
-
-
-            //3. Mines are buttfucking us
-            if (ship.getAIFlags().hasFlag(HAS_INCOMING_DAMAGE)) {
-                for (MissileAPI missile : AIUtils.getNearbyEnemyMissiles(ship, 500)) {
-                    if (!ship.getShield().isWithinArc(missile.getLocation()) && missile.isMine())
-                        desire += 100;
-                }
-            }
-
-            //4. Our armor grid is dramatically imbalanced
-
-
-
-            //Temp stopgap: If we need help, activate the system
-            if (ship.getAIFlags().hasFlag(NEEDS_HELP))
-                desire += 100;
-
-            //Temp stopgap: If we're fluxed out, turn it on
-//            if (ship.getHardFluxLevel() >= 0.8)
-//                desire += 100;
-
-            //communicate to the ship that it shouldn't use shields while at high flux because it's very important to not get overloaded
-            if (ship.getSystem().isActive() && ship.getHardFluxLevel() >= 0.9)
-                ship.getAIFlags().setFlag(DO_NOT_USE_SHIELDS);
+            if (debug) //TODO: ADD SOME SORT OF FUNCTIONALITY THAT MAKES THE AI WANT TO USE THE SYSTEM RIGHT AWAY IF ONLY A COUPLE CELLS ARE DAMAGED
+                Console.showMessage("Total: "+ desire + " Pos: "+ (imbalancedBelow.size() * 10) +" Neg: "+ (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 100));
 
             if (desire >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();
