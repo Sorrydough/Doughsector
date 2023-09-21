@@ -16,16 +16,10 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 public class sd_morphicarmor extends BaseShipSystemScript {
-
-	final IntervalUtil interval = new IntervalUtil(0.01f, 0.1f);
 	final static boolean debug = false;
+	final IntervalUtil interval = new IntervalUtil(0.02f, 0.2f);
 	static final float DEVIATION_PERCENT = 1;
-	final float FLUX_GEN_DIVISOR = 10;
-	final Color Color1 = new Color(250, 235, 215, 15);
-	final Color Color2 = new Color(255,120,80,255);
-	final Color Color3 = new Color(255,120,80,50);
-	final Color Color4 = new Color(255,120,80,200);
-
+	final float FLUX_GEN_DIVISOR = 8;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
@@ -38,8 +32,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			return;
 		}
 
-		ship.setJitter(id, Color3, effectLevel, 1, 0, 5);
-		ship.setJitterUnder(id, Color4, effectLevel, 10, 0, 7);
+		ship.setJitter(id, new Color(255,120,80,50), effectLevel, 1, 0, 5);
+		ship.setJitterUnder(id, new Color(255,120,80,200), effectLevel, 10, 0, 7);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -72,7 +66,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
 			if (isToAddInBounds)
-				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, Color1, Color2);
+				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, new Color(255,120,80,255), new Color(250, 235, 215, 15));
 			//draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
 				drawParticles(toSubtractLoc, ship, amountToTransfer);
@@ -117,7 +111,6 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	}
 
 	public static boolean isArmorGridBalanced(ArmorGridAPI grid) {
-		float averageArmorPerCell = getAverageArmorPerCell(grid);
 		boolean balanced = false;
 		List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, true);
 		List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, false);
@@ -132,12 +125,12 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		float sizeSqrt = (float) Math.sqrt(size);
 		float particleIntensity = 0.7f + Math.min(ship.getFluxLevel() * 0.3f, 0.3f);
 		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));
-		for (int i = 0; i < Math.round(sizeSqrt * 4); i++) {
+		for (int i = 0; i < (1 + Math.round(sizeSqrt * 3)); i++) {
 			//sparks
-			float particleSize = MathUtils.getRandomNumberInRange(sizeSqrt * 2, sizeSqrt * 4);
+			float particleSize = 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt * 2, sizeSqrt * 4);
 			float particleDuration = MathUtils.getRandomNumberInRange(1, 2);
 			Vector2f particleLoc = MathUtils.getRandomPointOnCircumference(loc, sizeSqrt);
-			Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(sizeSqrt, size), MathUtils.getRandomNumberInRange(-180f, 180f));
+			Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt, size), MathUtils.getRandomNumberInRange(-180f, 180f));
 			if (debug)
 				Console.showMessage("Transferred: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
 			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, particleIntensity, particleDuration, particleColor);
