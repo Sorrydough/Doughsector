@@ -13,6 +13,7 @@
   "builtInMods": [
     "sd_customai",
     "sd_beamintegration",
+    "delicate",
     "sd_crampedracks",
     "ecm"
   ],

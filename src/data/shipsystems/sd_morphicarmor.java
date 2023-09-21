@@ -31,33 +31,24 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			return;
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
+		ArmorGridAPI grid = ship.getArmorGrid();
+
 		ship.setJitter(id, Color3, effectLevel, 1, 0, 5);
 		ship.setJitterUnder(id, Color4, effectLevel, 10, 0, 7);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
 			//while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
-			//firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
-			List<Vector2f> cellsAboveAverage = new ArrayList<>();
-			List<Vector2f> cellsBelowAverage = new ArrayList<>();
-			ArmorGridAPI grid = ship.getArmorGrid();
-			if (isArmorGridBalanced(grid))
+			//if the armor grid is balanced we should turn off the system
+			if (isArmorGridBalanced(grid)) {
 				ship.getSystem().deactivate();
+				return;
+			}
+			//firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
 			float averageArmorPerCell = getAverageArmorPerCell(grid);
 			//next we create a list of cells above average, and another list of cells below average
-			for (int ix = 0; ix < grid.getGrid().length; ix++) {
-				for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
-					float currentArmor = grid.getArmorValue(ix, iy);
-					if (currentArmor > averageArmorPerCell && !isNumberWithinRange(currentArmor, averageArmorPerCell, DEVIATION_PERCENT)) {
-						cellsAboveAverage.add(new Vector2f(ix, iy));
-					} else if (currentArmor < averageArmorPerCell && !isNumberWithinRange(currentArmor, averageArmorPerCell, DEVIATION_PERCENT)) {
-						cellsBelowAverage.add(new Vector2f(ix, iy));
-					}
-				}
-			}
-
-			if (cellsAboveAverage.size() == 0 || cellsBelowAverage.size() == 0)
-				return;
+			List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, averageArmorPerCell, true);
+			List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, averageArmorPerCell, false);
 			//now that we have a list of cells above and below the average, we need to randomly choose one of the former and move the delta to the latter
 			Vector2f cellToSubtract = cellsAboveAverage.get(new Random().nextInt(cellsAboveAverage.size()));
 			Vector2f cellToAdd = cellsBelowAverage.get(new Random().nextInt(cellsBelowAverage.size()));
@@ -67,6 +58,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			float amountAbleToTransfer = (ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - averageArmorPerCell);
 			if (amountAbleToTransfer <= 0)
 				return;
+
 			float amountToTransfer = Math.min(amountNeededToTransfer, amountAbleToTransfer);
 			//subtract the amount from the donating cell and add it to the recieving cell
 			ship.getArmorGrid().setArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y, ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - amountToTransfer);
@@ -95,6 +87,24 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 	}
 
+	public static List<Vector2f> getCellsAroundAverage(ArmorGridAPI grid, float average, boolean above) {
+		List<Vector2f> cells = new ArrayList<>();
+		for (int ix = 0; ix < grid.getGrid().length; ix++) {
+			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
+				float currentArmor = grid.getArmorValue(ix, iy);
+				boolean isAboveAverage = currentArmor > average;
+
+				float lowerBound = average - (average * (DEVIATION_PERCENT / 100));
+				float upperBound = average + (average * (DEVIATION_PERCENT / 100));
+				boolean isWithinRange = currentArmor <= upperBound && currentArmor >= lowerBound;
+
+				if ((above && isAboveAverage && isWithinRange) || (!above && !isAboveAverage && isWithinRange))
+					cells.add(new Vector2f(ix, iy));
+			}
+		}
+		return cells;
+	}
+
 	public static float getAverageArmorPerCell(ArmorGridAPI grid) {
 		float armor = 0f;
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
@@ -106,30 +116,15 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	}
 
 	public static boolean isArmorGridBalanced(ArmorGridAPI grid) {
-		float averageArmor = getAverageArmorPerCell(grid);
-		float numImbalanced = 0;
-		boolean balanced = true;
-		Outer:
-		for (int ix = 0; ix < grid.getGrid().length; ix++) {
-			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
-				if (!isNumberWithinRange(grid.getArmorValue(ix, iy), averageArmor, DEVIATION_PERCENT)) {
-					numImbalanced += 1; //need to debug this, the system gets stuck on when the ship takes chip damage
-					if (numImbalanced > 3) {
-						balanced = false;
-						break Outer;
-					}
-				}
-			}
-		}
+		float averageArmorPerCell = getAverageArmorPerCell(grid);
+		boolean balanced = false;
+		List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, averageArmorPerCell, true);
+		List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, averageArmorPerCell, false);
+
+		if (cellsAboveAverage.size() == 0 || cellsBelowAverage.size() == 0)
+			balanced = true;
+
 		return balanced;
-	}
-
-
-	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
-	public static boolean isNumberWithinRange(float numberA, float numberB, float deviation) {
-		float lowerBound = numberB - (numberB * (deviation / 100));
-		float upperBound = numberB + (numberB * (deviation / 100));
-		return numberA <= upperBound && numberA >= lowerBound;
 	}
 
 	public static void drawParticles(Vector2f loc, ShipAPI ship, float size) {

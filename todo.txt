@@ -51,6 +51,8 @@ interfere with commissioned crews and substance abuse
 
 modify tags on various vanilla weapons to improve AI behavior
 
+move custom AI to not be a hullmod anymore
+
 Marr
 Ontos
 Helion
@@ -68,7 +70,7 @@ Restorer
 Salvation
 Oblivion
 
-
+in my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 10 minutes
 
 
 
