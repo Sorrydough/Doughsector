@@ -31,25 +31,23 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            //the system automatically shuts off when it does nothing, so we can just return in that case. Although I may change it.
-            //TODO: MAYBE HAVE SYSTEM GENERATE FLAT AMOUNT OF PASSIVE FLUX AND NOT AUTOMATICALLY TURN OFF TO AVOID PLAYER ANNOYANCE
+            //the system automatically shuts off when it does nothing, so we can just return in that case
             if (sd_morphicarmor.isArmorGridBalanced(ship.getArmorGrid()) || ship.getFluxTracker().isOverloadedOrVenting()
                     || ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE) || sd_morphicarmor.getCellsAroundAverage(ship.getArmorGrid(), true).size() == 0)
                 return;
             //We want the system on if:
             //1. Our armor grid isn't balanced
-            List<Vector2f> imbalancedBelow = sd_morphicarmor.getCellsAroundAverage(ship.getArmorGrid(), false);
-            desire += imbalancedBelow.size() * 10;
+            desire += 150;
 
             //We want the system off if:
             //1. Our flux level is too high
-            desire -= (ship.getFluxLevel() * 150 + ship.getHardFluxLevel() * 100);
-
-            //TODO: CURRENTLY THIS MAKES THE AI NOT WANT TO USE THE SYSTEM IF ITS FLUX IS HIGH AND THE ARMOR ISN'T VERY DAMAGED, WHICH IS THE REVERSE OF WHAT I WANT
-            //I WANT IT TO USE THE SYSTEM MORE LIBERALLY IF ITS ARMOR HAS ONLY BEEN CHIPPED, TO KEEP IT TOPPED UP, WE CAN CHECK THIS BY LOOKING AT THE NUMBER OF BELOW AVERAGE CELLS
+            desire -= (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 100);
+            //2. We're at risk of overloading ourselves (or getting overloaded)
+            if (ship.getFluxLevel() >= 0.85)
+                desire -= 50;
 
             if (debug)
-                Console.showMessage("Total: "+ desire + " Pos: "+ (imbalancedBelow.size() * 10) +" Neg: "+ (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 150));
+                Console.showMessage("Desire: "+ desire);
 
             if (desire >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();

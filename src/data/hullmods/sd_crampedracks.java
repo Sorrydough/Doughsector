@@ -8,7 +8,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class sd_crampedracks extends BaseHullMod
 {
-    public static final float PENALTY = 0.67f;
+    public static final float PENALTY = 0.75f;
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id)
@@ -23,7 +23,7 @@ public class sd_crampedracks extends BaseHullMod
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("This ship's mixed hardpoints are strapped for space, reducing their missile ammunition capacity by 33%% rounded up.", 5f, Misc.getNegativeHighlightColor(), "33%");
+        tooltip.addPara("This ship's mixed hardpoints are strapped for space, reducing their missile ammunition capacity by 25%% rounded up.", 5f, Misc.getNegativeHighlightColor(), "25%");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

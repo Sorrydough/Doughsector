@@ -5,7 +5,7 @@ Ship System Stuff:
 
 Misc Stuff:
 - Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
-- STRINGS
+- STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 
 Aesthetic Stuff:
 - Use fade engines to color function to make them change color randomly in combat - blue blinker color and orange technobullshit color
@@ -48,11 +48,17 @@ use orange as my "high-tech bullshit" color - emp arcs, hexshields, venting, etc
 compose ship name string file
 lunalib compatibility
 interfere with commissioned crews and substance abuse
-recolor everything to use orange as my techno bullshit color
 
 modify tags on various vanilla weapons to improve AI behavior
 
 move custom AI to not be a hullmod anymore
+
+use alex's temporal shell color as my "positive effect" color
+use my shade of orange as my "negative effect" color
+make heavy cruiser variant not giga ass
+figure out some way to make my ships stop trying to rotate their armor
+make morphic armor blast a cruiser's flux ass slightly less
+make a hullmod that increases dissiaption while venting as a % of your capacity
 
 Marr
 Ontos
