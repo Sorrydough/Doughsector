@@ -14,6 +14,7 @@ import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.dark.shaders.distortion.*;
 
 public class sd_morphicarmor extends BaseShipSystemScript {
 	final static boolean debug = false;
@@ -40,7 +41,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 
 		ship.setJitter(id, JITTER_COLOR, effectLevel, 1, 0, 5);
-		ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
+		//ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -134,7 +135,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 
 	public static void drawParticles(Vector2f loc, ShipAPI ship, float size) {
 		float sizeSqrt = (float) Math.sqrt(size);
-		float particleIntensity = 0.7f + Math.min(ship.getFluxLevel() * 0.3f, 0.3f);
+		float intensity = 0.6f + Math.min((0.5f + ship.getFluxLevel()) * 0.4f, 0.4f);
 		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));
 		for (int i = 0; i < (1 + Math.round(sizeSqrt * 3)); i++) {
 			//sparks
@@ -144,8 +145,16 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt, size), MathUtils.getRandomNumberInRange(-180f, 180f));
 			if (debug)
 				Console.showMessage("Transferred: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
-			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, particleIntensity, particleDuration, particleColor);
+			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, intensity, particleDuration, particleColor);
 		}
+		//draw a distortion wave
+		RippleDistortion ripple = new RippleDistortion();
+		ripple.setLocation(loc);
+		ripple.setSize(50 + size);
+		ripple.setVelocity(ship.getVelocity());
+		ripple.setLifetime(intensity);
+		ripple.setIntensity(intensity);
+		DistortionShader.addDistortion(ripple);
 	}
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {
