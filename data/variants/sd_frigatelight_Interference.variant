@@ -1,11 +1,10 @@
 {
     "displayName": "Interference",
     "goalVariant": true,
-    "fluxCapacitors": 5,
+    "fluxCapacitors": 8,
     "fluxVents": 4,
     "hullId": "sd_frigatelight",
     "hullMods": [
-        "fluxbreakers",
         "advancedoptics",
         "ecm"
     ],

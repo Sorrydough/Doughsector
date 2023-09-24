@@ -1,26 +1,25 @@
 {
-    "displayName": "Attack",
+    "displayName": "Buster",
     "goalVariant": true,
-    "fluxCapacitors": 30,
-    "fluxVents": 3,
+    "fluxCapacitors": 12,
+    "fluxVents": 30,
     "hullId": "sd_cruiserheavy",
     "hullMods": [
         "magazines",
-        "fluxbreakers",
-        "high_scatter_amp",
-        "unstable_injector"
+        "autorepair",
+        "advancedoptics"
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "sd_cruiserheavy_Attack",
+    "variantId": "sd_cruiserheavy_Buster",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "ALTERNATING",
             "weapons": {
-                "NRG02": "gravitonbeam",
-                "NRG03": "gravitonbeam",
-                "NRG04": "gravitonbeam"
+                "NRG02": "phasebeam",
+                "NRG03": "phasebeam",
+                "NRG04": "phasebeam"
             }
         },
         {

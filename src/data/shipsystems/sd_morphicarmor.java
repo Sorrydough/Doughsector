@@ -83,7 +83,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			//generate flux according to shield upkeep and amount of armor hp transferred
 			float extraFlux = 0;
 			if (ship.getShield() != null)
-				extraFlux = ship.getShield().getUpkeep() / FLUX_GEN_DIVISOR;
+				extraFlux = (float) Math.sqrt(ship.getShield().getUpkeep()) / 2;
 			ship.getFluxTracker().increaseFlux(amountToTransfer * (2 + extraFlux), true);
 
 			//cleanup

@@ -17,6 +17,8 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
     float desire;
     final IntervalUtil interval = new IntervalUtil(0.5f, 1f);
 
+    final float DEVIATION_PERCENT = 1;
+
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;
@@ -43,7 +45,10 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             //1. Our flux level is too high
             desire -= (ship.getFluxLevel() * 100 + ship.getHardFluxLevel() * 100);
             //2. We're at risk of overloading ourselves (or getting overloaded)
-            if (ship.getFluxLevel() >= 0.85)
+            if (ship.getFluxLevel() >= 0.85) //&& ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)
+                desire -= 50;
+            //3. We could dissipate hardflux
+            if (ship.getHardFluxLevel() == ship.getFluxLevel()) //TODO: GIVE IT A LITTLE DEVIATION TOLERANCE
                 desire -= 50;
 
             if (debug)

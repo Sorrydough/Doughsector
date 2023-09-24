@@ -59,7 +59,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         BLUFLAGSHIP.setCaptain(BLUADMIRAL);
 
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
-        FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Attack", FleetMemberType.SHIP, "Radial Impulse", true);
+        FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Buster", FleetMemberType.SHIP, "Radial Impulse", true);
         api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Relay", FleetMemberType.SHIP, "Shrivelled Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Strike", FleetMemberType.SHIP, "Galactic Cloud", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);

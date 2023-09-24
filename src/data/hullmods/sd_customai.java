@@ -134,8 +134,8 @@ public class sd_customai extends BaseHullMod {
             }
 
             /////////////////////////////////////
-            //FIXES BATTLECARRIERS RUNNING AWAY// IF OUR FIGHTERS ARE BEING AGGRESSIVE THEN WE WANT TO BE AGGRESSIVE
-            ///////////////////////////////////// TODO: SWAP CAPTAIN TO AGGRESSIVE AND CHECK IF THIS CODE IS STILL NECESSARY
+            //FIXES BATTLECARRIERS RUNNING AWAY// THERE'S AN AI BUG, AND WE NEED TO FIX IT BY TELLING THE CARRIER OT RECALL ITS FIGHTERS IN SPECIFIC CIRCUMSTANCE TO FIX IT
+            ///////////////////////////////////// TODO: THIS
             if (ship.hasLaunchBays() && ship.getVariant().getHints().contains(ShipHullSpecAPI.ShipTypeHints.COMBAT))
                 if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
                     ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
