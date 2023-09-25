@@ -128,17 +128,17 @@ public class sd_customai extends BaseHullMod {
             ////////////////////////////
             //FIXES SUICIDING FIGHTERS// IF OUR REPLACEMENT RATE SUCKS THEN PRESERVING IT SHOULD BE OUR TOP PRIORITY
             //////////////////////////// TODO: FIGURE OUT WHY THIS JUST DOESN'T WORK, AND FIGURE OUT WHY IT DOESN'T NPE
-            if (ship.getSharedFighterReplacementRate() < 0.85) {
+            if (ship.hasLaunchBays() && ship.getSharedFighterReplacementRate() < 0.85) {
                 ship.setPullBackFighters(true);
                 ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
             }
 
             /////////////////////////////////////
             //FIXES BATTLECARRIERS RUNNING AWAY// THERE'S AN AI BUG, AND WE NEED TO FIX IT BY TELLING THE CARRIER OT RECALL ITS FIGHTERS IN SPECIFIC CIRCUMSTANCE TO FIX IT
-            ///////////////////////////////////// TODO: THIS
-            if (ship.hasLaunchBays() && ship.getVariant().getHints().contains(ShipHullSpecAPI.ShipTypeHints.COMBAT))
-                if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
-                    ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
+            ///////////////////////////////////// TODO: DEBUG WHY THIS DOESN'T WORK, ALSO ALEX FIXED IT NEXT UPDATE SO I CAN REMOVE IT LATER
+//            if (ship.hasLaunchBays() && ship.getVariant().getHints().contains(ShipHullSpecAPI.ShipTypeHints.COMBAT))
+//                if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
+//                    ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
 
             /////////////////////////////////////////////////
             //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW

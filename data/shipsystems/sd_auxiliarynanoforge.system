@@ -1,0 +1,10 @@
+{
+	"id":"sd_auxiliarynanoforge",
+	"type":"STAT_MOD",
+	"statsScript":"data.shipsystems.sd_auxiliarynanoforge",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_morphicarmorAI",
+	
+	"useSound":"system_forgevats",
+	"outOfUsesSound":"gun_out_of_ammo",
+}

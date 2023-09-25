@@ -15,13 +15,12 @@ import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.dark.shaders.distortion.*;
+import data.scripts.sd_util;
 
 public class sd_morphicarmor extends BaseShipSystemScript {
 	final static boolean debug = false;
 	final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
 	static final float DEVIATION_PERCENT = 1;
-	final float FLUX_GEN_DIVISOR = 15;
-
 	final Color JITTER_COLOR = new Color(250, 235, 215,55);
 	final Color JITTER_UNDER_COLOR = new Color(250, 235, 215,155);
 	final Color EMP_CENTER_COLOR = new Color(250, 235, 215, 205);
@@ -41,7 +40,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 
 		ship.setJitter(id, JITTER_COLOR, effectLevel, 1, 0, 5);
-		//ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
+		ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -77,15 +76,15 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, EMP_EDGE_COLOR, EMP_CENTER_COLOR);
 			//draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
-				drawParticles(toSubtractLoc, ship, amountToTransfer);
+				drawVfx(toSubtractLoc, ship, amountToTransfer);
 			if (isToAddInBounds)
-				drawParticles(toAddLoc, ship, amountToTransfer);
+				drawVfx(toAddLoc, ship, amountToTransfer);
 
 			//generate flux according to shield upkeep and amount of armor hp transferred
 			float extraFlux = 0;
 			if (ship.getShield() != null)
-				extraFlux = (float) Math.sqrt(ship.getShield().getUpkeep()) / 2;
-			ship.getFluxTracker().increaseFlux(amountToTransfer * (2 + extraFlux), true);
+				extraFlux = (float) Math.sqrt(ship.getShield().getUpkeep()) / 3;
+			ship.getFluxTracker().increaseFlux(amountToTransfer * (3 + extraFlux), true);
 
 			//cleanup
 			ship.syncWithArmorGridState();
@@ -99,11 +98,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
 			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
 				float currentArmor = grid.getArmorValue(ix, iy);
-				float lowerBound = average - (average * (DEVIATION_PERCENT / 100));
-				float upperBound = average + (average * (DEVIATION_PERCENT / 100));
-				boolean isWithinRange = currentArmor <= upperBound && currentArmor >= lowerBound;
 				boolean isAboveAverage = currentArmor > average;
-
+				boolean isWithinRange = sd_util.isNumberWithinRange(currentArmor, average, DEVIATION_PERCENT);
 				if ((above && isAboveAverage && !isWithinRange) || (!above && !isAboveAverage && !isWithinRange)) {
 					cells.add(new Vector2f(ix, iy));
 				}
@@ -133,18 +129,18 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		return balanced;
 	}
 
-	public static void drawParticles(Vector2f loc, ShipAPI ship, float size) {
+	public static void drawVfx(Vector2f loc, ShipAPI ship, float size) {
 		float sizeSqrt = (float) Math.sqrt(size);
 		float intensity = 0.6f + Math.min((0.5f + ship.getFluxLevel()) * 0.4f, 0.4f);
 		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));
-		for (int i = 0; i < (1 + Math.round(sizeSqrt * 3)); i++) {
+		for (int i = 0; i < (2 + Math.round(sizeSqrt * 3)); i++) {
 			//sparks
 			float particleSize = 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt * 2, sizeSqrt * 4);
 			float particleDuration = MathUtils.getRandomNumberInRange(1, 2);
 			Vector2f particleLoc = MathUtils.getRandomPointOnCircumference(loc, sizeSqrt);
 			Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt, size), MathUtils.getRandomNumberInRange(-180f, 180f));
 			if (debug)
-				Console.showMessage("Transferred: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
+				Console.showMessage("Transferred Sqrt: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
 			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, intensity, particleDuration, particleColor);
 		}
 		//draw a distortion wave

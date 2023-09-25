@@ -53,14 +53,9 @@ modify tags on various vanilla weapons to improve AI behavior
 
 move custom AI to not be a hullmod anymore
 
-use alex's temporal shell color as my "positive effect" color
-use my shade of orange as my "negative effect" color
-make heavy cruiser variant not giga ass
 figure out some way to make my ships stop trying to rotate their armor
-make morphic armor blast a cruiser's flux ass slightly less
-make a hullmod that increases dissiaption while venting as a % of your capacity
 custom reaper AI that makes them not eat ass, alternatively dragoncocks
-add distortion effects to armor repair, maybe try to make it shimmer
+if carriers have defensive targeting array, tag them as COMBAT and NO AUTO ESCORT (but also verify whether this is even necessary)
 
 Marr
 Ontos
@@ -93,10 +88,15 @@ Base faction tech hullmod is incompatible with HSA, converted hangar, and safety
 Additional Spall Protection: 2/4/6/12, 25% improved fragmentation resistance and reduced crew casualties. For niche fits that have to deal with modded nonsense.
 Ancillary Beam Pumps: 3/6/9/15, Beams do 50% more damage and generate 25% more flux. Reduces the portion of beam range past 500 range by 50%. Compatible with advanced optics.
 External Hangar: 5/10/15/20, Adds a hangar bay. Fighters are unable to be sent to engage enemies. Incompatible with bombers. Fighter restoration speed 0/50/100/150% by hull size.
+Hardline Capacitor Dump: 4/8/16/24, while venting flux dissipation is increased by 2% of the ship's maximum flux capacity.
 
 Shipsystem ideas:
 Temporal Shell: It's temporal shell.
+^ Done
 Canister Antimatter: Canflak except energy damage.
+^ Done
 Morphic Armor: Toggle system, rebalances the ship's armor grid. Generates flux based on shield upkeep and amount of armor HP rebalanced.
+^ Done?
 Auxiliary Nanoforge: Restores 10% fighter replacement rate, or 2 reload cost worth of missiles rounded up. Restores the lower one proportionally. Stores 3 charges, generates 25% base cap hardflux on use.
+^ Next.
 Stasis Field: Reduces the timeflow of everything in the vicinity by 25%.
