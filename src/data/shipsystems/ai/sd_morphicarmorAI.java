@@ -13,9 +13,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
     final boolean debug = false;
     ShipAPI ship;
     @Override
-    public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
-        this.ship = ship;
-    }
+    public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) { this.ship = ship; }
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         interval.advance(amount);

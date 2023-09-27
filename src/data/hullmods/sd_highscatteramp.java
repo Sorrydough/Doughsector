@@ -31,11 +31,13 @@ public class sd_highscatteramp extends BaseHullMod {
 		boolean sMod = isSMod(stats);
 		stats.getBeamWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT + (sMod ? SMOD_MODIFIER : 0));
 		stats.getBeamWeaponFluxCostMult().modifyPercent(id, FLUX_GENERATED_PERCENT);
+
 	}
 
 	@Override
 	public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
 		ship.addListener(new HighScatterAmpRangeMod());
+
 	}
 
 	public String getSModDescriptionParam(int index, HullSize hullSize, ShipAPI ship) {

@@ -74,6 +74,10 @@ Restorer
 Salvation
 Oblivion
 
+figure out whether beam pumps should just do a 30% beam range reduction, cut the goofy shit
+
+do a 2nd pass on ship class names
+
 in my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 10 minutes
 
 Weapon ideas:
@@ -85,10 +89,12 @@ Add another fighter:
 5 OP, 4 heavily shielded support fighters, each armed with an advanced optics graviton lance and a PD laser.
 
 Base faction tech hullmod is incompatible with HSA, converted hangar, and safety overrides. Faction hullmod ideas:
-Additional Spall Protection: 2/4/6/12, 25% improved fragmentation resistance and reduced crew casualties. For niche fits that have to deal with modded nonsense.
-Ancillary Beam Pumps: 3/6/9/15, Beams do 50% more damage and generate 25% more flux. Reduces the portion of beam range past 500 range by 50%. Compatible with advanced optics.
-External Hangar: 5/10/15/20, Adds a hangar bay. Fighters are unable to be sent to engage enemies. Incompatible with bombers. Fighter restoration speed 0/50/100/150% by hull size.
-Hardline Capacitor Dump: 4/8/16/24, while venting flux dissipation is increased by 2% of the ship's maximum flux capacity.
+Additional Spall Protection: 2/4/6/12, 10% improved kinetic resistance, fragmentation resistance and reduced crew casualties.
+Ancillary Beam Pumps: 3/6/9/12, Beams do 50% more damage and generate 25% more flux. Reduces the portion of beam range past 500 range by 50%. Compatible with advanced optics.
+^ Consider special penalty for burst beams such as increased cooldown time.
+External Hangar: 6/12/18/24, Adds a hangar bay. Fighters are unable to be sent to engage enemies. Incompatible with bombers. Fighter restoration speed 0/50/100/150% by hull size. 500/1000/1500/2500 hull hp is lost, applied after all other modifiers.
+Capacitor Purge: 4/8/16/24, while venting flux dissipation is increased by 2% of the ship's maximum flux capacity. Reduces PPT by 15%.
+- Add safety overrides alternative
 
 Shipsystem ideas:
 Temporal Shell: It's temporal shell.
@@ -96,7 +102,7 @@ Temporal Shell: It's temporal shell.
 Canister Antimatter: Canflak except energy damage.
 ^ Done
 Morphic Armor: Toggle system, rebalances the ship's armor grid. Generates flux based on shield upkeep and amount of armor HP rebalanced.
-^ Done?
+^ Done, AI needs debugging
 Auxiliary Nanoforge: Restores 10% fighter replacement rate, or 2 reload cost worth of missiles rounded up. Restores the lower one proportionally. Stores 3 charges, generates 25% base cap hardflux on use.
-^ Next.
-Stasis Field: Reduces the timeflow of everything in the vicinity by 25%.
+^ Done but needs to be debugged, needs AI
+Stasis Field: Freezes a ship in place and makes it invulnerable for 3 seconds.

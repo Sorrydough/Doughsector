@@ -1,8 +1,8 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sModDesc,sprite
-High Scatter Amplifier,high_scatter_amp,3,,Common,,Weapons,5000,,,,4,8,12,20,data.hullmods.sd_highscatteramp,<tooltip created in the script>,,Increases beam weapon damage by an additional %s.,graphics/hullmods/high_scatter_amp.png
+High Scatter Amplifier,high_scatter_amp,3,,Common,,Weapons,5000,,,,4,8,12,20,data.hullmods.sd_highscatteramp,<tooltip created in the script>,,Increases beam weapon damage by an additional %s.,graphics/hullmods/sd_beampumps.png
 ,,,,,,,,,,,,,,,,,,,
 Improved Ship AI,sd_customai,,,Common,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/automated.png
-Beam Targeting Integration,sd_beamintegration,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_beamintegration,<tooltip created in the script>,,,graphics/hullmods/distributed_fire_control.png
+Beam Targeting Integration,sd_beamintegration,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_beamintegration,<tooltip created in the script>,,,graphics/hullmods/sd_beamintegration.png
 Light Ground Support,sd_groundsupport,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/ground_support.png
-Cramped Racks,sd_crampedracks,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedracks,<tooltip created in the script>,,,graphics/hullmods/generic_mod.png
-Hexshield,sd_hexshield,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Causes shields to unfold near-instantly. Upon hitting 100% hard flux, the ship will not overload; instead, the shield system is disabled for %s seconds.","Instant shield unfold, shield is temporarily disabled instead of overloading.",,graphics/hullmods/omni_shield_emitter.png
+Cramped Racks,sd_crampedracks,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedracks,<tooltip created in the script>,,,graphics/hullmods/sd_crampedracks.png
+Hexshield,sd_hexshield,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shields unfold instantly. Instead of overloading the ship, its shield is disabled for %s seconds.",,,graphics/hullmods/sd_hexshield.png

@@ -1,10 +1,7 @@
 package data.shipsystems;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.FighterLaunchBayAPI;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 
@@ -12,13 +9,13 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
     final float BAY_REPLENISHMENT_AMOUNT = 0.10f;
     final float MISSILE_COOLDOWN_PENALTY = 3;
     final float MISSILE_RELOAD_AMOUNT = 2;
-    WeaponAPI emptiestMissile = null;
-    float emptiestMissileRatio = 1;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
 
         ShipAPI ship = (ShipAPI) stats.getEntity();
+        WeaponAPI emptiestMissile = null;
+        float emptiestMissileRatio = 1;
         //find out which missile has the least ammo
         for (WeaponAPI weapon : ship.getAllWeapons()) {
             if (weapon.getType() != WeaponAPI.WeaponType.MISSILE || !weapon.usesAmmo())
@@ -31,7 +28,7 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
             }
         }
         //if fighters are at a lower "ammo" than the lowest missile, then restore fighters
-        if (ship.getSharedFighterReplacementRate() < emptiestMissileRatio || emptiestMissile == null) {
+        if (emptiestMissile == null || ship.getSharedFighterReplacementRate() < emptiestMissileRatio) {
             for (FighterLaunchBayAPI bay : ship.getLaunchBaysCopy()) {
                 if (bay.getWing() == null)
                     continue;
@@ -57,6 +54,20 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
             //TODO: this
         }
     }
+
+    //TODO: RETURN UNUSABLE IF ALL MISSILES ARE RESTORED AND FIGHTERS ARE HEALTHY
+//    @Override
+//    public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
+//        if (system.isOutOfAmmo() || system.getState() != ShipSystemAPI.SystemState.IDLE)
+//            return null;
+//        if (getAverageArmorPerCell(ship.getArmorGrid()) <= ship.getArmorGrid().getMaxArmorInCell() / 10)
+//            return "ARMOR DESTROYED";
+//        if (isArmorGridBalanced(ship.getArmorGrid()))
+//            return "ARMOR BALANCED";
+//        if (system.isActive())
+//            return "REBALANCING";
+//        return "READY";
+//    }
 
     //literally just copied alex's map from the missile autoloader because he didn't make it an api call and I don't want to import
     public static float getReloadCost(WeaponAPI weapon) {

@@ -60,7 +60,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
         FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Buster", FleetMemberType.SHIP, "Radial Impulse", true);
-        api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Relay", FleetMemberType.SHIP, "Shrivelled Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Relay", FleetMemberType.SHIP, "Involuted Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Strike", FleetMemberType.SHIP, "Galactic Cloud", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Sonic Disturbance", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
@@ -70,7 +70,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Direct Path", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Bombarded Signal", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Precisely Certain", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Interference", FleetMemberType.SHIP, "Chilled Nova", false).getCaptain().setPersonality(Personalities.CAUTIOUS);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Interference", FleetMemberType.SHIP, "Chilled Nova", false);
 
         HashMap<String, Integer> REDADMIRALSKILLS = new HashMap<>();
         REDADMIRALSKILLS.put(Skills.POINT_DEFENSE, 2);
