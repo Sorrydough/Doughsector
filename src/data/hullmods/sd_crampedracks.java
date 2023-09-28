@@ -19,11 +19,12 @@ public class sd_crampedracks extends BaseHullMod
             }
         }
     }
-
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("This ship's mixed hardpoints are strapped for space, making them unable to recieve ammo capacity bonuses.", 5f, Misc.getNegativeHighlightColor(), "unable to recieve ammo capacity");
+        tooltip.addPara("This ship's mixed hardpoints are cramped, making them unable to recieve ammo capacity bonuses.", 5f);
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) { return false; }
+    @Override
+    public boolean showInRefitScreenModPickerFor(ShipAPI ship) { return ship.getHullSpec().getManufacturer().equals("???"); }
 }

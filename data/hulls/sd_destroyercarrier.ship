@@ -2,7 +2,7 @@
   "hullId": "sd_destroyercarrier",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_destroyercarrier.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 192,
   "width": 92,
   "center": [45, 93.5],
@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration"
+    "sd_designtech"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

@@ -2,7 +2,7 @@
   "hullId": "sd_capitalbattleship",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "graphics/ships/sd_capitalbattleship.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 440,
   "width": 220,
   "center": [110, 223],
@@ -12,7 +12,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration"
+    "sd_designtech",
+    "sd_crampedracks"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

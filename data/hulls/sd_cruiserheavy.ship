@@ -2,7 +2,7 @@
   "hullId": "sd_cruiserheavy",
   "hullSize": "CRUISER",
   "spriteName": "graphics/ships/sd_cruiserfatfuck.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 210,
   "width": 180,
   "center": [90, 102],
@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration",
+    "sd_designtech",
     "delicate"
   ],
   "builtInWeapons": {

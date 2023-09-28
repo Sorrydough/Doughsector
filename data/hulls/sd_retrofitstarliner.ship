@@ -2,7 +2,7 @@
   "hullId": "sd_retrofitstarliner",
   "hullSize": "CRUISER",
   "spriteName": "graphics/ships/sd_retrofitstarliner.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 284,
   "width": 126,
   "center": [63, 140],
@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration"
+    "sd_designtech"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

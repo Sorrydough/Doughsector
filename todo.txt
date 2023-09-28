@@ -13,7 +13,6 @@ Aesthetic Stuff:
 
 Generic AI Stuff:
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility
-- Figure out how to fix the issue with carriers getting stuck in a flux dissipation loop
 - Alter squall weapons.csv data - DO NOT USE VS FRIGATES, and USE VS SHIELDS?
 - Alter breach SRMs behavior
 Campaign Stuff:
@@ -41,20 +40,14 @@ Post-Release Stuff:
 
 investigate stasis field for support destroyer - use custom data like on quantum disruptor, check if you can modify timescale on projectiles, cope with modifying velocity speed and maneuverability if not
 return customdata to quantum disruptor, alter stats to have very short duration, scale its range based on the optimal range of installed weapons
-morphic cascade - rebalances ship's armor. generates hard flux based on amount of armor regenerated. Implement emp arcs, custom AI, make sure it's unusable if the armor grid is fully balanced
-have arthr whip up a version of the capital that doesn't have canisters
-implement carrier shipsystem - generates hardflux, instantly restores some fighter replacement rate, smoke comes from bays, can also restore missiles, use the restoration costs of missile autoloader
 use orange as my "high-tech bullshit" color - emp arcs, hexshields, venting, etc
-compose ship name string file
 lunalib compatibility
 interfere with commissioned crews and substance abuse
 
 modify tags on various vanilla weapons to improve AI behavior
 
-move custom AI to not be a hullmod anymore
-
 figure out some way to make my ships stop trying to rotate their armor
-custom reaper AI that makes them not eat ass, alternatively dragoncocks
+custom reaper AI that makes them not blow ass, alternatively dragoncocks
 if carriers have defensive targeting array, tag them as COMBAT and NO AUTO ESCORT (but also verify whether this is even necessary)
 
 Marr
@@ -74,8 +67,6 @@ Restorer
 Salvation
 Oblivion
 
-figure out whether beam pumps should just do a 30% beam range reduction, cut the goofy shit
-
 do a 2nd pass on ship class names
 
 in my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 10 minutes
@@ -88,14 +79,6 @@ Medium size antimatter canister launcher: like an energy damage PCL that saturat
 Add another fighter:
 5 OP, 4 heavily shielded support fighters, each armed with an advanced optics graviton lance and a PD laser.
 
-Base faction tech hullmod is incompatible with HSA, converted hangar, and safety overrides. Faction hullmod ideas:
-Additional Spall Protection: 2/4/6/12, 10% improved kinetic resistance, fragmentation resistance and reduced crew casualties.
-Ancillary Beam Pumps: 3/6/9/12, Beams do 50% more damage and generate 25% more flux. Reduces the portion of beam range past 500 range by 50%. Compatible with advanced optics.
-^ Consider special penalty for burst beams such as increased cooldown time.
-External Hangar: 6/12/18/24, Adds a hangar bay. Fighters are unable to be sent to engage enemies. Incompatible with bombers. Fighter restoration speed 0/50/100/150% by hull size. 500/1000/1500/2500 hull hp is lost, applied after all other modifiers.
-Capacitor Purge: 4/8/16/24, while venting flux dissipation is increased by 2% of the ship's maximum flux capacity. Reduces PPT by 15%.
-- Add safety overrides alternative
-
 Shipsystem ideas:
 Temporal Shell: It's temporal shell.
 ^ Done
@@ -106,3 +89,7 @@ Morphic Armor: Toggle system, rebalances the ship's armor grid. Generates flux b
 Auxiliary Nanoforge: Restores 10% fighter replacement rate, or 2 reload cost worth of missiles rounded up. Restores the lower one proportionally. Stores 3 charges, generates 25% base cap hardflux on use.
 ^ Done but needs to be debugged, needs AI
 Stasis Field: Freezes a ship in place and makes it invulnerable for 3 seconds.
+^ Should be easy to code but needs whack AI script
+
+fix my retarded external hangar code
+look at vic modplugin to see how to swap a script at runtime

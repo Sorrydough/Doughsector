@@ -25,6 +25,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	final Color JITTER_UNDER_COLOR = new Color(250, 235, 215,155);
 	final Color EMP_CENTER_COLOR = new Color(250, 235, 215, 205);
 	final Color EMP_EDGE_COLOR = new Color(255,120,80,105);
+	final float FLUX_PER_ARMOR = 3;
 
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
@@ -72,7 +73,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			Vector2f toAddLoc = (grid.getLocation((int) cellToAdd.x, (int) cellToAdd.y));
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
-			if (isToAddInBounds) //TODO: CHANGE ARC THICKNESS BASED ON HULL SIZE OR ARMOR REPAIRED OR SOMETHING IDK
+			if (isToAddInBounds) //TODO: CHANGE ARC THICKNESS BASED ON HULL SIZE OR ARMOR REPAIRED OR ADD EXTRAS OR SOMETHING IDK
 				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, 8, EMP_EDGE_COLOR, EMP_CENTER_COLOR);
 			//draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
@@ -80,11 +81,13 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			if (isToAddInBounds)
 				drawVfx(toAddLoc, ship, amountToTransfer);
 
-			//generate flux according to shield upkeep and amount of armor hp transferred
-			float extraFlux = 0;
-			if (ship.getShield() != null)
-				extraFlux = (float) Math.sqrt(ship.getShield().getUpkeep()) / 3;
-			ship.getFluxTracker().increaseFlux(amountToTransfer * (3 + extraFlux), true);
+			//generate flux according to amount of armor hp transferred
+//			float extraFlux = 0;
+//			if (ship.getShield() != null)
+//				extraFlux = (float) (Math.sqrt(ship.getShield().getUpkeep()) / 4);
+//			ship.getFluxTracker().increaseFlux((amountToTransfer * (FLUX_PER_ARMOR + extraFlux)), true);
+
+			ship.getFluxTracker().increaseFlux((amountToTransfer * FLUX_PER_ARMOR), true);
 
 			//cleanup
 			ship.syncWithArmorGridState();
@@ -129,7 +132,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		return balanced;
 	}
 
-	public static void drawVfx(Vector2f loc, ShipAPI ship, float size) {
+	public static void drawVfx(Vector2f loc, ShipAPI ship, float size) { //TODO: intensity needs to be the reverse of armor grid health
 		float sizeSqrt = (float) Math.sqrt(size);
 		float intensity = 0.6f + Math.min((0.5f + ship.getFluxLevel()) * 0.4f, 0.4f);
 		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));

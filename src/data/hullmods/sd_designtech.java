@@ -7,7 +7,7 @@ import com.fs.starfarer.api.util.Misc;
 
 import java.util.*;
 
-public class sd_beamintegration extends BaseHullMod {
+public class sd_designtech extends BaseHullMod {
     final Map<HullSize, Integer> BEAM_ITU_PERCENT = new HashMap<>();
     {    //free ITU bonus for beams
         BEAM_ITU_PERCENT.put(HullSize.FIGHTER, 5);
@@ -35,9 +35,10 @@ public class sd_beamintegration extends BaseHullMod {
         tooltip.addPara("Beams recieve a 10/20/40/60%% range bonus by hull size.", 5f, Misc.getHighlightColor(), "10/20/40/60%");
         tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.", 5f,
                 Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.");
+        tooltip.addPara("Design spec is incompatible with: High Scatter Amplifier, Converted Hangar, and Safety Overrides.", 10f, Misc.getNegativeHighlightColor(), "incompatible with:");
     }
     @Override
-    public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
-        return false;
-    }
+    public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) { return false; }
+    @Override
+    public boolean showInRefitScreenModPickerFor(ShipAPI ship) { return ship.getHullSpec().getManufacturer().equals("???"); }
 }

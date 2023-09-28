@@ -14,7 +14,7 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.entities.SimpleEntity;
 import org.lwjgl.util.vector.Vector2f;
 
-public class sd_hexshield extends BaseHullMod {
+public class sd_hexshield extends BaseHullMod { //TODO: REWRITE THIS SCRIPT
 
     public static final float SHIELD_POP_TIME = 10f;
     public static final float SHIELD_UNFOLD_MULT = 10f;

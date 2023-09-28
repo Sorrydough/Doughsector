@@ -2,7 +2,7 @@
   "hullId": "sd_frigatecarrier",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_frigatecarrier.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 112,
   "width": 100,
   "center": [50, 56],
@@ -12,7 +12,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration"
+    "sd_designtech",
+    "sd_crampedracks"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

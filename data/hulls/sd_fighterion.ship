@@ -2,7 +2,7 @@
   "hullId": "sd_fighterion",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/sd_fighterion.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 18,
   "width": 18,
   "center": [9.5, 8.5],

@@ -2,7 +2,7 @@
   "hullId": "sd_fightergraviton",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/sd_fightergraviton.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 36,
   "width": 36,
   "center": [17.5, 16.5],

@@ -2,7 +2,7 @@
   "hullId": "sd_frigateheavy",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_frigateheavy.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 136,
   "width": 96,
   "center": [48, 63],
@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration",
+    "sd_designtech",
     "delicate"
   ],
   "builtInWeapons": {

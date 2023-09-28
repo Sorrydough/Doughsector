@@ -2,7 +2,7 @@
   "hullId": "sd_retrofitnebula",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_retrofitnebula.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 200,
   "width": 120,
   "center": [60, 99],
@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration"
+    "sd_designtech"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

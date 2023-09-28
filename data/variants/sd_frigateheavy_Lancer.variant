@@ -2,12 +2,12 @@
     "displayName": "Lancer",
     "goalVariant": true,
     "fluxCapacitors": 10,
-    "fluxVents": 7,
+    "fluxVents": 8,
     "hullId": "sd_frigateheavy",
     "hullMods": [
         "autorepair",
         "armoredweapons",
-        "high_scatter_amp"
+        "sd_beampumps"
     ],
     "permaMods": [],
     "sMods": [],

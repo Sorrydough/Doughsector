@@ -2,7 +2,7 @@
   "hullId": "sd_fighterblaster",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/sd_fighterblaster.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 38,
   "width": 32,
   "center": [16.5, 18.5],

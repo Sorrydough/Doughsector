@@ -2,7 +2,7 @@
   "hullId": "sd_destroyerinterference",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_destroyerinterference.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 210,
   "width": 120,
   "center": [60, 106],
@@ -12,10 +12,9 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration",
+    "sd_designtech",
     "delicate",
-    "sd_crampedracks",
-    "ecm"
+    "sd_crampedracks"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

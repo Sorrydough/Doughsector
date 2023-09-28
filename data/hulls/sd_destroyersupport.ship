@@ -2,7 +2,7 @@
   "hullId": "sd_destroyersupport",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_destroyersupport.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 190,
   "width": 190,
   "center": [95, 92.5],
@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration",
+    "sd_designtech",
     "delicate",
     "pointdefenseai"
   ],

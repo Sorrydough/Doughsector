@@ -2,7 +2,7 @@
   "hullId": "sd_frigatelight",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_frigatelight.png",
-  "style": "SD_SPEC",
+  "style": "SD_TECH",
   "height": 84,
   "width": 48,
   "center": [24, 42],
@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_beamintegration",
+    "sd_designtech",
     "insulatedengine"
   ],
   "builtInWeapons": {

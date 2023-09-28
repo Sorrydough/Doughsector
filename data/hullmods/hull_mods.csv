@@ -1,8 +1,14 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sModDesc,sprite
-High Scatter Amplifier,high_scatter_amp,3,,Common,,Weapons,5000,,,,4,8,12,20,data.hullmods.sd_highscatteramp,<tooltip created in the script>,,Increases beam weapon damage by an additional %s.,graphics/hullmods/sd_beampumps.png
-,,,,,,,,,,,,,,,,,,,
-Improved Ship AI,sd_customai,,,Common,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/automated.png
-Beam Targeting Integration,sd_beamintegration,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_beamintegration,<tooltip created in the script>,,,graphics/hullmods/sd_beamintegration.png
-Light Ground Support,sd_groundsupport,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/ground_support.png
-Cramped Racks,sd_crampedracks,,,Common,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedracks,<tooltip created in the script>,,,graphics/hullmods/sd_crampedracks.png
+#Builtins,,,,,,,,,,,,,,,,,,,
+Beam Targeting Integration,sd_designtech,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_designtech,<tooltip created in the script>,,,graphics/hullmods/sd_designtech.png
+Cramped Racks,sd_crampedracks,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedracks,<tooltip created in the script>,,,graphics/hullmods/sd_crampedracks.png
 Hexshield,sd_hexshield,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shields unfold instantly. Instead of overloading the ship, its shield is disabled for %s seconds.",,,graphics/hullmods/sd_hexshield.png
+Improved Ship AI,sd_customai,,,,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/sd_improvedai.png
+Light Ground Support,sd_groundsupport,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/sd_groundsupport.png
+,,,,,,,,,,,,,,,,,,,
+#Modulars,,,,,,,,,,,,,,,,,,,
+Redundant Spall Protection,sd_spallprotection,,,Common,,Defenses,,TRUE,,,2,4,8,12,data.hullmods.sd_spallprotection,<tooltip created in the script>,,,graphics/hullmods/sd_spallprotection.png
+Ancillary Beam Pumps,sd_beampumps,,,Common,,Weapons,,TRUE,,,3,6,9,12,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
+Capacitor Purge,sd_capacitorpurge,,,Common,,Special,,TRUE,,,4,8,16,24,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
+External Hangar,sd_externalhangar,,,Common,,Fighters,,TRUE,,,6,12,18,24,data.hullmods.sd_externalhangar,<tooltip created in the script>,,,graphics/hullmods/sd_externalhangar.png
+Loadline Recalibration,sd_loadline,,,Common,,Special,,TRUE,,,8,16,24,32,data.hullmods.sd_loadline,<tooltip created in the script>,,,graphics/hullmods/sd_loadline.png
