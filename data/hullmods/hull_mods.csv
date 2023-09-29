@@ -9,6 +9,6 @@ Light Ground Support,sd_groundsupport,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_grou
 #Modulars,,,,,,,,,,,,,,,,,,,
 Redundant Spall Protection,sd_spallprotection,,,Common,,Defenses,,TRUE,,,2,4,8,12,data.hullmods.sd_spallprotection,<tooltip created in the script>,,,graphics/hullmods/sd_spallprotection.png
 Ancillary Beam Pumps,sd_beampumps,,,Common,,Weapons,,TRUE,,,3,6,9,12,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
-Capacitor Purge,sd_capacitorpurge,,,Common,,Special,,TRUE,,,4,8,16,24,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
+Capacitor Purge,sd_capacitorpurge,,,Common,,Special,,TRUE,,,10,20,30,50,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
 External Hangar,sd_externalhangar,,,Common,,Fighters,,TRUE,,,6,12,18,24,data.hullmods.sd_externalhangar,<tooltip created in the script>,,,graphics/hullmods/sd_externalhangar.png
 Loadline Recalibration,sd_loadline,,,Common,,Special,,TRUE,,,8,16,24,32,data.hullmods.sd_loadline,<tooltip created in the script>,,,graphics/hullmods/sd_loadline.png

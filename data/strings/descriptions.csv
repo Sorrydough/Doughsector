@@ -4,5 +4,7 @@ sd_frigate,SHIP,"With excellent survivability against much larger ships than its
 sd_frigatecarrier,SHIP,"Due to the demanding logistics and high cost of autoforges, most navies opt to consolidate them into larger ships, leaving frigate-sized carriers an anomaly appropriate only for niche doctrines."
 sd_frigateheavy,SHIP,"A simple ship with excellent staying power, this abnormally large frigate is specialized for blockading pursuit ships."
 ,,
-sd_microion,WEAPON,An ion beam unremarkable in all ways other than its miniaturization.
-sd_microblaster,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
+sd_ionbeam_fighter,WEAPON,An ion beam unremarkable in all ways other than its miniaturization.
+sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
+,,
+sd_dragon_single,WEAPON,The tactical flexibility of a reliable torpedo compatible with any standard missile hardpoint more than justifies the extreme mounting complexity inherent to the dragonfire platform.

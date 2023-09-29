@@ -1,10 +1,10 @@
 {
-	"id":"sd_dragonsingle",
+	"id":"sd_dragon_single",
 	"specClass":"projectile",
 	"type":"MISSILE",
 	"size":"SMALL",
-	"turretSprite":"graphics/weapons/sd_dragonsingle_turret.png",
-	"hardpointSprite":"graphics/weapons/sd_dragonsingle_hardpoint.png",
+	"turretSprite":"graphics/weapons/sd_dragon_single_turret.png",
+	"hardpointSprite":"graphics/weapons/sd_dragon_single_hardpoint.png",
 	"hardpointOffsets":[12, 0],
 	"turretOffsets":[5, 0],
 	"hardpointAngleOffsets":[0],

@@ -32,7 +32,7 @@ public class sd_externalhangar extends BaseHullMod {
         stats.getMinCrewMod().modifyFlat(id, CREW_PENALTY);
         stats.getNumFighterBays().modifyFlat(id, NUMBER_BAYS);
         stats.getFighterWingRange().modifyMult(id, WING_RANGE_MULT);
-        stats.getFighterRefitTimeMult().modifyMult(id, (float) REFIT_MOD.get(hullSize) / 100);
+        stats.getFighterRefitTimeMult().modifyMult(id, (float) REFIT_MOD.get(hullSize) / 100); //TODO: FIX THIS BEING RETARDED
         stats.getDynamic().getMod(Stats.BOMBER_COST_MOD).modifyFlat(id, BOMBER_PENALTY);
     }
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {

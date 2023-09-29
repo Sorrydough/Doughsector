@@ -28,13 +28,13 @@ public class sd_modPlugin extends BaseModPlugin {
         {
             //projectiles
             sd_weaponsList.add("amblaster");
-            sd_weaponsList.add("gigacannon");
 
             //beams
             sd_weaponsList.add("taclaser");
             sd_weaponsList.add("ionbeam");
             sd_weaponsList.add("gravitonbeam");
             sd_weaponsList.add("phasebeam");
+            sd_weaponsList.add("irautolance");
             sd_weaponsList.add("tachyonlance");
             sd_weaponsList.add("hil");
 
@@ -47,14 +47,16 @@ public class sd_modPlugin extends BaseModPlugin {
             //missiles
             sd_weaponsList.add("heatseeker");
             sd_weaponsList.add("salamanderpod");
-            sd_weaponsList.add("reaper");
-            sd_weaponsList.add("typhoon");
-            sd_weaponsList.add("cyclone");
+            sd_weaponsList.add("dragon");
+            sd_weaponsList.add("dragonpod");
             sd_weaponsList.add("gazer");
             sd_weaponsList.add("gazerpod");
             sd_weaponsList.add("sabot_single");
             sd_weaponsList.add("sabotpod");
             sd_weaponsList.add("squall");
+
+            //self-insert donut steel weapons
+            sd_weaponsList.add("sd_dragon_single");
         }
 
         for (String weapon : sd_weaponsList) {

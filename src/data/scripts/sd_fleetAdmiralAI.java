@@ -84,7 +84,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
                         taskManager.removeAssignment(assignment.getAssignment());
                     }
                     //if an enemy ship had an engage order applied due to being fluxed out, check if it's time to rescind the order
-                    if (assignment.getAssignment().getType() == CombatAssignmentType.ENGAGE && (target.getFluxLevel() < 0.75 || target.getHardFluxLevel() < 0.65) && !target.getFluxTracker().isOverloaded() && !target.getEngineController().isFlamedOut()) {
+                    if (assignment.getAssignment().getType() == CombatAssignmentType.INTERCEPT && (target.getFluxLevel() < 0.75 || target.getHardFluxLevel() < 0.65) && !target.getFluxTracker().isOverloaded() && !target.getEngineController().isFlamedOut()) {
                         taskManager.removeAssignment(assignment.getAssignment());
                     }
                 }
@@ -152,7 +152,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
                         }
                     }
                     if (!isEnemyEngaged) {
-                        applyAssignment(engine.getFleetManager(0).getDeployedFleetMember(enemy), CombatAssignmentType.ENGAGE);
+                        applyAssignment(engine.getFleetManager(0).getDeployedFleetMember(enemy), CombatAssignmentType.INTERCEPT);
                     }
                 }
             }

@@ -79,6 +79,8 @@ Medium size antimatter canister launcher: like an energy damage PCL that saturat
 Add another fighter:
 5 OP, 4 heavily shielded support fighters, each armed with an advanced optics graviton lance and a PD laser.
 
+Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency.
+
 Shipsystem ideas:
 Temporal Shell: It's temporal shell.
 ^ Done

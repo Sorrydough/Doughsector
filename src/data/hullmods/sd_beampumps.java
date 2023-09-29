@@ -26,7 +26,7 @@ public class sd_beampumps extends BaseHullMod {
 		ship.addListener(new BeamPumpsRangeMod());
 		for (WeaponAPI weapon : ship.getAllWeapons()) {
 			if (weapon.isBurstBeam())
-				weapon.setRefireDelay(weapon.getRefireDelay() * (1 + (float) BURST_BEAM_PENALTY / 100));
+				weapon.setRefireDelay(weapon.getRefireDelay() * (1 + (float) BURST_BEAM_PENALTY / 100)); //TODO: DEBUG THIS
 		}
 	}
 	public class BeamPumpsRangeMod implements WeaponBaseRangeModifier {
