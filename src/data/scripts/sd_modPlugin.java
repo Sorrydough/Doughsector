@@ -2,6 +2,7 @@ package data.scripts;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 
@@ -22,6 +23,7 @@ public class sd_modPlugin extends BaseModPlugin {
         if (hasGraphicsLib) {
             ShaderLib.init();
             TextureData.readTextureDataCSV("data/lights/sd_texture_data.csv");
+            LightData.readLightDataCSV("data/lights/sd_light_data.csv");
         }
 
         List <String> sd_weaponsList = new ArrayList<>();
@@ -30,7 +32,6 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("amblaster");
 
             //beams
-            sd_weaponsList.add("taclaser");
             sd_weaponsList.add("ionbeam");
             sd_weaponsList.add("gravitonbeam");
             sd_weaponsList.add("phasebeam");
@@ -56,6 +57,7 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("squall");
 
             //self-insert donut steel weapons
+            sd_weaponsList.add("sd_gravlance");
             sd_weaponsList.add("sd_dragon_single");
         }
 

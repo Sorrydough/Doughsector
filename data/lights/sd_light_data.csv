@@ -1,0 +1,2 @@
+id,type,size,intensity,fadeout,color,offset,hit size,hit intensity,hit fadeout,hit color,flash size,flash intensity,flash fadeout,flash color,flash offset,chance,fighter dim
+sd_gravlance,beam,45,0.4,,"[75,175,55]",,130,0.2,,"[75,125,155]",65,0.2,,"[75,125,155]",,1,TRUE
