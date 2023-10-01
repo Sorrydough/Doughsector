@@ -4,17 +4,18 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
+import org.lazywizard.console.Console;
 
 public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
     final float BAY_REPLENISHMENT_AMOUNT = 0.10f;
-    final float MISSILE_COOLDOWN_PENALTY = 3;
+    final float MISSILE_COOLDOWN_PENALTY = 5;
     final float MISSILE_RELOAD_AMOUNT = 2;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
 
         ShipAPI ship = (ShipAPI) stats.getEntity();
-        WeaponAPI emptiestMissile = null;
+        WeaponAPI emptiestMissile = getEmptiestMissile(ship);
         float emptiestMissileRatio = 1;
         //find out which missile has the least ammo
         for (WeaponAPI weapon : ship.getAllWeapons()) {
@@ -55,22 +56,39 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
         }
     }
 
-    //TODO: RETURN UNUSABLE IF ALL MISSILES ARE RESTORED AND FIGHTERS ARE HEALTHY
-//    @Override
-//    public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
-//        if (system.isOutOfAmmo() || system.getState() != ShipSystemAPI.SystemState.IDLE)
-//            return null;
-//        if (getAverageArmorPerCell(ship.getArmorGrid()) <= ship.getArmorGrid().getMaxArmorInCell() / 10)
-//            return "ARMOR DESTROYED";
-//        if (isArmorGridBalanced(ship.getArmorGrid()))
-//            return "ARMOR BALANCED";
-//        if (system.isActive())
-//            return "REBALANCING";
-//        return "READY";
-//    }
+    static WeaponAPI getEmptiestMissile(ShipAPI ship) {
+        WeaponAPI emptiestMissile = null;
+        float emptiestMissileRatio = 1;
+        //find out which missile has the least ammo
+        for (WeaponAPI weapon : ship.getAllWeapons()) {
+            if (weapon.getType() != WeaponAPI.WeaponType.MISSILE || !weapon.usesAmmo())
+                continue;
+
+            float weaponAmmoRatio = (float) weapon.getAmmo() / weapon.getMaxAmmo();
+            if (weaponAmmoRatio < emptiestMissileRatio) {
+                emptiestMissileRatio = weaponAmmoRatio;
+                emptiestMissile = weapon;
+            }
+        }
+        return emptiestMissile;
+    }
+
+    //TODO: STATUS TEXT
+    @Override
+    public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
+
+        if (system.isActive())
+            return "REBALANCING";
+        if (system.isActive())
+            return "FABRICATING";
+        return null;
+    }
+
+
+
 
     //literally just copied alex's map from the missile autoloader because he didn't make it an api call and I don't want to import
-    public static float getReloadCost(WeaponAPI weapon) {
+    static float getReloadCost(WeaponAPI weapon) {
         if (weapon.getSpec().hasTag(Tags.RELOAD_1PT)) return 1f;
         if (weapon.getSpec().hasTag(Tags.RELOAD_1_AND_A_HALF_PT)) return 1.5f;
         if (weapon.getSpec().hasTag(Tags.RELOAD_2PT)) return 2f;

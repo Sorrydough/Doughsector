@@ -165,8 +165,6 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
-		if (system.isOutOfAmmo() || system.getState() != ShipSystemAPI.SystemState.IDLE)
-			return null;
 		if (getAverageArmorPerCell(ship.getArmorGrid()) <= ship.getArmorGrid().getMaxArmorInCell() / 10)
 			return "ARMOR DESTROYED";
 		if (isArmorGridBalanced(ship.getArmorGrid()))
