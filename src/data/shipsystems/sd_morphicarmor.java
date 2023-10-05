@@ -20,14 +20,11 @@ import data.scripts.sd_util;
 public class sd_morphicarmor extends BaseShipSystemScript {
 	final static boolean debug = false;
 	final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
-	static final float DEVIATION_PERCENT = 1;
 	final Color JITTER_COLOR = new Color(250, 235, 215,55);
 	final Color JITTER_UNDER_COLOR = new Color(250, 235, 215,155);
 	final Color EMP_CENTER_COLOR = new Color(250, 235, 215, 205);
 	final Color EMP_EDGE_COLOR = new Color(255,120,80,105);
 	final float FLUX_PER_ARMOR = 3;
-
-
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
@@ -94,7 +91,6 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			ship.syncWeaponDecalsWithArmorDamage();
 		}
 	}
-
 	public static List<Vector2f> getCellsAroundAverage(ArmorGridAPI grid, boolean above) {
 		List<Vector2f> cells = new ArrayList<>();
 		float average = getAverageArmorPerCell(grid);
@@ -102,7 +98,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
 				float currentArmor = grid.getArmorValue(ix, iy);
 				boolean isAboveAverage = currentArmor > average;
-				boolean isWithinRange = sd_util.isNumberWithinRange(currentArmor, average, DEVIATION_PERCENT);
+				boolean isWithinRange = sd_util.isNumberWithinRange(currentArmor, average, 1);
 				if ((above && isAboveAverage && !isWithinRange) || (!above && !isAboveAverage && !isWithinRange)) {
 					cells.add(new Vector2f(ix, iy));
 				}
@@ -110,7 +106,6 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 		return cells;
 	}
-
 	public static float getAverageArmorPerCell(ArmorGridAPI grid) {
 		float armor = 0f;
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
@@ -120,7 +115,6 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 		return armor / (grid.getGrid().length * grid.getGrid()[0].length);
 	}
-
 	public static boolean isArmorGridBalanced(ArmorGridAPI grid) {
 		boolean balanced = false;
 		List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, true);
@@ -131,10 +125,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 
 		return balanced;
 	}
-
 	public static void drawVfx(Vector2f loc, ShipAPI ship, float size, float intensity) {
 		float sizeSqrt = (float) Math.sqrt(size);
-//		float intensity = 0.6f + Math.min((0.5f + ship.getFluxLevel()) * 0.4f, 0.4f);
 		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));
 		for (int i = 0; i < (2 + Math.round(sizeSqrt * 3)); i++) {
 			//sparks
@@ -157,9 +149,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	}
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {
-		if (index == 0) {
+		if (index == 0)
 			return new StatusData("Rebalancing armor", false);
-		}
 		return null;
 	}
 

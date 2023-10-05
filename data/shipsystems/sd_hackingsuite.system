@@ -1,9 +1,9 @@
 {
-	"id":"sd_quantumdisruptor",
+	"id":"sd_hackingsuite",
 	"type":"STAT_MOD",
 	"aiType":"ACAUSAL_DISRUPTOR",
 	
-	"statsScript":"data.shipsystems.sd_quantumdisruptor",
+	"statsScript":"data.shipsystems.sd_hackingsuite",
 	
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"system_quantumdisruptor",

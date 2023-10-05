@@ -6,15 +6,14 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipSystemAPI.SystemState;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
+import data.scripts.sd_util;
 import org.lazywizard.lazylib.MathUtils;
 
-public class sd_quantumdisruptor extends BaseShipSystemScript {
-
-
-
+public class sd_hackingsuite extends BaseShipSystemScript {
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
-			return; // TODO: DEBUG THIS VS. MONITOR, MAKE TEXT SIZE DEPEND ON HULLSIZE, HAVE SOUND AND VFX PLAY WITH A LISTENER PLUGIN STOLEN FROM ALEX DISRUPTOR CODE
+			return;
+		// TODO: DEBUG THIS VS. MONITOR, MAKE TEXT SIZE DEPEND ON HULLSIZE, HAVE SOUND AND VFX PLAY WITH A LISTENER PLUGIN STOLEN FROM ALEX DISRUPTOR CODE, DRAW A RING INDICATING SYSTEM RANGE
 
 		// set jitter effects for ourselves
 		ShipAPI ship = (ShipAPI) stats.getEntity();
@@ -34,44 +33,28 @@ public class sd_quantumdisruptor extends BaseShipSystemScript {
 			float duration = target.getSystem().getCooldownRemaining() + DISRUPTION_DURATION;
 			target.getSystem().setCooldown(duration);
 			target.getFluxTracker().playOverloadSound();
-			Global.getCombatEngine().addFloatingText(target.getLocation(), "System disabled for "+ Math.round(duration) +" seconds!", 20, Color.LIGHT_GRAY, target, 1, 10);
+			Global.getCombatEngine().addFloatingText(target.getLocation(), "System disabled for "+ Math.round(duration) +" seconds!",
+					20, Color.LIGHT_GRAY, target, 1, 10);
 		}
 	}
-	private static boolean isTargetValid(ShipAPI ship) {
+	public static boolean isTargetValid(ShipAPI ship) {
 		ShipAPI target = ship.getShipTarget();
 		if (target == null)
 			return false;
 		float targetDistance = MathUtils.getDistance(ship, target);
 		return target.getSystem() != null && !target.isFighter() && target != ship && !target.getFluxTracker().isOverloadedOrVenting() &&
-				!(targetDistance > ship.getMutableStats().getSystemRangeBonus().computeEffective(getOptimalRange(ship)));
-	}
-	private static float getOptimalRange(ShipAPI ship) {
-		float totalDPS = 0;
-		float totalWeightedRange = 0;
-		float optimalWeaponRange = 0;
-		for (WeaponAPI weapon : ship.getAllWeapons()) {
-			float weaponDPS = weapon.getSpec().getDerivedStats().getDps();
-			float weaponRange = weapon.getRange();
-
-			//adjust the weight based on DPS
-			totalWeightedRange += weaponRange * weaponDPS;
-			totalDPS += weaponDPS;
-		}
-		if (totalDPS > 0) {
-			optimalWeaponRange = totalWeightedRange / totalDPS;
-		}
-		return optimalWeaponRange;
+				!(targetDistance > ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship)) && target.getOwner() != ship.getOwner());
 	}
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 		if (system.isOutOfAmmo() || system.getState() == SystemState.COOLDOWN)
-			return "RECHARGING";
+			return "RECHARGING"; // TODO: FIGURE OUT A BETTER TEXT TO PUT HERE
 		if (!isTargetValid(ship))
 			return "NO TARGET";
-		if (MathUtils.getDistance(ship, ship.getShipTarget()) > ship.getMutableStats().getSystemRangeBonus().computeEffective(getOptimalRange(ship)))
+		if (MathUtils.getDistance(ship, ship.getShipTarget()) > ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship)))
 			return "OUT OF RANGE";
 		if (system.getState() != SystemState.IDLE)
-			return "DISABLING";
+			return "INTRUDING";
 		return "READY";
 	}
 	@Override

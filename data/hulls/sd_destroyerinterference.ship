@@ -13,8 +13,8 @@
   "builtInMods": [
     "sd_customai",
     "sd_designtech",
-    "delicate",
-    "sd_crampedracks"
+    "sd_crampedstowage",
+    "ecm"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

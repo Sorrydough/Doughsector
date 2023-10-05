@@ -1,0 +1,81 @@
+package data.shipsystems.ai;
+
+import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.util.IntervalUtil;
+import com.fs.starfarer.combat.entities.Ship;
+import data.shipsystems.sd_hackingsuite;
+import data.shipsystems.sd_morphicarmor;
+import org.lazywizard.console.Console;
+import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
+import org.lwjgl.util.vector.Vector2f;
+import data.scripts.sd_util;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class sd_hackingsuiteAI implements ShipSystemAIScript {
+    final IntervalUtil intervalShort = new IntervalUtil(0.01f, 0.01f);
+    final IntervalUtil intervalLong = new IntervalUtil(0.5f, 1f);
+    final float DEVIATION_PERCENT = 1;
+    final boolean debug = false;
+    List<ShipAPI> targets = new ArrayList<>();
+    ShipAPI ship;
+    float systemRange = 0;
+    final List<String> uselessSystems = new ArrayList<>(); {
+        uselessSystems.add("flarelauncher");
+    }
+    @Override
+    public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) { this.ship = ship; }
+    @Override
+    public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
+        if (!AIUtils.canUseSystemThisFrame(ship))
+            return;
+        // this stuff is on a slower interval cuz it's expensive
+        intervalLong.advance(amount);
+        if (intervalLong.intervalElapsed()) {
+            // calculate our system range, kinda important to have
+            if (systemRange == 0)
+                systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship));
+            // keep track of nearby targets
+            for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, systemRange)) {
+                if (sd_hackingsuite.isTargetValid(enemy))
+                    targets.add(enemy);
+            }
+            for (ShipAPI enemy : targets) {
+                if (MathUtils.getDistance(ship, enemy) > systemRange)
+                    targets.remove(enemy);
+            }
+        }
+        // no point going any further if we have no targets ))))
+        if (targets.isEmpty())
+            return;
+        intervalShort.advance(amount);
+        if (intervalShort.intervalElapsed()) {
+            float desirePos = 0;
+            float desireNeg = 0;
+            // We want the system on if:
+            // 1. A ship within range is using its system
+            for (ShipAPI enemy : targets) { // TODO: SCALE DESIRE BASED ON THE DP OF THE TARGET
+                if (enemy.getSystem().isOn()) {
+                    ship.setShipTarget(enemy);
+                    desirePos += 150;
+                }
+            }
+            // We don't want to use our system if:
+            // 1. Our flux level is too high
+            desireNeg -= (ship.getFluxLevel() * 100) * (0.5 + ship.getSystem().getFluxPerUse()); // this math is more frgile than you'd think
+            // 2. The enemy's system isn't worthwhile disabling
+            for (String system : uselessSystems) {
+                if (Objects.equals(target.getSystem().getId(), system))
+                    desireNeg -= 100;
+            }
+            float desireTotal = desirePos + desireNeg;
+            if (debug)
+                Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
+            if (desireTotal >= 100 && !ship.getSystem().isOn())
+                ship.useSystem();
+        }
+    }
+}

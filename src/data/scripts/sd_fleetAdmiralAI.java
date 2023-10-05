@@ -158,11 +158,10 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
             }
 
             //for debug. float text above all current assignments
-            if (debug) {
+            if (debug)
                 for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
-                    engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 150, Color.LIGHT_GRAY, null, 1, 10);
+                    engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 1, 10);
                 }
-            }
             assignmentsWithTargets.clear();
             allies.clear();
             enemies.clear();
@@ -177,12 +176,8 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
             this.assignment = assignment;
             this.object = object;
         }
-        public CombatFleetManagerAPI.AssignmentInfo getAssignment() {
-            return assignment;
-        }
-        public Object getObject() {
-            return object;
-        }
+        public CombatFleetManagerAPI.AssignmentInfo getAssignment() { return assignment; }
+        public Object getObject() { return object; }
     }
 
     static void sortByRecoveryCost(List<ShipAPI> ships) {

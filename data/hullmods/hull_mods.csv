@@ -1,7 +1,7 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sModDesc,sprite
 #Builtins,,,,,,,,,,,,,,,,,,,
 Beam Targeting Integration,sd_designtech,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_designtech,<tooltip created in the script>,,,graphics/hullmods/sd_designtech.png
-Cramped Racks,sd_crampedracks,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedracks,<tooltip created in the script>,,,graphics/hullmods/sd_crampedracks.png
+Cramped Stowage,sd_crampedstowage,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedstowage,<tooltip created in the script>,,,graphics/hullmods/sd_crampedstowage.png
 Hexshield,sd_hexshield,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shields unfold instantly. Instead of overloading the ship, its shield is disabled for %s seconds.",,,graphics/hullmods/sd_hexshield.png
 Improved Ship AI,sd_customai,,,,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/sd_improvedai.png
 Light Ground Support,sd_groundsupport,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/sd_groundsupport.png
