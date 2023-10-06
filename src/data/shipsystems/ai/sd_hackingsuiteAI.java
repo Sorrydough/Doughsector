@@ -16,18 +16,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class sd_hackingsuiteAI implements ShipSystemAIScript {
-    final IntervalUtil intervalShort = new IntervalUtil(0.01f, 0.01f);
-    final IntervalUtil intervalLong = new IntervalUtil(0.5f, 1f);
-    final float DEVIATION_PERCENT = 1;
-    final boolean debug = false;
-    List<ShipAPI> targets = new ArrayList<>();
-    ShipAPI ship;
-    float systemRange = 0;
     final List<String> uselessSystems = new ArrayList<>(); {
         uselessSystems.add("flarelauncher");
     }
+    List<ShipAPI> targets = new ArrayList<>();
+    final IntervalUtil intervalShort = new IntervalUtil(0.01f, 0.01f);
+    final IntervalUtil intervalLong = new IntervalUtil(0.5f, 1f);
+    final boolean debug = true;
+    float systemRange = 0;
+    ShipAPI ship;
     @Override
-    public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) { this.ship = ship; }
+    public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
+        this.ship = ship;
+    }
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         if (!AIUtils.canUseSystemThisFrame(ship))
@@ -43,9 +44,11 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                 if (sd_hackingsuite.isTargetValid(enemy))
                     targets.add(enemy);
             }
-            for (ShipAPI enemy : targets) {
-                if (MathUtils.getDistance(ship, enemy) > systemRange)
-                    targets.remove(enemy);
+            if (!targets.isEmpty()) {
+                for (ShipAPI enemy : targets) {
+                    if (MathUtils.getDistance(ship, enemy) > systemRange)
+                        targets.remove(enemy);
+                }
             }
         }
         // no point going any further if we have no targets ))))
@@ -55,9 +58,9 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
         if (intervalShort.intervalElapsed()) {
             float desirePos = 0;
             float desireNeg = 0;
-            // We want the system on if:
+            // We want to use the system if:
             // 1. A ship within range is using its system
-            for (ShipAPI enemy : targets) { // TODO: SCALE DESIRE BASED ON THE DP OF THE TARGET
+            for (ShipAPI enemy : targets) {
                 if (enemy.getSystem().isOn()) {
                     ship.setShipTarget(enemy);
                     desirePos += 150;
@@ -65,7 +68,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             }
             // We don't want to use our system if:
             // 1. Our flux level is too high
-            desireNeg -= (ship.getFluxLevel() * 100) * (0.5 + ship.getSystem().getFluxPerUse()); // this math is more frgile than you'd think
+            desireNeg -= (ship.getFluxLevel() * 100) * (0.5 + ship.getSystem().getFluxPerUse() / ship.getMaxFlux()); // this math is more fragile than you'd think
             // 2. The enemy's system isn't worthwhile disabling
             for (String system : uselessSystems) {
                 if (Objects.equals(target.getSystem().getId(), system))
@@ -74,7 +77,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             float desireTotal = desirePos + desireNeg;
             if (debug)
                 Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
-            if (desireTotal >= 100 && !ship.getSystem().isOn())
+            if (desireTotal >= 100)
                 ship.useSystem();
         }
     }

@@ -1,16 +1,13 @@
 {
 	"id":"sd_hackingsuite",
 	"type":"STAT_MOD",
-	"aiType":"ACAUSAL_DISRUPTOR",
-	
 	"statsScript":"data.shipsystems.sd_hackingsuite",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_hackingsuiteAI",
 	
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"system_quantumdisruptor",
 	"outOfUsesSound":"gun_out_of_ammo",
-	
-	"aiHints":{
-	}
 }
 
 

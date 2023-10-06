@@ -30,12 +30,9 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             // We want the system off if:
             // 1. Our flux level is too high
             desireNeg -= (ship.getHardFluxLevel() * 100 + ship.getFluxLevel() * 100);
-            // 2. We're at risk of overloading ourselves (or getting overloaded) // TODO: CHECK IF THIS CAN BE REMOVED NOW THAT I FOUND THE DO NOT PURSUE BUG
-            if (ship.getFluxLevel() >= 0.9) //&& ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)
-                desireNeg -= 50;
-            // 3. We could dissipate hardflux
+            // 2. We could dissipate hardflux
             if (sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1)) {
-                if (ship.getShield() == null || ship.getShield().isOff()) // TODO: CHECK THE SHIELD SHUNT BEHAVIOR AND SEE IF THAT NEEDS TO BE CHANGED AT ALL
+                if (ship.getShield() == null || ship.getShield().isOff())
                     desireNeg -= ship.getHardFluxLevel() * 100;
             }
             float desireTotal = desirePos + desireNeg;

@@ -8,8 +8,7 @@ import com.fs.starfarer.api.util.Misc;
 import java.util.*;
 
 public class sd_designtech extends BaseHullMod {
-    final Map<HullSize, Integer> BEAM_ITU_PERCENT = new HashMap<>();
-    {    //free ITU bonus for beams
+    final Map<HullSize, Integer> BEAM_ITU_PERCENT = new HashMap<>(); { // free ITU bonus for beams
         BEAM_ITU_PERCENT.put(HullSize.FIGHTER, 5);
         BEAM_ITU_PERCENT.put(HullSize.FRIGATE, 10);
         BEAM_ITU_PERCENT.put(HullSize.DESTROYER, 20);

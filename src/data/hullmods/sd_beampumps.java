@@ -49,13 +49,16 @@ public class sd_beampumps extends BaseHullMod {
 	public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
 		tooltip.addPara("Beams deal "+ DAMAGE_BONUS + "%% more damage.", 5f, Misc.getHighlightColor(), DAMAGE_BONUS + "%");
 		tooltip.addPara("Beams generate "+ FLUX_GENERATED_PENALTY + "%% more flux.", 5f, Misc.getHighlightColor(), (int)FLUX_GENERATED_PENALTY + "%");
-		tooltip.addPara("Reduces the portion of the range of beams that is above "+ RANGE_THRESHOLD +" range by " + Math.round((1f - RANGE_MULT) * 100f) + "%%. The base range is affected.", 2f, Misc.getHighlightColor(), String.valueOf(RANGE_THRESHOLD), Math.round((1f - RANGE_MULT) * 100f) + "%");
+		tooltip.addPara("Reduces the portion of the range of beams that is above "+ RANGE_THRESHOLD +" range by " + Math.round((1f - RANGE_MULT) * 100f) + "%%.", 2f, Misc.getHighlightColor(), String.valueOf(RANGE_THRESHOLD), Math.round((1f - RANGE_MULT) * 100f) + "%");
 		tooltip.addPara("Increases the refire delay of burst beams by "+ BURST_BEAM_PENALTY +"%%.",2f, Misc.getHighlightColor(), BURST_BEAM_PENALTY +"%");
-		tooltip.addSectionHeading("Interactions with other modifiers", Alignment.MID, 10f);
-		tooltip.addPara("The base range is reduced, therefore modifiers will apply to the reduced base value.", 2f);
+		tooltip.addSectionHeading("The base range is reduced, therefore modifiers will apply to the reduced base value.", Alignment.MID, 10f);
 	}
 	@Override
-	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) { return false; }
+	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
+		return false;
+	}
 	@Override
-	public boolean showInRefitScreenModPickerFor(ShipAPI ship) { return ship.getHullSpec().getManufacturer().equals("???"); }
+	public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
+		return ship.getHullSpec().getManufacturer().equals("???");
+	}
 }
