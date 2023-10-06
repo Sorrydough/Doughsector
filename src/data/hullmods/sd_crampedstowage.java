@@ -7,7 +7,7 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
 public class sd_crampedstowage extends BaseHullMod {
-    private final float EXTRA_AMMO_MULT = 0.5f;
+    final float EXTRA_AMMO_MULT = 0.5f;
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         for (WeaponAPI weapon : ship.getAllWeapons()) {
@@ -24,7 +24,8 @@ public class sd_crampedstowage extends BaseHullMod {
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("Ammunition bonuses for this ship's mixed hardpoints are reduced by "+ Math.round(EXTRA_AMMO_MULT * 100) +"%% rounded up.", 5f, Misc.getHighlightColor(), Math.round(EXTRA_AMMO_MULT * 100) +"%");
+        tooltip.addPara("Ammunition bonuses for this ship's mixed hardpoints are reduced by "+ Math.round((1 - EXTRA_AMMO_MULT) * 100) +"%% rounded up.", 5f,
+                Misc.getHighlightColor(), Math.round((1 - EXTRA_AMMO_MULT) * 100) +"%");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

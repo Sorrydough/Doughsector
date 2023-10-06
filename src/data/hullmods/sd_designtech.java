@@ -23,21 +23,26 @@ public class sd_designtech extends BaseHullMod {
         //need an exception for gunnery implants
         if (ship.getCaptain() != null && ship.getCaptain().getStats().hasSkill("gunnery_implants"))
             extra += 15;
-
-        float bonusToGive = (BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod() - extra, -extra)) + extra;
+        float bonusToGive = (BEAM_ITU_PERCENT.get(ship.getHullSize()) - Math.max(ship.getMutableStats().getEnergyWeaponRangeBonus().getPercentMod() - extra, -extra)) + extra; //fuck I hate math
         //make sure to check whether the bonus is positive, we don't want to accidentally subtract if the player overcomes our targeting bonus
         if (bonusToGive > 0)
             ship.getMutableStats().getBeamWeaponRangeBonus().modifyPercent(id, bonusToGive);
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("Beams recieve a 10/20/40/60%% range bonus by hull size.", 5f, Misc.getHighlightColor(), "10/20/40/60%");
+        tooltip.addPara("Beams recieve a 10/20/40/60%% range bonus by hull size.", 5f,
+                Misc.getHighlightColor(), "10/20/40/60%"); //hardcode deez nuts
         tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.", 5f,
                 Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.");
-        tooltip.addPara("Design spec is incompatible with: High Scatter Amplifier, Converted Hangar, and Safety Overrides.", 10f, Misc.getNegativeHighlightColor(), "incompatible with:");
+        tooltip.addPara("Design spec is incompatible with: High Scatter Amplifier, Converted Hangar, and Safety Overrides.", 10f,
+                Misc.getNegativeHighlightColor(), "incompatible with:");
     }
     @Override
-    public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) { return false; }
+    public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
+        return false;
+    }
     @Override
-    public boolean showInRefitScreenModPickerFor(ShipAPI ship) { return ship.getHullSpec().getManufacturer().equals("???"); }
+    public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
+        return ship.getHullSpec().getManufacturer().equals("???");
+    }
 }

@@ -17,7 +17,7 @@ public class drawSystemRadius extends BaseCombatLayeredRenderingPlugin {
         this.width = width;
         this.color = color;
     }
-    public void render(CombatEngineLayers layer, ViewportAPI viewport) {
+    public void render(CombatEngineLayers layer, ViewportAPI viewport) { // TODO: COPY SOTF CODE TO MAKE THIS STOP BEING BUGGY AF
         if (ship.getSystem().getState().equals(ShipSystemAPI.SystemState.IDLE)) {
             GL11.glLineWidth(3);
             GL11.glEnable(GL11.GL_BLEND);
