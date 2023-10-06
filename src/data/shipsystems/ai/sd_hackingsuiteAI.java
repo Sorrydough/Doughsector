@@ -2,9 +2,7 @@ package data.shipsystems.ai;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import com.fs.starfarer.combat.entities.Ship;
 import data.shipsystems.sd_hackingsuite;
-import data.shipsystems.sd_morphicarmor;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
