@@ -3,6 +3,7 @@ package data.shipsystems.ai;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import data.shipsystems.sd_hackingsuite;
+
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -36,7 +37,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
         if (intervalLong.intervalElapsed()) {
             // calculate our system range, kinda important to have
             if (systemRange == 0)
-                systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship));
+                systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) * 1.2f);
             // keep track of nearby targets
             for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, systemRange)) {
                 if (sd_hackingsuite.isTargetValid(enemy))
