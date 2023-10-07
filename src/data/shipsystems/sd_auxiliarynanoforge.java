@@ -7,28 +7,66 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
     final float BAY_REPLENISHMENT_AMOUNT = 0.10f;
     final float MISSILE_COOLDOWN_PENALTY = 5;
     static final float MISSILE_RELOAD_AMOUNT = 2;
-    WeaponAPI emptiestMissile = null;
+    boolean doOnce = true;
+    boolean restoreFighters = true;
+    List<WeaponSlotAPI> slots = new ArrayList<>();
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
         ShipAPI ship = (ShipAPI) stats.getEntity();
-        WeaponSlotAPI slot = null;
-
-        emptiestMissile = getEmptiestMissile(ship);
-        float emptiestMissileRatio = getAmmoRatio(emptiestMissile);
-
-        if (effectLevel == 1) {
-            // find out which missile has the least ammo and its ratio
-            // if fighters are at a lower "ammo" than the lowest missile, then restore fighters - there's an inspection bug with getEmptiestMissile, suppress the error for my own sanity
-            if (emptiestMissile == null || ship.getSharedFighterReplacementRate() < emptiestMissileRatio) {
+        // find out which missile has the least ammo and its ratio
+        WeaponAPI weapon = getEmptiestMissile(ship);
+        float emptiestMissileRatio = getAmmoRatio(weapon);
+        if (doOnce && ship.getSystem().isChargeup()) { // need a doOnce here to prevent the vfx location from "shifting" after restoration has occurred
+            slots.clear(); //clear any remembered slots from the previous use of the system
+            // if there's no weapon to restore ammo to, make a list of our fighter bays to do vfx on
+            if (weapon == null || ship.getSharedFighterReplacementRate() < emptiestMissileRatio) {
+                for (FighterLaunchBayAPI bay : ship.getLaunchBaysCopy()) {
+                    if (bay.getWing() == null)
+                        continue;
+                    slots.add(bay.getWeaponSlot());
+                }
+            } else { //if we're going to restore ammo then set the flag
+                slots.add(weapon.getSlot());
+                restoreFighters = false;
+            }
+            doOnce = false;
+        }
+        //do vfx, holy shit this was a pain in the ass and I had to refactor the entire script architecture to get it to work seamlessly
+        if (slots.size() > 0) { // TODO: CUT ALL THIS BULLSHIT, SET WEAPON TO GLOW, SET HANGAR DECO WEAPON TO HAVE A GLOW SPRITE
+            for (WeaponSlotAPI slot : slots) {
+                CombatEngineAPI engine = Global.getCombatEngine();
+                Vector2f location = slot.computePosition(ship);
+                Color particleColor = new Color(255, 120, 80, Math.round(105 * effectLevel));
+                engine.addSmoothParticle(location, ship.getVelocity(), MathUtils.getRandomNumberInRange(25f, 35f), effectLevel, 0.1f, particleColor);
+                Vector2f fastParticleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(80f, 250f),
+                        slot.computeMidArcAngle(ship) + MathUtils.getRandomNumberInRange(-17f, 17f));
+                float randomSize01 = MathUtils.getRandomNumberInRange(3f, 5f);
+                engine.addSmoothParticle(MathUtils.getRandomPointOnCircumference(location, 10f), fastParticleVel, randomSize01, effectLevel,
+                        MathUtils.getRandomNumberInRange(0.2f, 0.25f), new Color(255,120,80,105));
+                for (int b = 0; b < 2; b++) {
+                    Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(35f, 125f),
+                            slot.computeMidArcAngle(ship) + MathUtils.getRandomNumberInRange(-20f, 20f));
+                    float randomSize1 = MathUtils.getRandomNumberInRange(3f, 5f);
+                    engine.addSmoothParticle(MathUtils.getRandomPointOnCircumference(location, 10f), particleVel, randomSize1, effectLevel,
+                            MathUtils.getRandomNumberInRange(0.35f, 0.5f), particleColor);
+                }
+            }
+        }
+        // the actual restoration effects occur here
+        if (effectLevel == 1) { // need to check effectLevel to prevent the restoration from occurring multiple times
+            if (restoreFighters) { // if fighters are at a lower "ammo" than the lowest missile, then restore fighters
                 for (FighterLaunchBayAPI bay : ship.getLaunchBaysCopy()) {
                     if (bay.getWing() == null)
                         continue;
@@ -40,35 +78,16 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
                     bay.makeCurrentIntervalFast();
                     if (fightersToAdd > 0 && bay.getWing().getWingMembers().size() < maxWingSize)
                         bay.setFastReplacements(fightersToAdd);
-                    slot = bay.getWeaponSlot();
                 }
             } else { // otherwise, restore ammo to the missile
-                int maxAmmo = emptiestMissile.getMaxAmmo();
-                int ammoAfterReload = Math.min(emptiestMissile.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(emptiestMissile)), maxAmmo);
-                emptiestMissile.setAmmo(ammoAfterReload);
-                emptiestMissile.setRemainingCooldownTo(MISSILE_COOLDOWN_PENALTY + emptiestMissile.getCooldown() + emptiestMissile.getCooldownRemaining());
-                slot = emptiestMissile.getSlot();
+                assert weapon != null;
+                int maxAmmo = weapon.getMaxAmmo();
+                int ammoAfterReload = Math.min(weapon.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(weapon)), maxAmmo);
+                weapon.setAmmo(ammoAfterReload);
+                weapon.setRemainingCooldownTo(MISSILE_COOLDOWN_PENALTY + weapon.getCooldown() + weapon.getCooldownRemaining());
             }
-        }
-        if (slot != null) {
-            //TODO: fix vfx being drawn during chargedown only
-            doVFX(ship, slot, Global.getCombatEngine());
-        }
-    }
-    void doVFX(ShipAPI ship, WeaponSlotAPI slot, CombatEngineAPI engine) {
-        Vector2f location = slot.computePosition(ship);
-        engine.addFloatingText(location, "YOUR MOM!",
-                25, Color.LIGHT_GRAY, ship, 1, 10);
-        for (int a = 0; a < 10; a++) {
-            engine.addSmoothParticle(location, ship.getVelocity(), MathUtils.getRandomNumberInRange(25f, 35f), 1, 0.1f, new Color(255, 120, 80, 1));
-            Vector2f fastParticleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(80f, 250f), slot.computeMidArcAngle(ship) + MathUtils.getRandomNumberInRange(-17f, 17f));
-            float randomSize01 = MathUtils.getRandomNumberInRange(3f, 5f);
-            engine.addSmoothParticle(MathUtils.getRandomPointOnCircumference(location, 4f), fastParticleVel, randomSize01, 1, MathUtils.getRandomNumberInRange(0.2f, 0.25f), new Color(255, 120, 80, 1));
-            for (int b = 0; b < 3; b++) {
-                Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), MathUtils.getRandomNumberInRange(35f, 125f), slot.computeMidArcAngle(ship) + MathUtils.getRandomNumberInRange(-20f, 20f));
-                float randomSize1 = MathUtils.getRandomNumberInRange(3f, 5f);
-                engine.addSmoothParticle(MathUtils.getRandomPointOnCircumference(location, 4f), particleVel, randomSize1, 1, MathUtils.getRandomNumberInRange(0.35f, 0.5f), new Color(255, 120, 80, 1));
-            }
+            restoreFighters = true;
+            doOnce = true;
         }
     }
     static WeaponAPI getEmptiestMissile(ShipAPI ship) {
@@ -99,6 +118,8 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
     public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
         if (system.isOutOfAmmo() || system.isActive() || system.getState() == ShipSystemAPI.SystemState.COOLDOWN)
             return "FABRICATING";
+        if (!AIUtils.canUseSystemThisFrame(ship))
+            return "STANDBY";
         WeaponAPI emptiestMissile = getEmptiestMissile(ship);
         float ammoRatio = getAmmoRatio(emptiestMissile);
         float replacementRate = ship.getSharedFighterReplacementRate();
@@ -110,7 +131,7 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
     }
     @Override
     public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-        return canRestoreAmmo(getEmptiestMissile(ship)) || ship.getSharedFighterReplacementRate() <= 0.9;
+        return AIUtils.canUseSystemThisFrame(ship) && (canRestoreAmmo(getEmptiestMissile(ship)) || ship.getSharedFighterReplacementRate() <= 0.9);
     }
     // literally just copied alex's map from the missile autoloader because he didn't make it an api call and I don't want to import
     static float getReloadCost(WeaponAPI weapon) {

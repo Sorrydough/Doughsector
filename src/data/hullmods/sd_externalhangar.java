@@ -15,7 +15,7 @@ public class sd_externalhangar extends BaseHullMod {
     final int WING_RANGE_MULT = 0;
     final int BOMBER_PENALTY = 10000;
     final Map<HullSize, Float> REFIT_MOD = new HashMap<>(); {
-        REFIT_MOD.put(HullSize.FRIGATE, 5f);
+        REFIT_MOD.put(HullSize.FRIGATE, 10f);
         REFIT_MOD.put(HullSize.DESTROYER, 2f);
         REFIT_MOD.put(HullSize.CRUISER, 1f);
         REFIT_MOD.put(HullSize.CAPITAL_SHIP, 0.75f);
@@ -38,8 +38,8 @@ public class sd_externalhangar extends BaseHullMod {
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("Installs a hangar on the ship with 20/50/100/125%% rebuild speed by hullsize.", 5,
-                Misc.getHighlightColor(), "20/50/100/125%"); // I hate this so much, literally not even worth my mindspace to make it inherit the modifier dynamically
+        tooltip.addPara("Installs a hangar on the ship with 10/50/100/125%% rebuild speed by hullsize.", 5,
+                Misc.getHighlightColor(), "10/50/100/125%"); // I hate this so much, literally not even worth my mindspace to make it inherit the modifier dynamically
         tooltip.addPara("Fighters are unable to leave the vicinity of their ship.", 5);
         tooltip.addPara("Minimum crew is increased by "+ CREW_PENALTY +".", 2,
                 Misc.getHighlightColor(), String.valueOf(CREW_PENALTY));

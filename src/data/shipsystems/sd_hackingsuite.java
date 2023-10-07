@@ -60,7 +60,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 		target.getSystem().setCooldown(duration);
 		engine.addFloatingText(target.getLocation(), "System disabled for "+ Math.round(duration) +" seconds!",
 				FONT_SIZE.get(target.getHullSize()), Color.LIGHT_GRAY, target, 1, 10);
-		engine.addPlugin(new BaseEveryFrameCombatPlugin() {
+		engine.addPlugin(new BaseEveryFrameCombatPlugin() { // TODO: MOVE THIS INTO ITS OWN CLASS, SIMILAR TO THE PPT CHRONOBOOST
 			float time = 0;
 			boolean doOnce = true;
 			final IntervalUtil interval = new IntervalUtil(1f, 1f);
