@@ -25,7 +25,7 @@ public class sd_capacitorpurge extends BaseHullMod {
                 Misc.getHighlightColor(), Math.round(CAPACITOR_CONVERSION * 100) +"%");
         tooltip.addPara("Peak performance time reduced by "+ Math.round((1 - PPT_PENALTY) * 100) +"%%.", 5f,
                 Misc.getHighlightColor(), Math.round((1 - PPT_PENALTY) * 100) +"%");
-        tooltip.addSectionHeading("Dissipation bonus is applied after all other vent rate bonuses.", Alignment.MID, 10f);
+        tooltip.addSectionHeading("Bonus is applied after all other vent rate bonuses.", Alignment.MID, 10f);
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

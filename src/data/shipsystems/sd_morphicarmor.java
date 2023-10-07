@@ -147,13 +147,11 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		ripple.setIntensity(intensity);
 		DistortionShader.addDistortion(ripple);
 	}
-
 	public StatusData getStatusData(int index, State state, float effectLevel) {
 		if (index == 0)
 			return new StatusData("Rebalancing armor", false);
 		return null;
 	}
-
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 		if (getAverageArmorPerCell(ship.getArmorGrid()) <= ship.getArmorGrid().getMaxArmorInCell() / 10)
@@ -164,7 +162,6 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			return "REBALANCING";
 		return "READY";
 	}
-
 	@Override
 	public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
 		return getAverageArmorPerCell(ship.getArmorGrid()) > ship.getArmorGrid().getMaxArmorInCell() / 10 && !isArmorGridBalanced(ship.getArmorGrid());
