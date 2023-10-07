@@ -71,7 +71,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
 			float intensity = getAverageArmorPerCell(grid) / grid.getMaxArmorInCell();
-			float thickness = (2 + amountToTransfer) * intensity;
+			float thickness = (2 + amountToTransfer * 2) * intensity;
 			if (isToAddInBounds)
 				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, thickness, EMP_EDGE_COLOR, EMP_CENTER_COLOR);
 			//draw spark effects on the cell if it's within bounds

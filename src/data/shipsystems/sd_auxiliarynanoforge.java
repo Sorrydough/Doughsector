@@ -15,17 +15,20 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
     final float BAY_REPLENISHMENT_AMOUNT = 0.10f;
     final float MISSILE_COOLDOWN_PENALTY = 5;
     static final float MISSILE_RELOAD_AMOUNT = 2;
+    WeaponAPI emptiestMissile = null;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
         ShipAPI ship = (ShipAPI) stats.getEntity();
         WeaponSlotAPI slot = null;
-        if (ship.getSystem().getEffectLevel() == 1) {
+
+        emptiestMissile = getEmptiestMissile(ship);
+        float emptiestMissileRatio = getAmmoRatio(emptiestMissile);
+
+        if (effectLevel == 1) {
             // find out which missile has the least ammo and its ratio
-            WeaponAPI weapon = getEmptiestMissile(ship);
-            float emptiestMissileRatio = getAmmoRatio(weapon);
             // if fighters are at a lower "ammo" than the lowest missile, then restore fighters - there's an inspection bug with getEmptiestMissile, suppress the error for my own sanity
-            if (weapon == null || ship.getSharedFighterReplacementRate() < emptiestMissileRatio) {
+            if (emptiestMissile == null || ship.getSharedFighterReplacementRate() < emptiestMissileRatio) {
                 for (FighterLaunchBayAPI bay : ship.getLaunchBaysCopy()) {
                     if (bay.getWing() == null)
                         continue;
@@ -40,11 +43,11 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
                     slot = bay.getWeaponSlot();
                 }
             } else { // otherwise, restore ammo to the missile
-                int maxAmmo = weapon.getMaxAmmo();
-                int ammoAfterReload = Math.min(weapon.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(weapon)), maxAmmo);
-                weapon.setAmmo(ammoAfterReload);
-                weapon.setRemainingCooldownTo(MISSILE_COOLDOWN_PENALTY + weapon.getCooldown() + weapon.getCooldownRemaining());
-                slot = weapon.getSlot();
+                int maxAmmo = emptiestMissile.getMaxAmmo();
+                int ammoAfterReload = Math.min(emptiestMissile.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(emptiestMissile)), maxAmmo);
+                emptiestMissile.setAmmo(ammoAfterReload);
+                emptiestMissile.setRemainingCooldownTo(MISSILE_COOLDOWN_PENALTY + emptiestMissile.getCooldown() + emptiestMissile.getCooldownRemaining());
+                slot = emptiestMissile.getSlot();
             }
         }
         if (slot != null) {
