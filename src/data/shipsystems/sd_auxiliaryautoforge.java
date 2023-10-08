@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
+public class sd_auxiliaryautoforge extends BaseShipSystemScript  {
     final float BAY_REPLENISHMENT_AMOUNT = 0.10f;
     final float MISSILE_COOLDOWN_PENALTY = 5;
     static final float MISSILE_RELOAD_AMOUNT = 2;
@@ -80,7 +80,10 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
                         bay.setFastReplacements(fightersToAdd);
                 }
             } else { // otherwise, restore ammo to the missile
-                assert weapon != null;
+                if (weapon == null) {
+                    Console.showMessage("please report bug in auxiliary autoforge");
+                    return;
+                }
                 int maxAmmo = weapon.getMaxAmmo();
                 int ammoAfterReload = Math.min(weapon.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(weapon)), maxAmmo);
                 weapon.setAmmo(ammoAfterReload);
@@ -116,10 +119,10 @@ public class sd_auxiliarynanoforge extends BaseShipSystemScript  {
     }
     @Override
     public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
-        if (system.isOutOfAmmo() || system.isActive() || system.getState() == ShipSystemAPI.SystemState.COOLDOWN)
+        if (system.isActive())
             return "FABRICATING";
         if (!AIUtils.canUseSystemThisFrame(ship))
-            return "STANDBY";
+            return "RESETTING";
         WeaponAPI emptiestMissile = getEmptiestMissile(ship);
         float ammoRatio = getAmmoRatio(emptiestMissile);
         float replacementRate = ship.getSharedFighterReplacementRate();

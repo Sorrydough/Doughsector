@@ -18,10 +18,12 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            // the system automatically shuts off when it does nothing, so we can just return in that case
+            ArmorGridAPI grid = ship.getArmorGrid();
+            // god fucking damn that's a lotta prereqs
             if (!AIUtils.canUseSystemThisFrame(ship) || (!ship.getSystem().isOn() && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE)) ||
-                    sd_morphicarmor.isArmorGridBalanced(ship.getArmorGrid()) || sd_morphicarmor.getCellsAroundAverage(ship.getArmorGrid(), true).size() == 0)
-                return;
+                    sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD || ship.getFluxLevel() >= sd_morphicarmor.HIGH_FLUX ||
+                    sd_morphicarmor.isArmorGridBalanced(grid) || sd_morphicarmor.getCellsAroundAverage(grid, true).size() == 0)
+                return; // the system automatically shuts off when it does nothing, so we can just return in that case
             float desirePos = 0;
             float desireNeg = 0;
             // We want the system on if:
@@ -35,6 +37,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
                 if (ship.getShield() == null || ship.getShield().isOff())
                     desireNeg -= ship.getHardFluxLevel() * 100;
             }
+            // system has a failsafe to shut itself off if the ship's about to flux itself out with it, so we don't need to write AI for that case
             float desireTotal = desirePos + desireNeg;
             if (debug)
                 Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);

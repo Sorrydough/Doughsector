@@ -1,7 +1,7 @@
 {
-	"id":"sd_auxiliarynanoforge",
+	"id":"sd_auxiliaryautoforge",
 	"type":"STAT_MOD",
-	"statsScript":"data.shipsystems.sd_auxiliarynanoforge",
+	"statsScript":"data.shipsystems.sd_auxiliaryautoforge",
 	"aiType":"CUSTOM",
 	"aiScript":"data.shipsystems.ai.sd_morphicarmorAI",
 	
