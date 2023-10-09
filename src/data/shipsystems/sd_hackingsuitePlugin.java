@@ -24,7 +24,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
         FONT_SIZE.put(ShipAPI.HullSize.CRUISER, 50);
         FONT_SIZE.put(ShipAPI.HullSize.CAPITAL_SHIP, 60);
     }
-    final Color fadeColor = new Color(250, 235, 215,75);
+    final Color fadeColor = new Color(230, 215, 195,100);
     final IntervalUtil interval = new IntervalUtil(1f, 1f);
     final Random rand = new Random();
     boolean doOnce = true;

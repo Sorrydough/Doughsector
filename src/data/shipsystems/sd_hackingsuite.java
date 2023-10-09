@@ -24,7 +24,6 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
-		// TODO: DRAW A RING INDICATING SYSTEM RANGE
 		// TODO: MAKE THE REMAINDER COOLDOWN SCALE OFF THE TARGET'S HULL SIZE
 		// set jitter effects for ourselves
 		ShipAPI ship = (ShipAPI) stats.getEntity();
@@ -51,12 +50,12 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 		if (system.isOutOfAmmo() || system.getState() == SystemState.COOLDOWN)
 			return "COOLDOWN";
+		if (system.isActive())
+			return "INTRUDING";
 		if (!AIUtils.canUseSystemThisFrame(ship))
 			return "STANDBY";
 		if (!isTargetValid(ship, ship.getShipTarget()))
 			return "NO TARGET";
-		if (system.getState() != SystemState.IDLE)
-			return "INTRUDING";
 		return "READY";
 	}
 	@Override

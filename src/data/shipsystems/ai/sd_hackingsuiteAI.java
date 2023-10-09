@@ -51,14 +51,12 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                         targets.remove(enemy);
                 }
             }
-            Console.showMessage(targets.toString());
         }
         // no point going any further if we have no targets ))))
         if (targets.isEmpty())
             return;
         intervalShort.advance(amount);
         if (intervalShort.intervalElapsed()) {
-//            Console.showMessage("urmum");
             float desirePos = 0;
             float desireNeg = 0;
             // We want to use the system if:
