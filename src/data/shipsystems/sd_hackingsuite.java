@@ -25,7 +25,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
 		// TODO: DRAW A RING INDICATING SYSTEM RANGE
-		// TODO: MAKE THE REMAINDER COOLDOWN SCALE OFF THE TARGET'S HULL SIZE,
+		// TODO: MAKE THE REMAINDER COOLDOWN SCALE OFF THE TARGET'S HULL SIZE
 		// set jitter effects for ourselves
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		float jitterLevel = effectLevel;
@@ -39,13 +39,13 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 		if (ship.getSystem().getEffectLevel() == 1)
 			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(ship.getShipTarget()));
 	}
-	public static boolean isTargetValid(ShipAPI ship) {
-		ShipAPI target = ship.getShipTarget();
-		if (target == null)
-			return false; // checks whether the target is in range and whether it's likely to even have a system that we'd want to disable
+	public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range and whether it's likely to even have a system that we'd want to disable
+		if (target == null)												// needs to take target as an input to work in the AI script
+			return false;
 		float targetDistance = MathUtils.getDistance(ship, target);
+		float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
 		return target.getSystem() != null && !target.isFighter() && target != ship && !target.getFluxTracker().isOverloadedOrVenting() &&
-				!(targetDistance > ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship)) && target.getOwner() != ship.getOwner());
+				!(targetDistance > systemRange) && target.getOwner() != ship.getOwner();
 	}
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
@@ -53,16 +53,14 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			return "COOLDOWN";
 		if (!AIUtils.canUseSystemThisFrame(ship))
 			return "STANDBY";
-		if (!isTargetValid(ship))
+		if (!isTargetValid(ship, ship.getShipTarget()))
 			return "NO TARGET";
-		if (MathUtils.getDistance(ship, ship.getShipTarget()) > ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship)))
-			return "OUT OF RANGE";
 		if (system.getState() != SystemState.IDLE)
 			return "INTRUDING";
 		return "READY";
 	}
 	@Override
 	public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-		return isTargetValid(ship) && AIUtils.canUseSystemThisFrame(ship);
+		return isTargetValid(ship, ship.getShipTarget()) && AIUtils.canUseSystemThisFrame(ship);
 	}
 }

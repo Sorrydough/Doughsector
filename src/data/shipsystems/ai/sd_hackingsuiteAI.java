@@ -1,5 +1,6 @@
 package data.shipsystems.ai;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import data.shipsystems.sd_hackingsuite;
@@ -10,6 +11,7 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import data.scripts.sd_util;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +23,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
     List<ShipAPI> targets = new ArrayList<>();
     final IntervalUtil intervalShort = new IntervalUtil(0.01f, 0.01f);
     final IntervalUtil intervalLong = new IntervalUtil(0.5f, 1f);
-    final boolean debug = true;
+    final boolean debug = false;
     float systemRange = 0;
     ShipAPI ship;
     @Override
@@ -37,24 +39,26 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
         if (intervalLong.intervalElapsed()) {
             // calculate our system range, kinda important to have
             if (systemRange == 0)
-                systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) * 1.2f);
+                systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
             // keep track of nearby targets
             for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, systemRange)) {
-                if (sd_hackingsuite.isTargetValid(enemy))
+                if (!targets.contains(enemy) && sd_hackingsuite.isTargetValid(ship, enemy))
                     targets.add(enemy);
             }
             if (!targets.isEmpty()) {
-                for (ShipAPI enemy : targets) {
+                for (ShipAPI enemy : new ArrayList<>(targets)) { // doing some shenanigans to bypass a concurrent modification exception
                     if (MathUtils.getDistance(ship, enemy) > systemRange)
                         targets.remove(enemy);
                 }
             }
+            Console.showMessage(targets.toString());
         }
         // no point going any further if we have no targets ))))
         if (targets.isEmpty())
             return;
         intervalShort.advance(amount);
         if (intervalShort.intervalElapsed()) {
+//            Console.showMessage("urmum");
             float desirePos = 0;
             float desireNeg = 0;
             // We want to use the system if:
@@ -75,7 +79,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             }
             float desireTotal = desirePos + desireNeg;
             if (debug)
-                Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
+                Global.getCombatEngine().addFloatingText(ship.getLocation(), "Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg, 20, Color.CYAN, ship, 5, 5);
             if (desireTotal >= 100)
                 ship.useSystem();
         }
