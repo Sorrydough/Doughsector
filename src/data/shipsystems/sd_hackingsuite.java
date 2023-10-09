@@ -50,7 +50,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 		if (system.isOutOfAmmo() || system.getState() == SystemState.COOLDOWN)
-			return "RESETTING";
+			return "COOLDOWN";
 		if (!AIUtils.canUseSystemThisFrame(ship))
 			return "STANDBY";
 		if (!isTargetValid(ship))

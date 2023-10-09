@@ -31,7 +31,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             desirePos += 150;
             // We want the system off if:
             // 1. Our flux level is too high
-            desireNeg -= (ship.getHardFluxLevel() * 100 + ship.getFluxLevel() * 100);
+            desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
             // 2. We could dissipate hardflux
             if (sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1)) {
                 if (ship.getShield() == null || ship.getShield().isOff())

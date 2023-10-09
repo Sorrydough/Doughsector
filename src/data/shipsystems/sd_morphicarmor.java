@@ -121,10 +121,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		boolean balanced = false;
 		List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, true);
 		List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, false);
-
 		if (cellsAboveAverage.size() == 0 || cellsBelowAverage.size() == 0)
 			balanced = true;
-
 		return balanced;
 	}
 	public static void drawVfx(Vector2f loc, ShipAPI ship, float size, float intensity) {
@@ -156,11 +154,12 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	}
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
+		ArmorGridAPI grid = ship.getArmorGrid();
 		if (ship.getFluxLevel() >= HIGH_FLUX)
 			return "STANDBY";
-		if (getAverageArmorPerCell(ship.getArmorGrid()) <= ship.getArmorGrid().getMaxArmorInCell() * DESTROYED_THRESHOLD)
+		if (getAverageArmorPerCell(ship.getArmorGrid()) <= grid.getMaxArmorInCell() * DESTROYED_THRESHOLD)
 			return "ARMOR DESTROYED";
-		if (isArmorGridBalanced(ship.getArmorGrid()))
+		if (isArmorGridBalanced(grid))
 			return "ARMOR BALANCED";
 		if (system.isActive())
 			return "REBALANCING";

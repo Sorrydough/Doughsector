@@ -93,7 +93,7 @@ public class sd_customai extends BaseHullMod {
                 if (Objects.equals(weapon.getSpec().getWeaponId(), "squall")) {
                     if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == HullSize.FRIGATE)) {
                         weapon.setForceNoFireOneFrame(true);
-                        if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)))
+                        if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))))
                             ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
                     }
                     if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
@@ -101,7 +101,7 @@ public class sd_customai extends BaseHullMod {
                     ShipAPI autofireAITarget = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip(); //autofire is an entirely separate AI from the main ship
                     if (autofireAITarget != null && (autofireAITarget.getShipTarget().getShield() == null || autofireAITarget.getShipTarget().getHullSize() == HullSize.FRIGATE)) {
                         weapon.setForceNoFireOneFrame(true);
-                        if (weapon.isInBurst() && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)))
+                        if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))))
                             ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
                     }
                 }

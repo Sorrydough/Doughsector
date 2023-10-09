@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_destroyercarrier",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_destroyercarrier.png",
@@ -15,12 +16,11 @@
     "sd_designtech"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_blinker",
+    "DEC01": "sd_destroyercarrier_hangar",
     "DEC02": "sd_blinker",
     "DEC03": "sd_blinker",
     "DEC04": "sd_blinker",
-    "DEC05": "sd_destroyercarrier_hangar",
-    "THR01": "sd_magicThruster",
+    "DEC05": "sd_blinker",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
     "THR04": "sd_magicThruster"
@@ -90,7 +90,7 @@
       "locations": [-76, -32.5]
     },
     {
-      "id": "DEC05",
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -123,7 +123,7 @@
       ]
     },
     {
-      "id": "DEC04",
+      "id": "DEC05",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -132,7 +132,7 @@
       "locations": [-38.5, 32.5]
     },
     {
-      "id": "DEC03",
+      "id": "DEC04",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -141,7 +141,7 @@
       "locations": [25, 31]
     },
     {
-      "id": "DEC02",
+      "id": "DEC03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -150,7 +150,7 @@
       "locations": [58.5, -26.5]
     },
     {
-      "id": "DEC01",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",

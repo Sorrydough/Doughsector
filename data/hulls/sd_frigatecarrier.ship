@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_frigatecarrier",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_frigatecarrier.png",
@@ -16,10 +17,10 @@
     "sd_crampedstowage"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_blinker",
+    "DEC01": "sd_frigatecarrier_hangar",
     "DEC02": "sd_blinker",
     "DEC03": "sd_blinker",
-    "DEC04": "sd_frigatecarrier_hangar",
+    "DEC04": "sd_blinker",
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
@@ -54,7 +55,7 @@
       "locations": [39, -0]
     },
     {
-      "id": "DEC03",
+      "id": "DEC04",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -99,7 +100,7 @@
       "locations": [-8.5, -29.5]
     },
     {
-      "id": "DEC02",
+      "id": "DEC03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -108,7 +109,7 @@
       "locations": [22, -19.5]
     },
     {
-      "id": "DEC01",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -117,7 +118,7 @@
       "locations": [43, 12.5]
     },
     {
-      "id": "DEC04",
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
