@@ -1,7 +1,5 @@
 Ship System Stuff:
-- Configure AI threat indicators for ship systems
 - Make the AM canisters go vaguely in the direction of the nearest threat instead of being completely random
-- Write custom quantum disruptor AI
 
 Misc Stuff:
 - Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
@@ -38,46 +36,18 @@ Post-Release Stuff:
 - Make sure the forum download link is hidden behind a simple riddle
 - When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
 
-investigate stasis field for support destroyer - use custom data like on quantum disruptor, check if you can modify timescale on projectiles, cope with modifying velocity speed and maneuverability if not
-return customdata to quantum disruptor, alter stats to have very short duration, scale its range based on the optimal range of installed weapons
-use orange as my "high-tech bullshit" color - emp arcs, hexshields, venting, etc
 lunalib compatibility
 interfere with commissioned crews and substance abuse
-
 modify tags on various vanilla weapons to improve AI behavior
-
 figure out some way to make my ships stop trying to rotate their armor
-custom reaper AI that makes them not blow ass, alternatively dragoncocks
-if carriers have defensive targeting array, tag them as COMBAT and NO AUTO ESCORT (but also verify whether this is even necessary)
-
-Marr
-Ontos
-Helion
-Parhelion
-Excision
-
-Corona
-Beacon
-Serenity
-Absolver
-Oculus
-Patron
-Solace
-Restorer
-Salvation
-Oblivion
-
-do a 2nd pass on ship class names
-
-in my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 10 minutes
+in my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
 
 Weapon ideas:
-Small size dragoncock: 6 OP, 1 ammo
 Small size graviton lance: Kinetic support beam that just does a bunch of soft flux to shields in a quick burst
 Medium size antimatter canister launcher: like an energy damage PCL that saturates an area with lower hit strength
 
 Add another fighter:
-5 OP, 4 heavily shielded support fighters, each armed with an advanced optics graviton lance and a PD laser.
+5 OP, 2 heavily shielded support fighters, each armed with an advanced optics graviton lance and a PD laser.
 
 Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency.
 
@@ -87,11 +57,13 @@ Temporal Shell: It's temporal shell.
 Canister Antimatter: Canflak except energy damage.
 ^ Done
 Morphic Armor: Toggle system, rebalances the ship's armor grid. Generates flux based on shield upkeep and amount of armor HP rebalanced.
-^ Done, AI needs debugging
-Auxiliary Nanoforge: Restores 10% fighter replacement rate, or 2 reload cost worth of missiles rounded up. Restores the lower one proportionally. Stores 3 charges, generates 25% base cap hardflux on use.
-^ Done but needs to be debugged, needs AI
-Stasis Field: Freezes a ship in place and makes it invulnerable for 3 seconds.
-^ Should be easy to code but needs whack AI script
+^ Done.
+Auxiliary Microforge: Restores 10% fighter replacement rate, or 2 reload cost worth of missiles rounded up. Restores the lower one proportionally. Stores 3 charges, generates 25% base cap hardflux on use.
+^ Done.
+Hacking Suite: Shuts off the system of the targeted ship, forcibly disables it for a period of time.
+^ Done.
+Entropy Chronoboost: Increases rate of PPT and/or CR degredation of the target.
+^ Should be easy to code but needs wack AI script
 
-fix my retarded external hangar code
 look at vic modplugin to see how to swap a script at runtime
+remove base blueprints from player faction at save load

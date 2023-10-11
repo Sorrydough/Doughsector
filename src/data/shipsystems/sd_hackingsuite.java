@@ -28,11 +28,11 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 		// set jitter effects for ourselves
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		float jitterLevel = effectLevel;
-		if (state == State.OUT)
+		if (state == State.OUT) // ensures jitter level doesn't deteriorate during OUT
 			jitterLevel *= jitterLevel;
 		float jitterExtra = jitterLevel * 50;
-		ship.setJitter(this, Color1, jitterLevel, 4, 0f, 0 + jitterExtra);
-		ship.setJitterUnder(this, Color2, jitterLevel, 20, 0f, 3f + jitterExtra);
+		ship.setJitterUnder(this, Color2, jitterLevel, 20, 0, 3 + jitterExtra);
+		ship.setJitter(this, Color1, jitterLevel, 4, 0, 0 + jitterExtra);
 
 		// apply the effect to the target, note we check effectLevel and not for active state because our system doesn't have an active duration
 		if (ship.getSystem().getEffectLevel() == 1)

@@ -9,10 +9,9 @@ import com.fs.starfarer.api.combat.ShipAPI;
 public class sd_destroyersupportglowDecoScript implements EveryFrameWeaponEffectPlugin {
     final float rotationSpeed = 180f; //get this from the weapon spec when alex adds the ability to do so
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        if (engine.isPaused()) return;
-
         ShipAPI ship = weapon.getShip();
-        if (ship == null) return;
+        if (engine.isPaused() || ship == null)
+            return;
 
         if (ship.getSystem().isActive()) {
             weapon.setForceFireOneFrame(true);
@@ -24,6 +23,11 @@ public class sd_destroyersupportglowDecoScript implements EveryFrameWeaponEffect
             desiredAngle += rotationSpeed * amount;
             weapon.setFacing(desiredAngle - shipFacing);
         }
+        // TODO: ADD SOME CODE HERE TO MAKE THE WEAPON CONTINUE FIRE FOR THE DURATION OF THE PLUGIN AFTER DISENGAGING
+
+
+
+
     }
 
     public static float normalizeAngle(float angleDeg) {

@@ -15,18 +15,11 @@ import java.util.Random;
 
 public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
     final ShipAPI target;
-    public sd_hackingsuitePlugin(ShipAPI ship) {
-        this.target = ship;
-    }
-    final Map<ShipAPI.HullSize, Integer> FONT_SIZE = new HashMap<>(); {
-        FONT_SIZE.put(ShipAPI.HullSize.FRIGATE, 30);
-        FONT_SIZE.put(ShipAPI.HullSize.DESTROYER, 40);
-        FONT_SIZE.put(ShipAPI.HullSize.CRUISER, 50);
-        FONT_SIZE.put(ShipAPI.HullSize.CAPITAL_SHIP, 60);
+    public sd_hackingsuitePlugin(ShipAPI target) {
+        this.target = target;
     }
     final Color fadeColor = new Color(230, 215, 195,100);
     final IntervalUtil interval = new IntervalUtil(1f, 1f);
-    final Random rand = new Random();
     boolean doOnce = true;
     float duration = 5;
     float time = 0;
@@ -41,12 +34,11 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
                 target.getSystem().deactivate();
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);
-            engine.addFloatingText(target.getLocation(), "System disabled for "+ Math.round(duration) +" seconds!",
-                    FONT_SIZE.get(target.getHullSize()), Color.LIGHT_GRAY, target, 1, 10);
+            target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ Math.round(duration) +" seconds!", Color.LIGHT_GRAY, 5, true);
             doOnce = false;
         }
-        if (Global.getCombatEngine().isPaused())
-            return;
+        if (engine.isPaused())
+            return; // don't want the timer to progress while the engine is paused
         interval.advance(amount);
         if (interval.intervalElapsed()) {
             time += 1;

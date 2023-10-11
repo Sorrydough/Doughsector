@@ -46,7 +46,7 @@ public class sd_drawSystemRadius extends BaseCombatLayeredRenderingPlugin {
             ShipSystemAPI system = ship.getSystem();
             interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
             if (interval.intervalElapsed()) { // using some timer shenanigans to scale opacity based on system state
-                if (system.getState().equals(ShipSystemAPI.SystemState.COOLDOWN) && timer > 0.25) {
+                if (system.getState() != ShipSystemAPI.SystemState.IDLE && timer > 0.25) {
                     timer -= 0.05;
                     if (timer < 0.25)
                         timer = 0.2f;
