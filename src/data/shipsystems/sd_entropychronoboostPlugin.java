@@ -3,6 +3,7 @@ package data.shipsystems;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
@@ -34,15 +35,14 @@ public class sd_entropychronoboostPlugin extends BaseEveryFrameCombatPlugin {
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
+        MutableShipStatsAPI targetStats = target.getMutableStats();
         String id = this.toString();
         
 
 
         if (doOnce) {
             target.getMutableStats().getCRLossPerSecondPercent().modifyPercent(id, CR_DEGRADE_PERCENT);
-            target.setTimeDeployed(target.getFullTimeDeployed() + 0.5f);
-
-
+//            target.setTimeDeployed(target.getFullTimeDeployed() + 0.5f);
             doOnce = false;
         }
 
@@ -56,6 +56,13 @@ public class sd_entropychronoboostPlugin extends BaseEveryFrameCombatPlugin {
             return;
         interval.advance(amount);
         if (interval.intervalElapsed()) {
+
+
+//            totalPeakTimeLoss += (ELITE_OVERLEVEL_CR_LOSS_MULT - 1f) * effectLevel * (effectOverlevelSquared - 1f) * objectiveAmount;
+//            targetStats.getCRLossPerSecondPercent().modifyMult(id, II_Util.lerp(1f, ELITE_OVERLEVEL_CR_LOSS_MULT, effectLevel * (effectOverlevel - 1f)));
+//            targetStats.getPeakCRDuration().modifyFlat(id, -totalPeakTimeLoss / ship.getMutableStats().getPeakCRDuration().getMult());
+
+
 
 
 

@@ -13,6 +13,7 @@
   "builtInMods": [
     "sd_customai",
     "sd_designtech",
+    "sd_driveinterference",
     "sd_crampedstowage"
   ],
   "builtInWeapons": {
