@@ -4,11 +4,8 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import com.fs.starfarer.api.util.IntervalUtil;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class sd_entropychronoboost extends BaseShipSystemScript {
     public static final Color jitterUnderColor = new Color(150,100,255, 150);
@@ -22,12 +19,11 @@ public class sd_entropychronoboost extends BaseShipSystemScript {
         ship.setJitterUnder(id, jitterUnderColor, effectLevel, 10, 0, 10);
         ship.setJitter(id, jitterColor, effectLevel, 1, 0, 5);
 
-        if (doOnce) { // apply our effect plugin to the target
+        if (doOnce && effectLevel == 1) { // apply our effect plugin to the target
             Global.getCombatEngine().addPlugin(new sd_entropychronoboostPlugin(ship, ship.getShipTarget()));
             doOnce = false;
         }
     }
-
     public void unapply(MutableShipStatsAPI stats, String id) {
         doOnce = true;
     }

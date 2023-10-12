@@ -1,10 +1,8 @@
 {
+	"designTypeColors":{
+		"???":[250, 235, 215, 255]
+	},
 	"graphics": {
-        "fer": {
-			"sd_blockThruster":"graphics/fx/thrusters/sd_blockThruster.png"
-        },
-		"fighterSkinsPlayerAndNPC":{
-		},
 		"characters": {
 			"sd_ghostbusters1":"graphics/portraits/sd_app_092.png",
 			"sd_ghostbusters2":"graphics/portraits/sd_app_087.png"

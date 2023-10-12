@@ -19,7 +19,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
         this.target = target;
     }
     final Color fadeColor = new Color(230, 215, 195,100);
-    final IntervalUtil interval = new IntervalUtil(1f, 1f);
+    final IntervalUtil TIMER = new IntervalUtil(1f, 1f);
     boolean doOnce = true;
     float duration = 5;
     float time = 0;
@@ -39,8 +39,8 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
         }
         if (engine.isPaused())
             return; // don't want the timer to progress while the engine is paused
-        interval.advance(amount);
-        if (interval.intervalElapsed()) {
+        TIMER.advance(amount);
+        if (TIMER.intervalElapsed()) {
             time += 1;
             if (time >= duration) {
                 target.setShipSystemDisabled(false);

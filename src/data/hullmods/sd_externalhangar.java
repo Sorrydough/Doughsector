@@ -58,7 +58,4 @@ public class sd_externalhangar extends BaseHullMod {
     public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
         return false;
     }
-    public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
-        return ship.getHullSpec().getManufacturer().equals("???");
-    }
 }

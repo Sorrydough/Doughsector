@@ -2,6 +2,7 @@ package data.hullmods;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
@@ -34,15 +35,10 @@ public class sd_designtech extends BaseHullMod {
                 Misc.getHighlightColor(), "10/20/40/60%"); //hardcode deez nuts
         tooltip.addPara("Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.", 5f,
                 Misc.getDarkHighlightColor(), "Only the strongest bonus between this hullmod and all other percentage hullmod bonuses combined applies.");
-        tooltip.addPara("Design spec is incompatible with: High Scatter Amplifier, Converted Hangar, and Safety Overrides.", 10f,
-                Misc.getNegativeHighlightColor(), "incompatible with:");
+        tooltip.addSectionHeading("Bonus is lost if Safety Overrides is installed.", Alignment.MID, 10f);
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
         return false;
-    }
-    @Override
-    public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
-        return ship.getHullSpec().getManufacturer().equals("???");
     }
 }

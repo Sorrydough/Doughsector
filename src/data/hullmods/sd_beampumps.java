@@ -38,8 +38,4 @@ public class sd_beampumps extends BaseHullMod {
 	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
 		return false;
 	}
-	@Override
-	public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
-		return ship.getHullSpec().getManufacturer().equals("???");
-	}
 }

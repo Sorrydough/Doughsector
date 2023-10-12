@@ -14,10 +14,6 @@
 	"loopSound":"system_damper_omega_loop",
 	"deactivateSound":"system_damper_omega_off",
 	"outOfUsesSound":"gun_out_of_ammo",
-	
-	"aiHints":{
-	}
-
 }
 
 

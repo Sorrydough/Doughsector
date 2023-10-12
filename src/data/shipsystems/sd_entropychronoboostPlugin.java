@@ -27,7 +27,7 @@ public class sd_entropychronoboostPlugin extends BaseEveryFrameCombatPlugin {
         AVERAGE_PPT.put(ShipAPI.HullSize.CRUISER, 480);
         AVERAGE_PPT.put(ShipAPI.HullSize.CAPITAL_SHIP, 600);
     }
-    final IntervalUtil interval = new IntervalUtil(1, 1);
+    final IntervalUtil TIMER = new IntervalUtil(1, 1);
     final float CR_DEGRADE_PERCENT = 25;
     final float DURATION = 5;
     boolean doOnce = true;
@@ -54,8 +54,8 @@ public class sd_entropychronoboostPlugin extends BaseEveryFrameCombatPlugin {
 
         if (Global.getCombatEngine().isPaused())
             return;
-        interval.advance(amount);
-        if (interval.intervalElapsed()) {
+        TIMER.advance(amount);
+        if (TIMER.intervalElapsed()) {
 
 
 //            totalPeakTimeLoss += (ELITE_OVERLEVEL_CR_LOSS_MULT - 1f) * effectLevel * (effectOverlevelSquared - 1f) * objectiveAmount;

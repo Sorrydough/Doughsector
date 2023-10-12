@@ -22,10 +22,6 @@ public class sd_groundsupport extends BaseHullMod {
 	public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
 		return false;
 	}
-	@Override
-	public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
-		return ship.getHullSpec().getManufacturer().equals("???");
-	}
 }
 
 

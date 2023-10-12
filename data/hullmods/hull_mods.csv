@@ -1,15 +1,15 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sModDesc,sprite
 #Builtins,,,,,,,,,,,,,,,,,,,
-Beam Targeting Integration,sd_designtech,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_designtech,<tooltip created in the script>,,,graphics/hullmods/sd_designtech.png
-Cramped Stowage,sd_crampedstowage,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedstowage,<tooltip created in the script>,,,graphics/hullmods/sd_crampedstowage.png
-Drive Interference,sd_driveinterference,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_driveinterference,<tooltip created in the script>,,,graphics/hullmods/sd_driveinterference.png
-Hexshield,sd_hexshield,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shields unfold instantly. Instead of overloading the ship, its shield is disabled for %s seconds.",,,graphics/hullmods/sd_hexshield.png
-Improved Ship AI,sd_customai,,,,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/sd_improvedai.png
-Light Ground Support,sd_groundsupport,,,,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/sd_groundsupport.png
+Beam Targeting Integration,sd_designtech,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_designtech,<tooltip created in the script>,,,graphics/hullmods/sd_designtech.png
+Cramped Stowage,sd_crampedstowage,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_crampedstowage,<tooltip created in the script>,,,graphics/hullmods/sd_crampedstowage.png
+Drive Interference,sd_driveinterference,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_driveinterference,<tooltip created in the script>,,,graphics/hullmods/sd_driveinterference.png
+Hexshield,sd_hexshield,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shields unfold instantly. Instead of overloading the ship, its shield is disabled for %s seconds.",,,graphics/hullmods/sd_hexshield.png
+Improved Ship AI,sd_customai,,,???,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/sd_improvedai.png
+Light Ground Support,sd_groundsupport,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/sd_groundsupport.png
 ,,,,,,,,,,,,,,,,,,,
 #Modulars,,,,,,,,,,,,,,,,,,,
-Redundant Spall Protection,sd_spallprotection,,,Common,,Defenses,,TRUE,,,2,4,8,12,data.hullmods.sd_spallprotection,<tooltip created in the script>,,,graphics/hullmods/sd_spallprotection.png
-Ancillary Beam Pumps,sd_beampumps,,,Common,,Weapons,,TRUE,,,3,6,9,12,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
-Capacitor Purge,sd_capacitorpurge,,,Common,,Special,,TRUE,,,10,20,30,50,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
-External Hangar,sd_externalhangar,,,Common,,Fighters,,TRUE,,,6,12,18,24,data.hullmods.sd_externalhangar,<tooltip created in the script>,,,graphics/hullmods/sd_externalhangar.png
-Loadline Recalibration,sd_loadline,,,Common,,Special,,TRUE,,,8,16,24,32,data.hullmods.sd_loadline,<tooltip created in the script>,,,graphics/hullmods/sd_loadline.png
+Redundant Spall Protection,sd_spallprotection,,,???,,Defenses,,TRUE,,,2,4,8,12,data.hullmods.sd_spallprotection,<tooltip created in the script>,,,graphics/hullmods/sd_spallprotection.png
+Ancillary Beam Pumps,sd_beampumps,,,???,,Weapons,,TRUE,,,3,6,9,12,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
+Capacitor Purge,sd_capacitorpurge,,,???,,Special,,TRUE,,,10,20,30,50,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
+External Hangar,sd_externalhangar,,,???,,Fighters,,TRUE,,,6,12,18,24,data.hullmods.sd_externalhangar,<tooltip created in the script>,,,graphics/hullmods/sd_externalhangar.png
+Loadline Recalibration,sd_loadline,,,???,,Special,,TRUE,,,8,16,24,32,data.hullmods.sd_loadline,<tooltip created in the script>,,,graphics/hullmods/sd_loadline.png

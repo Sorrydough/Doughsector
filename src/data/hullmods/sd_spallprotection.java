@@ -15,15 +15,11 @@ public class sd_spallprotection extends BaseHullMod {
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("Reduces incoming kinetic damage, fragmentation damage, and crew casualties in combat by "+ Math.round((1 - SPALL_BONUS) * 100) +"%%.", 5f,
+        tooltip.addPara("Reduces hull and armor damage from kinetic and fragmentation hits, as well as crew casualties in combat by "+ Math.round((1 - SPALL_BONUS) * 100) +"%%.", 5f,
                 Misc.getHighlightColor(), Math.round((1 - SPALL_BONUS) * 100) +"%");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
         return false;
-    }
-    @Override
-    public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
-        return ship.getHullSpec().getManufacturer().equals("???");
     }
 }
