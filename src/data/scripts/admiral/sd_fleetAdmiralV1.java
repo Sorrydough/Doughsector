@@ -1,8 +1,9 @@
-package data.scripts;
+package data.scripts.admiral;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.BattleObjectives;
+import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.console.Console;
 
@@ -10,8 +11,8 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
-    boolean debug = false;
+public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
+    boolean debug = true;
     boolean doInit = true;
     boolean isAttackingObjective = false;
     boolean doHaveAllObjectives = false;
@@ -19,19 +20,15 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
     CombatFleetManagerAPI fleetManager;
     CombatTaskManagerAPI taskManager;
     IntervalUtil interval = new IntervalUtil(1, 3); //runs every 1 to 3 seconds to approximate a human's variable reaction time
-
+    int owner = 0;
     @Override
-    public void preCombat() {
-    }
-
-    @Override
-    public void advance(float amount) {
+    public void advance(float amount, List<InputEventAPI> events) {
         if (doInit) {
             if (debug)
-                Console.showMessage("Admiral Init");
+                Console.showMessage("Player Admiral Init");
             engine = Global.getCombatEngine();
-            fleetManager = engine.getFleetManager(1);
-            taskManager = fleetManager.getTaskManager(true);
+            fleetManager = engine.getFleetManager(owner);
+            taskManager = fleetManager.getTaskManager(false);
             //enemyTaskManager = fleetManager.getTaskManager(false);
             //as part of init, we need to wipe all assignments that might've been created by alex's admiral
             for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
@@ -46,37 +43,37 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
             List<ShipAPI> allies = new ArrayList<>();
             List<ShipAPI> enemies = new ArrayList<>();
             for (ShipAPI ship : Global.getCombatEngine().getShips()) {
-                if (ship.getOwner() == 1 && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
+                if (ship.getOwner() == owner && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
                     allies.add(ship);
-                } else if (ship.getOwner() == 0 && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
+                } else if (ship.getOwner() != owner && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
                     enemies.add(ship);
                 }
             }
 
             //sort the lists based on ship size (aka recovery cost)
-            sortByRecoveryCost(allies);
-            sortByRecoveryCost(enemies);
+            sd_fleetAdmiralUtil.sortByRecoveryCost(allies);
+            sd_fleetAdmiralUtil.sortByRecoveryCost(enemies);
 
             //make a list of all assignments and what they're attached to
-            List<AssignmentInfoWithTarget> assignmentsWithTargets = new ArrayList<>();
+            List<sd_fleetAdmiralUtil.AssignmentInfoWithTarget> assignmentsWithTargets = new ArrayList<>();
             for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
                 for (ShipAPI ship : Global.getCombatEngine().getShips()) {
                     if (assignment.getTarget().getLocation() == ship.getLocation()) {
                         //add the 'ShipAPI ship' to a new list of ships that have an assignment, alongside its associated 'AssignmentInfo assignment'
-                        assignmentsWithTargets.add(new AssignmentInfoWithTarget(assignment, ship));
+                        assignmentsWithTargets.add(new sd_fleetAdmiralUtil.AssignmentInfoWithTarget(assignment, ship));
                     }
                 }
                 for (BattleObjectiveAPI objective : engine.getObjectives()) {
                     if (assignment.getTarget().getLocation() == objective.getLocation()) {
                         //same again, the goal is to keep track of what assignments are attached to what objects
-                        assignmentsWithTargets.add(new AssignmentInfoWithTarget(assignment, objective));
+                        assignmentsWithTargets.add(new sd_fleetAdmiralUtil.AssignmentInfoWithTarget(assignment, objective));
                     }
                 }
             }
 
             //assign around and find out
             isAttackingObjective = false;
-            for (AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
+            for (sd_fleetAdmiralUtil.AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
                 if (assignment.getObject() instanceof ShipAPI) {
                     ShipAPI target = (ShipAPI) assignment.getObject();
                     //ensure we never have assignments on dead stuff, fighters, etc
@@ -103,7 +100,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
 
             //keep track of whether we own all the objectives
             for (BattleObjectiveAPI objective : engine.getObjectives()) {
-                if (objective.getOwner() != 1) {
+                if (objective.getOwner() != owner) {
                     doHaveAllObjectives = false;
                     break;
                 }
@@ -114,7 +111,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
 
             //if we're not attacking an objective, and we don't own all objectives then attack one
             if (engine.getObjectives().size() >= 1 && !isAttackingObjective && !doHaveAllObjectives) {
-                attackObjective();
+                attackObjective(owner);
             }
 
 
@@ -122,7 +119,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
             //check whether the two largest allies have a defend order
             boolean largestally1 = false;
 //            boolean largestally2 = false;
-            for (AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
+            for (sd_fleetAdmiralUtil.AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
                 if (assignment.getObject() instanceof ShipAPI) {
                     ShipAPI ship = (ShipAPI) assignment.getObject();
                     if (ship == allies.get(0)) {
@@ -135,7 +132,7 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
             }
             //if they don't, apply a defend order to each
             if (!largestally1) {
-                applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND);
+                sd_fleetAdmiralUtil.applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND, owner);
             }
 //            if (!largestally2) {
 //                applyAssignment(fleetManager.getDeployedFleetMember(allies.get(1)), CombatAssignmentType.DEFEND);
@@ -145,14 +142,14 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
             for (ShipAPI enemy : enemies) {
                 if (enemy.getFluxLevel() > 0.75 || enemy.getHardFluxLevel() > 0.65 || enemy.getFluxTracker().isOverloaded() || enemy.getEngineController().isFlamedOut()) {
                     boolean isEnemyEngaged = false;
-                    for (AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
+                    for (sd_fleetAdmiralUtil.AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
                         if (enemy == assignment.getObject()) {
                             isEnemyEngaged = true;
                             break;
                         }
                     }
                     if (!isEnemyEngaged) {
-                        applyAssignment(engine.getFleetManager(0).getDeployedFleetMember(enemy), CombatAssignmentType.INTERCEPT);
+                        sd_fleetAdmiralUtil.applyAssignment(engine.getFleetManager(owner).getDeployedFleetMember(enemy), CombatAssignmentType.INTERCEPT, owner);
                     }
                 }
             }
@@ -168,43 +165,16 @@ public class sd_fleetAdmiralAI implements AdmiralAIPlugin {
         }
     }
 
-    // Create a class to represent an assignment and its associated target
-    static class AssignmentInfoWithTarget {
-        private final CombatFleetManagerAPI.AssignmentInfo assignment;
-        private final Object object; // You can use 'Object' to represent various types of targets
-        public AssignmentInfoWithTarget(CombatFleetManagerAPI.AssignmentInfo assignment, Object object) {
-            this.assignment = assignment;
-            this.object = object;
-        }
-        public CombatFleetManagerAPI.AssignmentInfo getAssignment() { return assignment; }
-        public Object getObject() { return object; }
-    }
-
-    static void sortByRecoveryCost(List<ShipAPI> ships) {
-        Collections.sort(ships, new Comparator<ShipAPI>() {
-            @Override
-            public int compare(ShipAPI ship1, ShipAPI ship2) {
-                float supplies1 = ship1.getHullSpec().getSuppliesToRecover();
-                float supplies2 = ship2.getHullSpec().getSuppliesToRecover();
-                return Float.compare(supplies2, supplies1);
-            }
-        });
-    }
-
-    static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment) {
-        Global.getCombatEngine().getFleetManager(1).getTaskManager(true).createAssignment(assignment, target, false);
-    }
-
-    static void attackObjective() {
+    static void attackObjective(int owner) {
         for (BattleObjectiveAPI objective : Global.getCombatEngine().getObjectives()) {
-            if (Objects.equals(objective.getType(), BattleObjectives.SENSOR_JAMMER) && objective.getOwner() != 1) {
-                applyAssignment(objective, CombatAssignmentType.ASSAULT);
+            if (Objects.equals(objective.getType(), BattleObjectives.SENSOR_JAMMER) && objective.getOwner() != owner) {
+                sd_fleetAdmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
                 break;
-            } else if (Objects.equals(objective.getType(), BattleObjectives.NAV_BUOY) && objective.getOwner() != 1) {
-                applyAssignment(objective, CombatAssignmentType.ASSAULT);
+            } else if (Objects.equals(objective.getType(), BattleObjectives.NAV_BUOY) && objective.getOwner() != owner) {
+                sd_fleetAdmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
                 break;
-            } else if (Objects.equals(objective.getType(), BattleObjectives.COMM_RELAY) && objective.getOwner() != 1) {
-                applyAssignment(objective, CombatAssignmentType.ASSAULT);
+            } else if (Objects.equals(objective.getType(), BattleObjectives.COMM_RELAY) && objective.getOwner() != owner) {
+                sd_fleetAdmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
                 break;
             }
         }

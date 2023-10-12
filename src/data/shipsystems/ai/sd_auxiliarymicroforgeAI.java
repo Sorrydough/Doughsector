@@ -2,16 +2,14 @@ package data.shipsystems.ai;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.scripts.sd_util;
 import data.shipsystems.sd_auxiliarymicroforge;
-import data.shipsystems.sd_morphicarmor;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 public class sd_auxiliarymicroforgeAI implements ShipSystemAIScript {
     final IntervalUtil interval = new IntervalUtil(0.5f, 1f);
-    final boolean debug = true;
+    final boolean debug = false;
     ShipAPI ship;
     ShipSystemAPI system;
     @Override
