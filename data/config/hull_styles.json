@@ -9,7 +9,7 @@
 		"weaponDisabledExplosionColor":[255,125,25,255],
 		"shieldRingColor":[250,235,215,255],
 		#"shieldInnerColor":[245,85,55,125],
-		"shieldInnerColor":[250,235,215,150],
+		"shieldInnerColor":[250,235,215,125],
 		"fluxVentCoreColor":[255,255,255,255],
 		#"fluxVentFringeColor":[255,120,80,255],
 		"fluxVentFringeColor":[125,0,155,255],
