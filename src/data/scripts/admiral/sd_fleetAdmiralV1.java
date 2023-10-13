@@ -21,6 +21,7 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
     CombatTaskManagerAPI taskManager;
     IntervalUtil interval = new IntervalUtil(1, 3); //runs every 1 to 3 seconds to approximate a human's variable reaction time
     int owner = 0;
+    float numObjectives = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         if (doInit) {
@@ -34,6 +35,7 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
             for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
                 taskManager.removeAssignment(assignment);
             }
+            numObjectives = engine.getObjectives().size();
             doInit = false;
         }
 
@@ -107,36 +109,28 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
                 doHaveAllObjectives = true;
             }
 
-
-
-            //if we're not attacking an objective, and we don't own all objectives then attack one
-            if (engine.getObjectives().size() >= 1 && !isAttackingObjective && !doHaveAllObjectives) {
-                attackObjective(owner);
-            }
-
-
-
-            //check whether the two largest allies have a defend order
-            boolean largestally1 = false;
-//            boolean largestally2 = false;
-            for (sd_fleetAdmiralUtil.AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
-                if (assignment.getObject() instanceof ShipAPI) {
-                    ShipAPI ship = (ShipAPI) assignment.getObject();
-                    if (ship == allies.get(0)) {
-                        largestally1 = true;
+            //functions that we only do in battles with objectives (aka a fleet engagement, instead of a skirmish)
+            if (numObjectives != 0) {
+                //check whether the largest ally has a defend order
+                boolean largestally1 = false;
+                for (sd_fleetAdmiralUtil.AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
+                    if (assignment.getObject() instanceof ShipAPI) {
+                        ShipAPI ship = (ShipAPI) assignment.getObject();
+                        if (ship == allies.get(0)) {
+                            largestally1 = true;
+                        }
                     }
-//                    if (ship == allies.get(1)) {
-//                        largestally2 = true;
-//                    }
+                }
+                //if it doesn't, apply a defend order to it
+                if (!largestally1) {
+                    sd_fleetAdmiralUtil.applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND, owner);
+                }
+
+                //if we're not attacking an objective & we don't own all objectives then attack one
+                if (!isAttackingObjective && !doHaveAllObjectives) {
+                    attackObjective(owner);
                 }
             }
-            //if they don't, apply a defend order to each
-            if (!largestally1) {
-                sd_fleetAdmiralUtil.applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND, owner);
-            }
-//            if (!largestally2) {
-//                applyAssignment(fleetManager.getDeployedFleetMember(allies.get(1)), CombatAssignmentType.DEFEND);
-//            }
 
             //if an enemy ship is fluxed out, put an engage order on it if it doesn't already have one
             for (ShipAPI enemy : enemies) {

@@ -13,6 +13,8 @@ Generic AI Stuff:
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility
 - Alter squall weapons.csv data - DO NOT USE VS FRIGATES, and USE VS SHIELDS?
 - Alter breach SRMs behavior
+- Rewrite vent behavior, take beams into account as well
+
 Campaign Stuff:
 - Make a placeholder faction with the fleets randomly patrolling near caches
 - Add songs
@@ -62,8 +64,10 @@ Auxiliary Microforge: Restores 10% fighter replacement rate, or 2 reload cost wo
 ^ Done.
 Hacking Suite: Shuts off the system of the targeted ship, forcibly disables it for a period of time.
 ^ Done.
+Stasis Field: Reduces the target's timeflow and damage taken to 10% for 5 seconds.
+^ Mostly done. Needs AI script.
 Entropy Chronoboost: Increases rate of PPT and/or CR degredation of the target.
-^ Should be easy to code but needs wack AI script
+^ Tough to code the system itself, AI code should be average difficulty
 
 look at vic modplugin to see how to swap a script at runtime
 remove base blueprints from player faction at save load
