@@ -12,7 +12,7 @@ import java.util.List;
 
 public class sd_fleetAdmiralUtil {
     // need a custom class to keep track of what each assignment is actually attached to
-    static class AssignmentInfoWithTarget {
+    static class AssignmentInfoWithTarget { // TODO: STOP USING THIS GOOFY THING AND USE A MAP INSTEAD
         private final CombatFleetManagerAPI.AssignmentInfo assignment;
         private final Object object; // You can use 'Object' to represent various types of targets
         public AssignmentInfoWithTarget(CombatFleetManagerAPI.AssignmentInfo assignment, Object object) {

@@ -41,13 +41,13 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             float desireTotal = desirePos + desireNeg;
             if (debug)
                 Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
-            // TODO: giveCommand TOGGLE_SHIELD_OR_PHASE
+
             if (ship.getSystem() instanceof sd_morphicarmor) {
                 if (desireTotal >= 100 && !ship.getSystem().isOn())
                     ship.useSystem();
                 if (desireTotal <= 0 && ship.getSystem().isOn())
                     ship.useSystem();
-            } else {
+            } else if (ship.getPhaseCloak() instanceof sd_morphicarmor){
                 if (desireTotal >= 100 && !ship.getPhaseCloak().isOn())
                     ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
                 if (desireTotal <= 0 && ship.getPhaseCloak().isOn())

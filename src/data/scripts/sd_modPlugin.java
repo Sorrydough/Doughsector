@@ -2,6 +2,9 @@ package data.scripts;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.SettingsAPI;
+import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.combat.WeaponAPI;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
@@ -17,6 +20,7 @@ public class sd_modPlugin extends BaseModPlugin {
 //    when the player loads their save, if their phase ships doctrine is set to 0, it removes the gremlin blueprint
     // maybe all the other bps too?
 
+    SettingsAPI settings = Global.getSettings();
     @Override
     public void onApplicationLoad() {
         boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
@@ -64,12 +68,25 @@ public class sd_modPlugin extends BaseModPlugin {
         }
 
         for (String weapon : sd_weaponsList) {
-            Global.getSettings().getWeaponSpec(weapon).addTag("sd_arsenal_package");
+            settings.getWeaponSpec(weapon).addTag("sd_arsenal_package");
         }
     }
 
-    @Override
     public void onNewGameAfterProcGen() {
         new sd_moonGenerator().generate(Global.getSector());
+    }
+
+    public void onGameLoad(boolean newGame) {
+        FactionAPI playerFaction = Global.getSector().getPlayerPerson().getFaction();
+        for (String weapon : playerFaction.getKnownWeapons()) {
+            if (settings.getWeaponSpec(weapon).hasTag("base_bp")) {
+                playerFaction.removeKnownWeapon(weapon);
+            }
+        }
+        for (String ship : playerFaction.getKnownShips()) {
+            if (settings.getHullSpec(ship).hasTag("base_bp")) {
+                playerFaction.removeKnownShip(ship);
+            }
+        }
     }
 }

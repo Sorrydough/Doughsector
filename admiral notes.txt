@@ -1,0 +1,13 @@
+Firsyl we need a controller. This sets up all the info as customdata and regularly refreshes it for the rest of the scripts to access.
+Once all the relevant info has been initialized, the strategy selector script analyzes it and decides which strategy is appropriate for the situation.
+Once a strategy is selected, the appropriate strategy script iterates over every ship (and every order), ensuring that all the ships have appropriate orders.
+
+
+
+Strategies:
+
+Modules:
+
+Utilities:
+- Create a list of all allied & enemy ships
+- Apply an assignment to a target

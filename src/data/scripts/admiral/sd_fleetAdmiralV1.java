@@ -20,15 +20,18 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
     CombatFleetManagerAPI fleetManager;
     CombatTaskManagerAPI taskManager;
     IntervalUtil interval = new IntervalUtil(1, 3); //runs every 1 to 3 seconds to approximate a human's variable reaction time
-    int owner = 0;
+    int allySide = 0;
+    int enemySide = 1;
     float numObjectives = 0;
+    float deployedAllyDP = 0;
+    float deployedEnemyDP = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         if (doInit) {
             if (debug)
                 Console.showMessage("Player Admiral Init");
             engine = Global.getCombatEngine();
-            fleetManager = engine.getFleetManager(owner);
+            fleetManager = engine.getFleetManager(allySide);
             taskManager = fleetManager.getTaskManager(false);
             //enemyTaskManager = fleetManager.getTaskManager(false);
             //as part of init, we need to wipe all assignments that might've been created by alex's admiral
@@ -45,12 +48,17 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
             List<ShipAPI> allies = new ArrayList<>();
             List<ShipAPI> enemies = new ArrayList<>();
             for (ShipAPI ship : Global.getCombatEngine().getShips()) {
-                if (ship.getOwner() == owner && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
+                if (ship.getOwner() == allySide && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
                     allies.add(ship);
-                } else if (ship.getOwner() != owner && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
+                    deployedAllyDP += ship.getMutableStats().getSuppliesToRecover().base;
+                } else if (ship.getOwner() != allySide && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
                     enemies.add(ship);
+                    deployedEnemyDP += ship.getMutableStats().getSuppliesToRecover().base;
                 }
             }
+
+            //figure out how much DP each fleet is worth
+
 
             //sort the lists based on ship size (aka recovery cost)
             sd_fleetAdmiralUtil.sortByRecoveryCost(allies);
@@ -102,7 +110,7 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
 
             //keep track of whether we own all the objectives
             for (BattleObjectiveAPI objective : engine.getObjectives()) {
-                if (objective.getOwner() != owner) {
+                if (objective.getOwner() != allySide) {
                     doHaveAllObjectives = false;
                     break;
                 }
@@ -110,7 +118,7 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
             }
 
             //functions that we only do in battles with objectives (aka a fleet engagement, instead of a skirmish)
-            if (numObjectives != 0) {
+            if (numObjectives != 0 || deployedEnemyDP * 1.15 > deployedAllyDP) {
                 //check whether the largest ally has a defend order
                 boolean largestally1 = false;
                 for (sd_fleetAdmiralUtil.AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
@@ -123,12 +131,12 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
                 }
                 //if it doesn't, apply a defend order to it
                 if (!largestally1) {
-                    sd_fleetAdmiralUtil.applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND, owner);
+                    sd_fleetAdmiralUtil.applyAssignment(fleetManager.getDeployedFleetMember(allies.get(0)), CombatAssignmentType.DEFEND, allySide);
                 }
 
                 //if we're not attacking an objective & we don't own all objectives then attack one
-                if (!isAttackingObjective && !doHaveAllObjectives) {
-                    attackObjective(owner);
+                if (numObjectives != 0 && !isAttackingObjective && !doHaveAllObjectives) {
+                    attackObjective(allySide);
                 }
             }
 
@@ -143,7 +151,7 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
                         }
                     }
                     if (!isEnemyEngaged) {
-                        sd_fleetAdmiralUtil.applyAssignment(engine.getFleetManager(owner).getDeployedFleetMember(enemy), CombatAssignmentType.INTERCEPT, owner);
+                        sd_fleetAdmiralUtil.applyAssignment(engine.getFleetManager(enemySide).getDeployedFleetMember(enemy), CombatAssignmentType.INTERCEPT, allySide);
                     }
                 }
             }
