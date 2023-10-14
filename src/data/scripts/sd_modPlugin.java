@@ -4,6 +4,7 @@ import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.SettingsAPI;
 import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
@@ -16,10 +17,6 @@ import data.scripts.world.sd_moonGenerator;
 
 @SuppressWarnings("unused")
 public class sd_modPlugin extends BaseModPlugin {
-//    public void
-//    when the player loads their save, if their phase ships doctrine is set to 0, it removes the gremlin blueprint
-    // maybe all the other bps too?
-
     SettingsAPI settings = Global.getSettings();
     @Override
     public void onApplicationLoad() {
@@ -75,18 +72,35 @@ public class sd_modPlugin extends BaseModPlugin {
     public void onNewGameAfterProcGen() {
         new sd_moonGenerator().generate(Global.getSector());
     }
-
+    //ShipAPI enemy : new ArrayList<>(targets))
     public void onGameLoad(boolean newGame) {
-        FactionAPI playerFaction = Global.getSector().getPlayerPerson().getFaction();
+        final FactionAPI playerFaction = Global.getSector().getPlayerPerson().getFaction();
+        List<String> weaponsToRemove = new ArrayList<>();
         for (String weapon : playerFaction.getKnownWeapons()) {
             if (settings.getWeaponSpec(weapon).hasTag("base_bp")) {
-                playerFaction.removeKnownWeapon(weapon);
+                weaponsToRemove.add(weapon);
             }
         }
+        List<String> shipsToRemove = new ArrayList<>();
         for (String ship : playerFaction.getKnownShips()) {
             if (settings.getHullSpec(ship).hasTag("base_bp")) {
-                playerFaction.removeKnownShip(ship);
+                shipsToRemove.add(ship);
             }
+        }
+        List<String> fightersToRemove = new ArrayList<>();
+        for (String fighter : playerFaction.getKnownFighters()) {
+            if (settings.getFighterWingSpec(fighter).hasTag("base_bp")) {
+                fightersToRemove.add(fighter);
+            }
+        }
+        for (String weapon : weaponsToRemove) {
+            playerFaction.removeKnownWeapon(weapon);
+        }
+        for (String ship : shipsToRemove) {
+            playerFaction.removeKnownShip(ship);
+        }
+        for (String fighter : fightersToRemove) {
+            playerFaction.removeKnownFighter(fighter);
         }
     }
 }
