@@ -24,7 +24,7 @@
         }
     ],
     "wings": [
-        "sd_fightergravitonWing",
-        "sd_fightergravitonWing"
+        "sd_fightercanisterWing",
+        "sd_fightercanisterWing"
     ]
 }

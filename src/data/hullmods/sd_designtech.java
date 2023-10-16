@@ -18,6 +18,8 @@ public class sd_designtech extends BaseHullMod {
     }
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+        if (ship.getVariant().hasHullMod("safetyoverrides"))
+            return;
         //bonus not cumulative with targeting computer modifications
         //this needs to be here instead of applyEffectsBeforeShipCreation to avoid an ordering issue
         float extra = 0;

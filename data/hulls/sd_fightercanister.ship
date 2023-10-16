@@ -1,7 +1,7 @@
 {
-  "hullId": "sd_fightergraviton",
+  "hullId": "sd_fightercanister",
   "hullSize": "FIGHTER",
-  "spriteName": "graphics/ships/sd_fightergraviton.png",
+  "spriteName": "graphics/ships/sd_fightercanister.png",
   "style": "SD_TECH",
   "height": 36,
   "width": 36,

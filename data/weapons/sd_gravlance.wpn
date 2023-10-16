@@ -17,7 +17,6 @@
 	"fringeColor":[75,125,155,255],
 	"coreColor":[205,225,255,255],
 	"glowColor":[75,125,155,255],
-	"skipIdleFrameIfZeroBurstDelay":true,
 	"hitGlowBrightenDuration":0.25,
 	"width":10.0,
 	"textureType":LASER,

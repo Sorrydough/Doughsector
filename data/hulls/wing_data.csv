@@ -1,4 +1,5 @@
 id,variant,tags,tier,rarity,fleet pts,op cost,formation,range,attackRunRange,attackPositionOffset,num,role,role desc,refit,base value,,,,,,,,,,,,,number
-sd_fighterblasterWing,sd_fighterblaster_Standard,"sd_arsenal_package, no_sell, fighter, fighter3, auto_fighter",2,,3,10,V,2000,500,400,3,FIGHTER,Fighter,10,7500,,,,,,,,,,,,,2.1
-sd_fighterionWing,sd_fighterion_Standard,"sd_arsenal_package, no_sell, interceptor, interceptor3, auto_fighter",2,,5,15,BOX,2000,300,200,6,INTERCEPTOR,Suppression,8,5000,,,,,,,,,,,,,2.1
-sd_fightergravitonWing,sd_fightergraviton_Standard,"sd_arsenal_package, no_sell, bomber, bomber3",2,,7,20,CLAW,4000,2000,600,4,BOMBER,Bomber,15,10000,,,,,,,,,,,,,2.1
+sd_fightersupportWing,sd_fightersupport_Standard,"sd_arsenal_package, no_sell, fighter, support3",2,,2,5,BOX,1000,500,,2,SUPPORT,Support,8,4000,,,,,,,,,,,,,
+sd_fighterblasterWing,sd_fighterblaster_Standard,"sd_arsenal_package, no_sell, fighter, fighter3, auto_fighter",2,,4,10,V,3000,500,400,3,FIGHTER,Fighter,10,6000,,,,,,,,,,,,,2.1
+sd_fighterionWing,sd_fighterion_Standard,"sd_arsenal_package, no_sell, interceptor, interceptor3, auto_fighter",2,,6,15,BOX,3000,300,200,6,INTERCEPTOR,Suppression,8,8000,,,,,,,,,,,,,2.1
+sd_fightercanisterWing,sd_fightercanister_Standard,"sd_arsenal_package, no_sell, bomber, bomber3",2,,8,20,CLAW,5000,2000,600,4,BOMBER,Bomber,15,10000,,,,,,,,,,,,,2.1

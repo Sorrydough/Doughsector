@@ -24,8 +24,6 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
     int allySide = 0;
     int enemySide = 1;
     float numObjectives = 0;
-    float deployedAllyDP = 0;
-    float deployedEnemyDP = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         if (Global.getCombatEngine() == null)
@@ -50,6 +48,8 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
             //make a list of all allies and all enemies
             List<ShipAPI> allies = new ArrayList<>();
             List<ShipAPI> enemies = new ArrayList<>();
+            float deployedAllyDP = 0;
+            float deployedEnemyDP = 0;
             for (ShipAPI ship : Global.getCombatEngine().getShips()) {
                 if (ship.getOwner() == allySide && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) {
                     allies.add(ship);
@@ -64,8 +64,7 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
 
 
             //sort the lists based on ship size (aka recovery cost)
-            sd_fleetAdmiralUtil.sortByRecoveryCost(allies);
-            sd_fleetAdmiralUtil.sortByRecoveryCost(enemies);
+
 
             //make a list of all assignments and what they're attached to
             List<sd_fleetAdmiralUtil.AssignmentInfoWithTarget> assignmentsWithTargets = new ArrayList<>();
@@ -84,7 +83,6 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
                 }
             }
 
-            //assign around and find out
             isAttackingObjective = false;
             for (sd_fleetAdmiralUtil.AssignmentInfoWithTarget assignment : assignmentsWithTargets) {
                 if (assignment.getObject() instanceof ShipAPI) {

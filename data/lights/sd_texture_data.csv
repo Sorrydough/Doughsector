@@ -1,4 +1,9 @@
 id,type,frame,magnitude,map,path
+sd_fightersupport,ship,,1,normal,graphics/ships/normals/sd_fightersupport_normal.png
+sd_fighterblaster,ship,,1,normal,graphics/ships/normals/sd_fighterblaster_normal.png
+sd_fighterion,ship,,1,normal,graphics/ships/normals/sd_fighterion_normal.png
+sd_fightercanister,ship,,1,normal,graphics/ships/normals/sd_fightercanister_normal.png
+,,,,,
 sd_frigatelight,ship,,1,normal,graphics/ships/normals/sd_frigatelight_normal.png
 sd_frigate,ship,,1,normal,graphics/ships/normals/sd_frigate_normal.png
 sd_frigatecarrier,ship,,1,normal,graphics/ships/normals/sd_frigatecarrier_normal.png

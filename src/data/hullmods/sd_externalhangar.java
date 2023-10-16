@@ -30,19 +30,22 @@ public class sd_externalhangar extends BaseHullMod {
         stats.getMinCrewMod().modifyFlat(id, CREW_PENALTY);
         stats.getNumFighterBays().modifyFlat(id, NUMBER_BAYS);
         stats.getFighterWingRange().modifyMult(id, WING_RANGE_MULT);
+        stats.getHullBonus().modifyFlat(id, -HULL_PENALTY.get(hullSize));
         stats.getFighterRefitTimeMult().modifyMult(id, REFIT_MOD.get(hullSize));
         stats.getDynamic().getMod(Stats.BOMBER_COST_MOD).modifyFlat(id, BOMBER_PENALTY);
     }
-    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ship.getMutableStats().getHullBonus().modifyFlat(id, -HULL_PENALTY.get(ship.getHullSize()));
-    }
+//    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+//        ship.getMutableStats().
+//    }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("Installs a hangar on the ship with 10/50/100/125%% rebuild speed by hullsize.", 5,
-                Misc.getHighlightColor(), "10/50/100/125%"); // I hate this so much, literally not even worth my mindspace to make it inherit the modifier dynamically
-        tooltip.addPara("Fighters are unable to leave the vicinity of their ship.", 5);
+        tooltip.addPara("Installs a hangar on the ship with 10/50/100/150%% rebuild speed by hullsize.", 5,
+                Misc.getHighlightColor(), "10/50/100/150%"); // I hate this so much, literally not even worth my mindspace to make it inherit the modifier dynamically
+        tooltip.addPara("Hull strength is reduced by 500/1000/2000/3000, applied after all bonuses.", 5,
+                Misc.getHighlightColor(), "500/1000/2000/3000");
         tooltip.addPara("Minimum crew is increased by "+ CREW_PENALTY +".", 2,
                 Misc.getHighlightColor(), String.valueOf(CREW_PENALTY));
+        tooltip.addPara("Fighters are unable to leave the vicinity of their ship.", 2);
         tooltip.addPara("Bombers cannot be installed.", 2);
     }
     @Override

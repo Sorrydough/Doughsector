@@ -1,13 +1,13 @@
 {
-  "displayName": "Graviton Bomber",
+  "displayName": "AM Canister Bomber",
   "fluxCapacitors": 0,
   "fluxVents": 0,
   "goalVariant": true,
-  "hullId": "sd_fightergraviton",
+  "hullId": "sd_fightercanister",
   "hullMods": [],
   "permaMods": [],
   "quality": 0,
-  "variantId": "sd_fightergraviton_Standard",
+  "variantId": "sd_fightercanister_Standard",
   "weaponGroups": [
     {
       "autofire": false,

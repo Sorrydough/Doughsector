@@ -23,5 +23,5 @@
             "weapons": {"NRG01": "pdburst"}
         }
     ],
-    "wings": ["sd_fightergravitonWing"]
+    "wings": ["sd_fightercanisterWing"]
 }

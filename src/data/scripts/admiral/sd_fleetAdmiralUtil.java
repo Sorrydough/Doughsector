@@ -19,8 +19,12 @@ public class sd_fleetAdmiralUtil {
             this.assignment = assignment;
             this.object = object;
         }
-        public CombatFleetManagerAPI.AssignmentInfo getAssignment() { return assignment; }
-        public Object getObject() { return object; }
+        public CombatFleetManagerAPI.AssignmentInfo getAssignment() {
+            return assignment;
+        }
+        public Object getObject() {
+            return object;
+        }
     }
 
     public static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment, int owner) {

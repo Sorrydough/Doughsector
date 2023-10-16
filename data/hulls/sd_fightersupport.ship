@@ -1,0 +1,84 @@
+{
+  "hullName": "New Hull",
+  "hullId": "sd_fightersupport",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/sd_fightersupport.png",
+  "style": "SD_TECH",
+  "height": 36,
+  "width": 36,
+  "center": [17.5, 19],
+  "collisionRadius": 25.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 23,
+  "viewOffset": 0,
+  "builtInMods": [
+    "no_weapon_flux",
+    "sd_hexshield",
+    "advancedoptics"
+  ],
+  "weaponSlots": [
+    {
+      "id": "NRG01",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [7.5, 8]
+    },
+    {
+      "id": "NRG02",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [7.5, -9]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-11, 7.5],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-11, -8.5],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-11, -7],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-11, 6],
+      "length": 12,
+      "width": 3,
+      "angle": 180,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    -11, -8,
+    -4.5, -14.5,
+    7, -14.5,
+    10, -9,
+    4, -0.5,
+    10, 8,
+    7, 13.5,
+    -4.5, 13.5,
+    -11, 7
+  ]
+}
