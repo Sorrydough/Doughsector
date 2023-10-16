@@ -6,6 +6,7 @@ import com.fs.starfarer.api.impl.campaign.ids.BattleObjectives;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.console.Console;
+import data.scripts.admiral.modules.sd_admiralExecutionManager;
 
 import java.awt.*;
 import java.util.*;
@@ -27,6 +28,8 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
     float deployedEnemyDP = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
+        if (Global.getCombatEngine() == null)
+            return;
         if (doInit) {
             if (debug)
                 Console.showMessage("Player Admiral Init");
@@ -140,6 +143,10 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
                 }
             }
 
+            //sd_admiralExecutionManager.attackTarget(this);
+
+
+
             //if an enemy ship is fluxed out, put an engage order on it if it doesn't already have one
             for (ShipAPI enemy : enemies) {
                 if (enemy.getFluxLevel() > 0.75 || enemy.getHardFluxLevel() > 0.65 || enemy.getFluxTracker().isOverloaded() || enemy.getEngineController().isFlamedOut()) {
@@ -158,16 +165,15 @@ public class sd_fleetAdmiralV1 extends BaseEveryFrameCombatPlugin {
 
             //for debug. float text above all current assignments
             if (debug)
-                for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments()) {
+                for (CombatFleetManagerAPI.AssignmentInfo assignment : taskManager.getAllAssignments())
                     engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 1, 10);
-                }
             assignmentsWithTargets.clear();
             allies.clear();
             enemies.clear();
         }
     }
 
-    static void attackObjective(int owner) {
+    public void attackObjective(int owner) {
         for (BattleObjectiveAPI objective : Global.getCombatEngine().getObjectives()) {
             if (Objects.equals(objective.getType(), BattleObjectives.SENSOR_JAMMER) && objective.getOwner() != owner) {
                 sd_fleetAdmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);

@@ -26,12 +26,9 @@ public class sd_modPlugin extends BaseModPlugin {
             TextureData.readTextureDataCSV("data/lights/sd_texture_data.csv");
             LightData.readLightDataCSV("data/lights/sd_light_data.csv");
         }
-
-        List <String> sd_weaponsList = new ArrayList<>();
-        {
+        List <String> sd_weaponsList = new ArrayList<>(); {
             //projectiles
             sd_weaponsList.add("amblaster");
-
             //beams
             sd_weaponsList.add("ionbeam");
             sd_weaponsList.add("gravitonbeam");
@@ -39,13 +36,11 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("irautolance");
             sd_weaponsList.add("tachyonlance");
             sd_weaponsList.add("hil");
-
             //point defense
             sd_weaponsList.add("lrpdlaser");
             sd_weaponsList.add("pdburst");
             sd_weaponsList.add("heavyburst");
             sd_weaponsList.add("guardian");
-
             //missiles
             sd_weaponsList.add("swarmer");
             sd_weaponsList.add("heatseeker");
@@ -59,48 +54,25 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("sabot_single");
             sd_weaponsList.add("sabotpod");
             sd_weaponsList.add("squall");
-
             //self-insert donut steel weapons
             sd_weaponsList.add("sd_dragon_single");
         }
-
-        for (String weapon : sd_weaponsList) {
+        for (String weapon : sd_weaponsList)
             settings.getWeaponSpec(weapon).addTag("sd_arsenal_package");
-        }
     }
-
     public void onNewGameAfterProcGen() {
         new sd_moonGenerator().generate(Global.getSector());
     }
-    //ShipAPI enemy : new ArrayList<>(targets))
     public void onGameLoad(boolean newGame) {
         final FactionAPI playerFaction = Global.getSector().getPlayerPerson().getFaction();
-        List<String> weaponsToRemove = new ArrayList<>();
-        for (String weapon : playerFaction.getKnownWeapons()) {
-            if (settings.getWeaponSpec(weapon).hasTag("base_bp")) {
-                weaponsToRemove.add(weapon);
-            }
-        }
-        List<String> shipsToRemove = new ArrayList<>();
-        for (String ship : playerFaction.getKnownShips()) {
-            if (settings.getHullSpec(ship).hasTag("base_bp")) {
-                shipsToRemove.add(ship);
-            }
-        }
-        List<String> fightersToRemove = new ArrayList<>();
-        for (String fighter : playerFaction.getKnownFighters()) {
-            if (settings.getFighterWingSpec(fighter).hasTag("base_bp")) {
-                fightersToRemove.add(fighter);
-            }
-        }
-        for (String weapon : weaponsToRemove) {
-            playerFaction.removeKnownWeapon(weapon);
-        }
-        for (String ship : shipsToRemove) {
-            playerFaction.removeKnownShip(ship);
-        }
-        for (String fighter : fightersToRemove) {
-            playerFaction.removeKnownFighter(fighter);
-        }
+        for (String weapon : new ArrayList<>(playerFaction.getKnownWeapons()))
+            if (settings.getWeaponSpec(weapon).hasTag("base_bp"))
+                playerFaction.removeKnownWeapon(weapon);
+        for (String ship : new ArrayList<>(playerFaction.getKnownShips()))
+            if (settings.getHullSpec(ship).hasTag("base_bp"))
+                playerFaction.removeKnownShip(ship);
+        for (String fighter : new ArrayList<>(playerFaction.getKnownFighters()))
+            if (settings.getFighterWingSpec(fighter).hasTag("base_bp"))
+                playerFaction.removeKnownFighter(fighter);
     }
 }

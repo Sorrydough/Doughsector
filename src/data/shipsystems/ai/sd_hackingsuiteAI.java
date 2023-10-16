@@ -41,16 +41,13 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             if (systemRange == 0)
                 systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
             // keep track of nearby targets
-            for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, systemRange)) {
+            for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, systemRange))
                 if (!targets.contains(enemy) && sd_hackingsuite.isTargetValid(ship, enemy))
                     targets.add(enemy);
-            }
-            if (!targets.isEmpty()) {
-                for (ShipAPI enemy : new ArrayList<>(targets)) { // doing some shenanigans to bypass a concurrent modification exception
+            if (!targets.isEmpty())
+                for (ShipAPI enemy : new ArrayList<>(targets)) // doing some shenanigans to bypass a concurrent modification exception
                     if (MathUtils.getDistance(ship, enemy) > systemRange)
                         targets.remove(enemy);
-                }
-            }
         }
         // no point going any further if we have no targets ))))
         if (targets.isEmpty())

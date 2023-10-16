@@ -12,7 +12,7 @@ import java.util.List;
 
 public class sd_fleetAdmiralUtil {
     // need a custom class to keep track of what each assignment is actually attached to
-    static class AssignmentInfoWithTarget { // TODO: STOP USING THIS GOOFY THING AND USE A MAP INSTEAD
+    public static class AssignmentInfoWithTarget { // TODO: STOP USING THIS GOOFY THING AND USE A MAP INSTEAD
         private final CombatFleetManagerAPI.AssignmentInfo assignment;
         private final Object object; // You can use 'Object' to represent various types of targets
         public AssignmentInfoWithTarget(CombatFleetManagerAPI.AssignmentInfo assignment, Object object) {
@@ -23,11 +23,11 @@ public class sd_fleetAdmiralUtil {
         public Object getObject() { return object; }
     }
 
-    static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment, int owner) {
+    public static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment, int owner) {
         Global.getCombatEngine().getFleetManager(owner).getTaskManager(false).createAssignment(assignment, target, false);
     }
 
-    static void sortByRecoveryCost(List<ShipAPI> ships) {
+    public static void sortByRecoveryCost(List<ShipAPI> ships) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
             @Override
             public int compare(ShipAPI ship1, ShipAPI ship2) {

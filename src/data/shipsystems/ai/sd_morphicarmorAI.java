@@ -47,7 +47,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
                     ship.useSystem();
                 if (desireTotal <= 0 && ship.getSystem().isOn())
                     ship.useSystem();
-            } else if (ship.getPhaseCloak() instanceof sd_morphicarmor){
+            } else if (ship.getPhaseCloak() != null) { // for some reason cloak instanceof morphicarmor doesn't work, and also I get an NPE if I don't do a check for cloak being present
                 if (desireTotal >= 100 && !ship.getPhaseCloak().isOn())
                     ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
                 if (desireTotal <= 0 && ship.getPhaseCloak().isOn())
