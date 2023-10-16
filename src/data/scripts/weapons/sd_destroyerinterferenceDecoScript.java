@@ -18,11 +18,11 @@ public class sd_destroyerinterferenceDecoScript implements EveryFrameWeaponEffec
         ShipAPI ship = weapon.getShip();
         if (pluginOuter == null) {
             pluginOuter = new sd_drawSystemRadius(ship, sd_util.getOptimalRange(ship) + ship.getCollisionRadius(), 2, colorOuter, false);
-            Global.getCombatEngine().addLayeredRenderingPlugin(pluginOuter);
+            engine.addLayeredRenderingPlugin(pluginOuter);
         }
         if (pluginInner == null) {
             pluginInner = new sd_drawSystemRadius(ship, sd_util.getOptimalRange(ship) + ship.getCollisionRadius(), 2, colorInner, true);
-            Global.getCombatEngine().addLayeredRenderingPlugin(pluginInner);
+            engine.addLayeredRenderingPlugin(pluginInner);
         }
         if (ship.getSystem().isOn()) {
             weapon.setForceFireOneFrame(true);
