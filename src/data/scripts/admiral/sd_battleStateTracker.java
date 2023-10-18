@@ -1,15 +1,9 @@
 package data.scripts.admiral;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
+import com.fs.starfarer.api.combat.CombatFleetManagerAPI.*;
 
 import java.util.*;
-
-import data.scripts.admiral.sd_fleetAdmiralUtil.*;
-import com.fs.starfarer.api.combat.CombatFleetManagerAPI.*;
-import org.lwjgl.util.vector.Vector2f;
-
 
 public class sd_battleStateTracker { // this class doesn't do anything per se, it's just an object that holds data to be accessed by other classes
     public CombatEngineAPI engine;
@@ -21,6 +15,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
     public final List<ShipAPI> deployedAllyShips = new ArrayList<>();
     public final List<ShipAPI> deployedEnemyShips = new ArrayList<>();
     public final HashMap<AssignmentInfo, Object> assignmentsWithTargets = new HashMap<>();
+    public final HashMap<ShipAPI, AssignmentInfo> shipsWithTargetAssignments = new HashMap<>();
     public int deployedAllyDP;
     public int deployedEnemyDP;
     public int numOwnedObjectives;
@@ -29,6 +24,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
     boolean doOnce = true;
     void reset() {
         assignmentsWithTargets.clear();
+        shipsWithTargetAssignments.clear();
         deployedShips.clear();
         deployedAllyShips.clear();
         deployedEnemyShips.clear();
@@ -63,49 +59,20 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         for (ShipAPI ship : deployedShips) {
             if (ship.getOwner() == allySide) {
                 deployedAllyShips.add(ship);
-                deployedAllyDP += getDeploymentCost(ship);
+                deployedAllyDP += sd_fleetAdmiralUtil.getDeploymentCost(ship);
             } else if (ship.getOwner() == enemySide) {
                 deployedEnemyShips.add(ship);
-                deployedEnemyDP += getDeploymentCost(ship);
+                deployedEnemyDP += sd_fleetAdmiralUtil.getDeploymentCost(ship);
             }
         }
-        sortByDeploymentCost(deployedAllyShips);
-        sortByDeploymentCost(deployedEnemyShips);
+        sd_fleetAdmiralUtil.sortByDeploymentCost(deployedAllyShips);
+        sd_fleetAdmiralUtil.sortByDeploymentCost(deployedEnemyShips);
 
         for (AssignmentInfo assignment : allyTaskManager.getAllAssignments())
-            assignmentsWithTargets.put(assignment, getObjectAtLocation(assignment.getTarget().getLocation()));
-    }
-    private static Object getObjectAtLocation(Vector2f location) {
-        CombatEngineAPI engine = Global.getCombatEngine();
-        for (ShipAPI ship : engine.getShips())
-            if (location == ship.getLocation())
-                return ship;
-        for (BattleObjectiveAPI objective : engine.getObjectives())
-            if (location == objective.getLocation())
-                return objective;
-        return null;
-    }
-    private static float getDeploymentCost(ShipAPI ship) {
-        MutableShipStatsAPI stats = ship.getMutableStats();
-        return Math.max(stats.getSuppliesToRecover().base, stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).computeEffective(stats.getSuppliesToRecover().modified));
-    }
-    private static void sortByDeploymentCost(List<ShipAPI> ships) {
-        Collections.sort(ships, new Comparator<ShipAPI>() {
-            @Override
-            public int compare(ShipAPI ship1, ShipAPI ship2) {
-                float supplies1 = getDeploymentCost(ship1);
-                float supplies2 = getDeploymentCost(ship2);
-                return Float.compare(supplies2, supplies1);
-            }
-        });
+            assignmentsWithTargets.put(assignment, sd_fleetAdmiralUtil.getObjectAtLocation(assignment.getTarget().getLocation()));
+
+        for (ShipAPI ship : deployedAllyShips)
+            if (allyTaskManager.getAssignmentFor(ship) != null)
+                shipsWithTargetAssignments.put(ship, allyTaskManager.getAssignmentFor(ship));
     }
 }
-
-// TODO: CHECK IF IT'S POSSIBLE FOR ASSIGNMENTS TO BE ON DEAD STUFF
-//        for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : assignmentsWithTargets.entrySet()) {
-//            if (assignment.getValue() instanceof ShipAPI) {
-//                ShipAPI target = (ShipAPI) assignment.getValue();
-//                if (target.isHulk() || !target.isAlive() || target.isFighter())
-//                    allyTaskManager.removeAssignment(assignment.getKey());
-//            }
-//        }
