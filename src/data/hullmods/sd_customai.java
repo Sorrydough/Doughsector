@@ -12,7 +12,7 @@ import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import data.scripts.admiral.sd_fleetAdmiralAI;
+//import data.scripts.admiral.sd_fleetAdmiralAI;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -31,7 +31,7 @@ public class sd_customai extends BaseHullMod {
     float maxRange= 0;
     final IntervalUtil timer = new IntervalUtil (0.5f, 1.5f);
 
-    AdmiralAIPlugin admiral = new sd_fleetAdmiralAI();
+//    AdmiralAIPlugin admiral = new sd_fleetAdmiralAI();
     boolean applyAI = false;
 
     public class sd_aiListener implements AdvanceableListener { //SCY's venting code
@@ -47,9 +47,9 @@ public class sd_customai extends BaseHullMod {
                 return;
 
             if (runOnce) {
-                if (applyAI && Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
-                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
-                }
+//                if (applyAI && Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
+//                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
+//                }
 
                 runOnce = false;
                 List<WeaponAPI> loadout = ship.getAllWeapons();

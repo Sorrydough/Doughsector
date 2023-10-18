@@ -8,6 +8,7 @@ import java.util.*;
 
 import data.scripts.admiral.sd_fleetAdmiralUtil.*;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI.*;
+import org.lwjgl.util.vector.Vector2f;
 
 
 public class sd_battleStateTracker { // this class doesn't do anything per se, it's just an object that holds data to be accessed by other classes
@@ -42,12 +43,12 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         // doing it this way so stuff doesn't have to get recalculated repeatedly and I don't have 10,000 static classes in a util the size of your mom
         if (doOnce) {
             engine = combatEngine;
+            allySide = allyOwner;
+            enemySide = enemyOwner;
             allyFleetManager = engine.getFleetManager(allySide);
             allyTaskManager = allyFleetManager.getTaskManager(false);
             enemyFleetManager = engine.getFleetManager(enemySide);
             enemyTaskManager = enemyFleetManager.getTaskManager(false);
-            allySide = allyOwner;
-            enemySide = enemyOwner;
             doOnce = false;
         }
 
@@ -71,29 +72,24 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         sortByDeploymentCost(deployedAllyShips);
         sortByDeploymentCost(deployedEnemyShips);
 
-        for (AssignmentInfo assignment : allyTaskManager.getAllAssignments()) {
-            for (ShipAPI ship : Global.getCombatEngine().getShips())
-                if (assignment.getTarget().getLocation() == ship.getLocation())
-                    if (assignmentsWithTargets.containsKey(assignment))
-                        //add the 'AssignmentInfo assignment' to a list of assignments, alongside its associated 'ShipAPI ship'
-                        assignmentsWithTargets.put(assignment, ship);
-            for (BattleObjectiveAPI objective : engine.getObjectives())
-                if (assignment.getTarget().getLocation() == objective.getLocation())
-                    //same again, the goal is to keep track of what assignments are attached to what objects
-                    assignmentsWithTargets.put(assignment, objective);
-        }
-
-
-
-
-
-
+        for (AssignmentInfo assignment : allyTaskManager.getAllAssignments())
+            assignmentsWithTargets.put(assignment, getObjectAtLocation(assignment.getTarget().getLocation()));
     }
-    static float getDeploymentCost(ShipAPI ship) {
+    private static Object getObjectAtLocation(Vector2f location) {
+        CombatEngineAPI engine = Global.getCombatEngine();
+        for (ShipAPI ship : engine.getShips())
+            if (location == ship.getLocation())
+                return ship;
+        for (BattleObjectiveAPI objective : engine.getObjectives())
+            if (location == objective.getLocation())
+                return objective;
+        return null;
+    }
+    private static float getDeploymentCost(ShipAPI ship) {
         MutableShipStatsAPI stats = ship.getMutableStats();
         return Math.max(stats.getSuppliesToRecover().base, stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).computeEffective(stats.getSuppliesToRecover().modified));
     }
-    static void sortByDeploymentCost(List<ShipAPI> ships) {
+    private static void sortByDeploymentCost(List<ShipAPI> ships) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
             @Override
             public int compare(ShipAPI ship1, ShipAPI ship2) {

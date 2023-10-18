@@ -10,6 +10,6 @@
 	},
 	"plugins": {
 		"combatReadinessPlugin":"data.scripts.sd_CRPluginImpl",
-		"admiralAIPlugin":"data.scripts.admiral.sd_fleetAdmiralV1"
+		"admiralAIPlugin":"data.scripts.admiral.sd_fleetAdmiralController"
 	}
 }
