@@ -6,7 +6,6 @@ import com.fs.starfarer.api.impl.campaign.ids.BattleObjectives;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.console.Console;
-import data.scripts.admiral.modules.sd_admiralExecutionManager;
 
 import java.awt.*;
 import java.util.*;
