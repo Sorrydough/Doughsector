@@ -39,7 +39,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			return;
 		}
 
-		ship.setJitter(id, JITTER_COLOR, effectLevel, 1, 0, 5);
+		ship.setJitter(id, JITTER_COLOR, effectLevel, 2, 0, 5);
 		ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
