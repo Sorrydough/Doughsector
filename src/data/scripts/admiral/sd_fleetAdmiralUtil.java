@@ -5,9 +5,8 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import org.lwjgl.util.vector.Vector2f;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+
 
 public class sd_fleetAdmiralUtil {
     public static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment, int owner) {
@@ -37,4 +36,29 @@ public class sd_fleetAdmiralUtil {
             }
         });
     }
+    public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battleStateTracker battleState) {
+        float threat = 0;
+        List<ShipAPI> assignedToTarget = new ArrayList<>();
+        for (Map.Entry<ShipAPI, CombatFleetManagerAPI.AssignmentInfo> ship : battleState.shipsWithTargetAssignments.entrySet()) {
+            if (ship.getValue() == assignment) {
+                assignedToTarget.add(ship.getKey());
+            }
+        }
+
+
+
+
+
+        for (ShipAPI enemy : battleState.deployedEnemyShips) {
+
+
+        }
+
+
+
+
+
+        return threat;
+    }
+
 }

@@ -8,16 +8,14 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
-public class sd_entropychronoboostPlugin extends BaseEveryFrameCombatPlugin {
+public class sd_entropychronoPlugin extends BaseEveryFrameCombatPlugin {
     final ShipAPI target;
     final ShipAPI ship;
-    public sd_entropychronoboostPlugin(ShipAPI ship, ShipAPI target) {
+    public sd_entropychronoPlugin(ShipAPI ship, ShipAPI target) {
         this.ship = ship;
         this.target = target;
     }
