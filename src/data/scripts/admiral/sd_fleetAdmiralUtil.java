@@ -58,7 +58,7 @@ public class sd_fleetAdmiralUtil {
 
 
 
-        return threat;
+        return threat; // ur mum
     }
 
 }
