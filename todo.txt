@@ -4,16 +4,15 @@ Ship System Stuff:
 Misc Stuff:
 - Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
+- Do another pass on ship names
 
 Aesthetic Stuff:
 - Use fade engines to color function to make them change color randomly in combat - blue blinker color and orange technobullshit color
 - Implement glowmaps for blinkers and friends
 
 Generic AI Stuff:
-- Improve venting behavior - needs to use starficz' calculate incoming damage utility
-- Alter squall weapons.csv data - DO NOT USE VS FRIGATES, and USE VS SHIELDS?
-- Alter breach SRMs behavior
-- Rewrite vent behavior, take beams into account as well
+- Improve venting behavior - needs to use starficz' calculate incoming damage utility, account for beams
+- Modify tags on various vanilla weapons to improve AI behavior - squalls & breach srms for starters
 
 Campaign Stuff:
 - Make a placeholder faction with the fleets randomly patrolling near caches
@@ -40,16 +39,12 @@ Post-Release Stuff:
 
 lunalib compatibility
 interfere with commissioned crews and substance abuse
-modify tags on various vanilla weapons to improve AI behavior
 figure out some way to make my ships stop trying to rotate their armor
 in my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
 
 Weapon ideas:
 Small size graviton lance: Kinetic support beam that just does a bunch of soft flux to shields in a quick burst
 Medium size antimatter canister launcher: like an energy damage PCL that saturates an area with lower hit strength
-
-Add another fighter:
-5 OP, 2 heavily shielded support fighters, each armed with an advanced optics graviton lance and a PD laser.
 
 Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency.
 
@@ -64,10 +59,10 @@ Auxiliary Microforge: Restores 10% fighter replacement rate, or 2 reload cost wo
 ^ Done.
 Hacking Suite: Shuts off the system of the targeted ship, forcibly disables it for a period of time.
 ^ Done.
-Stasis Field: Reduces the target's timeflow and damage taken to 10% for 5 seconds.
+Stasis Field: Reduces the target's timeflow and damage taken to 10% for a period of time. // Wait how's current implementation different from overloading them?
 ^ Mostly done. Needs AI script.
 Entropy Chronoboost: Increases rate of PPT and/or CR degredation of the target.
 ^ Tough to code the system itself, AI code should be average difficulty
 
 look at vic modplugin to see how to swap a script at runtime
-remove base blueprints from player faction at save load
+make all my systems generate at least a bit of flux upon activation

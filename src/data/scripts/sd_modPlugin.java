@@ -42,7 +42,6 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("heavyburst");
             sd_weaponsList.add("guardian");
             //missiles
-            sd_weaponsList.add("swarmer");
             sd_weaponsList.add("heatseeker");
             sd_weaponsList.add("salamanderpod");
             sd_weaponsList.add("breach");
@@ -56,6 +55,7 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("squall");
             //self-insert donut steel weapons
             sd_weaponsList.add("sd_dragon_single");
+            sd_weaponsList.add("sd_gravlance");
         }
         for (String weapon : sd_weaponsList)
             settings.getWeaponSpec(weapon).addTag("sd_arsenal_package");
