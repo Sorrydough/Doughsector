@@ -36,7 +36,8 @@ public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
         target.setJitterUnder(id, sd_stasisfield.jitterUnderColor, effectLevel, 10, 0, 10);
         target.setJitter(id, sd_stasisfield.jitterColor, effectLevel, 1, 0, 5);
 
-        target.getShield().toggleOff();
+        if (target.getShield() != null)
+            target.getShield().toggleOff();
         float STASIS_MULT = STASIS_MULT_MIN + (STASIS_MULT_MAX - STASIS_MULT_MIN) * (1.0f - effectLevel); // chatgpt wrote this
         targetStats.getTimeMult().modifyMult(id, STASIS_MULT);
         targetStats.getHullDamageTakenMult().modifyMult(id, STASIS_MULT);
