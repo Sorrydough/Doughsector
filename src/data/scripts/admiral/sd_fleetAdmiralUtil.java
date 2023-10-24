@@ -16,6 +16,13 @@ public class sd_fleetAdmiralUtil {
         MutableShipStatsAPI stats = ship.getMutableStats();
         return Math.max(stats.getSuppliesToRecover().base, stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).computeEffective(stats.getSuppliesToRecover().modified));
     }
+    public static float calculateCombatEffectiveness(ShipAPI ship) {
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        float CombatEffectiveness = getDeploymentCost(ship);
+        if (stats.getVariant().hasHullMod("safetyoverrides")) // change this to use a map
+            CombatEffectiveness *= 1.25;
+        return CombatEffectiveness;
+    }
     public static Object getObjectAtLocation(Vector2f location) {
         CombatEngineAPI engine = Global.getCombatEngine();
         for (ShipAPI ship : engine.getShips())
@@ -35,6 +42,19 @@ public class sd_fleetAdmiralUtil {
                 return Float.compare(supplies2, supplies1);
             }
         });
+    }
+    public static float getShipStrengthAssigned(CombatFleetManagerAPI.AssignmentInfo assignment, sd_battleStateTracker battleState) {
+        List<ShipAPI> assignedToTarget = new ArrayList<>();
+        for (Map.Entry<ShipAPI, CombatFleetManagerAPI.AssignmentInfo> ship : battleState.shipsWithTargetAssignments.entrySet()) {
+            if (ship.getValue() == assignment) {
+                assignedToTarget.add(ship.getKey());
+            }
+        }
+        float strength = 0;
+        for (ShipAPI ship : assignedToTarget) {
+            strength += calculateCombatEffectiveness(ship);
+        }
+        return strength;
     }
     public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battleStateTracker battleState) {
         float threat = 0;
