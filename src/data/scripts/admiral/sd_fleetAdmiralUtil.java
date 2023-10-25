@@ -16,10 +16,10 @@ public class sd_fleetAdmiralUtil {
         MutableShipStatsAPI stats = ship.getMutableStats();
         return Math.max(stats.getSuppliesToRecover().base, stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).computeEffective(stats.getSuppliesToRecover().modified));
     }
-    public static float calculateCombatEffectiveness(ShipAPI ship) {
+    public static float getCombatEffectiveness(ShipAPI ship) {
         MutableShipStatsAPI stats = ship.getMutableStats();
         float CombatEffectiveness = getDeploymentCost(ship);
-        if (stats.getVariant().hasHullMod("safetyoverrides")) // change this to use a map
+        if (stats.getVariant().hasHullMod("safetyoverrides")) // todo: change this to use a map
             CombatEffectiveness *= 1.25;
         return CombatEffectiveness;
     }
@@ -52,7 +52,7 @@ public class sd_fleetAdmiralUtil {
         }
         float strength = 0;
         for (ShipAPI ship : assignedToTarget) {
-            strength += calculateCombatEffectiveness(ship);
+            strength += getCombatEffectiveness(ship);
         }
         return strength;
     }

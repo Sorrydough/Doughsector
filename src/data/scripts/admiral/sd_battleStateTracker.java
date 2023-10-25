@@ -56,13 +56,17 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
             if (objective.getOwner() == allySide)
                 numOwnedObjectives += 1;
 
+        boolean isPlayer = allySide == 0;
         for (ShipAPI ship : deployedShips) {
-            if (ship.getOwner() == allySide) {
+            if (!isPlayer && ship.getOwner() == allySide) {
                 deployedAllyShips.add(ship);
-                deployedAllyDP += sd_fleetAdmiralUtil.getDeploymentCost(ship);
+                deployedAllyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
+            } else if (isPlayer && ship.getFleetMember().getFleetCommander().isPlayer()) {
+                deployedAllyShips.add(ship);
+                deployedAllyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
             } else if (ship.getOwner() == enemySide) {
                 deployedEnemyShips.add(ship);
-                deployedEnemyDP += sd_fleetAdmiralUtil.getDeploymentCost(ship);
+                deployedEnemyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
             }
         }
         sd_fleetAdmiralUtil.sortByDeploymentCost(deployedAllyShips);
