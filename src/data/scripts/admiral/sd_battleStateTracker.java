@@ -16,8 +16,8 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
     public final List<ShipAPI> deployedEnemyShips = new ArrayList<>();
     public final HashMap<AssignmentInfo, Object> assignmentsWithTargets = new HashMap<>();
     public final HashMap<ShipAPI, AssignmentInfo> shipsWithTargetAssignments = new HashMap<>();
-    public int deployedAllyDP;
-    public int deployedEnemyDP;
+    public int deployedAllyThreat;
+    public int deployedEnemyThreat;
     public int numOwnedObjectives;
     public int allySide;
     public int enemySide;
@@ -30,8 +30,8 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         deployedShips.clear();
         deployedAllyShips.clear();
         deployedEnemyShips.clear();
-        deployedAllyDP = 0;
-        deployedEnemyDP = 0;
+        deployedAllyThreat = 0;
+        deployedEnemyThreat = 0;
         numOwnedObjectives = 0;
         averageAllySpeed = 0;
         averageEnemySpeed = 0;
@@ -53,7 +53,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         }
 
         for (ShipAPI ship : engine.getShips())
-            if (!ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter())
+            if (ship.getFleetMember() != null && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter()) // need to nullcheck fleetmember to prevent a crash with stations
                 deployedShips.add(ship);
 
         for (BattleObjectiveAPI objective : engine.getObjectives())
@@ -64,13 +64,13 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         for (ShipAPI ship : deployedShips) {
             if (!isPlayer && ship.getOwner() == allySide) {
                 deployedAllyShips.add(ship);
-                deployedAllyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
+                deployedAllyThreat += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
             } else if (isPlayer && ship.getOwner() == allySide && !ship.isAlly()) { // making sure we don't confuse reinforcing ships for the player's ships
                 deployedAllyShips.add(ship);
-                deployedAllyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
+                deployedAllyThreat += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
             } else if (ship.getOwner() == enemySide) {
                 deployedEnemyShips.add(ship);
-                deployedEnemyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
+                deployedEnemyThreat += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
             }
         }
         sd_fleetAdmiralUtil.sortByDeploymentCost(deployedAllyShips);

@@ -86,6 +86,7 @@ public class sd_customStartPlaceholder extends CustomStart {
         addFleetMember("sd_frigate_Strike", dialog, data, tempFleet, "flagship");
         addFleetMember("sd_frigatelight_Lancer", dialog, data, tempFleet, "none");
         addFleetMember("sd_frigatelight_Lancer", dialog, data, tempFleet, "none");
+        addFleetMember("sd_retrofitkite_Standard", dialog, data, tempFleet, "none");
 
 
         data.getStartingCargo().getCredits().add(10000);

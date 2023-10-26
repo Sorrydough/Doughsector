@@ -1,0 +1,16 @@
+{
+    "displayName": "Standard",
+    "fluxCapacitors": 5,
+    "fluxVents": 5,
+    "hullId": "sd_retrofitkite",
+    "hullMods": ["sd_externalhangar"],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_retrofitkite_Standard",
+    "weaponGroups": [{
+        "autofire": false,
+        "mode": "LINKED",
+        "weapons": {"SYN01": "amblaster"}
+    }],
+    "wings": ["sd_fightersupportWing"]
+}
