@@ -12,7 +12,7 @@ import java.util.Map;
 public class sd_formationManager {
     public static void manageFormation(sd_battleStateTracker battleState) {
         boolean largestAllyDefended = false;
-        boolean shouldBeDefensive = battleState.deployedEnemyDP > battleState.deployedAllyDP;
+        boolean shouldBeDefensive = battleState.deployedEnemyDP > battleState.deployedAllyDP || battleState.averageAllySpeed < battleState.averageEnemySpeed;
         for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {
             if (assignment.getKey().getType() == CombatAssignmentType.DEFEND && assignment.getValue() instanceof ShipAPI) {
                 ShipAPI ship = (ShipAPI) assignment.getValue();

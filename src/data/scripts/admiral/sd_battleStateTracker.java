@@ -21,6 +21,8 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
     public int numOwnedObjectives;
     public int allySide;
     public int enemySide;
+    public int averageAllySpeed;
+    public int averageEnemySpeed;
     boolean doOnce = true;
     void reset() {
         assignmentsWithTargets.clear();
@@ -31,6 +33,8 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         deployedAllyDP = 0;
         deployedEnemyDP = 0;
         numOwnedObjectives = 0;
+        averageAllySpeed = 0;
+        averageEnemySpeed = 0;
     }
     public void updateState(CombatEngineAPI combatEngine, int allyOwner, int enemyOwner) {
         // need to reset all the fields that we don't want to preserve between updates
@@ -71,6 +75,14 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         }
         sd_fleetAdmiralUtil.sortByDeploymentCost(deployedAllyShips);
         sd_fleetAdmiralUtil.sortByDeploymentCost(deployedEnemyShips);
+
+        for (ShipAPI ship : deployedAllyShips)
+            averageAllySpeed += ship.getMaxSpeed();
+        averageAllySpeed /= Math.max(1, deployedAllyShips.size());
+
+        for (ShipAPI ship : deployedEnemyShips)
+            averageEnemySpeed += ship.getMaxSpeed();
+        averageEnemySpeed /= Math.max(1, deployedEnemyShips.size());
 
         for (AssignmentInfo assignment : allyTaskManager.getAllAssignments())
             assignmentsWithTargets.put(assignment, sd_fleetAdmiralUtil.getObjectAtLocation(assignment.getTarget().getLocation()));

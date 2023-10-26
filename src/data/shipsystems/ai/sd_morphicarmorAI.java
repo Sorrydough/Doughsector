@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class sd_morphicarmorAI implements ShipSystemAIScript {
     final IntervalUtil interval = new IntervalUtil(0.5f, 1f);
-    final boolean debug = true;
+    final boolean debug = false;
     ShipAPI ship;
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) { this.ship = ship; }
@@ -35,10 +35,9 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             // 1. Our flux level is too high
             desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
             // 2. We could dissipate hardflux
-            if (sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1)) {
+            if (sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
                 if (ship.getShield() == null || ship.getShield().isOff())
                     desireNeg -= ship.getHardFluxLevel() * 100;
-            }
             // system has a failsafe to shut itself off if the ship's about to flux itself out with it, so we don't need to write AI for that case
             float desireTotal = desirePos + desireNeg;
             if (debug)
