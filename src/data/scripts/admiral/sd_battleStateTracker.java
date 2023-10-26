@@ -61,7 +61,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
             if (!isPlayer && ship.getOwner() == allySide) {
                 deployedAllyShips.add(ship);
                 deployedAllyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
-            } else if (isPlayer && ship.getFleetMember().getFleetCommander().isPlayer()) {
+            } else if (isPlayer && !ship.isAlly()) {
                 deployedAllyShips.add(ship);
                 deployedAllyDP += sd_fleetAdmiralUtil.getCombatEffectiveness(ship);
             } else if (ship.getOwner() == enemySide) {

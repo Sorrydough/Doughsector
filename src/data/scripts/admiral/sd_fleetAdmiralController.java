@@ -1,5 +1,6 @@
 package data.scripts.admiral;
 
+import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
@@ -19,7 +20,7 @@ public class sd_fleetAdmiralController extends BaseEveryFrameCombatPlugin {
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
-        if (engine == null || engine.isPaused())
+        if (engine == null || engine.isPaused() || Global.getCurrentState() != GameState.COMBAT)
             return;
         interval.advance(amount);
         if (interval.intervalElapsed()) {
@@ -32,9 +33,11 @@ public class sd_fleetAdmiralController extends BaseEveryFrameCombatPlugin {
                 doInit = false;
             }
 
-            sd_formationManager.manageFormation(battleState);
-            sd_objectiveManager.manageAttackedObjectives(battleState);
-            sd_attackManager.manageAttackedEnemies(battleState);
+            if (battleState.deployedAllyShips.size() != 0) {
+                sd_formationManager.manageFormation(battleState);
+                sd_objectiveManager.manageAttackedObjectives(battleState);
+                sd_attackManager.manageAttackedEnemies(battleState);
+            }
 
             for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
                 engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 1, 10);

@@ -13,8 +13,7 @@ import java.util.Map;
 
 public class sd_attackManager {
     public static void manageAttackedEnemies(sd_battleStateTracker battleState) {
-//        Console.showMessage(battleState.assignmentsWithTargets.toString());
-        //if an enemy ship is fluxed out, put an engage order on it if it doesn't already have one
+        // if an enemy ship is fluxed out, put an engage order on it if it doesn't already have one
         for (ShipAPI enemy : battleState.deployedEnemyShips)
             if (isTargetVulnerable(enemy)) {
                 boolean isEnemyEngaged = false;
