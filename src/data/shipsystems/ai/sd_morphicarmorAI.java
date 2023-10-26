@@ -8,9 +8,11 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import data.scripts.sd_util;
 
+import java.util.Objects;
+
 public class sd_morphicarmorAI implements ShipSystemAIScript {
     final IntervalUtil interval = new IntervalUtil(0.5f, 1f);
-    final boolean debug = false;
+    final boolean debug = true;
     ShipAPI ship;
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) { this.ship = ship; }
@@ -42,12 +44,12 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             if (debug)
                 Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
 
-            if (ship.getSystem() instanceof sd_morphicarmor) {
+            if (Objects.equals(ship.getSystem().getId(), "sd_morphicarmor")) {
                 if (desireTotal >= 100 && !ship.getSystem().isOn())
                     ship.useSystem();
                 if (desireTotal <= 0 && ship.getSystem().isOn())
                     ship.useSystem();
-            } else if (ship.getPhaseCloak() != null) { // for some reason cloak instanceof morphicarmor doesn't work, and also I get an NPE if I don't do a check for cloak being present
+            } else if (Objects.equals(ship.getPhaseCloak().getId(), "sd_morphicarmor")) {
                 if (desireTotal >= 100 && !ship.getPhaseCloak().isOn())
                     ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
                 if (desireTotal <= 0 && ship.getPhaseCloak().isOn())
