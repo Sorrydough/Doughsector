@@ -105,6 +105,9 @@ public class sd_fleetAdmiralUtil {
             CRmod *= CRmod;
         modifier += CRmod;
 
+        // todo: factor disabled weapons, engines and flux level
+        // todo: factor modules into the strength of stations or supercaps
+
         return getDeploymentCost(ship) * ((float) modifier / 100);
     }
     public static Object getObjectAtLocation(Vector2f location) {

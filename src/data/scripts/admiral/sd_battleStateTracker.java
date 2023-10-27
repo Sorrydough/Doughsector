@@ -91,4 +91,11 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
             if (allyTaskManager.getAssignmentFor(ship) != null)
                 shipsWithTargetAssignments.put(ship, allyTaskManager.getAssignmentFor(ship));
     }
+    public CombatFleetManagerAPI getFleetmanager(int owner) {
+        if (owner == allySide)
+            return allyFleetManager;
+        if (owner == enemySide)
+            return enemyFleetManager;
+        return null;
+    }
 }
