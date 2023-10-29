@@ -1,23 +1,26 @@
 {
-  "hullId": "sd_frigate",
+  "hullName": "New Hull",
+  "hullId": "sd_frigateinterference",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/sd_frigate.png",
+  "spriteName": "graphics/ships/sd_frigateinterference.png",
   "style": "SD_TECH",
-  "height": 112,
-  "width": 70,
-  "center": [36.5, 55.5],
-  "collisionRadius": 79.5,
+  "height": 110,
+  "width": 100,
+  "center": [50, 54],
+  "collisionRadius": 68.5,
   "shieldCenter": [0, -0],
-  "shieldRadius": 75.5,
+  "shieldRadius": 64.5,
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "sd_designtech"
+    "sd_designtech",
+    "fluxshunt"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
     "DEC02": "sd_blinker",
     "DEC03": "sd_blinker",
+    "DEC04": "sd_blinker",
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
@@ -29,45 +32,36 @@
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 269,
-      "angle": -37.5,
-      "locations": [22.5, -16.5]
-    },
-    {
-      "id": "NRG02",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 240,
-      "angle": 54,
-      "locations": [-10.5, 12.5]
+      "arc": 205,
+      "angle": 11,
+      "locations": [23, 0]
     },
     {
       "id": "NRG03",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 360,
-      "angle": 0,
-      "locations": [-21.5, -9.5]
+      "arc": 180,
+      "angle": 65,
+      "locations": [0, 25]
     },
     {
-      "id": "SYN01",
+      "id": "NRG02",
       "size": "SMALL",
-      "type": "SYNERGY",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 271,
+      "angle": -37,
+      "locations": [12, -30]
+    },
+    {
+      "id": "MSL01",
+      "size": "SMALL",
+      "type": "MISSILE",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [38.5, -0.5]
-    },
-    {
-      "id": "SYN02",
-      "size": "SMALL",
-      "type": "SYNERGY",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 0,
-      "locations": [16.5, 20.5]
+      "locations": [22, 25]
     },
     {
       "id": "THR01",
@@ -76,7 +70,7 @@
       "mount": "HARDPOINT",
       "arc": 10,
       "angle": 40,
-      "locations": [18.5, 34.5]
+      "locations": [9.5, 44.5]
     },
     {
       "id": "THR02",
@@ -85,7 +79,7 @@
       "mount": "HARDPOINT",
       "arc": 10,
       "angle": -40,
-      "locations": [20.5, -31.5]
+      "locations": [9.5, -44.5]
     },
     {
       "id": "THR03",
@@ -94,7 +88,7 @@
       "mount": "HARDPOINT",
       "arc": 10,
       "angle": 135,
-      "locations": [13.5, 34.5]
+      "locations": [5.5, 44.5]
     },
     {
       "id": "THR04",
@@ -103,7 +97,7 @@
       "mount": "HARDPOINT",
       "arc": 10,
       "angle": -135,
-      "locations": [15.5, -31.5]
+      "locations": [5.5, -44.5]
     },
     {
       "id": "DEC02",
@@ -112,7 +106,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [48.5, -14]
+      "locations": [46.5, -6.5]
     },
     {
       "id": "DEC01",
@@ -121,7 +115,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [48.5, 13]
+      "locations": [48.5, 2.5]
     },
     {
       "id": "DEC03",
@@ -130,12 +124,21 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [-0.5, -23]
+      "locations": [25.5, -36.5]
+    },
+    {
+      "id": "DEC04",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [22.5, 37.5]
     }
   ],
   "engineSlots": [
     {
-      "location": [-53.5, 6],
+      "location": [-46, 0],
       "length": 48,
       "width": 12,
       "angle": 180,
@@ -143,15 +146,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-53.5, -3],
-      "length": 48,
-      "width": 12,
-      "angle": 180,
-      "contrailSize": 12,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-53.5, 4.5],
+      "location": [-31, 15.5],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -159,7 +154,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-53.5, -4.5],
+      "location": [-46, -2],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -167,7 +162,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-53.5, -1.5],
+      "location": [-46, 2],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -175,7 +170,23 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-53.5, 7.5],
+      "location": [-31, 17.5],
+      "length": 24,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-30, -17.5],
+      "length": 24,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-30, -15.5],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -184,16 +195,15 @@
     }
   ],
   "bounds": [
-    36.5, -27.5,
-    48, -10.5,
-    48.5, 11.5,
-    24, 13,
-    23, 31.5,
-    -23.5, 25.5,
-    -50, 11,
-    -50, -7,
-    -24, -21.5,
-    -10, -14.5,
-    13.5, -28
+    22, -41,
+    48, -1,
+    28.5, 18,
+    27.5, 35.5,
+    14, 42,
+    -8, 41,
+    -13.5, 27,
+    -44.5, 9.5,
+    -45, -8,
+    1, -41
   ]
 }

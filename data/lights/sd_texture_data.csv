@@ -6,6 +6,7 @@ sd_fightercanister,ship,,1,normal,graphics/ships/normals/sd_fightercanister_norm
 ,,,,,
 sd_frigatelight,ship,,1,normal,graphics/ships/normals/sd_frigatelight_normal.png
 sd_frigate,ship,,1,normal,graphics/ships/normals/sd_frigate_normal.png
+sd_frigateinterference,ship,,1,normal,graphics/ships/normals/sd_frigateinterference_normal.png
 sd_frigatecarrier,ship,,1,normal,graphics/ships/normals/sd_frigatecarrier_normal.png
 sd_frigateheavy,ship,,1,normal,graphics/ships/normals/sd_frigateheavy_normal.png
 ,,,,,

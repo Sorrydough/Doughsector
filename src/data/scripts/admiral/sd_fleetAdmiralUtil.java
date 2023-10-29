@@ -101,14 +101,14 @@ public class sd_fleetAdmiralUtil {
         } else if (CR <= 0.5) {
             CRmod = (0.5f - CR) / 0.5f * 10;
         }
-        if (CR < 0.4f)
+        if (CR < 0.4f) // malfunctions start below this point so we multiply the size of the penalty
             CRmod *= CRmod;
         modifier += CRmod;
 
         // todo: factor disabled weapons, engines and flux level
         // todo: factor modules into the strength of stations or supercaps
 
-        return getDeploymentCost(ship) * ((float) modifier / 100);
+        return getDeploymentCost(ship) * Math.max(0.1f, (float) modifier / 100); // math.max because a ship's combat effectiveness rating should never go below 10% of its DP
     }
     public static Object getObjectAtLocation(Vector2f location) {
         CombatEngineAPI engine = Global.getCombatEngine();
