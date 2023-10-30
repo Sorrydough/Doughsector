@@ -44,7 +44,7 @@ public class sd_fleetAdmiralUtil {
             dModsExcluded.add("degraded_life_support");
         }
 
-        final int dmodMod = -5;
+        final int dmodMod = 5;
         final int smodMod = 15;
         final int officerSkillMod = 15;
         final int officerEliteSkillMod = 10;
@@ -58,7 +58,7 @@ public class sd_fleetAdmiralUtil {
         // adjust by dmods that actually reduce combat performance
         for (String whyisthisastring : variant.getHullMods())
             if (Global.getSettings().getHullModSpec(whyisthisastring).hasTag("dmod") && !dModsExcluded.contains(whyisthisastring))
-                modifier += dmodMod;
+                modifier -= dmodMod;
         // and adjust by non-logistic hullmods
         for (String whyisthisastring : variant.getSMods())
             if (!sModsExcluded.contains(whyisthisastring))
@@ -96,13 +96,13 @@ public class sd_fleetAdmiralUtil {
         // modify by CR
         float CRmod = 0;
         float CR = ship.getCurrentCR();
-        if (CR >= 0.7f) {
+        if (CR >= 0.7f) { // chatgpt wrote this :)
             CRmod = (CR - 0.7f) / 0.3f * 10;
         } else if (CR <= 0.5) {
-            CRmod = (0.5f - CR) / 0.5f * 10;
+            CRmod -= (0.5f - CR) / 0.5f * 10;
         }
         if (CR < 0.4f) // malfunctions start below this point so we multiply the size of the penalty
-            CRmod *= CRmod;
+            CRmod -= CRmod * CRmod;
         modifier += CRmod;
 
         // todo: factor disabled weapons, engines and flux level
