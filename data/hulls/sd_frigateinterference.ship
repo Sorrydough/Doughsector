@@ -14,13 +14,14 @@
   "builtInMods": [
     "sd_customai",
     "sd_designtech",
-    "fluxshunt"
+    "ecm"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
     "DEC02": "sd_blinker",
     "DEC03": "sd_blinker",
     "DEC04": "sd_blinker",
+    "DEC05": "sd_hackingsuite_deco",
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
@@ -134,6 +135,15 @@
       "arc": 0,
       "angle": 0,
       "locations": [22.5, 37.5]
+    },
+    {
+      "id": "DEC05",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [0, -0]
     }
   ],
   "engineSlots": [

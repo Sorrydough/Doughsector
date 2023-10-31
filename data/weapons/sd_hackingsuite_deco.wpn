@@ -1,0 +1,14 @@
+{
+	"id":"sd_hackingsuite_deco",
+	"specClass":"beam",
+	"type":"DECORATIVE",
+	"size":"SMALL",
+	"everyFrameEffect":"data.scripts.weapons.sd_hackingsuite_deco",
+	"turretSprite":"",
+	"hardpointSprite":"",
+	"turretOffsets":[0,0],
+	"turretAngleOffsets":[0],
+	"hardpointOffsets":[0,0],
+	"hardpointAngleOffsets":[0],
+	"textureType":ROUGH,
+}

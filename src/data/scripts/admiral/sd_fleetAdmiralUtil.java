@@ -7,6 +7,7 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.characters.SkillSpecAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
@@ -71,28 +72,30 @@ public class sd_fleetAdmiralUtil {
                 modifier += officerSkillMod + officerEliteSkillMod;
         }
         // adjust for fleet admiral's skills
-        for (SkillLevelAPI skill : ship.getFleetMember().getFleetCommander().getStats().getSkillsCopy()) {
-            String skillID = skill.getSkill().getId();
-            if (Objects.equals(skillID, Skills.TACTICAL_DRILLS)) {
-                modifier += 5;
-                continue;
-            }
-            if (ship.getCaptain() != null) {
-                if (Objects.equals(skillID, Skills.WOLFPACK_TACTICS)) {
-                    switch (ship.getHullSize()) {
-                        case FRIGATE:
-                            modifier += 20;
-                            break;
-                        case DESTROYER:
-                            modifier += 10;
-                            break;
-                    }
+        PersonAPI commander = ship.getFleetMember().getFleetCommander();
+        if (commander != null)
+            for (SkillLevelAPI skill : commander.getStats().getSkillsCopy()) {
+                String skillID = skill.getSkill().getId();
+                if (Objects.equals(skillID, Skills.TACTICAL_DRILLS)) {
+                    modifier += 5;
                     continue;
                 }
-                if (Objects.equals(skillID, Skills.COORDINATED_MANEUVERS))
-                    modifier += 10;
+                if (ship.getCaptain() != null) {
+                    if (Objects.equals(skillID, Skills.WOLFPACK_TACTICS)) {
+                        switch (ship.getHullSize()) {
+                            case FRIGATE:
+                                modifier += 20;
+                                break;
+                            case DESTROYER:
+                                modifier += 10;
+                                break;
+                        }
+                        continue;
+                    }
+                    if (Objects.equals(skillID, Skills.COORDINATED_MANEUVERS))
+                        modifier += 10;
+                }
             }
-        }
         // modify by CR
         float CRmod = 0;
         float CR = ship.getCurrentCR();
