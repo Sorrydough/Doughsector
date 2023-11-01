@@ -18,23 +18,27 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
     public sd_hackingsuitePlugin(ShipAPI target) {
         this.target = target;
     }
+    final Map<ShipAPI.HullSize, Integer> HACK_DURATION = new HashMap<>(); {
+        HACK_DURATION.put(ShipAPI.HullSize.FRIGATE, 20);
+        HACK_DURATION.put(ShipAPI.HullSize.DESTROYER, 15);
+        HACK_DURATION.put(ShipAPI.HullSize.CRUISER, 10);
+        HACK_DURATION.put(ShipAPI.HullSize.CAPITAL_SHIP, 5);
+    }
     final Color fadeColor = new Color(230, 215, 195,100);
     final IntervalUtil TIMER = new IntervalUtil(1f, 1f);
     boolean doOnce = true;
-    float duration = 5;
     float time = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
         target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.75f);
+        int duration = HACK_DURATION.get(target.getHullSize());
         if (doOnce) {
-            duration += target.getSystem().getCooldownRemaining();
             target.getSystem().setCooldown(duration);
-            if (target.getSystem().isOn())
-                target.getSystem().deactivate();
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);
-            target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ Math.round(duration) +" seconds!", Color.LIGHT_GRAY, 5, true);
+            target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ duration +" seconds!", Color.LIGHT_GRAY, 5, true);
+            target.getCustomData().put("hackingsuite", null); // needed so we don't stack the effect on a ship twice by accident
             doOnce = false;
         }
         if (engine.isPaused())
@@ -44,14 +48,14 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
             time += 1;
             if (time >= duration) {
                 target.setShipSystemDisabled(false);
+                target.getCustomData().remove("hackingsuite");
                 engine.removePlugin(this);
-                //return;
             }
             // make arcs shoot out of the target randomly based on their flux level
             // the most challenging aspect of this is knowing what type of system it is
             // I want engines on a ship with a mobility system, weapons with an offensive, and shields with a shield system
-            // but this doesn't really work because uh... there's no tagging functionality for systems
-            // so, I have to cope, anyway if you find this blog and know a solution send me a DM
+            // but this doesn't really work because uh, there's no tagging functionality for systems
+            // so I have to cope... anyway if you find this blog and know a solution send me a DM
 // 				final Color EMP_CENTER_COLOR = new Color(250, 235, 215, 205);
 //				final Color EMP_EDGE_COLOR = new Color(255,120,80,105);
 //					List<Object> ports = new ArrayList<>();

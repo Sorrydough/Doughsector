@@ -13,18 +13,11 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import data.scripts.sd_util;
 
 public class sd_hackingsuite extends BaseShipSystemScript {
-	final Map<ShipAPI.HullSize, Integer> ARC_THICKNESS = new HashMap<>(); {
-		ARC_THICKNESS.put(ShipAPI.HullSize.FRIGATE, 5);
-		ARC_THICKNESS.put(ShipAPI.HullSize.DESTROYER, 8);
-		ARC_THICKNESS.put(ShipAPI.HullSize.CRUISER, 12);
-		ARC_THICKNESS.put(ShipAPI.HullSize.CAPITAL_SHIP, 15);
-	}
 	final Color Color1 = new Color(250, 235, 215,75);
 	final Color Color2 = new Color(250, 235, 215,155);
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
-		// TODO: MAKE THE REMAINDER COOLDOWN SCALE OFF THE TARGET'S HULL SIZE
 		// set jitter effects for ourselves
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		float jitterLevel = effectLevel;
@@ -43,8 +36,9 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			return false;
 		float targetDistance = MathUtils.getDistance(ship, target);
 		float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
-		return target.getSystem() != null && !target.isFighter() && target != ship && !target.getFluxTracker().isOverloadedOrVenting() &&
-				!(targetDistance > systemRange) && target.getOwner() != ship.getOwner();
+		return target.getSystem() != null && !target.getSystem().isOn() && !target.getCustomData().containsKey("sd_hackingsuite")
+				&& !target.isFighter() && target != ship && !target.getFluxTracker().isOverloadedOrVenting()
+				&& !(targetDistance > systemRange) && target.getOwner() != ship.getOwner();
 	}
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {

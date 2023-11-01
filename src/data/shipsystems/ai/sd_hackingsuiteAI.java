@@ -57,9 +57,9 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             float desirePos = 0;
             float desireNeg = 0;
             // We want to use the system if:
-            // 1. A ship within range is using its system
+            // 1. A valid target is within range and its system isn't worthless
             for (ShipAPI enemy : targets) {
-                if (enemy.getSystem().isOn()) {
+                if (!enemy.getSystem().isOn() && !uselessSystems.contains(enemy.getSystem().getId())) {
                     ship.setShipTarget(enemy);
                     desirePos += 150;
                 }
@@ -67,11 +67,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             // We don't want to use our system if:
             // 1. Our flux level is too high
             desireNeg -= (ship.getFluxLevel() * 100) * (0.5 + ship.getSystem().getFluxPerUse() / ship.getMaxFlux()); // this math is more fragile than you'd think
-            // 2. The enemy's system isn't worthwhile disabling
-            for (String system : uselessSystems) {
-                if (Objects.equals(target.getSystem().getId(), system))
-                    desireNeg -= 100;
-            }
+
             float desireTotal = desirePos + desireNeg;
             if (debug)
                 Global.getCombatEngine().addFloatingText(ship.getLocation(), "Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg, 20, Color.CYAN, ship, 5, 5);

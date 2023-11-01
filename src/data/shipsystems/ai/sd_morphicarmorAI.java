@@ -39,20 +39,20 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
                 if (ship.getShield() == null || ship.getShield().isOff())
                     desireNeg -= ship.getHardFluxLevel() * 100;
             // system has a failsafe to shut itself off if the ship's about to flux itself out with it, so we don't need to write AI for that case
-            float desireTotal = desirePos + desireNeg;
+            int desireTotal = (int) (desirePos + desireNeg);
             if (debug)
                 Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
 
-            if (Objects.equals(ship.getSystem().getId(), "sd_morphicarmor")) {
-                if (desireTotal >= 100 && !ship.getSystem().isOn())
-                    ship.useSystem();
-                if (desireTotal <= 0 && ship.getSystem().isOn())
-                    ship.useSystem();
-            } else if (Objects.equals(ship.getPhaseCloak().getId(), "sd_morphicarmor")) {
+            if (ship.getPhaseCloak() != null && Objects.equals(ship.getPhaseCloak().getId(), "sd_morphicarmor")) {
                 if (desireTotal >= 100 && !ship.getPhaseCloak().isOn())
                     ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
                 if (desireTotal <= 0 && ship.getPhaseCloak().isOn())
                     ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
+            } else {
+                if (desireTotal >= 100 && !ship.getSystem().isOn())
+                    ship.useSystem();
+                if (desireTotal <= 0 && ship.getSystem().isOn())
+                    ship.useSystem();
             }
         }
     }

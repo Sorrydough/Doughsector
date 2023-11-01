@@ -15,59 +15,42 @@ import java.util.Map;
 public class sd_entropychronoPlugin extends BaseEveryFrameCombatPlugin {
     final ShipAPI target;
     final ShipAPI ship;
+    final MutableShipStatsAPI targetStats;
     public sd_entropychronoPlugin(ShipAPI ship, ShipAPI target) {
         this.ship = ship;
         this.target = target;
+        this.targetStats = target.getMutableStats();
     }
-    final Map<ShipAPI.HullSize, Integer> AVERAGE_PPT = new HashMap<>(); {
-        AVERAGE_PPT.put(ShipAPI.HullSize.FRIGATE, 240);
-        AVERAGE_PPT.put(ShipAPI.HullSize.DESTROYER, 360);
-        AVERAGE_PPT.put(ShipAPI.HullSize.CRUISER, 480);
-        AVERAGE_PPT.put(ShipAPI.HullSize.CAPITAL_SHIP, 600);
+    final Map<ShipAPI.HullSize, Float> PPT_DRAIN = new HashMap<>(); {
+        PPT_DRAIN.put(ShipAPI.HullSize.FRIGATE, 0.5f);
+        PPT_DRAIN.put(ShipAPI.HullSize.DESTROYER, 1f);
+        PPT_DRAIN.put(ShipAPI.HullSize.CRUISER, 1.5f);
+        PPT_DRAIN.put(ShipAPI.HullSize.CAPITAL_SHIP, 2f);
     }
     final IntervalUtil TIMER = new IntervalUtil(1, 1);
+    final String id = this.toString();
     final float CR_DEGRADE_PERCENT = 25;
-    final float DURATION = 5;
-    boolean doOnce = true;
+    final float DURATION = 10;
+    float totalPeakTimeLost = 0;
     float time = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
-        CombatEngineAPI engine = Global.getCombatEngine();
-        MutableShipStatsAPI targetStats = target.getMutableStats();
-        String id = this.toString();
-        
+        float effectLevel = ship.getSystem().getEffectLevel();
 
-
-        if (doOnce) {
-            target.getMutableStats().getCRLossPerSecondPercent().modifyPercent(id, CR_DEGRADE_PERCENT);
-//            target.setTimeDeployed(target.getFullTimeDeployed() + 0.5f);
-            doOnce = false;
-        }
-
-
-
-
-
-
+        targetStats.getCRLossPerSecondPercent().modifyPercent(id, CR_DEGRADE_PERCENT * effectLevel);
 
         if (Global.getCombatEngine().isPaused())
             return;
         TIMER.advance(amount);
         if (TIMER.intervalElapsed()) {
-
-
-//            totalPeakTimeLoss += (ELITE_OVERLEVEL_CR_LOSS_MULT - 1f) * effectLevel * (effectOverlevelSquared - 1f) * objectiveAmount;
-//            targetStats.getCRLossPerSecondPercent().modifyMult(id, II_Util.lerp(1f, ELITE_OVERLEVEL_CR_LOSS_MULT, effectLevel * (effectOverlevel - 1f)));
-//            targetStats.getPeakCRDuration().modifyFlat(id, -totalPeakTimeLoss / ship.getMutableStats().getPeakCRDuration().getMult());
-
-
-
-
-
+            if (target.getPeakTimeRemaining() > PPT_DRAIN.get(target.getHullSize())) {
+                totalPeakTimeLost += PPT_DRAIN.get(target.getHullSize()) * effectLevel;
+                targetStats.getPeakCRDuration().modifyFlat(id, -totalPeakTimeLost);
+            }
             time += 1;
             if (time >= DURATION) {
                 target.getMutableStats().getCRLossPerSecondPercent().unmodifyPercent(id);
-                engine.removePlugin(this);
+                Global.getCombatEngine().removePlugin(this);
             }
         }
     }
