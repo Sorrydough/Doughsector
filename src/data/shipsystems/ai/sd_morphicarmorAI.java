@@ -25,7 +25,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             if (!AIUtils.canUseSystemThisFrame(ship) || (!ship.getSystem().isOn() && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE)) ||
                     sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD || ship.getFluxLevel() >= sd_morphicarmor.HIGH_FLUX ||
                     sd_morphicarmor.isArmorGridBalanced(grid) || sd_morphicarmor.getCellsAroundAverage(grid, true).size() == 0)
-                return; // the system automatically shuts off when it does nothing, so we can just return in that case
+                return;
             float desirePos = 0;
             float desireNeg = 0;
             // We want the system on if:
@@ -34,26 +34,12 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             // We want the system off if:
             // 1. Our flux level is too high
             desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
-            // 2. We could dissipate hardflux
-            if (sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
-                if (ship.getShield() == null || ship.getShield().isOff())
-                    desireNeg -= ship.getHardFluxLevel() * 100;
-            // system has a failsafe to shut itself off if the ship's about to flux itself out with it, so we don't need to write AI for that case
+            // the system automatically shuts off when it does nothing or when the ship is about to flux itself out, so we don't need to write code for those situations
             int desireTotal = (int) (desirePos + desireNeg);
             if (debug)
                 Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
 
-            if (ship.getPhaseCloak() != null && Objects.equals(ship.getPhaseCloak().getId(), "sd_morphicarmor")) {
-                if (desireTotal >= 100 && !ship.getPhaseCloak().isOn())
-                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
-                if (desireTotal <= 0 && ship.getPhaseCloak().isOn())
-                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
-            } else {
-                if (desireTotal >= 100 && !ship.getSystem().isOn())
-                    ship.useSystem();
-                if (desireTotal <= 0 && ship.getSystem().isOn())
-                    ship.useSystem();
-            }
+            sd_util.activateSystem(ship, "sd_morphicarmor", desireTotal);
         }
     }
 }

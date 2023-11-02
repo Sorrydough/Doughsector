@@ -123,7 +123,7 @@ public class sd_fleetAdmiralUtil {
                 return objective;
         return null;
     }
-    public static void sortByDeploymentCost(List<ShipAPI> ships) {
+    public static void sortByDeploymentCost(final List<ShipAPI> ships) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
             @Override
             public int compare(ShipAPI ship1, ShipAPI ship2) {

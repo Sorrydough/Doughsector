@@ -86,7 +86,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			float extraFlux = 0;
 			if (ship.getShield() != null)
 				extraFlux = (float) Math.sqrt(ship.getShield().getUpkeep() / FLUX_PER_ARMOR);
-			ship.getFluxTracker().increaseFlux(amountToTransfer * (FLUX_PER_ARMOR + extraFlux), true);
+			ship.getFluxTracker().increaseFlux(amountToTransfer * (FLUX_PER_ARMOR + extraFlux), false);
 
 			//cleanup
 			ship.syncWithArmorGridState();

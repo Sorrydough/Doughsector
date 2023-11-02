@@ -15,21 +15,26 @@ import data.scripts.sd_util;
 public class sd_hackingsuite extends BaseShipSystemScript {
 	final Color Color1 = new Color(250, 235, 215,75);
 	final Color Color2 = new Color(250, 235, 215,155);
+	boolean doOnce = true;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
 		// set jitter effects for ourselves
 		ShipAPI ship = (ShipAPI) stats.getEntity();
-		float jitterLevel = effectLevel;
-		if (state == State.OUT) // ensures jitter level doesn't deteriorate during OUT
-			jitterLevel *= jitterLevel;
-		float jitterExtra = jitterLevel * 50;
-		ship.setJitterUnder(this, Color2, jitterLevel, 20, 0, 3 + jitterExtra);
-		ship.setJitter(this, Color1, jitterLevel, 4, 0, 0 + jitterExtra);
+//		ship.setJitterUnder(this, Color2, effectLevel, 20, 0, 10 * effectLevel);
+//		ship.setJitter(this, Color1, effectLevel, 5, 0, 5 * effectLevel);
 
-		// apply the effect to the target, note we check effectLevel and not for active state because our system doesn't have an active duration
-		if (ship.getSystem().getEffectLevel() == 1)
-			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(ship.getShipTarget()));
+		ship.setJitter(id, Color1, effectLevel, 2, 0, 5);
+		ship.setJitterUnder(id, Color2, effectLevel, 10, 0, 5);
+
+		// I like to use a plugin even when it's not strictly necessary
+		if (doOnce && ship.getSystem().isActive()) {
+			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(ship, ship.getShipTarget()));
+			doOnce = false;
+		}
+	}
+	public void unapply(MutableShipStatsAPI stats, String id) {
+		doOnce = true;
 	}
 	public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range and whether it's likely to even have a system that we'd want to disable
 		if (target == null)												// needs to take target as an input to work in the AI script

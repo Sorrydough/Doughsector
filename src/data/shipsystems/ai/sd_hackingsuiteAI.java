@@ -3,6 +3,7 @@ package data.shipsystems.ai;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
+import data.scripts.admiral.sd_fleetAdmiralUtil;
 import data.shipsystems.sd_hackingsuite;
 
 import org.lazywizard.console.Console;
@@ -12,13 +13,17 @@ import org.lwjgl.util.vector.Vector2f;
 import data.scripts.sd_util;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
+
+import data.scripts.admiral.sd_fleetAdmiralUtil.*;
 
 public class sd_hackingsuiteAI implements ShipSystemAIScript {
-    final List<String> uselessSystems = new ArrayList<>(); {
-        uselessSystems.add("flarelauncher");
+    final Map<ShipAPI.HullSize, Integer> AVG_DPCOST = new HashMap<>(); {
+        AVG_DPCOST.put(ShipAPI.HullSize.FRIGATE, 5);
+        AVG_DPCOST.put(ShipAPI.HullSize.DESTROYER, 10);
+        AVG_DPCOST.put(ShipAPI.HullSize.CRUISER, 20);
+        AVG_DPCOST.put(ShipAPI.HullSize.CAPITAL_SHIP, 40);
     }
     List<ShipAPI> targets = new ArrayList<>();
     final IntervalUtil intervalShort = new IntervalUtil(0.01f, 0.01f);
@@ -52,27 +57,31 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
         // no point going any further if we have no targets ))))
         if (targets.isEmpty())
             return;
+        sd_fleetAdmiralUtil.sortByDeploymentCost(targets);
         intervalShort.advance(amount);
         if (intervalShort.intervalElapsed()) {
             float desirePos = 0;
             float desireNeg = 0;
+            // We don't want to use the system if:
+            // 1. Our flux level is too high
+            desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
+
             // We want to use the system if:
-            // 1. A valid target is within range and its system isn't worthless
+            // 1. A valid target is within range, scale desire by the target's DP cost
             for (ShipAPI enemy : targets) {
-                if (!enemy.getSystem().isOn() && !uselessSystems.contains(enemy.getSystem().getId())) {
-                    ship.setShipTarget(enemy);
-                    desirePos += 150;
+                float enemyDeployCost = sd_fleetAdmiralUtil.getDeploymentCost(enemy);
+                float desireToAttack = 100 * (enemyDeployCost / AVG_DPCOST.get(enemy.getHullSize()));
+                if (desireToAttack + desireNeg >= 100) {
+                    ship.setShipTarget(target);
+                    desirePos += desireToAttack;
+                    break;
                 }
             }
-            // We don't want to use our system if:
-            // 1. Our flux level is too high
-            desireNeg -= (ship.getFluxLevel() * 100) * (0.5 + ship.getSystem().getFluxPerUse() / ship.getMaxFlux()); // this math is more fragile than you'd think
 
-            float desireTotal = desirePos + desireNeg;
+            int desireTotal = (int) (desirePos + desireNeg);
             if (debug)
                 Global.getCombatEngine().addFloatingText(ship.getLocation(), "Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg, 20, Color.CYAN, ship, 5, 5);
-            if (desireTotal >= 100)
-                ship.useSystem();
+            sd_util.activateSystem(ship, "sd_hackingsuite", desireTotal);
         }
     }
 }

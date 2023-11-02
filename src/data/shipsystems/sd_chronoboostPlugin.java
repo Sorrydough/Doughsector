@@ -12,11 +12,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class sd_entropychronoPlugin extends BaseEveryFrameCombatPlugin {
+public class sd_chronoboostPlugin extends BaseEveryFrameCombatPlugin {
     final ShipAPI target;
     final ShipAPI ship;
     final MutableShipStatsAPI targetStats;
-    public sd_entropychronoPlugin(ShipAPI ship, ShipAPI target) {
+    public sd_chronoboostPlugin(ShipAPI ship, ShipAPI target) {
         this.ship = ship;
         this.target = target;
         this.targetStats = target.getMutableStats();
@@ -32,7 +32,6 @@ public class sd_entropychronoPlugin extends BaseEveryFrameCombatPlugin {
     final float CR_DEGRADE_PERCENT = 25;
     final float DURATION = 10;
     float totalPeakTimeLost = 0;
-    float time = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         float effectLevel = ship.getSystem().getEffectLevel();
@@ -47,8 +46,7 @@ public class sd_entropychronoPlugin extends BaseEveryFrameCombatPlugin {
                 totalPeakTimeLost += PPT_DRAIN.get(target.getHullSize()) * effectLevel;
                 targetStats.getPeakCRDuration().modifyFlat(id, -totalPeakTimeLost);
             }
-            time += 1;
-            if (time >= DURATION) {
+            if (effectLevel == 0) {
                 target.getMutableStats().getCRLossPerSecondPercent().unmodifyPercent(id);
                 Global.getCombatEngine().removePlugin(this);
             }
