@@ -70,7 +70,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             // 1. A valid target is within range, scale desire by the target's DP cost
             for (ShipAPI enemy : targets) {
                 float enemyDeployCost = sd_fleetAdmiralUtil.getDeploymentCost(enemy);
-                float desireToAttack = 100 * (enemyDeployCost / AVG_DPCOST.get(enemy.getHullSize()));
+                float desireToAttack = 200 * Math.max(2, enemyDeployCost / AVG_DPCOST.get(enemy.getHullSize()));
                 if (desireToAttack + desireNeg >= 100) {
                     ship.setShipTarget(target);
                     desirePos += desireToAttack;

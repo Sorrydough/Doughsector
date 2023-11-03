@@ -54,8 +54,8 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("sabotpod");
             sd_weaponsList.add("squall");
             //self-insert donut steel weapons
-            sd_weaponsList.add("sd_dragon_single");
-            sd_weaponsList.add("sd_gravlance");
+            //sd_weaponsList.add("sd_dragon_single");
+            //sd_weaponsList.add("sd_gravlance");
         }
         for (String weapon : sd_weaponsList)
             settings.getWeaponSpec(weapon).addTag("sd_arsenal_package");

@@ -26,7 +26,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
-        target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.75f);
+        target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.85f);
         if (doOnce) {
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);

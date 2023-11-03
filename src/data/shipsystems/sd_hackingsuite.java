@@ -3,6 +3,7 @@ package data.shipsystems;
 import java.awt.Color;
 import java.util.*;
 
+import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
@@ -13,30 +14,44 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import data.scripts.sd_util;
 
 public class sd_hackingsuite extends BaseShipSystemScript {
+	final Map<ShipAPI.HullSize, Float> FLUX_COST = new HashMap<>(); {
+		FLUX_COST.put(ShipAPI.HullSize.FRIGATE, 0.5f);
+		FLUX_COST.put(ShipAPI.HullSize.DESTROYER, 1f);
+		FLUX_COST.put(ShipAPI.HullSize.CRUISER, 1.5f);
+		FLUX_COST.put(ShipAPI.HullSize.CAPITAL_SHIP, 2.5f);
+	}
 	final Color Color1 = new Color(250, 235, 215,75);
 	final Color Color2 = new Color(250, 235, 215,155);
 	boolean doOnce = true;
+	ShipAPI target = null;
+	final IntervalUtil TIMER = new IntervalUtil(1, 1);
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
-		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
-			return;
-		// set jitter effects for ourselves
+		CombatEngineAPI engine = Global.getCombatEngine();
 		ShipAPI ship = (ShipAPI) stats.getEntity();
-//		ship.setJitterUnder(this, Color2, effectLevel, 20, 0, 10 * effectLevel);
-//		ship.setJitter(this, Color1, effectLevel, 5, 0, 5 * effectLevel);
-
+		if (engine == null || ship.getOwner() == -1 || ship.getVariant() == null)
+			return;
+		// when I'm interacting with another ship I like to use a plugin even when it's not strictly necessary
+		if (doOnce && ship.getSystem().isActive()) {
+			target = ship.getShipTarget();
+			engine.addPlugin(new sd_hackingsuitePlugin(ship, target));
+			doOnce = false;
+		}
+		// vfx
 		ship.setJitter(id, Color1, effectLevel, 2, 0, 5);
 		ship.setJitterUnder(id, Color2, effectLevel, 10, 0, 5);
 
-		// I like to use a plugin even when it's not strictly necessary
-		if (doOnce && ship.getSystem().isActive()) {
-			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(ship, ship.getShipTarget()));
-			doOnce = false;
+		TIMER.advance(engine.getElapsedInLastFrame());
+		if (target != null && TIMER.intervalElapsed()) {
+			ship.getFluxTracker().increaseFlux(ship.getHullSpec().getFluxDissipation() * FLUX_COST.get(target.getHullSize()), false);
+			if (!isTargetValid(ship, target)) // deactivate the system if the target becomes invalid
+				ship.getSystem().deactivate();
 		}
 	}
 	public void unapply(MutableShipStatsAPI stats, String id) {
+		target = null;
 		doOnce = true;
 	}
-	public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range and whether it's likely to even have a system that we'd want to disable
+	public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
 		if (target == null)												// needs to take target as an input to work in the AI script
 			return false;
 		float targetDistance = MathUtils.getDistance(ship, target);
