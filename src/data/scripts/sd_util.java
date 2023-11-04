@@ -34,10 +34,10 @@ public class sd_util {
         }
         return optimalWeaponRange;
     }
-    public static void activateSystem(ShipAPI ship, String systemID, int desirePos, int desireNeg, boolean debug) {
-        int desireTotal = desirePos + desireNeg;
+    public static void activateSystem(ShipAPI ship, String systemID, float desirePos, float desireNeg, boolean debug) {
+        float desireTotal = desirePos + desireNeg;
         if (debug)
-            Console.showMessage("Ship:"+ ship.getName() +" Total: "+ desireTotal +" Pos: "+ desirePos +" Neg: "+ desireNeg);
+            Console.showMessage("Ship:"+ ship.getName() +" Total: "+ Math.round(desireTotal) +" Pos: "+ Math.round(desirePos) +" Neg: "+ Math.round(desireNeg));
 
         if (ship.getPhaseCloak() != null && Objects.equals(ship.getPhaseCloak().getId(), systemID)) {
             if (desireTotal >= 100 && !ship.getPhaseCloak().isOn())

@@ -21,26 +21,27 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
         interval.advance(amount);
         if (interval.intervalElapsed()) {
             ArmorGridAPI grid = ship.getArmorGrid();
-            // god fucking damn that's a lotta prereqs
-            if (!AIUtils.canUseSystemThisFrame(ship) || (!ship.getSystem().isOn() && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE)) ||
-                    sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD || ship.getFluxLevel() >= sd_morphicarmor.HIGH_FLUX ||
-                    sd_morphicarmor.isArmorGridBalanced(grid) || sd_morphicarmor.getCellsAroundAverage(grid, true).isEmpty())
+            // if any of these is the case then the system is definitely off and we don't want to turn it on, so we can return to save cpu time
+            if (!AIUtils.canUseSystemThisFrame(ship) || (!ship.getSystem().isOn() && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE)) // do not pursue thing to prevent fluxlocking
+                    || sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD)
                 return;
-            float desirePos = 0;
-            float desireNeg = 0;
-            // We want the system on if:
-            // 1. Our armor grid isn't balanced
-            desirePos += 150;
-            // We want the system off if:
-            // 1. Our flux level is too high
-            desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
-            // 2. We could dissipate hardflux and we don't have incoming damage
-            if (ship.getShield() != null && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)
-                    && sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
-                desireNeg -= ship.getHardFluxLevel() * 100;
-            // the system automatically shuts off when it does nothing or when the ship is about to flux itself out, so we don't need to write code for those situations
 
-            sd_util.activateSystem(ship, "sd_morphicarmor", Math.round(desirePos), Math.round(desireNeg), debug);
+            float desirePos = 0;
+            float desireNeg = 0; // todo: add a way to check whether incoming damage is gonna fuck us up (aka damper field logic)
+            // We want the system on if our armor grid isn't balanced, otherwise just turn it off immediately cuz it's doing nothing for ya tbqh
+            if (ship.getFluxLevel() < 0.95f && !sd_morphicarmor.isArmorGridBalanced(grid)) {
+                desirePos += 150;
+                // We want the system off if:
+                // 1. Our flux level is too high
+                desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
+                // 2. We could dissipate hardflux and we don't have incoming damage
+                if (ship.getShield() != null && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)
+                        && sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
+                    desireNeg -= ship.getHardFluxLevel() * 100;
+            }
+            else desireNeg -= 50;
+
+            sd_util.activateSystem(ship, "sd_morphicarmor", desirePos, desireNeg, debug);
         }
     }
 }

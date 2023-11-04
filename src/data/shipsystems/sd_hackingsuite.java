@@ -14,42 +14,23 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import data.scripts.sd_util;
 
 public class sd_hackingsuite extends BaseShipSystemScript {
-	final Map<ShipAPI.HullSize, Float> FLUX_COST = new HashMap<>(); {
-		FLUX_COST.put(ShipAPI.HullSize.FRIGATE, 0.5f);
-		FLUX_COST.put(ShipAPI.HullSize.DESTROYER, 1f);
-		FLUX_COST.put(ShipAPI.HullSize.CRUISER, 1.5f);
-		FLUX_COST.put(ShipAPI.HullSize.CAPITAL_SHIP, 2.5f);
-	}
 	final Color Color1 = new Color(250, 235, 215,75);
 	final Color Color2 = new Color(250, 235, 215,155);
-	boolean doOnce = true;
-	ShipAPI target = null;
-	final IntervalUtil TIMER = new IntervalUtil(1, 1);
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
-		CombatEngineAPI engine = Global.getCombatEngine();
-		ShipAPI ship = (ShipAPI) stats.getEntity();
-		if (engine == null || ship.getOwner() == -1 || ship.getVariant() == null)
+		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
-		// when I'm interacting with another ship I like to use a plugin even when it's not strictly necessary
-		if (doOnce && ship.getSystem().isActive()) {
-			target = ship.getShipTarget();
-			engine.addPlugin(new sd_hackingsuitePlugin(ship, target));
-			doOnce = false;
-		}
-		// vfx
-		ship.setJitter(id, Color1, effectLevel, 2, 0, 5);
-		ship.setJitterUnder(id, Color2, effectLevel, 10, 0, 5);
+		// set jitter effects for ourselves
+		ShipAPI ship = (ShipAPI) stats.getEntity();
+		float jitterLevel = effectLevel;
+		if (state == State.OUT) // ensures jitter level doesn't deteriorate during OUT
+			jitterLevel *= jitterLevel;
+		float jitterExtra = jitterLevel * 50;
+		ship.setJitter(this, Color1, jitterLevel, 4, 0, 0 + jitterExtra);
+		ship.setJitterUnder(this, Color2, jitterLevel, 20, 0, 3 + jitterExtra);
 
-		TIMER.advance(engine.getElapsedInLastFrame());
-		if (target != null && TIMER.intervalElapsed()) {
-			ship.getFluxTracker().increaseFlux(ship.getHullSpec().getFluxDissipation() * FLUX_COST.get(target.getHullSize()), false);
-			if (!isTargetValid(ship, target)) // deactivate the system if the target becomes invalid
-				ship.getSystem().deactivate();
-		}
-	}
-	public void unapply(MutableShipStatsAPI stats, String id) {
-		target = null;
-		doOnce = true;
+		// apply the effect to the target, note we check effectLevel and not for active state because our system doesn't have an active duration
+		if (ship.getSystem().getEffectLevel() == 1)
+			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(ship.getShipTarget()));
 	}
 	public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
 		if (target == null)												// needs to take target as an input to work in the AI script

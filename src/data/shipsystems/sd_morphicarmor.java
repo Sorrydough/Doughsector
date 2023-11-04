@@ -19,28 +19,28 @@ import data.scripts.sd_util;
 
 public class sd_morphicarmor extends BaseShipSystemScript {
 	final static boolean debug = false;
-	public static final float DESTROYED_THRESHOLD = 0.1f; // these two accessed in the AI script
-	public static final float HIGH_FLUX = 0.9f;
-	final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
-	final Color JITTER_COLOR = new Color(250, 235, 215,55);
-	final Color JITTER_UNDER_COLOR = new Color(250, 235, 215,155);
-	final Color EMP_CENTER_COLOR = new Color(250, 235, 215, 205);
-	final Color EMP_EDGE_COLOR = new Color(255,120,80,105);
-	final float FLUX_PER_ARMOR = 3;
+	public static final float DESTROYED_THRESHOLD = 0.1f; // accessed in the AI script
+	public static final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
+	public static final Color JITTER_COLOR = new Color(250, 235, 215,55);
+	public static final Color JITTER_UNDER_COLOR = new Color(250, 235, 215,155);
+	public static final Color EMP_CENTER_COLOR = new Color(250, 235, 215, 205);
+	public static final Color EMP_EDGE_COLOR = new Color(255,120,80,105);
+	public static final float FLUX_PER_ARMOR = 3;
+	public static final float EMP_MULT = 0.5f;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		ArmorGridAPI grid = ship.getArmorGrid();
-		//if the armor grid is balanced we should turn off the system
-		if (isArmorGridBalanced(grid) || ship.getFluxLevel() >= HIGH_FLUX) {
-			ship.getSystem().deactivate();
-			return;
-		}
 
 		ship.setJitter(id, JITTER_COLOR, effectLevel, 2, 0, 5);
 		ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
+
+		stats.getEmpDamageTakenMult().modifyMult(id, EMP_MULT);
+
+		if (isArmorGridBalanced(grid))
+			return;
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -93,6 +93,11 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			ship.syncWeaponDecalsWithArmorDamage();
 		}
 	}
+
+	public void unapply(MutableShipStatsAPI stats, String id) {
+		stats.getEmpDamageTakenMult().unmodifyMult(id);
+	}
+
 	public static List<Vector2f> getCellsAroundAverage(ArmorGridAPI grid, boolean above) {
 		List<Vector2f> cells = new ArrayList<>();
 		float average = getAverageArmorPerCell(grid);
@@ -125,6 +130,9 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			balanced = true;
 		return balanced;
 	}
+	public static boolean isArmorGridDestroyed(ArmorGridAPI grid) {
+		return getAverageArmorPerCell(grid) < grid.getMaxArmorInCell() * DESTROYED_THRESHOLD;
+	}
 	public static void drawVfx(Vector2f loc, ShipAPI ship, float size, float intensity) {
 		float sizeSqrt = (float) Math.sqrt(size);
 		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));
@@ -149,15 +157,13 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	}
 	public StatusData getStatusData(int index, State state, float effectLevel) {
 		if (index == 0)
-			return new StatusData("REBALANCING ARMOR", false);
+			return new StatusData("REBALANCING ARMOR", false); // todo: figure out how to check the armor grid from here
 		return null;
 	}
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 		ArmorGridAPI grid = ship.getArmorGrid();
-		if (ship.getFluxLevel() >= HIGH_FLUX)
-			return "STANDBY";
-		if (getAverageArmorPerCell(ship.getArmorGrid()) <= grid.getMaxArmorInCell() * DESTROYED_THRESHOLD)
+		if (isArmorGridDestroyed(grid))
 			return "ARMOR DESTROYED";
 		if (isArmorGridBalanced(grid))
 			return "ARMOR BALANCED";
@@ -167,7 +173,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	}
 	@Override
 	public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-		return getAverageArmorPerCell(ship.getArmorGrid()) > ship.getArmorGrid().getMaxArmorInCell() * DESTROYED_THRESHOLD && !isArmorGridBalanced(ship.getArmorGrid()) && ship.getFluxLevel() < HIGH_FLUX;
+		return !isArmorGridDestroyed(ship.getArmorGrid());
 	}
 }
 

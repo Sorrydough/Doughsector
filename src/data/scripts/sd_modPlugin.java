@@ -33,7 +33,6 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("ionbeam");
             sd_weaponsList.add("gravitonbeam");
             sd_weaponsList.add("phasebeam");
-            sd_weaponsList.add("irautolance");
             sd_weaponsList.add("tachyonlance");
             sd_weaponsList.add("hil");
             //point defense
@@ -50,8 +49,6 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("pilum_large");
             sd_weaponsList.add("dragon");
             sd_weaponsList.add("dragonpod");
-            sd_weaponsList.add("sabot_single");
-            sd_weaponsList.add("sabotpod");
             sd_weaponsList.add("squall");
             //self-insert donut steel weapons
             //sd_weaponsList.add("sd_dragon_single");

@@ -1,9 +1,9 @@
 {
-	"id":"sd_temporalshell",
+	"id":"sd_chronoarmor",
 	"type":"STAT_MOD",
-	"aiType":"TEMPORAL_SHELL",
-
-	"statsScript":"data.shipsystems.sd_temporalshell",
+	"statsScript":"data.shipsystems.sd_chronoarmor",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_morphicarmorAI",
 
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.75,
@@ -11,7 +11,7 @@
 
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"system_temporalshell",
-	"loopSound":"system_temporalshell_loop",
+	"loopSound":"system_morphicarmor_loop",
 	"deactivateSound":"system_temporalshell_off",
 	"outOfUsesSound":"gun_out_of_ammo",
 

@@ -18,9 +18,9 @@ public class sd_stasisfield extends BaseShipSystemScript {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
 
-        ShipAPI ship = (ShipAPI) stats.getEntity();
-        ship.setJitterUnder(id, jitterUnderColor, effectLevel, 10, 0, 10);
+        ShipAPI ship = ShipAPI.class.cast(stats.getEntity());
         ship.setJitter(id, jitterColor, effectLevel, 1, 0, 1);
+        ship.setJitterUnder(id, jitterUnderColor, effectLevel, 10, 0, 10);
 
         if (doOnce) { // apply our effect plugin to the target
             Global.getCombatEngine().addPlugin(new sd_stasisfieldPlugin(ship, ship.getShipTarget()));

@@ -2,10 +2,10 @@
     "displayName": "Strike",
     "goalVariant": true,
     "fluxCapacitors": 10,
-    "fluxVents": 5,
+    "fluxVents": 3,
     "hullId": "sd_frigate",
     "hullMods": [
-        "fluxbreakers",
+        "autorepair",
         "fluxcoil"
     ],
     "permaMods": [],
@@ -22,10 +22,10 @@
         },
         {
             "autofire": false,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "SYN01": "sabot_single",
-                "SYN02": "sabot_single"
+                "SYN01": "breach",
+                "SYN02": "breach"
             }
         },
         {

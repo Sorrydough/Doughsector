@@ -46,7 +46,7 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
             if (ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))
                 desireNeg -= ship.getHardFluxLevel() * 50;
 
-            sd_util.activateSystem(ship, "sd_auxforge", Math.round(desirePos), Math.round(desireNeg), debug);
+            sd_util.activateSystem(ship, "sd_auxforge", desirePos, desireNeg, debug);
         }
     }
 }

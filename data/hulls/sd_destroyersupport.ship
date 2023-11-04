@@ -13,7 +13,6 @@
   "builtInMods": [
     "sd_customai",
     "sd_designtech",
-    "delicate",
     "pointdefenseai"
   ],
   "builtInWeapons": {
