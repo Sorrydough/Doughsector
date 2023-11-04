@@ -21,35 +21,20 @@ public class sd_chronoboostPlugin extends BaseEveryFrameCombatPlugin {
         this.target = target;
         this.targetStats = target.getMutableStats();
     }
-    final Map<ShipAPI.HullSize, Float> PPT_DRAIN = new HashMap<>(); {
-        PPT_DRAIN.put(ShipAPI.HullSize.FRIGATE, 0.5f);
-        PPT_DRAIN.put(ShipAPI.HullSize.DESTROYER, 1f);
-        PPT_DRAIN.put(ShipAPI.HullSize.CRUISER, 1.5f);
-        PPT_DRAIN.put(ShipAPI.HullSize.CAPITAL_SHIP, 2f);
-    }
     final IntervalUtil TIMER = new IntervalUtil(1, 1);
     final String id = this.toString();
-    final float CR_DEGRADE_PERCENT = 25;
-    final float DURATION = 10;
-    float totalPeakTimeLost = 0;
+    final float TIME_PERCENT = 50;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         float effectLevel = ship.getSystem().getEffectLevel();
 
-        targetStats.getCRLossPerSecondPercent().modifyPercent(id, CR_DEGRADE_PERCENT * effectLevel);
+        targetStats.getTimeMult().modifyPercent(id, TIME_PERCENT * effectLevel);
+        targetStats.getFluxDissipation().modifyMult(id, 1 - effectLevel);
 
-        if (Global.getCombatEngine().isPaused())
-            return;
-        TIMER.advance(amount);
-        if (TIMER.intervalElapsed()) {
-            if (target.getPeakTimeRemaining() > PPT_DRAIN.get(target.getHullSize())) {
-                totalPeakTimeLost += PPT_DRAIN.get(target.getHullSize()) * effectLevel;
-                targetStats.getPeakCRDuration().modifyFlat(id, -totalPeakTimeLost);
-            }
-            if (effectLevel == 0) {
-                target.getMutableStats().getCRLossPerSecondPercent().unmodifyPercent(id);
-                Global.getCombatEngine().removePlugin(this);
-            }
+        if (effectLevel == 0) {
+            targetStats.getTimeMult().unmodifyPercent(id);
+            targetStats.getFluxDissipation().unmodifyMult(id);
+            Global.getCombatEngine().removePlugin(this);
         }
     }
 }

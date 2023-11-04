@@ -16,10 +16,10 @@ public class sd_chronoboost extends BaseShipSystemScript {
             return;
 
         ShipAPI ship = (ShipAPI) stats.getEntity();
-        ship.setJitterUnder(id, jitterUnderColor, effectLevel, 10, 0, 10);
         ship.setJitter(id, jitterColor, effectLevel, 1, 0, 5);
+        ship.setJitterUnder(id, jitterUnderColor, effectLevel, 5, 0, 10);
 
-        if (doOnce && effectLevel == 1) { // apply our effect plugin to the target
+        if (doOnce) { // apply our effect plugin to the target
             Global.getCombatEngine().addPlugin(new sd_chronoboostPlugin(ship, ship.getShipTarget()));
             doOnce = false;
         }

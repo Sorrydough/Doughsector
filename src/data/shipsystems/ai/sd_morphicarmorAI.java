@@ -34,9 +34,8 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
                 // We want the system off if:
                 // 1. Our flux level is too high
                 desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
-                // 2. We could dissipate hardflux and we don't have incoming damage
-                if (ship.getShield() != null && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)
-                        && sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
+                // 2. We could dissipate hardflux
+                if (ship.getShield() != null && ship.getShield().isOff() && sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
                     desireNeg -= ship.getHardFluxLevel() * 100;
             }
             else desireNeg -= 50;

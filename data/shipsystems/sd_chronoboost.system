@@ -1,9 +1,9 @@
 {
-	"id":"sd_stasisfield",
+	"id":"sd_chronoboost",
 	"type":"STAT_MOD",
 	"aiType":"LIDAR_ARRAY",
 	
-	"statsScript":"data.shipsystems.sd_stasisfield",
+	"statsScript":"data.shipsystems.sd_chronoboost",
 
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.75,
