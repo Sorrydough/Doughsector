@@ -24,7 +24,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             // god fucking damn that's a lotta prereqs
             if (!AIUtils.canUseSystemThisFrame(ship) || (!ship.getSystem().isOn() && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE)) ||
                     sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD || ship.getFluxLevel() >= sd_morphicarmor.HIGH_FLUX ||
-                    sd_morphicarmor.isArmorGridBalanced(grid) || sd_morphicarmor.getCellsAroundAverage(grid, true).size() == 0)
+                    sd_morphicarmor.isArmorGridBalanced(grid) || sd_morphicarmor.getCellsAroundAverage(grid, true).isEmpty())
                 return;
             float desirePos = 0;
             float desireNeg = 0;
@@ -34,12 +34,13 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             // We want the system off if:
             // 1. Our flux level is too high
             desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
+            // 2. We could dissipate hardflux and we don't have incoming damage
+            if (ship.getShield() != null && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE)
+                    && sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
+                desireNeg -= ship.getHardFluxLevel() * 100;
             // the system automatically shuts off when it does nothing or when the ship is about to flux itself out, so we don't need to write code for those situations
-            int desireTotal = (int) (desirePos + desireNeg);
-            if (debug)
-                Console.showMessage("Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg);
 
-            sd_util.activateSystem(ship, "sd_morphicarmor", desireTotal);
+            sd_util.activateSystem(ship, "sd_morphicarmor", Math.round(desirePos), Math.round(desireNeg), debug);
         }
     }
 }

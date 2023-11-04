@@ -11,6 +11,8 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
+import com.fs.starfarer.campaign.fleet.Battle;
+import com.fs.starfarer.ui.P;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.*;
@@ -49,7 +51,7 @@ public class sd_fleetAdmiralUtil {
         final int smodMod = 15;
         final int officerSkillMod = 15;
         final int officerEliteSkillMod = 10;
-        int modifier = 100;
+        float modifier = 100;
 
         ShipVariantAPI variant = ship.getMutableStats().getVariant();
         // adjust threat by certain hullmods that overperform
@@ -111,17 +113,7 @@ public class sd_fleetAdmiralUtil {
         // todo: factor disabled weapons, engines and flux level
         // todo: factor modules into the strength of stations or supercaps
 
-        return getDeploymentCost(ship) * Math.max(0.1f, (float) modifier / 100); // math.max because a ship's combat effectiveness rating should never go below 10% of its DP
-    }
-    public static Object getObjectAtLocation(Vector2f location) {
-        CombatEngineAPI engine = Global.getCombatEngine();
-        for (ShipAPI ship : engine.getShips())
-            if (location == ship.getLocation())
-                return ship;
-        for (BattleObjectiveAPI objective : engine.getObjectives())
-            if (location == objective.getLocation())
-                return objective;
-        return null;
+        return getDeploymentCost(ship) * Math.max(0.1f, modifier / 100); // math.max because a ship's combat effectiveness rating should never go below 10% of its DP
     }
     public static void sortByDeploymentCost(final List<ShipAPI> ships) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
@@ -134,16 +126,10 @@ public class sd_fleetAdmiralUtil {
         });
     }
     public static float getShipStrengthAssigned(CombatFleetManagerAPI.AssignmentInfo assignment, sd_battleStateTracker battleState) {
-        List<ShipAPI> assignedToTarget = new ArrayList<>();
-        for (Map.Entry<ShipAPI, CombatFleetManagerAPI.AssignmentInfo> ship : battleState.shipsWithTargetAssignments.entrySet()) {
-            if (ship.getValue() == assignment) {
-                assignedToTarget.add(ship.getKey());
-            }
-        }
         float strength = 0;
-        for (ShipAPI ship : assignedToTarget) {
-            strength += getCombatEffectiveness(ship);
-        }
+        for (ShipAPI ship : battleState.deployedAllyShips)
+            if (battleState.allyTaskManager.getAssignmentFor(ship) == assignment)
+                strength += getCombatEffectiveness(ship);
         return strength;
     }
     public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battleStateTracker battleState) {

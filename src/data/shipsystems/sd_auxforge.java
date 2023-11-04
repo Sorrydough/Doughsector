@@ -8,7 +8,7 @@ import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.awt.*;
 
-public class sd_auxiliarymicroforge extends BaseShipSystemScript  {
+public class sd_auxforge extends BaseShipSystemScript  {
     final float BAY_REPLENISHMENT_AMOUNT = 0.10f;
     final float MISSILE_COOLDOWN_PENALTY = 5;
     static final float MISSILE_RELOAD_AMOUNT = 2;

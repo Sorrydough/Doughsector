@@ -1,0 +1,10 @@
+{
+	"id":"sd_auxforge",
+	"type":"STAT_MOD",
+	"statsScript":"data.shipsystems.sd_auxforge",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_auxforgeAI",
+	
+	"useSound":"system_forgevats",
+	"outOfUsesSound":"gun_out_of_ammo",
+}

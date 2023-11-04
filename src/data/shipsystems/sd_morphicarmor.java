@@ -121,7 +121,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		boolean balanced = false;
 		List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, true);
 		List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, false);
-		if (cellsAboveAverage.size() == 0 || cellsBelowAverage.size() == 0)
+		if (cellsAboveAverage.isEmpty() || cellsBelowAverage.isEmpty())
 			balanced = true;
 		return balanced;
 	}

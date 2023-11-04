@@ -3,6 +3,7 @@ package data.scripts;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.combat.WeaponAPI;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 
 import java.util.Collections;
@@ -33,16 +34,20 @@ public class sd_util {
         }
         return optimalWeaponRange;
     }
-    public static void activateSystem(ShipAPI ship, String systemID, int desire) {
+    public static void activateSystem(ShipAPI ship, String systemID, int desirePos, int desireNeg, boolean debug) {
+        int desireTotal = desirePos + desireNeg;
+        if (debug)
+            Console.showMessage("Ship:"+ ship.getName() +" Total: "+ desireTotal +" Pos: "+ desirePos +" Neg: "+ desireNeg);
+
         if (ship.getPhaseCloak() != null && Objects.equals(ship.getPhaseCloak().getId(), systemID)) {
-            if (desire >= 100 && !ship.getPhaseCloak().isOn())
+            if (desireTotal >= 100 && !ship.getPhaseCloak().isOn())
                 ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
-            if (desire <= 0 && ship.getPhaseCloak().isOn())
+            if (desireTotal <= 0 && ship.getPhaseCloak().isOn())
                 ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
         } else {
-            if (desire >= 100 && !ship.getSystem().isOn())
+            if (desireTotal >= 100 && !ship.getSystem().isOn())
                 ship.useSystem();
-            if (desire <= 0 && ship.getSystem().isOn())
+            if (desireTotal <= 0 && ship.getSystem().isOn())
                 ship.useSystem();
         }
     }
@@ -52,8 +57,6 @@ public class sd_util {
             public int compare(ShipAPI ship1, ShipAPI ship2) {
                 float distance1 = MathUtils.getDistance(ship, ship1);
                 float distance2 = MathUtils.getDistance(ship, ship2);
-                // To sort in ascending order (closest first), use distance1 - distance2
-                // To sort in descending order (farthest first), use distance2 - distance1
                 if (closestFirst)
                     return Float.compare(distance1, distance2);
                 return Float.compare(distance2, distance1);

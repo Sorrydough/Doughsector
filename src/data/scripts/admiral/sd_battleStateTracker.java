@@ -16,13 +16,13 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
     public final List<ShipAPI> deployedEnemyShips = new ArrayList<>();
     public final HashMap<AssignmentInfo, Object> assignmentsWithTargets = new HashMap<>();
     public final HashMap<ShipAPI, AssignmentInfo> shipsWithTargetAssignments = new HashMap<>();
-    public int deployedAllyThreat;
-    public int deployedEnemyThreat;
+    public float deployedAllyThreat;
+    public float deployedEnemyThreat;
     public int numOwnedObjectives;
     public int allySide;
     public int enemySide;
-    public int averageAllySpeed;
-    public int averageEnemySpeed;
+    public float averageAllySpeed;
+    public float averageEnemySpeed;
     boolean doOnce = true;
     void reset() {
         assignmentsWithTargets.clear();
@@ -85,7 +85,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         averageEnemySpeed /= Math.max(1, deployedEnemyShips.size());
 
         for (AssignmentInfo assignment : allyTaskManager.getAllAssignments())
-            assignmentsWithTargets.put(assignment, sd_fleetAdmiralUtil.getObjectAtLocation(assignment.getTarget().getLocation()));
+            assignmentsWithTargets.put(assignment, getAssignmentTarget(assignment.getTarget()));
 
         for (ShipAPI ship : deployedAllyShips)
             if (allyTaskManager.getAssignmentFor(ship) != null)
@@ -96,6 +96,13 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
             return allyFleetManager;
         if (owner == enemySide)
             return enemyFleetManager;
+        return null;
+    }
+    public static Object getAssignmentTarget(AssignmentTargetAPI assignment) {
+        if (assignment instanceof DeployedFleetMemberAPI)
+            return ((DeployedFleetMemberAPI) assignment).getShip();
+        if (assignment instanceof BattleObjectiveAPI)
+            return assignment;
         return null;
     }
 }

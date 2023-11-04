@@ -6,4 +6,4 @@ Canister Antimatter,sd_canisterantimatter,,,,,,,,2,0.05,,,,5,,,,,,,,,,,,,graphic
 Hacking Suite,sd_hackingsuite,1,,,,,,,,,1.5,,1.5,,TRUE,,,,,,,,,,,,graphics/icons/hullsys/quantum_disruptor.png
 Stasis Field,sd_stasisfield,,,0.05,,,,,,,1,5,1,30,TRUE,,,,,,,,,,,,graphics/icons/hullsys/high_energy_focus.png
 Morphic Armor,sd_morphicarmor,1,,,,,,,,,0.25,,0.25,,TRUE,,,,,,,,,,,,graphics/icons/hullsys/damper_field.png
-Auxiliary Microforge,sd_auxiliarymicroforge,,,,,,0.5,,3,0.025,1,,1,5,,,,,,,,,,,,,graphics/icons/hullsys/missile_autoforge.png
+Auxiliary Microforge,sd_auxforge,,,,,,0.5,,3,0.025,1,,1,5,,,,,,,,,,,,,graphics/icons/hullsys/missile_autoforge.png

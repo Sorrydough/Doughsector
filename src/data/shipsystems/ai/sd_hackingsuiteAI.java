@@ -78,10 +78,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                 }
             }
 
-            int desireTotal = (int) (desirePos + desireNeg);
-            if (debug)
-                Global.getCombatEngine().addFloatingText(ship.getLocation(), "Desire Total: "+ desireTotal +" Desire Pos: "+ desirePos +" Desire Neg: "+ desireNeg, 20, Color.CYAN, ship, 5, 5);
-            sd_util.activateSystem(ship, "sd_hackingsuite", desireTotal);
+            sd_util.activateSystem(ship, "sd_hackingsuite", Math.round(desirePos), Math.round(desireNeg), debug);
         }
     }
 }
