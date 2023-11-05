@@ -21,7 +21,6 @@ public class sd_chronoboostPlugin extends BaseEveryFrameCombatPlugin {
         this.target = target;
         this.targetStats = target.getMutableStats();
     }
-    final IntervalUtil TIMER = new IntervalUtil(1, 1);
     final String id = this.toString();
     final float TIME_PERCENT = 50;
     @Override
