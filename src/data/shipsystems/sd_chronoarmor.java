@@ -12,7 +12,9 @@ import org.lazywizard.lazylib.CollisionUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class sd_chronoarmor extends BaseShipSystemScript {
@@ -24,6 +26,9 @@ public class sd_chronoarmor extends BaseShipSystemScript {
 
         ShipAPI ship = (ShipAPI) stats.getEntity();
         ArmorGridAPI grid = ship.getArmorGrid();
+
+        if (sd_morphicarmor.isArmorGridDestroyed(grid))
+            ship.getSystem().deactivate();
 
         float jitterLevel = effectLevel; // copied from alex's temporal shell code. It's a mess, but whatever.
         float jitterRangeBonus = 0;
@@ -49,7 +54,8 @@ public class sd_chronoarmor extends BaseShipSystemScript {
         ship.getEngineController().fadeToOtherColor(this, sd_morphicarmor.JITTER_COLOR, new Color(0,0,0,0), effectLevel, 0.5f);
         ship.getEngineController().extendFlame(this, -0.25f, -0.25f, -0.25f);
 
-        float shipTimeMult = 1f + (TIME_MULT - 1f) * effectLevel;
+        float averageArmorPerCell = sd_morphicarmor.getAverageArmorPerCell(grid);
+        float shipTimeMult = Math.max(1, TIME_MULT * (averageArmorPerCell / grid.getMaxArmorInCell()) * effectLevel);
         stats.getTimeMult().modifyMult(id, shipTimeMult);
 
         if (ship == Global.getCombatEngine().getPlayerShip())
@@ -66,7 +72,6 @@ public class sd_chronoarmor extends BaseShipSystemScript {
         if (sd_morphicarmor.interval.intervalElapsed()) {
             //while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
             //firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
-            float averageArmorPerCell = sd_morphicarmor.getAverageArmorPerCell(grid);
             //next we create a list of cells above average, and another list of cells below average
             java.util.List<Vector2f> cellsAboveAverage = sd_morphicarmor.getCellsAroundAverage(grid, true);
             List<Vector2f> cellsBelowAverage = sd_morphicarmor.getCellsAroundAverage(grid, false);
@@ -121,7 +126,7 @@ public class sd_chronoarmor extends BaseShipSystemScript {
     }
     public StatusData getStatusData(int index, State state, float effectLevel) {
         if (index == 0)
-            return new StatusData("TIMEFLOW ALTERED", false);
+            return new StatusData("TIMEFLOW ALTERED", false); // todo: show how much the timeflow has degraded
         if (index == 1)
             return new StatusData("REBALANCING ARMOR", false); // todo: figure out how to check the armor grid from here
         return null;
