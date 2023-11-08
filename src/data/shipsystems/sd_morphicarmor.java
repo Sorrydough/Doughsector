@@ -27,6 +27,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	public static final Color EMP_EDGE_COLOR = new Color(255,120,80,105);
 	public static final float FLUX_PER_ARMOR = 3;
 	public static final float EMP_MULT = 0.5f;
+	public static final float ARMOR_MULT = 0.5f;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
@@ -38,6 +39,9 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
 
 		stats.getEmpDamageTakenMult().modifyMult(id, EMP_MULT);
+		stats.getArmorBonus().modifyMult(id, 1 / ARMOR_MULT);
+		stats.getEffectiveArmorBonus().modifyMult(id, ARMOR_MULT);
+		stats.getMinArmorFraction().modifyMult(id, ARMOR_MULT);
 
 		if (isArmorGridBalanced(grid))
 			return;
@@ -96,6 +100,9 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 
 	public void unapply(MutableShipStatsAPI stats, String id) {
 		stats.getEmpDamageTakenMult().unmodifyMult(id);
+		stats.getArmorBonus().unmodifyMult(id);
+		stats.getEffectiveArmorBonus().unmodifyMult(id);
+		stats.getMinArmorFraction().unmodifyMult(id);
 	}
 
 	public static List<Vector2f> getCellsAroundAverage(ArmorGridAPI grid, boolean above) {

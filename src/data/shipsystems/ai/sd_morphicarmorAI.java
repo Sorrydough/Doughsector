@@ -1,6 +1,8 @@
 package data.shipsystems.ai;
 
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
+import com.fs.starfarer.api.plugins.ShipSystemStatsScriptAdvanced;
 import com.fs.starfarer.api.util.IntervalUtil;
 import data.shipsystems.sd_morphicarmor;
 import org.lazywizard.console.Console;

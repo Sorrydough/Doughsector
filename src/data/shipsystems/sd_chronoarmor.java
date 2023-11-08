@@ -64,6 +64,9 @@ public class sd_chronoarmor extends BaseShipSystemScript {
             Global.getCombatEngine().getTimeMult().unmodify(id);
 
         stats.getEmpDamageTakenMult().modifyMult(id, sd_morphicarmor.EMP_MULT);
+        stats.getArmorBonus().modifyMult(id, 1 / sd_morphicarmor.ARMOR_MULT);
+        stats.getEffectiveArmorBonus().modifyMult(id, sd_morphicarmor.ARMOR_MULT);
+        stats.getMinArmorFraction().modifyMult(id, sd_morphicarmor.ARMOR_MULT);
 
         if (sd_morphicarmor.isArmorGridBalanced(grid))
             return;
@@ -122,6 +125,9 @@ public class sd_chronoarmor extends BaseShipSystemScript {
     public void unapply(MutableShipStatsAPI stats, String id) {
         Global.getCombatEngine().getTimeMult().unmodify(id);
         stats.getEmpDamageTakenMult().unmodifyMult(id);
+        stats.getArmorBonus().unmodifyMult(id);
+        stats.getEffectiveArmorBonus().unmodifyMult(id);
+        stats.getMinArmorFraction().unmodifyMult(id);
         stats.getTimeMult().unmodify(id);
     }
     public StatusData getStatusData(int index, State state, float effectLevel) {
