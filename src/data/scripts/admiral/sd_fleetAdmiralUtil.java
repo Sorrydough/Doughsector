@@ -1,19 +1,13 @@
 package data.scripts.admiral;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI.SkillLevelAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.characters.SkillSpecAPI;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.combat.ShipAPI.HullSize;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
-import com.fs.starfarer.campaign.fleet.Battle;
-import com.fs.starfarer.ui.P;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.util.*;
 
@@ -54,24 +48,26 @@ public class sd_fleetAdmiralUtil {
         float modifier = 100;
 
         ShipVariantAPI variant = ship.getMutableStats().getVariant();
-        // adjust threat by certain hullmods that overperform
-        for (Map.Entry<String, Integer> hullmod : overpoweredHullmods.entrySet())
-            if (variant.hasHullMod(hullmod.getKey()))
-                modifier += hullmod.getValue();
-        // adjust by dmods that actually reduce combat performance
-        for (String whyisthisastring : variant.getHullMods())
-            if (Global.getSettings().getHullModSpec(whyisthisastring).hasTag("dmod") && !dModsExcluded.contains(whyisthisastring))
-                modifier -= dmodMod;
-        // and adjust by non-logistic hullmods
-        for (String whyisthisastring : variant.getSMods())
-            if (!sModsExcluded.contains(whyisthisastring))
-                modifier += smodMod;
-        // adjust by the captain's skills
-        for (SkillLevelAPI skill : ship.getCaptain().getStats().getSkillsCopy()) {
-            if (skill.getLevel() == 1)
-                modifier += officerSkillMod;
-            else if (skill.getLevel() == 2)
-                modifier += officerSkillMod + officerEliteSkillMod;
+        if (variant != null) {
+            // adjust threat by certain hullmods that overperform
+            for (Map.Entry<String, Integer> hullmod : overpoweredHullmods.entrySet())
+                if (variant.hasHullMod(hullmod.getKey()))
+                    modifier += hullmod.getValue();
+            // adjust by dmods that actually reduce combat performance
+            for (String whyisthisastring : variant.getHullMods())
+                if (Global.getSettings().getHullModSpec(whyisthisastring).hasTag("dmod") && !dModsExcluded.contains(whyisthisastring))
+                    modifier -= dmodMod;
+            // and adjust by non-logistic hullmods
+            for (String whyisthisastring : variant.getSMods())
+                if (!sModsExcluded.contains(whyisthisastring))
+                    modifier += smodMod;
+            // adjust by the captain's skills
+            for (SkillLevelAPI skill : ship.getCaptain().getStats().getSkillsCopy()) {
+                if (skill.getLevel() == 1)
+                    modifier += officerSkillMod;
+                else if (skill.getLevel() == 2)
+                    modifier += officerSkillMod + officerEliteSkillMod;
+            }
         }
         // adjust for fleet admiral's skills
         PersonAPI commander = ship.getFleetMember().getFleetCommander();
@@ -99,21 +95,68 @@ public class sd_fleetAdmiralUtil {
                 }
             }
         // modify by CR
-        float CRmod = 0;
-        float CR = ship.getCurrentCR();
-        if (CR >= 0.7f) { // chatgpt wrote this :)
-            CRmod = (CR - 0.7f) / 0.3f * 10;
-        } else if (CR <= 0.5) {
-            CRmod -= (0.5f - CR) / 0.5f * 10;
+        if (ship.losesCRDuringCombat()) {
+            float CRmod = 0;
+            float CR = ship.getCurrentCR();
+            if (CR >= 0.7f) { // chatgpt wrote this :)
+                CRmod = (CR - 0.7f) / 0.3f * 10;
+            } else if (CR <= 0.5) {
+                CRmod -= (0.5f - CR) / 0.5f * 10;
+            }
+            if (CR < 0.4f) // malfunctions start below this point so we multiply the size of the penalty
+                CRmod -= CRmod * CRmod;
+            modifier += CRmod;
         }
-        if (CR < 0.4f) // malfunctions start below this point so we multiply the size of the penalty
-            CRmod -= CRmod * CRmod;
-        modifier += CRmod;
 
-        // todo: factor disabled weapons, engines and flux level
-        // todo: factor modules into the strength of stations or supercaps
+        // factor disabled weapons
+        List<WeaponAPI> weapons = ship.getAllWeapons();
+        if (!weapons.isEmpty()) {
+            float totalDPS = 0;
+            float workingDPS = 0;
+            for (WeaponAPI weapon : weapons) {
+                totalDPS += weapon.getSpec().getDerivedStats().getDps();
+                if (!weapon.isDisabled())
+                    workingDPS += weapon.getSpec().getDerivedStats().getDps();
+            }
+            modifier *= Math.max(0.5, workingDPS / totalDPS);
+        }
 
-        return getDeploymentCost(ship) * Math.max(0.1f, modifier / 100); // math.max because a ship's combat effectiveness rating should never go below 10% of its DP
+        // factor disabled engines
+        List<ShipEngineAPI> engines = ship.getEngineController().getShipEngines();
+        if (!engines.isEmpty()) {
+            float totalThrust = 0;
+            float workingThrust = 0;
+            for (ShipEngineAPI engine : engines) {
+                totalThrust += engine.getContribution();
+                if (!engine.isDisabled())
+                    workingThrust += engine.getContribution();
+            }
+            modifier *= Math.max(0.5, workingThrust / totalThrust);
+        }
+
+        // factor flux level
+        modifier *= Math.min(1, 1 - (ship.getFluxLevel() + 0.5));
+
+        // factor carrier replenishment
+        if (ship.hasLaunchBays()) {
+            modifier *= Math.max(0.65, ship.getSharedFighterReplacementRate());
+        }
+
+        // special code for stations and modules, note that this function calls itself recursively when dealing with them so this part is going to look real goofy
+        float deploymentCost = 0;
+        float moduleThreat = 0;
+        if (ship.isShipWithModules()) {
+            for (ShipAPI module : ship.getChildModulesCopy())
+                moduleThreat += getCombatEffectiveness(ship);
+            deploymentCost = moduleThreat;
+        } else if (ship.isStationModule()) {
+            ShipAPI parent = ship.getParentStation();
+            deploymentCost = getDeploymentCost(parent) / parent.getChildModulesCopy().size();
+        } else {
+            deploymentCost = getDeploymentCost(ship);
+        }
+
+        return deploymentCost * Math.max(0.1f, modifier / 100); // math.max because a ship's combat effectiveness rating should never go below 10% of its DP
     }
     public static void sortByDeploymentCost(final List<ShipAPI> ships) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
