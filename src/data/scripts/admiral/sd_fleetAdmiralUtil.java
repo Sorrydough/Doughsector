@@ -20,7 +20,7 @@ public class sd_fleetAdmiralUtil {
         MutableShipStatsAPI stats = ship.getMutableStats();
         return Math.max(stats.getSuppliesToRecover().base, stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).computeEffective(stats.getSuppliesToRecover().modified));
     }
-    public static float getCombatEffectiveness(ShipAPI ship) {
+    public static float getCombatEffectiveness(ShipAPI ship, float minFraction) {
         final Map<String, Integer> overpoweredHullmods = new HashMap<>(); {
             overpoweredHullmods.put("safetyoverrides", 20);
         }
@@ -62,7 +62,10 @@ public class sd_fleetAdmiralUtil {
                 if (!sModsExcluded.contains(whyisthisastring))
                     modifier += smodMod;
             // adjust by the captain's skills
-            for (SkillLevelAPI skill : ship.getCaptain().getStats().getSkillsCopy()) {
+            List<SkillLevelAPI> skills = ship.getCaptain().getStats().getSkillsCopy();
+            if (ship.isStationModule())
+                skills = ship.getParentStation().getCaptain().getStats().getSkillsCopy();
+            for (SkillLevelAPI skill : skills) {
                 if (skill.getLevel() == 1)
                     modifier += officerSkillMod;
                 else if (skill.getLevel() == 2)
@@ -144,19 +147,19 @@ public class sd_fleetAdmiralUtil {
 
         // special code for stations and modules, note that this function calls itself recursively when dealing with them so this part is going to look real goofy
         float deploymentCost = 0;
-        float moduleThreat = 0;
         if (ship.isShipWithModules()) {
             for (ShipAPI module : ship.getChildModulesCopy())
-                moduleThreat += getCombatEffectiveness(ship);
-            deploymentCost = moduleThreat;
+                deploymentCost += getCombatEffectiveness(module, 0.2f);
         } else if (ship.isStationModule()) {
             ShipAPI parent = ship.getParentStation();
             deploymentCost = getDeploymentCost(parent) / parent.getChildModulesCopy().size();
         } else {
             deploymentCost = getDeploymentCost(ship);
         }
-
-        return deploymentCost * Math.max(0.1f, modifier / 100); // math.max because a ship's combat effectiveness rating should never go below 10% of its DP
+        if (ship.getEngineController().getShipEngines().isEmpty()) // stuff that can't move is undercosted
+            deploymentCost *= 1.5f;
+        // math.max because a ship's combat effectiveness rating should never go below a specified portion of its DP. We can modify this for armor tanks etc contextually later on.
+        return deploymentCost * Math.max(minFraction, modifier / 100);
     }
     public static void sortByDeploymentCost(final List<ShipAPI> ships) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
@@ -172,7 +175,7 @@ public class sd_fleetAdmiralUtil {
         float strength = 0;
         for (ShipAPI ship : battleState.deployedAllyShips)
             if (battleState.allyTaskManager.getAssignmentFor(ship) == assignment)
-                strength += getCombatEffectiveness(ship);
+                strength += getCombatEffectiveness(ship, 0.2f);
         return strength;
     }
     public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battleStateTracker battleState) {

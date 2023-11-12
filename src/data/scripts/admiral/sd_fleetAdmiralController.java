@@ -35,7 +35,7 @@ public class sd_fleetAdmiralController extends BaseEveryFrameCombatPlugin {
 
             //Console.showMessage("Allied DP: "+ battleState.deployedAllyDP +" Enemy DP: "+ battleState.deployedEnemyDP);
 
-            if (battleState.deployedAllyShips.size() != 0) {
+            if (!battleState.deployedAllyShips.isEmpty()) {
                 sd_formationManager.manageFormation(battleState);
                 sd_objectiveManager.manageAttackedObjectives(battleState);
                 sd_attackManager.manageAttackedEnemies(battleState);
