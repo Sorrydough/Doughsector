@@ -60,7 +60,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
             if (objective.getOwner() == allySide)
                 numOwnedObjectives += 1;
 
-        boolean isPlayer = allySide == 0;
+        boolean isPlayer = allySide == 0; // todo: fix this so the admiral works when the AI reinforces a player fleet
         for (ShipAPI ship : deployedShips) {
             if (!isPlayer && ship.getOwner() == allySide) {
                 deployedAllyShips.add(ship);
@@ -90,7 +90,51 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         for (ShipAPI ship : deployedAllyShips)
             if (allyTaskManager.getAssignmentFor(ship) != null)
                 shipsWithTargetAssignments.put(ship, allyTaskManager.getAssignmentFor(ship));
+
+        //for (battleGridSquare square : )
+
+
     }
+
+    static class battleGridSquare {
+        List<ShipAPI> allyShips = new ArrayList<>();
+        List<ShipAPI> enemyShips = new ArrayList<>();
+        float allyThreat = 0;
+        float enemyThreat = 0;
+
+        public void addAllyShip(ShipAPI ship) {
+            allyShips.add(ship);
+        }
+
+        public void removeShip(ShipAPI ship) {
+            enemyShips.remove(ship);
+        }
+
+//        public List<String> getShips() {
+//            return ships;
+//        }
+
+        public List<ShipAPI> getAllyShips() {
+            return allyShips;
+        }
+        public List<ShipAPI> getEnemyShips() {
+            return enemyShips;
+        }
+        public float getEnemyThreat() {
+            return enemyThreat;
+        }
+        public float getAllyThreat() {
+            return allyThreat;
+        }
+
+
+
+    }
+
+
+
+
+
     public CombatFleetManagerAPI getFleetmanager(int owner) {
         if (owner == allySide)
             return allyFleetManager;
@@ -98,11 +142,18 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
             return enemyFleetManager;
         return null;
     }
-    public static Object getAssignmentTarget(AssignmentTargetAPI assignment) {
+    public Object getAssignmentTarget(AssignmentTargetAPI assignment) {
         if (assignment instanceof DeployedFleetMemberAPI)
             return ((DeployedFleetMemberAPI) assignment).getShip();
         if (assignment instanceof BattleObjectiveAPI)
             return assignment;
         return null;
+    }
+    public List<ShipAPI> getShipsAssigned(AssignmentInfo assignment) {
+        List<ShipAPI> ships = new ArrayList<>();
+        for (ShipAPI ship : deployedAllyShips)
+            if (allyTaskManager.getAssignmentFor(ship) == assignment)
+                ships.add(ship);
+        return ships;
     }
 }

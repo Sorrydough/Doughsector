@@ -38,7 +38,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);
             target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ Math.round(duration) +" seconds!", Color.LIGHT_GRAY, 5, true);
-            target.getCustomData().put("sd_hackingsuite", null);
+            target.getCustomData().put("sd_hackingsuite", "urmum");
             doOnce = false;
         }
         if (engine.isPaused())
@@ -48,8 +48,8 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
             time += 1;
             if (time >= duration) {
                 target.setShipSystemDisabled(false);
-                engine.removePlugin(this);
                 target.getCustomData().remove("sd_hackingsuite");
+                engine.removePlugin(this);
                 //return;
             }
             // make arcs shoot out of the target randomly based on their flux level

@@ -141,9 +141,8 @@ public class sd_fleetAdmiralUtil {
         modifier *= Math.min(1, 1 - (ship.getFluxLevel() + 0.5));
 
         // factor carrier replenishment
-        if (ship.hasLaunchBays()) {
-            modifier *= Math.max(0.65, ship.getSharedFighterReplacementRate());
-        }
+        if (ship.hasLaunchBays())
+            modifier *= Math.min(1, 0.45 + ship.getSharedFighterReplacementRate());
 
         // special code for stations and modules, note that this function calls itself recursively when dealing with them so this part is going to look real goofy
         float deploymentCost = 0;
@@ -156,9 +155,9 @@ public class sd_fleetAdmiralUtil {
         } else {
             deploymentCost = getDeploymentCost(ship);
         }
-        if (ship.getEngineController().getShipEngines().isEmpty()) // stuff that can't move is undercosted
+        if (ship.getEngineController().getShipEngines().isEmpty()) // stuff that can't move is undercosted so we have to bump its value up a bit
             deploymentCost *= 1.5f;
-        // math.max because a ship's combat effectiveness rating should never go below a specified portion of its DP. We can modify this for armor tanks etc contextually later on.
+        // math.max because a ship's combat effectiveness rating should never go below a specified portion of its DP. We can modify this for armor tanks etc contextually when we call the function
         return deploymentCost * Math.max(minFraction, modifier / 100);
     }
     public static void sortByDeploymentCost(final List<ShipAPI> ships) {

@@ -21,6 +21,7 @@ Vayra's Sector
 Ship/Weapon Pack
 Roider Union
 Osiris Alliance
+Kyeltziv Technocracy
 Magellan                (good integration although a lot is still left on the table, weapon bloat)
 
 B tier: Mods with great ideas that are marred by bad balance, extreme bloat, art issues, or severe lack of integration.
