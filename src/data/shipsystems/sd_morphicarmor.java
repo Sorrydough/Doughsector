@@ -38,10 +38,10 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		ship.setJitter(id, JITTER_COLOR, effectLevel, 2, 0, 5);
 		ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
 
-		stats.getEmpDamageTakenMult().modifyMult(id, EMP_MULT);
-		stats.getArmorBonus().modifyMult(id, 1 / ARMOR_MULT);
-		stats.getEffectiveArmorBonus().modifyMult(id, ARMOR_MULT);
-		stats.getMinArmorFraction().modifyMult(id, ARMOR_MULT);
+//		stats.getEmpDamageTakenMult().modifyMult(id, EMP_MULT);
+//		stats.getArmorBonus().modifyMult(id, 1 / ARMOR_MULT);
+//		stats.getEffectiveArmorBonus().modifyMult(id, ARMOR_MULT);
+//		stats.getMinArmorFraction().modifyMult(id, ARMOR_MULT);
 
 		if (isArmorGridBalanced(grid))
 			return;
@@ -98,12 +98,12 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 	}
 
-	public void unapply(MutableShipStatsAPI stats, String id) {
-		stats.getEmpDamageTakenMult().unmodifyMult(id);
-		stats.getArmorBonus().unmodifyMult(id);
-		stats.getEffectiveArmorBonus().unmodifyMult(id);
-		stats.getMinArmorFraction().unmodifyMult(id);
-	}
+//	public void unapply(MutableShipStatsAPI stats, String id) {
+//		stats.getEmpDamageTakenMult().unmodifyMult(id);
+//		stats.getArmorBonus().unmodifyMult(id);
+//		stats.getEffectiveArmorBonus().unmodifyMult(id);
+//		stats.getMinArmorFraction().unmodifyMult(id);
+//	}
 
 	public static List<Vector2f> getCellsAroundAverage(ArmorGridAPI grid, boolean above) {
 		List<Vector2f> cells = new ArrayList<>();
