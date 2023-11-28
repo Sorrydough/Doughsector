@@ -133,7 +133,7 @@ public class sd_util {
             //if (useBackup) {
             if (true) {
                 maxDistance = threat.getWeapon().getRange();
-                if (threat.getWeapon() != null){
+                if (threat.getWeapon() != null) {
                     maxDistance -= MathUtils.getDistance(threat.getWeapon().getLocation(), threat.getLocation());
                 }
             }

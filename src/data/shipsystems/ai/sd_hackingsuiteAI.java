@@ -26,9 +26,11 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
     final boolean debug = false;
     float systemRange = 0;
     ShipAPI ship;
+    ShipSystemAPI system;
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;
+        this.system = system;
     }
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
@@ -66,6 +68,8 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             for (ShipAPI enemy : targets) {
                 float enemyDeployCost = sd_fleetAdmiralUtil.getDeploymentCost(enemy);
                 float desireToAttack = 150 * Math.max(2, enemyDeployCost / AVG_DPCOST.get(enemy.getHullSize()));
+                // modulate attack desire based on number of charges
+                desireToAttack *= (float) system.getAmmo() / system.getMaxAmmo();
                 if (desireToAttack + desireNeg >= 100) {
                     ship.setShipTarget(target);
                     desirePos += desireToAttack;
