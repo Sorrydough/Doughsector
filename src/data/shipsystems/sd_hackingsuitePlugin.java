@@ -35,6 +35,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
         target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.75f);
         if (doOnce) {
             duration += DURATION.get(target.getHullSize()) + target.getSystem().getCooldownRemaining();
+            target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", 0.33f);
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);
             target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ Math.round(duration) +" seconds!", Color.LIGHT_GRAY, 5, true);
@@ -47,6 +48,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
         if (TIMER.intervalElapsed()) {
             time += 1;
             if (time >= duration) {
+                target.getMutableStats().getAutofireAimAccuracy().unmodifyMult("sd_hackingsuite");
                 target.setShipSystemDisabled(false);
                 target.getCustomData().remove("sd_hackingsuite");
                 engine.removePlugin(this);
