@@ -7,7 +7,7 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 
 import java.awt.*;
 
-public class sd_chronoboost extends BaseShipSystemScript {
+public class sd_nullifier extends BaseShipSystemScript {
     public static final Color jitterUnderColor = new Color(150,100,255, 150);
     public static final Color jitterColor = new Color(150,100,255, 50);
     boolean doOnce = true;
@@ -20,7 +20,7 @@ public class sd_chronoboost extends BaseShipSystemScript {
         ship.setJitterUnder(id, jitterUnderColor, effectLevel, 5, 0, 10);
 
         if (doOnce) { // apply our effect plugin to the target
-            Global.getCombatEngine().addPlugin(new sd_chronoboostPlugin(ship, ship.getShipTarget()));
+            Global.getCombatEngine().addPlugin(new sd_nullifierPlugin(ship, ship.getShipTarget()));
             doOnce = false;
         }
     }
