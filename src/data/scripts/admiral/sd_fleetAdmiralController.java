@@ -20,7 +20,7 @@ public class sd_fleetAdmiralController extends BaseEveryFrameCombatPlugin {
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
-        if (engine == null || engine.isPaused() || Global.getCurrentState() != GameState.COMBAT || engine.isSimulation() || engine.isMission())
+        if (engine == null || engine.isPaused() || Global.getCurrentState() != GameState.COMBAT || engine.isSimulation())
             return;
         interval.advance(amount);
         if (interval.intervalElapsed()) {
