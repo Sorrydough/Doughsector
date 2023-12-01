@@ -16,7 +16,7 @@
   ],
   "weaponSlots": [
     {
-      "id": "MSL01",
+      "id": "HRD01",
       "size": "MEDIUM",
       "type": "MISSILE",
       "mount": "HIDDEN",

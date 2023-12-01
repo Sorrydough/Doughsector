@@ -2,6 +2,7 @@ package data.shipsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
+import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
@@ -38,27 +39,33 @@ public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin {
     float timeMod = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
-        if (target.isPhased())
+        CombatEngineAPI engine = Global.getCombatEngine();
+        if (!sd_nullifier.isTargetValid(ship, target))
             ship.getSystem().deactivate();
         targetDynamic.getMod("sd_nullifier").modifyFlat(id, 1);
         float numApplied = targetDynamic.getMod("sd_nullifier").computeEffective(0);
         float effectLevel = ship.getSystem().getEffectLevel();
-        //make target's PPT and Cr degrade 25% faster
+        // make target's PPT and Cr degrade 25% faster
         targetStats.getCRLossPerSecondPercent().modifyMult(id, PPT_MULT * effectLevel);
         targetStats.getPeakCRDuration().modifyFlat(id, -((PPT_MULT - 1) * amount * effectLevel));
-        //correct the target's timeflow to 100%,
+        // correct the target's timeflow to 100%, accounting for how many other ships with this system are also trying to help
         float targetTimeflow = targetStats.getTimeMult().getModifiedValue();
         float timeflowOver = (targetTimeflow - 1) * 100;
         if (timeflowOver != 0) {
             timeMod = timeflowOver / numApplied;
             targetStats.getTimeMult().modifyFlat(id, timeMod * effectLevel);
+            if (target == engine.getPlayerShip())
+                engine.getTimeMult().modifyFlat(id, timeMod * effectLevel);
         }
-        ship.getFluxTracker().increaseFlux(timeMod * FLUX_PER_TIMEFLOW * amount * effectLevel, true);
 
-        if (effectLevel == 0) {
+        if (!Global.getCombatEngine().isPaused())
+            ship.getFluxTracker().increaseFlux(timeMod * FLUX_PER_TIMEFLOW * amount * effectLevel, true);
+
+        if (effectLevel == 0) { // cleanup
             targetDynamic.getMod("sd_nullifier").unmodifyFlat(id);
             targetStats.getCRLossPerSecondPercent().unmodifyMult(id);
             targetStats.getTimeMult().unmodifyFlat(id);
+            engine.getTimeMult().unmodifyFlat(id);
             Global.getCombatEngine().removePlugin(this);
         }
     }

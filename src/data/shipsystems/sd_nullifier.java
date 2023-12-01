@@ -3,7 +3,11 @@ package data.shipsystems;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.ShipSystemAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
+import data.scripts.sd_util;
+import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.awt.*;
 
@@ -26,5 +30,16 @@ public class sd_nullifier extends BaseShipSystemScript {
     }
     public void unapply(MutableShipStatsAPI stats, String id) {
         doOnce = true;
+    }
+    public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
+        if (target == null)												// needs to take target as an input to work in the AI script
+            return false;
+        float targetDistance = MathUtils.getDistance(ship, target);
+        float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
+        return !target.isFighter() && target != ship && !(targetDistance > systemRange) && !target.isPhased();
+    }
+    @Override
+    public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
+        return isTargetValid(ship, ship.getShipTarget()) && AIUtils.canUseSystemThisFrame(ship);
     }
 }

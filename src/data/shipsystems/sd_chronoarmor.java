@@ -48,10 +48,10 @@ public class sd_chronoarmor extends BaseShipSystemScript {
         jitterLevel = (float) Math.sqrt(jitterLevel);
         effectLevel *= effectLevel;
 
-        ship.setJitter(this, sd_morphicarmor.JITTER_COLOR, jitterLevel, 3, 0, 0 + jitterRangeBonus);
-        ship.setJitterUnder(this, sd_morphicarmor.JITTER_UNDER_COLOR, jitterLevel, 25, 0f, 7f + jitterRangeBonus);
+        ship.setJitter(this, new Color(150,100,255, 150), jitterLevel, 3, 0, 0 + jitterRangeBonus);
+        ship.setJitterUnder(this, new Color(150,100,255, 50), jitterLevel, 25, 0f, 7f + jitterRangeBonus);
 
-        ship.getEngineController().fadeToOtherColor(this, sd_morphicarmor.JITTER_COLOR, new Color(0,0,0,0), effectLevel, 0.5f);
+        ship.getEngineController().fadeToOtherColor(this, new Color(150,100,255, 50), new Color(0,0,0,0), effectLevel, 0.5f);
         ship.getEngineController().extendFlame(this, -0.25f, -0.25f, -0.25f);
 
         float averageArmorPerCell = sd_morphicarmor.getAverageArmorPerCell(grid);

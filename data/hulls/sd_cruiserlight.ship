@@ -28,7 +28,16 @@
   },
   "weaponSlots": [
     {
-      "id": "MSL01",
+      "id": "HRD01",
+      "size": "LARGE",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [113, -0]
+    },
+    {
+      "id": "HRD02",
       "size": "SMALL",
       "type": "MISSILE",
       "mount": "HARDPOINT",
@@ -37,13 +46,76 @@
       "locations": [-12, 26]
     },
     {
-      "id": "THR04",
+      "id": "TRT01",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 230,
+      "angle": -36.5,
+      "locations": [37, -24]
+    },
+    {
+      "id": "TRT02",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 215,
+      "angle": 50.5,
+      "locations": [27, 25]
+    },
+    {
+      "id": "TRT03",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 271,
+      "angle": 180,
+      "locations": [-90, -0]
+    },
+    {
+      "id": "TRT04",
       "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": -135,
-      "locations": [-102, -40]
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 265,
+      "angle": 0,
+      "locations": [86, -0]
+    },
+    {
+      "id": "TRT05",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 197,
+      "angle": 0,
+      "locations": [58, -0]
+    },
+    {
+      "id": "TRT06",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 145,
+      "angle": -33.5,
+      "locations": [-4, -24]
+    },
+    {
+      "id": "TRT07",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 226,
+      "angle": -90,
+      "locations": [-42, -36]
+    },
+    {
+      "id": "TRT08",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 243,
+      "angle": 90,
+      "locations": [-62, 35]
     },
     {
       "id": "THR01",
@@ -71,6 +143,15 @@
       "arc": 5,
       "angle": 135,
       "locations": [-102, 40]
+    },
+    {
+      "id": "THR04",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -135,
+      "locations": [-102, -40]
     },
     {
       "id": "DEC02",
@@ -125,87 +206,6 @@
       "arc": 0,
       "angle": -90,
       "locations": [-56.5, -57]
-    },
-    {
-      "id": "SYN01",
-      "size": "LARGE",
-      "type": "SYNERGY",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 0,
-      "locations": [113, -0]
-    },
-    {
-      "id": "NRG01",
-      "size": "MEDIUM",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 230,
-      "angle": -36.5,
-      "locations": [37, -24]
-    },
-    {
-      "id": "NRG02",
-      "size": "MEDIUM",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 215,
-      "angle": 50.5,
-      "locations": [27, 25]
-    },
-    {
-      "id": "NRG03",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 265,
-      "angle": 0,
-      "locations": [86, -0]
-    },
-    {
-      "id": "NRG04",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 197,
-      "angle": 0,
-      "locations": [58, -0]
-    },
-    {
-      "id": "NRG05",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 145,
-      "angle": -33.5,
-      "locations": [-4, -24]
-    },
-    {
-      "id": "NRG06",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 226,
-      "angle": -90,
-      "locations": [-42, -36]
-    },
-    {
-      "id": "NRG07",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 243,
-      "angle": 90,
-      "locations": [-62, 35]
-    },
-    {
-      "id": "NRG08",
-      "size": "MEDIUM",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 271,
-      "angle": 180,
-      "locations": [-90, -0]
     }
   ],
   "engineSlots": [

@@ -17,7 +17,7 @@
   ],
   "weaponSlots": [
     {
-      "id": "NRG01",
+      "id": "HRD01",
       "size": "MEDIUM",
       "type": "ENERGY",
       "mount": "HIDDEN",
@@ -26,7 +26,7 @@
       "locations": [10, -3]
     },
     {
-      "id": "NRG02",
+      "id": "TRT01",
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "HIDDEN",

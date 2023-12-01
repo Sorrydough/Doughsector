@@ -13,8 +13,8 @@
       "autofire": false,
       "mode": "ALTERNATING",
       "weapons": {
-        "NRG01": "sd_gravlance",
-        "NRG02": "sd_gravlance"
+        "HRD01": "sd_gravlance",
+        "HRD02": "sd_gravlance"
       }
     },
   ],

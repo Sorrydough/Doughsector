@@ -25,45 +25,45 @@
   },
   "weaponSlots": [
     {
-      "id": "NRG01",
+      "id": "TRT01",
       "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 269,
       "angle": -37.5,
       "locations": [22.5, -16.5]
     },
     {
-      "id": "NRG02",
+      "id": "TRT02",
       "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 240,
       "angle": 54,
       "locations": [-10.5, 12.5]
     },
     {
-      "id": "NRG03",
+      "id": "TRT03",
       "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 360,
       "angle": 0,
       "locations": [-21.5, -9.5]
     },
     {
-      "id": "SYN01",
+      "id": "HRD01",
       "size": "SMALL",
-      "type": "SYNERGY",
+      "type": "MISSILE",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
       "locations": [38.5, -0.5]
     },
     {
-      "id": "SYN02",
+      "id": "HRD02",
       "size": "SMALL",
-      "type": "SYNERGY",
+      "type": "MISSILE",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,

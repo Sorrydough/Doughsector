@@ -12,12 +12,12 @@
     {
       "autofire": false,
       "mode": "LINKED",
-      "weapons": { "NRG01": "sd_kineticblaster_fighter" }
+      "weapons": { "HRD01": "sd_kineticblaster_fighter" }
     },
     {
       "autofire": true,
       "mode": "LINKED",
-      "weapons": { "NRG02": "pdburst_fighter" }
+      "weapons": { "TRT01": "pdburst_fighter" }
     }
   ],
   "wings": []

@@ -29,7 +29,7 @@
   },
   "weaponSlots": [
     {
-      "id": "SYN01",
+      "id": "HRD01",
       "size": "LARGE",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -38,7 +38,7 @@
       "locations": [75, -47]
     },
     {
-      "id": "SYN02",
+      "id": "HRD02",
       "size": "MEDIUM",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
@@ -47,7 +47,7 @@
       "locations": [78, -3]
     },
     {
-      "id": "NRG01",
+      "id": "TRT01",
       "size": "LARGE",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -56,7 +56,7 @@
       "locations": [23, 49]
     },
     {
-      "id": "NRG02",
+      "id": "TRT02",
       "size": "MEDIUM",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -65,7 +65,7 @@
       "locations": [70, 43]
     },
     {
-      "id": "NRG04",
+      "id": "TRT04",
       "size": "MEDIUM",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -74,7 +74,7 @@
       "locations": [21, -1]
     },
     {
-      "id": "NRG03",
+      "id": "TRT03",
       "size": "MEDIUM",
       "type": "ENERGY",
       "mount": "TURRET",
@@ -83,40 +83,40 @@
       "locations": [38, -47]
     },
     {
-      "id": "NRG06",
+      "id": "TRT05",
       "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 259,
-      "angle": 28.5,
-      "locations": [52, 64]
-    },
-    {
-      "id": "NRG05",
-      "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 100,
       "angle": 0,
       "locations": [56, -3]
     },
     {
-      "id": "NRG08",
+      "id": "TRT06",
       "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 227,
-      "angle": -138,
-      "locations": [-30, -35]
+      "arc": 259,
+      "angle": 28.5,
+      "locations": [52, 64]
     },
     {
-      "id": "NRG07",
+      "id": "TRT07",
       "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 210,
       "angle": 142,
       "locations": [-30, 35]
+    },
+    {
+      "id": "TRT08",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 227,
+      "angle": -138,
+      "locations": [-30, -35]
     },
     {
       "id": "DEC06",
