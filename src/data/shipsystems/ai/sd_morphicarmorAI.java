@@ -28,7 +28,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
         if (interval.intervalElapsed()) {
             ArmorGridAPI grid = ship.getArmorGrid();
             // if any of these is the case then the system is definitely off and we don't want to turn it on, so we can return to save cpu time
-            if (!AIUtils.canUseSystemThisFrame(ship) || sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD)
+            if (!sd_util.canUseSystemThisFrame(ship) || sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD)
                 return;
 
             float desirePos = 0; // todo: add AI behavior to use the system to block emp damage

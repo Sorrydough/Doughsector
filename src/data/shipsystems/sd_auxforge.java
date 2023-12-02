@@ -4,6 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
+import data.scripts.sd_util;
 import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.awt.*;
@@ -102,7 +103,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
     }
     @Override
     public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-        return AIUtils.canUseSystemThisFrame(ship) && (ship.getSharedFighterReplacementRate() < 0.9 || canReloadMissile(getEmptiestMissile(ship)));
+        return sd_util.canUseSystemThisFrame(ship) && (ship.getSharedFighterReplacementRate() < 0.9 || canReloadMissile(getEmptiestMissile(ship)));
     }
     // literally just copied alex's map from the missile autoloader because he didn't make it an api call and I don't want to import
     static float getReloadCost(WeaponAPI weapon) {

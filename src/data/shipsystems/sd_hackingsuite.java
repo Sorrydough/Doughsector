@@ -47,7 +47,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			return "COOLDOWN";
 		if (system.isActive())
 			return "INTRUDING";
-		if (!AIUtils.canUseSystemThisFrame(ship))
+		if (!sd_util.canUseSystemThisFrame(ship))
 			return "STANDBY";
 		if (!isTargetValid(ship, ship.getShipTarget()))
 			return "NO TARGET";
@@ -55,6 +55,6 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 	}
 	@Override
 	public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-		return isTargetValid(ship, ship.getShipTarget()) && AIUtils.canUseSystemThisFrame(ship);
+		return isTargetValid(ship, ship.getShipTarget()) && sd_util.canUseSystemThisFrame(ship);
 	}
 }

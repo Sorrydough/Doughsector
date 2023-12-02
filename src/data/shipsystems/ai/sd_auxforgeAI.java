@@ -22,7 +22,7 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            if (!AIUtils.canUseSystemThisFrame(ship))
+            if (!sd_util.canUseSystemThisFrame(ship))
                 return;
             float desirePos = 0;
             float desireNeg = 0;

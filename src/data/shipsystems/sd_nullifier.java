@@ -19,7 +19,7 @@ public class sd_nullifier extends BaseShipSystemScript {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
 
-        ShipAPI ship = (ShipAPI) stats.getEntity();
+        ShipAPI ship = ShipAPI.class.cast(stats.getEntity());
         ship.setJitter(id, jitterColor, effectLevel, 1, 0, 5);
         ship.setJitterUnder(id, jitterUnderColor, effectLevel, 5, 0, 10);
 
@@ -40,6 +40,6 @@ public class sd_nullifier extends BaseShipSystemScript {
     }
     @Override
     public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-        return isTargetValid(ship, ship.getShipTarget()) && AIUtils.canUseSystemThisFrame(ship);
+        return isTargetValid(ship, ship.getShipTarget()) && sd_util.canUseSystemThisFrame(ship);
     }
 }

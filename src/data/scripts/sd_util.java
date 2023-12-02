@@ -70,6 +70,21 @@ public class sd_util {
         });
     }
 
+    public static boolean canUseSystemThisFrame(ShipAPI ship) { // duplicate of the AIUtils function, but this also works for toggle systems
+        FluxTrackerAPI flux = ship.getFluxTracker();
+        ShipSystemAPI system = ship.getSystem();
+
+        return !(system == null || flux.isOverloadedOrVenting() || system.isOutOfAmmo()
+                // active but can't be toggled off
+                || (system.isActive() && !system.getSpecAPI().isToggle())
+                // chargeup or chargedown
+                || (system.getState() == ShipSystemAPI.SystemState.IN || system.getState() == ShipSystemAPI.SystemState.OUT)
+                // cooling down
+                || !system.isActive() && system.getCooldownRemaining() > 0
+                // fluxed out
+                || !system.isActive() && (system.getFluxPerUse() > (flux.getMaxFlux() - flux.getCurrFlux())));
+    }
+
 
 
 

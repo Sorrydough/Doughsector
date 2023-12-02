@@ -8,6 +8,8 @@ import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
+import data.scripts.sd_util;
+import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
 public class sd_stasisfield extends BaseShipSystemScript {
@@ -30,8 +32,15 @@ public class sd_stasisfield extends BaseShipSystemScript {
     public void unapply(MutableShipStatsAPI stats, String id) {
         doOnce = true;
     }
+    public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
+        if (target == null)												// needs to take target as an input to work in the AI script
+            return false;
+        float targetDistance = MathUtils.getDistance(ship, target);
+        float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
+        return !target.isFighter() && target != ship && !(targetDistance > systemRange) && !target.isPhased();
+    }
     @Override
     public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-        return ship.getShipTarget() != null && ship.getShipTarget().getHullSize() != ShipAPI.HullSize.FIGHTER;
+        return isTargetValid(ship, ship.getShipTarget()) && sd_util.canUseSystemThisFrame(ship);
     }
 }
