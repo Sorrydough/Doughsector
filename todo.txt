@@ -22,7 +22,6 @@ Art Her Stuff:
 - Really Converted Hangars
 - Export, Pirate, Path skin variants
 - Hullmod icons
-- Make the sensor get blown
 
 Post-Release Stuff:
 - crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)

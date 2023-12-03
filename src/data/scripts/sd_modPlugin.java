@@ -28,6 +28,9 @@ public class sd_modPlugin extends BaseModPlugin {
         }
         List <String> sd_weaponsList = new ArrayList<>(); {
             //projectiles
+            sd_weaponsList.add("lightmg");
+            sd_weaponsList.add("lightdualmg");
+            sd_weaponsList.add("lightneedler");
             sd_weaponsList.add("amblaster");
             //beams
             sd_weaponsList.add("ionbeam");
@@ -36,7 +39,6 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("tachyonlance");
             sd_weaponsList.add("hil");
             //point defense
-            sd_weaponsList.add("lrpdlaser");
             sd_weaponsList.add("pdburst");
             sd_weaponsList.add("heavyburst");
             sd_weaponsList.add("guardian");
@@ -45,10 +47,12 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("salamanderpod");
             sd_weaponsList.add("breach");
             sd_weaponsList.add("breachpod");
-            sd_weaponsList.add("pilum");
-            sd_weaponsList.add("pilum_large");
+            sd_weaponsList.add("gazer");
+            sd_weaponsList.add("gazerpod");
             sd_weaponsList.add("dragon");
             sd_weaponsList.add("dragonpod");
+            sd_weaponsList.add("pilum");
+            sd_weaponsList.add("pilum_large");
             sd_weaponsList.add("squall");
             //self-insert donut steel weapons
             //sd_weaponsList.add("sd_dragon_single");

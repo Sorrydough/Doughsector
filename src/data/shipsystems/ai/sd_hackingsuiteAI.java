@@ -73,7 +73,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                 if (desireToAttack + desireNeg >= 100) {
                     ship.setShipTarget(target);
                     desirePos += desireToAttack;
-                    break;
+                    break; // break when a target has been selected, the list of potential targets is sorted by highest DP first so we know we're always selecting the best target
                 }
             }
             sd_util.activateSystem(ship, "sd_hackingsuite", desirePos, desireNeg, debug);

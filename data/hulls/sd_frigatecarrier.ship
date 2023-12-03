@@ -12,9 +12,7 @@
   "shieldRadius": 70.5,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_customai",
-    "sd_designtech",
-    "sd_crampedstowage"
+    "sd_customai"
   ],
   "builtInWeapons": {
     "DEC01": "sd_frigatecarrier_hangar",
