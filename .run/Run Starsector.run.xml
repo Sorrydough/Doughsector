@@ -4,6 +4,7 @@
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <envs>
       <env name="MESA_LOADER_DRIVER_OVERRIDE" value="zink" />
+      <env name="OBS_VKCAPTURE_LINEAR" value="1" />
       <env name="OBS_VKCAPTURE" value="1" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="com.fs.starfarer.StarfarerLauncher" />

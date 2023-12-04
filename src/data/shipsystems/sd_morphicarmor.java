@@ -120,7 +120,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		}
 		return cells;
 	}
-	public static float getAverageArmorPerCell(ArmorGridAPI grid) {
+	public static float getAverageArmorPerCell(ArmorGridAPI grid) { // chatgpt wrote this
 		float armor = 0f;
 		for (int ix = 0; ix < grid.getGrid().length; ix++) {
 			for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {

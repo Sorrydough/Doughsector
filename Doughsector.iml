@@ -14,5 +14,6 @@
     <orderEntry type="library" name="Graphics" level="project" />
     <orderEntry type="library" name="ExerelinCore" level="project" />
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="starfarer_obf" level="project" />
   </component>
 </module>

@@ -4,8 +4,6 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
-import com.fs.starfarer.api.util.IntervalUtil;
-import org.lazywizard.console.Console;
 
 import java.util.List;
 import java.util.Map;
@@ -14,9 +12,9 @@ public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: ma
     final ShipAPI target;
     final ShipAPI ship;
     final MutableShipStatsAPI targetStats;
-    DynamicStatsAPI targetDynamic;
-    String id;
-    CombatEngineAPI engine;
+    final DynamicStatsAPI targetDynamic;
+    final CombatEngineAPI engine;
+    final String id;
     public sd_nullifierPlugin(ShipAPI ship, ShipAPI target) {
         this.ship = ship;
         this.target = target;
@@ -25,10 +23,8 @@ public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: ma
         this.id = ship.getId();
         this.engine = Global.getCombatEngine();
     }
-    final float PPT_MULT = 1.25f;
     final float FLUX_PER_TIMEFLOW = 2;
-
-    IntervalUtil interval = new IntervalUtil(1, 1);
+    final float PPT_MULT = 1.25f;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         if (engine.isPaused())
@@ -47,28 +43,23 @@ public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: ma
         float numApplied = targetDynamic.getMod("sd_nullifier").getFlatBonuses().size();
 
         // 2. Figure out the biggest effectLevel that's being applied to the target
-        float nullification = 0;
+        float nullificationLevel = 0;
         for (Map.Entry<String, MutableStat.StatMod> nullifier : targetDynamic.getMod("sd_nullifier").getFlatBonuses().entrySet())
-            if (nullifier.getValue().getValue() > nullification)
-                nullification = nullifier.getValue().getValue();
+            if (nullifier.getValue().getValue() > nullificationLevel)
+                nullificationLevel = nullifier.getValue().getValue();
 
         // 3. Apply our timeflow change according to the biggest effectLevel
         targetStats.getTimeMult().unmodify("sd_nullifier");
         float baseTimeflow = target.getMutableStats().getTimeMult().getModifiedValue();
         targetDynamic.getMod("sd_baseTimeMult").modifyFlat("sd_nullifier", baseTimeflow); // storing this on the target so I can access it in the AI script
-        float modificationMult = (1 + ((baseTimeflow - 1) * (1 - nullification))) / baseTimeflow; // puretilt wrote this math for me
+        float modificationMult = (1 + ((baseTimeflow - 1) * (1 - nullificationLevel))) / baseTimeflow; // puretilt wrote this math for me
         targetStats.getTimeMult().modifyMult("sd_nullifier", modificationMult);
         if (target == engine.getPlayerShip())
             engine.getTimeMult().modifyMult("sd_nullifier", modificationMult);
 
         // 4. Generate flux
         float modificationPercent = Math.abs(1 - baseTimeflow) * 100;
-        ship.getFluxTracker().increaseFlux(modificationPercent * FLUX_PER_TIMEFLOW * nullification * amount, true);
-
-        // debug
-//        interval.advance(amount);
-//        if (interval.intervalElapsed())
-//            Console.showMessage("Difference: "+ modificationPercent +" Target Timeflow: "+ targetStats.getTimeMult().getModifiedValue());
+        ship.getFluxTracker().increaseFlux(modificationPercent * FLUX_PER_TIMEFLOW * nullificationLevel * amount, true);
 
         if (effectLevel == 0) { // cleanup
             targetDynamic.getMod("sd_nullifier").unmodifyFlat(id);
