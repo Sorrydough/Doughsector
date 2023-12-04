@@ -8,6 +8,9 @@ import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
+import static data.shipsystems.sd_auxforge.canReloadMissile;
+import static data.shipsystems.sd_auxforge.getEmptiestMissile;
+
 public class sd_auxforgeAI implements ShipSystemAIScript {
     final IntervalUtil interval = new IntervalUtil(0.5f, 1f);
     final boolean debug = false;
@@ -22,7 +25,7 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            if (!sd_util.canUseSystemThisFrame(ship))
+            if (!sd_util.canUseSystemThisFrame(ship) || !(ship.getSharedFighterReplacementRate() < 0.9 || canReloadMissile(getEmptiestMissile(ship))))
                 return;
             float desirePos = 0;
             float desireNeg = 0;
@@ -31,8 +34,8 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
             desirePos += ((float) system.getAmmo() / system.getMaxAmmo()) * 100;
             // 2. Our missiles are depleted
             boolean willRestoreFighters = sd_auxforge.willRestoreFighters(ship);
-            WeaponAPI missile = sd_auxforge.getEmptiestMissile(ship);
-            if (sd_auxforge.canReloadMissile(missile) && !willRestoreFighters)
+            WeaponAPI missile = getEmptiestMissile(ship);
+            if (canReloadMissile(missile) && !willRestoreFighters)
                 desirePos += (1 - (float) missile.getAmmo() / missile.getMaxAmmo()) * 100;
             // 3. Our fighters are depleted
             float replacement = ship.getSharedFighterReplacementRate();
@@ -44,7 +47,7 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
             desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
             // 2. We're under attack and flux is escalating
             if (ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))
-                desireNeg -= ship.getHardFluxLevel() * 50;
+                desireNeg -= ship.getFluxLevel() * 50;
 
             sd_util.activateSystem(ship, "sd_auxforge", desirePos, desireNeg, debug);
         }

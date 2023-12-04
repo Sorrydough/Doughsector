@@ -51,7 +51,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
                 }
             } else { // otherwise, restore ammo to the missile
                 int maxAmmo = missile.getMaxAmmo();
-                int ammoAfterReload = Math.min(missile.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(missile)), maxAmmo);
+                int ammoAfterReload = Math.min(missile.getAmmo() + (int) Math.ceil(getReloadCost(missile) / MISSILE_RELOAD_AMOUNT), maxAmmo);
                 missile.setAmmo(ammoAfterReload);
                 missile.setRemainingCooldownTo(MISSILE_COOLDOWN_PENALTY + missile.getCooldown() + missile.getCooldownRemaining());
             }

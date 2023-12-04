@@ -56,7 +56,7 @@ public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
         targetStats.getShieldDamageTakenMult().modifyMult("sd_stasisfield", stasis_mult);
         targetStats.getShieldUnfoldRateMult().modifyMult("sd_stasisfield", 1 / stasis_mult); // allows the target to deploy and rotate its shields at full speed relative to global space
         targetStats.getShieldTurnRateMult().modifyMult("sd_stasisfield", 1 / stasis_mult); // ^
-        targetStats.getShieldArcBonus().modifyMult("sd_stasisfield", stasis_mult);
+        targetStats.getShieldArcBonus().modifyMult("sd_stasisfield", stasis_mult); // todo: handle flux generation here and make it depend on target hullsize.
 
 //        if (targetDynamic.getMod("sd_baseMass").getFlatBonuses().isEmpty())
 //            targetDynamic.getMod("sd_baseMass").modifyFlat(id, target.getMass());
