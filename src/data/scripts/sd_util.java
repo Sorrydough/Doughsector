@@ -77,8 +77,8 @@ public class sd_util {
         return !(system == null || flux.isOverloadedOrVenting() || system.isOutOfAmmo()
                 // active but can't be toggled off
                 || (system.isActive() && !system.getSpecAPI().isToggle())
-                // chargeup or chargedown
-                || (system.getState() == ShipSystemAPI.SystemState.IN || system.getState() == ShipSystemAPI.SystemState.OUT)
+                // chargedown
+                || (system.getState() == ShipSystemAPI.SystemState.OUT)
                 // cooling down
                 || !system.isActive() && system.getCooldownRemaining() > 0
                 // fluxed out

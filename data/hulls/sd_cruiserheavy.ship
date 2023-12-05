@@ -12,6 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
+    "sd_mixedintegration",
     "delicate"
   ],
   "builtInWeapons": {
