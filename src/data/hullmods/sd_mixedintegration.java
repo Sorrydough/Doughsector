@@ -33,6 +33,15 @@ public class sd_mixedintegration extends BaseHullMod {
         }
     }
     public String getUnapplicableReason(ShipAPI ship) {
+        if (!hasMixedenergySlot(ship))
+            return "Ship must have a synergy or universal slot.";
+        return null;
+    }
+    @Override
+    public boolean isApplicableToShip(ShipAPI ship) {
+        return hasMixedenergySlot(ship);
+    }
+    static boolean hasMixedenergySlot(ShipAPI ship) {
         boolean applicable = false;
         for (WeaponSlotAPI slot : ship.getHullSpec().getAllWeaponSlotsCopy()) {
             if (isSlotMixedEnergy(slot)) {
@@ -40,9 +49,7 @@ public class sd_mixedintegration extends BaseHullMod {
                 break;
             }
         }
-        if (!applicable)
-            return "Ship must have a synergy or universal slot.";
-        return null;
+        return applicable;
     }
     static boolean isSlotMixedEnergy(WeaponSlotAPI slot) {
         return slot.getWeaponType() == WeaponType.SYNERGY || slot.getWeaponType() == WeaponType.UNIVERSAL;
