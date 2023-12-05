@@ -37,9 +37,9 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			return false;
 		float targetDistance = MathUtils.getDistance(ship, target);
 		float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
-		return target.getSystem() != null && !target.getSystem().isOn() && !target.getCustomData().containsKey("sd_hackingsuite")
+		return target.isAlive() && target.getSystem() != null && !target.getSystem().isOn() && !target.getCustomData().containsKey("sd_hackingsuite")
 				&& !target.isFighter() && !target.isPhased() && target != ship && !target.getFluxTracker().isOverloadedOrVenting()
-				&& !(targetDistance > systemRange) && target.getOwner() != ship.getOwner();
+				&& !(targetDistance > systemRange) && target.getOwner() != ship.getOwner() && target.getCurrentCR() > 0;
 	}
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {

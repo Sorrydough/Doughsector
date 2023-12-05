@@ -48,7 +48,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                     targets.add(enemy);
             if (!targets.isEmpty())
                 for (ShipAPI enemy : new ArrayList<>(targets)) // doing some shenanigans to bypass a concurrent modification exception
-                    if (MathUtils.getDistance(ship, enemy) > systemRange || target.getSystem().isOn())
+                    if (MathUtils.getDistance(ship, enemy) > systemRange || !target.isAlive() || target.getSystem().isOn()) // somehow system becomes null when a ship dies fun fact
                         targets.remove(enemy);
         }
         // no point going any further if we have no targets ))))

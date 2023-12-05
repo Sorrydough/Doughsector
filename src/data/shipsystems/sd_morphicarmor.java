@@ -87,10 +87,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 				drawVfx(toAddLoc, ship, amountToTransfer, intensity);
 
 			//generate flux according to amount of armor hp transferred
-			float extraFlux = 0;
-			if (ship.getShield() != null)
-				extraFlux = (float) Math.sqrt(ship.getShield().getUpkeep() / FLUX_PER_ARMOR);
-			ship.getFluxTracker().increaseFlux(amountToTransfer * (FLUX_PER_ARMOR + extraFlux), false);
+			ship.getFluxTracker().increaseFlux(amountToTransfer * FLUX_PER_ARMOR, false);
 
 			//cleanup
 			ship.syncWithArmorGridState();
