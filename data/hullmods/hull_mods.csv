@@ -8,6 +8,6 @@ Hexshield,sd_hexshield,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shiel
 #Modulars,,,,,,,,,,,,,,,,,,,
 Redundant Spall Protection,sd_spallprotection,,,???,"no_drop, no_drop_salvage",Defenses,,TRUE,,,2,4,8,14,data.hullmods.sd_spallprotection,<tooltip created in the script>,,,graphics/hullmods/sd_spallprotection.png
 Ancillary Beam Pumps,sd_beampumps,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,3,6,9,12,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
-Capacitor Purge,sd_capacitorpurge,,,???,"no_drop, no_drop_salvage",Special,,TRUE,,,10,20,30,50,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
-Loadline Recalibration,sd_loadline,,,???,"no_drop, no_drop_salvage",Special,,TRUE,,,8,16,24,32,data.hullmods.sd_loadline,<tooltip created in the script>,,,graphics/hullmods/sd_loadline.png
+Capacitor Purge,sd_capacitorpurge,,,???,"no_drop, no_drop_salvage",Special,,TRUE,,,8,16,24,40,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
+Loadline Recalibration,sd_loadline,,,???,"no_drop, no_drop_salvage",Special,,TRUE,,,10,20,30,50,data.hullmods.sd_loadline,<tooltip created in the script>,,,graphics/hullmods/sd_loadline.png
 Mixed Integration,sd_mixedintegration,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,2,4,6,10,data.hullmods.sd_mixedintegration,<tooltip created in the script>,,,graphics/hullmods/sd_mixedintegration.png

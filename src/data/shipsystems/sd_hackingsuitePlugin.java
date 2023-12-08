@@ -24,6 +24,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
         DURATION.put(ShipAPI.HullSize.CRUISER, 10);
         DURATION.put(ShipAPI.HullSize.CAPITAL_SHIP, 5);
     }
+    final float AUTOFIRE_PENALTY = 0.33f;
     final Color fadeColor = new Color(230, 215, 195,100);
     final IntervalUtil TIMER = new IntervalUtil(1f, 1f);
     boolean doOnce = true;
@@ -35,7 +36,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
         target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.75f);
         if (doOnce) {
             duration += DURATION.get(target.getHullSize()) + target.getSystem().getCooldownRemaining();
-            target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", 0.33f);
+            target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);
             target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ Math.round(duration) +" seconds!", Color.LIGHT_GRAY, 5, true);

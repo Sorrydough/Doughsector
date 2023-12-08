@@ -11,7 +11,8 @@
   "shieldRadius": 115.5,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_customai"
+    "sd_customai",
+    "delicate"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

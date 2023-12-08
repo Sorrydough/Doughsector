@@ -2,6 +2,8 @@ package data.scripts;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
+import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize;
 import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
@@ -57,6 +59,37 @@ public class sd_util {
                 ship.useSystem();
         }
     }
+    public static void emitMote(ShipAPI ship, Object module) {
+        final Map<WeaponSize, Integer> AMOUNT = new HashMap<>(); {
+            AMOUNT.put(WeaponSize.SMALL, 1);
+            AMOUNT.put(WeaponSize.MEDIUM, 2);
+            AMOUNT.put(WeaponSize.LARGE, 4);
+        }
+        final Random rand = new Random();
+        if (module instanceof WeaponAPI) {
+            WeaponAPI weapon = (WeaponAPI) module;
+            int amount = AMOUNT.get(weapon.getSize());
+            for (int i = 0; i < amount; i++) {
+                int angleOffset = rand.nextInt(181) - 90;
+                float modifiedAngle = weapon.getSlot().getAngle() + angleOffset;
+                Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", weapon.getLocation(), modifiedAngle + ship.getFacing(), ship.getVelocity());
+                Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, weapon.getLocation(), ship.getVelocity());
+            }
+        } else if (module instanceof ShipEngineAPI) {
+            ShipEngineAPI vroom = (ShipEngineAPI) module;
+            float size = vroom.getEngineSlot().getWidth();
+            int amount = (int) Math.ceil(Math.sqrt(size));
+            for (int i = 0; i < amount; i++) {
+                int angleOffset = rand.nextInt(181) - 90;
+                float modifiedAngle = vroom.getEngineSlot().getAngle() + angleOffset;
+                Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", vroom.getLocation(), modifiedAngle + ship.getFacing(), ship.getVelocity());
+                Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, vroom.getLocation(), ship.getVelocity());
+            }
+        }
+    }
+
+
+
     public static void sortByDistance(final ShipAPI ship, final List<ShipAPI> ships, final boolean closestFirst) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
             @Override

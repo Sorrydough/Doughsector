@@ -31,25 +31,15 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
             if (!sd_util.canUseSystemThisFrame(ship) || sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD)
                 return;
 
-            float desirePos = 0; // todo: add AI behavior to use the system to block emp damage
-            float desireNeg = 0; // todo: add a way to check whether incoming damage is gonna fuck us up (aka damper field logic)
-
-            // calculate all potential incoming damage
-//            float unfoldTime = 0;
-//            if (ship.getShield() != null)
-//                unfoldTime = ship.getShield().getUnfoldTime() * 1.1f;
-//            predictedWeaponHits = sd_util.generatePredictedWeaponHits(ship, ship.getLocation(), unfoldTime);
-//            incomingProjectiles = sd_util.incomingProjectileHits(ship, ship.getLocation());
-//            List<sd_util.FutureHit> combinedHits = new ArrayList<>();
-//            combinedHits.addAll(predictedWeaponHits);
-//            combinedHits.addAll(incomingProjectiles);
+            float desirePos = 0;
+            float desireNeg = 0;
 
             // We want the system on if our armor grid isn't balanced, otherwise just turn it off immediately cuz it's doing nothing for ya tbqh
             if (ship.getFluxLevel() < 0.95f && !sd_morphicarmor.isArmorGridBalanced(grid)) {
                 desirePos += 150;
                 // We want the system off if:
                 // 1. Our flux level is too high
-                desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 150;
+                desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 125;
                 // 2. We could dissipate hardflux
                 if (ship.getShield() != null && ship.getShield().isOff() && sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
                     desireNeg -= ship.getHardFluxLevel() * 150;
