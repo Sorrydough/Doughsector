@@ -79,6 +79,9 @@ public class sd_customai extends BaseHullMod {
 //                }
 //            }
 
+
+
+
             ////////////////////////////
             //IMPROVES SQUALL BEHAVIOR//
             ////////////////////////////
@@ -108,20 +111,35 @@ public class sd_customai extends BaseHullMod {
                 }
             }
 
-            //////////////////////////////////////////////////////////
-            //ALLEVIATES SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
-            //////////////////////////////////////////////////////////
-            if (ship.getShipTarget() != null && ship.getFluxLevel() > 0.25 && ship.getShipTarget().getHullLevel() > 0.25)
-                for (WeaponAPI weapon : ship.getAllWeapons()) {
-                    if (weapon.getFluxCostToFire() + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.85)
-                        weapon.setForceNoFireOneFrame(true);
-                }
+            ////////////////////////////////////////////////////////////
+            //TELLS THE SHIP TO BACK OFF IF IT CAN'T SHOOT ITS WEAPONS//
+            ////////////////////////////////////////////////////////////
+            float biggestFluxCost = 0;
+            for (WeaponAPI weapon : ship.getAllWeapons())
+                if (weapon.getFluxCostToFire() > biggestFluxCost)
+                    biggestFluxCost = weapon.getFluxCostToFire();
+            if (biggestFluxCost + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.95) {
+                ship.getAIFlags().unsetFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACK_OFF);
+            }
+
+            ////////////////////////////////////////////////////////////////
+            //ALLEVIATES SMALL SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
+            ////////////////////////////////////////////////////////////////
+            if (ship.getHullSize() == HullSize.FRIGATE || ship.getHullSize() == HullSize.DESTROYER)
+                if (ship.getShipTarget() != null && ship.getFluxLevel() > 0.25 && ship.getShipTarget().getHullLevel() > 0.25)
+                    for (WeaponAPI weapon : ship.getAllWeapons())
+                        if (weapon.getFluxCostToFire() + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.85)
+                            weapon.setForceNoFireOneFrame(true);
 
             ///////////////////////////////////////////////////////////
             //FIXES CARRIERS SENDING STRIKE BOMBERS AGAINST DUMB SHIT//
             /////////////////////////////////////////////////////////// TODO: THIS
 
 
+
+            // FIXES SHIPS SHOOTING THEIR DRAGONCOCKS AT STUFF THAT THEY'LL NEVER HIT
+            // TODO: THIS
 
 
 
@@ -143,7 +161,7 @@ public class sd_customai extends BaseHullMod {
 
             /////////////////////////////////////////////////
             //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
-            ///////////////////////////////////////////////// TODO: DEBUG THIS FOR MODDED PHASE SYSTEMS LIKE SIERRA
+            /////////////////////////////////////////////////
             boolean isPhaseEnemy = false;
             for (ShipAPI enemy : AIUtils.getEnemiesOnMap(ship)) {
                 if (enemy.isPhased()) { //first, check if the enemy even has phase ships, so we don't run code frivilously

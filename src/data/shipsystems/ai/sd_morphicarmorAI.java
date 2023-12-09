@@ -28,18 +28,21 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
         if (interval.intervalElapsed()) {
             ArmorGridAPI grid = ship.getArmorGrid();
             // if any of these is the case then the system is definitely off and we don't want to turn it on, so we can return to save cpu time
-            if (!sd_util.canUseSystemThisFrame(ship) || sd_morphicarmor.getAverageArmorPerCell(grid) <= grid.getMaxArmorInCell() * sd_morphicarmor.DESTROYED_THRESHOLD)
+            if (!sd_util.canUseSystemThisFrame(ship) || sd_morphicarmor.isArmorGridDestroyed(grid))
                 return;
 
             float desirePos = 0;
             float desireNeg = 0;
 
             // We want the system on if our armor grid isn't balanced, otherwise just turn it off immediately cuz it's doing nothing for ya tbqh
-            if (ship.getFluxLevel() < 0.95f && !sd_morphicarmor.isArmorGridBalanced(grid)) {
+            if (!sd_morphicarmor.isArmorGridBalanced(grid)) {
                 desirePos += 150;
+                // Calculate how much flux we're going to generate by using our system and scale negative desire accordingly
+                float fluxToRebalance = getFluxToRebalance(grid);
+                desireNeg -= (fluxToRebalance * ship.getFluxLevel()) / 100;
                 // We want the system off if:
                 // 1. Our flux level is too high
-                desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 125;
+                desireNeg -= ship.getFluxLevel() * 100;
                 // 2. We could dissipate hardflux
                 if (ship.getShield() != null && ship.getShield().isOff() && sd_util.isNumberWithinRange(ship.getHardFluxLevel(), ship.getFluxLevel(), 1))
                     desireNeg -= ship.getHardFluxLevel() * 150;
@@ -48,5 +51,14 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
 
             sd_util.activateSystem(ship, "sd_morphicarmor", desirePos, desireNeg, debug);
         }
+    }
+    static float getFluxToRebalance(ArmorGridAPI grid) {
+        float flux = 0;
+        for (int ix = 0; ix < grid.getGrid().length; ix++) {
+            for (int iy = 0; iy < grid.getGrid()[0].length; iy++) {
+                flux += Math.abs(grid.getArmorValue(ix, iy) - sd_morphicarmor.getAverageArmorPerCell(grid));
+            }
+        }
+        return flux * sd_morphicarmor.FLUX_PER_ARMOR;
     }
 }
