@@ -28,8 +28,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
     final Color fadeColor = new Color(230, 215, 195,100);
     final IntervalUtil TIMER = new IntervalUtil(1f, 1f);
     boolean doOnce = true;
-    float duration = 0;
-    float time = 0;
+    float duration = 0, time = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
@@ -50,7 +49,8 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
             time += 1;
             if (time >= duration) {
                 target.getMutableStats().getAutofireAimAccuracy().unmodifyMult("sd_hackingsuite");
-                target.setShipSystemDisabled(false);
+                if (target.getCurrentCR() > 0)
+                    target.setShipSystemDisabled(false);
                 target.getCustomData().remove("sd_hackingsuite");
                 engine.removePlugin(this);
                 //return;

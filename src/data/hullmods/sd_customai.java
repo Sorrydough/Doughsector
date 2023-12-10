@@ -66,7 +66,7 @@ public class sd_customai extends BaseHullMod {
             }
 
             if (Global.getCombatEngine().isSimulation())
-                ship.getCaptain().setPersonality(Personalities.AGGRESSIVE);
+                ship.getCaptain().setPersonality(Personalities.STEADY);
 
             ////////////////////////////////////////////////////////
             //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//

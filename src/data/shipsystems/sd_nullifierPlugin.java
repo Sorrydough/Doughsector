@@ -4,13 +4,13 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
+import data.scripts.sd_util;
 
 import java.util.List;
 import java.util.Map;
 
 public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: make a util for checking whether target is valid
-    final ShipAPI target;
-    final ShipAPI ship;
+    final ShipAPI target, ship;
     final MutableShipStatsAPI targetStats;
     final DynamicStatsAPI targetDynamic;
     final CombatEngineAPI engine;
@@ -23,8 +23,7 @@ public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: ma
         this.id = ship.getId();
         this.engine = Global.getCombatEngine();
     }
-    final float FLUX_PER_TIMEFLOW = 2;
-    final float PPT_MULT = 1.25f;
+    final float FLUX_PER_TIMEFLOW = 2, PPT_MULT = 1.25f;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         if (engine.isPaused())
@@ -57,15 +56,20 @@ public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: ma
         if (target == engine.getPlayerShip())
             engine.getTimeMult().modifyMult("sd_nullifier", modificationMult);
 
-        // 4. Generate flux
+        // 4. Slightly reduce target shield arc
+//        targetStats.getShieldArcBonus().modifyMult("sd_nullifier", (PPT_MULT - 1) * nullificationLevel);
+//        sd_util.modifyShieldArc(target, Math.max(45, targetStats.getShieldArcBonus().computeEffective(target.getHullSpec().getShieldSpec().getArc())), effectLevel);
+
+        // 5. Generate flux
         float modificationPercent = Math.abs(1 - baseTimeflow) * 100;
-        ship.getFluxTracker().increaseFlux(modificationPercent * FLUX_PER_TIMEFLOW * effectLevel * amount, true);
+        ship.getFluxTracker().increaseFlux((modificationPercent * FLUX_PER_TIMEFLOW * effectLevel * amount) / numApplied, true); // divide by numApplied to share flux load
 
         if (effectLevel == 0) { // cleanup
             targetDynamic.getMod("sd_nullifier").unmodifyFlat(id);
             targetStats.getCRLossPerSecondPercent().unmodifyMult(id);
             if (targetDynamic.getMod("sd_nullifier").getFlatBonuses().isEmpty()) {
                 targetDynamic.getMod("sd_baseTimeMult").unmodify("sd_nullifier");
+//                targetStats.getShieldArcBonus().unmodifyMult("sd_nullifier");
                 targetStats.getTimeMult().unmodifyFlat("sd_nullifier");
                 engine.getTimeMult().unmodifyFlat("sd_nullifier");
             }

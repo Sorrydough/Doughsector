@@ -21,9 +21,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
         AVG_DPCOST.put(ShipAPI.HullSize.CAPITAL_SHIP, 40);
     }
     List<ShipAPI> targets = new ArrayList<>();
-    final IntervalUtil intervalShort = new IntervalUtil(0.01f, 0.01f);
-    final IntervalUtil intervalLong = new IntervalUtil(0.5f, 1f);
-    final boolean debug = false;
+    final IntervalUtil intervalShort = new IntervalUtil(0.01f, 0.01f), intervalLong = new IntervalUtil(0.5f, 1f);
     float systemRange = 0;
     ShipAPI ship;
     ShipSystemAPI system;
@@ -48,7 +46,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                     targets.add(enemy);
             if (!targets.isEmpty())
                 for (ShipAPI enemy : new ArrayList<>(targets)) // doing some shenanigans to bypass a concurrent modification exception
-                    if (MathUtils.getDistance(ship, enemy) > systemRange || !target.isAlive() || target.getSystem().isOn()) // somehow system becomes null when a ship dies fun fact
+                    if (!sd_hackingsuite.isTargetValid(ship, enemy)) // somehow system becomes null when a ship dies fun fact
                         targets.remove(enemy);
         }
         // no point going any further if we have no targets ))))
@@ -66,17 +64,19 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             // We want to use the system if:
             // 1. A valid target is within range, scaled by the target's DP cost, biggest target prioritized
             for (ShipAPI enemy : targets) {
+                if (!sd_hackingsuite.isTargetValid(ship, target)) // doing this again even though we do it earlier because of the slow interval
+                    continue;
                 float enemyDeployCost = sd_fleetAdmiralUtil.getDeploymentCost(enemy);
                 float desireToAttack = 150 * Math.max(2, enemyDeployCost / AVG_DPCOST.get(enemy.getHullSize()));
                 // modulate attack desire based on number of charges
-                desireToAttack *= (float) system.getAmmo() / system.getMaxAmmo();
+                desireToAttack *= float.class.cast(system.getAmmo() / system.getMaxAmmo());
                 if (desireToAttack + desireNeg >= 100) {
                     ship.setShipTarget(target);
                     desirePos += desireToAttack;
                     break; // break when a target has been selected, the list of potential targets is sorted by highest DP first so we know we're always selecting the best target
                 }
             }
-            sd_util.activateSystem(ship, "sd_hackingsuite", desirePos, desireNeg, debug);
+            sd_util.activateSystem(ship, "sd_hackingsuite", desirePos, desireNeg, false);
         }
     }
 }

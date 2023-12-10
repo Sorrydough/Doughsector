@@ -2,7 +2,8 @@
 	"id":"sd_nullifier",
 	"type":"STAT_MOD",
 	"statsScript":"data.shipsystems.sd_nullifier",
-	"aiType":"LIDAR_ARRAY",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_nullifierAI",
 
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.75,

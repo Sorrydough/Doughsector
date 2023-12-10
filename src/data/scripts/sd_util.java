@@ -8,7 +8,6 @@ import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import com.fs.starfarer.combat.entities.*;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
@@ -17,13 +16,32 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.DefenseUtils;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class sd_util {
+    public static final Color factionColor = new Color (250, 235, 215,55), factionUnderColor = new Color (250, 235, 215,155);
+    public static final Color hightechColor =  new Color (100,165,255,55), hightechUnderColor = new Color (100,165,255,155);
+    public static final Color phaseColor = new Color(150,100,255, 55), phaseUnderColor = new Color(150,100,255, 155);
+    public static final Color damageColor = new Color (255,120,80,55), damageUnderColor = new Color (255,120,80,155);
+    public static final Color healColor = new Color (60,210,150,55), healUnderColor = new Color (60,210,150,155);
+
     public static boolean isNumberWithinRange(float numberA, float numberB, float deviationPercent) {
         float lowerBound = numberB - (numberB * (deviationPercent / 100));
         float upperBound = numberB + (numberB * (deviationPercent / 100));
         return numberA <= upperBound && numberA >= lowerBound;
+    }
+
+    public static void modifyShieldArc(ShipAPI target, float goalShieldArc, float effectLevel) {
+        // 1. If the target's shield is still unfolding, don't mess with it
+        if (target.getShield() == null || target.getShield().isOff() || target.getShield().getActiveArc() < goalShieldArc)
+            return;
+        // 2. Calculate how quickly the target's shield should be modified
+        // Let's say target arc is 90, current arc is 180
+        // when effectLevel is 1, arc should be set to 90
+        // when effectLevel is 0.5, arc should be set to (135 = 180-90/2)
+        target.getShield().setActiveArc(Math.max(goalShieldArc, target.getShield().getActiveArc() - goalShieldArc / (1 / effectLevel)));
     }
 
     public static float getOptimalRange(ShipAPI ship) { // chatgpt wrote most of this

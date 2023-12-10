@@ -2,7 +2,8 @@
 	"id":"sd_stasisfield",
 	"type":"STAT_MOD",
 	"statsScript":"data.shipsystems.sd_stasisfield",
-	"aiType":"LIDAR_ARRAY",
+	"aiType":"CUSTOM",
+	"aiScript":"data.shipsystems.ai.sd_stasisfieldAI",
 
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.75,

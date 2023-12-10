@@ -10,12 +10,10 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import java.awt.*;
 
 public class sd_auxforge extends BaseShipSystemScript  {
-    final float BAY_REPLENISHMENT_AMOUNT = 0.10f;
-    final float MISSILE_COOLDOWN_PENALTY = 5;
     static final float MISSILE_RELOAD_AMOUNT = 2;
-    public static final Color GLOW_COLOR = new Color(255,120,80,255);
-    boolean doOnce = true;
+    final float MISSILE_COOLDOWN_PENALTY = 5, BAY_REPLENISHMENT_AMOUNT = 0.10f;
     boolean willRestoreFighters = true;
+    boolean doOnce = true;
     WeaponAPI missile;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
@@ -33,7 +31,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
         // holy shit this vfx was a pain in the ass and I had to refactor the entire script architecture to get it to work seamlessly
         // I've deleted over 150 lines of code from previous vfx implementations, be happy that this is only one line now (although there's a few more in the hangar deco script)
         if (!willRestoreFighters)
-            missile.setGlowAmount(Math.min(effectLevel + 0.5f, 1), GLOW_COLOR);
+            missile.setGlowAmount(Math.min(effectLevel + 0.5f, 1), sd_util.damageUnderColor);
 
         // the actual restoration effects occur here
         if (effectLevel == 1) { // need to check effectLevel to prevent the restoration from occurring multiple times
@@ -61,7 +59,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
     @Override
     public void unapply(MutableShipStatsAPI stats, String id) {
         if (missile != null) //glow sticks around after the system deactivates otherwise LMAO
-            missile.setGlowAmount(0, GLOW_COLOR);
+            missile.setGlowAmount(0, sd_util.damageUnderColor);
     }
     public static boolean willRestoreFighters(ShipAPI ship) {
         WeaponAPI missile = getEmptiestMissile(ship);
@@ -87,6 +85,9 @@ public class sd_auxforge extends BaseShipSystemScript  {
     public static boolean canReloadMissile(WeaponAPI weapon) {
         return weapon != null && weapon.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(weapon)) <= weapon.getMaxAmmo();
     }
+    public static boolean canBeUsed(ShipAPI ship) {
+        return sd_util.canUseSystemThisFrame(ship) && (ship.getSharedFighterReplacementRate() < 0.9 || canReloadMissile(getEmptiestMissile(ship)));
+    }
     @Override
     public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
         if (system.isCoolingDown() || system.isOutOfAmmo())
@@ -103,7 +104,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
     }
     @Override
     public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-        return sd_util.canUseSystemThisFrame(ship) && (ship.getSharedFighterReplacementRate() < 0.9 || canReloadMissile(getEmptiestMissile(ship)));
+        return canBeUsed(ship);
     }
     // literally just copied alex's map from the missile autoloader because he didn't make it an api call and I don't want to import
     static float getReloadCost(WeaponAPI weapon) {

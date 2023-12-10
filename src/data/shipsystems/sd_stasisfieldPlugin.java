@@ -5,13 +5,13 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
 import com.fs.starfarer.loading.specs.HullVariantSpec;
+import data.scripts.sd_util;
 
 import java.util.List;
 import java.util.Map;
 
 public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
-    final ShipAPI target;
-    final ShipAPI ship;
+    final ShipAPI ship, target;
     final MutableShipStatsAPI targetStats;
     final DynamicStatsAPI targetDynamic;
     final CombatEngineAPI engine;
@@ -45,9 +45,9 @@ public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
 
         float stasis_mult = STASIS_MULT_MIN + (1f - STASIS_MULT_MIN) * (1f - stasisLevel); // chatgpt wrote this
 
-        target.fadeToColor("sd_stasisfield", sd_stasisfield.jitterUnderColor, 0.25f, 0.25f, 0.66f * stasisLevel);
-        target.setJitterUnder("sd_stasisfield", sd_stasisfield.jitterUnderColor, stasisLevel, 10, 0, 10);
-        target.setJitter("sd_stasisfield", sd_stasisfield.jitterColor, stasisLevel, 1, 0, 5);
+        target.fadeToColor("sd_stasisfield", sd_util.phaseUnderColor, 0.25f, 0.25f, 0.66f * stasisLevel);
+        target.setJitterUnder("sd_stasisfield", sd_util.phaseUnderColor, stasisLevel, 10, 0, 10);
+        target.setJitter("sd_stasisfield", sd_util.phaseColor, stasisLevel, 1, 0, 5);
 
         targetStats.getTimeMult().modifyMult("sd_stasisfield", stasis_mult);
         targetStats.getEmpDamageTakenMult().modifyMult("sd_stasisfield", stasis_mult);
@@ -65,7 +65,7 @@ public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
 //        if (target.getMass() != goalMass)
 //            target.setMass(goalMass);
 
-        modifyShieldArc(target, Math.max(35, targetStats.getShieldArcBonus().computeEffective(target.getHullSpec().getShieldSpec().getArc())), stasisLevel);
+        sd_util.modifyShieldArc(target, Math.max(45, targetStats.getShieldArcBonus().computeEffective(target.getHullSpec().getShieldSpec().getArc())), stasisLevel);
 
         if (effectLevel == 0) { // system can be turned off at will so we have to check for effect level when unapplying
             targetDynamic.getMod("sd_stasisfield").unmodifyFlat(id);
@@ -83,15 +83,5 @@ public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
             }
             engine.removePlugin(this);
         }
-    }
-    public static void modifyShieldArc(ShipAPI target, float goalShieldArc, float effectLevel) {
-        // 1. If the target's shield is still unfolding, don't mess with it
-        if (target.getShield() == null || target.getShield().isOff() || target.getShield().getActiveArc() < goalShieldArc)
-            return;
-        // 2. Calculate how quickly the target's shield should be modified
-        // Let's say target arc is 90, current arc is 180
-        // when effectLevel is 1, arc should be set to 90
-        // when effectLevel is 0.5, arc should be set to (135 = 180-90/2)
-        target.getShield().setActiveArc(Math.max(goalShieldArc, target.getShield().getActiveArc() - goalShieldArc / (1 / effectLevel)));
     }
 }

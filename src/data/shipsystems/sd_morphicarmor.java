@@ -18,16 +18,8 @@ import org.dark.shaders.distortion.*;
 import data.scripts.sd_util;
 
 public class sd_morphicarmor extends BaseShipSystemScript {
-	final static boolean debug = false;
-	public static final float DESTROYED_THRESHOLD = 0.1f; // accessed in the AI script
-	public static final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
-	public static final Color JITTER_COLOR = new Color(250, 235, 215,55);
-	public static final Color JITTER_UNDER_COLOR = new Color(250, 235, 215,155);
-	public static final Color EMP_CENTER_COLOR = new Color(250, 235, 215, 205);
-	public static final Color EMP_EDGE_COLOR = new Color(255,120,80,105);
-	public static final float FLUX_PER_ARMOR = 3;
-	public static final float EMP_MULT = 0.5f;
-	public static final float ARMOR_MULT = 0.5f;
+	public static final float FLUX_PER_ARMOR = 3, DESTROYED_THRESHOLD = 0.1f;
+	final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
 			return;
@@ -35,11 +27,16 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		ArmorGridAPI grid = ship.getArmorGrid();
 
-		ship.setJitter(id, JITTER_COLOR, effectLevel, 2, 0, 5);
-		ship.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 10, 0, 5);
+		boolean isArmorGridBalanced = isArmorGridBalanced(grid);
 
-		if (isArmorGridBalanced(grid))
+		if (isArmorGridBalanced) {
+			ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
+			ship.setJitterUnder(id, sd_util.factionUnderColor, effectLevel, 10, 0, 5);
 			return;
+		} else {
+			ship.setJitter(id, sd_util.healColor, effectLevel, 2, 0, 5);
+			ship.setJitterUnder(id, sd_util.healUnderColor, effectLevel, 10, 0, 5);
+		}
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
@@ -63,8 +60,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			//subtract the amount from the donating cell and add it to the recieving cell
 			ship.getArmorGrid().setArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y, ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - amountToTransfer);
 			ship.getArmorGrid().setArmorValue((int) cellToAdd.x, (int) cellToAdd.y, ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y) + amountToTransfer);
-			if (debug)
-				Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
+			//Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
 
 			//start vfx: draw an emp arc to the target cell if it's within bounds
 			Vector2f toSubtractLoc = (grid.getLocation((int) cellToSubtract.x, (int) cellToSubtract.y));
@@ -74,7 +70,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			float intensity = getAverageArmorPerCell(grid) / grid.getMaxArmorInCell();
 			float thickness = (2 + amountToTransfer * 2) * intensity;
 			if (isToAddInBounds)
-				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship, thickness, EMP_EDGE_COLOR, EMP_CENTER_COLOR);
+				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship,
+						thickness, sd_util.healColor, sd_util.damageUnderColor);
 			//draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
 				drawVfx(toSubtractLoc, ship, amountToTransfer, intensity);
@@ -134,8 +131,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 			float particleDuration = MathUtils.getRandomNumberInRange(1, 2);
 			Vector2f particleLoc = MathUtils.getRandomPointOnCircumference(loc, sizeSqrt);
 			Vector2f particleVel = MathUtils.getPointOnCircumference(ship.getVelocity(), 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt, size), MathUtils.getRandomNumberInRange(-180f, 180f));
-			if (debug)
-				Console.showMessage("Transferred Sqrt: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
+			//Console.showMessage("Transferred Sqrt: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
 			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, intensity, particleDuration, particleColor);
 		}
 		//draw a distortion wave
