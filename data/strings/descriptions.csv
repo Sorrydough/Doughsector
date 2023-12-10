@@ -1,10 +1,15 @@
 id,type,text1
-sd_frigatelight,SHIP,"An agile light support frigate designed for fleet actions. Highly vulnerable to other frigates and strike craft on its own, its redundant subsystems and large weapon allow it to effectively plug holes and support allies."
-sd_frigate,SHIP,"With excellent survivability against much larger ships than itself, this skirmish frigate is perfectly suited to delaying actions or sowing disarray in the opponent’s line of battle."
-sd_frigatecarrier,SHIP,"Due to the demanding logistics and high cost of autoforges, most navies opt to consolidate them into larger ships, leaving frigate-sized carriers an anomaly appropriate only for niche doctrines."
-sd_frigateheavy,SHIP,"A simple ship with excellent staying power, this abnormally large frigate is specialized for blockading pursuit ships."
-,,
 sd_ionbeam_fighter,WEAPON,An ion beam unremarkable in all ways other than its miniaturization.
 sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
 ,,
 sd_dragon_single,WEAPON,The tactical flexibility of a reliable torpedo compatible with any standard missile hardpoint more than justifies the extreme mounting complexity inherent to the dragonfire platform.
+,,
+,,
+sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
+sd_canisterantimatter,SHIP_SYSTEM,Launches proximity-fused explosives around the ship.
+sd_auxforge,SHIP_SYSTEM,"Replenishes missiles or fighters, depending on which is more depleted. Generates flux."
+sd_morphicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. Generates more flux on more heavily armored ships.
+,SHIP_SYSTEM,
+sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy.
+sd_nullifier,SHIP_SYSTEM,"Accelerates the decay of the target’s combat readiness, and normalizes their timeflow with that of realspace. Generates flux based on the magnitude of the timeflow correction."
+sd_stasisfield,SHIP_SYSTEM,"Dramatically reduces the target’s timeflow, damage taken, and shield arc. Generates significant flux."

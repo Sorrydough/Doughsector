@@ -1,5 +1,5 @@
 {
-	"id":"sd_decoylauncher_fighter",
+	"id":"sd_decoylauncher",
 	"type":"WEAPON",
 	"aiType":"FLARE_JAMMER",
 	"weaponDataId":"sd_decoyflare_fighter",

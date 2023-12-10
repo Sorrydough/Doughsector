@@ -39,7 +39,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
                 desirePos += 150;
                 // Calculate how much flux we're going to generate by using our system and scale negative desire accordingly
                 float fluxToRebalance = getFluxToRebalance(grid);
-                desireNeg -= (fluxToRebalance * ship.getFluxLevel()) / 100;
+                desireNeg -= ((fluxToRebalance / ship.getMaxFlux()) * ship.getFluxLevel()) * 100;
                 // We want the system off if:
                 // 1. Our flux level is too high
                 desireNeg -= ship.getFluxLevel() * 100;

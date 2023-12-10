@@ -59,7 +59,7 @@ public class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: ma
 
         // 4. Generate flux
         float modificationPercent = Math.abs(1 - baseTimeflow) * 100;
-        ship.getFluxTracker().increaseFlux(modificationPercent * FLUX_PER_TIMEFLOW * nullificationLevel * amount, true);
+        ship.getFluxTracker().increaseFlux(modificationPercent * FLUX_PER_TIMEFLOW * effectLevel * amount, true);
 
         if (effectLevel == 0) { // cleanup
             targetDynamic.getMod("sd_nullifier").unmodifyFlat(id);
