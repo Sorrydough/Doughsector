@@ -1,4 +1,4 @@
-package data.scripts.campaign.customstart;
+package data.customstart;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.Script;

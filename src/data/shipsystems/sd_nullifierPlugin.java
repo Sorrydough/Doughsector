@@ -4,7 +4,6 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
-import data.scripts.sd_util;
 
 import java.util.List;
 import java.util.Map;

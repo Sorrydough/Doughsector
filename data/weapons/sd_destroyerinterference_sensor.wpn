@@ -3,7 +3,7 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"everyFrameEffect":"data.scripts.weapons.sd_destroyerinterferenceDecoScript",
+	"everyFrameEffect":"data.weapons.sd_systemRangeDecoScript",
 	"showDamageWhenDecorative":"true",
 	"turretSprite":"graphics/ships/decos/sd_destroyerinterference_sensor.png",
 	"hardpointSprite":"graphics/ships/decos/sd_destroyerinterference_sensor.png",

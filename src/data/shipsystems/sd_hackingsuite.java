@@ -1,17 +1,12 @@
 package data.shipsystems;
 
-import java.awt.Color;
-import java.util.*;
-
-import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipSystemAPI.SystemState;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import data.scripts.sd_util;
+import data.sd_util;
 
 public class sd_hackingsuite extends BaseShipSystemScript {
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {

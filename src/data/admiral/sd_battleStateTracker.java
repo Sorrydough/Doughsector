@@ -1,4 +1,4 @@
-package data.scripts.admiral;
+package data.admiral;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI.*;

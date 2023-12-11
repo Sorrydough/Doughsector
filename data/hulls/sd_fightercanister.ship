@@ -17,7 +17,7 @@
   "weaponSlots": [
     {
       "id": "HRD01",
-      "size": "MEDIUM",
+      "size": "SMALL",
       "type": "MISSILE",
       "mount": "HIDDEN",
       "arc": 10,

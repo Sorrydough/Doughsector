@@ -20,6 +20,7 @@
     "DEC02": "sd_blinker",
     "DEC03": "sd_blinker",
     "DEC04": "sd_blinker",
+    "DEC05": "sd_frigateinterference_deco",
     "THR01": "sd_magicThruster",
     "THR02": "sd_magicThruster",
     "THR03": "sd_magicThruster",
@@ -141,7 +142,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [0, -0]
+      "locations": [-17.5, -0]
     }
   ],
   "engineSlots": [

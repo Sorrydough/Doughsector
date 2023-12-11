@@ -16,5 +16,5 @@
             "name": "MagicLib"
         }
     ],
-	"modPlugin":"data.scripts.sd_modPlugin"
+	"modPlugin":"data.sd_modPlugin"
 }

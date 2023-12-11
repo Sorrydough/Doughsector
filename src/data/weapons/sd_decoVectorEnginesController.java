@@ -1,8 +1,7 @@
-package data.scripts.weapons;
+package data.weapons;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.loading.specs.EngineSlot;
 import org.lazywizard.lazylib.MathUtils;

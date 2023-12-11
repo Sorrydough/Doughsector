@@ -1,4 +1,4 @@
-package data.scripts.admiral;
+package data.admiral;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI.SkillLevelAPI;
@@ -29,7 +29,7 @@ public class sd_fleetAdmiralUtil {
                 if (hullmod.hasUITag("Logistics"))
                     sModsExcluded.add(hullmod.getId());
         }
-        final List<String> dModsExcluded = new ArrayList<>(); {
+        final List<String> dModsExcluded = new ArrayList<>(); { // todo: check vayra dmods
             dModsExcluded.add("degraded_drive_field");
             dModsExcluded.add("malfunctioning_comms");
             dModsExcluded.add("fragile_subsystems");

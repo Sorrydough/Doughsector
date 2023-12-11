@@ -3,6 +3,7 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
+	"showDamageWhenDecorative":"false",
 	"turretSprite":"graphics/fx/thrusters/sd_magicThruster00.png",
 	"hardpointSprite":"graphics/fx/thrusters/sd_magicThruster00.png",
 	"numFrames":6,
@@ -21,6 +22,5 @@
 	"textureType":ROUGH,
 	"textureScrollSpeed":1.0,
 	"pixelsPerTexel":5.0,	
-	"everyFrameEffect":"data.scripts.weapons.sd_magicVectorThruster",
+	"everyFrameEffect":"data.weapons.sd_magicVectorThruster",
 }
-#	"showDamageWhenDecorative":"false",

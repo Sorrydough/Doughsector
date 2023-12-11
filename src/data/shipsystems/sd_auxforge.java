@@ -4,10 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import data.scripts.sd_util;
-import org.lazywizard.lazylib.combat.AIUtils;
-
-import java.awt.*;
+import data.sd_util;
 
 public class sd_auxforge extends BaseShipSystemScript  {
     static final float MISSILE_RELOAD_AMOUNT = 2;

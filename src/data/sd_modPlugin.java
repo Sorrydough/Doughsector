@@ -1,11 +1,9 @@
-package data.scripts;
+package data;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.SettingsAPI;
 import com.fs.starfarer.api.campaign.FactionAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
@@ -13,7 +11,7 @@ import org.dark.shaders.util.TextureData;
 import java.util.ArrayList;
 import java.util.List;
 
-import data.scripts.world.sd_moonGenerator;
+import data.world.sd_moonGenerator;
 
 @SuppressWarnings("unused")
 public class sd_modPlugin extends BaseModPlugin {

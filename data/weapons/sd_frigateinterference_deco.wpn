@@ -1,9 +1,9 @@
 {
-	"id":"sd_hackingsuite_deco",
+	"id":"sd_frigateinterference_deco",
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"everyFrameEffect":"data.scripts.weapons.sd_hackingsuite_deco",
+	"everyFrameEffect":"data.weapons.sd_systemRangeDecoScript",
 	"turretSprite":"",
 	"hardpointSprite":"",
 	"turretOffsets":[0,0],

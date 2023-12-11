@@ -1,9 +1,8 @@
-package data.scripts.graphics;
+package data.graphics;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.scripts.sd_util;
 import org.lazywizard.lazylib.opengl.DrawUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;

@@ -1,4 +1,4 @@
-package data.scripts;
+package data;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
@@ -21,11 +21,11 @@ import java.util.*;
 import java.util.List;
 
 public class sd_util {
-    public static final Color factionColor = new Color (250, 235, 215,55), factionUnderColor = new Color (250, 235, 215,155);
-    public static final Color hightechColor =  new Color (100,165,255,55), hightechUnderColor = new Color (100,165,255,155);
-    public static final Color phaseColor = new Color(150,100,255, 55), phaseUnderColor = new Color(150,100,255, 155);
-    public static final Color damageColor = new Color (255,120,80,55), damageUnderColor = new Color (255,120,80,155);
-    public static final Color healColor = new Color (60,210,150,55), healUnderColor = new Color (60,210,150,155);
+    public static final Color factionColor = new Color (250, 235, 215,55), factionUnderColor = new Color (250, 235, 215,155),
+            timeColor =  new Color (100,165,255,55), timeUnderColor = new Color (100,165,255,155),
+            phaseColor = new Color(150,100,255, 55), phaseUnderColor = new Color(150,100,255, 155),
+            damageColor = new Color (255,120,80,55), damageUnderColor = new Color (255,120,80,155),
+            healColor = new Color (60,210,150,55), healUnderColor = new Color (60,210,150,155);
 
     public static boolean isNumberWithinRange(float numberA, float numberB, float deviationPercent) {
         float lowerBound = numberB - (numberB * (deviationPercent / 100));
@@ -47,8 +47,10 @@ public class sd_util {
     public static float getOptimalRange(ShipAPI ship) { // chatgpt wrote most of this
         float totalDPS = 0;
         float totalWeightedRange = 0;
-        float optimalWeaponRange = 0;
+        float optimalWeaponRange = 500; // default in case the ship has no weapons installed
         for (WeaponAPI weapon : ship.getAllWeapons()) {
+            if (weapon.getType() == WeaponAPI.WeaponType.MISSILE)
+                continue; // missiles are really really weird so we need to exclude them
             float weaponDPS = weapon.getSpec().getDerivedStats().getDps();
             float weaponRange = weapon.getRange();
             //adjust the weight based on DPS

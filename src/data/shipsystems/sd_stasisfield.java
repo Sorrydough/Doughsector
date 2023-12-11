@@ -1,16 +1,12 @@
 package data.shipsystems;
 
-import java.awt.Color;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipSystemAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import data.scripts.sd_util;
+import data.sd_util;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
 
 public class sd_stasisfield extends BaseShipSystemScript {
     boolean doOnce = true;
@@ -19,8 +15,8 @@ public class sd_stasisfield extends BaseShipSystemScript {
             return;
 
         ShipAPI ship = ShipAPI.class.cast(stats.getEntity());
-        ship.setJitter(id, sd_util.phaseColor, effectLevel, 1, 0, 1);
-        ship.setJitterUnder(id, sd_util.phaseUnderColor, effectLevel, 10, 0, 10);
+        ship.setJitter(id, sd_util.timeColor, effectLevel, 1, 0, 1);
+        ship.setJitterUnder(id, sd_util.timeUnderColor, effectLevel, 10, 0, 10);
 
         if (doOnce) { // apply our effect plugin to the target
             Global.getCombatEngine().addPlugin(new sd_stasisfieldPlugin(ship, ship.getShipTarget()));

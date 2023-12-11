@@ -1,7 +1,7 @@
 /*
     By Tartiflette
  */
-package data.scripts.weapons;
+package data.weapons;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;

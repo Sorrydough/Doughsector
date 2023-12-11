@@ -12,7 +12,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "delicate"
+    "delicate",
+    "pointdefenseai"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",

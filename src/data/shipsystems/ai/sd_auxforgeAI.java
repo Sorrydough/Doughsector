@@ -2,10 +2,8 @@ package data.shipsystems.ai;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.scripts.sd_util;
+import data.sd_util;
 import data.shipsystems.sd_auxforge;
-import org.lazywizard.console.Console;
-import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import static data.shipsystems.sd_auxforge.*;

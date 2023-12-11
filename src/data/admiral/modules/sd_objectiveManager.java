@@ -1,12 +1,12 @@
-package data.scripts.admiral.modules;
+package data.admiral.modules;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BattleObjectiveAPI;
 import com.fs.starfarer.api.combat.CombatAssignmentType;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI;
 import com.fs.starfarer.api.impl.campaign.ids.BattleObjectives;
-import data.scripts.admiral.sd_battleStateTracker;
-import data.scripts.admiral.sd_fleetAdmiralUtil;
+import data.admiral.sd_battleStateTracker;
+import data.admiral.sd_fleetAdmiralUtil;
 
 import java.util.Map;
 import java.util.Objects;

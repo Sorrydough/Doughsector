@@ -1,4 +1,4 @@
-package data.scripts.weapons;
+package data.weapons;
 
 import com.fs.starfarer.api.combat.*;
 import data.shipsystems.sd_auxforge;

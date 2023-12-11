@@ -10,12 +10,11 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
-import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.dark.shaders.distortion.*;
-import data.scripts.sd_util;
+import data.sd_util;
 
 public class sd_morphicarmor extends BaseShipSystemScript {
 	public static final float FLUX_PER_ARMOR = 3, DESTROYED_THRESHOLD = 0.1f;
@@ -27,9 +26,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		ArmorGridAPI grid = ship.getArmorGrid();
 
-		boolean isArmorGridBalanced = isArmorGridBalanced(grid);
-
-		if (isArmorGridBalanced) {
+		if (isArmorGridBalanced(grid)) {
 			ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
 			ship.setJitterUnder(id, sd_util.factionUnderColor, effectLevel, 10, 0, 5);
 			return;

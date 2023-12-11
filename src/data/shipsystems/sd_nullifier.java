@@ -5,11 +5,8 @@ import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipSystemAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import data.scripts.sd_util;
+import data.sd_util;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
-
-import java.awt.*;
 
 public class sd_nullifier extends BaseShipSystemScript {
     boolean doOnce = true;
@@ -18,8 +15,8 @@ public class sd_nullifier extends BaseShipSystemScript {
             return;
 
         ShipAPI ship = ShipAPI.class.cast(stats.getEntity());
-        ship.setJitter(id, sd_util.phaseColor, effectLevel, 1, 0, 5);
-        ship.setJitterUnder(id, sd_util.phaseUnderColor, effectLevel, 5, 0, 10);
+        ship.setJitter(id, sd_util.timeColor, effectLevel, 1, 0, 5);
+        ship.setJitterUnder(id, sd_util.timeUnderColor, effectLevel, 5, 0, 10);
 
         if (doOnce) { // apply our effect plugin to the target
             Global.getCombatEngine().addPlugin(new sd_nullifierPlugin(ship, ship.getShipTarget()));

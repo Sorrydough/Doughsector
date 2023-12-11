@@ -1,13 +1,13 @@
-package data.scripts.admiral;
+package data.admiral;
 
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.scripts.admiral.modules.sd_attackManager;
-import data.scripts.admiral.modules.sd_formationManager;
-import data.scripts.admiral.modules.sd_objectiveManager;
+import data.admiral.modules.sd_attackManager;
+import data.admiral.modules.sd_formationManager;
+import data.admiral.modules.sd_objectiveManager;
 import org.lazywizard.console.Console;
 
 import java.awt.*;

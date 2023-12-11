@@ -3,8 +3,8 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"everyFrameEffect":"data.scripts.weapons.sd_decoHangarScript",
 	"showDamageWhenDecorative":"false",
+	"everyFrameEffect":"data.weapons.sd_decoHangarScript",
 	"turretSprite":"graphics/ships/decos/sd_frigatecarrier_hangar.png",
 	"hardpointSprite":"graphics/ships/decos/sd_frigatecarrier_hangar.png",
 	"turretGlowSprite": "graphics/ships/decos/sd_frigatecarrier_hangarGlow.png",
@@ -21,5 +21,5 @@
 	"width":1.0,
 	"textureType":ROUGH,
 	"textureScrollSpeed":1.0,
-	"pixelsPerTexel":5.0,	
+	"pixelsPerTexel":5.0,
 }

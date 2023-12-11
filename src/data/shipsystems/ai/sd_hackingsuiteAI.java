@@ -2,13 +2,12 @@ package data.shipsystems.ai;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.scripts.admiral.sd_fleetAdmiralUtil;
+import data.admiral.sd_fleetAdmiralUtil;
 import data.shipsystems.sd_hackingsuite;
 
-import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
-import data.scripts.sd_util;
+import data.sd_util;
 
 import java.util.*;
 import java.util.List;

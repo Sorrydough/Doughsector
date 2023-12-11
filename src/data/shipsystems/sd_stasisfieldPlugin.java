@@ -4,8 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
-import com.fs.starfarer.loading.specs.HullVariantSpec;
-import data.scripts.sd_util;
+import data.sd_util;
 
 import java.util.List;
 import java.util.Map;
@@ -45,9 +44,9 @@ public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
 
         float stasis_mult = STASIS_MULT_MIN + (1f - STASIS_MULT_MIN) * (1f - stasisLevel); // chatgpt wrote this
 
-        target.fadeToColor("sd_stasisfield", sd_util.phaseUnderColor, 0.25f, 0.25f, 0.66f * stasisLevel);
-        target.setJitterUnder("sd_stasisfield", sd_util.phaseUnderColor, stasisLevel, 10, 0, 10);
-        target.setJitter("sd_stasisfield", sd_util.phaseColor, stasisLevel, 1, 0, 5);
+        target.fadeToColor("sd_stasisfield", sd_util.timeUnderColor, 0.25f, 0.25f, 0.66f * stasisLevel);
+        target.setJitterUnder("sd_stasisfield", sd_util.timeUnderColor, stasisLevel, 10, 0, 10);
+        target.setJitter("sd_stasisfield", sd_util.timeColor, stasisLevel, 1, 0, 5);
 
         targetStats.getTimeMult().modifyMult("sd_stasisfield", stasis_mult);
         targetStats.getEmpDamageTakenMult().modifyMult("sd_stasisfield", stasis_mult);

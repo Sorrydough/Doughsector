@@ -2,7 +2,7 @@
 	"id":"sd_antimatterlauncher",
 	"specClass":"projectile",
 	"type":"MISSILE",
-	"size":"MEDIUM",
+	"size":"SMALL",
 	"turretSprite":"graphics/weapons/phase_charge_launcher_turret_base.png",
 	"hardpointSprite":"graphics/weapons/phase_charge_launcher_hardpoint_base.png",
 	"hardpointOffsets":[12, 0, 6, 4, 6, -4, 0, 0],

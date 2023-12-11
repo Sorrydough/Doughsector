@@ -1,4 +1,4 @@
-package data.scripts.world;
+package data.world;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
@@ -7,7 +7,6 @@ import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.procgen.PlanetConditionGenerator;
 import org.apache.log4j.Logger;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
