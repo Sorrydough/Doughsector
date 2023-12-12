@@ -1,21 +1,22 @@
 {
-  "displayName": "AM Canister Bomber",
+  "displayName": "Support Fighter",
   "fluxCapacitors": 0,
   "fluxVents": 0,
   "goalVariant": true,
-  "hullId": "sd_fightercanister",
+  "hullId": "sd_fightersupport",
   "hullMods": [],
   "permaMods": [],
   "quality": 0,
-  "variantId": "sd_fightercanister_Standard",
+  "variantId": "sd_fightersupport",
   "weaponGroups": [
     {
       "autofire": false,
-      "mode": "LINKED",
+      "mode": "ALTERNATING",
       "weapons": {
-        "HRD01": "sd_antimatterlauncher"
+        "HRD01": "sd_gravlance",
+        "HRD02": "sd_gravlance"
       }
-    }
+    },
   ],
   "wings": []
 }

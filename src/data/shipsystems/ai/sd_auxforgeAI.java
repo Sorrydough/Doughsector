@@ -27,16 +27,16 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
             float desireNeg = 0;
             // We want to use the system if:
             // 1. We have a lot of charges saved up
-            desirePos += (float.class.cast(system.getAmmo() / system.getMaxAmmo())) * 100;
+            desirePos += (Float.class.cast(system.getAmmo() / system.getMaxAmmo())) * 100;
             // 2. Our missiles are depleted
             boolean willRestoreFighters = sd_auxforge.willRestoreFighters(ship);
             WeaponAPI missile = getEmptiestMissile(ship);
             if (canReloadMissile(missile) && !willRestoreFighters)
-                desirePos += (1 - float.class.cast(missile.getAmmo() / missile.getMaxAmmo())) * 100;
+                desirePos += (1 - Float.class.cast(missile.getAmmo() / missile.getMaxAmmo())) * 100;
             // 3. Our fighters are depleted
             float replacement = ship.getSharedFighterReplacementRate();
             if (replacement < 0.9 && willRestoreFighters)
-                desirePos += float.class.cast((1 - (replacement - 0.3)) * 100);
+                desirePos += Float.class.cast((1 - (replacement - 0.3)) * 100);
 
             // We don't want to use the system if:
             // 1. Our flux level is too high

@@ -1,19 +1,19 @@
 {
-  "displayName": "Ion Interceptor Drone",
+  "displayName": "Bomber",
   "fluxCapacitors": 0,
   "fluxVents": 0,
   "goalVariant": true,
-  "hullId": "sd_fighterion",
+  "hullId": "sd_fightercanister",
   "hullMods": [],
   "permaMods": [],
   "quality": 0,
-  "variantId": "sd_fighterion_Standard",
+  "variantId": "sd_fightercanister",
   "weaponGroups": [
     {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
-        "TRT01": "sd_ionbeam_fighter"
+        "HRD01": "sd_antimatterlauncher"
       }
     }
   ],

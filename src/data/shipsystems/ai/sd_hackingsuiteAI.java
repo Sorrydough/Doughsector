@@ -68,7 +68,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                 float enemyDeployCost = sd_fleetAdmiralUtil.getDeploymentCost(enemy);
                 float desireToAttack = 150 * Math.max(2, enemyDeployCost / AVG_DPCOST.get(enemy.getHullSize()));
                 // modulate attack desire based on number of charges
-                desireToAttack *= float.class.cast(system.getAmmo() / system.getMaxAmmo());
+                desireToAttack *= Float.class.cast(system.getAmmo() / system.getMaxAmmo());
                 if (desireToAttack + desireNeg >= 100) {
                     ship.setShipTarget(target);
                     desirePos += desireToAttack;

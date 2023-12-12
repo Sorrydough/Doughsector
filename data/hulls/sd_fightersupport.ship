@@ -24,7 +24,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
-      "locations": [7.5, 8]
+      "locations": [7, 8]
     },
     {
       "id": "HRD02",
@@ -33,7 +33,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
-      "locations": [7.5, -9]
+      "locations": [7, -9]
     },
     {
       "id": "SYS02",

@@ -1,0 +1,21 @@
+{
+  "displayName": "Interceptor Drone",
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "goalVariant": true,
+  "hullId": "sd_fighterion",
+  "hullMods": [],
+  "permaMods": [],
+  "quality": 0,
+  "variantId": "sd_fighterion",
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "TRT01": "sd_ionbeam_fighter"
+      }
+    }
+  ],
+  "wings": []
+}
