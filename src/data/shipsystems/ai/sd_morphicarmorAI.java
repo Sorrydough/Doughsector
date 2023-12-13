@@ -19,7 +19,7 @@ public class sd_morphicarmorAI implements ShipSystemAIScript {
         if (interval.intervalElapsed()) {
             ArmorGridAPI grid = ship.getArmorGrid();
             // if any of these is the case then the system is definitely off and we don't want to turn it on, so we can return to save cpu time
-            if (sd_morphicarmor.isArmorGridDestroyed(grid))
+            if (sd_morphicarmor.isArmorGridDestroyed(grid) || !sd_util.canUseSystemThisFrame(ship))
                 return;
 
             float desirePos = 0;

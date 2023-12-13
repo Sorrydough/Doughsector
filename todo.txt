@@ -1,47 +1,52 @@
-Ship System Stuff:
-- Make the AM canisters go vaguely in the direction of the nearest threat instead of being completely random
-
-Misc Stuff:
-- Calculate effective DPS of soft flux vs. high compared to vs. low tech for my own sanity
+Version 1.0 Stuff: (first release, no advanced campaign mechanics)
+- Fix Float.class.cast error
+- Make canflak go vaguely in the direction of the nearest threat instead of being completely random
+- Write AI scripts for stasis and nullifier
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 - Do another pass on ship names
+- Integrate engine color fade for all systems
+- Glowmaps for decos
+- Add proper engines to cosmetic thrusters (check rangda as example)
+- Make a placeholder faction
+- Add music
+- Return custom fleet command AI to working in mission
+- Fix all the variants that I broke
+- Hullmod icons
+- LukasLib compatibility
+- Fix graviton lance behavior
+- Implement canflak pod, make art for both
+- Make sure the forum download link is hidden behind a simple riddle
+- Figure out what to do about nullifier shield arc change, make stasis field shield arc change never send it below 35 degrees
+- Doublecheck combat engine speed modification for timeflow systems
+- Add 20% CR to automated ships to make up for lower base CR
+- Rebalance KB fighter for no weapon flux hullmod
+- Debug ship.setForceCarrierPullBackTime()
+- Make arthr do another art pass on my ships - fatten up the carriers, add temporal core to destroyer
+- Fix interference frigate looking stupid
 
-Aesthetic Stuff:
-- Use fade engines to color function to make them change color randomly in combat - blue blinker color and orange technobullshit color
-- Implement glowmaps for blinkers and friends
+Version 2.0 Stuff: (agent fleet, proper colony behavior)
+- Expand upon custom fleet command AI so it can work in campaign
+- Really Converted Hangars
+- Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, etc
+- Export, Pirate, Path skin variants
+- Copy legio AI behavior where it doesn't rotate armor etc
+- Implement energy manticore
+- Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
+- Some sort of mote-creating engine hullmod. Maybe 0-flux related?
+- When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
+- Run a checksum on my own mod so I know when people have tampered with it
+- Add a functionality to the attack manager where it chooses between engage or eliminate depending on whether enough ships ar enearby to actually kill the target immediately
+- Check if it's possible to apply an avoid order to a waypoint
 
-Generic AI Stuff:
+Version 3.0 Stuff: (scope creep)
+- Scholar with aoe fleet shield
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility, account for beams
 - Modify tags on various vanilla weapons to improve AI behavior - squalls & breach srms for starters
-
-Campaign Stuff:
-- Make a placeholder faction with the fleets randomly patrolling near caches
-- Add songs
-
-Art Her Stuff:
-- Really Converted Hangars
-- Export, Pirate, Path skin variants
-- Hullmod icons
-
-Post-Release Stuff:
-- crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
-- global combatplugin for RTS mode
-    5% range?
-    very good autofire accuracy?
-    25% less recoil?
-    free target anal?
-- some sort of ship marriage system to capture the hearts and dicks of redditors
+- Interfere with commissioned crews and substance abuse
+- In my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
+- Crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
+- Look at vic modplugin to see how to swap a script at runtime
+- Global combatplugin for RTS mode: 5% range?, very good autofire accuracy?, 25% less recoil?
+- Some sort of waifu system to capture the hearts and dicks of redditors
 - Script to make weapons look nice in the refit screen
-- Combat warning noise for missiles hitting your flagship
-- Make sure the forum download link is hidden behind a simple riddle
-- When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
-
-lunalib compatibility
-interfere with commissioned crews and substance abuse
-figure out some way to make my ships stop trying to rotate their armor
-in my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
-
-Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency.
-
-
-look at vic modplugin to see how to swap a script at runtime
+- Smods rework - dmods and smods share slots, if you gain a dmod it replaces an smod, smods increase DP by 10% each, use alex's "buff" class to implement

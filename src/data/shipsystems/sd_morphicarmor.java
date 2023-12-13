@@ -28,11 +28,11 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 
 		if (isArmorGridBalanced(grid)) {
 			ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
-			ship.setJitterUnder(id, sd_util.factionUnderColor, effectLevel, 10, 0, 5);
+			//ship.setJitterUnder(id, sd_util.factionUnderColor, effectLevel, 10, 0, 5);
 			return;
 		} else {
 			ship.setJitter(id, sd_util.healColor, effectLevel, 2, 0, 5);
-			ship.setJitterUnder(id, sd_util.healUnderColor, effectLevel, 10, 0, 5);
+			//ship.setJitterUnder(id, sd_util.healUnderColor, effectLevel, 10, 0, 5);
 		}
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
@@ -148,6 +148,8 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 		ArmorGridAPI grid = ship.getArmorGrid();
+		if (!sd_util.canUseSystemThisFrame(ship))
+			return "STANDBY";
 		if (isArmorGridDestroyed(grid))
 			return "ARMOR DESTROYED";
 		if (isArmorGridBalanced(grid))
@@ -158,7 +160,7 @@ public class sd_morphicarmor extends BaseShipSystemScript {
 	}
 	@Override
 	public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-		return !isArmorGridDestroyed(ship.getArmorGrid());
+		return !isArmorGridDestroyed(ship.getArmorGrid()) && sd_util.canUseSystemThisFrame(ship);
 	}
 }
 
