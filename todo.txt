@@ -1,5 +1,6 @@
 Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Fix Float.class.cast error
+- Do The Elite Ships System
 - Make canflak go vaguely in the direction of the nearest threat instead of being completely random
 - Write AI scripts for stasis and nullifier
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
@@ -13,7 +14,7 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Fix all the variants that I broke
 - Hullmod icons
 - LukasLib compatibility
-- Fix graviton lance behavior
+- Fix graviton lance impact and DPS/hitstrength
 - Implement canflak pod, make art for both
 - Make sure the forum download link is hidden behind a simple riddle
 - Figure out what to do about nullifier shield arc change, make stasis field shield arc change never send it below 35 degrees
@@ -23,6 +24,7 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Debug ship.setForceCarrierPullBackTime()
 - Make arthr do another art pass on my ships - fatten up the carriers, add temporal core to destroyer
 - Fix interference frigate looking stupid
+- Make SO count as a dmod
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Expand upon custom fleet command AI so it can work in campaign
@@ -50,3 +52,5 @@ Version 3.0 Stuff: (scope creep)
 - Some sort of waifu system to capture the hearts and dicks of redditors
 - Script to make weapons look nice in the refit screen
 - Smods rework - dmods and smods share slots, if you gain a dmod it replaces an smod, smods increase DP by 10% each, use alex's "buff" class to implement
+- Write a guide for fleet command AI
+- Write a guide for shipsystem AI

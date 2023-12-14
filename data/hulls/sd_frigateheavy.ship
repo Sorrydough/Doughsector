@@ -12,7 +12,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_customai",
-    "armoredweapons"
+    "phasefield"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
