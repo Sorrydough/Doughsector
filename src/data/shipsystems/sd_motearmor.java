@@ -16,9 +16,9 @@ public class sd_motearmor extends BaseShipSystemScript {
 //    @Override
 //    public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
 //        ArmorGridAPI grid = ship.getArmorGrid();
-//        if (sd_morphicarmor.isArmorGridDestroyed(grid))
+//        if (sd_mnemonicarmor.isArmorGridDestroyed(grid))
 //            return "ARMOR DESTROYED";
-//        if (sd_morphicarmor.isArmorGridBalanced(grid))
+//        if (sd_mnemonicarmor.isArmorGridBalanced(grid))
 //            return "ARMOR BALANCED";
 //        if (system.isActive())
 //            return "REBALANCING";
@@ -26,6 +26,6 @@ public class sd_motearmor extends BaseShipSystemScript {
 //    }
 //    @Override
 //    public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-//        return !sd_morphicarmor.isArmorGridDestroyed(ship.getArmorGrid());
+//        return !sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid());
 //    }
 }

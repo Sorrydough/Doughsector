@@ -28,7 +28,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
         // holy shit this vfx was a pain in the ass and I had to refactor the entire script architecture to get it to work seamlessly
         // I've deleted over 150 lines of code from previous vfx implementations, be happy that this is only one line now (although there's a few more in the hangar deco script)
         if (!willRestoreFighters)
-            missile.setGlowAmount(Math.min(effectLevel + 0.5f, 1), sd_util.damageUnderColor);
+            missile.setGlowAmount(1, sd_util.healUnderColor);
 
         // the actual restoration effects occur here
         if (effectLevel == 1) { // need to check effectLevel to prevent the restoration from occurring multiple times

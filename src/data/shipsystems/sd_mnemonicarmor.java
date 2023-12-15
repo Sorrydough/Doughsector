@@ -16,7 +16,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.dark.shaders.distortion.*;
 import data.sd_util;
 
-public class sd_morphicarmor extends BaseShipSystemScript {
+public class sd_mnemonicarmor extends BaseShipSystemScript {
 	public static final float FLUX_PER_ARMOR = 3, DESTROYED_THRESHOLD = 0.1f;
 	final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {

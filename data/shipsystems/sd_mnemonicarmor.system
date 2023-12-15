@@ -1,17 +1,21 @@
 {
-	"id":"sd_motearmor",
+	"id":"sd_mnemonicarmor",
 	"type":"STAT_MOD",
-	"statsScript":"data.shipsystems.sd_motearmor",
+	"statsScript":"data.shipsystems.sd_mnemonicarmor",
 	"aiType":"CUSTOM",
-	"aiScript":"data.shipsystems.ai.sd_motearmorAI",
+	"aiScript":"data.shipsystems.ai.sd_mnemonicarmorAI",
 
 	"soundFilterType":"LOWPASS",
-	"soundFilterGain":0.75,
-	"soundFilterGainHF":0.5,
-
+	"soundFilterGain":0.9,
+	"soundFilterGainHF":0.8,
+		
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"system_mnemonicarmor",
 	"loopSound":"system_mnemonicarmor_loop",
 	"deactivateSound":"system_mnemonicarmor_off",
 	"outOfUsesSound":"gun_out_of_ammo",
 }
+
+
+
+

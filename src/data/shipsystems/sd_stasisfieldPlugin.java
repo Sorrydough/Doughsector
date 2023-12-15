@@ -66,7 +66,7 @@ public class sd_stasisfieldPlugin extends BaseEveryFrameCombatPlugin {
 
         sd_util.modifyShieldArc(target, Math.max(45, targetStats.getShieldArcBonus().computeEffective(target.getHullSpec().getShieldSpec().getArc())), stasisLevel);
 
-        ship.getFluxTracker().increaseFlux(Float.class.cast((ship.getHullSpec().getFluxCapacity() * effectLevel * 0.05) / numApplied), true);
+        ship.getFluxTracker().increaseFlux((float) (ship.getHullSpec().getFluxCapacity() * effectLevel * 0.05) / numApplied, true);
 
         if (effectLevel == 0) { // system can be turned off at will so we have to check for effect level when unapplying
             targetDynamic.getMod("sd_stasisfield").unmodifyFlat(id);

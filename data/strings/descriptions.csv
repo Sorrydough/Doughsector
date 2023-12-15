@@ -9,7 +9,7 @@ sd_dragon_single,WEAPON,The tactical flexibility of a reliable torpedo compatibl
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
 sd_canisterantimatter,SHIP_SYSTEM,Launches proximity-fused explosive canisters.
 sd_auxforge,SHIP_SYSTEM,"Replenishes missiles or fighters, depending on which is more depleted. Generates flux."
-sd_morphicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. Generates more flux on more heavily armored ships.
+sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. Generates more flux on more heavily armored ships.
 sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and generates motes. Nearby motes are rallied to this ship while active.
 sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy.
 sd_nullifier,SHIP_SYSTEM,Accelerates the decay of the target’s combat readiness and normalizes their timeflow with that of realspace. Generates flux based on the magnitude of the timeflow correction.

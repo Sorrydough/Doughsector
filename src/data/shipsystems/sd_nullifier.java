@@ -14,7 +14,7 @@ public class sd_nullifier extends BaseShipSystemScript {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
 
-        ShipAPI ship = ShipAPI.class.cast(stats.getEntity());
+        ShipAPI ship = (ShipAPI) stats.getEntity();
         ship.setJitter(id, sd_util.timeColor, effectLevel, 1, 0, 5);
         ship.setJitterUnder(id, sd_util.timeUnderColor, effectLevel, 5, 0, 10);
 

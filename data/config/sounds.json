@@ -26,13 +26,13 @@
 	"music":{
 		"sd_ghostbusters":[{"file":"sd_ghostbusters.ogg","source":"sounds/music/","volume":0.35,"randomStart":false}]
 	},
-	"system_morphicarmor":[
+	"system_mnemonicarmor":[
 		{"file":"sounds/sfx_systems/damper_field_activate.ogg","pitch":0.8,"volume":0.4},
 	],
-	"system_morphicarmor_loop":[
+	"system_mnemonicarmor_loop":[
 		{"file":"sounds/sfx_systems/damper_field_loop.ogg","pitch":0.6,"volume":0.7},
 	],
-	"system_morphicarmor_off":[
+	"system_mnemonicarmor_off":[
 		{"file":"sounds/sfx_systems/damper_field_deactivate.ogg","pitch":0.6,"volume":0.7},
 	],
 }
