@@ -6,8 +6,8 @@
 	"aiScript":"data.shipsystems.ai.sd_motearmorAI",
 
 	"soundFilterType":"LOWPASS",
-	"soundFilterGain":0.75,
-	"soundFilterGainHF":0.5,
+	"soundFilterGain":0.9,
+	"soundFilterGainHF":0.8,
 
 	"fadeActivationSoundOnChargedown":true,
 	"useSound":"system_mnemonicarmor",

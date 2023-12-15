@@ -49,8 +49,9 @@ public class sd_util {
         float totalWeightedRange = 0;
         float optimalWeaponRange = 500; // default in case the ship has no weapons installed
         for (WeaponAPI weapon : ship.getAllWeapons()) {
-            if (weapon.getType() == WeaponAPI.WeaponType.MISSILE)
-                continue; // missiles are really really weird so we need to exclude them
+            if (weapon.getType() == WeaponAPI.WeaponType.MISSILE ||
+                    (weapon.getSpec().getAIHints().contains(WeaponAPI.AIHints.PD) && !weapon.getSpec().getAIHints().contains(WeaponAPI.AIHints.PD_ALSO)))
+                continue; // missiles are really really weird so we need to exclude them, PD can be really high DPS but short range so we exclude that too
             float weaponDPS = weapon.getSpec().getDerivedStats().getDps();
             float weaponRange = weapon.getRange();
             //adjust the weight based on DPS

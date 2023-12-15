@@ -47,32 +47,10 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 	public static float ATTRACTOR_DURATION_LOCK = 20f;
 	public static float ATTRACTOR_DURATION = 10f;
 	
-	//public static Color JITTER_COLOR = new Color(100,155,255,175);
-	
-	
-//	static {
-//		// .wpn
-//		Color muzzleFlashColor = new Color(100,165,255,25);
-//		
-//		// .proj
-//		Color hitGlowColor = new Color(100,100,255,255);
-//		Color engineGlowColor = new Color(100,165,255,255);
-//		Color contrailColor = new Color(100,165,255,25);
-//		
-//		//MoteControlScript
-//		Color jitterColor = new Color(100,165,255,175);
-//		Color empArcColor = new Color(100,165,255,255);
-//		
-//		// on hit effect
-//		Color onHitEmpColor = new Color(100,165,255,255);
-//	}
-	
 	public static class MoteData {
 		public Color jitterColor;
 		public Color empColor;
-		
 		public int maxMotes;
-		
 		public float antiFighterDamage;
 		public String impactSound;
 		public String loopSound;
@@ -155,15 +133,10 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		}
 		return data;
 	}
-	
-	
-	
+
 	protected IntervalUtil launchInterval = new IntervalUtil(0.75f, 1.25f);
-	protected IntervalUtil attractorParticleInterval = new IntervalUtil(0.05f, 0.1f);
 	protected WeightedRandomPicker<WeaponSlotAPI> launchSlots = new WeightedRandomPicker<WeaponSlotAPI>();
 	protected WeaponSlotAPI attractor = null;
-	
-	//protected int empCount = 0;
 	protected boolean findNewTargetOnUse = true;
 	
 	protected void findSlots(ShipAPI ship) {
@@ -190,8 +163,6 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		
 		float amount = Global.getCombatEngine().getElapsedInLastFrame();
 		
-		//Global.getCombatEngine().setPaused(true);
-		
 		SharedMoteAIData data = getSharedData(ship);
 		data.elapsed += amount;
 		
@@ -210,11 +181,6 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		}
 		
 		CombatEngineAPI engine = Global.getCombatEngine();
-		
-		attractorParticleInterval.advance(amount);
-		if (attractorParticleInterval.intervalElapsed()) {
-			spawnAttractorParticles(ship);
-		}
 		
 		launchInterval.advance(amount * 5f);
 		if (launchInterval.intervalElapsed()) {
@@ -302,7 +268,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 			
 			float emp = 0;
 			float dam = 0;
-			EmpArcEntityAPI arc = (EmpArcEntityAPI)engine.spawnEmpArc(ship, slotLoc, ship, target,
+			EmpArcEntityAPI arc = engine.spawnEmpArc(ship, slotLoc, ship, target,
 							   DamageType.ENERGY, 
 							   dam,
 							   emp, // emp 
@@ -321,91 +287,8 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 			if (data.attractorLock == null) {
 				Global.getSoundPlayer().playSound("mote_attractor_targeted_empty_space", 1f, 1f, data.attractorTarget, new Vector2f());
 			}
-			
-//			Vector2f targetLoc = new Vector2f(target.getLocation());
-//			int glows = 100;
-//			float maxRadius = 500f;
-//			float minRadius = 300f;
-//			
-//			if (data.attractorLock != null) {
-//				maxRadius += data.attractorLock.getCollisionRadius();
-//				minRadius += data.attractorLock.getCollisionRadius();
-//			}
-//			
-//			float minDur = 0.5f;
-//			float maxDur = 0.75f;
-//			float minSize = 10f;
-//			float maxSize = 30f;
-//			Color color = MoteControlScript.getEMPColor(ship);
-//			for (int i = 0; i < glows; i++) {
-//				float radius = minRadius + (float) Math.random() * (maxRadius - minRadius);
-//				Vector2f loc = Misc.getPointAtRadius(targetLoc, radius);
-//				Vector2f dir = Misc.getUnitVectorAtDegreeAngle(Misc.getAngleInDegrees(loc, targetLoc));
-//				float dist = Misc.getDistance(loc, targetLoc);
-//				
-//				float dur = minDur + (float) Math.random() * (maxDur - minDur);
-//				float speed = dist / dur;
-//				dir.scale(speed);
-//				
-//				float size = minSize + (float) Math.random() * (maxSize - minSize);
-//				
-//				engine.addHitParticle(loc, dir, size, 1f, 0.3f, dur, color);
-//				engine.addHitParticle(loc, dir, size * 0.33f, 1f, 0.3f, dur, Color.white);
-//			}
-			
-			
 			engine.removeEntity(asteroid);
 		}
-	}
-	
-	protected void spawnAttractorParticles(ShipAPI ship) {
-		if (true) return; // just not liking this much
-		SharedMoteAIData data = getSharedData(ship);
-		
-		if (data.attractorTarget == null) return;
-		
-		CombatEngineAPI engine = Global.getCombatEngine();
-		
-		Vector2f targetLoc = data.attractorTarget;
-		
-		int glows = 2;
-		float maxRadius = 300f;
-		float minRadius = 200f;
-		
-		if (data.attractorLock != null) {
-			maxRadius += data.attractorLock.getCollisionRadius();
-			minRadius += data.attractorLock.getCollisionRadius();
-			targetLoc = data.attractorLock.getShieldCenterEvenIfNoShield();
-		}
-		
-		float minDur = 0.5f;
-		float maxDur = 0.75f;
-		float minSize = 15f;
-		float maxSize = 30f;
-		Color color = sd_moteControlScript.getEMPColor(ship);
-		for (int i = 0; i < glows; i++) {
-			float radius = minRadius + (float) Math.random() * (maxRadius - minRadius);
-			Vector2f loc = Misc.getPointAtRadius(targetLoc, radius);
-			Vector2f dir = Misc.getUnitVectorAtDegreeAngle(Misc.getAngleInDegrees(loc, targetLoc));
-			float dist = Misc.getDistance(loc, targetLoc);
-			
-			float dur = minDur + (float) Math.random() * (maxDur - minDur);
-			float speed = dist / dur;
-			dir.scale(speed);
-			
-			float size = minSize + (float) Math.random() * (maxSize - minSize);
-			
-			engine.addHitParticle(loc, dir, size, 1f, 0.3f, dur, color);
-			engine.addHitParticle(loc, dir, size * 0.5f, 1f, 0.3f, dur, Color.white);
-		}
-	}
-	
-	
-	public void unapply(MutableShipStatsAPI stats, String id) {
-	}
-	
-	public StatusData getStatusData(int index, State state, float effectLevel) {
-		return null;
 	}
 	
 	public void calculateTargetData(ShipAPI ship) {
@@ -429,32 +312,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 					sd_moteControlScript.getJitterColor(ship)));
 		}
 	}
-	
-	@Override
-	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
-		if (system.isOutOfAmmo()) return null;
-		if (system.getState() != SystemState.IDLE) return null;
-		
-		boolean inRange = isMouseInRange(ship);
-		//Vector2f targetLoc = getTargetLoc(ship);
-		//ShipAPI target = getLockTarget(ship, targetLoc);
-		
-		if (!inRange) {
-			return "OUT OF RANGE";
-		}
-//		if (target != null) {
-//			return "ENEMY SHIP";
-//		}
-//		return "AREA";
-		return null;
-	}
 
-	
-	@Override
-	public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
-		return true;
-	}
-	
 	public Vector2f getTargetedLocation(ShipAPI from) {
 		Vector2f loc = from.getSystem().getTargetLoc();
 		if (loc == null) {
@@ -515,10 +373,6 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		return ship.getMutableStats().getSystemRangeBonus().computeEffective(MAX_ATTRACTOR_RANGE);
 	}
 	
-//	public int getMaxMotes() {
-//		return MAX_MOTES;
-//	}
-	
 	protected EveryFrameCombatPlugin createTargetJitterPlugin(final ShipAPI target,
 															  final float in, 
 															  final float out,
@@ -542,14 +396,12 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 					Global.getCombatEngine().removePlugin(this);
 					return;
 				}
-				
 
 				if (level > 0) {
-					float jitterLevel = level;
-					float maxRangeBonus = 50f;
-					float jitterRangeBonus = jitterLevel * maxRangeBonus;
-					target.setJitterUnder(this, jitterColor, jitterLevel, 10, 0f, jitterRangeBonus);
-					target.setJitter(this, jitterColor, jitterLevel, 4, 0f, 0 + jitterRangeBonus);
+                    float maxRangeBonus = 50f;
+					float jitterRangeBonus = level * maxRangeBonus;
+					target.setJitterUnder(this, jitterColor, level, 10, 0f, jitterRangeBonus);
+					target.setJitter(this, jitterColor, level, 4, 0f, 0 + jitterRangeBonus);
 				}
 			}
 		};
