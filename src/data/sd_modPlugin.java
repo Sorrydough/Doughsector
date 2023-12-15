@@ -4,6 +4,7 @@ import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.SettingsAPI;
 import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
@@ -33,7 +34,6 @@ public class sd_modPlugin extends BaseModPlugin {
             //beams
             sd_weaponsList.add("ionbeam");
             sd_weaponsList.add("gravitonbeam");
-            sd_weaponsList.add("phasebeam");
             sd_weaponsList.add("tachyonlance");
             sd_weaponsList.add("hil");
             //point defense
@@ -53,11 +53,17 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("pilum_large");
             sd_weaponsList.add("squall");
             //self-insert donut steel weapons
-            //sd_weaponsList.add("sd_dragon_single");
-            //sd_weaponsList.add("sd_gravlance");
+            sd_weaponsList.add("sd_gravlance");
+            sd_weaponsList.add("sd_dragon_single");
+            sd_weaponsList.add("sd_antimatterlauncher");
+            sd_weaponsList.add("sd_antimatterpod");
         }
-        for (String weapon : sd_weaponsList)
-            settings.getWeaponSpec(weapon).addTag("sd_arsenal_package");
+        for (String weapon : sd_weaponsList) {
+            try {
+                WeaponSpecAPI spec = settings.getWeaponSpec(weapon);
+                spec.addTag("sd_arsenal_package");
+            } catch (Exception ignored) {}
+        }
     }
     public void onNewGameAfterProcGen() {
         new sd_moonGenerator().generate(Global.getSector());

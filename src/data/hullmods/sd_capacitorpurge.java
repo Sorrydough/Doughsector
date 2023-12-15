@@ -11,7 +11,7 @@ import data.sd_util;
 import java.util.HashMap;
 
 public class sd_capacitorpurge extends BaseHullMod {
-    static final float CAPACITOR_CONVERSION = 0.05f;
+    static final float CAPACITOR_CONVERSION = 0.1f;
     static final float MALFUNCTION_CHANCE = 0.05f;
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ship.addListener(new sd_capacitorpurge.sd_capacitorpurgeListener(ship));
@@ -82,7 +82,8 @@ public class sd_capacitorpurge extends BaseHullMod {
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         tooltip.addPara("While active venting, "+ Math.round(CAPACITOR_CONVERSION * 100) +"%% of the ship's flux capacity is converted into dissipation, applied after the vent bonus.", 5f,
                 Misc.getHighlightColor(), Math.round(CAPACITOR_CONVERSION * 100) +"%");
-        tooltip.addPara("Malfunctions may occur while venting and have a unique side effect. Longer vents experience more severe malfunctions.", 5f);
+        tooltip.addPara("Malfunctions may occur while venting and have a special effect. Longer vents experience more severe malfunctions.", 5f,
+                Misc.getHighlightColor(),"special effect");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
