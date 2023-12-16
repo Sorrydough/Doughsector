@@ -80,7 +80,7 @@ public class sd_util {
                 ship.useSystem();
         }
     }
-    public static void emitMote(ShipAPI ship, Object module) {
+    public static void emitMote(ShipAPI ship, Object module, boolean emitOne) {
         final Map<WeaponSize, Integer> AMOUNT = new HashMap<>(); {
             AMOUNT.put(WeaponSize.SMALL, 1);
             AMOUNT.put(WeaponSize.MEDIUM, 2);
@@ -90,6 +90,8 @@ public class sd_util {
         if (module instanceof WeaponAPI) {
             WeaponAPI weapon = (WeaponAPI) module;
             int amount = AMOUNT.get(weapon.getSize());
+            if (emitOne)
+                amount = 1;
             for (int i = 0; i < amount; i++) {
                 int angleOffset = rand.nextInt(181) - 90;
                 float modifiedAngle = weapon.getSlot().getAngle() + angleOffset;
@@ -100,6 +102,8 @@ public class sd_util {
             ShipEngineAPI vroom = (ShipEngineAPI) module;
             float size = vroom.getEngineSlot().getWidth();
             int amount = (int) Math.ceil(Math.sqrt(size));
+            if (emitOne)
+                amount = 1;
             for (int i = 0; i < amount; i++) {
                 int angleOffset = rand.nextInt(181) - 90;
                 float modifiedAngle = vroom.getEngineSlot().getAngle() + angleOffset;

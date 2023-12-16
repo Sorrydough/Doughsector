@@ -1,15 +1,19 @@
 package data.hullmods;
 
-import com.fs.starfarer.api.combat.BaseHullMod;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
+import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.WeaponBaseRangeModifier;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import data.sd_util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class sd_beampumps extends BaseHullMod {
 	static final int RANGE_THRESHOLD = 500;
@@ -21,7 +25,7 @@ public class sd_beampumps extends BaseHullMod {
 	}
 	@Override
 	public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-		ship.addListener(new BeamPumpsRangeMod());
+		ship.addListener(new BeamPumpsListener(ship));
 		for (WeaponAPI weapon : ship.getAllWeapons()) {
 			switch (weapon.getType()) {
 				case STATION_MODULE:
@@ -32,14 +36,40 @@ public class sd_beampumps extends BaseHullMod {
 				case ENERGY:
 					continue;
 			}
-			if (weapon.isBeam()) {
+			if (isMixedBeam(weapon)) {
 				weapon.ensureClonedSpec();
 				weapon.getSpec().setBeamSpeed(1000000);
 			}
 		}
 	}
-	public static class BeamPumpsRangeMod implements WeaponBaseRangeModifier {
-		public BeamPumpsRangeMod() {}
+	public static class BeamPumpsListener implements AdvanceableListener, WeaponBaseRangeModifier {
+		final ArrayList<WeaponAPI> weapons = new ArrayList<>();
+		final ShipAPI ship;
+		public BeamPumpsListener(ShipAPI ship) {
+            this.ship = ship;
+			for (WeaponAPI weapon : ship.getAllWeapons())
+				if (isMixedBeam(weapon))
+					weapons.add(weapon);
+        }
+		final HashMap<BeamAPI, Float> beamsWithTime = new HashMap<>();
+		final Map<WeaponAPI.WeaponSize, Integer> REQUIRED_TIME = new HashMap<>(); {
+			REQUIRED_TIME.put(WeaponAPI.WeaponSize.SMALL, 8);
+			REQUIRED_TIME.put(WeaponAPI.WeaponSize.MEDIUM, 6);
+			REQUIRED_TIME.put(WeaponAPI.WeaponSize.LARGE, 2);
+		}
+        @Override
+		public void advance(float amount) {
+			for (WeaponAPI weapon : weapons) {
+				for (BeamAPI beam : weapon.getBeams()) {
+					if (beam.didDamageThisFrame())
+						beamsWithTime.put(beam, amount + beamsWithTime.get(beam));
+					if (beamsWithTime.get(beam) >= REQUIRED_TIME.get(beam.getWeapon().getSize())) {
+						sd_util.emitMote(ship, beam.getWeapon(), true);
+						beamsWithTime.remove(beam);
+					}
+				}
+			}
+		}
 		public float getWeaponBaseRangePercentMod(ShipAPI ship, WeaponAPI weapon) {
 			return 0;
 		}
@@ -47,7 +77,7 @@ public class sd_beampumps extends BaseHullMod {
 			return 1f;
 		}
 		public float getWeaponBaseRangeFlatMod(ShipAPI ship, WeaponAPI weapon) { // copied alex's HSA code lol
-			if (weapon.isBeam() && weapon.getSlot().getWeaponType() == WeaponAPI.WeaponType.ENERGY) {
+			if (weapon.isBeam() && weapon.getSlot().getWeaponType() == WeaponType.ENERGY) {
 				float range = weapon.getSpec().getMaxRange();
 				if (range < RANGE_THRESHOLD) return 0;
 
@@ -57,6 +87,9 @@ public class sd_beampumps extends BaseHullMod {
 			}
 			return 0f;
 		}
+	}
+	static boolean isMixedBeam(WeaponAPI weapon) {
+		return weapon.isBeam() && weapon.getSlot().getWeaponType() != WeaponType.ENERGY;
 	}
 	@Override
 	public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {

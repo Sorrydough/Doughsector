@@ -14,12 +14,12 @@ import com.fs.starfarer.api.util.Misc;
 
 public class sd_wetmounts extends BaseHullMod {
     final float RANGE_BONUS = 100;
-    final float RECOIL_REDUCTION = 0.5f;
+    final float RECOIL_MULT = 0.5f;
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         // copied effects from armored mounts
-        stats.getMaxRecoilMult().modifyMult(id, RECOIL_REDUCTION);
-        stats.getRecoilPerShotMult().modifyMult(id, RECOIL_REDUCTION);
-        stats.getRecoilDecayMult().modifyMult(id, RECOIL_REDUCTION);
+        stats.getMaxRecoilMult().modifyMult(id, RECOIL_MULT);
+        stats.getRecoilPerShotMult().modifyMult(id, RECOIL_MULT);
+        stats.getRecoilDecayMult().modifyMult(id, RECOIL_MULT);
     }
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
@@ -28,8 +28,8 @@ public class sd_wetmounts extends BaseHullMod {
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("Recoil is reduced by "+ Math.round(RECOIL_REDUCTION * 100) +"%% and weapon range is extended by a flat "+ Math.round(RANGE_BONUS) +" units." , 5f,
-                Misc.getHighlightColor(), Math.round(RECOIL_REDUCTION * 100) +"%", Math.round(RANGE_BONUS) + "");
+        tooltip.addPara("Recoil is reduced by "+ Math.round(RECOIL_MULT * 100) +"%% and weapon range is extended by a flat "+ Math.round(RANGE_BONUS) +" units." , 5f,
+                Misc.getHighlightColor(), Math.round(RECOIL_MULT * 100) +"%", Math.round(RANGE_BONUS) + "");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

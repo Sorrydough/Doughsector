@@ -61,14 +61,14 @@ public class sd_capacitorpurge extends BaseHullMod {
                     stats.getEngineMalfunctionChance().modifyFlat(id, MALFUNCTION_CHANCE * duration);
                     for (ShipEngineAPI vroom : ship.getEngineController().getShipEngines()) {
                         if (vroom.isDisabled() && !engines.get(vroom)) { // aka if the engine is disabled and it wasn't disabled last time we checked
-                            sd_util.emitMote(ship, vroom);
+                            sd_util.emitMote(ship, vroom, false);
                             engines.put(vroom, true);
                         } else if (!vroom.isDisabled() && engines.get(vroom)) // if the engine isn't disabled and it was disabled last time we checked, update its state
                             engines.put(vroom, false);
                     }
                     for (WeaponAPI weapon : ship.getAllWeapons()) {
                         if (weapon.isDisabled() && !weapons.get(weapon)) {
-                            sd_util.emitMote(ship, weapon);
+                            sd_util.emitMote(ship, weapon, false);
                             weapons.put(weapon, true);
                         } else if (!weapon.isDisabled() && weapons.get(weapon))
                             weapons.put(weapon, false);
