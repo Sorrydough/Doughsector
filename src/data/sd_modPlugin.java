@@ -5,12 +5,14 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.SettingsAPI;
 import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
-import org.dark.shaders.light.LightData;
-import org.dark.shaders.util.ShaderLib;
-import org.dark.shaders.util.TextureData;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import lunalib.lunaSettings.LunaSettings;
+import org.dark.shaders.light.LightData;
+import org.dark.shaders.util.ShaderLib;
+import org.dark.shaders.util.TextureData;
 
 import data.world.sd_moonGenerator;
 
@@ -65,19 +67,32 @@ public class sd_modPlugin extends BaseModPlugin {
             } catch (Exception ignored) {}
         }
     }
-    public void onNewGameAfterProcGen() {
-        new sd_moonGenerator().generate(Global.getSector());
-    }
     public void onGameLoad(boolean newGame) {
+        final boolean hasLunaLib = Global.getSettings().getModManager().isModEnabled("lunalib");
         final FactionAPI playerFaction = Global.getSector().getPlayerPerson().getFaction();
-        for (String weapon : new ArrayList<>(playerFaction.getKnownWeapons()))
-            if (settings.getWeaponSpec(weapon).hasTag("base_bp"))
-                playerFaction.removeKnownWeapon(weapon);
-        for (String ship : new ArrayList<>(playerFaction.getKnownShips()))
-            if (settings.getHullSpec(ship).hasTag("base_bp"))
-                playerFaction.removeKnownShip(ship);
-        for (String fighter : new ArrayList<>(playerFaction.getKnownFighters()))
-            if (settings.getFighterWingSpec(fighter).hasTag("base_bp"))
-                playerFaction.removeKnownFighter(fighter);
+        // generate moons if someone's loading a save that hasn't had them generated yet
+        // we don't need to use an onNewGameAfterProcGen because onGameLoad runs in that case anyway
+        boolean wantMoons = true;
+        if (hasLunaLib)
+            wantMoons = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_generateMoons"));
+        if (wantMoons && !Global.getSector().getMemoryWithoutUpdate().contains("sd_moons")) {
+            Global.getSector().getMemoryWithoutUpdate().set("sd_moons", true);
+            new sd_moonGenerator().generate(Global.getSector());
+        }
+        // remove baseBP
+        boolean wantRemoveBaseBP = false;
+        if (hasLunaLib)
+            wantRemoveBaseBP = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_removeBaseBP"));
+        if (wantRemoveBaseBP) {
+            for (String weapon : new ArrayList<>(playerFaction.getKnownWeapons()))
+                if (settings.getWeaponSpec(weapon).hasTag("base_bp"))
+                    playerFaction.removeKnownWeapon(weapon);
+            for (String ship : new ArrayList<>(playerFaction.getKnownShips()))
+                if (settings.getHullSpec(ship).hasTag("base_bp"))
+                    playerFaction.removeKnownShip(ship);
+            for (String fighter : new ArrayList<>(playerFaction.getKnownFighters()))
+                if (settings.getFighterWingSpec(fighter).hasTag("base_bp"))
+                    playerFaction.removeKnownFighter(fighter);
+        }
     }
 }

@@ -19,8 +19,9 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.combat.LowCRShipDamageSequence;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
+import lunalib.lunaSettings.LunaSettings;
 
-public class sd_CRPluginImpl implements CombatReadinessPlugin {
+public class sd_combatReadinessPlugin implements CombatReadinessPlugin {
 
 	public static float NO_SYSTEM_THRESHOLD = 0.0f;
 	
@@ -45,9 +46,15 @@ public class sd_CRPluginImpl implements CombatReadinessPlugin {
 	
 	public void applyMaxCRCrewModifiers(FleetMemberAPI member) {
 		if (member == null || member.getStats() == null) return;
-		//float maxCRBasedOnLevel = (40f + member.getCrewFraction() * 10f) / 100f;
-		float maxCRBasedOnLevel = 0.5f;
-		member.getStats().getMaxCombatReadiness().modifyFlat("crew skill bonus", maxCRBasedOnLevel, "Basic maintenance");
+
+		final boolean hasLunaLib = Global.getSettings().getModManager().isModEnabled("lunalib");
+		float baseCR = 0.5f;
+
+		if (hasLunaLib && !Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_modifyCR"))) {
+			baseCR = 0.7f;
+		}
+
+		member.getStats().getMaxCombatReadiness().modifyFlat("crew skill bonus", baseCR, "Basic maintenance");
 		
 		float cf = member.getCrewFraction();
 		if (cf < 1) {

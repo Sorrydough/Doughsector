@@ -1,5 +1,5 @@
 {
-	"id":"sd",
+	"id":"sd_doughsector",
 	"name":"Doughpack",
 	"author":"Sorrydough",
 	"version":"69",
@@ -8,12 +8,12 @@
   	"jars":["jars/doughsector.jar"],
     "dependencies": [
         {
-            "id": "lw_lazylib",
-            "name": "LazyLib"
-        },
-        {
             "id": "MagicLib",
             "name": "MagicLib"
+        },
+        {
+            "id": "lw_lazylib",
+            "name": "LazyLib"
         }
     ],
 	"modPlugin":"data.sd_modPlugin"

@@ -9,7 +9,7 @@
 		}
 	},
 	"plugins": {
-		"combatReadinessPlugin":"data.sd_CRPluginImpl",
+		"combatReadinessPlugin":"data.sd_combatReadinessPlugin",
 		"admiralAIPlugin":"data.admiral.sd_fleetAdmiralController"
 	}
 }
