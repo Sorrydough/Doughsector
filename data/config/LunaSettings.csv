@@ -1,4 +1,4 @@
 fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValue,maxValue,tab
 sd_removeBaseBP,Clear Base Blueprints,Boolean,FALSE,,When a save is loaded all base blueprints are removed from your database.,,,
+sd_modifyCR,Modify Default CR,Boolean,TRUE,,Default CR for non-automated ships is reduced from 70%% to 50%%.,,,
 sd_generateMoons,Generate Moons,Boolean,TRUE,,Adds moons to planets during mapgen or on first load.,,,
-sd_modifyCR,Modify Default CR,Boolean,TRUE,,Default CR for non-automated ships is reduced from 70 to 50.,,,

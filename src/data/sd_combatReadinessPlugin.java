@@ -47,12 +47,9 @@ public class sd_combatReadinessPlugin implements CombatReadinessPlugin {
 	public void applyMaxCRCrewModifiers(FleetMemberAPI member) {
 		if (member == null || member.getStats() == null) return;
 
-		final boolean hasLunaLib = Global.getSettings().getModManager().isModEnabled("lunalib");
 		float baseCR = 0.5f;
-
-		if (hasLunaLib && !Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_modifyCR"))) {
+		if (Global.getSettings().getModManager().isModEnabled("lunalib") && !Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_modifyCR")))
 			baseCR = 0.7f;
-		}
 
 		member.getStats().getMaxCombatReadiness().modifyFlat("crew skill bonus", baseCR, "Basic maintenance");
 		
