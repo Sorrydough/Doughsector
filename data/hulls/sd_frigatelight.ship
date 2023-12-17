@@ -16,6 +16,7 @@
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
+    "DEC02": "sd_decoVectorEnginesController",
     "THR01": "sd_dummy",
     "THR02": "sd_dummy",
     "THR03": "sd_dummy",
@@ -154,8 +155,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 145,
-      "locations": [-26, 14]
+      "angle": 135,
+      "locations": [-25, 13]
     },
     {
       "id": "THR04",
@@ -163,8 +164,17 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -145,
-      "locations": [-26, -14]
+      "angle": -135,
+      "locations": [-25, -13]
+    },
+    {
+      "id": "DEC02",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-20, -0]
     }
   ],
   "engineSlots": [
@@ -195,33 +205,33 @@
     {
       "location": [-25, 13],
       "length": 18,
-      "width": 1,
+      "width": 2,
       "angle": 135,
-      "contrailSize": 1,
+      "contrailSize": 2,
       "style": "sd_blockThruster"
     },
     {
       "location": [-25, -13],
       "length": 18,
-      "width": 1,
+      "width": 2,
       "angle": -135,
-      "contrailSize": 1,
+      "contrailSize": 2,
       "style": "sd_blockThruster"
     },
     {
-      "location": [-8, 19],
+      "location": [-7, 19],
       "length": 18,
-      "width": 1,
+      "width": 2,
       "angle": 45,
-      "contrailSize": 1,
+      "contrailSize": 2,
       "style": "sd_blockThruster"
     },
     {
-      "location": [-8, -19],
+      "location": [-7, -19],
       "length": 18,
-      "width": 1,
+      "width": 2,
       "angle": -45,
-      "contrailSize": 1,
+      "contrailSize": 2,
       "style": "sd_blockThruster"
     }
   ],
