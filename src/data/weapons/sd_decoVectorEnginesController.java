@@ -2,6 +2,7 @@ package data.weapons;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.loading.specs.EngineSlot;
 import org.lazywizard.lazylib.MathUtils;
@@ -37,11 +38,11 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
         ShipAPI ship = weapon.getShip();
         if (doOnce) {
             //Global.getLogger(ptes_decoEnginesController.class).info(Misc.getAngleInDegrees(new Vector2f(1,0))+ "/" +Misc.getAngleInDegrees(new Vector2f(0,1))+ "/" + MathUtils.getShortestRotation(Misc.getAngleInDegrees(new Vector2f(1,0)),Misc.getAngleInDegrees(new Vector2f(0,1))));
-            for (WeaponAPI tempWeapon : ship.getAllWeapons()) {
-                if (tempWeapon.getSlot().getId().startsWith("THR")) {
+            for (WeaponSlotAPI slot : ship.getHullSpec().getAllWeaponSlotsCopy()) {
+                if (slot.getId().startsWith("THR")) {
                     ShipEngineControllerAPI.ShipEngineAPI thruster = null;
                     for (ShipEngineControllerAPI.ShipEngineAPI e : ship.getEngineController().getShipEngines()) {
-                        if (MathUtils.isWithinRange(e.getLocation(), tempWeapon.getLocation(), 4)) {
+                        if (MathUtils.isWithinRange(e.getLocation(), slot.computePosition(ship), 4)) {
                             thruster = e;
                             break;
                         }

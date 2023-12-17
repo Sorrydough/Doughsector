@@ -27,15 +27,6 @@ public class sd_beampumps extends BaseHullMod {
 	public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
 		ship.addListener(new BeamPumpsListener(ship));
 		for (WeaponAPI weapon : ship.getAllWeapons()) {
-			switch (weapon.getType()) {
-				case STATION_MODULE:
-				case LAUNCH_BAY:
-				case DECORATIVE:
-				case BUILT_IN:
-				case SYSTEM:
-				case ENERGY:
-					continue;
-			}
 			if (isMixedBeam(weapon)) {
 				weapon.ensureClonedSpec();
 				weapon.getSpec().setBeamSpeed(1000000);
@@ -51,21 +42,25 @@ public class sd_beampumps extends BaseHullMod {
 				if (isMixedBeam(weapon))
 					weapons.add(weapon);
         }
-		final HashMap<BeamAPI, Float> beamsWithTime = new HashMap<>();
 		final Map<WeaponAPI.WeaponSize, Integer> REQUIRED_TIME = new HashMap<>(); {
-			REQUIRED_TIME.put(WeaponAPI.WeaponSize.SMALL, 8);
-			REQUIRED_TIME.put(WeaponAPI.WeaponSize.MEDIUM, 6);
-			REQUIRED_TIME.put(WeaponAPI.WeaponSize.LARGE, 2);
+			REQUIRED_TIME.put(WeaponAPI.WeaponSize.SMALL, 6);
+			REQUIRED_TIME.put(WeaponAPI.WeaponSize.MEDIUM, 4);
+			REQUIRED_TIME.put(WeaponAPI.WeaponSize.LARGE, 1);
 		}
+		final HashMap<WeaponAPI, Float> beamsWithTime = new HashMap<>();
         @Override
 		public void advance(float amount) {
 			for (WeaponAPI weapon : weapons) {
 				for (BeamAPI beam : weapon.getBeams()) {
-					if (beam.didDamageThisFrame())
-						beamsWithTime.put(beam, amount + beamsWithTime.get(beam));
-					if (beamsWithTime.get(beam) >= REQUIRED_TIME.get(beam.getWeapon().getSize())) {
-						sd_util.emitMote(ship, beam.getWeapon(), true);
-						beamsWithTime.remove(beam);
+					if (beam.didDamageThisFrame()) {
+						if (beamsWithTime.containsKey(weapon))
+							beamsWithTime.put(weapon, 0.1f + beamsWithTime.get(weapon));
+						else
+							beamsWithTime.put(weapon, 0.1f);
+					}
+					if (beamsWithTime.containsKey(weapon) && beamsWithTime.get(weapon) >= REQUIRED_TIME.get(weapon.getSize())) {
+						sd_util.emitMote(ship, weapon, true);
+						beamsWithTime.remove(weapon);
 					}
 				}
 			}
@@ -77,7 +72,7 @@ public class sd_beampumps extends BaseHullMod {
 			return 1f;
 		}
 		public float getWeaponBaseRangeFlatMod(ShipAPI ship, WeaponAPI weapon) { // copied alex's HSA code lol
-			if (weapon.isBeam() && weapon.getSlot().getWeaponType() == WeaponType.ENERGY) {
+			if (weapon.isBeam()) {
 				float range = weapon.getSpec().getMaxRange();
 				if (range < RANGE_THRESHOLD) return 0;
 
@@ -89,6 +84,13 @@ public class sd_beampumps extends BaseHullMod {
 		}
 	}
 	static boolean isMixedBeam(WeaponAPI weapon) {
+		switch (weapon.getType()) {
+			case STATION_MODULE:
+			case LAUNCH_BAY:
+			case DECORATIVE:
+			case SYSTEM:
+				return false;
+		}
 		return weapon.isBeam() && weapon.getSlot().getWeaponType() != WeaponType.ENERGY;
 	}
 	@Override

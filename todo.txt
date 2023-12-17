@@ -2,6 +2,7 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Do The Elite Ships System
 - Make canflak go vaguely in the direction of the nearest threat instead of being completely random
 - Write AI scripts for stasis and nullifier
+- Do nullifier and stasis VFX
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 - Do another pass on ship names
 - Integrate engine color fade for all systems
@@ -12,15 +13,12 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Return custom fleet command AI to working in mission
 - Fix all the variants that I broke
 - Hullmod icons
-- LukasLib compatibility
 - Implement canflak pod, make art for both
 - Make sure the forum download link is hidden behind a simple riddle
 - Figure out what to do about nullifier shield arc change, make stasis field shield arc change never send it below 35 degrees
 - Doublecheck combat engine speed modification for timeflow systems
-- Add 20% CR to automated ships to make up for lower base CR
 - Rebalance KB fighter for no weapon flux hullmod
 - Debug ship.setForceCarrierPullBackTime()
-- Make arthr do another art pass on my ships - fatten up the carriers, add temporal core to destroyer
 - Fix interference frigate looking stupid
 - Add custom phasefield
 
@@ -30,7 +28,6 @@ Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, etc
 - Export, Pirate, Path skin variants
 - Copy legio AI behavior where it doesn't rotate armor etc
-- Implement energy manticore
 - Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
 - Some sort of mote-creating engine hullmod. Maybe 0-flux related?
 - When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
@@ -38,16 +35,15 @@ Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Add a functionality to the attack manager where it chooses between engage or eliminate depending on whether enough ships ar enearby to actually kill the target immediately
 - Check if it's possible to apply an avoid order to a waypoint
 - Make SO count as a dmod
+- Make arthr do another art pass on my ships - rework interference destroyer & light carriers
 - Add 35 DP capital battlecarrier, support cruiser, 9 DP energy manticore
 
 Version 3.0 Stuff: (scope creep)
-- Scholar with aoe fleet shield
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility, account for beams
 - Modify tags on various vanilla weapons to improve AI behavior - squalls & breach srms for starters
 - Interfere with commissioned crews and substance abuse
 - In my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
 - Crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
-- Look at vic modplugin to see how to swap a script at runtime
 - Global combatplugin for RTS mode: 5% range?, very good autofire accuracy?, 25% less recoil?
 - Some sort of waifu system to capture the hearts and dicks of redditors
 - Script to make weapons look nice in the refit screen

@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_frigatelight",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_frigatelight.png",
@@ -11,15 +12,14 @@
   "shieldRadius": 50.5,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_customai",
-    "insulatedengine"
+    "sd_customai"
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
-    "THR01": "sd_magicThruster",
-    "THR02": "sd_magicThruster",
-    "THR03": "sd_magicThruster",
-    "THR04": "sd_magicThruster"
+    "THR01": "sd_dummy",
+    "THR02": "sd_dummy",
+    "THR03": "sd_dummy",
+    "THR04": "sd_dummy"
   },
   "weaponSlots": [
     {
@@ -190,6 +190,38 @@
       "width": 6,
       "angle": 180,
       "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-25, 13],
+      "length": 18,
+      "width": 1,
+      "angle": 135,
+      "contrailSize": 1,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-25, -13],
+      "length": 18,
+      "width": 1,
+      "angle": -135,
+      "contrailSize": 1,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-8, 19],
+      "length": 18,
+      "width": 1,
+      "angle": 45,
+      "contrailSize": 1,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-8, -19],
+      "length": 18,
+      "width": 1,
+      "angle": -45,
+      "contrailSize": 1,
       "style": "sd_blockThruster"
     }
   ],
