@@ -16,11 +16,10 @@
   ],
   "builtInWeapons": {
     "DEC01": "sd_blinker",
-    "DEC02": "sd_decoVectorEnginesController",
-    "THR01": "sd_dummy",
-    "THR02": "sd_dummy",
-    "THR03": "sd_dummy",
-    "THR04": "sd_dummy"
+    "THR01": "sd_decoVectorEnginesController",
+    "THR02": "sd_decoVectorEnginesController",
+    "THR03": "sd_decoVectorEnginesController",
+    "THR04": "sd_decoVectorEnginesController"
   },
   "weaponSlots": [
     {
@@ -166,15 +165,6 @@
       "arc": 0,
       "angle": -135,
       "locations": [-25, -13]
-    },
-    {
-      "id": "DEC02",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": 180,
-      "locations": [-20, -0]
     }
   ],
   "engineSlots": [

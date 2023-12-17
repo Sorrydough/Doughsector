@@ -18,7 +18,7 @@ import java.util.Map;
 public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlugin {
     //SCRIPT BY PURRTILT
     boolean doOnce = true;
-    ArrayList<decoEngine> engines = new ArrayList<>();
+    decoEngine target = null;
     final Map<ShipAPI.HullSize, Float> strafeMulti = new HashMap<>(); {
         strafeMulti.put(ShipAPI.HullSize.FIGHTER, 1f);
         strafeMulti.put(ShipAPI.HullSize.FRIGATE, 1f);
@@ -26,30 +26,32 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
         strafeMulti.put(ShipAPI.HullSize.CRUISER, 0.5f);
         strafeMulti.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.25f);
     }
+    float originalWidth = 0;
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        if (engine.isPaused() || weapon.getShip().getOwner() == -1) return;
+        if (engine.isPaused() || weapon.getShip().getOwner() == -1)
+            return;
 
         ShipAPI ship = weapon.getShip();
         ShipEngineControllerAPI controller = ship.getEngineController();
 
         if (doOnce) {
-            for (WeaponSlotAPI slot : ship.getHullSpec().getAllWeaponSlotsCopy()) {
-                if (slot.getId().startsWith("THR")) {
-                    ShipEngineAPI thruster = null;
-                    for (ShipEngineAPI e : controller.getShipEngines()) {
-                        if (MathUtils.isWithinRange(e.getLocation(), slot.computePosition(ship), 4)) {
-                            thruster = e;
-                            break;
-                        }
+            if (weapon.getSlot().getId().startsWith("THR")) {
+                ShipEngineAPI thruster = null;
+                for (ShipEngineAPI e : controller.getShipEngines()) {
+                    if (MathUtils.isWithinRange(e.getLocation(), weapon.getLocation(), 2)) {
+                        thruster = e;
+                        break;
                     }
-                    if (thruster == null)
-                        return;
-                    engines.add(new decoEngine(ship, thruster));
                 }
+                if (thruster != null)
+                    target = new decoEngine(ship, thruster);
             }
             doOnce = false;
         }
+
+        if (target == null)
+            return;
 
         Vector2f newVector = new Vector2f();
         if (controller.isAccelerating())
@@ -79,30 +81,24 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
         if (controller.isTurningLeft())
             turn--;
 
-        for (decoEngine e : engines) {
-            float thrust = 0;
-            if (!VectorUtils.isZeroVector(newVector) && Math.abs(MathUtils.getShortestRotation(e.angle, currAngle)) <= 60)
-                thrust += 1;
-            if (turn != 0 && e.turn == turn)
-                thrust += 1f;
-            thrust(e, MathUtils.clamp(thrust, 0.4f, 1f));
-        }
+        float thrust = 0;
+        if (!VectorUtils.isZeroVector(newVector) && Math.abs(MathUtils.getShortestRotation(target.angle, currAngle)) <= 60)
+            thrust += 1;
+        if (turn != 0 && target.turn == turn)
+            thrust += 1f;
+        thrust(target, MathUtils.clamp(thrust, 0.4f, 1f));
     }
-
-
 
     private void thrust(decoEngine data, float thrust) {
         ShipAPI ship = data.ship;
         Vector2f size = new Vector2f(15, 80);
         float smooth = 0.2f;
-        if (data.engine.isDisabled()) thrust = 0f;
-        if (ship.getEngineController().isAccelerating()) thrust = 0f;
-        //Global.getLogger(ptes_decoEnginesController.class).info(weapon.getSlot().getId());
-
-
+        if (data.engine.isDisabled())
+            thrust = 0f;
+        if (ship.getEngineController().isAccelerating())
+            thrust = 0f;
         //target angle
         float length = thrust;
-
         float amount = Global.getCombatEngine().getElapsedInLastFrame();
 
         //thrust is reduced while the engine isn't facing the target angle, then smoothed
@@ -120,9 +116,9 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
             data.previousThrust -= engineslot.getAccelTimeToMaxGlow() * amount;
             data.previousThrust = Math.max(thrust , data.previousThrust);
         }
-
-        data.ship.getEngineController().setFlameLevel(data.engine.getEngineSlot(), data.previousThrust);
         //data.ship.getEngineController().forceShowAccelerating();
+        ship.getEngineController().forceShowAccelerating();
+        data.ship.getEngineController().setFlameLevel(data.engine.getEngineSlot(), data.previousThrust);
     }
 
     static class decoEngine {
@@ -149,12 +145,6 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
                     }
                 }
             }
-            /*
-            Global.getLogger(ptes_decoEnginesController.class).info(displacementAngle + "/" + (Math.abs(displacementAngle) - 90) + "/" + tolerance + "/" + turn);
-            Global.getLogger(ptes_decoEnginesController.class).info(weapon.getSlot().getAngle() + "/" + absAngle);
-
-             */
-
             EngineSlot engineslot = (EngineSlot) engine.getEngineSlot();
             Global.getLogger(sd_decoVectorEnginesController.class).info(engineslot.getAccelTimeToMaxGlow());
 
