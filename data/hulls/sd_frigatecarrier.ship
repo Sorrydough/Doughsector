@@ -16,13 +16,13 @@
   ],
   "builtInWeapons": {
     "DEC01": "sd_frigatecarrier_hangar",
-    "DEC02": "sd_blinker",
-    "DEC03": "sd_blinker",
-    "DEC04": "sd_blinker",
-    "THR01": "sd_magicThruster",
-    "THR02": "sd_magicThruster",
-    "THR03": "sd_magicThruster",
-    "THR04": "sd_magicThruster"
+    "DEC02": "sd_decoBlinker",
+    "DEC03": "sd_decoBlinker",
+    "DEC04": "sd_decoBlinker",
+    "THR01": "sd_decoVectorController",
+    "THR02": "sd_decoVectorController",
+    "THR03": "sd_decoVectorController",
+    "THR04": "sd_decoVectorController"
   },
   "weaponSlots": [
     {

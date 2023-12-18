@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class sd_blinkerScript implements EveryFrameWeaponEffectPlugin {
+public class sd_decoBlinkerScript implements EveryFrameWeaponEffectPlugin {
 
     //The minimum and maximum duration the lights are "completely off" during the animation (how long they stay at the final animation frame)
     final float MAX_OFF_DURATION = 5f;

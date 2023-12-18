@@ -5,7 +5,7 @@ import data.graphics.sd_drawSystemRadius;
 import data.sd_util;
 import org.lwjgl.util.Color;
 
-public class sd_systemRangeDecoScript implements EveryFrameWeaponEffectPlugin {
+public class sd_decoSystemRangeScript implements EveryFrameWeaponEffectPlugin {
     final Color colorOuter = new Color(250, 235, 215,55);
     final Color colorInner = new Color(250, 235, 215,5);
     sd_drawSystemRadius pluginOuter = null;

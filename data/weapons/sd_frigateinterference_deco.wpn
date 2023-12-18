@@ -3,7 +3,7 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"everyFrameEffect":"data.weapons.sd_systemRangeDecoScript",
+	"everyFrameEffect":"data.weapons.sd_decoSystemRangeScript",
 	"turretSprite":"",
 	"hardpointSprite":"",
 	"turretOffsets":[0,0],

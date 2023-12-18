@@ -3,7 +3,7 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"everyFrameEffect":"data.weapons.sd_systemRangeDecoScript",
+	"everyFrameEffect":"data.weapons.sd_decoSystemRangeScript",
 	"showDamageWhenDecorative":"false",
 	"turretSprite":"graphics/ships/decos/sd_destroyersupport_glow.png",
 	"hardpointSprite":"graphics/ships/decos/sd_destroyersupport_glow.png",

@@ -15,11 +15,11 @@
     "sd_customai"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_blinker",
-    "THR01": "sd_decoVectorEnginesController",
-    "THR02": "sd_decoVectorEnginesController",
-    "THR03": "sd_decoVectorEnginesController",
-    "THR04": "sd_decoVectorEnginesController"
+    "DEC01": "sd_decoBlinker",
+    "THR01": "sd_decoVectorController",
+    "THR02": "sd_decoVectorController",
+    "THR03": "sd_decoVectorController",
+    "THR04": "sd_decoVectorController"
   },
   "weaponSlots": [
     {

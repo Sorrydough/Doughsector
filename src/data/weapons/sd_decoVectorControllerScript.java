@@ -3,7 +3,6 @@ package data.weapons;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
-import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.loading.specs.EngineSlot;
 import org.lazywizard.lazylib.MathUtils;
@@ -11,11 +10,10 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlugin {
+public class sd_decoVectorControllerScript implements EveryFrameWeaponEffectPlugin {
     //SCRIPT BY PURRTILT
     boolean doOnce = true;
     decoEngine target = null;
@@ -26,7 +24,6 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
         strafeMulti.put(ShipAPI.HullSize.CRUISER, 0.5f);
         strafeMulti.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.25f);
     }
-    float originalWidth = 0;
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         if (engine.isPaused() || weapon.getShip().getOwner() == -1)
@@ -117,7 +114,6 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
             data.previousThrust = Math.max(thrust , data.previousThrust);
         }
         //data.ship.getEngineController().forceShowAccelerating();
-        ship.getEngineController().forceShowAccelerating();
         data.ship.getEngineController().setFlameLevel(data.engine.getEngineSlot(), data.previousThrust);
     }
 
@@ -146,10 +142,7 @@ public class sd_decoVectorEnginesController implements EveryFrameWeaponEffectPlu
                 }
             }
             EngineSlot engineslot = (EngineSlot) engine.getEngineSlot();
-            Global.getLogger(sd_decoVectorEnginesController.class).info(engineslot.getAccelTimeToMaxGlow());
-
             engineslot.setGlowParams(engineslot.getWidth(),engineslot.getLength(),10f,1);
-
             sizeMulti = engine.getEngineSlot().getWidth() / 3;
         }
 
