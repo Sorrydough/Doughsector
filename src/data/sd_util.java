@@ -131,8 +131,7 @@ public class sd_util {
     public static boolean canUseSystemThisFrame(ShipAPI ship) { // duplicate of the AIUtils function, but this also works for toggle systems
         FluxTrackerAPI flux = ship.getFluxTracker();
         ShipSystemAPI system = ship.getSystem();
-
-        return !(system == null || flux.isOverloadedOrVenting() || system.isOutOfAmmo()
+        return !(system == null || flux.isOverloadedOrVenting() || system.isOutOfAmmo() || ship.getOwner() == 1
                 // active but can't be toggled off
                 || (system.isActive() && !system.getSpecAPI().isToggle())
                 // chargedown
