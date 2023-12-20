@@ -7,6 +7,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.util.IntervalUtil;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
@@ -24,6 +25,7 @@ public class sd_utilityhullmodPlugin extends BaseEveryFrameCombatPlugin {
     final boolean applyAI = false;
     boolean runOnce = true;
     float maxRange = 0;
+    String personality = Personalities.AGGRESSIVE;
     //    AdmiralAIPlugin admiral = new sd_fleetAdmiralAI();
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
@@ -33,7 +35,10 @@ public class sd_utilityhullmodPlugin extends BaseEveryFrameCombatPlugin {
 //                if (applyAI && Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
 //                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
 //                }
-            runOnce = false;
+            if (Global.getCombatEngine().isSimulation()) {
+                ship.getCaptain().setPersonality(personality);
+                Console.showMessage("Personality for "+ ship.getName() +" overriden to "+ personality);
+            }
             List<WeaponAPI> loadout = ship.getAllWeapons();
             if (loadout != null) {
                 for (WeaponAPI w : loadout) {
@@ -44,11 +49,9 @@ public class sd_utilityhullmodPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }
             }
+            runOnce = false;
             timer.randomize();
         }
-
-        if (Global.getCombatEngine().isSimulation())
-            ship.getCaptain().setPersonality(Personalities.STEADY);
 
         ////////////////////////////////////////////////////////
         //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//

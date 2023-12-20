@@ -14,7 +14,7 @@ import com.fs.starfarer.api.util.Misc;
 
 public class sd_wetmounts extends BaseHullMod {
     final float RANGE_BONUS = 100;
-    final float RECOIL_MULT = 0.5f;
+    final float RECOIL_MULT = 0.25f;
     public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
         // copied effects from armored mounts
         stats.getMaxRecoilMult().modifyMult(id, RECOIL_MULT);
