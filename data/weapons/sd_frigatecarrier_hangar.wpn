@@ -4,7 +4,7 @@
 	"type":"DECORATIVE",
 	"size":"SMALL",
 	"showDamageWhenDecorative":"false",
-	"everyFrameEffect":"data.weapons.sd_decoHangarScript",
+	"everyFrameEffect":"data.weapons.sd_decoSystemHangarScript",
 	"turretSprite":"graphics/ships/decos/sd_frigatecarrier_hangar.png",
 	"hardpointSprite":"graphics/ships/decos/sd_frigatecarrier_hangar.png",
 	"turretGlowSprite": "graphics/ships/decos/sd_frigatecarrier_hangarGlow.png",

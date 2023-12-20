@@ -39,7 +39,7 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);
             target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ Math.round(duration) +" seconds!", Color.LIGHT_GRAY, 5, true);
-            target.getCustomData().put("sd_hackingsuite", "urmum");
+            target.getCustomData().put("sd_hackingsuite", -1);
             doOnce = false;
         }
         if (engine.isPaused())

@@ -8,6 +8,7 @@ import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
+import data.graphics.sd_decoSystemRangePlugin;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
@@ -113,6 +114,13 @@ public class sd_util {
         }
     }
 
+    public static void applySystemRangeDeco(ShipAPI ship) {
+        if (!ship.getCustomData().containsKey("sd_decoSystemRange")) {
+            ship.getCustomData().put("sd_decoSystemRange", -1);
+            Global.getCombatEngine().addPlugin(new sd_decoSystemRangePlugin(ship));
+        }
+    }
+
 
 
     public static void sortByDistance(final ShipAPI ship, final List<ShipAPI> ships, final boolean closestFirst) {
@@ -141,9 +149,6 @@ public class sd_util {
                 // fluxed out
                 || !system.isActive() && (system.getFluxPerUse() > (flux.getMaxFlux() - flux.getCurrFlux())));
     }
-
-
-
 
 
 

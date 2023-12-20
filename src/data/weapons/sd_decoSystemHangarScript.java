@@ -4,7 +4,7 @@ import com.fs.starfarer.api.combat.*;
 import data.shipsystems.sd_auxforge;
 
 
-public class sd_decoHangarScript implements EveryFrameWeaponEffectPlugin {
+public class sd_decoSystemHangarScript implements EveryFrameWeaponEffectPlugin {
     boolean willRestoreFighters = true;
     boolean doOnce = true;
     @Override
