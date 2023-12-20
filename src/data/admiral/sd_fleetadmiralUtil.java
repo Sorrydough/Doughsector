@@ -12,7 +12,7 @@ import com.fs.starfarer.api.loading.HullModSpecAPI;
 import java.util.*;
 
 
-public class sd_fleetAdmiralUtil {
+public class sd_fleetadmiralUtil {
     public static void applyAssignment(AssignmentTargetAPI target, CombatAssignmentType assignment, int owner) {
         Global.getCombatEngine().getFleetManager(owner).getTaskManager(false).createAssignment(assignment, target, false);
     }
@@ -170,36 +170,35 @@ public class sd_fleetAdmiralUtil {
             }
         });
     }
-    public static float getShipStrengthAssigned(CombatFleetManagerAPI.AssignmentInfo assignment, sd_battleStateTracker battleState) {
+    public static float getShipStrengthAssigned(CombatFleetManagerAPI.AssignmentInfo assignment, sd_battlestateTracker battleState) {
         float strength = 0;
         for (ShipAPI ship : battleState.deployedAllyShips)
             if (battleState.allyTaskManager.getAssignmentFor(ship) == assignment)
                 strength += getCombatEffectiveness(ship, 0.2f);
         return strength;
     }
-    public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battleStateTracker battleState) {
-        float threat = 0;
-        List<ShipAPI> assignedToTarget = new ArrayList<>();
-        for (Map.Entry<ShipAPI, CombatFleetManagerAPI.AssignmentInfo> ship : battleState.shipsWithTargetAssignments.entrySet()) {
-            if (ship.getValue() == assignment) {
-                assignedToTarget.add(ship.getKey());
-            }
-        }
-
-
-
-
-
-        for (ShipAPI enemy : battleState.deployedEnemyShips) {
-
-
-        }
-
-
-
-
-
-        return threat; // ur mum
-    }
-
+//    public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battlestateTracker battleState) {
+//        float threat = 0;
+//        List<ShipAPI> assignedToTarget = new ArrayList<>();
+//        for (Map.Entry<ShipAPI, CombatFleetManagerAPI.AssignmentInfo> ship : battleState.shipsWithTargetAssignments.entrySet()) {
+//            if (ship.getValue() == assignment) {
+//                assignedToTarget.add(ship.getKey());
+//            }
+//        }
+//
+//
+//
+//
+//
+//        for (ShipAPI enemy : battleState.deployedEnemyShips) {
+//
+//
+//        }
+//
+//
+//
+//
+//
+//        return threat; // ur mum
+//    }
 }

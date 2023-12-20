@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class sd_decoVectorControllerScript implements EveryFrameWeaponEffectPlugin {
     //SCRIPT BY PURRTILT
-    boolean doOnce = true;
+    boolean runOnce = true;
     decoEngine target = null;
     final Map<ShipAPI.HullSize, Float> strafeMulti = new HashMap<>(); {
         strafeMulti.put(ShipAPI.HullSize.FIGHTER, 1f);
@@ -32,7 +32,7 @@ public class sd_decoVectorControllerScript implements EveryFrameWeaponEffectPlug
         ShipAPI ship = weapon.getShip();
         ShipEngineControllerAPI controller = ship.getEngineController();
 
-        if (doOnce) {
+        if (runOnce) {
             if (weapon.getSlot().getId().startsWith("THR")) {
                 ShipEngineAPI thruster = null;
                 for (ShipEngineAPI e : controller.getShipEngines()) {
@@ -44,7 +44,7 @@ public class sd_decoVectorControllerScript implements EveryFrameWeaponEffectPlug
                 if (thruster != null)
                     target = new decoEngine(ship, thruster);
             }
-            doOnce = false;
+            runOnce = false;
         }
 
         if (target == null)

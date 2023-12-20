@@ -10,18 +10,18 @@ public class sd_auxforge extends BaseShipSystemScript  {
     static final float MISSILE_RELOAD_AMOUNT = 2;
     final float MISSILE_COOLDOWN_PENALTY = 5, BAY_REPLENISHMENT_AMOUNT = 0.10f;
     boolean willRestoreFighters = true;
-    boolean doOnce = true;
+    boolean runOnce = true;
     WeaponAPI missile;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
         ShipAPI ship = (ShipAPI) stats.getEntity();
 
-        //need a doOnce here so the weapon glow doesn't shift when the system goes into chargedown
-        if (doOnce && ship.getSystem().isChargeup()) {
+        //need a runOnce here so the weapon glow doesn't shift when the system goes into chargedown
+        if (runOnce && ship.getSystem().isChargeup()) {
             missile = getEmptiestMissile(ship);
             willRestoreFighters = willRestoreFighters(ship);
-            doOnce = false;
+            runOnce = false;
         }
 
         //if we're going to restore missiles, then start glowing the missile
@@ -50,7 +50,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
                 missile.setAmmo(ammoAfterReload);
                 missile.setRemainingCooldownTo(MISSILE_COOLDOWN_PENALTY + missile.getCooldown() + missile.getCooldownRemaining());
             }
-            doOnce = true;
+            runOnce = true;
         }
     }
     @Override

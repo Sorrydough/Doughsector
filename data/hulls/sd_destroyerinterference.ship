@@ -11,7 +11,7 @@
   "shieldRadius": 119,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_customai",
+    "sd_utilityhullmod",
     "delicate"
   ],
   "builtInWeapons": {

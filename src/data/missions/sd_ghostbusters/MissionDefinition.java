@@ -103,12 +103,12 @@ public class MissionDefinition implements MissionDefinitionPlugin {
     }
 
     private static class ghostbusters_Plugin extends BaseEveryFrameCombatPlugin {
-        boolean doOnce = true;
+        boolean runOnce = true;
         @Override
         public void advance(float amount, List<InputEventAPI> events) {
-            if (doOnce && !Global.getCombatEngine().isPaused()) {
+            if (runOnce && !Global.getCombatEngine().isPaused()) {
                 Global.getSoundPlayer().playCustomMusic(3, 10, "sd_ghostbusters");
-                doOnce = false;
+                runOnce = false;
             }
         }
     }

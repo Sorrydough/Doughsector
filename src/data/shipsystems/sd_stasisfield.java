@@ -9,7 +9,7 @@ import data.sd_util;
 import org.lazywizard.lazylib.MathUtils;
 
 public class sd_stasisfield extends BaseShipSystemScript {
-    boolean doOnce = true;
+    boolean runOnce = true;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
             return;
@@ -18,13 +18,13 @@ public class sd_stasisfield extends BaseShipSystemScript {
         ship.setJitter(id, sd_util.timeColor, effectLevel, 1, 0, 1);
         ship.setJitterUnder(id, sd_util.timeUnderColor, effectLevel, 10, 0, 10);
 
-        if (doOnce) { // apply our effect plugin to the target
+        if (runOnce) { // apply our effect plugin to the target
             Global.getCombatEngine().addPlugin(new sd_stasisfieldPlugin(ship, ship.getShipTarget()));
-            doOnce = false;
+            runOnce = false;
         }
     }
     public void unapply(MutableShipStatsAPI stats, String id) {
-        doOnce = true;
+        runOnce = true;
     }
     public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
         if (target == null)												// needs to take target as an input to work in the AI script

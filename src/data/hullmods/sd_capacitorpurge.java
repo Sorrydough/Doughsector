@@ -27,7 +27,7 @@ public class sd_capacitorpurge extends BaseHullMod {
         protected IntervalUtil interval = new IntervalUtil(0.1f, 0.1f);
         protected HashMap<ShipEngineAPI, Boolean> engines = new HashMap<>();
         protected HashMap<WeaponAPI, Boolean> weapons = new HashMap<>();
-        boolean doOnce = true;
+        boolean runOnce = true;
         boolean vented = false;
         float duration = 0;
         @Override
@@ -35,12 +35,12 @@ public class sd_capacitorpurge extends BaseHullMod {
             // create a list of all weapon and engine slots as well as whether they've been disabled for this repair cycle
             // if a slot wasn't disabled before and it is now, flag it as disabled and play our effect
             // if a slot isn't disabled and it was flagged as disabled, unflag it as disabled
-            if (doOnce) { // this tracks whether a mote has been emitted by this module yet, it does NOT track whether the module is disabled (although these two things are related)
+            if (runOnce) { // this tracks whether a mote has been emitted by this module yet, it does NOT track whether the module is disabled (although these two things are related)
                 for (ShipEngineAPI vroom : ship.getEngineController().getShipEngines())
                     engines.put(vroom, false);
                 for (WeaponAPI weapon : ship.getAllWeapons())
                     weapons.put(weapon, false);
-                doOnce = false;
+                runOnce = false;
             }
             interval.advance(amount);
             if (interval.intervalElapsed()) {
@@ -52,7 +52,7 @@ public class sd_capacitorpurge extends BaseHullMod {
                     float bonusAsPercent = Math.round((bonus / stats.getFluxDissipation().getModifiedValue()) * 100);
                     stats.getVentRateMult().modifyPercent(id, bonusAsPercent / 2);
                     if (vented) {
-                        doOnce = true;
+                        runOnce = true;
                         vented = false;
                     }
                 } else {

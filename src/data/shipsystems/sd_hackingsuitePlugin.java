@@ -11,7 +11,6 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
     final ShipAPI target;
@@ -27,20 +26,20 @@ public class sd_hackingsuitePlugin extends BaseEveryFrameCombatPlugin {
     final float AUTOFIRE_PENALTY = 0.33f;
     final Color fadeColor = new Color(230, 215, 195,100);
     final IntervalUtil TIMER = new IntervalUtil(1f, 1f);
-    boolean doOnce = true;
+    boolean runOnce = true;
     float duration = 0, time = 0;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
         target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.75f);
-        if (doOnce) {
+        if (runOnce) {
             duration += DURATION.get(target.getHullSize()) + target.getSystem().getCooldownRemaining();
             target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
             target.getFluxTracker().playOverloadSound();
             target.setShipSystemDisabled(true);
             target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for "+ Math.round(duration) +" seconds!", Color.LIGHT_GRAY, 5, true);
             target.getCustomData().put("sd_hackingsuite", -1);
-            doOnce = false;
+            runOnce = false;
         }
         if (engine.isPaused())
             return; // don't want the timer to progress while the engine is paused

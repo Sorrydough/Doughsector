@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.CombatFleetManagerAPI.*;
 
 import java.util.*;
 
-public class sd_battleStateTracker { // this class doesn't do anything per se, it's just an object that holds data to be accessed by other classes
+public class sd_battlestateTracker { // this class doesn't do anything per se, it's just an object that holds data to be accessed by other classes
     public CombatEngineAPI engine;
     public CombatFleetManagerAPI allyFleetManager;
     public CombatFleetManagerAPI enemyFleetManager;
@@ -23,7 +23,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
     public int enemySide;
     public float averageAllySpeed;
     public float averageEnemySpeed;
-    boolean doOnce = true;
+    boolean runOnce = true;
     void reset() {
         assignmentsWithTargets.clear();
         shipsWithTargetAssignments.clear();
@@ -41,7 +41,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         reset();
         // updateState gets called and we populate the fields, then we can pass the object to other classes for them to also get that info
         // doing it this way so stuff doesn't have to get recalculated repeatedly and I don't have 10,000 static classes in a util the size of your mom
-        if (doOnce) {
+        if (runOnce) {
             engine = combatEngine;
             allySide = allyOwner;
             enemySide = enemyOwner;
@@ -49,7 +49,7 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
             allyTaskManager = allyFleetManager.getTaskManager(false);
             enemyFleetManager = engine.getFleetManager(enemySide);
             enemyTaskManager = enemyFleetManager.getTaskManager(false);
-            doOnce = false;
+            runOnce = false;
         }
 
         for (ShipAPI ship : engine.getShips())
@@ -64,17 +64,17 @@ public class sd_battleStateTracker { // this class doesn't do anything per se, i
         for (ShipAPI ship : deployedShips) {
             if (!isPlayer && ship.getOwner() == allySide) {
                 deployedAllyShips.add(ship);
-                deployedAllyThreat += sd_fleetAdmiralUtil.getCombatEffectiveness(ship, 0.2f);
+                deployedAllyThreat += sd_fleetadmiralUtil.getCombatEffectiveness(ship, 0.2f);
             } else if (isPlayer && ship.getOwner() == allySide && !ship.isAlly()) { // making sure we don't confuse reinforcing ships for the player's ships
                 deployedAllyShips.add(ship);
-                deployedAllyThreat += sd_fleetAdmiralUtil.getCombatEffectiveness(ship, 0.2f);
+                deployedAllyThreat += sd_fleetadmiralUtil.getCombatEffectiveness(ship, 0.2f);
             } else if (ship.getOwner() == enemySide) {
                 deployedEnemyShips.add(ship);
-                deployedEnemyThreat += sd_fleetAdmiralUtil.getCombatEffectiveness(ship, 0.2f);
+                deployedEnemyThreat += sd_fleetadmiralUtil.getCombatEffectiveness(ship, 0.2f);
             }
         }
-        sd_fleetAdmiralUtil.sortByDeploymentCost(deployedAllyShips);
-        sd_fleetAdmiralUtil.sortByDeploymentCost(deployedEnemyShips);
+        sd_fleetadmiralUtil.sortByDeploymentCost(deployedAllyShips);
+        sd_fleetadmiralUtil.sortByDeploymentCost(deployedEnemyShips);
 
         for (ShipAPI ship : deployedAllyShips)
             averageAllySpeed += ship.getMaxSpeed();

@@ -13,8 +13,8 @@ import org.lazywizard.console.Console;
 import java.awt.*;
 import java.util.List;
 
-public class sd_fleetAdmiralController extends BaseEveryFrameCombatPlugin {
-    public final sd_battleStateTracker battleState = new sd_battleStateTracker();
+public class sd_fleetadmiralController extends BaseEveryFrameCombatPlugin {
+    public final sd_battlestateTracker battleState = new sd_battlestateTracker();
     private final IntervalUtil interval = new IntervalUtil(0.5f, 2); // variable to approximate human reaction time
     private boolean doInit = true;
     @Override

@@ -2,7 +2,7 @@ package data.shipsystems.ai;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.admiral.sd_fleetAdmiralUtil;
+import data.admiral.sd_fleetadmiralUtil;
 import data.shipsystems.sd_hackingsuite;
 
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -51,7 +51,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
         // no point going any further if we have no targets ))))
         if (targets.isEmpty())
             return;
-        sd_fleetAdmiralUtil.sortByDeploymentCost(targets);
+        sd_fleetadmiralUtil.sortByDeploymentCost(targets);
         intervalShort.advance(amount);
         if (intervalShort.intervalElapsed()) {
             float desirePos = 0;
@@ -65,10 +65,10 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             for (ShipAPI enemy : targets) {
                 if (!sd_hackingsuite.isTargetValid(ship, target)) // doing this again even though we do it earlier because of the slow interval
                     continue;
-                float enemyDeployCost = sd_fleetAdmiralUtil.getDeploymentCost(enemy);
+                float enemyDeployCost = sd_fleetadmiralUtil.getDeploymentCost(enemy);
                 float desireToAttack = 150 * Math.max(2, enemyDeployCost / AVG_DPCOST.get(enemy.getHullSize()));
                 // modulate attack desire based on number of charges
-                desireToAttack *= (system.getAmmo() / system.getMaxAmmo());
+                desireToAttack *= (float) system.getAmmo() / system.getMaxAmmo();
                 if (desireToAttack + desireNeg >= 100) {
                     ship.setShipTarget(target);
                     desirePos += desireToAttack;

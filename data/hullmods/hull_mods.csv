@@ -1,6 +1,6 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sModDesc,sprite
 #Builtins,,,,,,,,,,,,,,,,,,,
-Improved Ship AI,sd_customai,,,???,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_customai,<tooltip created in the script>,,,graphics/hullmods/sd_improvedai.png
+Utility Hullmod,sd_utilityhullmod,,,???,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_utilityhullmod,<tooltip created in the script>,,,graphics/hullmods/sd_utilityhullmod.png
 Drive Interference,sd_driveinterference,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_driveinterference,<tooltip created in the script>,,,graphics/hullmods/sd_driveinterference.png
 Light Ground Support,sd_groundsupport,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/sd_groundsupport.png
 Hexshield,sd_hexshield,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shields unfold instantly. Instead of overloading the ship, its shield is disabled for %s seconds.",,,graphics/hullmods/sd_hexshield.png

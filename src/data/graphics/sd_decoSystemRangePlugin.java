@@ -23,13 +23,13 @@ public class sd_decoSystemRangePlugin extends BaseEveryFrameCombatPlugin {
     }
     final Color colorOuter = new Color(250, 235, 215,55);
     final Color colorInner = new Color(250, 235, 215,5);
-    boolean doOnce = true;
+    boolean runOnce = true;
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
-        if (doOnce) {
+        if (runOnce) {
             engine.addLayeredRenderingPlugin(new drawRadius(ship, sd_util.getOptimalRange(ship) + ship.getCollisionRadius(), 2, colorOuter, false));
             engine.addLayeredRenderingPlugin(new drawRadius(ship, sd_util.getOptimalRange(ship) + ship.getCollisionRadius(), 2, colorInner, true));
-            doOnce = false;
+            runOnce = false;
         }
         if (ship.getSystem().isOn())
             for (WeaponAPI weapon : ship.getAllWeapons())

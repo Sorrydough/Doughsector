@@ -3,13 +3,13 @@ package data.admiral.modules;
 import com.fs.starfarer.api.combat.CombatAssignmentType;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import data.admiral.sd_battleStateTracker;
-import data.admiral.sd_fleetAdmiralUtil;
+import data.admiral.sd_battlestateTracker;
+import data.admiral.sd_fleetadmiralUtil;
 
 import java.util.Map;
 
 public class sd_formationManager {
-    public static void manageFormation(sd_battleStateTracker battleState) {
+    public static void manageFormation(sd_battlestateTracker battleState) {
         boolean largestAllyDefended = false;
         boolean shouldBeDefensive = battleState.averageAllySpeed < battleState.averageEnemySpeed; //battleState.deployedEnemyThreat > battleState.deployedAllyThreat ||
         for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {
@@ -25,7 +25,7 @@ public class sd_formationManager {
         }
         // if we need to play defensively, apply a defend order to the biggest ship
         if (!largestAllyDefended && shouldBeDefensive)
-            sd_fleetAdmiralUtil.applyAssignment(battleState.allyFleetManager.getDeployedFleetMember(battleState.deployedAllyShips.get(0)), CombatAssignmentType.DEFEND, battleState.allySide);
+            sd_fleetadmiralUtil.applyAssignment(battleState.allyFleetManager.getDeployedFleetMember(battleState.deployedAllyShips.get(0)), CombatAssignmentType.DEFEND, battleState.allySide);
     }
         // todo: check for the largest ship that isn't out of position, instead of the largest ship generally
 }       // todo: fix bug where if a small ship gets a defend order, it becomes stuck there after a bigger ship deploys

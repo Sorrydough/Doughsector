@@ -5,14 +5,14 @@ import com.fs.starfarer.api.combat.BattleObjectiveAPI;
 import com.fs.starfarer.api.combat.CombatAssignmentType;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI;
 import com.fs.starfarer.api.impl.campaign.ids.BattleObjectives;
-import data.admiral.sd_battleStateTracker;
-import data.admiral.sd_fleetAdmiralUtil;
+import data.admiral.sd_battlestateTracker;
+import data.admiral.sd_fleetadmiralUtil;
 
 import java.util.Map;
 import java.util.Objects;
 
 public class sd_objectiveManager {
-    public static void manageAttackedObjectives(sd_battleStateTracker battleState) {
+    public static void manageAttackedObjectives(sd_battlestateTracker battleState) {
         boolean isAttackingObjective = false;
         boolean doHaveAllObjectives = false;
         for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {
@@ -38,13 +38,13 @@ public class sd_objectiveManager {
     private static void attackObjective(int owner) {
         for (BattleObjectiveAPI objective : Global.getCombatEngine().getObjectives()) {
             if (Objects.equals(objective.getType(), BattleObjectives.SENSOR_JAMMER) && objective.getOwner() != owner) {
-                sd_fleetAdmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
+                sd_fleetadmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
                 break;
             } else if (Objects.equals(objective.getType(), BattleObjectives.NAV_BUOY) && objective.getOwner() != owner) {
-                sd_fleetAdmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
+                sd_fleetadmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
                 break;
             } else if (Objects.equals(objective.getType(), BattleObjectives.COMM_RELAY) && objective.getOwner() != owner) {
-                sd_fleetAdmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
+                sd_fleetadmiralUtil.applyAssignment(objective, CombatAssignmentType.ASSAULT, owner);
                 break;
             }
         }
