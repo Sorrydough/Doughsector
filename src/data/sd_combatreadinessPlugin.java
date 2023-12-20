@@ -21,7 +21,7 @@ import com.fs.starfarer.api.impl.combat.LowCRShipDamageSequence;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import lunalib.lunaSettings.LunaSettings;
 
-public class sd_combatReadinessPlugin implements CombatReadinessPlugin {
+public class sd_combatreadinessPlugin implements CombatReadinessPlugin {
 
 	public static float NO_SYSTEM_THRESHOLD = 0.0f;
 	

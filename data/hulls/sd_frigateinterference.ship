@@ -20,7 +20,6 @@
     "DEC02": "sd_decoBlinker",
     "DEC03": "sd_decoBlinker",
     "DEC04": "sd_decoBlinker",
-    "DEC05": "sd_frigateinterference_deco",
     "THR01": "sd_decoVectorController",
     "THR02": "sd_decoVectorController",
     "THR03": "sd_decoVectorController",
@@ -134,15 +133,6 @@
       "arc": 0,
       "angle": 0,
       "locations": [22.5, 37.5]
-    },
-    {
-      "id": "DEC05",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-17.5, -0]
     }
   ],
   "engineSlots": [

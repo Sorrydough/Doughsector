@@ -31,10 +31,6 @@ public class sd_decoSystemRangePlugin extends BaseEveryFrameCombatPlugin {
             engine.addLayeredRenderingPlugin(new drawRadius(ship, sd_util.getOptimalRange(ship) + ship.getCollisionRadius(), 2, colorInner, true));
             runOnce = false;
         }
-        if (ship.getSystem().isOn())
-            for (WeaponAPI weapon : ship.getAllWeapons())
-                if (weapon.getSlot().getId().startsWith("DECSYS"))
-                    weapon.setForceFireOneFrame(true);
     }
     static class drawRadius extends BaseCombatLayeredRenderingPlugin {
         final Map<ShipSystemAPI.SystemState, Float> ALPHA_MULT = new HashMap<>(); {

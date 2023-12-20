@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 
-public class sd_spallprotection extends BaseHullMod {
+public class sd_antispall extends BaseHullMod {
     final float SPALL_BONUS = 0.9f;
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getFragmentationDamageTakenMult().modifyMult(id, SPALL_BONUS);
