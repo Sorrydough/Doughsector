@@ -14,7 +14,7 @@ import java.util.Random;
 public class sd_addPlanet implements BaseCommand {
     @Override @SuppressWarnings("")
     public CommandResult runCommand(@NotNull String args, @NotNull CommandContext context) {
-        if (Global.getSector().getPlayerFleet().getContainingLocation() instanceof StarSystemAPI && !args.equals("")) {
+        if (Global.getSector().getPlayerFleet().getContainingLocation() instanceof StarSystemAPI && !args.isEmpty()) {
             StarSystemAPI system = Global.getSector().getPlayerFleet().getStarSystem();
             PlanetAPI planet = system.addPlanet("deez", system.getStar(), "deez", args, new Random().nextInt(360), 50, system.getStar().getRadius() * 5, system.getStar().getRadius());
             PlanetConditionGenerator.generateConditionsForPlanet(planet, system.getAge());

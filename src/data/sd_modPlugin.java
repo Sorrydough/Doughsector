@@ -14,7 +14,7 @@ import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 
-import data.world.sd_moonGenerator;
+import data.world.sd_moonGeneratorPlugin;
 
 @SuppressWarnings("unused")
 public class sd_modPlugin extends BaseModPlugin {
@@ -77,7 +77,7 @@ public class sd_modPlugin extends BaseModPlugin {
             wantMoons = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_generateMoons"));
         if (wantMoons && !Global.getSector().getMemoryWithoutUpdate().contains("sd_moons")) {
             Global.getSector().getMemoryWithoutUpdate().set("sd_moons", true);
-            new sd_moonGenerator().generate(Global.getSector());
+            new sd_moonGeneratorPlugin().generate(Global.getSector());
         }
         // remove baseBP
         boolean wantRemoveBaseBP = false;

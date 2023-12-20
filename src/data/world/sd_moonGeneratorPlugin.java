@@ -17,13 +17,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
     //very, very heavily modified version of tomatopaste's moon generator used in lights out
     //his vision of the purpose for moons was very different from my own, so I needed my own implementation
 
-public class sd_moonGenerator implements SectorGeneratorPlugin {
+public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
     final float MIN_RADIUS_FOR_MOON_GEN = 150; //minimum radius a planet must have before the generator tries to put moons around it
     final float DIVISOR = 100; //higher number means lower probability to generate moons
     final float SPECIAL_PROBABILITY = 10; //higher is lower chance for habitable or toxic planets
-
-    final Logger log = Global.getLogger(sd_moonGenerator.class);
-
     final List<String> freezingPlanets = new ArrayList<>(); {
         freezingPlanets.add("frozen");
         freezingPlanets.add("frozen1");
@@ -159,7 +156,6 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 
     @Override
     public void generate(SectorAPI sector) {
-        log.info("Adding moons to in-system entities...");
         for (StarSystemAPI system : sector.getStarSystems()) {
             if (system.isProcgen()) {
                 CopyOnWriteArrayList<SectorEntityToken> entityTokens = new CopyOnWriteArrayList<>(system.getAllEntities());
@@ -172,7 +168,6 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
 
                         int numMoons;
                         numMoons = random.nextInt (1 + (int) (planet.getRadius() / DIVISOR));
-                        log.info("Adding " + numMoons + " moons to " + planet.getTypeId());
 
                         boolean isVeryHot = planet.getMarket().hasCondition(Conditions.VERY_HOT);
                         boolean isHot = planet.getMarket().hasCondition(Conditions.HOT) || isVeryHot;
@@ -203,16 +198,8 @@ public class sd_moonGenerator implements SectorGeneratorPlugin {
                                 type = neutralPlanets.get(index);
                             }
 
-                            //log.info("Attempting to add moon type " + type + " to planet type " + planet.getTypeId());
-
                             PlanetAPI moon = system.addPlanet("sd_moon_" + i + "_" + planet.hashCode(), planet, planet.getFullName() + " M-" + toRoman(i + 1), type, planet.getSpec().getPitch(), radius, orbitRadius, orbitDays);
                             PlanetConditionGenerator.generateConditionsForPlanet(moon, system.getAge());
-
-                            StringBuilder logs = new StringBuilder("Added moon to: " + planet.getTypeId() + " with orbit radius " + orbitRadius + ", with conditions :");
-                            for (MarketConditionAPI c : moon.getMarket().getConditions()) {
-                                logs.append(", ").append(c.getId());
-                            }
-                            log.info(logs);
                         }
                     }
                 }
