@@ -3,13 +3,13 @@ package data.admiral.modules;
 import com.fs.starfarer.api.combat.CombatAssignmentType;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import data.admiral.sd_battlestateTracker;
+import data.admiral.sd_fleetadmiralController;
 import data.admiral.sd_fleetadmiralUtil;
 
 import java.util.Map;
 
 public class sd_formationManager {
-    public static void manageFormation(sd_battlestateTracker battleState) {
+    public static void manageFormation(sd_fleetadmiralController.battlestateTracker battleState) {
         boolean largestAllyDefended = false;
         boolean shouldBeDefensive = battleState.averageAllySpeed < battleState.averageEnemySpeed; //battleState.deployedEnemyThreat > battleState.deployedAllyThreat ||
         for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {

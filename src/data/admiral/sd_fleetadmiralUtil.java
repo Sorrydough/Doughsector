@@ -170,7 +170,7 @@ public class sd_fleetadmiralUtil {
             }
         });
     }
-    public static float getShipStrengthAssigned(CombatFleetManagerAPI.AssignmentInfo assignment, sd_battlestateTracker battleState) {
+    public static float getShipStrengthAssigned(CombatFleetManagerAPI.AssignmentInfo assignment, sd_fleetadmiralController.battlestateTracker battleState) {
         float strength = 0;
         for (ShipAPI ship : battleState.deployedAllyShips)
             if (battleState.allyTaskManager.getAssignmentFor(ship) == assignment)

@@ -5,14 +5,14 @@ import com.fs.starfarer.api.combat.BattleObjectiveAPI;
 import com.fs.starfarer.api.combat.CombatAssignmentType;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI;
 import com.fs.starfarer.api.impl.campaign.ids.BattleObjectives;
-import data.admiral.sd_battlestateTracker;
+import data.admiral.sd_fleetadmiralController;
 import data.admiral.sd_fleetadmiralUtil;
 
 import java.util.Map;
 import java.util.Objects;
 
 public class sd_objectiveManager {
-    public static void manageAttackedObjectives(sd_battlestateTracker battleState) {
+    public static void manageAttackedObjectives(sd_fleetadmiralController.battlestateTracker battleState) {
         boolean isAttackingObjective = false;
         boolean doHaveAllObjectives = false;
         for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {

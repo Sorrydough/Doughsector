@@ -3,13 +3,13 @@ package data.admiral.modules;
 import com.fs.starfarer.api.combat.CombatAssignmentType;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI.*;
 import com.fs.starfarer.api.combat.ShipAPI;
-import data.admiral.sd_battlestateTracker;
+import data.admiral.sd_fleetadmiralController;
 import data.admiral.sd_fleetadmiralUtil;
 
 import java.util.Map;
 
 public class sd_attackManager {
-    public static void manageAttackedEnemies(sd_battlestateTracker battleState) {
+    public static void manageAttackedEnemies(sd_fleetadmiralController.battlestateTracker battleState) {
         // if an enemy ship is fluxed out, put an engage order on it if it doesn't already have one
         for (ShipAPI enemy : battleState.deployedEnemyShips)
             if (isTargetVulnerable(enemy)) {
