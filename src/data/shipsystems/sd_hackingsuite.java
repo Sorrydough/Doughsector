@@ -17,10 +17,11 @@ import java.util.Map;
 
 public class sd_hackingsuite extends BaseShipSystemScript {
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
-		if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
-			return;
-		// set jitter effects for ourselves
 		ShipAPI ship = (ShipAPI) stats.getEntity();
+		if (!sd_util.isCombatSituation(ship))
+			return;
+
+		// set jitter effects for ourselves
 		float jitterLevel = effectLevel;
 		if (state == State.OUT) // ensures jitter level doesn't deteriorate during OUT
 			jitterLevel *= jitterLevel;

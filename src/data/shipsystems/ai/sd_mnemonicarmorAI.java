@@ -15,6 +15,9 @@ public class sd_mnemonicarmorAI implements ShipSystemAIScript {
     }
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
+        if (!sd_util.isCombatSituation(ship) || !sd_util.canUseSystemThisFrame(ship))
+            return;
+
         interval.advance(amount);
         if (interval.intervalElapsed()) {
             ArmorGridAPI grid = ship.getArmorGrid();

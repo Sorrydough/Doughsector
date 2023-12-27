@@ -34,6 +34,11 @@ public class sd_util {
         return numberA <= upperBound && numberA >= lowerBound;
     }
 
+    public static boolean isCombatSituation(ShipAPI ship) {
+        CombatEngineAPI engine = Global.getCombatEngine();
+        return engine != null && !engine.isPaused() && ship.getOwner() != -1 && ship.getVariant() != null;
+    }
+
     public static void modifyShieldArc(ShipAPI target, float goalShieldArc, float effectLevel) {
         // 1. If the target's shield is still unfolding, don't mess with it
         if (target.getShield() == null || target.getShield().isOff() || target.getShield().getActiveArc() < goalShieldArc)

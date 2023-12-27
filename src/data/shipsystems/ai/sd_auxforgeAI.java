@@ -19,6 +19,9 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
     }
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
+        if (!sd_util.isCombatSituation(ship) || !sd_util.canUseSystemThisFrame(ship))
+            return;
+
         interval.advance(amount);
         if (interval.intervalElapsed()) {
             if (!canBeUsed(ship))

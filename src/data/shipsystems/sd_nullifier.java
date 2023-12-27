@@ -14,10 +14,10 @@ import java.util.Map;
 public class sd_nullifier extends BaseShipSystemScript {
     boolean runOnce = true;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
-        if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
+        ShipAPI ship = (ShipAPI) stats.getEntity();
+        if (!sd_util.isCombatSituation(ship))
             return;
 
-        ShipAPI ship = (ShipAPI) stats.getEntity();
         ship.setJitter(id, sd_util.timeColor, effectLevel, 1, 0, 5);
         ship.setJitterUnder(id, sd_util.timeUnderColor, effectLevel, 5, 0, 10);
 

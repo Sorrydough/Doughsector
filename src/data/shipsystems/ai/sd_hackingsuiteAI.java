@@ -31,7 +31,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
     }
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
-        if (!sd_util.canUseSystemThisFrame(ship))
+        if (!sd_util.isCombatSituation(ship) || !sd_util.canUseSystemThisFrame(ship))
             return;
         // this stuff is on a slower interval cuz it's expensive
         intervalLong.advance(amount);

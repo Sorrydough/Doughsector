@@ -13,9 +13,9 @@ public class sd_auxforge extends BaseShipSystemScript  {
     boolean runOnce = true;
     WeaponAPI missile;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
-        if (Global.getCombatEngine() == null || stats.getEntity().getOwner() == -1 || stats.getVariant() == null)
-            return;
         ShipAPI ship = (ShipAPI) stats.getEntity();
+        if (!sd_util.isCombatSituation(ship))
+            return;
 
         //need a runOnce here so the weapon glow doesn't shift when the system goes into chargedown
         if (runOnce && ship.getSystem().isChargeup()) {
