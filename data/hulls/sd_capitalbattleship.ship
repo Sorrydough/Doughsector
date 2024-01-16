@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_capitalbattleship",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "graphics/ships/sd_capitalbattleship.png",
@@ -12,7 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod",
-    "sd_driveinterference"
+    "sd_motefield"
   ],
   "builtInWeapons": {
     "DEC01": "sd_decoBlinker",
@@ -93,7 +94,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 90,
-      "locations": [145, 86.5]
+      "locations": [145, 86]
     },
     {
       "id": "THR05",
@@ -101,7 +102,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 137,
+      "angle": 135,
       "locations": [-176.5, 82.5]
     },
     {
@@ -111,7 +112,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -90,
-      "locations": [145, -86.5]
+      "locations": [145, -86]
     },
     {
       "id": "THR06",
@@ -372,7 +373,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [205.5, 26]
+      "locations": [205, 26]
     },
     {
       "id": "THR02",
@@ -381,7 +382,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [205.5, -26]
+      "locations": [205, -26]
     },
     {
       "id": "SYS01",
@@ -746,6 +747,54 @@
       "width": 9,
       "angle": 180,
       "contrailSize": 9,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-176.5, 82.5],
+      "length": 45,
+      "width": 5,
+      "angle": 135,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-176.5, -82.5],
+      "length": 45,
+      "width": 5,
+      "angle": -135,
+      "contrailSize": 5,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [205, -26],
+      "length": 36,
+      "width": 4,
+      "angle": 0,
+      "contrailSize": 4,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [205, 26],
+      "length": 36,
+      "width": 4,
+      "angle": 0,
+      "contrailSize": 4,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [145, 86],
+      "length": 36,
+      "width": 4,
+      "angle": 90,
+      "contrailSize": 4,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [145, -86],
+      "length": 36,
+      "width": 4,
+      "angle": -90,
+      "contrailSize": 4,
       "style": "sd_blockThruster"
     }
   ],

@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_destroyersupport",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_destroyersupport.png",
@@ -80,7 +81,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -142,
+      "angle": -135,
       "locations": [-73, -31.5]
     },
     {
@@ -89,7 +90,7 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 142,
+      "angle": 135,
       "locations": [-73, 31.5]
     },
     {
@@ -98,8 +99,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 43,
-      "locations": [69.5, 16.5]
+      "angle": 45,
+      "locations": [69.5, 16]
     },
     {
       "id": "THR02",
@@ -108,7 +109,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -45,
-      "locations": [69.5, -16.5]
+      "locations": [69.5, -16]
     },
     {
       "id": "DEC03",
@@ -257,6 +258,38 @@
       "width": 6,
       "angle": 180,
       "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [69.5, 16],
+      "length": 27,
+      "width": 3,
+      "angle": 45,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [69.5, -16],
+      "length": 27,
+      "width": 3,
+      "angle": -45,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-73, 31.5],
+      "length": 36,
+      "width": 4,
+      "angle": 135,
+      "contrailSize": 4,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-73, -31.5],
+      "length": 36,
+      "width": 4,
+      "angle": -135,
+      "contrailSize": 4,
       "style": "sd_blockThruster"
     }
   ],

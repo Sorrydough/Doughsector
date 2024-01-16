@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_frigate",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_frigate.png",
@@ -74,8 +75,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": 40,
-      "locations": [18.5, 34.5]
+      "angle": 45,
+      "locations": [1, 28]
     },
     {
       "id": "THR02",
@@ -83,8 +84,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 10,
-      "angle": -40,
-      "locations": [20.5, -31.5]
+      "angle": -45,
+      "locations": [-11, -19]
     },
     {
       "id": "THR03",
@@ -93,7 +94,7 @@
       "mount": "HARDPOINT",
       "arc": 10,
       "angle": 135,
-      "locations": [13.5, 34.5]
+      "locations": [-41, 15]
     },
     {
       "id": "THR04",
@@ -102,7 +103,7 @@
       "mount": "HARDPOINT",
       "arc": 10,
       "angle": -135,
-      "locations": [15.5, -31.5]
+      "locations": [-41, -12]
     },
     {
       "id": "DEC02",
@@ -128,8 +129,8 @@
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 0,
-      "locations": [-0.5, -23]
+      "angle": 180,
+      "locations": [4.5, -23]
     }
   ],
   "engineSlots": [
@@ -179,6 +180,38 @@
       "width": 6,
       "angle": 180,
       "contrailSize": 6,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-41, 15],
+      "length": 18,
+      "width": 2,
+      "angle": 135,
+      "contrailSize": 2,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-41, -12],
+      "length": 18,
+      "width": 2,
+      "angle": -135,
+      "contrailSize": 2,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [1, 28],
+      "length": 27,
+      "width": 3,
+      "angle": 45,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-11, -19],
+      "length": 27,
+      "width": 3,
+      "angle": -45,
+      "contrailSize": 3,
       "style": "sd_blockThruster"
     }
   ],

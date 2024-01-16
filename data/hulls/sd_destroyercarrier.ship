@@ -20,6 +20,7 @@
     "DEC03": "sd_decoBlinker",
     "DEC04": "sd_decoBlinker",
     "DEC05": "sd_decoBlinker",
+    "THR01": "sd_decoVectorController",
     "THR02": "sd_decoVectorController",
     "THR03": "sd_decoVectorController",
     "THR04": "sd_decoVectorController"
@@ -156,6 +157,24 @@
       "arc": 0,
       "angle": 0,
       "locations": [79.5, 27.5]
+    },
+    {
+      "id": "TRT03",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 173,
+      "angle": -54.5,
+      "locations": [3.5, -23]
+    },
+    {
+      "id": "TRT02",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 245,
+      "angle": 51.5,
+      "locations": [47.5, 21]
     }
   ],
   "engineSlots": [
@@ -206,11 +225,43 @@
       "angle": 180,
       "contrailSize": 9,
       "style": "sd_blockThruster"
+    },
+    {
+      "location": [-76, 32.5],
+      "length": 27,
+      "width": 3,
+      "angle": 135,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-76, -32.5],
+      "length": 27,
+      "width": 3,
+      "angle": -135,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-60, 32.5],
+      "length": 27,
+      "width": 3,
+      "angle": 45,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-60, -32.5],
+      "length": 27,
+      "width": 3,
+      "angle": -45,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
     }
   ],
   "bounds": [
-    32, 23.5,
-    20.5, 31.5,
+    63, 29.5,
+    44, 39.5,
     -5.5, 31,
     -23.5, 41,
     -44.5, 26,
@@ -220,9 +271,10 @@
     -67.5, -33.5,
     -51, -27,
     -26, -41.5,
-    -3, -30.5,
-    53.5, -27.5,
-    66.5, -21,
+    10, -38.5,
+    19.5, -30.5,
+    55, -29.5,
+    61.5, -21.5,
     93.5, -24,
     85, 24
   ]

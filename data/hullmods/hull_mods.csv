@@ -11,3 +11,4 @@ Advanced Antispall,sd_antispall,,,???,"no_drop, no_drop_salvage",Defenses,,TRUE,
 Wet Mounts,sd_wetmounts,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,4,8,12,16,data.hullmods.sd_wetmounts,<tooltip created in the script>,,,graphics/hullmods/sd_wetmounts.png
 Ancillary Beam Pumps,sd_beampumps,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,3,6,9,12,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
 Capacitor Purge,sd_capacitorpurge,,,???,"no_drop, no_drop_salvage",Special,,TRUE,,,8,16,24,40,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png
+Missile Boosters,sd_missileboosters,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,2,4,8,16,data.hullmods.sd_missileboosters,<tooltip created in the script>,,,graphics/hullmods/sd_missileboosters.png
