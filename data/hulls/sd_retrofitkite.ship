@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_retrofitkite",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_retrofitkite.png",
@@ -15,9 +16,11 @@
     "sd_groundsupport"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_decoBlinker",
-    "DEC02": "sd_decoBlinker"
+    "DEC01": "sd_retrofitkite_hangar",
+    "DEC02": "sd_decoBlinker",
+    "DEC03": "sd_decoBlinker"
   },
+  "builtInWings": ["sd_fightersupportWing"],
   "weaponSlots": [
     {
       "id": "HRD01",
@@ -83,7 +86,7 @@
       "locations": [10, -21]
     },
     {
-      "id": "DEC01",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -92,7 +95,7 @@
       "locations": [3, 38.5]
     },
     {
-      "id": "DEC02",
+      "id": "DEC03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -117,6 +120,27 @@
       "arc": 10,
       "angle": -150,
       "locations": [-22, -5]
+    },
+    {
+      "id": "DEC01",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [14.5, -0]
+    },
+    {
+      "id": "LB 1",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        18, 12,
+        18, -12
+      ]
     }
   ],
   "engineSlots": [

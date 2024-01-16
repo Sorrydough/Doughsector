@@ -1,19 +1,16 @@
 Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Do The Elite Ships System
-- Make canflak go vaguely in the direction of the nearest threat instead of being completely random
 - Write AI scripts for stasis and nullifier
 - Do nullifier and stasis VFX
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 - Do another pass on ship names
 - Integrate engine color fade for all systems
 - Glowmaps for decos
-- Add proper engines to cosmetic thrusters (check rangda as example)
 - Make a placeholder faction
 - Add music
 - Return custom fleet command AI to working in mission
 - Fix all the variants that I broke
 - Hullmod icons
-- Implement canflak pod, make art for both
 - Make sure the forum download link is hidden behind a simple riddle
 - Figure out what to do about nullifier shield arc change, make stasis field shield arc change never send it below 35 degrees
 - Doublecheck combat engine speed modification for timeflow systems
@@ -21,6 +18,9 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Debug ship.setForceCarrierPullBackTime()
 - Fix interference frigate looking stupid
 - Add custom phasefield
+- Commissioned crew effect: Improved CP regeneration
+- Doublecheck/fix fleet points
+- Update AI tweaks, integrate its autofire plugin
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Expand upon custom fleet command AI so it can work in campaign

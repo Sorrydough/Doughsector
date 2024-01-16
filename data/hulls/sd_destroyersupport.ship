@@ -14,16 +14,15 @@
   "builtInMods": [
     "sd_utilityhullmod",
     "delicate",
-    "pointdefenseai"
+    "advancedcore"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_decoBlinker",
-    "DEC02": "sd_decoBlinker",
+    "DEC01": "sd_destroyersupport_hangar",
+    "DEC02": "sd_destroyersupport_glow",
     "DEC03": "sd_decoBlinker",
     "DEC04": "sd_decoBlinker",
-    "DEC05": "sd_destroyersupport_hangarL",
-    "DEC06": "sd_destroyersupport_hangarR",
-    "DEC07": "sd_destroyersupport_glow",
+    "DEC05": "sd_decoBlinker",
+    "DEC06": "sd_decoBlinker",
     "THR01": "sd_decoVectorController",
     "THR02": "sd_decoVectorController",
     "THR03": "sd_decoVectorController",
@@ -112,7 +111,7 @@
       "locations": [69.5, -16]
     },
     {
-      "id": "DEC03",
+      "id": "DEC05",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -121,7 +120,7 @@
       "locations": [8, 82.5]
     },
     {
-      "id": "DEC04",
+      "id": "DEC06",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -130,7 +129,7 @@
       "locations": [-30, 58]
     },
     {
-      "id": "DEC02",
+      "id": "DEC04",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -139,13 +138,13 @@
       "locations": [26, -61.5]
     },
     {
-      "id": "DEC01",
+      "id": "DEC03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [40, -49.5]
+      "locations": [39.5, -49.5]
     },
     {
       "id": "LB 1",
@@ -160,31 +159,22 @@
       ]
     },
     {
-      "id": "DEC05",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-56.5, 34]
-    },
-    {
-      "id": "DEC06",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-56.5, -34]
-    },
-    {
-      "id": "DEC07",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
       "locations": [-46, -0]
+    },
+    {
+      "id": "DEC01",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-56, -0]
     }
   ],
   "engineSlots": [
