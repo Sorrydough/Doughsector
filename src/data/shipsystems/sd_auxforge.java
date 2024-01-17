@@ -8,7 +8,7 @@ import data.sd_util;
 
 public class sd_auxforge extends BaseShipSystemScript  {
     static final float MISSILE_RELOAD_AMOUNT = 2;
-    final float MISSILE_COOLDOWN_PENALTY = 5, BAY_REPLENISHMENT_AMOUNT = 0.10f;
+    final float MISSILE_COOLDOWN_PENALTY = 10, BAY_REPLENISHMENT_AMOUNT = 0.10f;
     boolean willRestoreFighters = true;
     boolean runOnce = true;
     WeaponAPI missile;
@@ -45,9 +45,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
                         bay.setFastReplacements(fightersToAdd);
                 }
             } else { // otherwise, restore ammo to the missile
-                int maxAmmo = missile.getMaxAmmo();
-                int ammoAfterReload = Math.min(missile.getAmmo() + (int) Math.ceil(getReloadCost(missile) / MISSILE_RELOAD_AMOUNT), maxAmmo);
-                missile.setAmmo(ammoAfterReload);
+                missile.setAmmo(Math.min(missile.getAmmo() + calculateMissileReload(missile), missile.getMaxAmmo()));
                 missile.setRemainingCooldownTo(MISSILE_COOLDOWN_PENALTY + missile.getCooldown() + missile.getCooldownRemaining());
             }
             runOnce = true;
@@ -55,7 +53,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
     }
     @Override
     public void unapply(MutableShipStatsAPI stats, String id) {
-        if (missile != null) //glow sticks around after the system deactivates otherwise LMAO
+        if (missile != null) // glow sticks around after the system deactivates otherwise LMAO
             missile.setGlowAmount(0, sd_util.damageUnderColor);
     }
     public static boolean willRestoreFighters(ShipAPI ship) {
@@ -64,6 +62,14 @@ public class sd_auxforge extends BaseShipSystemScript  {
             return true;
         float ratio = (float) missile.getAmmo() / missile.getMaxAmmo();
         return ship.getSharedFighterReplacementRate() <= ratio;
+    }
+    public static int calculateMissileReload(WeaponAPI weapon) {
+        float ratio = MISSILE_RELOAD_AMOUNT / getReloadCost(weapon);
+        return (int) Math.min(Math.ceil(weapon.getMaxAmmo() * ratio), weapon.getMaxAmmo());
+    }
+    public static boolean willMissileOverflow(WeaponAPI weapon) {
+        // figure out whether the full reload will cause the missile to overflow
+        return weapon.getAmmo() + calculateMissileReload(weapon) > weapon.getMaxAmmo();
     }
     public static WeaponAPI getEmptiestMissile(ShipAPI ship) {
         WeaponAPI emptiestMissile = null; // returns null if there's no missile to restore ammo for
@@ -80,7 +86,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
         return emptiestMissile;
     }
     public static boolean canReloadMissile(WeaponAPI weapon) {
-        return weapon != null && weapon.getAmmo() + (int) Math.ceil(MISSILE_RELOAD_AMOUNT / getReloadCost(weapon)) <= weapon.getMaxAmmo();
+        return weapon != null && !willMissileOverflow(weapon);
     }
     public static boolean canBeUsed(ShipAPI ship) {
         return sd_util.canUseSystemThisFrame(ship) && (ship.getSharedFighterReplacementRate() < 0.9 || canReloadMissile(getEmptiestMissile(ship)));

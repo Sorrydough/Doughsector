@@ -21,6 +21,14 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Commissioned crew effect: Improved CP regeneration
 - Doublecheck/fix fleet points
 - Update AI tweaks, integrate its autofire plugin
+- Ensure missile autoloader can't reload super expensive missiles (aka round down)
+- Swap engines on retrofits to old style, ensure they have old speed stats
+- Ensure all my custom ships have correct agility stats (aka slightly better than vanilla)
+- Do another pass on carrier stats
+- Add battlecarrier tags to appropriate ships
+- Copy stasis field VFX over to temporal nullifier
+- Double-check nullifier behavior
+- Redo the kite shitbash
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Expand upon custom fleet command AI so it can work in campaign
