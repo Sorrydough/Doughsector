@@ -54,7 +54,7 @@ public class sd_nullifier extends BaseShipSystemScript {
             this.id = ship.getId();
             this.engine = Global.getCombatEngine();
         }
-        final float FLUX_PER_TIMEFLOW = 2, PPT_MULT = 1.25f;
+        final float FLUX_PER_TIMEFLOW = 2, PPT_MULT = 1.5f;
         @Override
         public void advance(float amount, List<InputEventAPI> events) {
             if (engine.isPaused())
@@ -64,7 +64,7 @@ public class sd_nullifier extends BaseShipSystemScript {
 
             float effectLevel = ship.getSystem().getEffectLevel();
 
-            // make target's PPT and CR degrade 25% faster
+            // make target's PPT and CR degrade faster
             targetStats.getCRLossPerSecondPercent().modifyMult(id, PPT_MULT * effectLevel);
             targetStats.getPeakCRDuration().modifyFlat(id, -((PPT_MULT - 1) * amount * effectLevel));
 
@@ -77,6 +77,10 @@ public class sd_nullifier extends BaseShipSystemScript {
             for (Map.Entry<String, MutableStat.StatMod> nullifier : targetDynamic.getMod("sd_nullifier").getFlatBonuses().entrySet())
                 if (nullifier.getValue().getValue() > nullificationLevel)
                     nullificationLevel = nullifier.getValue().getValue();
+
+            target.fadeToColor("sd_stasisfield", sd_util.timeUnderColor, 0.25f, 0.25f, 0.66f * nullificationLevel);
+            target.setJitterUnder("sd_stasisfield", sd_util.timeUnderColor, nullificationLevel, 10, 0, 10);
+            target.setJitter("sd_stasisfield", sd_util.timeColor, nullificationLevel, 1, 0, 5);
 
             // 3. Apply our timeflow change according to the biggest effectLevel
             targetStats.getTimeMult().unmodify("sd_nullifier");
