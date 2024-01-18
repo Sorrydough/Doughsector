@@ -33,20 +33,15 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 
 public class sd_moteControlScript extends BaseShipSystemScript {
-	
 	protected static float MAX_ATTRACTOR_RANGE = 3000f;
 	public static float MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD = 2000f;
 	public static float MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD = 1000f;
-	
 	public static int MAX_MOTES = 30;
 	public static int MAX_MOTES_HF = 50;
-	
 	public static float ANTI_FIGHTER_DAMAGE = 200;
 	public static float ANTI_FIGHTER_DAMAGE_HF = 1000;
-	
 	public static float ATTRACTOR_DURATION_LOCK = 20f;
 	public static float ATTRACTOR_DURATION = 10f;
-	
 	public static class MoteData {
 		public Color jitterColor;
 		public Color empColor;
@@ -56,11 +51,8 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		public String loopSound;
 	}
 	
-	public static Map<String, MoteData> MOTE_DATA = new HashMap<String, MoteData>();
-	
+	public static Map<String, MoteData> MOTE_DATA = new HashMap<>();
 	public static String MOTELAUNCHER = "motelauncher";
-	public static String MOTELAUNCHER_HF = "motelauncher_hf";
-	
 	static {
 		MoteData normal = new MoteData();
 		normal.jitterColor = new Color(100,165,255,175);
@@ -71,28 +63,11 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		normal.loopSound = "mote_attractor_loop";
 		
 		MOTE_DATA.put(MOTELAUNCHER, normal);
-		
-		MoteData hf = new MoteData();
-		hf.jitterColor = new Color(255,100,255,175);
-		hf.empColor = new Color(255,100,255,255);
-		hf.maxMotes = MAX_MOTES_HF;
-		hf.antiFighterDamage = ANTI_FIGHTER_DAMAGE_HF;
-		hf.impactSound = "mote_attractor_impact_damage";
-		hf.loopSound = "mote_attractor_loop_dark";
-		
-		MOTE_DATA.put(MOTELAUNCHER_HF, hf);
 	}
-	
-	public static boolean isHighFrequency(ShipAPI ship) {
-		//if (true) return true;
-		return ship != null && ship.getVariant().hasHullMod(HullMods.HIGH_FREQUENCY_ATTRACTOR);
-	}
-	
+
 	public static String getWeaponId(ShipAPI ship) {
-		if (isHighFrequency(ship)) return MOTELAUNCHER_HF;
 		return MOTELAUNCHER;
 	}
-	
 	public static float getAntiFighterDamage(ShipAPI ship) {
 		return MOTE_DATA.get(getWeaponId(ship)).antiFighterDamage;
 	}
@@ -117,8 +92,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 	
 	public static class SharedMoteAIData {
 		public float elapsed = 0f;
-		public List<MissileAPI> motes = new ArrayList<MissileAPI>();
-		
+		public List<MissileAPI> motes = new ArrayList<>();
 		public float attractorRemaining = 0f;
 		public Vector2f attractorTarget = null;
 		public ShipAPI attractorLock = null;
@@ -135,7 +109,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 	}
 
 	protected IntervalUtil launchInterval = new IntervalUtil(0.75f, 1.25f);
-	protected WeightedRandomPicker<WeaponSlotAPI> launchSlots = new WeightedRandomPicker<WeaponSlotAPI>();
+	protected WeightedRandomPicker<WeaponSlotAPI> launchSlots = new WeightedRandomPicker<>();
 	protected WeaponSlotAPI attractor = null;
 	protected boolean findNewTargetOnUse = true;
 	
@@ -268,17 +242,9 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 			
 			float emp = 0;
 			float dam = 0;
-			EmpArcEntityAPI arc = engine.spawnEmpArc(ship, slotLoc, ship, target,
-							   DamageType.ENERGY, 
-							   dam,
-							   emp, // emp 
-							   100000f, // max range 
-							   "mote_attractor_targeted_ship",
-							   40f, // thickness
-							   //new Color(100,165,255,255),
-							   sd_moteControlScript.getEMPColor(ship),
-							   new Color(255,255,255,255)
-							   );
+			EmpArcEntityAPI arc = engine.spawnEmpArc(ship, slotLoc, ship, target, DamageType.ENERGY, dam, emp,100000f,"mote_attractor_targeted_ship",40f,
+							   							sd_moteControlScript.getEMPColor(ship),
+														new Color(255,255,255,255));
 			if (data.attractorLock != null) {
 				arc.setTargetToShipCenter(slotLoc, data.attractorLock);
 			}
@@ -334,21 +300,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		}
 		return targetLoc;
 	}
-	
-	public boolean isMouseInRange(ShipAPI from) {
-		Vector2f targetLoc = new Vector2f(from.getMouseTarget());
-		return isLocationInRange(from, targetLoc);
-	}
-	
-	public boolean isLocationInRange(ShipAPI from, Vector2f loc) {
-		findSlots(from);
-		
-		Vector2f slotLoc = attractor.computePosition(from);
-		float dist = Misc.getDistance(slotLoc, loc);
-        return !(dist > getRange(from));
-    }
-	
-	
+
 	public ShipAPI getLockTarget(ShipAPI from, Vector2f loc) {
 		Vector2f slotLoc = attractor.computePosition(from);
 		for (ShipAPI other : Global.getCombatEngine().getShips()) {
@@ -373,10 +325,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 		return ship.getMutableStats().getSystemRangeBonus().computeEffective(MAX_ATTRACTOR_RANGE);
 	}
 	
-	protected EveryFrameCombatPlugin createTargetJitterPlugin(final ShipAPI target,
-															  final float in, 
-															  final float out,
-															  final Color jitterColor) {
+	protected EveryFrameCombatPlugin createTargetJitterPlugin(final ShipAPI target, final float in, final float out, final Color jitterColor) {
 		return new BaseEveryFrameCombatPlugin() {
 			float elapsed = 0f;
 			@Override
@@ -384,8 +333,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 				if (Global.getCombatEngine().isPaused()) return;
 				
 				elapsed += amount;
-				
-				
+
 				float level = 0f;
 				if (elapsed < in) {
 					level = elapsed / in;

@@ -4,7 +4,6 @@ sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster
 sd_gravlance,WEAPON,"Effectively a modified graviton beam, this variant trades continuous fire capability for dramatically simplified mounting requirements."
 sd_antimatterlauncher,WEAPON,Launches proximity-fused explosive canisters. Reloading is quite simple compared to other missiles of its size.
 sd_antimatterlauncher_pod,WEAPON,"Launches a wide screen of proximity-fused explosive canisters, providing effective area denial or close-in strike capability."
-sd_dragon_single,WEAPON,The tactical flexibility of a reliable torpedo compatible with any standard missile hardpoint more than justifies the extreme mounting complexity inherent to the dragonfire platform.
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
 sd_canisterantimatter,SHIP_SYSTEM,Launches proximity-fused explosive canisters.
@@ -13,4 +12,3 @@ sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. Generates more 
 sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and generates motes. Nearby motes are rallied to this ship while active.
 sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy.
 sd_nullifier,SHIP_SYSTEM,Accelerates the decay of the target’s combat readiness and normalizes their timeflow with that of realspace. Generates flux based on the magnitude of the timeflow correction.
-sd_stasisfield,SHIP_SYSTEM,"Dramatically reduces the target’s timeflow, damage taken, and shield arc. Generates significant flux."

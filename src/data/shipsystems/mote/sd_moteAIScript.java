@@ -24,19 +24,13 @@ public class sd_moteAIScript implements MissileAIPlugin {
 	public static float MAX_HARD_AVOID_RANGE = 200;
 	public static float AVOID_RANGE = 50;
 	public static float COHESION_RANGE = 100;
-
-	public static float ATTRACTOR_LOCK_STOP_FLOCKING_ADD = 300f; 
-	
+	public static float ATTRACTOR_LOCK_STOP_FLOCKING_ADD = 300f;
 	protected MissileAPI missile;
-	
 	protected IntervalUtil tracker = new IntervalUtil(0.05f, 0.1f);
-	
 	protected IntervalUtil updateListTracker = new IntervalUtil(0.05f, 0.1f);
 	protected List<MissileAPI> missileList = new ArrayList<MissileAPI>();
 	protected List<CombatEntityAPI> hardAvoidList = new ArrayList<CombatEntityAPI>();
-	
 	protected float r;
-
 	protected CombatEntityAPI target;
 	protected sd_moteControlScript.SharedMoteAIData data;
 	
@@ -120,9 +114,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 				hardAvoiding = f > 0.5f;
 			}
 		}
-		
-		
-		//for (MissileAPI otherMissile : missileList) {
+
 		for (MissileAPI otherMissile : data.motes) {
 			if (otherMissile == missile) continue;
 			
@@ -146,14 +138,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 				dir.scale(f * w);
 				Vector2f.add(total, dir, total);
 			}
-			
-//			if (dist < cohesionRange && dist > avoidRange) {
-//				//Vector2f dir = Utils.getUnitVectorAtDegreeAngle(Utils.getAngleInDegrees(missile.getLocation(), mote.getLocation()));
-//				Vector2f dir = Utils.getUnitVectorAtDegreeAngle(Utils.getAngleInDegrees(mote.getLocation(), missile.getLocation()));
-//				float f = dist / cohesionRange - 1f;
-//				dir.scale(f * 0.5f);
-//				Vector2f.add(total, dir, total);
-//			}
 		}
 		
 		if (missile.getSource() != null) {
@@ -204,14 +188,9 @@ public class sd_moteAIScript implements MissileAIPlugin {
 			missile.getEngineController().forceShowAccelerating();
 		}
 	}
-	
-	//public void accumulate(FlockingData data, Vector2f )
-
-
 	protected IntervalUtil flutterCheck = new IntervalUtil(2f, 4f);
 	protected FaderUtil currFlutter = null;
 	protected float flutterRemaining = 0f;
-	
 	protected float elapsed = 0f;
 	public void advance(float amount) {
 		if (missile.isFizzling()) return;
@@ -235,35 +214,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 			}
 		}
 		
-//		if (flutterRemaining > 0) {
-//			flutterRemaining -= amount;
-//			if (currFlutter == null) {
-//				float min = 1/15f;
-//				float max = 1/4f;
-//				float dur = min + (max - min) * (float) Math.random();
-//				//dur *= 0.5f;
-//				currFlutter = new FaderUtil(0f, dur/2f, dur/2f, false, true);
-//				currFlutter.fadeIn();
-//			}
-//			currFlutter.advance(amount);
-//			if (currFlutter.isFadedOut()) {
-//				currFlutter = null;
-//			}
-//		} else {
-//			currFlutter = null;
-//		}
-//		
-//		if (currFlutter != null) {
-//			missile.setGlowRadius(currFlutter.getBrightness() * 30f);
-//		} else {
-//			missile.setGlowRadius(0f);
-//		}
-//		if (true) {
-//			doFlocking();
-//			return;
-//		}
-		
-		
 		if (elapsed >= 0.5f) {
 			
 			boolean wantToFlock = !isTargetValid();
@@ -279,10 +229,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 			} else {
 				CombatEngineAPI engine = Global.getCombatEngine();
 				Vector2f targetLoc = engine.getAimPointWithLeadForAutofire(missile, 1.5f, target, 50);
-				engine.headInDirectionWithoutTurning(missile, 
-								     				 Misc.getAngleInDegrees(missile.getLocation(), targetLoc),
-								     				 10000);
-				//AIUtils.turnTowardsPointV2(missile, targetLoc);
+				engine.headInDirectionWithoutTurning(missile, Misc.getAngleInDegrees(missile.getLocation(), targetLoc),10000);
 				if (r > 0.5f) {
 					missile.giveCommand(ShipCommand.TURN_LEFT);
 				} else {
@@ -297,7 +244,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 			if (elapsed >= 0.5f) {
 				acquireNewTargetIfNeeded();
 			}
-			//causeEnemyMissilesToTargetThis();
 		}
 	}
 	
@@ -309,7 +255,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		CombatEngineAPI engine = Global.getCombatEngine();
 		
 		if (target != null && target instanceof ShipAPI && ((ShipAPI)target).isHulk()) return false;
-		
 		List list = null;
 		if (target instanceof ShipAPI) {
 			list = engine.getShips();
@@ -384,7 +329,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		
 		target = closest;
 	}
-	
 	protected int getNumMotesTargeting(CombatEntityAPI other) {
 		int count = 0;
 		for (MissileAPI mote : data.motes) {
@@ -398,7 +342,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		}
 		return count;
 	}
-	
 	public Vector2f getAttractorLoc() {
 		Vector2f attractor = null;
 		if (data.attractorTarget != null) {
@@ -409,7 +352,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		}
 		return attractor;
 	}
-
 	public CombatEntityAPI getTarget() {
 		return target;
 	}

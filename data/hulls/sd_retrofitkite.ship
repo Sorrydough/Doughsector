@@ -15,12 +15,14 @@
     "sd_utilityhullmod",
     "sd_groundsupport"
   ],
+  "builtInWings": [
+    "sd_fightersupportWing"
+  ],
   "builtInWeapons": {
     "DEC01": "sd_retrofitkite_hangar",
     "DEC02": "sd_decoBlinker",
     "DEC03": "sd_decoBlinker"
   },
-  "builtInWings": ["sd_fightersupportWing"],
   "weaponSlots": [
     {
       "id": "HRD01",
@@ -37,8 +39,8 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -5,
-      "locations": [16, 21]
+      "angle": -10,
+      "locations": [14, 24]
     },
     {
       "id": "SYS02",
@@ -46,8 +48,8 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 5,
-      "locations": [16, -21]
+      "angle": 10,
+      "locations": [14, -24]
     },
     {
       "id": "SYS03",
@@ -55,8 +57,8 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 35,
-      "locations": [13, 21]
+      "angle": 15,
+      "locations": [11, 24]
     },
     {
       "id": "SYS04",
@@ -64,8 +66,8 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -35,
-      "locations": [13, -21]
+      "angle": -15,
+      "locations": [11, -24]
     },
     {
       "id": "SYS05",
@@ -73,8 +75,8 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": 69,
-      "locations": [10, 21]
+      "angle": 40,
+      "locations": [8, 24]
     },
     {
       "id": "SYS06",
@@ -82,8 +84,8 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 10,
-      "angle": -69,
-      "locations": [10, -21]
+      "angle": -40,
+      "locations": [8, -24]
     },
     {
       "id": "DEC02",
@@ -104,7 +106,7 @@
       "locations": [3, -38.5]
     },
     {
-      "id": "SYS07",
+      "id": "SYS09",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
@@ -113,7 +115,7 @@
       "locations": [-22, 5]
     },
     {
-      "id": "SYS08",
+      "id": "SYS10",
       "size": "SMALL",
       "type": "SYSTEM",
       "mount": "HIDDEN",
@@ -128,7 +130,25 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [14.5, -0]
+      "locations": [12.5, -0]
+    },
+    {
+      "id": "SYS07",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 60,
+      "locations": [5, 24]
+    },
+    {
+      "id": "SYS08",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": -60,
+      "locations": [5, -24]
     },
     {
       "id": "LB 1",
@@ -138,8 +158,8 @@
       "arc": 360,
       "angle": 0,
       "locations": [
-        18, 12,
-        18, -12
+        16, 13,
+        16, -13
       ]
     }
   ],

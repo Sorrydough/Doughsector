@@ -1,7 +1,6 @@
 Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Do The Elite Ships System
-- Write AI scripts for stasis and nullifier
-- Do nullifier and stasis VFX
+- Write AI scripts for stasis and mote armor
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 - Do another pass on ship names
 - Integrate engine color fade for all systems
@@ -12,9 +11,7 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Fix all the variants that I broke
 - Hullmod icons
 - Make sure the forum download link is hidden behind a simple riddle
-- Figure out what to do about nullifier shield arc change, make stasis field shield arc change never send it below 35 degrees
 - Doublecheck combat engine speed modification for timeflow systems
-- Rebalance KB fighter for no weapon flux hullmod
 - Debug ship.setForceCarrierPullBackTime()
 - Fix interference frigate looking stupid
 - Add custom phasefield
@@ -25,6 +22,7 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Swap engines on retrofits to old style, ensure they have old agility stats
 - Ensure all my custom ships have correct agility stats (aka slightly better than vanilla)
 - Do another pass on carrier stats
+- Create engine reigniter hullmod
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Expand upon custom fleet command AI so it can work in campaign

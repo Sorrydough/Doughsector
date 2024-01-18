@@ -1,0 +1,294 @@
+{
+  "hullName": "New Hull",
+  "hullId": "sd_destroyer",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/sd_destroyer.png",
+  "style": "SD_TECH",
+  "height": 177,
+  "width": 108,
+  "center": [55, 88],
+  "collisionRadius": 108,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 99.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "sd_utilityhullmod",
+    "advancedoptics"
+  ],
+  "builtInWeapons": {
+    "DEC01": "sd_decoBlinker",
+    "DEC02": "sd_decoBlinker",
+    "DEC03": "sd_decoBlinker",
+    "DEC04": "sd_decoBlinker",
+    "DEC05": "sd_decoBlinker",
+    "THR01": "sd_decoVectorController",
+    "THR02": "sd_decoVectorController",
+    "THR03": "sd_decoVectorController",
+    "THR04": "sd_decoVectorController"
+  },
+  "weaponSlots": [
+    {
+      "id": "HRD01",
+      "size": "MEDIUM",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [58, -25]
+    },
+    {
+      "id": "HRD02",
+      "size": "MEDIUM",
+      "type": "SYNERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [28, -25]
+    },
+    {
+      "id": "HRD03",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [25, 28]
+    },
+    {
+      "id": "TRT02",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 215,
+      "angle": 0,
+      "locations": [46, -0]
+    },
+    {
+      "id": "TRT03",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 215,
+      "angle": 90,
+      "locations": [-31, 35]
+    },
+    {
+      "id": "TRT04",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 215,
+      "angle": -90,
+      "locations": [-31, -35]
+    },
+    {
+      "id": "THR01",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 45,
+      "locations": [-4, 37]
+    },
+    {
+      "id": "THR02",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -45,
+      "locations": [-4, -37]
+    },
+    {
+      "id": "DEC04",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [24, 41.5]
+    },
+    {
+      "id": "DEC02",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [61.5, 25.5]
+    },
+    {
+      "id": "DEC01",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [76, -15.5]
+    },
+    {
+      "id": "DEC03",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [52, -42.5]
+    },
+    {
+      "id": "DEC05",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [23.5, -46.5]
+    },
+    {
+      "id": "THR03",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 135,
+      "locations": [-61, 32]
+    },
+    {
+      "id": "THR04",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -135,
+      "locations": [-61, -32]
+    },
+    {
+      "id": "TRT01",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [-11, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-87, -0],
+      "length": 75,
+      "width": 15,
+      "angle": 180,
+      "contrailSize": 15,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-87, 3],
+      "length": 48,
+      "width": 12,
+      "angle": 180,
+      "contrailSize": 12,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-87, -3],
+      "length": 48,
+      "width": 12,
+      "angle": 180,
+      "contrailSize": 12,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-84, 13],
+      "length": 60,
+      "width": 12,
+      "angle": 180,
+      "contrailSize": 12,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-84, -13],
+      "length": 60,
+      "width": 12,
+      "angle": 180,
+      "contrailSize": 12,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-84, -15],
+      "length": 36,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-84, -11],
+      "length": 36,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-84, 11],
+      "length": 36,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-84, 15],
+      "length": 36,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-61, 32],
+      "length": 25,
+      "width": 3,
+      "angle": 135,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-61, -32],
+      "length": 27,
+      "width": 3,
+      "angle": -135,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-4, 37],
+      "length": 25,
+      "width": 3,
+      "angle": 45,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    },
+    {
+      "location": [-4, -37],
+      "length": 25,
+      "width": 3,
+      "angle": -45,
+      "contrailSize": 3,
+      "style": "sd_blockThruster"
+    }
+  ],
+  "bounds": [
+    84.5, -0.5,
+    75, 14,
+    14.5, 41.5,
+    1, 30,
+    -32, 51.5,
+    -80.5, 20,
+    -79.5, -19,
+    -33.5, -51,
+    3.5, -30.5,
+    17.5, -46.5,
+    64.5, -37
+  ]
+}
