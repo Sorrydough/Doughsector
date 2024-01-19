@@ -1,49 +1,62 @@
+Arthr Stuff:
+- Hullmod icons
+- Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, etc
+- Really Converted Hangars
+- Export, Pirate, Path skin variants
+
 Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Do The Elite Ships System
 - Write AI scripts for stasis and mote armor
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 - Do another pass on ship names
-- Integrate engine color fade for all systems
-- Glowmaps for decos
 - Make a placeholder faction
 - Add music
 - Return custom fleet command AI to working in mission
 - Fix all the variants that I broke
-- Hullmod icons
 - Make sure the forum download link is hidden behind a simple riddle
-- Doublecheck combat engine speed modification for timeflow systems
-- Debug ship.setForceCarrierPullBackTime()
-- Fix interference frigate looking stupid
 - Add custom phasefield
-- Commissioned crew effect: Improved CP regeneration
 - Doublecheck/fix fleet points
 - Update AI tweaks, integrate its autofire plugin
 - Ensure autoforge can't reload super expensive missiles (aka round down)
 - Swap engines on retrofits to old style, ensure they have old agility stats
-- Ensure all my custom ships have correct agility stats (aka slightly better than vanilla)
 - Do another pass on carrier stats
+- Inertial damper for bomblets
+- Ensure hardpoint and turret sprites are all correctly aligned
+- Figure out a proper way to discourage people using multiple of my capital
+
+
+Version 1.5 Stuff: (easy to do, but not a priority)
+- Add GUI hover sprite for fighter weapons
+- Commissioned crew effect: Improved CP regeneration
+- Hullmod that adds hardflux dissipation based on the shield arc
+- Copy legio AI behavior where it doesn't rotate armor etc
+- Debug ship.setForceCarrierPullBackTime()
+- Integrate engine color fade for all systems
+- Glowmaps for decos
+- Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
 - Create engine reigniter hullmod
+
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Expand upon custom fleet command AI so it can work in campaign
-- Really Converted Hangars
-- Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, etc
-- Export, Pirate, Path skin variants
-- Copy legio AI behavior where it doesn't rotate armor etc
-- Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
-- Some sort of mote-creating engine hullmod. Maybe 0-flux related?
 - When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
 - Run a checksum on my own mod so I know when people have tampered with it
 - Add a functionality to the attack manager where it chooses between engage or eliminate depending on whether enough ships ar enearby to actually kill the target immediately
 - Check if it's possible to apply an avoid order to a waypoint
 - Make SO count as a dmod
-- Make arthr do another art pass on my ships - rework interference destroyer & light carriers
-- Add 35 DP capital battlecarrier, support cruiser, 9 DP energy manticore
+
+
+Version 2.5 Stuff: (Advanced agent interaction)
+- When your ships are destroyed in combat, they become salvageable derelicts in the system later
+- CR rework to make retreating from fights a thing
+- Have AI fleets salvage their destroyed ships back into their fleet if you're disengage cheesing them, Maybe even salvage YOUR ships??
+- Potential storypoint effects: Reconfigure hullmods/smods/loadouts, summon support fleet upon disengagement, restore ships to combat readiness, minefield
+
 
 Version 3.0 Stuff: (scope creep)
 - Improve venting behavior - needs to use starficz' calculate incoming damage utility, account for beams
 - Modify tags on various vanilla weapons to improve AI behavior - squalls & breach srms for starters
-- Interfere with commissioned crews and substance abuse
+- Interfere with commissioned crews and substance abuse somehow
 - In my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
 - Crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
 - Global combatplugin for RTS mode: 5% range?, very good autofire accuracy?, 25% less recoil?
@@ -53,3 +66,4 @@ Version 3.0 Stuff: (scope creep)
 - Write a guide for fleet command AI
 - Write a guide for shipsystem AI
 - Custom quality captains
+
