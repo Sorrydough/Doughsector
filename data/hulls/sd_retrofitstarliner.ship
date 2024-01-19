@@ -1,4 +1,5 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_retrofitstarliner",
   "hullSize": "CRUISER",
   "spriteName": "graphics/ships/sd_retrofitstarliner.png",
@@ -6,9 +7,9 @@
   "height": 284,
   "width": 126,
   "center": [63, 140],
-  "collisionRadius": 202,
+  "collisionRadius": 187.5,
   "shieldCenter": [0, -0],
-  "shieldRadius": 187,
+  "shieldRadius": 168.5,
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod"

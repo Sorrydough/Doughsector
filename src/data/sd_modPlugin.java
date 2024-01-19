@@ -47,16 +47,11 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("salamanderpod");
             sd_weaponsList.add("breach");
             sd_weaponsList.add("breachpod");
-            sd_weaponsList.add("gazer");
-            sd_weaponsList.add("gazerpod");
-            sd_weaponsList.add("dragon");
-            sd_weaponsList.add("dragonpod");
             sd_weaponsList.add("pilum");
             sd_weaponsList.add("pilum_large");
             sd_weaponsList.add("squall");
             //self-insert donut steel weapons
             sd_weaponsList.add("sd_gravlance");
-            sd_weaponsList.add("sd_dragon_single");
             sd_weaponsList.add("sd_antimatterlauncher");
             sd_weaponsList.add("sd_antimatterpod");
         }

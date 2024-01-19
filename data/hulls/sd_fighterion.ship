@@ -1,14 +1,15 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_fighterion",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/sd_fighterion.png",
   "style": "SD_TECH",
   "height": 18,
   "width": 18,
-  "center": [9.5, 8.5],
-  "collisionRadius": 16.5,
+  "center": [9, 9],
+  "collisionRadius": 18,
   "shieldCenter": [0, -0],
-  "shieldRadius": 15.5,
+  "shieldRadius": 15,
   "viewOffset": 0,
   "builtInMods": [
     "no_weapon_flux"
@@ -21,7 +22,7 @@
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
-      "locations": [-1, -0]
+      "locations": [-1.5, -0.5]
     },
     {
       "id": "SYS01",
@@ -30,12 +31,12 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [0.5, 4]
+      "locations": [0, 3.5]
     }
   ],
   "engineSlots": [
     {
-      "location": [-6.5, 5],
+      "location": [-7, 4.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -43,7 +44,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-6.5, -4],
+      "location": [-7, -4.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -51,7 +52,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-6.5, -2],
+      "location": [-7, -2.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -59,7 +60,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-6.5, 3],
+      "location": [-7, 2.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -68,9 +69,9 @@
     }
   ],
   "bounds": [
-    -6, -5,
-    6, -6,
-    6, 7,
-    -6, 6
+    -6.5, -5.5,
+    5.5, -6.5,
+    5.5, 6.5,
+    -6.5, 5.5
   ]
 }

@@ -6,8 +6,8 @@
   "style": "SD_TECH",
   "height": 36,
   "width": 36,
-  "center": [17.5, 19],
-  "collisionRadius": 25.5,
+  "center": [18, 19],
+  "collisionRadius": 26.5,
   "shieldCenter": [0, -0],
   "shieldRadius": 23,
   "viewOffset": 0,
@@ -24,7 +24,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
-      "locations": [7, 8]
+      "locations": [7, 8.5]
     },
     {
       "id": "HRD02",
@@ -33,7 +33,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
-      "locations": [7, -9]
+      "locations": [7, -8.5]
     },
     {
       "id": "SYS02",
@@ -42,7 +42,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -38.5,
-      "locations": [-4, -7.5]
+      "locations": [-4, -7]
     },
     {
       "id": "WS0001",
@@ -51,12 +51,12 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 38.5,
-      "locations": [-4, 6.5]
+      "locations": [-4, 7]
     }
   ],
   "engineSlots": [
     {
-      "location": [-11, 7.5],
+      "location": [-11, 8],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -64,7 +64,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-11, -8.5],
+      "location": [-11, -8],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -72,7 +72,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-11, -7],
+      "location": [-11, -6.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -80,7 +80,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-11, 6],
+      "location": [-11, 6.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -89,14 +89,14 @@
     }
   ],
   "bounds": [
-    -11, -8,
-    -4.5, -14.5,
-    7, -14.5,
-    10, -9,
-    4, -0.5,
-    10, 8,
-    7, 13.5,
-    -4.5, 13.5,
-    -11, 7
+    -11, -7.5,
+    -4.5, -14,
+    7, -14,
+    10, -8.5,
+    4, 0,
+    10, 8.5,
+    7, 14,
+    -4.5, 14,
+    -11, 7.5
   ]
 }

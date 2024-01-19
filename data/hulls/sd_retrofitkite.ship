@@ -6,10 +6,10 @@
   "style": "SD_TECH",
   "height": 66,
   "width": 82,
-  "center": [41, 28],
-  "collisionRadius": 64,
-  "shieldCenter": [0, 0],
-  "shieldRadius": 58,
+  "center": [41, 27],
+  "collisionRadius": 59.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 52,
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod",
@@ -31,7 +31,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [-6.5, -0]
+      "locations": [-5.5, -0]
     },
     {
       "id": "SYS01",
@@ -40,7 +40,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -10,
-      "locations": [14, 24]
+      "locations": [15, 24]
     },
     {
       "id": "SYS02",
@@ -49,7 +49,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 10,
-      "locations": [14, -24]
+      "locations": [15, -24]
     },
     {
       "id": "SYS03",
@@ -58,7 +58,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 15,
-      "locations": [11, 24]
+      "locations": [12, 24]
     },
     {
       "id": "SYS04",
@@ -67,7 +67,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -15,
-      "locations": [11, -24]
+      "locations": [12, -24]
     },
     {
       "id": "SYS05",
@@ -76,7 +76,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 40,
-      "locations": [8, 24]
+      "locations": [9, 24]
     },
     {
       "id": "SYS06",
@@ -85,7 +85,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -40,
-      "locations": [8, -24]
+      "locations": [9, -24]
     },
     {
       "id": "DEC02",
@@ -94,7 +94,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [3, 38.5]
+      "locations": [4, 38.5]
     },
     {
       "id": "DEC03",
@@ -103,7 +103,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [3, -38.5]
+      "locations": [4, -38.5]
     },
     {
       "id": "SYS09",
@@ -112,7 +112,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 150,
-      "locations": [-22, 5]
+      "locations": [-21, 5]
     },
     {
       "id": "SYS10",
@@ -121,7 +121,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -150,
-      "locations": [-22, -5]
+      "locations": [-21, -5]
     },
     {
       "id": "DEC01",
@@ -130,7 +130,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [12.5, -0]
+      "locations": [13.5, -0]
     },
     {
       "id": "SYS07",
@@ -139,7 +139,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 60,
-      "locations": [5, 24]
+      "locations": [6, 24]
     },
     {
       "id": "SYS08",
@@ -148,7 +148,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -60,
-      "locations": [5, -24]
+      "locations": [6, -24]
     },
     {
       "id": "LB 1",
@@ -158,14 +158,14 @@
       "arc": 360,
       "angle": 0,
       "locations": [
-        16, 13,
-        16, -13
+        17, 13,
+        17, -13
       ]
     }
   ],
   "engineSlots": [
     {
-      "location": [-21, 19.5],
+      "location": [-20, 19.5],
       "length": 36,
       "width": 9,
       "angle": 180,
@@ -173,7 +173,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-21, -19.5],
+      "location": [-20, -19.5],
       "length": 36,
       "width": 9,
       "angle": 180,
@@ -181,7 +181,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-26, -12],
+      "location": [-25, -12],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -189,7 +189,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-22, 27.5],
+      "location": [-21, 27.5],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -197,7 +197,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-22, -27.5],
+      "location": [-21, -27.5],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -205,7 +205,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-26, 12],
+      "location": [-25, 12],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -214,9 +214,9 @@
     }
   ],
   "bounds": [
-    37, 0,
-    -5.5, 38.5,
-    -23.5, -0,
-    -4.5, -39
+    38, 0,
+    -4.5, 38.5,
+    -22.5, -0,
+    -3.5, -39
   ]
 }

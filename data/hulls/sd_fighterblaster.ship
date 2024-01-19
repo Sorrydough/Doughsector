@@ -1,12 +1,13 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_fighterblaster",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/sd_fighterblaster.png",
   "style": "SD_TECH",
   "height": 38,
   "width": 32,
-  "center": [16.5, 18.5],
-  "collisionRadius": 28,
+  "center": [16, 19],
+  "collisionRadius": 29.5,
   "shieldCenter": [0, -0],
   "shieldRadius": 26,
   "viewOffset": 0,
@@ -22,7 +23,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
-      "locations": [10, -3]
+      "locations": [9.5, -3.5]
     },
     {
       "id": "TRT01",
@@ -31,12 +32,12 @@
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
-      "locations": [-2, 4]
+      "locations": [-2.5, 3.5]
     }
   ],
   "engineSlots": [
     {
-      "location": [-15.5, 8],
+      "location": [-16, 7.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -44,7 +45,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-15.5, -7],
+      "location": [-16, -7.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -52,7 +53,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-15.5, 7],
+      "location": [-16, 6.5],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -60,7 +61,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-15.5, -6],
+      "location": [-16, -6.5],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -68,7 +69,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-15.5, -5],
+      "location": [-16, -5.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -76,7 +77,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-15.5, 6],
+      "location": [-16, 5.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -85,11 +86,11 @@
     }
   ],
   "bounds": [
-    -15, -7,
-    -6, -12,
-    10, -7,
-    16.5, 3.5,
-    -1.5, 11.5,
-    -15, 8.5
+    -15.5, -7.5,
+    -6.5, -12.5,
+    9.5, -7.5,
+    16, 3,
+    -2, 11,
+    -15.5, 8
   ]
 }

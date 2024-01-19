@@ -6,10 +6,10 @@
   "style": "SD_TECH",
   "height": 190,
   "width": 190,
-  "center": [95, 92.5],
-  "collisionRadius": 121.5,
+  "center": [95, 95],
+  "collisionRadius": 114,
   "shieldCenter": [0, -0],
-  "shieldRadius": 115.5,
+  "shieldRadius": 107,
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod",
@@ -36,7 +36,7 @@
       "mount": "TURRET",
       "arc": 240,
       "angle": 90,
-      "locations": [2.5, 58]
+      "locations": [0, 58]
     },
     {
       "id": "TRT02",
@@ -45,7 +45,7 @@
       "mount": "TURRET",
       "arc": 240,
       "angle": 90,
-      "locations": [2.5, 38]
+      "locations": [0, 38]
     },
     {
       "id": "TRT03",
@@ -54,7 +54,7 @@
       "mount": "TURRET",
       "arc": 240,
       "angle": -90,
-      "locations": [2.5, -38]
+      "locations": [0, -38]
     },
     {
       "id": "TRT04",
@@ -63,7 +63,7 @@
       "mount": "TURRET",
       "arc": 240,
       "angle": -90,
-      "locations": [2.5, -58]
+      "locations": [0, -58]
     },
     {
       "id": "HRD01",
@@ -72,7 +72,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [67.5, -0]
+      "locations": [65, -0]
     },
     {
       "id": "THR04",
@@ -81,7 +81,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -135,
-      "locations": [-73, -31.5]
+      "locations": [-75.5, -31.5]
     },
     {
       "id": "THR03",
@@ -90,7 +90,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 135,
-      "locations": [-73, 31.5]
+      "locations": [-75.5, 31.5]
     },
     {
       "id": "THR01",
@@ -99,7 +99,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 45,
-      "locations": [69.5, 16]
+      "locations": [67, 16]
     },
     {
       "id": "THR02",
@@ -108,7 +108,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -45,
-      "locations": [69.5, -16]
+      "locations": [67, -16]
     },
     {
       "id": "DEC05",
@@ -117,7 +117,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [8, 82.5]
+      "locations": [5.5, 82.5]
     },
     {
       "id": "DEC06",
@@ -126,7 +126,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 90,
-      "locations": [-30, 58]
+      "locations": [-32.5, 58]
     },
     {
       "id": "DEC04",
@@ -135,7 +135,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -90,
-      "locations": [26, -61.5]
+      "locations": [23.5, -61.5]
     },
     {
       "id": "DEC03",
@@ -144,7 +144,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [39.5, -49.5]
+      "locations": [37, -49.5]
     },
     {
       "id": "LB 1",
@@ -154,8 +154,8 @@
       "arc": 360,
       "angle": 0,
       "locations": [
-        -54, 33.5,
-        -54, -33.5
+        -56.5, 33.5,
+        -56.5, -33.5
       ]
     },
     {
@@ -165,7 +165,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [-46, -0]
+      "locations": [-48.5, -0]
     },
     {
       "id": "DEC01",
@@ -174,12 +174,12 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [-56, -0]
+      "locations": [-58.5, -0]
     }
   ],
   "engineSlots": [
     {
-      "location": [-78.5, 10],
+      "location": [-81, 10],
       "length": 45,
       "width": 9,
       "angle": 180,
@@ -187,7 +187,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-78.5, -10],
+      "location": [-81, -10],
       "length": 45,
       "width": 9,
       "angle": 180,
@@ -195,7 +195,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-79.5, -0],
+      "location": [-82, -0],
       "length": 60,
       "width": 12,
       "angle": 180,
@@ -203,7 +203,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-79.5, 2.5],
+      "location": [-82, 2.5],
       "length": 36,
       "width": 9,
       "angle": 180,
@@ -211,7 +211,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-79.5, -2.5],
+      "location": [-82, -2.5],
       "length": 36,
       "width": 9,
       "angle": 180,
@@ -219,7 +219,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-78.5, 12],
+      "location": [-81, 12],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -227,7 +227,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-78.5, 8],
+      "location": [-81, 8],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -235,7 +235,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-78.5, -12],
+      "location": [-81, -12],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -243,7 +243,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-78.5, -8],
+      "location": [-81, -8],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -251,7 +251,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [69.5, 16],
+      "location": [67, 16],
       "length": 27,
       "width": 3,
       "angle": 45,
@@ -259,7 +259,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [69.5, -16],
+      "location": [67, -16],
       "length": 27,
       "width": 3,
       "angle": -45,
@@ -267,7 +267,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-73, 31.5],
+      "location": [-75.5, 31.5],
       "length": 36,
       "width": 4,
       "angle": 135,
@@ -275,7 +275,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-73, -31.5],
+      "location": [-75.5, -31.5],
       "length": 36,
       "width": 4,
       "angle": -135,
@@ -284,11 +284,11 @@
     }
   ],
   "bounds": [
-    3.5, 79.5,
-    -76, 23.5,
-    -75.5, -22,
-    3.5, -77,
-    70.5, -12,
-    70, 12
+    1, 79.5,
+    -78.5, 23.5,
+    -78, -22,
+    1, -77,
+    68, -12,
+    67.5, 12
   ]
 }

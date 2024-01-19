@@ -1,14 +1,15 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_retrofitnebula",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_retrofitnebula.png",
   "style": "SD_TECH",
   "height": 200,
   "width": 120,
-  "center": [60, 99],
+  "center": [60, 100],
   "collisionRadius": 131,
-  "shieldCenter": [1, 0],
-  "shieldRadius": 122.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 121.5,
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod"
@@ -25,7 +26,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [77, 27]
+      "locations": [76, 27]
     },
     {
       "id": "HRD02",
@@ -34,7 +35,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [77, -27]
+      "locations": [76, -27]
     },
     {
       "id": "TRT01",
@@ -43,7 +44,7 @@
       "mount": "TURRET",
       "arc": 220,
       "angle": 105,
-      "locations": [-28, 38]
+      "locations": [-29, 38]
     },
     {
       "id": "TRT02",
@@ -52,7 +53,7 @@
       "mount": "TURRET",
       "arc": 220,
       "angle": -105,
-      "locations": [-28, -38]
+      "locations": [-29, -38]
     },
     {
       "id": "SYS01",
@@ -61,7 +62,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 5,
-      "locations": [93, 6]
+      "locations": [92, 6]
     },
     {
       "id": "SYS02",
@@ -70,7 +71,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -5,
-      "locations": [93, -6]
+      "locations": [92, -6]
     },
     {
       "id": "SYS03",
@@ -79,7 +80,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 40,
-      "locations": [90, 6]
+      "locations": [89, 6]
     },
     {
       "id": "SYS04r",
@@ -88,7 +89,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -40,
-      "locations": [90, -6]
+      "locations": [89, -6]
     },
     {
       "id": "SYS05",
@@ -97,7 +98,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 70,
-      "locations": [87, 6]
+      "locations": [86, 6]
     },
     {
       "id": "SYS06",
@@ -106,7 +107,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -70,
-      "locations": [87, -6]
+      "locations": [86, -6]
     },
     {
       "id": "SYS07",
@@ -115,7 +116,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 60,
-      "locations": [40, 43]
+      "locations": [39, 43]
     },
     {
       "id": "SYS08",
@@ -124,7 +125,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -60,
-      "locations": [40, -43]
+      "locations": [39, -43]
     },
     {
       "id": "SYS09",
@@ -133,7 +134,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 120,
-      "locations": [37, 43]
+      "locations": [36, 43]
     },
     {
       "id": "SYS10",
@@ -142,7 +143,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -120,
-      "locations": [37, -43]
+      "locations": [36, -43]
     },
     {
       "id": "SYS11",
@@ -151,7 +152,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 55,
-      "locations": [-68, 34]
+      "locations": [-69, 34]
     },
     {
       "id": "SYS12",
@@ -160,7 +161,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 125,
-      "locations": [-68, 31]
+      "locations": [-69, 31]
     },
     {
       "id": "SYS13",
@@ -169,7 +170,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -125,
-      "locations": [-68, -31]
+      "locations": [-69, -31]
     },
     {
       "id": "SYS14",
@@ -178,7 +179,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -55,
-      "locations": [-68, -34]
+      "locations": [-69, -34]
     },
     {
       "id": "SYS15",
@@ -187,7 +188,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": -165,
-      "locations": [-71, 32]
+      "locations": [-72, 32]
     },
     {
       "id": "SYS16",
@@ -196,7 +197,7 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 165,
-      "locations": [-71, -32]
+      "locations": [-72, -32]
     },
     {
       "id": "DEC01",
@@ -205,7 +206,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [93.5, 14.5]
+      "locations": [92.5, 14.5]
     },
     {
       "id": "DEC02",
@@ -214,12 +215,12 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [91, -15.5]
+      "locations": [90, -15.5]
     }
   ],
   "engineSlots": [
     {
-      "location": [-92, 12],
+      "location": [-93, 12],
       "length": 60,
       "width": 15,
       "angle": 180,
@@ -227,7 +228,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-92, -12],
+      "location": [-93, -12],
       "length": 60,
       "width": 15,
       "angle": -180,
@@ -235,7 +236,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-92, 15.5],
+      "location": [-93, 15.5],
       "length": 48,
       "width": 12,
       "angle": 180,
@@ -243,7 +244,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-92, 8.5],
+      "location": [-93, 8.5],
       "length": 48,
       "width": 12,
       "angle": 180,
@@ -251,7 +252,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-92, -8.5],
+      "location": [-93, -8.5],
       "length": 48,
       "width": 12,
       "angle": 180,
@@ -259,7 +260,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-92, -15.5],
+      "location": [-93, -15.5],
       "length": 48,
       "width": 12,
       "angle": 180,
@@ -268,17 +269,17 @@
     }
   ],
   "bounds": [
-    91, 16,
-    91, -16,
-    67, -38,
-    2, -38,
-    -8, -28,
-    -19, -51,
-    -88, -19,
-    -88, 19,
-    -19, 51,
-    -8, 28,
-    2, 39,
-    67, 39
+    90, 16,
+    90, -16,
+    66, -38,
+    1, -38,
+    -9, -28,
+    -20, -51,
+    -89, -19,
+    -89, 19,
+    -20, 51,
+    -9, 28,
+    1, 39,
+    66, 39
   ]
 }

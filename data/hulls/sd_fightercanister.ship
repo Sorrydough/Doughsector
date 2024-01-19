@@ -1,12 +1,13 @@
 {
+  "hullName": "New Hull",
   "hullId": "sd_fightercanister",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/sd_fightercanister.png",
   "style": "SD_TECH",
   "height": 36,
   "width": 36,
-  "center": [17.5, 16.5],
-  "collisionRadius": 28,
+  "center": [17, 18],
+  "collisionRadius": 31,
   "shieldCenter": [0, -0],
   "shieldRadius": 27,
   "viewOffset": 0,
@@ -22,12 +23,12 @@
       "mount": "HIDDEN",
       "arc": 10,
       "angle": 0,
-      "locations": [5.5, 3.5]
+      "locations": [4, 3]
     }
   ],
   "engineSlots": [
     {
-      "location": [-12.5, 8.5],
+      "location": [-14, 8],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -35,7 +36,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-12.5, -7.5],
+      "location": [-14, -8],
       "length": 24,
       "width": 6,
       "angle": 180,
@@ -43,7 +44,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-12.5, -9],
+      "location": [-14, -9.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -51,7 +52,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-12.5, 10],
+      "location": [-14, 9.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -59,7 +60,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-12.5, -6],
+      "location": [-14, -6.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -67,7 +68,7 @@
       "style": "sd_blockThruster"
     },
     {
-      "location": [-12.5, 7],
+      "location": [-14, 6.5],
       "length": 12,
       "width": 3,
       "angle": 180,
@@ -76,10 +77,10 @@
     }
   ],
   "bounds": [
-    -12, -8.5,
-    3, -14.5,
-    14, -7,
-    8, 13.5,
-    -12, 9
+    -13.5, -9,
+    1.5, -15,
+    12.5, -7.5,
+    6.5, 13,
+    -13.5, 8.5
   ]
 }

@@ -7,9 +7,9 @@
   "height": 290,
   "width": 140,
   "center": [72, 145],
-  "collisionRadius": 190,
+  "collisionRadius": 185,
   "shieldCenter": [0, -0],
-  "shieldRadius": 180.5,
+  "shieldRadius": 168,
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod"
