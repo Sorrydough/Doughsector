@@ -3,7 +3,7 @@ sd_ionbeam_fighter,WEAPON,An ion beam unremarkable in all ways other than its mi
 sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
 sd_gravlance,WEAPON,"Effectively a modified graviton beam, this variant trades continuous fire capability for dramatically simplified mounting requirements."
 sd_antimatterlauncher,WEAPON,Launches proximity-fused antimatter canisters. Reloading is quite simple compared to other missiles of its size.
-sd_antimatterpod,WEAPON,"Launches a wide screen of proximity-fused antimatter canisters, providing effective area denial or close-in strike capability."
+sd_antimatterpod,WEAPON,"Launches a wide screen of proximity-fused antimatter canisters, providing effective area denial or close-in strike capability. Features an integrated autoloader."
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
 sd_canisterantimatter,SHIP_SYSTEM,Launches proximity-fused antimatter canisters.

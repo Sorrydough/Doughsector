@@ -222,50 +222,18 @@
     {
       "location": [-93, 12],
       "length": 60,
-      "width": 15,
+      "width": 20,
       "angle": 180,
-      "contrailSize": 15,
-      "style": "sd_blockThruster"
+      "contrailSize": 20,
+      "style": "MIDLINE"
     },
     {
       "location": [-93, -12],
       "length": 60,
-      "width": 15,
+      "width": 20,
       "angle": -180,
-      "contrailSize": 15,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-93, 15.5],
-      "length": 48,
-      "width": 12,
-      "angle": 180,
-      "contrailSize": 12,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-93, 8.5],
-      "length": 48,
-      "width": 12,
-      "angle": 180,
-      "contrailSize": 12,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-93, -8.5],
-      "length": 48,
-      "width": 12,
-      "angle": 180,
-      "contrailSize": 12,
-      "style": "sd_blockThruster"
-    },
-    {
-      "location": [-93, -15.5],
-      "length": 48,
-      "width": 12,
-      "angle": 180,
-      "contrailSize": 12,
-      "style": "sd_blockThruster"
+      "contrailSize": 20,
+      "style": "MIDLINE"
     }
   ],
   "bounds": [

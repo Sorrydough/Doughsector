@@ -130,7 +130,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [13.5, -0]
+      "locations": [15, 13]
     },
     {
       "id": "SYS07",
@@ -158,8 +158,8 @@
       "arc": 360,
       "angle": 0,
       "locations": [
-        17, 13,
-        17, -13
+        13, 13,
+        17, 13
       ]
     }
   ],
@@ -167,18 +167,18 @@
     {
       "location": [-20, 19.5],
       "length": 36,
-      "width": 9,
+      "width": 12,
       "angle": 180,
-      "contrailSize": 9,
-      "style": "sd_blockThruster"
+      "contrailSize": 12,
+      "style": "MIDLINE"
     },
     {
       "location": [-20, -19.5],
       "length": 36,
-      "width": 9,
+      "width": 12,
       "angle": 180,
-      "contrailSize": 9,
-      "style": "sd_blockThruster"
+      "contrailSize": 12,
+      "style": "MIDLINE"
     },
     {
       "location": [-25, -12],
@@ -186,23 +186,23 @@
       "width": 6,
       "angle": 180,
       "contrailSize": 6,
-      "style": "sd_blockThruster"
+      "style": "MIDLINE"
     },
     {
       "location": [-21, 27.5],
       "length": 24,
-      "width": 6,
+      "width": 8,
       "angle": 180,
-      "contrailSize": 6,
-      "style": "sd_blockThruster"
+      "contrailSize": 8,
+      "style": "MIDLINE"
     },
     {
       "location": [-21, -27.5],
       "length": 24,
-      "width": 6,
+      "width": 8,
       "angle": 180,
-      "contrailSize": 6,
-      "style": "sd_blockThruster"
+      "contrailSize": 8,
+      "style": "MIDLINE"
     },
     {
       "location": [-25, 12],
@@ -210,7 +210,7 @@
       "width": 6,
       "angle": 180,
       "contrailSize": 6,
-      "style": "sd_blockThruster"
+      "style": "MIDLINE"
     }
   ],
   "bounds": [
