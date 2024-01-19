@@ -18,18 +18,19 @@ Mote Armor:
 
 Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Write AI scripts for stasis and mote armor
-- STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 - Do another pass on ship names
 - Make a placeholder faction
-- Add music
 - Return custom fleet command AI to working in mission
 - Fix all the variants that I broke
-- Make sure the forum download link is hidden behind a simple riddle
-- Doublecheck/fix fleet points
 - Ensure autoforge can't reload super expensive missiles (aka round down)
-- Swap engines on retrofits to old style, ensure they have old agility stats
 - Do another pass on carrier stats
 - Inertial damper for bomblets
+
+
+- Upon Release Stuff:
+- Make sure the forum download link is hidden behind a simple riddle
+- STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
+- Add music
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
