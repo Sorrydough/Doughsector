@@ -1,9 +1,9 @@
 {
-	"id":"sd_canisterantimatter",
+	"id":"sd_grapeshotarray",
 	"type":"WEAPON",
 	"aiType":"CANISTER_FLAK",
 	
-	"weaponDataId":"sd_canisterantimatter",
+	"weaponDataId":"sd_grapeshotarray",
 	"outOfUsesSound":"gun_out_of_ammo",
 
 	"aiHints":{

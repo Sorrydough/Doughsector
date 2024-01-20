@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("unused")
-public class sd_canisterantimatter implements OnFireEffectPlugin {
+public class sd_grapeshotarray implements OnFireEffectPlugin {
 
 	final Map<ShipAPI.HullSize, Float> RANGE_MULT = new HashMap<>();
 	{

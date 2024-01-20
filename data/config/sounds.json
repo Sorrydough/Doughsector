@@ -1,5 +1,5 @@
 {
-    "sd_canisterantimatter_explosion":{
+    "sd_grapeshot_explosion":{
 		"sounds":[	{"file":"sounds/sfx_systems/mine_strike_explosion_01.ogg","pitch":2.5,"volume":0.15},
 					{"file":"sounds/sfx_systems/mine_strike_explosion_02.ogg","pitch":2.5,"volume":0.15},
                     {"file":"sounds/sfx_systems/mine_strike_explosion_03.ogg","pitch":2.5,"volume":0.15},

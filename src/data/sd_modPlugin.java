@@ -28,24 +28,23 @@ public class sd_modPlugin extends BaseModPlugin {
             LightData.readLightDataCSV("data/lights/sd_light_data.csv");
         }
         List <String> sd_weaponsList = new ArrayList<>(); {
-            // add: HMG, flak, heavy needler, heavy blaster
-            // remove: amblaster, pdburst, heavyburst, IR autolance, phase lance
 
 
             //projectiles
             sd_weaponsList.add("lightneedler");
-            sd_weaponsList.add("heavyneedler");
+            sd_weaponsList.add("amblaster");
             sd_weaponsList.add("heavyblaster");
             //beams
             sd_weaponsList.add("ionbeam");
+            sd_weaponsList.add("irautolance");
             sd_weaponsList.add("gravitonbeam");
             sd_weaponsList.add("tachyonlance");
             sd_weaponsList.add("hil");
             //point defense
             sd_weaponsList.add("lightmg");
             sd_weaponsList.add("lightdualmg");
-            sd_weaponsList.add("heavymg");
-            sd_weaponsList.add("flak");
+            sd_weaponsList.add("pdburst");
+            sd_weaponsList.add("heavyburst");
             sd_weaponsList.add("guardian");
             //missiles
             sd_weaponsList.add("heatseeker");
@@ -58,7 +57,7 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("hurricane");
             //self-insert donut steel weapons
             sd_weaponsList.add("sd_antimatterlauncher");
-            sd_weaponsList.add("sd_antimatterpod");
+            sd_weaponsList.add("sd_grapeshotpod");
         }
         for (String weapon : sd_weaponsList) {
             try {
