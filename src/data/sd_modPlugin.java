@@ -33,7 +33,8 @@ public class sd_modPlugin extends BaseModPlugin {
             //projectiles
             sd_weaponsList.add("lightneedler");
             sd_weaponsList.add("amblaster");
-            sd_weaponsList.add("heavyblaster");
+            sd_weaponsList.add("irpulse");
+            sd_weaponsList.add("autopulse");
             //beams
             sd_weaponsList.add("ionbeam");
             sd_weaponsList.add("irautolance");

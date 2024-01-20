@@ -24,8 +24,11 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Fix all the variants that I broke
 - Ensure autoforge can't reload super expensive missiles (aka round down)
 - Do another pass on ship stats (armor, dissipation, speed)
-- Inertial damper for bomblets
+- Polish grapeshot sprites
 
+- Update AI tweaks, integrate its autofire plugin
+- Move my autofire AI tweaks into my own autofire plugin
+- Fix ships venting in front of breaches
 
 - Upon Release Stuff:
 - Make sure the forum download link is hidden behind a simple riddle
@@ -34,8 +37,6 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
-- Update AI tweaks, integrate its autofire plugin
-- Move my autofire AI tweaks into my own autofire plugin
 - Add GUI hover sprite for fighter weapons
 - Commissioned crew effect: Improved CP regeneration
 - Hullmod that adds hardflux dissipation based on the shield arc

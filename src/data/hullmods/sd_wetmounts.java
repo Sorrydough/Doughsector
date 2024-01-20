@@ -25,10 +25,11 @@ public class sd_wetmounts extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ship.getMutableStats().getBallisticWeaponRangeBonus().modifyFlat(id, RANGE_BONUS);
         ship.getMutableStats().getEnergyWeaponRangeBonus().modifyFlat(id, RANGE_BONUS);
+        ship.getMutableStats().getBeamWeaponRangeBonus().modifyFlat(id, -RANGE_BONUS);
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        tooltip.addPara("Recoil is reduced by "+ Math.round(RECOIL_MULT * 100) +"%% and weapon range is extended by a flat "+ Math.round(RANGE_BONUS) +" units." , 5f,
+        tooltip.addPara("Recoil is reduced by "+ Math.round(RECOIL_MULT * 100) +"%% and projectile weapon range is extended by a flat "+ Math.round(RANGE_BONUS) +" units." , 5f,
                 Misc.getHighlightColor(), Math.round(RECOIL_MULT * 100) +"%", Math.round(RANGE_BONUS) + "");
     }
     @Override

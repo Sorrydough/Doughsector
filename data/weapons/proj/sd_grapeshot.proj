@@ -9,6 +9,7 @@
     "center":[4,6],
     "collisionRadius":8,
 	"collisionClass":"MISSILE_FF",
+	#"onFireEffect":"data.weapons.sd_inertialdamperScript",
 	"explosionSpec":{
 			"duration":0.15f,
 			"radius":66,
