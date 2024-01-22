@@ -61,14 +61,14 @@ public class sd_capacitorpurge extends BaseHullMod {
                     stats.getEngineMalfunctionChance().modifyFlat(id, MALFUNCTION_CHANCE * duration);
                     for (ShipEngineAPI vroom : ship.getEngineController().getShipEngines()) {
                         if (vroom.isDisabled() && !engines.get(vroom)) { // aka if the engine is disabled and it wasn't disabled last time we checked
-                            sd_util.emitMote(ship, vroom, false);
+//                            sd_util.emitMote(ship, vroom, false);
                             engines.put(vroom, true);
                         } else if (!vroom.isDisabled() && engines.get(vroom)) // if the engine isn't disabled and it was disabled last time we checked, update its state
                             engines.put(vroom, false);
                     }
                     for (WeaponAPI weapon : ship.getAllWeapons()) {
                         if (weapon.isDisabled() && !weapons.get(weapon)) {
-                            sd_util.emitMote(ship, weapon, false);
+//                            sd_util.emitMote(ship, weapon, false);
                             weapons.put(weapon, true);
                         } else if (!weapon.isDisabled() && weapons.get(weapon))
                             weapons.put(weapon, false);
@@ -82,8 +82,9 @@ public class sd_capacitorpurge extends BaseHullMod {
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         tooltip.addPara("While active venting, "+ Math.round(CAPACITOR_CONVERSION * 100) +"%% of the ship's flux capacity is converted into dissipation, applied after the vent bonus.", 5f,
                 Misc.getHighlightColor(), Math.round(CAPACITOR_CONVERSION * 100) +"%");
-        tooltip.addPara("Malfunctions may occur while venting and have a special effect. Longer vents experience more severe malfunctions.", 5f,
-                Misc.getHighlightColor(),"special effect");
+        tooltip.addPara("Malfunctions may occur while venting. Longer vents experience more severe malfunctions.", 5f);
+//        tooltip.addPara("Malfunctions may occur while venting and have a special effect. Longer vents experience more severe malfunctions.", 5f,
+//                Misc.getHighlightColor(),"special effect");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

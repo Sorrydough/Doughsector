@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-//import static org.lazywizard.lazylib.MathUtils.getDistance;
-
 public class sd_beampumps extends BaseHullMod {
 	static final int RANGE_THRESHOLD = 500;
 	static final float RANGE_MULT = 0.5f;
@@ -56,15 +54,18 @@ public class sd_beampumps extends BaseHullMod {
         @Override
 		public void advance(float amount) {
 			for (WeaponAPI weapon : weapons) {
+				float tick = 0.1f;
+				if (weapon.isBurstBeam())
+					tick = 0.2f;
 				for (BeamAPI beam : weapon.getBeams()) {
 					if (beam.didDamageThisFrame()) {
-						if (beamsWithTime.containsKey(weapon))
-							beamsWithTime.put(weapon, 0.1f + beamsWithTime.get(weapon));
-						else
-							beamsWithTime.put(weapon, 0.1f);
+						if (beamsWithTime.containsKey(weapon)) {
+							beamsWithTime.put(weapon, tick + beamsWithTime.get(weapon));
+						} else
+							beamsWithTime.put(weapon, tick);
 					}
 					if (beamsWithTime.containsKey(weapon) && beamsWithTime.get(weapon) >= REQUIRED_TIME.get(weapon.getSize())) {
-						sd_util.emitMote(ship, weapon, true);
+//						sd_util.emitMote(ship, weapon, true);
 						beamsWithTime.remove(weapon);
 					}
 				}
@@ -104,8 +105,9 @@ public class sd_beampumps extends BaseHullMod {
 				Misc.getHighlightColor(), MODIFIER +"%");
 		tooltip.addPara("Reduces the base range of beams past "+ RANGE_THRESHOLD +" range by " + Math.round((1 - RANGE_MULT) * 100) + "%%.", 2f,
 				Misc.getHighlightColor(), String.valueOf(RANGE_THRESHOLD), Math.round((1 - RANGE_MULT) * 100) + "%");
-		tooltip.addPara("Beams in non-energy slots also recieve instant travel speed and a special effect.", 5f,
-				Misc.getHighlightColor(), "special effect");
+		tooltip.addPara("Beams in non-energy slots also recieve instant travel speed.", 5f);
+//		tooltip.addPara("Beams in non-energy slots also recieve instant travel speed and a special effect.", 5f,
+//				Misc.getHighlightColor(), "special effect");
 	}
 	@Override
 	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

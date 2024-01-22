@@ -1,13 +1,12 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sModDesc,sprite
 #Builtins,,,,,,,,,,,,,,,,,,,
 Utility Hullmod,sd_utilityhullmod,,,???,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.sd_utilityhullmod,<tooltip created in the script>,,,graphics/hullmods/sd_utilityhullmod.png
-Drive Interference,sd_driveinterference,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_driveinterference,<tooltip created in the script>,,,graphics/hullmods/sd_driveinterference.png
 Light Ground Support,sd_groundsupport,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_groundsupport,<tooltip created in the script>,,,graphics/hullmods/sd_groundsupport.png
 Hexshield,sd_hexshield,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_hexshield,"Shields unfold instantly. Instead of overloading the ship, its shield is disabled for %s seconds.",,,graphics/hullmods/sd_hexshield.png
 Mote Field,sd_motefield,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_motefield,<tooltip created in the script>,,,graphics/hullmods/sd_motefield.png
 ,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,
 #Modulars,,,,,,,,,,,,,,,,,,,
 Advanced Antispall,sd_antispall,,,???,"no_drop, no_drop_salvage",Defenses,,TRUE,,,2,4,8,14,data.hullmods.sd_antispall,<tooltip created in the script>,,,graphics/hullmods/sd_antispall.png
-Wet Mounts,sd_wetmounts,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,4,8,12,16,data.hullmods.sd_wetmounts,<tooltip created in the script>,,,graphics/hullmods/sd_wetmounts.png
 Ancillary Beam Pumps,sd_beampumps,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,3,6,9,12,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
 Capacitor Purge,sd_capacitorpurge,,,???,"no_drop, no_drop_salvage",Special,,TRUE,,,8,16,24,40,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png

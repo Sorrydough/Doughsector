@@ -28,13 +28,9 @@ public class sd_modPlugin extends BaseModPlugin {
             LightData.readLightDataCSV("data/lights/sd_light_data.csv");
         }
         List <String> sd_weaponsList = new ArrayList<>(); {
-
-
             //projectiles
             sd_weaponsList.add("lightneedler");
             sd_weaponsList.add("amblaster");
-            sd_weaponsList.add("irpulse");
-            sd_weaponsList.add("autopulse");
             //beams
             sd_weaponsList.add("ionbeam");
             sd_weaponsList.add("irautolance");
@@ -55,9 +51,9 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("pilum");
             sd_weaponsList.add("pilum_large");
             sd_weaponsList.add("squall");
-            sd_weaponsList.add("hurricane");
             //self-insert donut steel weapons
-            sd_weaponsList.add("sd_antimatterlauncher");
+            sd_weaponsList.add("sd_gravlance");
+            sd_weaponsList.add("sd_grapeshotrack");
             sd_weaponsList.add("sd_grapeshotpod");
         }
         for (String weapon : sd_weaponsList) {
