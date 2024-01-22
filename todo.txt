@@ -25,6 +25,7 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Ensure autoforge can't reload super expensive missiles (aka round down)
 - Do another pass on ship stats (armor, dissipation, speed)
 - Polish grapeshot sprites
+- Figure out a better way to display skills in main menu missions
 
 - Update AI tweaks, integrate its autofire plugin
 - Move my autofire AI tweaks into my own autofire plugin
@@ -55,6 +56,7 @@ Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Add a functionality to the attack manager where it chooses between engage or eliminate depending on whether enough ships ar enearby to actually kill the target immediately
 - Check if it's possible to apply an avoid order to a waypoint
 - Make SO count as a dmod
+- Make ships not shoot if asteroid is in the way
 
 
 Version 2.5 Stuff: (Advanced agent interaction)

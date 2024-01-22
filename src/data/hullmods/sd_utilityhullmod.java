@@ -129,7 +129,7 @@ public class sd_utilityhullmod extends BaseHullMod {
             }
 
             ////////////////////////////////////////////////////////////////
-            //ALLEVIATES SMALL SHIPS FLUXING THEMSELVES WITH BURST WEAPONS//
+            //ALLEVIATES SMALL SHIPS FLUXING THEMSELVES WITH BURST WEAPONS// todo: improve this behavior to calculate the burst potential of its opponent and keep its flux below that level
             ////////////////////////////////////////////////////////////////
             if (ship.getHullSize() == ShipAPI.HullSize.FRIGATE || ship.getHullSize() == ShipAPI.HullSize.DESTROYER)
                 if (ship.getShipTarget() != null && ship.getFluxLevel() > 0.25 && ship.getShipTarget().getHullLevel() > 0.25)
