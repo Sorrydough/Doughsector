@@ -31,7 +31,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [-5.5, -0]
+      "locations": [15, -13]
     },
     {
       "id": "SYS01",
@@ -130,7 +130,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [15, 13]
+      "locations": [16, 13]
     },
     {
       "id": "SYS07",
@@ -161,23 +161,32 @@
         13, 13,
         17, 13
       ]
+    },
+    {
+      "id": "HRD02",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [-6, -0]
     }
   ],
   "engineSlots": [
     {
       "location": [-20, 19.5],
       "length": 36,
-      "width": 12,
+      "width": 9,
       "angle": 180,
-      "contrailSize": 12,
+      "contrailSize": 9,
       "style": "MIDLINE"
     },
     {
       "location": [-20, -19.5],
       "length": 36,
-      "width": 12,
+      "width": 9,
       "angle": 180,
-      "contrailSize": 12,
+      "contrailSize": 9,
       "style": "MIDLINE"
     },
     {
@@ -191,17 +200,17 @@
     {
       "location": [-21, 27.5],
       "length": 24,
-      "width": 8,
+      "width": 6,
       "angle": 180,
-      "contrailSize": 8,
+      "contrailSize": 6,
       "style": "MIDLINE"
     },
     {
       "location": [-21, -27.5],
       "length": 24,
-      "width": 8,
+      "width": 6,
       "angle": 180,
-      "contrailSize": 8,
+      "contrailSize": 6,
       "style": "MIDLINE"
     },
     {

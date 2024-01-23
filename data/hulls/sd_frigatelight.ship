@@ -29,7 +29,7 @@
       "mount": "TURRET",
       "arc": 360,
       "angle": 0,
-      "locations": [-2, -0]
+      "locations": [-3, -0]
     },
     {
       "id": "SYS10",

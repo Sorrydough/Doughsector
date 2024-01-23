@@ -29,20 +29,20 @@
     {
       "id": "HRD01",
       "size": "SMALL",
-      "type": "MISSILE",
+      "type": "UNIVERSAL",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [77, 17]
+      "locations": [76, 17]
     },
     {
       "id": "HRD02",
       "size": "SMALL",
-      "type": "MISSILE",
+      "type": "UNIVERSAL",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [85, -17]
+      "locations": [84, -17]
     },
     {
       "id": "TRT01",

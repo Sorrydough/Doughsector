@@ -29,7 +29,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 90,
-      "locations": [-34, 47]
+      "locations": [-34, 46]
     },
     {
       "id": "HRD02",
@@ -38,7 +38,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": -90,
-      "locations": [-34, -47]
+      "locations": [-34, -46]
     },
     {
       "id": "TRT01",

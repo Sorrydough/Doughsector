@@ -34,7 +34,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [58, -25]
+      "locations": [59, -25]
     },
     {
       "id": "HRD02",
@@ -43,7 +43,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [28, -25]
+      "locations": [29, -25]
     },
     {
       "id": "HRD03",
@@ -52,14 +52,14 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [25, 28]
+      "locations": [26, 28]
     },
     {
       "id": "TRT02",
       "size": "SMALL",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 215,
+      "arc": 290,
       "angle": 0,
       "locations": [46, -0]
     },
