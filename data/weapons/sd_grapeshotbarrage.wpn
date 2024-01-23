@@ -1,11 +1,11 @@
 {
-  "id": "sd_grapeshotavalanche",
+  "id": "sd_grapeshotbarrage",
   "specClass": "projectile",
   "projectileSpecId": "sd_grapeshot_proj",
   "type": "MISSILE",
   "size": "LARGE",
-  "turretSprite": "graphics/weapons/sd_grapeshotavalanche_turret.png",
-  "hardpointSprite": "graphics/weapons/sd_grapeshotavalanche_hardpoint.png",
+  "turretSprite": "graphics/weapons/sd_grapeshotbarrage_turret.png",
+  "hardpointSprite": "graphics/weapons/sd_grapeshotbarrage_hardpoint.png",
   "renderHints": [
     RENDER_LOADED_MISSILES
   ],

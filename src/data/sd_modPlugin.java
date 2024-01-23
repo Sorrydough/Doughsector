@@ -55,6 +55,7 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("sd_gravlance");
             sd_weaponsList.add("sd_grapeshotrack");
             sd_weaponsList.add("sd_grapeshotpod");
+            sd_weaponsList.add("sd_grapeshotbarrage");
         }
         for (String weapon : sd_weaponsList) {
             try {

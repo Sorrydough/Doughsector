@@ -25,23 +25,9 @@ public class sd_capacitorpurge extends BaseHullMod {
         }
         protected String id = "sd_capacitorpurge";
         protected IntervalUtil interval = new IntervalUtil(0.1f, 0.1f);
-        protected HashMap<ShipEngineAPI, Boolean> engines = new HashMap<>();
-        protected HashMap<WeaponAPI, Boolean> weapons = new HashMap<>();
-        boolean runOnce = true;
-        boolean vented = false;
         float duration = 0;
         @Override
         public void advance(float amount) {
-            // create a list of all weapon and engine slots as well as whether they've been disabled for this repair cycle
-            // if a slot wasn't disabled before and it is now, flag it as disabled and play our effect
-            // if a slot isn't disabled and it was flagged as disabled, unflag it as disabled
-            if (runOnce) { // this tracks whether a mote has been emitted by this module yet, it does NOT track whether the module is disabled (although these two things are related)
-                for (ShipEngineAPI vroom : ship.getEngineController().getShipEngines())
-                    engines.put(vroom, false);
-                for (WeaponAPI weapon : ship.getAllWeapons())
-                    weapons.put(weapon, false);
-                runOnce = false;
-            }
             interval.advance(amount);
             if (interval.intervalElapsed()) {
                 if (!ship.getFluxTracker().isVenting()) {
@@ -51,29 +37,10 @@ public class sd_capacitorpurge extends BaseHullMod {
                     float bonus = stats.getFluxCapacity().getModifiedValue() * CAPACITOR_CONVERSION;
                     float bonusAsPercent = Math.round((bonus / stats.getFluxDissipation().getModifiedValue()) * 100);
                     stats.getVentRateMult().modifyPercent(id, bonusAsPercent / 2);
-                    if (vented) {
-                        runOnce = true;
-                        vented = false;
-                    }
                 } else {
                     duration += 0.1;
                     stats.getWeaponMalfunctionChance().modifyFlat(id, MALFUNCTION_CHANCE * duration);
                     stats.getEngineMalfunctionChance().modifyFlat(id, MALFUNCTION_CHANCE * duration);
-                    for (ShipEngineAPI vroom : ship.getEngineController().getShipEngines()) {
-                        if (vroom.isDisabled() && !engines.get(vroom)) { // aka if the engine is disabled and it wasn't disabled last time we checked
-//                            sd_util.emitMote(ship, vroom, false);
-                            engines.put(vroom, true);
-                        } else if (!vroom.isDisabled() && engines.get(vroom)) // if the engine isn't disabled and it was disabled last time we checked, update its state
-                            engines.put(vroom, false);
-                    }
-                    for (WeaponAPI weapon : ship.getAllWeapons()) {
-                        if (weapon.isDisabled() && !weapons.get(weapon)) {
-//                            sd_util.emitMote(ship, weapon, false);
-                            weapons.put(weapon, true);
-                        } else if (!weapon.isDisabled() && weapons.get(weapon))
-                            weapons.put(weapon, false);
-                    }
-                    vented = true;
                 }
             }
         }
@@ -83,8 +50,6 @@ public class sd_capacitorpurge extends BaseHullMod {
         tooltip.addPara("While active venting, "+ Math.round(CAPACITOR_CONVERSION * 100) +"%% of the ship's flux capacity is converted into dissipation, applied after the vent bonus.", 5f,
                 Misc.getHighlightColor(), Math.round(CAPACITOR_CONVERSION * 100) +"%");
         tooltip.addPara("Malfunctions may occur while venting. Longer vents experience more severe malfunctions.", 5f);
-//        tooltip.addPara("Malfunctions may occur while venting and have a special effect. Longer vents experience more severe malfunctions.", 5f,
-//                Misc.getHighlightColor(),"special effect");
     }
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

@@ -36,7 +36,7 @@ public class sd_beampumps extends BaseHullMod {
 			}
 		}
 	}
-	public static class BeamPumpsListener implements AdvanceableListener, WeaponBaseRangeModifier {
+	public static class BeamPumpsListener implements WeaponBaseRangeModifier {
 		final ArrayList<WeaponAPI> weapons = new ArrayList<>();
 		final ShipAPI ship;
 		public BeamPumpsListener(ShipAPI ship) {
@@ -45,32 +45,6 @@ public class sd_beampumps extends BaseHullMod {
 				if (isMixedBeam(weapon))
 					weapons.add(weapon);
         }
-		final Map<WeaponAPI.WeaponSize, Integer> REQUIRED_TIME = new HashMap<>(); {
-			REQUIRED_TIME.put(WeaponAPI.WeaponSize.SMALL, 6);
-			REQUIRED_TIME.put(WeaponAPI.WeaponSize.MEDIUM, 4);
-			REQUIRED_TIME.put(WeaponAPI.WeaponSize.LARGE, 1);
-		}
-		final HashMap<WeaponAPI, Float> beamsWithTime = new HashMap<>();
-        @Override
-		public void advance(float amount) {
-			for (WeaponAPI weapon : weapons) {
-				float tick = 0.1f;
-				if (weapon.isBurstBeam())
-					tick = 0.2f;
-				for (BeamAPI beam : weapon.getBeams()) {
-					if (beam.didDamageThisFrame()) {
-						if (beamsWithTime.containsKey(weapon)) {
-							beamsWithTime.put(weapon, tick + beamsWithTime.get(weapon));
-						} else
-							beamsWithTime.put(weapon, tick);
-					}
-					if (beamsWithTime.containsKey(weapon) && beamsWithTime.get(weapon) >= REQUIRED_TIME.get(weapon.getSize())) {
-//						sd_util.emitMote(ship, weapon, true);
-						beamsWithTime.remove(weapon);
-					}
-				}
-			}
-		}
 		public float getWeaponBaseRangePercentMod(ShipAPI ship, WeaponAPI weapon) {
 			return 0;
 		}
@@ -106,8 +80,6 @@ public class sd_beampumps extends BaseHullMod {
 		tooltip.addPara("Reduces the base range of beams past "+ RANGE_THRESHOLD +" range by " + Math.round((1 - RANGE_MULT) * 100) + "%%.", 2f,
 				Misc.getHighlightColor(), String.valueOf(RANGE_THRESHOLD), Math.round((1 - RANGE_MULT) * 100) + "%");
 		tooltip.addPara("Beams in non-energy slots also recieve instant travel speed.", 5f);
-//		tooltip.addPara("Beams in non-energy slots also recieve instant travel speed and a special effect.", 5f,
-//				Misc.getHighlightColor(), "special effect");
 	}
 	@Override
 	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {

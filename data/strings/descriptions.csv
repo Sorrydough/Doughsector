@@ -4,7 +4,7 @@ sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster
 sd_gravlance,WEAPON,"Effectively a modified graviton beam, this variant trades continuous fire capability for dramatically simplified mounting requirements."
 sd_grapeshotrack,WEAPON,Launches proximity-fused antimatter canisters. Reloading is quite simple compared to other missiles of its size.
 sd_grapeshotpod,WEAPON,"Launches a wide screen of proximity-fused antimatter canisters, providing effective area denial or close-in strike capability. Features an integrated autoloader."
-sd_grapeshotavalanche,WEAPON,"Launches a deluge of proximity-fused antimatter canisters, completely suppressing an area or doing devastating damage at close range. Features an integrated autoloader."
+sd_grapeshotbarrage,WEAPON,"Launches a deluge of proximity-fused antimatter canisters, completely suppressing an area or doing devastating damage at close range. Features an integrated autoloader."
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
 sd_grapeshotarray,SHIP_SYSTEM,Launches proximity-fused antimatter canisters.
