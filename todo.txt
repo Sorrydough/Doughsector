@@ -3,6 +3,8 @@ Arthr Stuff:
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, etc
 - Really Converted Hangars
 - Export, Pirate, Path skin variants
+- Weapon sprites
+- Generalized final pass
 
 
 Mote Armor:
@@ -24,10 +26,8 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Fix all the variants that I broke
 - Ensure autoforge can't reload super expensive missiles (aka round down)
 - Do another pass on ship stats (armor, dissipation, speed)
-- Polish grapeshot sprites
 - Figure out a better way to display skills in main menu missions
 
-- Update AI tweaks, integrate its autofire plugin
 - Move my autofire AI tweaks into my own autofire plugin
 - Fix ships venting in front of breaches
 

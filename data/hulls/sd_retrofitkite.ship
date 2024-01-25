@@ -34,6 +34,15 @@
       "locations": [15, -13]
     },
     {
+      "id": "HRD02",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [-6, -0]
+    },
+    {
       "id": "SYS01",
       "size": "SMALL",
       "type": "SYSTEM",
@@ -161,15 +170,6 @@
         13, 13,
         17, 13
       ]
-    },
-    {
-      "id": "HRD02",
-      "size": "SMALL",
-      "type": "UNIVERSAL",
-      "mount": "HARDPOINT",
-      "arc": 5,
-      "angle": 0,
-      "locations": [-6, -0]
     }
   ],
   "engineSlots": [
