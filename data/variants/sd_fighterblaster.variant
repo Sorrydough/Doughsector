@@ -16,7 +16,7 @@
     {
       "autofire": true,
       "mode": "LINKED",
-      "weapons": { "TRT01": "sd_microburst" }
+      "weapons": { "TRT01": "pdburst_fighter" }
     }
   ],
   "wings": []

@@ -4,8 +4,8 @@
   "projectileSpecId": "sd_grapeshot_proj",
   "type": "MISSILE",
   "size": "MEDIUM",
-  "turretSprite": "graphics/weapons/grapeshotpod.png",
-  "hardpointSprite": "graphics/weapons/grapeshotpod_hardpoint.png",
+  "turretSprite": "graphics/weapons/sd_grapeshotpod.png",
+  "hardpointSprite": "graphics/weapons/sd_grapeshotpod_hardpoint.png",
   "renderHints": [
     RENDER_LOADED_MISSILES
   ],

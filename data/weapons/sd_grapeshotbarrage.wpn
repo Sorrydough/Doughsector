@@ -4,8 +4,8 @@
   "projectileSpecId": "sd_grapeshot_proj",
   "type": "MISSILE",
   "size": "LARGE",
-  "turretSprite": "graphics/weapons/grapeshotbarrage.png",
-  "hardpointSprite": "graphics/weapons/grapeshotbarrage_hardpoint.png",
+  "turretSprite": "graphics/weapons/sd_grapeshotbarrage.png",
+  "hardpointSprite": "graphics/weapons/sd_grapeshotbarrage_hardpoint.png",
   "renderHints": [
     RENDER_LOADED_MISSILES
   ],
