@@ -45,7 +45,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             List<ShipAPI> deployedEnemyShips = new ArrayList<>();
             for (ShipAPI other : Global.getCombatEngine().getShips())
                 if (sd_fleetadmiralUtil.isDeployedShip(other) && other.getOwner() != ship.getOwner())
-                    deployedEnemyShips.add(ship);
+                    deployedEnemyShips.add(other);
 
             for (ShipAPI enemy : deployedEnemyShips) {
                 boolean foundLinked = false;
