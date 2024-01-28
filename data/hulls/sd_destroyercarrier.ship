@@ -29,7 +29,7 @@
     {
       "id": "HRD01",
       "size": "SMALL",
-      "type": "UNIVERSAL",
+      "type": "SYNERGY",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
@@ -38,7 +38,7 @@
     {
       "id": "HRD02",
       "size": "SMALL",
-      "type": "UNIVERSAL",
+      "type": "SYNERGY",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
@@ -161,7 +161,7 @@
     {
       "id": "TRT03",
       "size": "SMALL",
-      "type": "HYBRID",
+      "type": "ENERGY",
       "mount": "TURRET",
       "arc": 160,
       "angle": -54.5,
@@ -170,7 +170,7 @@
     {
       "id": "TRT02",
       "size": "SMALL",
-      "type": "HYBRID",
+      "type": "ENERGY",
       "mount": "TURRET",
       "arc": 235,
       "angle": 51.5,

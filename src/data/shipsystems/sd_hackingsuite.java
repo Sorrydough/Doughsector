@@ -81,7 +81,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			if (runOnce) {
 				duration += DURATION.get(target.getHullSize()) + target.getSystem().getCooldownRemaining();
 				if (sd_util.isAutomated(target))
-					duration *= 2;
+					duration *= 1.5;
 				target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
 				target.getFluxTracker().playOverloadSound();
 				target.setShipSystemDisabled(true);

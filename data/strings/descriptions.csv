@@ -1,7 +1,7 @@
 id,type,text1
 sd_ionbeam_fighter,WEAPON,An ion beam unremarkable in all ways other than its miniaturization.
 sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
-sd_gravlance,WEAPON,"Effectively a modified graviton beam, this variant trades continuous fire capability for dramatically simplified mounting requirements."
+sd_gravlance,WEAPON,"Although superficially similar to a graviton beam, this smaller version exhibits dramatically different behavior more similar in function to a classical needler."
 sd_grapeshotrack,WEAPON,Launches proximity-fused antimatter canisters. Reloading is quite simple compared to other missiles of its size.
 sd_grapeshotpod,WEAPON,"Launches a wide screen of proximity-fused antimatter canisters, providing effective area denial or close-in strike capability. Features an integrated autoloader."
 sd_grapeshotbarrage,WEAPON,"Launches a deluge of proximity-fused antimatter canisters, completely suppressing an area or doing devastating damage at close range. Features an integrated autoloader."

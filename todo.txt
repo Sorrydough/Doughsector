@@ -8,25 +8,23 @@ Arthr Stuff:
 
 
 Mote Armor:
-- Motes orbit the nearest allied ship.
-- The motearmor system can "grab" motes from nearby ships to orbit this ship instead.
+- Mote orbit radius depends on the ship's flux level - higher flux -> larger orbit radius
 - Ships generate motes when they rebalance armor damage with this system.
 - Motes contribute to fleetwide ECM bonus in combat (+0.5% per mote?)
 - Motefield obscures the fleet on the campaign map like phase field does. If phase field is present it does nothing.
 - Having more than 1 capital will disrupt the fleet-obscuring motefield bonus. Bonus is relative, ie 1 heavy frigate with 3 smaller frigate escorts will be very obscured.
-- When a ship becomes fully armorbroken, a bunch of torpedo-motes appear and hunt.
+- When a ship becomes fully armorbroken, torpedo-motes appear and hunt.
 - When a ship overloads, its motes enrage and hunt.
 
 
 Version 1.0 Stuff: (first release, no advanced campaign mechanics)
-- Write AI scripts for stasis and mote armor
+- Write AI script for stasis
 - Do another pass on ship names
 - Make a placeholder faction
 - Return custom fleet command AI to working in mission
 - Fix all the variants that I broke
 - Ensure autoforge can't reload super expensive missiles (aka round down)
 - Do another pass on ship stats (armor, dissipation, speed)
-- Figure out a better way to display skills in main menu missions
 
 - Move my autofire AI tweaks into my own autofire plugin
 - Fix ships venting in front of breaches
@@ -41,12 +39,12 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Add GUI hover sprite for fighter weapons
 - Commissioned crew effect: Improved CP regeneration
 - Hullmod that adds hardflux dissipation based on the shield arc
-- Copy legio AI behavior where it doesn't rotate armor etc
 - Debug ship.setForceCarrierPullBackTime()
 - Integrate engine color fade for all systems
 - Glowmaps for decos
 - Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
 - Create engine reigniter hullmod
+- Figure out a better way to display skills in main menu missions
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)

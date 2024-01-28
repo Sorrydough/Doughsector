@@ -36,7 +36,7 @@
     {
       "id": "TRT03",
       "size": "SMALL",
-      "type": "HYBRID",
+      "type": "ENERGY",
       "mount": "TURRET",
       "arc": 202,
       "angle": 72.5,
@@ -45,7 +45,7 @@
     {
       "id": "TRT02",
       "size": "SMALL",
-      "type": "HYBRID",
+      "type": "ENERGY",
       "mount": "TURRET",
       "arc": 250,
       "angle": -45,

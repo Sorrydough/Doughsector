@@ -88,11 +88,11 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             float desirePos = 0;
             float desireNeg = 0;
             // We don't want to use the system if:
-            // 1. Our flux level is too high
+            // Our flux level is too high
             desireNeg -= (ship.getHardFluxLevel() + ship.getFluxLevel()) * 100;
 
             // We want to use the system if:
-            // 1. A valid target is within range, scaled by the target's DP cost, biggest target prioritized
+            // A valid target is within range, scaled by the target's DP cost, biggest target prioritized, automated or neural linked ships extra preferred
             for (ShipAPI enemy : targets) {
                 if (!sd_hackingsuite.isTargetValid(ship, target)) // doing this again even though we do it earlier because of the slow interval, need to make sure the target isn't dead
                     continue;

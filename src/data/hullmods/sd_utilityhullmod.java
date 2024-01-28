@@ -56,7 +56,7 @@ public class sd_utilityhullmod extends BaseHullMod {
 //                if (applyAI && Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
 //                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
 //                }
-                if (Global.getCombatEngine().isSimulation()) {
+                if (Global.getCombatEngine().isSimulation() && ship.getHullSize() != ShipAPI.HullSize.CAPITAL_SHIP) {
                     ship.getCaptain().setPersonality(personality);
                     Console.showMessage("Personality for "+ ship.getName() +" overriden to "+ personality);
                 }
@@ -69,6 +69,13 @@ public class sd_utilityhullmod extends BaseHullMod {
                             }
                         }
                     }
+                }
+                // apply alex's AI behavior overrides
+                if (ship.getHullSize().ordinal() > 3) {
+                    ship.getShipAI().getConfig().alwaysStrafeOffensively = true;
+                } else {
+                    ship.getShipAI().getConfig().alwaysStrafeOffensively = true;
+                    ship.getShipAI().getConfig().turnToFaceWithUndamagedArmor = false;
                 }
                 runOnce = false;
                 timer.randomize();
@@ -141,7 +148,7 @@ public class sd_utilityhullmod extends BaseHullMod {
 
 
 
-            // FIXES SHIPS SHOOTING THEIR DRAGONCOCKS AT STUFF THAT THEY'LL NEVER HIT
+            // FIXES SHIPS BACKING OFF WHILE VENTING EVEN THOUGH THEY'RE IN NO DANGER
             // TODO: THIS
 
 
