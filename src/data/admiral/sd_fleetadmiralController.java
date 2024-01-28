@@ -96,7 +96,7 @@ public class sd_fleetadmiralController extends BaseEveryFrameCombatPlugin {
             }
 
             for (ShipAPI ship : engine.getShips())
-                if (!ship.isStationModule() && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter())
+                if (sd_fleetadmiralUtil.isDeployedShip(ship))
                     deployedShips.add(ship);
 
             for (BattleObjectiveAPI objective : engine.getObjectives())

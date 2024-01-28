@@ -80,6 +80,8 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.75f);
 			if (runOnce) {
 				duration += DURATION.get(target.getHullSize()) + target.getSystem().getCooldownRemaining();
+				if (sd_util.isAutomated(target))
+					duration *= 2;
 				target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
 				target.getFluxTracker().playOverloadSound();
 				target.setShipSystemDisabled(true);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import data.shipsystems.sd_motearmor;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;
@@ -28,18 +29,18 @@ public class sd_moteAIScript implements MissileAIPlugin {
 	protected MissileAPI missile;
 	protected IntervalUtil tracker = new IntervalUtil(0.05f, 0.1f);
 	protected IntervalUtil updateListTracker = new IntervalUtil(0.05f, 0.1f);
-	protected List<MissileAPI> missileList = new ArrayList<MissileAPI>();
-	protected List<CombatEntityAPI> hardAvoidList = new ArrayList<CombatEntityAPI>();
+	protected List<MissileAPI> missileList = new ArrayList<>();
+	protected List<CombatEntityAPI> hardAvoidList = new ArrayList<>();
 	protected float r;
 	protected CombatEntityAPI target;
-	protected sd_moteControlScript.SharedMoteAIData data;
+	protected sd_motearmor.SharedMoteAIData data;
 	
 	public sd_moteAIScript(MissileAPI missile) {
 		this.missile = missile;
 		r = (float) Math.random();
 		elapsed = -(float) Math.random() * 0.5f;
 		
-		data = sd_moteControlScript.getSharedData(missile.getSource());
+		data = sd_motearmor.getSharedData(missile.getSource());
 		
 		updateHardAvoidList();
 	}

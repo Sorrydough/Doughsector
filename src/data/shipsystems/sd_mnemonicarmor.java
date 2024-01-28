@@ -64,7 +64,7 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 			Vector2f toAddLoc = (grid.getLocation((int) cellToAdd.x, (int) cellToAdd.y));
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
 			boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
-			float intensity = getAverageArmorPerCell(grid) / grid.getMaxArmorInCell();
+			float intensity = averageArmorPerCell / grid.getMaxArmorInCell();
 			float thickness = (2 + amountToTransfer * 2) * intensity;
 			if (isToAddInBounds)
 				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship,

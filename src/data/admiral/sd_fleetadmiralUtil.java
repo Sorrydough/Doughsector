@@ -20,6 +20,11 @@ public class sd_fleetadmiralUtil {
         MutableShipStatsAPI stats = ship.getMutableStats();
         return Math.max(stats.getSuppliesToRecover().base, stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).computeEffective(stats.getSuppliesToRecover().modified));
     }
+
+    public static boolean isDeployedShip(ShipAPI ship) {
+        return !ship.isStationModule() && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter();
+    }
+
     public static float getCombatEffectiveness(ShipAPI ship, float minFraction) {
         final Map<String, Integer> overpoweredHullmods = new HashMap<>(); {
             overpoweredHullmods.put("safetyoverrides", 20);

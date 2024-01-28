@@ -37,7 +37,6 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 	public static float MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD = 2000f;
 	public static float MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD = 1000f;
 	public static int MAX_MOTES = 30;
-	public static int MAX_MOTES_HF = 50;
 	public static float ANTI_FIGHTER_DAMAGE = 200;
 	public static float ANTI_FIGHTER_DAMAGE_HF = 1000;
 	public static float ATTRACTOR_DURATION_LOCK = 20f;
@@ -80,15 +79,12 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 	public static Color getEMPColor(ShipAPI ship) {
 		return MOTE_DATA.get(getWeaponId(ship)).empColor;
 	}
-	
 	public static int getMaxMotes(ShipAPI ship) {
 		return MOTE_DATA.get(getWeaponId(ship)).maxMotes;
 	}
-	
 	public static String getLoopSound(ShipAPI ship) {
 		return MOTE_DATA.get(getWeaponId(ship)).loopSound;
 	}
-	
 	
 	public static class SharedMoteAIData {
 		public float elapsed = 0f;
@@ -100,7 +96,7 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 	
 	public static SharedMoteAIData getSharedData(ShipAPI source) {
 		String key = source + "_mote_AI_shared";
-		SharedMoteAIData data = (SharedMoteAIData)Global.getCombatEngine().getCustomData().get(key);
+		SharedMoteAIData data = (SharedMoteAIData) Global.getCombatEngine().getCustomData().get(key);
 		if (data == null) {
 			data = new SharedMoteAIData();
 			Global.getCombatEngine().getCustomData().put(key, data);
@@ -192,9 +188,6 @@ public class sd_moteControlScript extends BaseShipSystemScript {
 				mote.setWeaponSpec(weaponId);
 				mote.setMissileAI(new sd_moteAIScript(mote));
 				mote.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
-				// if they could flame out/be affected by emp, that'd be bad since they don't expire for a
-				// very long time so they'd be stuck disabled permanently, for practical purposes
-				// thus: total emp resistance (which can't target them anyway, but if it did.)
 				mote.setEmpResistance(10000);
 				data.motes.add(mote);
 				

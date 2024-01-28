@@ -9,6 +9,7 @@ import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import data.graphics.sd_decoSystemRangePlugin;
+import data.shipsystems.mote.sd_moteAIScript;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
@@ -35,8 +36,21 @@ public class sd_util {
     }
 
     public static boolean isCombatSituation(ShipAPI ship) {
-        CombatEngineAPI engine = Global.getCombatEngine();
-        return engine != null && !engine.isPaused() && ship.getOwner() != -1 && ship.getVariant() != null;
+        return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOwner() != -1 && ship.getVariant() != null;
+    }
+
+    public static boolean isAutomated(ShipAPI ship) {
+        return ship.getHullSpec().getMinCrew() == 0;
+        //return ship.getVariant().getHullMods().contains("automated") || ship.getHullSpec().getMinCrew() == 0
+        //        || ship.getHullSpec().getTags().contains("auto_rec") || ship.getCaptain().isAICore();
+    }
+
+    public static boolean isLinked(ShipAPI ship) {
+        List<String> neural = Arrays.asList("neural_interface", "neural_integrator");
+        for (String hullmod : ship.getVariant().getHullMods())
+            if (neural.contains(hullmod))
+                return true;
+        return false;
     }
 
     public static void modifyShieldArc(ShipAPI target, float goalShieldArc, float effectLevel) {
@@ -101,8 +115,12 @@ public class sd_util {
             for (int i = 0; i < amount; i++) {
                 int angleOffset = rand.nextInt(181) - 90;
                 float modifiedAngle = weapon.getSlot().getAngle() + angleOffset;
-                Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", weapon.getLocation(), modifiedAngle + ship.getFacing(), ship.getVelocity());
+                MissileAPI mote = (MissileAPI) Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", weapon.getLocation(), modifiedAngle + ship.getFacing(), ship.getVelocity());
                 Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, weapon.getLocation(), ship.getVelocity());
+                mote.setMissileAI(new sd_moteAIScript(mote));
+                mote.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
+                mote.setEmpResistance(10000);
+                //data.motes.add(mote);
             }
         } else if (module instanceof ShipEngineAPI) {
             ShipEngineAPI vroom = (ShipEngineAPI) module;
@@ -113,8 +131,12 @@ public class sd_util {
             for (int i = 0; i < amount; i++) {
                 int angleOffset = rand.nextInt(181) - 90;
                 float modifiedAngle = vroom.getEngineSlot().getAngle() + angleOffset;
-                Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", vroom.getLocation(), modifiedAngle + ship.getFacing(), ship.getVelocity());
+                MissileAPI mote = (MissileAPI) Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", vroom.getLocation(), modifiedAngle + ship.getFacing(), ship.getVelocity());
                 Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, vroom.getLocation(), ship.getVelocity());
+                mote.setMissileAI(new sd_moteAIScript(mote));
+                mote.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
+                mote.setEmpResistance(10000);
+                //data.motes.add(mote);
             }
         }
     }

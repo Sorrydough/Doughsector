@@ -10,6 +10,7 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import data.graphics.sd_decoSystemRangePlugin;
+import data.shipsystems.ai.sd_hackingsuiteAI;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class sd_utilityhullmod extends BaseHullMod {
-    List<String> decoSystemRange = Arrays.asList("sd_motearmor", "sd_hackingsuite", "sd_nullifier", "sd_stasisfield");
+    List<String> decoSystemRange = Arrays.asList("sd_hackingsuite", "sd_nullifier");
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         Global.getCombatEngine().addPlugin(new sd_utilityhullmodPlugin(ship));
         if (decoSystemRange.contains(ship.getSystem().getId()))
@@ -83,9 +84,6 @@ public class sd_utilityhullmod extends BaseHullMod {
 //                    ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
 //                }
 //            }
-
-
-
 
             ////////////////////////////
             //IMPROVES SQUALL BEHAVIOR//

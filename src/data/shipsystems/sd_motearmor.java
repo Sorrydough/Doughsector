@@ -1,7 +1,146 @@
 package data.shipsystems;
 
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
+import com.fs.starfarer.api.util.IntervalUtil;
+import data.sd_util;
+import data.shipsystems.mote.sd_moteAIScript;
+import data.shipsystems.mote.sd_moteControlScript;
+import org.dark.shaders.distortion.DistortionShader;
+import org.dark.shaders.distortion.RippleDistortion;
+import org.lazywizard.console.Console;
+import org.lazywizard.lazylib.CollisionUtils;
+import org.lazywizard.lazylib.MathUtils;
+import org.lwjgl.util.vector.Vector2f;
 
-public class sd_motearmor extends sd_mnemonicarmor {
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class sd_motearmor extends BaseShipSystemScript {
+    final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
+    final float ARMOR_PER_MOTE = 50;
+    float moteProgress = 0;
+    public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
+        ShipAPI ship = (ShipAPI) stats.getEntity();
+        if (!sd_util.isCombatSituation(ship))
+            return;
+
+        ArmorGridAPI grid = ship.getArmorGrid();
+
+        if (sd_mnemonicarmor.isArmorGridBalanced(grid)) {
+            ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
+            return;
+        } else {
+            ship.setJitter(id, sd_util.healColor, effectLevel, 2, 0, 5);
+        }
+
+        interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
+        if (interval.intervalElapsed()) {
+            //while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
+            //firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
+            float averageArmorPerCell = sd_mnemonicarmor.getAverageArmorPerCell(grid);
+            //next we create a list of cells above average, and another list of cells below average
+            List<Vector2f> cellsAboveAverage = sd_mnemonicarmor.getCellsAroundAverage(grid, true);
+            List<Vector2f> cellsBelowAverage = sd_mnemonicarmor.getCellsAroundAverage(grid, false);
+            //now that we have a list of cells above and below the average, we need to randomly choose one of the former and move the delta to the latter
+            Vector2f cellToSubtract = cellsAboveAverage.get(new Random().nextInt(cellsAboveAverage.size()));
+            Vector2f cellToAdd = cellsBelowAverage.get(new Random().nextInt(cellsBelowAverage.size()));
+
+            //find the amount we need to subtract from the cell - this the maximum of the amount needed or the amount the cell can provide
+            float amountNeededToTransfer = ship.getArmorGrid().getMaxArmorInCell() - ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y);
+            float amountAbleToTransfer = (ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - averageArmorPerCell);
+            if (amountAbleToTransfer <= 0)
+                return;
+
+            float amountToTransfer = Math.min(amountNeededToTransfer, amountAbleToTransfer);
+            //subtract the amount from the donating cell and add it to the recieving cell
+            ship.getArmorGrid().setArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y, ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - amountToTransfer);
+            ship.getArmorGrid().setArmorValue((int) cellToAdd.x, (int) cellToAdd.y, ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y) + amountToTransfer);
+            //Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
+
+            //start vfx: draw an emp arc to the target cell if it's within bounds
+            Vector2f toSubtractLoc = (grid.getLocation((int) cellToSubtract.x, (int) cellToSubtract.y));
+            Vector2f toAddLoc = (grid.getLocation((int) cellToAdd.x, (int) cellToAdd.y));
+            boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
+            boolean isToAddInBounds = CollisionUtils.isPointWithinBounds(toAddLoc, ship);
+            float intensity = sd_mnemonicarmor.getAverageArmorPerCell(grid) / grid.getMaxArmorInCell();
+            float thickness = (2 + amountToTransfer * 2) * intensity;
+            if (isToAddInBounds)
+                Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship,
+                        thickness, sd_util.healColor, sd_util.damageUnderColor);
+            //draw spark effects on the cell if it's within bounds
+            if (isToSubtractInBounds)
+                sd_mnemonicarmor.drawVfx(toSubtractLoc, ship, amountToTransfer, intensity);
+            if (isToAddInBounds)
+                sd_mnemonicarmor.drawVfx(toAddLoc, ship, amountToTransfer, intensity);
+
+            //generate flux according to amount of armor hp transferred
+            ship.getFluxTracker().increaseFlux(amountToTransfer * sd_mnemonicarmor.FLUX_PER_ARMOR, false);
+
+            //cleanup
+            ship.syncWithArmorGridState();
+            ship.syncWeaponDecalsWithArmorDamage();
+
+            //////////////////////////////////
+            //MOTE STUFF GETS TACKED ON HERE//
+            //////////////////////////////////
+            moteProgress += amountToTransfer;
+            if (moteProgress >= ARMOR_PER_MOTE) {
+                emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship));
+                moteProgress -= ARMOR_PER_MOTE;
+            }
+        }
+    }
+    public static class SharedMoteAIData {
+        public float elapsed = 0f;
+        public List<MissileAPI> motes = new ArrayList<>();
+        public float attractorRemaining = 0f;
+        public Vector2f attractorTarget = null;
+        public ShipAPI attractorLock = null;
+    }
+    public static SharedMoteAIData getSharedData(ShipAPI source) {
+        String key = source + "_mote_AI_shared";
+        SharedMoteAIData data = (SharedMoteAIData) Global.getCombatEngine().getCustomData().get(key);
+        if (data == null) {
+            data = new SharedMoteAIData();
+            Global.getCombatEngine().getCustomData().put(key, data);
+        }
+        return data;
+    }
+    public static void emitMote(ShipAPI ship, Vector2f loc) {
+        final Random rand = new Random();
+        int angleOffset = rand.nextInt(361) - 180;
+        MissileAPI mote = (MissileAPI) Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", loc, angleOffset + ship.getFacing(), ship.getVelocity());
+        Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, loc, ship.getVelocity());
+        mote.setMissileAI(new sd_moteAIScript(mote));
+        mote.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
+        mote.setEmpResistance(10000);
+        SharedMoteAIData data = getSharedData(ship);
+        data.motes.add(mote);
+    }
+    public StatusData getStatusData(int index, State state, float effectLevel) {
+        if (index == 0)
+            return new StatusData("REBALANCING ARMOR", false); // todo: figure out how to check the armor grid from here
+        return null;
+    }
+    @Override
+    public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
+        ArmorGridAPI grid = ship.getArmorGrid();
+        if (!sd_util.canUseSystemThisFrame(ship))
+            return "STANDBY";
+        if (sd_mnemonicarmor.isArmorGridDestroyed(grid))
+            return "ARMOR DESTROYED";
+        if (sd_mnemonicarmor.isArmorGridBalanced(grid))
+            return "ARMOR BALANCED";
+        if (system.isActive())
+            return "REBALANCING";
+        return "READY";
+    }
+    @Override
+    public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
+        return !sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid()) && sd_util.canUseSystemThisFrame(ship);
+    }
 }
