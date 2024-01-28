@@ -27,7 +27,7 @@
     {
       "id": "HRD01",
       "size": "SMALL",
-      "type": "MISSILE",
+      "type": "UNIVERSAL",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
@@ -36,7 +36,7 @@
     {
       "id": "HRD02",
       "size": "SMALL",
-      "type": "SYNERGY",
+      "type": "UNIVERSAL",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
