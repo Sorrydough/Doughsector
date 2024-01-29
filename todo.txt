@@ -45,6 +45,7 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
 - Create engine reigniter hullmod
 - Figure out a better way to display skills in main menu missions
+- ensure that two ships don't accidentally use hacking suite on the same target simultaneously
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
