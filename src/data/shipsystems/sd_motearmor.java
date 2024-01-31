@@ -15,13 +15,32 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public class sd_motearmor extends BaseShipSystemScript {
     final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
-    final float ARMOR_PER_MOTE = 50;
+    // add max motes
+    // add mote min radius, mote max radius
+    // add starting motes
+    final Map<ShipAPI.HullSize, Integer> ARMOR_PER_MOTE = new HashMap<>(); {
+        ARMOR_PER_MOTE.put(ShipAPI.HullSize.FRIGATE, 25);
+        ARMOR_PER_MOTE.put(ShipAPI.HullSize.DESTROYER, 50);
+        ARMOR_PER_MOTE.put(ShipAPI.HullSize.CRUISER, 75);
+        ARMOR_PER_MOTE.put(ShipAPI.HullSize.CAPITAL_SHIP, 150);
+    }
+    final Map<ShipAPI.HullSize, Integer> STARTING_MOTES = new HashMap<>(); {
+        STARTING_MOTES.put(ShipAPI.HullSize.FRIGATE, 3);
+        STARTING_MOTES.put(ShipAPI.HullSize.DESTROYER, 6);
+        STARTING_MOTES.put(ShipAPI.HullSize.CRUISER, 9);
+        STARTING_MOTES.put(ShipAPI.HullSize.CAPITAL_SHIP, 15);
+    }
+    final Map<ShipAPI.HullSize, Integer> MAX_MOTES = new HashMap<>(); {
+        MAX_MOTES.put(ShipAPI.HullSize.FRIGATE, 10);
+        MAX_MOTES.put(ShipAPI.HullSize.DESTROYER, 15);
+        MAX_MOTES.put(ShipAPI.HullSize.CRUISER, 20);
+        MAX_MOTES.put(ShipAPI.HullSize.CAPITAL_SHIP, 30);
+    }
     float moteProgress = 0;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         ShipAPI ship = (ShipAPI) stats.getEntity();
@@ -88,9 +107,9 @@ public class sd_motearmor extends BaseShipSystemScript {
             //MOTE STUFF GETS TACKED ON HERE//
             //////////////////////////////////
             moteProgress += amountToTransfer;
-            if (moteProgress >= ARMOR_PER_MOTE) {
+            if (moteProgress >= ARMOR_PER_MOTE.get(ship.getHullSize()) && getSharedData(ship).motes.size() < MAX_MOTES.get(ship.getHullSize())) {
                 emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship));
-                moteProgress -= ARMOR_PER_MOTE;
+                moteProgress -= ARMOR_PER_MOTE.get(ship.getHullSize());
             }
         }
     }

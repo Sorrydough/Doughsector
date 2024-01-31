@@ -1,0 +1,29 @@
+{
+    "displayName": "Command",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "sd_retrofitkite",
+    "hullMods": [
+        "autorepair",
+        "eccm",
+        "ecm",
+        "nav_relay",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "sd_retrofitkite_Command",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "HRD01": "heatseeker",
+                "HRD02": "heatseeker",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

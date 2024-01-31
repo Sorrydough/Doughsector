@@ -6,7 +6,7 @@ Hausinn,sd_fightercanister,,???,,,350,150,100,,20,,,200,200,200,100,100,30,FRONT
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Unthesel,sd_frigatelight,Light Frigate,???,sd_grapeshotarray,3,1300,350,1800,,150,35,,170,160,150,145,140,100,OMNI,,90,0.2,1,,,5,10,30,10,0.5,20,11,8500,6,10,180,0.25,3,3,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
 Yathve,sd_frigate,Frigate,???,sd_mnemonicarmor,5,2000,500,3000,,200,50,,150,145,140,135,130,200,OMNI,,75,0.2,1,,,25,50,40,25,1,25,10,12500,6,10,240,0.25,5,5,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
-Southioz,sd_frigateinterference,Frigate,???,sd_hackingsuite,7,2600,400,3200,,180,55,,140,135,130,125,120,250,OMNI,,90,0.2,1,,,20,40,50,30,1,30,10,17500,6,10,270,0.25,7,7,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
+Southioz,sd_frigateinterference,Frigate,???,sd_hackingsuite,7,2600,400,3200,,180,50,,140,135,130,125,120,250,OMNI,,90,0.2,1,,,20,40,50,30,1,30,10,17500,6,10,270,0.25,7,7,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
 Shavee,sd_frigateheavy,Heavy Frigate,???,sd_motearmor,9,3000,650,4400,,300,55,,120,115,110,105,105,300,OMNI,,90,0.2,1,,,30,45,80,30,1,30,9,35000,5,10,300,0.25,9,9,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Yathsou,sd_destroyer,Destroyer,???,sd_mnemonicarmor,10,5000,850,6000,,300,95,,80,70,60,40,35,450,OMNI,,75,0.2,1,,,50,75,60,60,2,30,9,40000,4,15,420,0.25,11,11,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,

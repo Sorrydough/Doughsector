@@ -27,8 +27,10 @@ public class sd_decoSystemRangePlugin extends BaseEveryFrameCombatPlugin {
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         if (runOnce) {
-            engine.addLayeredRenderingPlugin(new drawRadius(ship, sd_util.getOptimalRange(ship) + ship.getCollisionRadius(), 2, colorOuter, false));
-            engine.addLayeredRenderingPlugin(new drawRadius(ship, sd_util.getOptimalRange(ship) + ship.getCollisionRadius(), 2, colorInner, true));
+            engine.addLayeredRenderingPlugin(new drawRadius(ship,
+                    ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius()), 2, colorOuter, false));
+            engine.addLayeredRenderingPlugin(new drawRadius(ship,
+                    ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius()), 2, colorInner, true));
             runOnce = false;
         }
     }

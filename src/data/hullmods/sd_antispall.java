@@ -19,8 +19,8 @@ public class sd_antispall extends BaseHullMod {
     public static class sd_antispallListener implements DamageTakenModifier {
         @Override
         public String modifyDamageTaken(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f point, boolean shieldHit) {
-            if (damage.getType() == DamageType.KINETIC || damage.getType() == DamageType.FRAGMENTATION && !shieldHit) {
-                damage.getModifier().modifyFlat("sd_antispall", -Math.max(0, damage.computeDamageDealt(Global.getCombatEngine().getElapsedInLastFrame()) - 10));
+            if (!shieldHit && damage.getType() == DamageType.KINETIC || damage.getType() == DamageType.FRAGMENTATION) {
+                damage.getModifier().modifyFlat("sd_antispall", -Math.max(0, damage.getDamage()) - 10);
             }
             return null;
         }
