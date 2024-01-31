@@ -37,38 +37,156 @@ public class sd_moteAIScript implements MissileAIPlugin {
 	
 	public sd_moteAIScript(MissileAPI missile) {
 		this.missile = missile;
+		data = sd_motearmor.getSharedData(missile.getSource());
 		random = (float) Math.random();
 		elapsed = -(float) Math.random() * 0.5f;
-		
-		data = sd_motearmor.getSharedData(missile.getSource());
-		
 		updateHardAvoidList();
 	}
-	
-	public void updateHardAvoidList() {
+
+	protected IntervalUtil flutterCheck = new IntervalUtil(2f, 4f);
+	protected float flutterRemaining = 0f;
+	protected float elapsed;
+	public void advance(float amount) {
+		if (missile.isFizzling() || missile.getSource() ==  null)
+			return;
+
+		elapsed += amount;
+
+		updateListTracker.advance(amount);
+		if (updateListTracker.intervalElapsed())
+			updateHardAvoidList();
+
+		if (flutterRemaining <= 0) {
+			flutterCheck.advance(amount);
+			if (flutterCheck.intervalElapsed() && (Math.random() > 0.9f || (data.attractorLock != null && Math.random() > 0.5f)))
+				flutterRemaining = 2f + (float) Math.random() * 2f;
+		}
+
+		if (elapsed >= 0.5f) {
+			boolean wantToFlock = !isTargetValid();
+			if (data.attractorLock != null) {
+				float dist = Misc.getDistance(missile.getLocation(), data.attractorLock.getLocation());
+				if (dist > data.attractorLock.getCollisionRadius() + ATTRACTOR_LOCK_STOP_FLOCKING_ADD)
+					wantToFlock = true;
+			}
+
+			if (wantToFlock) {
+				doFlocking();
+			} else {
+				CombatEngineAPI engine = Global.getCombatEngine();
+				Vector2f targetLoc = engine.getAimPointWithLeadForAutofire(missile, 1.5f, target, 50);
+				engine.headInDirectionWithoutTurning(missile, Misc.getAngleInDegrees(missile.getLocation(), targetLoc),10000);
+				if (random > 0.5f) {
+					missile.giveCommand(ShipCommand.TURN_LEFT);
+				} else {
+					missile.giveCommand(ShipCommand.TURN_RIGHT);
+				}
+				missile.getEngineController().forceShowAccelerating();
+			}
+		}
+
+		tracker.advance(amount);
+		if (tracker.intervalElapsed())
+			if (elapsed >= 0.5f)
+				acquireNewTargetIfNeeded();
+	}
+
+
+	boolean isTargetValid() {
+		if (target instanceof ShipAPI) {
+			ShipAPI thing = (ShipAPI) target;
+			if (thing.isPhased() || thing.isHulk())
+				return false;
+		}
+		if (target instanceof MissileAPI) {
+			MissileAPI thing = (MissileAPI) target;
+			if (!Global.getCombatEngine().isInPlay(thing) || thing.isFizzling())
+				return false;
+		}
+		return target != null && target.getOwner() != missile.getOwner();
+	}
+
+	// put ships and asteroids into a list of shit to avoid, uses an AI grid iterator because alex thinks it should
+	void updateHardAvoidList() {
 		hardAvoidList.clear();
-		
-		CollisionGridAPI grid = Global.getCombatEngine().getAiGridShips();
-		Iterator<Object> iter = grid.getCheckIterator(missile.getLocation(), MAX_HARD_AVOID_RANGE * 2f, MAX_HARD_AVOID_RANGE * 2f);
+		Iterator<Object> iter = Global.getCombatEngine().getAiGridShips().getCheckIterator(missile.getLocation(),MAX_HARD_AVOID_RANGE * 2f,MAX_HARD_AVOID_RANGE * 2f);
 		while (iter.hasNext()) {
-			Object o = iter.next();
-			if (!(o instanceof ShipAPI)) continue;
-			
-			ShipAPI ship = (ShipAPI) o;
-			
-			if (ship.isFighter()) continue;
-			hardAvoidList.add(ship);
+			Object nextObject = iter.next();
+			if (nextObject instanceof ShipAPI)
+				hardAvoidList.add((ShipAPI) nextObject);
 		}
-		
-		grid = Global.getCombatEngine().getAiGridAsteroids();
-		iter = grid.getCheckIterator(missile.getLocation(), MAX_HARD_AVOID_RANGE * 2f, MAX_HARD_AVOID_RANGE * 2f);
+		iter = Global.getCombatEngine().getAiGridAsteroids().getCheckIterator(missile.getLocation(),MAX_HARD_AVOID_RANGE * 2f,MAX_HARD_AVOID_RANGE * 2f);
 		while (iter.hasNext()) {
-			Object o = iter.next();
-			if (!(o instanceof CombatEntityAPI)) continue;
-			
-			CombatEntityAPI asteroid = (CombatEntityAPI) o;
-			hardAvoidList.add(asteroid);
+			Object nextObject = iter.next();
+			if (nextObject instanceof CombatEntityAPI)
+				hardAvoidList.add((CombatEntityAPI) nextObject);
 		}
+	}
+
+	protected void acquireNewTargetIfNeeded() {
+		if (data.attractorLock != null) {
+			target = data.attractorLock;
+			return;
+		}
+
+		CombatEngineAPI engine = Global.getCombatEngine();
+
+		// want to: target nearest missile that is not targeted by another two motes already
+		int owner = missile.getOwner();
+
+		int maxMotesPerTarget = 1;
+		ShipAPI source = missile.getSource();
+		float hardfluxCollision = source.getCollisionRadius() * source.getHardFluxLevel();
+		float maxDistFromSourceShip = hardfluxCollision + MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD;
+		float maxDistFromAttractor = MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD;
+
+		float minDist = Float.MAX_VALUE;
+		CombatEntityAPI closest = null;
+		for (MissileAPI other : engine.getMissiles()) {
+			if (other.getOwner() == owner || other.getOwner() == 100)
+				continue;
+
+			float distToTarget = Misc.getDistance(missile.getLocation(), other.getLocation());
+			if (distToTarget > minDist || distToTarget > 3000 && !engine.isAwareOf(owner, other))
+				continue;
+
+			float distFromAttractor = Float.MAX_VALUE;
+			if (data.attractorTarget != null)
+				distFromAttractor = Misc.getDistance(other.getLocation(), data.attractorTarget);
+
+			float distFromSource = Misc.getDistance(other.getLocation(), missile.getSource().getLocation());
+			if (distFromSource > maxDistFromSourceShip && distFromAttractor > maxDistFromAttractor)
+				continue;
+
+			if (getNumMotesTargeting(other) >= maxMotesPerTarget)
+				continue;
+			if (distToTarget < minDist) {
+				closest = other;
+				minDist = distToTarget;
+			}
+		}
+
+		for (ShipAPI other : engine.getShips()) {
+			float distToTarget = Misc.getDistance(missile.getLocation(), other.getLocation());
+			if (other.getOwner() == owner || other.getOwner() == 100 || distToTarget > minDist || !engine.isAwareOf(owner, other))
+				continue;
+
+			float distFromAttractor = Float.MAX_VALUE;
+			if (data.attractorTarget != null)
+				distFromAttractor = Misc.getDistance(other.getLocation(), data.attractorTarget);
+
+			float distFromSource = Misc.getDistance(other.getLocation(), missile.getSource().getLocation());
+			if (distFromSource > maxDistFromSourceShip && distFromAttractor > maxDistFromAttractor)
+				continue;
+
+			if (getNumMotesTargeting(other) >= maxMotesPerTarget)
+				continue;
+			if (distToTarget < minDist) {
+				closest = other;
+				minDist = distToTarget;
+			}
+		}
+		target = closest;
 	}
 	
 	public void doFlocking() {
@@ -175,138 +293,6 @@ public class sd_moteAIScript implements MissileAIPlugin {
 			}
 			missile.getEngineController().forceShowAccelerating();
 		}
-	}
-	protected IntervalUtil flutterCheck = new IntervalUtil(2f, 4f);
-	protected FaderUtil currFlutter = null;
-	protected float flutterRemaining = 0f;
-	protected float elapsed;
-	public void advance(float amount) {
-		if (missile.isFizzling() || missile.getSource() ==  null)
-			return;
-		
-		elapsed += amount;
-		
-		updateListTracker.advance(amount);
-		if (updateListTracker.intervalElapsed())
-			updateHardAvoidList();
-		
-		if (flutterRemaining <= 0) {
-			flutterCheck.advance(amount);
-			if (flutterCheck.intervalElapsed() && (Math.random() > 0.9f || (data.attractorLock != null && Math.random() > 0.5f)))
-				flutterRemaining = 2f + (float) Math.random() * 2f;
-		}
-		
-		if (elapsed >= 0.5f) {
-			boolean wantToFlock = !isTargetValid();
-			if (data.attractorLock != null) {
-				float dist = Misc.getDistance(missile.getLocation(), data.attractorLock.getLocation());
-				if (dist > data.attractorLock.getCollisionRadius() + ATTRACTOR_LOCK_STOP_FLOCKING_ADD)
-					wantToFlock = true;
-			}
-			
-			if (wantToFlock) {
-				doFlocking();
-			} else {
-				CombatEngineAPI engine = Global.getCombatEngine();
-				Vector2f targetLoc = engine.getAimPointWithLeadForAutofire(missile, 1.5f, target, 50);
-				engine.headInDirectionWithoutTurning(missile, Misc.getAngleInDegrees(missile.getLocation(), targetLoc),10000);
-				if (random > 0.5f) {
-					missile.giveCommand(ShipCommand.TURN_LEFT);
-				} else {
-					missile.giveCommand(ShipCommand.TURN_RIGHT);
-				}
-				missile.getEngineController().forceShowAccelerating();
-			}
-		}
-		
-		tracker.advance(amount);
-		if (tracker.intervalElapsed())
-			if (elapsed >= 0.5f)
-				acquireNewTargetIfNeeded();
-	}
-	
-	
-	protected boolean isTargetValid() {
-		if (target == null || (target instanceof ShipAPI && ((ShipAPI) target).isPhased()))
-			return false;
-
-		CombatEngineAPI engine = Global.getCombatEngine();
-		
-		if (target != null && target instanceof ShipAPI && ((ShipAPI) target).isHulk())
-			return false;
-
-		List list;
-		if (target instanceof ShipAPI) {
-			list = engine.getShips();
-		} else {
-			list = engine.getMissiles();
-		}
-		return target != null && list.contains(target) && target.getOwner() != missile.getOwner();
-	}
-	
-	protected void acquireNewTargetIfNeeded() {
-		if (data.attractorLock != null) {
-			target = data.attractorLock;
-			return;
-		}
-		
-		CombatEngineAPI engine = Global.getCombatEngine();
-		
-		// want to: target nearest missile that is not targeted by another two motes already
-		int owner = missile.getOwner();
-		
-		int maxMotesPerMissile = 2;
-		float maxDistFromSourceShip = MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD;
-		float maxDistFromAttractor = MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD;
-		
-		float minDist = Float.MAX_VALUE;
-		CombatEntityAPI closest = null;
-		for (MissileAPI other : engine.getMissiles()) {
-			if (other.getOwner() == owner) continue;
-			if (other.getOwner() == 100) continue;
-			float distToTarget = Misc.getDistance(missile.getLocation(), other.getLocation());
-			
-			if (distToTarget > minDist) continue;
-			if (distToTarget > 3000 && !engine.isAwareOf(owner, other)) continue;
-			
-			float distFromAttractor = Float.MAX_VALUE;
-			if (data.attractorTarget != null) {
-				distFromAttractor = Misc.getDistance(other.getLocation(), data.attractorTarget);
-			}
-			float distFromSource = Misc.getDistance(other.getLocation(), missile.getSource().getLocation());
-			if (distFromSource > maxDistFromSourceShip &&
-					distFromAttractor > maxDistFromAttractor) continue;
-			
-			if (getNumMotesTargeting(other) >= maxMotesPerMissile) continue;
-			if (distToTarget < minDist) {
-				closest = other;
-				minDist = distToTarget;
-			}
-		}
-		
-		for (ShipAPI other : engine.getShips()) {
-			if (other.getOwner() == owner) continue;
-			if (other.getOwner() == 100) continue;
-			if (!other.isFighter()) continue;
-			float distToTarget = Misc.getDistance(missile.getLocation(), other.getLocation());
-			if (distToTarget > minDist) continue;
-			if (distToTarget > 3000 && !engine.isAwareOf(owner, other)) continue;
-			
-			float distFromAttractor = Float.MAX_VALUE;
-			if (data.attractorTarget != null) {
-				distFromAttractor = Misc.getDistance(other.getLocation(), data.attractorTarget);
-			}
-			float distFromSource = Misc.getDistance(other.getLocation(), missile.getSource().getLocation());
-			if (distFromSource > maxDistFromSourceShip &&
-					distFromAttractor > maxDistFromAttractor) continue;
-			
-			if (getNumMotesTargeting(other) >= maxMotesPerMissile) continue;
-			if (distToTarget < minDist) {
-				closest = other;
-				minDist = distToTarget;
-			}
-		}
-		target = closest;
 	}
 	protected int getNumMotesTargeting(CombatEntityAPI other) {
 		int count = 0;

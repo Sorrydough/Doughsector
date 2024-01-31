@@ -16,22 +16,32 @@ import java.util.List;
 import java.util.Map;
 
 public class sd_hackingsuite extends BaseShipSystemScript {
+	boolean runOnce = true;
+	ShipAPI enemy = null;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		if (!sd_util.isCombatSituation(ship))
 			return;
+
+		// needed to add this because it was possible for the ship to deselect its target during system chargeup, which would pass a null target to the effect plugin
+		if (runOnce && ship.getSystem().getState() == SystemState.IN) {
+			enemy = ship.getShipTarget();
+			runOnce = false;
+		}
 
 		// set jitter effects for ourselves
 		float jitterLevel = effectLevel;
 		if (state == State.OUT) // ensures jitter level doesn't deteriorate during OUT
 			jitterLevel *= jitterLevel;
 		float jitterExtra = jitterLevel * 50;
-		ship.setJitter(this, sd_util.factionColor, jitterLevel, 4, 0, 0 + jitterExtra);
+		ship.setJitter(this, sd_util.factionColor, jitterLevel, 4, 0, jitterExtra);
 		ship.setJitterUnder(this, sd_util.factionUnderColor, jitterLevel, 20, 0, 3 + jitterExtra);
 
 		// apply the effect to the target, note we check effectLevel and not for active state because our system doesn't have an active duration
-		if (ship.getSystem().getEffectLevel() == 1)
-			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(ship.getShipTarget()));
+		if (ship.getSystem().getEffectLevel() == 1) {
+			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(enemy));
+			runOnce = true;
+		}
 	}
 	public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
 		if (target == null)                                                // needs to take target as an input to work in the AI script

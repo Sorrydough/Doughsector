@@ -30,7 +30,7 @@
     {
       "id": "HRD01",
       "size": "LARGE",
-      "type": "SYNERGY",
+      "type": "MISSILE",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
