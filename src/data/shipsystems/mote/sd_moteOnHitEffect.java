@@ -2,6 +2,9 @@ package data.shipsystems.mote;
 
 import java.awt.Color;
 
+import com.fs.starfarer.combat.entities.Missile;
+import data.sd_util;
+import data.shipsystems.sd_motearmor;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;
@@ -16,6 +19,7 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 
 public class sd_moteOnHitEffect implements OnHitEffectPlugin {
+	public static float ANTI_FIGHTER_DAMAGE = 200;
 	public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target, Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
 		if (target instanceof ShipAPI) {
 			ShipAPI ship = (ShipAPI) target;
@@ -27,18 +31,15 @@ public class sd_moteOnHitEffect implements OnHitEffectPlugin {
 				if (!shieldHit || piercedShield)
 					engine.spawnEmpArcPierceShields(projectile.getSource(), point, target, target, projectile.getDamageType(), projectile.getDamageAmount(), projectile.getEmpAmount(),
 							100000f, "mote_attractor_impact_emp_arc", 20f,
-							sd_moteControlScript.getEMPColor(projectile.getSource()), new Color(255,255,255,255));
+							sd_util.healColor, new Color(255,255,255,255));
 			} else {
-				float damage = sd_moteControlScript.getAntiFighterDamage(projectile.getSource());
 				Global.getCombatEngine().applyDamage(projectile, ship, point,
-						damage, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
+						ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
 			}
 		} else if (target instanceof MissileAPI) {
-			float damage = sd_moteControlScript.getAntiFighterDamage(projectile.getSource());
-			Global.getCombatEngine().applyDamage(projectile, target, point, 
-					damage, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
+			Global.getCombatEngine().applyDamage(projectile, target, point,
+					ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
 		}
-		String impactSoundId = sd_moteControlScript.getImpactSoundId(projectile.getSource());
-		Global.getSoundPlayer().playSound(impactSoundId, 1f, 1f, point, new Vector2f());
+		Global.getSoundPlayer().playSound("mote_attractor_impact_normal", 1f, 1f, point, new Vector2f());
 	}
 }

@@ -20,9 +20,6 @@ import java.util.List;
 
 public class sd_motearmor extends BaseShipSystemScript {
     final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
-    // add max motes
-    // add mote min radius, mote max radius
-    // add starting motes
     final Map<ShipAPI.HullSize, Integer> ARMOR_PER_MOTE = new HashMap<>(); {
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.FRIGATE, 25);
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.DESTROYER, 50);
@@ -58,6 +55,11 @@ public class sd_motearmor extends BaseShipSystemScript {
 
         interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
         if (interval.intervalElapsed()) {
+            SharedMoteAIData data = getSharedData(ship);
+            Iterator<MissileAPI> iter = data.motes.iterator();
+            while (iter.hasNext())
+                if (!Global.getCombatEngine().isMissileAlive(iter.next()))
+                    iter.remove();
             //while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
             //firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
             float averageArmorPerCell = sd_mnemonicarmor.getAverageArmorPerCell(grid);
@@ -107,7 +109,7 @@ public class sd_motearmor extends BaseShipSystemScript {
             //MOTE STUFF GETS TACKED ON HERE//
             //////////////////////////////////
             moteProgress += amountToTransfer;
-            if (moteProgress >= ARMOR_PER_MOTE.get(ship.getHullSize()) && getSharedData(ship).motes.size() < MAX_MOTES.get(ship.getHullSize())) {
+            if (moteProgress >= ARMOR_PER_MOTE.get(ship.getHullSize()) && data.motes.size() < MAX_MOTES.get(ship.getHullSize())) {
                 emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship));
                 moteProgress -= ARMOR_PER_MOTE.get(ship.getHullSize());
             }
@@ -132,7 +134,7 @@ public class sd_motearmor extends BaseShipSystemScript {
     public static void emitMote(ShipAPI ship, Vector2f loc) {
         final Random rand = new Random();
         int angleOffset = rand.nextInt(361) - 180;
-        MissileAPI mote = (MissileAPI) Global.getCombatEngine().spawnProjectile(ship, null, "motelauncher", loc, angleOffset + ship.getFacing(), ship.getVelocity());
+        MissileAPI mote = (MissileAPI) Global.getCombatEngine().spawnProjectile(ship, null, "sd_motelauncher", loc, angleOffset + ship.getFacing(), ship.getVelocity());
         Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, loc, ship.getVelocity());
         mote.setMissileAI(new sd_moteAIScript(mote));
         mote.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
