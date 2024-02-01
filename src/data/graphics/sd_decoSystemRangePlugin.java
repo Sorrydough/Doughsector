@@ -33,8 +33,6 @@ public class sd_decoSystemRangePlugin extends BaseEveryFrameCombatPlugin {
                     ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius()), 2, colorInner, true));
             runOnce = false;
         }
-        if (!engine.isInPlay(ship) || !sd_util.isCombatSituation(ship) || !ship.isAlive() || ship.getCurrentCR() == 0)
-            engine.removePlugin(this);
     }
     static class drawRadius extends BaseCombatLayeredRenderingPlugin {
         final Map<ShipSystemAPI.SystemState, Float> ALPHA_MULT = new HashMap<>(); {
@@ -56,6 +54,9 @@ public class sd_decoSystemRangePlugin extends BaseEveryFrameCombatPlugin {
             this.width = width;
             this.color = color;
             this.drawFilled = drawFilled;
+        }
+        public boolean isExpired() {
+            return (!Global.getCombatEngine().isInPlay(ship) || !sd_util.isCombatSituation(ship) || !ship.isAlive() || ship.getCurrentCR() == 0);
         }
         @Override
         public EnumSet<CombatEngineLayers> getActiveLayers() {
