@@ -12,7 +12,9 @@
   "shieldRadius": 121.5,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_utilityhullmod"
+    "sd_utilityhullmod",
+    "heavyarmor",
+    "repair_gantry"
   ],
   "builtInWeapons": {
     "DEC01": "sd_decoBlinker",

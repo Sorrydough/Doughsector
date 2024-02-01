@@ -20,8 +20,6 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class sd_moteAIScript implements MissileAIPlugin {
-	public static float MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD = 1000;
-	public static float MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD = 500;
 	public static float MAX_HARD_AVOID_RANGE = 250;
 	public static float AVOID_RANGE = 50;
 	public static float COHESION_RANGE = 100;
@@ -137,8 +135,10 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		int maxMotesPerTarget = 1;
 		ShipAPI source = missile.getSource();
 		float hardfluxCollision = source.getCollisionRadius() * source.getHardFluxLevel();
-		float maxDistFromSourceShip = hardfluxCollision + MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD;
-		float maxDistFromAttractor = MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD;
+		// distance from source ship to seek targets
+		float maxDistFromSourceShip = source.getCollisionRadius() + hardfluxCollision;
+		// distance from attractor target to seek targets
+		float maxDistFromAttractor = source.getCollisionRadius() / 2 + hardfluxCollision;
 
 		float minDist = Float.MAX_VALUE;
 		CombatEntityAPI closest = null;
