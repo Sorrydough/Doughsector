@@ -132,7 +132,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		// want to: target nearest missile that is not targeted by another two motes already
 		int owner = missile.getOwner();
 
-		int maxMotesPerTarget = 1;
+		int maxMotesPerTarget = 2;
 		ShipAPI source = missile.getSource();
 		float hardfluxCollision = source.getCollisionRadius() * source.getHardFluxLevel();
 		// distance from source ship to seek targets

@@ -6,6 +6,7 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
 import data.sd_util;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 
 import java.util.List;
@@ -78,9 +79,9 @@ public class sd_nullifier extends BaseShipSystemScript {
                 if (nullifier.getValue().getValue() > nullificationLevel)
                     nullificationLevel = nullifier.getValue().getValue();
 
-            target.fadeToColor("sd_stasisfield", sd_util.timeUnderColor, 0.25f, 0.25f, 0.66f * nullificationLevel);
-            target.setJitterUnder("sd_stasisfield", sd_util.timeUnderColor, nullificationLevel, 10, 0, 10);
-            target.setJitter("sd_stasisfield", sd_util.timeColor, nullificationLevel, 1, 0, 5);
+            target.fadeToColor("sd_nullifier", sd_util.timeUnderColor, 0.25f, 0.25f, 0.66f * nullificationLevel);
+            target.setJitterUnder("sd_nullifier", sd_util.timeUnderColor, nullificationLevel, 10, 0, 10);
+            target.setJitter("sd_nullifier", sd_util.timeColor, nullificationLevel, 1, 0, 5);
 
             // 3. Apply our timeflow change according to the biggest effectLevel
             targetStats.getTimeMult().unmodify("sd_nullifier");
@@ -91,10 +92,6 @@ public class sd_nullifier extends BaseShipSystemScript {
             if (target == engine.getPlayerShip())
                 engine.getTimeMult().modifyMult("sd_nullifier", modificationMult);
 
-            // 4. Slightly reduce target shield arc
-//        targetStats.getShieldArcBonus().modifyMult("sd_nullifier", (PPT_MULT - 1) * nullificationLevel);
-//        sd_util.modifyShieldArc(target, Math.max(45, targetStats.getShieldArcBonus().computeEffective(target.getHullSpec().getShieldSpec().getArc())), effectLevel);
-
             // 5. Generate flux
             float modificationPercent = Math.abs(1 - baseTimeflow) * 100;
             ship.getFluxTracker().increaseFlux((modificationPercent * FLUX_PER_TIMEFLOW * effectLevel * amount) / numApplied, true); // divide by numApplied to share flux load
@@ -104,7 +101,6 @@ public class sd_nullifier extends BaseShipSystemScript {
                 targetStats.getCRLossPerSecondPercent().unmodifyMult(id);
                 if (targetDynamic.getMod("sd_nullifier").getFlatBonuses().isEmpty()) {
                     targetDynamic.getMod("sd_baseTimeMult").unmodify("sd_nullifier");
-//                targetStats.getShieldArcBonus().unmodifyMult("sd_nullifier");
                     targetStats.getTimeMult().unmodifyFlat("sd_nullifier");
                     engine.getTimeMult().unmodifyFlat("sd_nullifier");
                 }

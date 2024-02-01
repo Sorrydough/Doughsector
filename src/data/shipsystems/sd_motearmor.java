@@ -28,15 +28,15 @@ public class sd_motearmor extends BaseShipSystemScript {
     }
     final Map<ShipAPI.HullSize, Integer> STARTING_MOTES = new HashMap<>(); {
         STARTING_MOTES.put(ShipAPI.HullSize.FRIGATE, 3);
-        STARTING_MOTES.put(ShipAPI.HullSize.DESTROYER, 6);
-        STARTING_MOTES.put(ShipAPI.HullSize.CRUISER, 9);
-        STARTING_MOTES.put(ShipAPI.HullSize.CAPITAL_SHIP, 15);
+        STARTING_MOTES.put(ShipAPI.HullSize.DESTROYER, 5);
+        STARTING_MOTES.put(ShipAPI.HullSize.CRUISER, 8);
+        STARTING_MOTES.put(ShipAPI.HullSize.CAPITAL_SHIP, 13);
     }
     final Map<ShipAPI.HullSize, Integer> MAX_MOTES = new HashMap<>(); {
-        MAX_MOTES.put(ShipAPI.HullSize.FRIGATE, 10);
-        MAX_MOTES.put(ShipAPI.HullSize.DESTROYER, 15);
-        MAX_MOTES.put(ShipAPI.HullSize.CRUISER, 20);
-        MAX_MOTES.put(ShipAPI.HullSize.CAPITAL_SHIP, 30);
+        MAX_MOTES.put(ShipAPI.HullSize.FRIGATE, 8);
+        MAX_MOTES.put(ShipAPI.HullSize.DESTROYER, 13);
+        MAX_MOTES.put(ShipAPI.HullSize.CRUISER, 21);
+        MAX_MOTES.put(ShipAPI.HullSize.CAPITAL_SHIP, 34);
     }
     float moteProgress = 0;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
