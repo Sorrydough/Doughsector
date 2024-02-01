@@ -1,4 +1,4 @@
-package data.customstart;
+package data.campaign.customstart;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.Script;
@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 //Placeholder start for mod testing. Start with a small fleet, a blueprint package, and near a random gate in the sector.
-
 @SuppressWarnings("unused")
 public class sd_customStartPlaceholder extends CustomStart {
     @Override

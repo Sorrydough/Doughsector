@@ -25,6 +25,7 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Fix all the variants that I broke
 - Ensure autoforge can't reload super expensive missiles (aka round down)
 - Do another pass on ship stats (armor, dissipation, speed)
+- Specify that grapes don't benefit from eccm
 
 - Move my autofire AI tweaks into my own autofire plugin
 - Fix ships venting in front of breaches

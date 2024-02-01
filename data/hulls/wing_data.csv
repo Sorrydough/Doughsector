@@ -1,5 +1,5 @@
 id,variant,tags,tier,rarity,fleet pts,op cost,formation,range,attackRunRange,attackPositionOffset,num,role,role desc,refit,base value
-sd_fightersupportWing,sd_fightersupport,"sd_arsenal_package, no_sell, fighter, support3, stay_in_front_of_ship",2,,2,5,BOX,1500,500,,1,SUPPORT,Support,15,4000
-sd_fighterblasterWing,sd_fighterblaster,"sd_arsenal_package, no_sell, fighter, fighter3, auto_fighter",2,,4,10,BOX,2000,500,400,2,FIGHTER,Fighter,10,6000
+sd_fightersupportWing,sd_fightersupport,"sd_arsenal_package, no_sell, fighter, support3, stay_in_front_of_ship",2,,2,5,BOX,1000,500,,1,SUPPORT,Support,15,4000
+sd_fighterblasterWing,sd_fighterblaster,"sd_arsenal_package, no_sell, fighter, fighter3, auto_fighter",2,,4,10,BOX,2000,500,400,2,FIGHTER,Fighter,12,6000
 sd_fighterionWing,sd_fighterion,"sd_arsenal_package, no_sell, interceptor, interceptor3, auto_fighter",2,,6,15,CLAW,2000,300,200,5,INTERCEPTOR,Suppression,8,8000
-sd_fightercanisterWing,sd_fightercanister,"sd_arsenal_package, no_sell, bomber, bomber3",2,,8,20,V,3000,2000,600,3,BOMBER,Bomber,18,10000
+sd_fightercanisterWing,sd_fightercanister,"sd_arsenal_package, no_sell, bomber, bomber3",2,,8,20,V,2000,2000,600,3,BOMBER,Bomber,18,10000
