@@ -3,13 +3,11 @@ sd_ionbeam_fighter,WEAPON,An ion beam unremarkable in all ways other than its mi
 sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
 sd_gravlance,WEAPON,"Although superficially similar to a graviton beam, this smaller version exhibits dramatically different behavior more similar in function to a classical needler."
 sd_grapeshotrack,WEAPON,Launches proximity-fused antimatter canisters. Reloading is quite simple compared to other missiles of its size.
-sd_grapeshotpod,WEAPON,"Launches a wide screen of proximity-fused antimatter canisters, providing effective area denial or close-in strike capability. Features an integrated autoloader."
-sd_grapeshotbarrage,WEAPON,"Launches a deluge of proximity-fused antimatter canisters, completely suppressing an area or doing devastating damage at close range. Features an integrated autoloader."
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
 sd_grapeshotarray,SHIP_SYSTEM,Launches proximity-fused antimatter canisters.
-sd_auxforge,SHIP_SYSTEM,"Replenishes missiles or fighters, depending on which is more depleted. Generates flux."
-sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. Generates more flux on more heavily armored ships.
-sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and generates motes. Nearby motes are rallied to this ship while active.
-sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy. Extra strong against automated ships.
+sd_auxforge,SHIP_SYSTEM,"Replenishes missiles or fighters, depending on which is more depleted. Generates flux upon activation."
+sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. More flux intensive on heavily armored ships.
+sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and generates motes. More flux intensive on heavily armored ships.
+sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy. Automated ships suffer bonus duration.
 sd_nullifier,SHIP_SYSTEM,Accelerates the decay of the target’s combat readiness and normalizes their timeflow with that of realspace. Generates flux based on the magnitude of the timeflow correction.
