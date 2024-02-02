@@ -1,39 +1,39 @@
 {
     "displayName": "Strike",
     "fluxCapacitors": 10,
-    "fluxVents": 3,
+    "fluxVents": 5,
     "goalVariant": true,
-    "hullId": "sd_frigate",
+    "hullId": "sd_frigateheavy",
     "hullMods": [
         "autorepair",
-        "eccm",
+        "hardenedshieldemitter",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_frigate_Strike",
+    "variantId": "sd_frigateheavy_Strike",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "TRT01": "amblaster",
-                "TRT02": "amblaster",
+                "HRD01": "heavyblaster",
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "HRD01": "heatseeker",
-                "HRD02": "heatseeker",
+                "TRT01": "railgun",
+                "TRT02": "railgun",
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT03": "lightdualmg",
+                "TRT03": "lightmg",
+                "TRT04": "lightmg",
             }
         },
     ],
