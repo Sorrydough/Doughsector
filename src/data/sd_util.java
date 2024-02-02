@@ -22,8 +22,6 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-// DELETEME: comments are good for testing.
-
 public class sd_util {
     public static final Color factionColor = new Color (250, 235, 215,55), factionUnderColor = new Color (250, 235, 215,155),
             timeColor =  new Color (100,165,255,55), timeUnderColor = new Color (100,165,255,155),
