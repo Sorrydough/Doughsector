@@ -26,9 +26,9 @@ Version 1.0 Stuff: (first release, no advanced campaign mechanics)
 - Ensure autoforge can't reload super expensive missiles (aka round down)
 - Do another pass on ship stats (armor, dissipation, speed)
 - Specify that grapes don't benefit from eccm
+- Add a config setting to disable all my AI tweaks so I can test my ships against vanilla
 
 - Move my autofire AI tweaks into my own autofire plugin
-- Fix ships venting in front of breaches
 
 - Upon Release Stuff:
 - Make sure the forum download link is hidden behind a simple riddle
@@ -47,9 +47,14 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Create engine reigniter hullmod
 - Figure out a better way to display skills in main menu missions
 - ensure that two ships don't accidentally use hacking suite on the same target simultaneously
+- add status indicators for mnemonic armor - armor % imbalanced, % armor remaining
+- create a hullmod that extends engagement distance by a flat 1000
+- do another pass to nerf my fighters dissipation & change hexshield to disable the shield until 0 flux, instead of disabling for a flat amount of time
+- make kinetic blaster fighter damage itself
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
+- Improve venting behavior - needs to use starficz' calculate incoming damage utility, account for beams, breaches, termination system
 - Expand upon custom fleet command AI so it can work in campaign
 - When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
 - Run a checksum on my own mod so I know when people have tampered with it
@@ -67,7 +72,6 @@ Version 2.5 Stuff: (Advanced agent interaction)
 
 
 Version 3.0 Stuff: (scope creep)
-- Improve venting behavior - needs to use starficz' calculate incoming damage utility, account for beams
 - Modify tags on various vanilla weapons to improve AI behavior - squalls & breach srms for starters
 - Interfere with commissioned crews and substance abuse somehow
 - In my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
