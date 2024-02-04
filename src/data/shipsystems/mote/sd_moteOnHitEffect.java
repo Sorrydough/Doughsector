@@ -19,27 +19,25 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 
 public class sd_moteOnHitEffect implements OnHitEffectPlugin {
-	public static float ANTI_FIGHTER_DAMAGE = 200;
+	final float ANTI_FIGHTER_DAMAGE = 250;
 	public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target, Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
 		if (target instanceof ShipAPI) {
 			ShipAPI ship = (ShipAPI) target;
 			if (!ship.isFighter()) {
-				float pierceChance = 1f;
+				float pierceChance = 1;
 				pierceChance *= ship.getMutableStats().getDynamic().getValue(Stats.SHIELD_PIERCED_MULT);
 				boolean piercedShield = shieldHit && (float) Math.random() < pierceChance;
 				
-				if (!shieldHit || piercedShield)
-					engine.spawnEmpArcPierceShields(projectile.getSource(), point, target, target, projectile.getDamageType(), projectile.getDamageAmount(), projectile.getEmpAmount(),
+				if (!shieldHit || piercedShield) {
+					engine.spawnEmpArcPierceShields(projectile.getSource(), point, target, target,
+							projectile.getDamageType(), projectile.getDamageAmount(), projectile.getEmpAmount(),
 							100000f, "mote_attractor_impact_emp_arc", 20f,
-							sd_util.healColor, new Color(255,255,255,255));
-			} else {
-				Global.getCombatEngine().applyDamage(projectile, ship, point,
-						ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
-			}
-		} else if (target instanceof MissileAPI) {
-			Global.getCombatEngine().applyDamage(projectile, target, point,
-					ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
-		}
+							sd_util.healColor, new Color(255, 255, 255, 255));
+				}
+			} else
+				Global.getCombatEngine().applyDamage(projectile, ship, point, ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
+		} else if (target instanceof MissileAPI)
+			Global.getCombatEngine().applyDamage(projectile, target, point, ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
 		Global.getSoundPlayer().playSound("mote_attractor_impact_normal", 1f, 1f, point, new Vector2f());
 	}
 }

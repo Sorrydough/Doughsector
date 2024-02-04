@@ -26,7 +26,7 @@ public class sd_motearmor extends BaseShipSystemScript {
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.CRUISER, 75);
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.CAPITAL_SHIP, 150);
     }
-    final Map<ShipAPI.HullSize, Integer> STARTING_MOTES = new HashMap<>(); {
+    public static final Map<ShipAPI.HullSize, Integer> STARTING_MOTES = new HashMap<>(); {
         STARTING_MOTES.put(ShipAPI.HullSize.FRIGATE, 3);
         STARTING_MOTES.put(ShipAPI.HullSize.DESTROYER, 5);
         STARTING_MOTES.put(ShipAPI.HullSize.CRUISER, 8);
@@ -110,7 +110,7 @@ public class sd_motearmor extends BaseShipSystemScript {
             //////////////////////////////////
             moteProgress += amountToTransfer;
             if (moteProgress >= ARMOR_PER_MOTE.get(ship.getHullSize()) && data.motes.size() < MAX_MOTES.get(ship.getHullSize())) {
-                emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship));
+                emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship), true);
                 moteProgress -= ARMOR_PER_MOTE.get(ship.getHullSize());
             }
         }
@@ -118,9 +118,7 @@ public class sd_motearmor extends BaseShipSystemScript {
     public static class SharedMoteAIData {
         public float elapsed = 0f;
         public List<MissileAPI> motes = new ArrayList<>();
-        public float attractorRemaining = 0f;
-        public Vector2f attractorTarget = null;
-        public ShipAPI attractorLock = null;
+        public ShipAPI attractorTarget = null;
     }
     public static SharedMoteAIData getSharedData(ShipAPI source) {
         String key = source + "_mote_AI_shared";
@@ -131,16 +129,15 @@ public class sd_motearmor extends BaseShipSystemScript {
         }
         return data;
     }
-    public static void emitMote(ShipAPI ship, Vector2f loc) {
-        final Random rand = new Random();
-        int angleOffset = rand.nextInt(361) - 180;
+    public static void emitMote(ShipAPI ship, Vector2f loc, boolean sound) {
+        int angleOffset = new Random().nextInt(361) - 180;
         MissileAPI mote = (MissileAPI) Global.getCombatEngine().spawnProjectile(ship, null, "sd_motelauncher", loc, angleOffset + ship.getFacing(), ship.getVelocity());
-        Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, loc, ship.getVelocity());
+        if (sound)
+            Global.getSoundPlayer().playSound("system_flare_launcher_active", 1.0f, 1.6f, loc, ship.getVelocity());
         mote.setMissileAI(new sd_moteAIScript(mote));
         mote.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
         mote.setEmpResistance(10000);
-        SharedMoteAIData data = getSharedData(ship);
-        data.motes.add(mote);
+        getSharedData(ship).motes.add(mote);
     }
     public StatusData getStatusData(int index, State state, float effectLevel) {
         if (index == 0)

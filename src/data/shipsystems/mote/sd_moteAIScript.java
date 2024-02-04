@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import data.shipsystems.sd_motearmor;
+import org.lazywizard.console.Console;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;
@@ -20,10 +21,12 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 
 public class sd_moteAIScript implements MissileAIPlugin {
-	public static float MAX_HARD_AVOID_RANGE = 250;
-	public static float AVOID_RANGE = 50;
-	public static float COHESION_RANGE = 100;
-	public static float ATTRACTOR_LOCK_STOP_FLOCKING_ADD = 250;
+	final float HARD_AVOID_SCAN_RANGE = 500;
+	final float BASE_AVOID_RANGE = 50;
+	final float COHESION_RANGE = 100;
+	final float ATTRACTOR_LOCK_STOP_FLOCKING_ADD = 250;
+	final float MAX_MOTES_PER_TARGET = 2;
+
 	protected MissileAPI missile;
 	protected IntervalUtil tracker = new IntervalUtil(0.05f, 0.1f);
 	protected IntervalUtil updateListTracker = new IntervalUtil(0.05f, 0.1f);
@@ -32,6 +35,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 	protected float random;
 	protected CombatEntityAPI target;
 	protected sd_motearmor.SharedMoteAIData data;
+	protected float modifiedAvoidRange;
 	
 	public sd_moteAIScript(MissileAPI missile) {
 		this.missile = missile;
@@ -56,15 +60,15 @@ public class sd_moteAIScript implements MissileAIPlugin {
 
 		if (flutterRemaining <= 0) {
 			flutterCheck.advance(amount);
-			if (flutterCheck.intervalElapsed() && (Math.random() > 0.9f || (data.attractorLock != null && Math.random() > 0.5f)))
+			if (flutterCheck.intervalElapsed() && (Math.random() > 0.9f || (data.attractorTarget != null && Math.random() > 0.5f)))
 				flutterRemaining = 2f + (float) Math.random() * 2f;
 		}
 
 		if (elapsed >= 0.5f) {
 			boolean wantToFlock = !isTargetValid();
-			if (data.attractorLock != null) {
-				float dist = Misc.getDistance(missile.getLocation(), data.attractorLock.getLocation());
-				if (dist > data.attractorLock.getCollisionRadius() + ATTRACTOR_LOCK_STOP_FLOCKING_ADD)
+			if (data.attractorTarget != null) {
+				float dist = Misc.getDistance(missile.getLocation(), data.attractorTarget.getLocation());
+				if (dist > data.attractorTarget.getCollisionRadius() + ATTRACTOR_LOCK_STOP_FLOCKING_ADD)
 					wantToFlock = true;
 			}
 
@@ -107,13 +111,17 @@ public class sd_moteAIScript implements MissileAIPlugin {
 	// put ships and asteroids into a list of shit to avoid, uses an AI grid iterator because alex thinks it should
 	void updateHardAvoidList() {
 		hardAvoidList.clear();
-		Iterator<Object> iter = Global.getCombatEngine().getAiGridShips().getCheckIterator(missile.getLocation(),MAX_HARD_AVOID_RANGE * 2f,MAX_HARD_AVOID_RANGE * 2f);
+		Iterator<Object> iter = Global.getCombatEngine().getAiGridShips().getCheckIterator(missile.getLocation(), HARD_AVOID_SCAN_RANGE, HARD_AVOID_SCAN_RANGE);
 		while (iter.hasNext()) {
 			Object nextObject = iter.next();
-			if (nextObject instanceof ShipAPI)
-				hardAvoidList.add((ShipAPI) nextObject);
+			if (nextObject instanceof ShipAPI) {
+				ShipAPI ship = (ShipAPI) nextObject;
+				hardAvoidList.add((CombatEntityAPI) nextObject);
+//				if (ship.isHulk() || ship.getOwner() == missile.getOwner())
+//					hardAvoidList.add(ship);
+			}
 		}
-		iter = Global.getCombatEngine().getAiGridAsteroids().getCheckIterator(missile.getLocation(),MAX_HARD_AVOID_RANGE * 2f,MAX_HARD_AVOID_RANGE * 2f);
+		iter = Global.getCombatEngine().getAiGridAsteroids().getCheckIterator(missile.getLocation(), HARD_AVOID_SCAN_RANGE, HARD_AVOID_SCAN_RANGE);
 		while (iter.hasNext()) {
 			Object nextObject = iter.next();
 			if (nextObject instanceof CombatEntityAPI)
@@ -122,71 +130,51 @@ public class sd_moteAIScript implements MissileAIPlugin {
 	}
 
 	protected void acquireNewTargetIfNeeded() {
-		if (data.attractorLock != null) {
-			target = data.attractorLock;
+		if (data.attractorTarget != null) {
+			target = data.attractorTarget;
 			return;
 		}
 
 		CombatEngineAPI engine = Global.getCombatEngine();
+		ShipAPI ship = missile.getSource();
 
 		// want to: target nearest missile that is not targeted by another two motes already
 		int owner = missile.getOwner();
 
-		int maxMotesPerTarget = 2;
-		ShipAPI source = missile.getSource();
-		float hardfluxCollision = source.getCollisionRadius() * source.getHardFluxLevel();
-		// distance from source ship to seek targets
-		float maxDistFromSourceShip = source.getCollisionRadius() + hardfluxCollision;
+		// how close the mote has to get to a target for it to latch on; bigger ships have "more aggressive" motes and it's flux-dependent
+		float moteAttackDistance = ship.getCollisionRadius() + (ship.getCollisionRadius() * ship.getFluxLevel()) + modifiedAvoidRange;
 		// distance from attractor target to seek targets
-		float maxDistFromAttractor = source.getCollisionRadius() / 2 + hardfluxCollision;
+		float maxDistFromAttractor = ship.getCollisionRadius();
 
-		float minDist = Float.MAX_VALUE;
-		CombatEntityAPI closest = null;
-		for (MissileAPI other : engine.getMissiles()) {
+
+		float closestTargetDistance = Float.MAX_VALUE;
+		CombatEntityAPI closestTarget = null;
+
+		List<CombatEntityAPI> others = new ArrayList<>();
+		others.addAll(engine.getMissiles());
+		others.addAll(engine.getShips());
+
+		for (CombatEntityAPI other : others) {
 			if (other.getOwner() == owner || other.getOwner() == 100)
 				continue;
 
-			float distToTarget = Misc.getDistance(missile.getLocation(), other.getLocation());
-			if (distToTarget > minDist || distToTarget > 3000 && !engine.isAwareOf(owner, other))
+			float targetDistance = Misc.getDistance(missile.getLocation(), other.getLocation());
+			if (targetDistance > closestTargetDistance || !engine.isAwareOf(owner, other))
 				continue;
 
-			float distFromAttractor = Float.MAX_VALUE;
-			if (data.attractorTarget != null)
-				distFromAttractor = Misc.getDistance(other.getLocation(), data.attractorTarget);
-
-			float distFromSource = Misc.getDistance(other.getLocation(), missile.getSource().getLocation());
-			if (distFromSource > maxDistFromSourceShip && distFromAttractor > maxDistFromAttractor)
+			float distFromMote = Misc.getDistance(other.getLocation(), missile.getLocation());
+			if (distFromMote > moteAttackDistance)
 				continue;
 
-			if (getNumMotesTargeting(other) >= maxMotesPerTarget)
+			if (getNumMotesTargeting(other) >= MAX_MOTES_PER_TARGET)
 				continue;
-			if (distToTarget < minDist) {
-				closest = other;
-				minDist = distToTarget;
+
+			if (targetDistance < closestTargetDistance) {
+				closestTargetDistance = targetDistance;
+				closestTarget = other;
 			}
 		}
-
-		for (ShipAPI other : engine.getShips()) {
-			float distToTarget = Misc.getDistance(missile.getLocation(), other.getLocation());
-			if (other.getOwner() == owner || other.getOwner() == 100 || distToTarget > minDist || !engine.isAwareOf(owner, other))
-				continue;
-
-			float distFromAttractor = Float.MAX_VALUE;
-			if (data.attractorTarget != null)
-				distFromAttractor = Misc.getDistance(other.getLocation(), data.attractorTarget);
-
-			float distFromSource = Misc.getDistance(other.getLocation(), missile.getSource().getLocation());
-			if (distFromSource > maxDistFromSourceShip && distFromAttractor > maxDistFromAttractor)
-				continue;
-
-			if (getNumMotesTargeting(other) >= maxMotesPerTarget)
-				continue;
-			if (distToTarget < minDist) {
-				closest = other;
-				minDist = distToTarget;
-			}
-		}
-		target = closest;
+		target = closestTarget;
 	}
 	
 	public void doFlocking() {
@@ -194,8 +182,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		
 		ShipAPI source = missile.getSource();
 		
-		float avoidRange = AVOID_RANGE;
-		float cohesionRange = COHESION_RANGE;
+		float avoidRange = BASE_AVOID_RANGE;
 
 		// todo: improve mote orbit behavior, look closer at code down below since alex is adding flat values strangely
 		float hardfluxCollision = source.getCollisionRadius() * source.getHardFluxLevel();
@@ -211,7 +198,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		avoidRange *= mult;
 		
 		Vector2f total = new Vector2f();
-		Vector2f attractor = getAttractorLoc();
+		Vector2f attractor = getAttractorLock();
 		
 		if (attractor != null) {
 			float dist = Misc.getDistance(missile.getLocation(), attractor);
@@ -244,7 +231,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 				Vector2f dir = Misc.getUnitVectorAtDegreeAngle(Misc.getAngleInDegrees(otherMissile.getLocation(), missile.getLocation()));
 				Vector2f.add(total, dir, total);
 			}
-			if (dist < cohesionRange) {
+			if (dist < COHESION_RANGE) {
 				Vector2f dir = new Vector2f(otherMissile.getVelocity());
 				Misc.normalise(dir);
 				Vector2f.add(total, dir, total);
@@ -293,6 +280,15 @@ public class sd_moteAIScript implements MissileAIPlugin {
 			}
 			missile.getEngineController().forceShowAccelerating();
 		}
+
+		modifiedAvoidRange = avoidRange;
+	}
+	public Vector2f getAttractorLock() {
+		Vector2f attractor = null;
+		if (data.attractorTarget != null) {
+			attractor = data.attractorTarget.getLocation();
+		}
+		return attractor;
 	}
 	protected int getNumMotesTargeting(CombatEntityAPI other) {
 		int count = 0;
@@ -307,20 +303,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		}
 		return count;
 	}
-	public Vector2f getAttractorLoc() {
-		Vector2f attractor = null;
-		if (data.attractorTarget != null) {
-			attractor = data.attractorTarget;
-			if (data.attractorLock != null) {
-				attractor = data.attractorLock.getLocation();
-			}
-		}
-		return attractor;
-	}
 	public CombatEntityAPI getTarget() {
 		return target;
-	}
-	public void setTarget(CombatEntityAPI target) {
-		this.target = target;
 	}
 }
