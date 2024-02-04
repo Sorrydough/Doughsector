@@ -50,12 +50,9 @@ public class sd_modPlugin extends BaseModPlugin {
             sd_weaponsList.add("breachpod");
             sd_weaponsList.add("pilum");
             sd_weaponsList.add("pilum_large");
-            sd_weaponsList.add("squall");
             sd_weaponsList.add("dragon");
             sd_weaponsList.add("dragonpod");
-            sd_weaponsList.add("sd_grapeshotrack");
-            sd_weaponsList.add("sd_grapeshotpod");
-            sd_weaponsList.add("sd_grapeshotbarrage");
+            sd_weaponsList.add("squall");
         }
         for (String weapon : sd_weaponsList) {
             try {
