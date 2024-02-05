@@ -7,15 +7,13 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.hullmods.PhaseField;
 import com.fs.starfarer.api.input.InputEventAPI;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
-import com.fs.starfarer.ui.P;
-import data.graphics.sd_decoSystemRangePlugin;
-import data.sd_util;
+import com.fs.starfarer.api.util.Misc;
 import data.shipsystems.mote.sd_moteAIScript;
 import data.shipsystems.sd_mnemonicarmor;
 import data.shipsystems.sd_motearmor;
 import org.lazywizard.lazylib.CollisionUtils;
-import org.lazywizard.lazylib.LazyLib;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
@@ -40,25 +38,9 @@ import java.util.Random;
 
 
 public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
-
-    // returns a multiplier dependent on the number of other fleetships interfering with this ship's motefield strength
-    public static float getMotefieldStrengthFactor(ShipAPI ship) {
-        if (ship.getFleetMember() == null)
-            return 1;
-
-        List<FleetMemberAPI> interferingMotefields = new ArrayList<>();
-        for (FleetMemberAPI fleetMember : ship.getFleetMember().getFleetData().getMembersListCopy()) {
-            if (fleetMember.getVariant().getHullMods().contains("sd_motefield") && !Objects.equals(fleetMember.getId(), ship.getFleetMember().getId())
-                    && fleetMember.getHullSpec().getHullSize().ordinal() >= ship.getHullSize().ordinal()) {
-                interferingMotefields.add(fleetMember);
-            }
-        }
-        return (float) 1 / interferingMotefields.size();
-    }
-
     final static float MIN_CR = 0.1f;
     final float PERSONAL_CLOAK_MULT = 0.75f;
-    final String ID = "sd_motefield";
+    final String MOD_KEY = "sd_motefield";
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getSensorProfile().modifyMult(id, PERSONAL_CLOAK_MULT);
     }
@@ -66,23 +48,47 @@ public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
         Global.getCombatEngine().addPlugin(new sd_motefieldPlugin(ship));
     }
     @Override
-    public void advanceInCampaign(CampaignFleetAPI campaignFleetAPI) {
-
+    public void advanceInCampaign(CampaignFleetAPI fleet) {
+        String key = "$updatedMotefieldModifier";
+        if (fleet.isPlayerFleet() && fleet.getMemoryWithoutUpdate() != null && !fleet.getMemoryWithoutUpdate().getBoolean(key) && fleet.getMemoryWithoutUpdate().getBoolean("$justToggledTransponder")) {
+            this.onFleetSync(fleet);
+            fleet.getMemoryWithoutUpdate().set(key, true, 0.1f);
+        }
     }
+    @Override
+    public void onFleetSync(CampaignFleetAPI fleet) { // todo: this
+        //float mult = getPhaseFieldMultBaseProfileAndTotal(fleet);
+        float mult = 1;
 
+        if (fleet.isTransponderOn())
+            mult = 1;
+
+        if (mult <= 0)
+            fleet.getDetectedRangeMod().unmodifyMult(MOD_KEY);
+        else
+            fleet.getDetectedRangeMod().modifyMult(MOD_KEY, mult, "Phase ships in fleet");
+    }
+    @Override
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        tooltip.addPara("This ship's system is tied into a unique armor technology. While its principles are kept jealously classified, their effects can be plainly observed:", 5f);
+        tooltip.addPara("Upon arrival in combat the ship is accompanied by a number of motes. When the system rebalances its armor, these motes regenerate.",5f);
+        tooltip.addPara("The fleet recieves a 0.5%% improvement to their ECM rating per mote present on the battlefield.", 2f, Misc.getHighlightColor(), "0.5%");
+        tooltip.addPara("Out of combat, an obscuring effect is also observed:", 5f);
+        tooltip.addPara("This ship reduces the sensor signature of 1 ship larger than itself and 3 ships of at most the same size by 50% OR to this ship's sensor signature, whichever is the weaker bonus.", 2f);
+        tooltip.addPara("All aforementioned effects degrade as more ships of the type become present in the fleet.", 5f);
+    }
     @Override
     public boolean withAdvanceInCampaign() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean withOnFleetSync() {
-        return false;
+        return true;
     }
-
     @Override
-    public void onFleetSync(CampaignFleetAPI campaignFleetAPI) {
-
+    public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
+        return false;
     }
 
     static class sd_motefieldPlugin extends BaseEveryFrameCombatPlugin {
@@ -131,7 +137,7 @@ public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
                 Vector2f randomPoint = getRandomPointOnShip(ship);
                 if (sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid()))
                     wantYolo = true;
-                if (spawnedStarterMotes < motesToSpawn) {
+                if (spawnedStarterMotes < motesToSpawn) { // todo: make it look like these come from offscreen
                     sd_motearmor.emitMote(ship, randomPoint, false);
                     spawnedStarterMotes ++;
                 }
@@ -163,5 +169,19 @@ public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
             }
         }
         return pointsWithinBounds.get(new Random().nextInt(pointsWithinBounds.size()));
+    }
+    // returns a multiplier dependent on the number of other fleetships interfering with this ship's motefield strength
+    public static float getMotefieldStrengthFactor(ShipAPI ship) {
+        if (ship.getFleetMember() == null)
+            return 1;
+
+        List<FleetMemberAPI> interferingMotefields = new ArrayList<>();
+        for (FleetMemberAPI fleetMember : ship.getFleetMember().getFleetData().getMembersListCopy()) {
+            if (fleetMember.getVariant().getHullMods().contains("sd_motefield") && !Objects.equals(fleetMember.getId(), ship.getFleetMember().getId())
+                    && fleetMember.getHullSpec().getHullSize().ordinal() >= ship.getHullSize().ordinal()) {
+                interferingMotefields.add(fleetMember);
+            }
+        }
+        return (float) 1 / interferingMotefields.size();
     }
 }

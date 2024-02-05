@@ -2,12 +2,12 @@ id,type,text1
 sd_ionbeam_fighter,WEAPON,An ion beam unremarkable in all ways other than its miniaturization.
 sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
 sd_gravlance,WEAPON,"Although superficially similar to a graviton beam, this smaller version exhibits dramatically different behavior more similar in function to a classical needler."
-sd_grapeshotrack,WEAPON,Launches proximity-fused antimatter canisters. Reloading is quite simple compared to other missiles of its size.
+sd_grapeshotrack,WEAPON,Launches proximity-fused canisters of antimatter. Reloading is quite simple compared to other missiles of its size.
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
-sd_grapeshotarray,SHIP_SYSTEM,Launches proximity-fused antimatter canisters.
+sd_grapeshotarray,SHIP_SYSTEM,Dispenses proximity-fused canistersof  antimatter.
 sd_auxforge,SHIP_SYSTEM,"Replenishes missiles or fighters, depending on which is more depleted. Generates flux upon activation."
 sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. More flux intensive on heavily armored ships.
-sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and generates motes. More flux intensive on heavily armored ships.
-sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy. Automated ships suffer bonus duration.
-sd_nullifier,SHIP_SYSTEM,Accelerates the decay of the target’s combat readiness and normalizes their timeflow with that of realspace. Generates flux based on the magnitude of the timeflow correction.
+sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and has powerful side-effects. More flux intensive on heavily armored ships.
+sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy. Automated ships suffer additional duration.
+sd_nullifier,SHIP_SYSTEM,Accelerates the decay of the target’s combat readiness and normalizes their timeflow with that of realspace. Generates flux according to the magnitude of the timeflow correction.

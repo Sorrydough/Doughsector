@@ -1,43 +1,40 @@
 Arthr Stuff:
 - Hullmod icons
-- Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, etc
-- Really Converted Hangars
+- Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
 - Export, Pirate, Path skin variants
-- Weapon sprites
-- Generalized final pass
+- Generalized revision pass
+    Frigate needs to not look like I bashed it (maybe I can fix this?)
+    Interference frigate needs to not look like I bashed it
+    Heavy frigate needs to not look like it got spammed with the clone tool
+    Destroyer needs to not look like ass
+    Light cruiser needs to not have super exposed reverse thrusters
+    Heavy cruiser needs to not look unsettling
+    Capital needs to become a battlecarrier and lose some pointless mounts
+
+- Post-release sprite pass to incorporate capital's greeble style
 
 
-Mote Armor:
-- Mote orbit radius depends on the ship's flux level - higher flux -> larger orbit radius
-- Ships generate motes when they rebalance armor damage with this system.
-- Motes contribute to fleetwide ECM bonus in combat (+0.5% per mote?)
-- Motefield obscures the fleet on the campaign map like phase field does. If phase field is present it does nothing.
-- Having more than 1 capital will disrupt the fleet-obscuring motefield bonus. Bonus is relative, ie 1 heavy frigate with 3 smaller frigate escorts will be very obscured.
-- When a ship becomes fully armorbroken, torpedo-motes appear and hunt.
-- When a ship overloads, its motes enrage and hunt.
+Discord Beta stuff:
+- Write AI script for stasis
+- Figure out fighter names
+- Return custom fleet command AI to working in mission
+- Fix all the variants that I broke
+- Add a config setting to disable all my AI tweaks so I can test my ships against vanilla
+- Properly balance limited fighter ammo
+- Do motefield campaign behavior stuff
+- Move my autofire AI tweaks into my own autofire plugin
+- Placeholder strings
 
 
 Version 1.0 Stuff: (first release, no advanced campaign mechanics)
-- Write AI script for stasis
-- Do another pass on ship names
 - Make a placeholder faction
-- Return custom fleet command AI to working in mission
-- Fix all the variants that I broke
-- Ensure autoforge can't reload super expensive missiles (aka round down)
-- Do another pass on ship stats (armor, dissipation, speed)
-- Specify that grapes don't benefit from eccm
-- Add a config setting to disable all my AI tweaks so I can test my ships against vanilla
-
-- Move my autofire AI tweaks into my own autofire plugin
-
-- Upon Release Stuff:
 - Make sure the forum download link is hidden behind a simple riddle
-- STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship
 - Add music
+- Do another pass on ship stats (armor, dissipation, speed)
+- STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship... or maybe from the perspective of feedback that I've recieved regarding the ship?
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
-- Add GUI hover sprite for fighter weapons
 - Commissioned crew effect: Improved CP regeneration
 - Hullmod that adds hardflux dissipation based on the shield arc
 - Debug ship.setForceCarrierPullBackTime()
@@ -47,10 +44,11 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Create engine reigniter hullmod
 - Figure out a better way to display skills in main menu missions
 - ensure that two ships don't accidentally use hacking suite on the same target simultaneously
-- add status indicators for mnemonic armor - armor % imbalanced, % armor remaining
-- create a hullmod that extends engagement distance by a flat 1000
+- add status indicators for mnemonic armor - armor % imbalanced, % armor remaining - maybe use an indicator above the hull bar
 - do another pass to nerf my fighters dissipation & change hexshield to disable the shield until 0 flux, instead of disabling for a flat amount of time
 - make kinetic blaster fighter damage itself
+- Missile autoforge rework - add a graphical bar above shield strength to show restoration capacity (project solace has an example?)
+- Make motes stop fucking running into asteroids
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
