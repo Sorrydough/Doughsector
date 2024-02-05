@@ -26,13 +26,7 @@ public class sd_motearmor extends BaseShipSystemScript {
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.CRUISER, 75);
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.CAPITAL_SHIP, 150);
     }
-    public static final Map<ShipAPI.HullSize, Integer> STARTING_MOTES = new HashMap<>(); {
-        STARTING_MOTES.put(ShipAPI.HullSize.FRIGATE, 3);
-        STARTING_MOTES.put(ShipAPI.HullSize.DESTROYER, 5);
-        STARTING_MOTES.put(ShipAPI.HullSize.CRUISER, 8);
-        STARTING_MOTES.put(ShipAPI.HullSize.CAPITAL_SHIP, 13);
-    }
-    final Map<ShipAPI.HullSize, Integer> MAX_MOTES = new HashMap<>(); {
+    public static final Map<ShipAPI.HullSize, Integer> MAX_MOTES = new HashMap<>(); {
         MAX_MOTES.put(ShipAPI.HullSize.FRIGATE, 8);
         MAX_MOTES.put(ShipAPI.HullSize.DESTROYER, 13);
         MAX_MOTES.put(ShipAPI.HullSize.CRUISER, 21);
