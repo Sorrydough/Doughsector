@@ -9,7 +9,7 @@ import data.admiral.sd_fleetadmiralUtil;
 import java.util.Map;
 
 public class sd_attackManager {
-    public static void manageAttackedEnemies(sd_fleetadmiralController.battlestateTracker battleState) {
+    public static void manageAttackedEnemies(sd_fleetadmiralUtil.battlestateTracker battleState) {
         // if an enemy ship is fluxed out, put an engage order on it if it doesn't already have one
         for (ShipAPI enemy : battleState.deployedEnemyShips)
             if (isTargetVulnerable(enemy)) {

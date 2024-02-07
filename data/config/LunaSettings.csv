@@ -2,3 +2,6 @@ fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValu
 sd_removeBaseBP,Clear Base Blueprints,Boolean,FALSE,,When a save is loaded all base blueprints are removed from your database.,,,
 sd_modifyCR,Modify Default CR,Boolean,TRUE,,Default CR for non-automated ships is reduced from 70%% to 50%%.,,,
 sd_generateMoons,Generate Moons,Boolean,TRUE,,Adds moons to planets during mapgen or on first load.,,,
+sd_enableAITweaks,Enable AI Tweaks,Boolean,TRUE,,Enable all AI tweaks on SD ships. Disable for debug.,,,
+sd_enablePlayerAdmiral,Enable player admiral AI,Boolean,FALSE,,Controls whether custom fleet command AI runs for the player fleet.,,,
+sd_enableAIAdmiral,Enable AI admiral,Boolean,TRUE,,Controls whether custom fleet command AI runs for enemy AI fleets.,,,

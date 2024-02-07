@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class sd_objectiveManager {
-    public static void manageAttackedObjectives(sd_fleetadmiralController.battlestateTracker battleState) {
+    public static void manageAttackedObjectives(sd_fleetadmiralUtil.battlestateTracker battleState) {
         boolean isAttackingObjective = false;
         boolean doHaveAllObjectives = false;
         for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {

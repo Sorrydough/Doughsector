@@ -10,6 +10,6 @@
 	},
 	"plugins": {
 		"combatReadinessPlugin":"data.sd_combatreadinessPlugin",
-		"admiralAIPlugin":"data.admiral.sd_fleetadmiralController"
+		"sd_combatEFSPlugin":"data.sd_combatEFSPlugin"
 	}
 }

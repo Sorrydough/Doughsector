@@ -9,7 +9,8 @@ Arthr Stuff:
     Destroyer needs to not look like ass
     Light cruiser needs to not have super exposed reverse thrusters
     Heavy cruiser needs to not look unsettling
-    Capital needs to become a battlecarrier and lose some pointless mounts
+    Capital needs to become a battlecarrier and lose some pointless mounts, also needs aux thrusters adjusted
+    Nebula needs salvage gantry
 
 - Post-release sprite pass to incorporate capital's greeble style
 
@@ -21,18 +22,17 @@ Discord Beta stuff:
 - Playtest the limited fighter ammo
 - Placeholder descriptions
 - Faction flag
-- Add a config setting to disable all my AI tweaks so I can balance my ships with vanilla AI
-- Return custom fleet command AI to working in mission and include a config toggle for it on player-side
 - Integrate starficz shield AI
 - Integrate genir autofire AI
 
 
-Version 1.0 Stuff: (first release, no advanced campaign mechanics)
+Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Make a placeholder faction
 - Make sure the forum download link is hidden behind a simple riddle
 - Add music
 - Do another pass on ship stats (armor, dissipation, speed)
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship... or maybe from the perspective of feedback that I've recieved regarding the ship?
+- Add a rawdog config file for non-lunalib-users
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)

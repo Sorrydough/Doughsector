@@ -10,6 +10,7 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import data.graphics.sd_decoSystemRangePlugin;
+import lunalib.lunaSettings.LunaSettings;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -49,7 +50,11 @@ public class sd_utilityhullmod extends BaseHullMod {
         //    AdmiralAIPlugin admiral = new sd_fleetAdmiralAI();
         @Override
         public void advance(float amount, List<InputEventAPI> events) {
-            if (Global.getCombatEngine().isPaused() || ship.getShipAI() == null)
+            boolean enabled = false;
+            if (Global.getSettings().getModManager().isModEnabled("lunalib"))
+                enabled = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enablePlayerAdmiral"));
+
+            if (!enabled || Global.getCombatEngine().isPaused() || ship.getShipAI() == null)
                 return;
             if (runOnce) {
 //                if (applyAI && Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {

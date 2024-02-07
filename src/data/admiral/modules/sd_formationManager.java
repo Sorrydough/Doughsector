@@ -9,7 +9,7 @@ import data.admiral.sd_fleetadmiralUtil;
 import java.util.Map;
 
 public class sd_formationManager {
-    public static void manageFormation(sd_fleetadmiralController.battlestateTracker battleState) {
+    public static void manageFormation(sd_fleetadmiralUtil.battlestateTracker battleState) {
         boolean largestAllyDefended = false;
         boolean shouldBeDefensive = battleState.averageAllySpeed < battleState.averageEnemySpeed; //battleState.deployedEnemyThreat > battleState.deployedAllyThreat ||
         for (Map.Entry<CombatFleetManagerAPI.AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {
