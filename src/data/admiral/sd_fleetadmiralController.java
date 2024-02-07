@@ -38,16 +38,26 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
         if (engine == null || engine.isPaused() || Global.getCurrentState() != GameState.COMBAT)
             return;
 
+        if (doInit) {
+            battleState.updateState(engine, allySide, enemySide); // player side is 0, AI side is 1
+            Console.showMessage("Admiral Controller mounted for fleet side " + battleState.allySide);
+            for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
+                battleState.allyTaskManager.removeAssignment(assignment); // need to wipe all assignments that might've been created by alex or the player before the controller was mounted
+
+            doInit = false;
+        }
+
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            battleState.updateState(engine, allySide, enemySide); // player side is 0, AI side is 1
+            battleState.updateState(engine, allySide, enemySide);
             // ^ updating battle state is expensive so we don't do it every frame
-            if (doInit) {
-                Console.showMessage("Admiral Controller mounted for fleet side " + battleState.allySide);
-                for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
-                    battleState.allyTaskManager.removeAssignment(assignment); // need to wipe all assignments that might've been created by alex or the player before the controller was mounted
-                doInit = false;
-            }
+
+//            for (FleetMemberAPI fleetmember : battleState.allyFleetManager.getReservesCopy()) { // todo: reverse engineer fleet deployment manager
+//                if (fleetmember.canBeDeployedForCombat()) {
+//                    battleState.allyFleetManager
+//
+//                }
+//            }
 
             //Console.showMessage("Allied DP: "+ battleState.deployedAllyDP +" Enemy DP: "+ battleState.deployedEnemyDP);
 

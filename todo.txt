@@ -1,3 +1,11 @@
+
+Attack: Most generic variant, focused on range and trading efficacy against similarly sized targets.
+Strike: High alpha strike, usually short ranged and needs allied ships to distract for itself.
+Aegis: Focused on being as tanky as possible with good point defense.
+Snare: Specialized against fast ships and typically includes emp.
+Command: Dedicates most of its budget to ECM and nav buoy.
+
+
 Arthr Stuff:
 - Hullmod icons
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
@@ -33,6 +41,7 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Do another pass on ship stats (armor, dissipation, speed)
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship... or maybe from the perspective of feedback that I've recieved regarding the ship?
 - Add a rawdog config file for non-lunalib-users
+- Reverse-engineer fleet deployment manager
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)

@@ -20,8 +20,8 @@ public class sd_combatEFSPlugin extends BaseEveryFrameCombatPlugin {
         boolean enabledNPC = false;
         if (Global.getSettings().getModManager().isModEnabled("lunalib"))
             enabledNPC = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enableAIAdmiral"));
-        if (enabledNPC && !(engine.getFleetManager(1).getAdmiralAI() instanceof sd_fleetadmiralController))
-            engine.getFleetManager(1).setAdmiralAI(new sd_fleetadmiralController(1));
+        if (enabledNPC && !(engine.getFleetManager(1).getAdmiralAI() instanceof sd_fleetadmiralController) && engine.getFleetManager(1).getReservesCopy().isEmpty())
+            engine.getFleetManager(1).setAdmiralAI(new sd_fleetadmiralController(1));  // todo: reverse engineer the deployment manager
 
         boolean enabledPlayer = false;
         if (Global.getSettings().getModManager().isModEnabled("lunalib"))
