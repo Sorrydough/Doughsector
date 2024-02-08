@@ -1,5 +1,5 @@
 {
-  "hullName": "New Hull",
+  "hullName": "Oblivion",
   "hullId": "sd_capitalbattleship",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "graphics/ships/sd_capitalbattleship.png",
@@ -12,7 +12,8 @@
   "shieldRadius": 247.5,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_utilityhullmod"
+    "sd_utilityhullmod",
+    "advancedoptics"
   ],
   "builtInWeapons": {
     "CVR01": "sd_capitalbattleship_cover",

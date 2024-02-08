@@ -1,0 +1,38 @@
+{
+    "displayName": "Aegis",
+    "fluxCapacitors": 10,
+    "fluxVents": 4,
+    "goalVariant": true,
+    "hullId": "sd_frigate",
+    "hullMods": [
+        "autorepair",
+        "hardenedshieldemitter",
+        "sd_beampumps",
+        "sd_capacitorpurge",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "sd_frigate_Aegis",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT01": "taclaser",
+                "TRT02": "taclaser",
+                "TRT03": "taclaser",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "HRD02": "gazer",
+                "HRD01": "gazer",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

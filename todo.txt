@@ -1,10 +1,11 @@
 
-Attack: Most generic variant, focused on having good flux uptime
+Attack: Most generic variant, focused on having good flux uptime and decent range.
 Strike: High alpha strike, usually short ranged and needs allied ships to distract for itself.
 Aegis: Focused on being as tanky as possible with good point defense.
 Snare: Specialized against fast ships and typically includes emp.
 Command: Dedicates most of its budget to ECM and nav buoy.
-Overdriven: Safety Overrides. Nuff said.
+Elite: Uses s-mods, great at everything.
+Overdriven: Safety Overrides. Usually a variation of a strike loadout.
 
 
 Arthr Stuff:
@@ -13,12 +14,8 @@ Arthr Stuff:
 - Export, Pirate, Path skin variants
 - Generalized revision pass
     Frigate needs to not look like I bashed it (maybe I can fix this?)
-    Interference frigate needs to not look like I bashed it
-    Heavy frigate needs to not look like it got spammed with the clone tool
-    Destroyer needs to not look like ass
-    Light cruiser needs to not have super exposed reverse thrusters
+    Heavy frigate needs to not look like it got spammed with the clone tool (maybe I can fix this too)
     Heavy cruiser needs to not look unsettling
-    Capital needs to become a battlecarrier and lose some pointless mounts, also needs aux thrusters adjusted
     Nebula needs salvage gantry
 
 - Post-release sprite pass to incorporate capital's greeble style
@@ -33,10 +30,9 @@ Discord Beta stuff:
 - Faction flag
 - Integrate starficz shield AI
 - Integrate genir autofire AI
-- Finalize kite now that arthr fucked with it, figure out why its hangar sprite is offset
-- Decide whether to put builtin advanced optics on capital
-- Decide what to do with civilian builtin heavy armor
-- Unbreak fighter ammo
+- Ok I actually need to rework aux forge now
+- Troubleshoot strange point defense behavior vs. doom
+- Make beam chumps work on dems
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
@@ -47,6 +43,7 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship... or maybe from the perspective of feedback that I've recieved regarding the ship?
 - Add a rawdog config file for non-lunalib-users
 - Reverse-engineer fleet deployment manager
+- Do a manual sprite pass to clean up floaters etc
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)

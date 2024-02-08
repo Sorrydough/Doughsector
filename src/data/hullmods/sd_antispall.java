@@ -28,7 +28,7 @@ public class sd_antispall extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         tooltip.addPara("Kinetic and fragmentation damage to armor and hull are reduced by a flat "+ Math.round(FLAT_BONUS) +" points.", 5f,
-                Misc.getHighlightColor(), Math.round(FLAT_BONUS) +"");
+                Misc.getHighlightColor(), Math.round(FLAT_BONUS) +" points");
         tooltip.addPara("Crew casualties in combat are also reduced by "+ Math.round((1 - SPALL_BONUS) * 100) +"%%.", 5f,
                 Misc.getHighlightColor(), Math.round((1 - SPALL_BONUS) * 100) +"%");
     }

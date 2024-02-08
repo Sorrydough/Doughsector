@@ -1,5 +1,5 @@
 {
-  "hullName": "New Hull",
+  "hullName": "Starliner [Retrofit]",
   "hullId": "sd_retrofitstarliner",
   "hullSize": "CRUISER",
   "spriteName": "graphics/ships/sd_retrofitstarliner.png",
@@ -12,8 +12,7 @@
   "shieldRadius": 168.5,
   "viewOffset": 0,
   "builtInMods": [
-    "sd_utilityhullmod",
-    "heavyarmor"
+    "sd_utilityhullmod"
   ],
   "builtInWeapons": {
     "DEC01": "sd_decoBlinker",
