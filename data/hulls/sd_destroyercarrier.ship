@@ -15,11 +15,11 @@
     "sd_utilityhullmod"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_destroyercarrier_hangar",
+    "DEC01": "sd_decoBlinker",
     "DEC02": "sd_decoBlinker",
     "DEC03": "sd_decoBlinker",
     "DEC04": "sd_decoBlinker",
-    "DEC05": "sd_decoBlinker",
+    "HGR01": "sd_destroyercarrier_hangar",
     "THR01": "sd_decoVectorController",
     "THR02": "sd_decoVectorController",
     "THR03": "sd_decoVectorController",
@@ -90,13 +90,13 @@
       "locations": [-78.5, -32.5]
     },
     {
-      "id": "DEC01",
+      "id": "HGR01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [-48, -1]
+      "locations": [11.5, 3]
     },
     {
       "id": "LB 1",
@@ -123,7 +123,7 @@
       ]
     },
     {
-      "id": "DEC05",
+      "id": "DEC04",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -132,7 +132,7 @@
       "locations": [-41, 32.5]
     },
     {
-      "id": "DEC04",
+      "id": "DEC03",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -141,7 +141,7 @@
       "locations": [22.5, 31]
     },
     {
-      "id": "DEC03",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -150,7 +150,7 @@
       "locations": [56, -26.5]
     },
     {
-      "id": "DEC02",
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",

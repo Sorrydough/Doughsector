@@ -31,7 +31,7 @@
       "mount": "TURRET",
       "arc": 360,
       "angle": 0,
-      "locations": [5, -23]
+      "locations": [8, -26]
     },
     {
       "id": "TRT03",

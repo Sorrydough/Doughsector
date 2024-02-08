@@ -20,9 +20,9 @@
     "sd_fightersupportWing"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_retrofitkite_hangar",
+    "DEC01": "sd_decoBlinker",
     "DEC02": "sd_decoBlinker",
-    "DEC03": "sd_decoBlinker"
+    "HGR01": "sd_retrofitkite_hangar"
   },
   "weaponSlots": [
     {
@@ -32,7 +32,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [15, -13]
+      "locations": [25, -13]
     },
     {
       "id": "HRD02",
@@ -98,7 +98,7 @@
       "locations": [9, -24]
     },
     {
-      "id": "DEC02",
+      "id": "DEC01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -107,7 +107,7 @@
       "locations": [4, 38.5]
     },
     {
-      "id": "DEC03",
+      "id": "DEC02",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
@@ -134,13 +134,13 @@
       "locations": [-21, -5]
     },
     {
-      "id": "DEC01",
+      "id": "HGR01",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [16, 13]
+      "locations": [17, 13]
     },
     {
       "id": "SYS07",

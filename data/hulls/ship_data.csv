@@ -16,7 +16,7 @@ Equalizer,sd_destroyersupport,Advanced Destroyer,???,sd_nullifier,12,4000,700,80
 Serenity,sd_cruiserlight,Light Cruiser,???,sd_mnemonicarmor,12,8000,1000,12000,,500,145,,80,60,45,25,25,1500,OMNI,,75,0.2,1,,,100,150,150,150,3,50,9,125000,4,12,480,0.25,15,15,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
 Helion,sd_cruiserheavy,Heavy Cruiser,???,sd_motearmor,18,10000,1300,15000,,750,165,,45,35,25,15,15,2000,OMNI,,90,0.2,1,,,200,300,120,160,4,40,8,200000,3,12,540,0.25,30,30,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Oblivion,sd_capitalbattleship,Battleship,???,sd_mnemonicarmor,25,20000,1800,25000,,1250,385,,45,30,20,5,10,3500,OMNI,,90,0.2,1,,,500,750,400,300,10,30,8,500000,3,15,720,0.25,50,50,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
+Oblivion,sd_capitalbattleship,Battleship,???,sd_auxforge,25,20000,1800,25000,,1250,385,2,45,30,20,5,10,3500,OMNI,,90,0.2,1,,,500,750,400,300,10,30,8,500000,3,15,720,0.25,50,50,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Kite [Retrofit],sd_retrofitkite,Dropship,???,sd_grapeshotarray,2,1000,250,2000,,80,30,1,150,150,75,45,85,150,OMNI,,90,0.2,1,,,10,30,50,60,0.5,110,10,6500,5,10,180,0.25,2,2,,,,,,,"CIVILIAN, COMBAT, CARRIER, NO_AUTO_ESCORT","sd_arsenal_package, no_autofit, no_aitweaks",,0.65,2,3,,
 Nebula [Retrofit],sd_retrofitnebula,Militarized Auxiliary,???,sd_grapeshotarray,4,3000,350,1600,,90,60,,60,35,20,20,15,450,PHASE,sd_mnemonicarmor,,,,,,20,150,150,120,1,110,9,30000,4,12,240,0.25,4,4,,,,,,,"CIVILIAN, COMBAT","sd_arsenal_package, no_autofit, no_aitweaks",,0.65,2,3,,

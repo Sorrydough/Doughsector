@@ -104,7 +104,7 @@ public class sd_nullifier extends BaseShipSystemScript {
                     targetStats.getTimeMult().unmodifyFlat("sd_nullifier");
                     engine.getTimeMult().unmodifyFlat("sd_nullifier");
                 }
-                Global.getCombatEngine().removePlugin(this);
+                engine.removePlugin(this);
             }
         }
     }

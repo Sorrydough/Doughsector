@@ -24,6 +24,7 @@
     "DEC06": "sd_decoBlinker",
     "DEC07": "sd_decoBlinker",
     "DEC08": "sd_decoBlinker",
+    "HGR01": "sd_capitalbattleship_hangar",
     "THR01": "sd_decoVectorController",
     "THR02": "sd_decoVectorController",
     "THR03": "sd_decoVectorController",
@@ -35,7 +36,7 @@
     {
       "id": "HRD01",
       "size": "LARGE",
-      "type": "MISSILE",
+      "type": "SYNERGY",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
@@ -44,7 +45,7 @@
     {
       "id": "HRD02",
       "size": "LARGE",
-      "type": "MISSILE",
+      "type": "SYNERGY",
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
@@ -382,6 +383,39 @@
       "arc": 0,
       "angle": -135,
       "locations": [-176.5, -82.5]
+    },
+    {
+      "id": "HGR01",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-96, 60]
+    },
+    {
+      "id": "LB 1",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        -38, 50,
+        -55, 52
+      ]
+    },
+    {
+      "id": "LB 2",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        -83, 54,
+        -104, 57
+      ]
     }
   ],
   "engineSlots": [
