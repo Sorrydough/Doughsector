@@ -30,8 +30,8 @@ public class sd_nullifier extends BaseShipSystemScript {
     public void unapply(MutableShipStatsAPI stats, String id) {
         runOnce = true;
     }
-    public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
-        if (target == null)												// needs to take target as an input to work in the AI script
+    public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah, needs to take target as an input to work in the AI script
+        if (target == null)
             return false;
         float targetDistance = MathUtils.getDistance(ship, target);
         float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
@@ -39,6 +39,8 @@ public class sd_nullifier extends BaseShipSystemScript {
     }
     @Override
     public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
+        if (system.isActive())
+            return true;
         return isTargetValid(ship, ship.getShipTarget()) && sd_util.canUseSystemThisFrame(ship);
     }
     static class sd_nullifierPlugin extends BaseEveryFrameCombatPlugin { // todo: make a util for checking whether target is valid
@@ -56,12 +58,16 @@ public class sd_nullifier extends BaseShipSystemScript {
             this.engine = Global.getCombatEngine();
         }
         final float FLUX_PER_TIMEFLOW = 2, PPT_MULT = 1.5f;
+        boolean isDeactivating = false;
         @Override
         public void advance(float amount, List<InputEventAPI> events) {
             if (engine.isPaused())
                 return;
-            if (!sd_nullifier.isTargetValid(ship, target))
-                ship.getSystem().deactivate();
+            // thanks combustiblelemon for helping me fix a bug here where the system couldn't be turned off because you were unable to use the system
+            if (!sd_nullifier.isTargetValid(ship, target) && !isDeactivating) {
+                isDeactivating = true;
+                ship.useSystem();
+            }
 
             float effectLevel = ship.getSystem().getEffectLevel();
 
@@ -97,6 +103,7 @@ public class sd_nullifier extends BaseShipSystemScript {
             ship.getFluxTracker().increaseFlux((modificationPercent * FLUX_PER_TIMEFLOW * effectLevel * amount) / numApplied, true); // divide by numApplied to share flux load
 
             if (effectLevel == 0) { // cleanup
+                Console.showMessage("Doing nullifier cleanup for target "+ target.getName());
                 targetDynamic.getMod("sd_nullifier").unmodifyFlat(id);
                 targetStats.getCRLossPerSecondPercent().unmodifyMult(id);
                 if (targetDynamic.getMod("sd_nullifier").getFlatBonuses().isEmpty()) {

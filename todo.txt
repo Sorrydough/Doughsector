@@ -61,6 +61,7 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - make kinetic blaster fighter damage itself
 - Missile autoforge rework - add a graphical bar above shield strength to show restoration capacity (project solace has an example?)
 - Make motes stop fucking running into asteroids
+- Add a description display to motefield hullmod to show how much the ship's motefield has degraded
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)

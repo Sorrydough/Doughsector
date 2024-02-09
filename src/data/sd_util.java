@@ -95,9 +95,9 @@ public class sd_util {
                 ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, -1);
         } else {
             if (desireTotal >= 100 && !ship.getSystem().isOn())
-                ship.useSystem();
+                ship.giveCommand(ShipCommand.USE_SYSTEM, null, -1);
             if (desireTotal <= 0 && ship.getSystem().isOn())
-                ship.useSystem();
+                ship.giveCommand(ShipCommand.USE_SYSTEM, null, -1);
         }
     }
     public static void emitMote(ShipAPI ship, Object module, boolean emitOne) {
