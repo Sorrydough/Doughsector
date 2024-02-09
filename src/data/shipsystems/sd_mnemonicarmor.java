@@ -28,38 +28,36 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 
 		if (isArmorGridBalanced(grid)) {
 			ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
-			//ship.setJitterUnder(id, sd_util.factionUnderColor, effectLevel, 10, 0, 5);
 			return;
 		} else {
 			ship.setJitter(id, sd_util.healColor, effectLevel, 2, 0, 5);
-			//ship.setJitterUnder(id, sd_util.healUnderColor, effectLevel, 10, 0, 5);
 		}
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
 		if (interval.intervalElapsed()) {
-			//while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
-			//firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
+			// while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
+			// firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
 			float averageArmorPerCell = getAverageArmorPerCell(grid);
-			//next we create a list of cells above average, and another list of cells below average
+			// next we create a list of cells above average, and another list of cells below average
 			List<Vector2f> cellsAboveAverage = getCellsAroundAverage(grid, true);
 			List<Vector2f> cellsBelowAverage = getCellsAroundAverage(grid, false);
-			//now that we have a list of cells above and below the average, we need to randomly choose one of the former and move the delta to the latter
+			// now that we have a list of cells above and below the average, we need to randomly choose one of the former and move the delta to the latter
 			Vector2f cellToSubtract = cellsAboveAverage.get(new Random().nextInt(cellsAboveAverage.size()));
 			Vector2f cellToAdd = cellsBelowAverage.get(new Random().nextInt(cellsBelowAverage.size()));
 
-			//find the amount we need to subtract from the cell - this the maximum of the amount needed or the amount the cell can provide
+			// find the amount we need to subtract from the cell - this the maximum of the amount needed or the amount the cell can provide
 			float amountNeededToTransfer = ship.getArmorGrid().getMaxArmorInCell() - ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y);
 			float amountAbleToTransfer = (ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - averageArmorPerCell);
 			if (amountAbleToTransfer <= 0)
 				return;
 
 			float amountToTransfer = Math.min(amountNeededToTransfer, amountAbleToTransfer);
-			//subtract the amount from the donating cell and add it to the recieving cell
+			// subtract the amount from the donating cell and add it to the recieving cell
 			ship.getArmorGrid().setArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y, ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - amountToTransfer);
 			ship.getArmorGrid().setArmorValue((int) cellToAdd.x, (int) cellToAdd.y, ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y) + amountToTransfer);
 			//Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
 
-			//start vfx: draw an emp arc to the target cell if it's within bounds
+			// start vfx: draw an emp arc to the target cell if it's within bounds
 			Vector2f toSubtractLoc = (grid.getLocation((int) cellToSubtract.x, (int) cellToSubtract.y));
 			Vector2f toAddLoc = (grid.getLocation((int) cellToAdd.x, (int) cellToAdd.y));
 			boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
@@ -69,16 +67,16 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 			if (isToAddInBounds)
 				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship,
 						thickness, sd_util.healColor, sd_util.damageUnderColor);
-			//draw spark effects on the cell if it's within bounds
+			// draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
 				drawVfx(toSubtractLoc, ship, amountToTransfer, intensity);
 			if (isToAddInBounds)
 				drawVfx(toAddLoc, ship, amountToTransfer, intensity);
 
-			//generate flux according to amount of armor hp transferred
+			// generate flux according to amount of armor hp transferred
 			ship.getFluxTracker().increaseFlux(amountToTransfer * FLUX_PER_ARMOR, false);
 
-			//cleanup
+			// cleanup
 			ship.syncWithArmorGridState();
 			ship.syncWeaponDecalsWithArmorDamage();
 		}
@@ -123,7 +121,7 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 		float sizeSqrt = (float) Math.sqrt(size);
 		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));
 		for (int i = 0; i < (2 + Math.round(sizeSqrt * 3)); i++) {
-			//sparks
+			// sparks
 			float particleSize = 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt * 2, sizeSqrt * 4);
 			float particleDuration = MathUtils.getRandomNumberInRange(1, 2);
 			Vector2f particleLoc = MathUtils.getRandomPointOnCircumference(loc, sizeSqrt);
@@ -131,7 +129,7 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 			//Console.showMessage("Transferred Sqrt: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
 			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, intensity, particleDuration, particleColor);
 		}
-		//draw a distortion wave
+		// draw a distortion wave
 		RippleDistortion ripple = new RippleDistortion();
 		ripple.setLocation(loc);
 		ripple.setSize((50 + size) * intensity);

@@ -2,7 +2,7 @@
 	"id":"sd_mote",
 	"specClass":"missile",	
 	"missileType":"MOTE",
-	"onHitEffect":"data.shipsystems.mote.sd_moteOnHitEffect",
+	"onHitEffect":"data.weapons.mote.sd_moteOnHitEffect",
 	"sprite":"graphics/missiles/bomblet0.png",
 	"size":[4,4],	
 	"center":[2,2],

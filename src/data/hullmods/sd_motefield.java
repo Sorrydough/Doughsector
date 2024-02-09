@@ -5,12 +5,11 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
-import com.fs.starfarer.api.impl.hullmods.PhaseField;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import data.shipsystems.mote.sd_moteAIScript;
+import data.weapons.mote.sd_moteAIScript;
 import data.shipsystems.sd_mnemonicarmor;
 import data.shipsystems.sd_motearmor;
 import org.lazywizard.lazylib.CollisionUtils;
@@ -25,7 +24,7 @@ import java.util.Random;
 
 // todo needs to go into here:
 // spawn motes when we start a fight, scales off field strength - DONE
-// spawn reaper motes when we get armorbroken, scales off field strength - NEED TO MAKE SPECIAL MOTES
+// spawn reaper motes when we get armorbroken, scales off field strength - DONE
 // give an ECM bonus depending on the number of alive motes, scales off field strength - DONE
 // set an attractor lock on the nearest enemy when we get overloaded or armorbroken, clear attractor lock when we're not overloading - DONE
 
@@ -34,11 +33,13 @@ import java.util.Random;
 // can also reduce the sensor profile of a single ship that's larger than itself, the strength of which is dependent on this ship's sensor stat
 
 // Reduces the sensor signature of 1 ship larger than itself and 3 ships at most the same size by 50% OR to this ship's sensor signature, whichever is the weaker bonus.
-// Adding additional ships of this type doesn't improve the sensor signature reduction.
+// Adding additional ships of this type doesn't improve the sensor signature reduction, only the largest ship of the type can provide sensor sig reduction.
+// Stops functioning if the ship's CR goes below 0.1
 
 
 public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
-    final static float MIN_CR = 0.1f;
+    final static float DEPLETED_CR = 0.1f;
+    final static float FULL_CR = 0.5f;
     final float PERSONAL_CLOAK_MULT = 0.75f;
     final String MOD_KEY = "sd_motefield";
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
@@ -170,18 +171,23 @@ public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
         }
         return pointsWithinBounds.get(new Random().nextInt(pointsWithinBounds.size()));
     }
-    // returns a multiplier dependent on the number of other fleetships interfering with this ship's motefield strength
+    // returns a multiplier dependent on the number of other fleetships interfering with this ship's motefield strength, as well as any potential CR penalties
     public static float getMotefieldStrengthFactor(ShipAPI ship) {
-        if (ship.getFleetMember() == null)
-            return 1;
-
         List<FleetMemberAPI> interferingMotefields = new ArrayList<>();
-        for (FleetMemberAPI fleetMember : ship.getFleetMember().getFleetData().getMembersListCopy()) {
-            if (fleetMember.getVariant().getHullMods().contains("sd_motefield") && !Objects.equals(fleetMember.getId(), ship.getFleetMember().getId())
-                    && fleetMember.getHullSpec().getHullSize().ordinal() >= ship.getHullSize().ordinal()) {
-                interferingMotefields.add(fleetMember);
+        if (ship.getFleetMember() != null) {
+            for (FleetMemberAPI fleetMember : ship.getFleetMember().getFleetData().getMembersListCopy()) {
+                if (fleetMember.getVariant().getHullMods().contains("sd_motefield") && !Objects.equals(fleetMember.getId(), ship.getFleetMember().getId())
+                        && fleetMember.getHullSpec().getHullSize().ordinal() >= ship.getHullSize().ordinal()) {
+                    interferingMotefields.add(fleetMember);
+                }
             }
         }
-        return (float) 1 / interferingMotefields.size();
+        // if CR is 0.1, then readinessStrengthFactor is 0
+        // if CR is 0.5, then readinessStrengthFactor is 1
+        // Chatgpt wrote this CR math and I didn't doublecheck it, if it doesn't work then we know who to blame
+        float readinessStrengthFactor = Math.max(0, (ship.getCurrentCR() - DEPLETED_CR) / (FULL_CR - DEPLETED_CR));
+        float interferenceStrengthFactor = (float) 1 / Math.max(1, interferingMotefields.size());
+
+        return (1 * interferenceStrengthFactor * readinessStrengthFactor);
     }
 }

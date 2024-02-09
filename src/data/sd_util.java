@@ -9,7 +9,7 @@ import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import data.graphics.sd_decoSystemRangePlugin;
-import data.shipsystems.mote.sd_moteAIScript;
+import data.weapons.mote.sd_moteAIScript;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;

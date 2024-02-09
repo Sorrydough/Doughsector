@@ -1,10 +1,7 @@
-package data.shipsystems.mote;
+package data.weapons.mote;
 
 import java.awt.Color;
 
-import com.fs.starfarer.combat.entities.Missile;
-import data.sd_util;
-import data.shipsystems.sd_motearmor;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;
@@ -18,8 +15,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 
-public class sd_moteOnHitEffect implements OnHitEffectPlugin {
-	final float ANTI_FIGHTER_DAMAGE = 250;
+public class sd_moteSuperOnHitEffect implements OnHitEffectPlugin {
 	public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target, Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
 		if (target instanceof ShipAPI) {
 			ShipAPI ship = (ShipAPI) target;
@@ -32,12 +28,12 @@ public class sd_moteOnHitEffect implements OnHitEffectPlugin {
 					engine.spawnEmpArcPierceShields(projectile.getSource(), point, target, target,
 							projectile.getDamageType(), projectile.getDamageAmount(), projectile.getEmpAmount(),
 							100000f, "mote_attractor_impact_emp_arc", 20f,
-							sd_util.healColor, new Color(255, 255, 255, 255));
+							new Color(255,100,100,55), new Color(255, 255, 255, 255));
 				}
 			} else
-				Global.getCombatEngine().applyDamage(projectile, ship, point, ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
+				Global.getCombatEngine().applyDamage(projectile, ship, point, projectile.getDamageAmount(), DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
 		} else if (target instanceof MissileAPI)
-			Global.getCombatEngine().applyDamage(projectile, target, point, ANTI_FIGHTER_DAMAGE, DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
+			Global.getCombatEngine().applyDamage(projectile, target, point, projectile.getDamageAmount(), DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);
 		Global.getSoundPlayer().playSound("mote_attractor_impact_normal", 1f, 1f, point, new Vector2f());
 	}
 }

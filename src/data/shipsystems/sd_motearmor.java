@@ -5,16 +5,10 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.IntervalUtil;
 import data.sd_util;
-import data.shipsystems.mote.sd_moteAIScript;
-import data.shipsystems.mote.sd_moteControlScript;
-import org.dark.shaders.distortion.DistortionShader;
-import org.dark.shaders.distortion.RippleDistortion;
-import org.lazywizard.console.Console;
+import data.weapons.mote.sd_moteAIScript;
 import org.lazywizard.lazylib.CollisionUtils;
-import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -49,34 +43,37 @@ public class sd_motearmor extends BaseShipSystemScript {
 
         interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
         if (interval.intervalElapsed()) {
+
+            // keeps the list of motes attached to this ship cleaned up
             SharedMoteAIData data = getSharedData(ship);
             Iterator<MissileAPI> iter = data.motes.iterator();
             while (iter.hasNext())
                 if (!Global.getCombatEngine().isMissileAlive(iter.next()))
                     iter.remove();
-            //while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
-            //firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
+
+            // while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
+            // firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function
             float averageArmorPerCell = sd_mnemonicarmor.getAverageArmorPerCell(grid);
-            //next we create a list of cells above average, and another list of cells below average
+            // next we create a list of cells above average, and another list of cells below average
             List<Vector2f> cellsAboveAverage = sd_mnemonicarmor.getCellsAroundAverage(grid, true);
             List<Vector2f> cellsBelowAverage = sd_mnemonicarmor.getCellsAroundAverage(grid, false);
-            //now that we have a list of cells above and below the average, we need to randomly choose one of the former and move the delta to the latter
+            // now that we have a list of cells above and below the average, we need to randomly choose one of the former and move the delta to the latter
             Vector2f cellToSubtract = cellsAboveAverage.get(new Random().nextInt(cellsAboveAverage.size()));
             Vector2f cellToAdd = cellsBelowAverage.get(new Random().nextInt(cellsBelowAverage.size()));
 
-            //find the amount we need to subtract from the cell - this the maximum of the amount needed or the amount the cell can provide
+            // find the amount we need to subtract from the cell - this the maximum of the amount needed or the amount the cell can provide
             float amountNeededToTransfer = ship.getArmorGrid().getMaxArmorInCell() - ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y);
             float amountAbleToTransfer = (ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - averageArmorPerCell);
             if (amountAbleToTransfer <= 0)
                 return;
 
             float amountToTransfer = Math.min(amountNeededToTransfer, amountAbleToTransfer);
-            //subtract the amount from the donating cell and add it to the recieving cell
+            // subtract the amount from the donating cell and add it to the recieving cell
             ship.getArmorGrid().setArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y, ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - amountToTransfer);
             ship.getArmorGrid().setArmorValue((int) cellToAdd.x, (int) cellToAdd.y, ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y) + amountToTransfer);
             //Console.showMessage("Amount needed: "+ amountNeededToTransfer +" Amount Able: "+ amountAbleToTransfer +" Amount To: "+ amountToTransfer);
 
-            //start vfx: draw an emp arc to the target cell if it's within bounds
+            // start vfx: draw an emp arc to the target cell if it's within bounds
             Vector2f toSubtractLoc = (grid.getLocation((int) cellToSubtract.x, (int) cellToSubtract.y));
             Vector2f toAddLoc = (grid.getLocation((int) cellToAdd.x, (int) cellToAdd.y));
             boolean isToSubtractInBounds = CollisionUtils.isPointWithinBounds(toSubtractLoc, ship);
@@ -86,22 +83,20 @@ public class sd_motearmor extends BaseShipSystemScript {
             if (isToAddInBounds)
                 Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship,
                         thickness, sd_util.healColor, sd_util.damageUnderColor);
-            //draw spark effects on the cell if it's within bounds
+            // draw spark effects on the cell if it's within bounds
             if (isToSubtractInBounds)
                 sd_mnemonicarmor.drawVfx(toSubtractLoc, ship, amountToTransfer, intensity);
             if (isToAddInBounds)
                 sd_mnemonicarmor.drawVfx(toAddLoc, ship, amountToTransfer, intensity);
 
-            //generate flux according to amount of armor hp transferred
+            // generate flux according to amount of armor hp transferred
             ship.getFluxTracker().increaseFlux(amountToTransfer * sd_mnemonicarmor.FLUX_PER_ARMOR, false);
 
-            //cleanup
+            // cleanup
             ship.syncWithArmorGridState();
             ship.syncWeaponDecalsWithArmorDamage();
 
-            //////////////////////////////////
-            //MOTE STUFF GETS TACKED ON HERE//
-            //////////////////////////////////
+            // some mote stuff
             moteProgress += amountToTransfer;
             if (moteProgress >= ARMOR_PER_MOTE.get(ship.getHullSize()) && data.motes.size() < MAX_MOTES.get(ship.getHullSize())) {
                 emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship), true);
