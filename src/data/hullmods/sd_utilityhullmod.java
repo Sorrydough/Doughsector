@@ -47,19 +47,15 @@ public class sd_utilityhullmod extends BaseHullMod {
         boolean runOnce = true;
         float maxRange = 0;
         String personality = Personalities.AGGRESSIVE;
-        //    AdmiralAIPlugin admiral = new sd_fleetAdmiralAI();
         @Override
         public void advance(float amount, List<InputEventAPI> events) {
             boolean enabled = false;
             if (Global.getSettings().getModManager().isModEnabled("lunalib"))
-                enabled = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enablePlayerAdmiral"));
+                enabled = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enableAITweaks"));
 
             if (!enabled || Global.getCombatEngine().isPaused() || ship.getShipAI() == null)
                 return;
             if (runOnce) {
-//                if (applyAI && Global.getCombatEngine().isMission() && Global.getCombatEngine().getFleetManager(ship.getOwner()).getAdmiralAI() != admiral) {
-//                    Global.getCombatEngine().getFleetManager(ship.getOwner()).setAdmiralAI(admiral);
-//                }
                 if (Global.getCombatEngine().isSimulation() && ship.getHullSize() != ShipAPI.HullSize.CAPITAL_SHIP) {
                     ship.getCaptain().setPersonality(personality);
                     Console.showMessage("Personality for "+ ship.getName() +" overriden to "+ personality);

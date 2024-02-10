@@ -8,5 +8,5 @@ Mote Field,sd_motefield,,,???,,,,,TRUE,,0,0,0,0,data.hullmods.sd_motefield,<tool
 ,,,,,,,,,,,,,,,,,,,
 #Modulars,,,,,,,,,,,,,,,,,,,
 Advanced Antispall,sd_antispall,,,???,"no_drop, no_drop_salvage",Defenses,,TRUE,,,2,4,8,16,data.hullmods.sd_antispall,<tooltip created in the script>,,,graphics/hullmods/sd_antispall.png
-Ancillary Beam Pumps,sd_beampumps,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,2,6,15,30,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
+Ancillary Beam Pumps,sd_beampumps,,,???,"no_drop, no_drop_salvage",Weapons,,TRUE,,,3,6,15,30,data.hullmods.sd_beampumps,<tooltip created in the script>,,,graphics/hullmods/sd_beampumps.png
 Capacitor Purge,sd_capacitorpurge,,,???,"no_drop, no_drop_salvage",Special,,TRUE,,,6,12,18,30,data.hullmods.sd_capacitorpurge,<tooltip created in the script>,,,graphics/hullmods/sd_capacitorpurge.png

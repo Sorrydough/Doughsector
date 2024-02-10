@@ -1,40 +1,38 @@
 {
-    "displayName": "Aegis",
-    "fluxCapacitors": 10,
-    "fluxVents": 3,
+    "displayName": "Attack",
+    "fluxCapacitors": 8,
+    "fluxVents": 10,
     "goalVariant": true,
-    "hullId": "sd_frigate",
+    "hullId": "sd_frigateinterference",
     "hullMods": [
-        "autorepair",
-        "hardenedshieldemitter",
-        "hardened_subsystems",
+        "auxiliarythrusters",
+        "fluxbreakers",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_frigate_Aegis",
+    "variantId": "sd_frigateinterference_Attack",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "sd_gravlance",
-                "TRT02": "sd_gravlance",
+                "TRT02": "railgun",
+                "TRT03": "railgun",
             }
         },
         {
             "autofire": false,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "HRD02": "gazer",
-                "HRD01": "gazer",
+                "HRD01": "breach",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT03": "pdburst",
+                "TRT01": "irautolance",
             }
         },
     ],

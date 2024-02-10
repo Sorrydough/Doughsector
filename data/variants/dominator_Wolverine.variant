@@ -1,0 +1,58 @@
+{
+    "displayName": "Wolverine",
+    "fluxCapacitors": 4,
+    "fluxVents": 30,
+    "goalVariant": false,
+    "hullId": "dominator",
+    "hullMods": [
+        "adaptiveshields",
+        "auxiliarythrusters",
+        "converted_hangar",
+        "fluxbreakers",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "dominator_Wolverine",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 013": "hellbore",
+                "WS 012": "hellbore",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 015": "sabotpod",
+                "WS 016": "sabotpod",
+                "WS 014": "sabotpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 011": "hveldriver",
+                "WS 010": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 007": "vulcan",
+                "WS 004": "vulcan",
+                "WS 001": "vulcan",
+            }
+        },
+    ],
+    "wings": [
+        "sarissa_wing",
+    ],
+    "modules": [],
+}

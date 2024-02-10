@@ -22,7 +22,8 @@ public class sd_modPlugin extends BaseModPlugin {
     List <String> sd_weaponsList = new ArrayList<>(); {
         //projectiles
         sd_weaponsList.add("amblaster");
-        sd_weaponsList.add("heavyblaster");
+        sd_weaponsList.add("sd_gravlance");
+        sd_weaponsList.add("sd_amhowitzer");
         sd_weaponsList.add("railgun");
         sd_weaponsList.add("lightmg");
         sd_weaponsList.add("lightdualmg");
@@ -36,6 +37,7 @@ public class sd_modPlugin extends BaseModPlugin {
         sd_weaponsList.add("heavyburst");
         sd_weaponsList.add("guardian");
         //missiles
+        sd_weaponsList.add("sd_grapeshotrack");
         sd_weaponsList.add("heatseeker");
         sd_weaponsList.add("salamanderpod");
         sd_weaponsList.add("breach");

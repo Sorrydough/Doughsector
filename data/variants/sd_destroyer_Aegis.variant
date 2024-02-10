@@ -1,39 +1,47 @@
 {
     "displayName": "Aegis",
-    "fluxCapacitors": 10,
-    "fluxVents": 3,
+    "fluxCapacitors": 17,
+    "fluxVents": 0,
     "goalVariant": true,
-    "hullId": "sd_frigate",
+    "hullId": "sd_destroyer",
     "hullMods": [
         "autorepair",
         "hardenedshieldemitter",
-        "hardened_subsystems",
+        "magazines",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_frigate_Aegis",
+    "variantId": "sd_destroyer_Aegis",
     "weaponGroups": [
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "TRT01": "sd_gravlance",
-                "TRT02": "sd_gravlance",
-            }
-        },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "HRD02": "gazer",
-                "HRD01": "gazer",
+                "HRD02": "gazerpod",
+                "HRD01": "gazerpod",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD03": "breach",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "TRT01": "guardian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT04": "pdburst",
+                "TRT02": "pdburst",
                 "TRT03": "pdburst",
             }
         },

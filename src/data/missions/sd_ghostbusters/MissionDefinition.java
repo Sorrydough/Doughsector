@@ -65,12 +65,12 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Sonic Disturbance", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Lightwave Instrument", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Relay", FleetMemberType.SHIP, "Reconstructed Mind", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Relay", FleetMemberType.SHIP, "Sweating Heartbeat", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Direct Path", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Bombarded Signal", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Lancer", FleetMemberType.SHIP, "Precisely Certain", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Interference", FleetMemberType.SHIP, "Chilled Nova", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Reconstructed Mind", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Sweating Heartbeat", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Direct Path", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Bombarded Signal", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Precisely Certain", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Chilled Nova", false);
 
         HashMap<String, Integer> REDADMIRALSKILLS = new HashMap<>();
         REDADMIRALSKILLS.put(Skills.POINT_DEFENSE, 2);
