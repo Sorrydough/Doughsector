@@ -1,0 +1,44 @@
+{
+    "displayName": "Strike",
+    "fluxCapacitors": 4,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "sd_destroyercarrier",
+    "hullMods": [
+        "autorepair",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "sd_destroyercarrier_Strike",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT01": "gravitonbeam",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "HRD02": "heatseeker",
+                "HRD01": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT02": "lightdualmg",
+                "TRT03": "lightdualmg",
+            }
+        },
+    ],
+    "wings": [
+        "sd_fightercanisterWing",
+        "sd_fightercanisterWing",
+    ],
+    "modules": [],
+}

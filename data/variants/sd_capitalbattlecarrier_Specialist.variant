@@ -1,0 +1,91 @@
+{
+    "displayName": "Specialist",
+    "fluxCapacitors": 25,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "sd_capitalbattlecarrier",
+    "hullMods": [
+        "auxiliarythrusters",
+        "eccm",
+        "fluxbreakers",
+        "targetingunit",
+        "turretgyros",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "sd_capitalbattlecarrier_Specialist",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD02": "pilum_large",
+                "HRD01": "pilum_large",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "HRD03": "salamanderpod",
+                "HRD04": "salamanderpod",
+                "HRD05": "heatseeker",
+                "HRD06": "heatseeker",
+                "HRD07": "heatseeker",
+                "HRD08": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT01": "hil",
+                "TRT02": "hil",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT03": "hil",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT08": "gravitonbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT11": "pdburst",
+                "TRT12": "pdburst",
+                "TRT10": "pdburst",
+                "TRT09": "pdburst",
+                "TRT06": "pdburst",
+                "TRT07": "pdburst",
+                "TRT15": "lightmg",
+                "TRT05": "pdburst",
+                "TRT16": "pdburst",
+                "TRT13": "pdburst",
+                "TRT14": "lightmg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT04": "heavyburst",
+            }
+        },
+    ],
+    "wings": [
+        "sd_fighterionWing",
+        "sd_fighterionWing",
+    ],
+    "modules": [],
+}

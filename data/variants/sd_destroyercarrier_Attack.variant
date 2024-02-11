@@ -1,30 +1,30 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 8,
-    "fluxVents": 10,
+    "fluxCapacitors": 0,
+    "fluxVents": 11,
     "goalVariant": true,
-    "hullId": "sd_frigateinterference",
+    "hullId": "sd_destroyercarrier",
     "hullMods": [
-        "auxiliarythrusters",
-        "fluxbreakers",
+        "advancedoptics",
+        "autorepair",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_frigateinterference_Attack",
+    "variantId": "sd_destroyercarrier_Attack",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT02": "railgun",
-                "TRT03": "railgun",
+                "TRT01": "ionbeam",
             }
         },
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
+                "HRD02": "breach",
                 "HRD01": "breach",
             }
         },
@@ -32,10 +32,14 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "irautolance",
+                "TRT02": "sd_gravlance",
+                "TRT03": "sd_gravlance",
             }
         },
     ],
-    "wings": [],
+    "wings": [
+        "sd_fighterblasterWing",
+        "sd_fighterblasterWing",
+    ],
     "modules": [],
 }

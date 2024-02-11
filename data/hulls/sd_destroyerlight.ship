@@ -1,8 +1,8 @@
 {
   "hullName": "Oculus",
-  "hullId": "sd_destroyer",
+  "hullId": "sd_destroyerlight",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/sd_destroyer.png",
+  "spriteName": "graphics/ships/sd_destroyerlight.png",
   "style": "SD_TECH",
   "height": 210,
   "width": 120,

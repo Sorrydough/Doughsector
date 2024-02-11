@@ -1,0 +1,67 @@
+{
+    "displayName": "Specialist",
+    "fluxCapacitors": 0,
+    "fluxVents": 19,
+    "goalVariant": true,
+    "hullId": "sd_cruiser",
+    "hullMods": [
+        "autorepair",
+        "eccm",
+        "pointdefenseai",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "sd_cruiser_Specialist",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT01": "sd_amhowitzer",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD01": "locust",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD02": "breach",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT02": "ionbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT08": "lightmg",
+                "TRT06": "lightdualmg",
+                "TRT07": "lightmg",
+                "TRT04": "lightdualmg",
+                "TRT05": "lightdualmg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT03": "heavyburst",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

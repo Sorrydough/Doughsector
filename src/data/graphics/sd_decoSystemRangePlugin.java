@@ -63,7 +63,7 @@ public class sd_decoSystemRangePlugin extends BaseEveryFrameCombatPlugin {
             return EnumSet.of(CombatEngineLayers.BELOW_SHIPS_LAYER);
         }
         public float getRenderRadius() {
-            return radius + 500f;
+            return Float.MAX_VALUE;
         }
         float timer = 1;
         public void render(CombatEngineLayers layer, ViewportAPI viewport) {

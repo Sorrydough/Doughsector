@@ -1,22 +1,23 @@
 {
     "displayName": "Strike",
     "fluxCapacitors": 10,
-    "fluxVents": 10,
+    "fluxVents": 6,
     "goalVariant": true,
     "hullId": "sd_frigatelight",
     "hullMods": [
-        "fluxbreakers",
+        "autorepair",
+        "auxiliarythrusters",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_frigatelight_Attack",
+    "variantId": "sd_frigatelight_Strike",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "heavyblaster",
+                "TRT01": "sd_amhowitzer",
             }
         },
     ],

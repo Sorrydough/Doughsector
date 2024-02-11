@@ -3,14 +3,14 @@
     "fluxCapacitors": 8,
     "fluxVents": 0,
     "goalVariant": true,
-    "hullId": "sd_destroyersupport",
+    "hullId": "sd_destroyeradvanced",
     "hullMods": [
         "autorepair",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_destroyersupport_Attack",
+    "variantId": "sd_destroyeradvanced_Attack",
     "weaponGroups": [
         {
             "autofire": true,

@@ -200,15 +200,17 @@ public class sd_fleetadmiralUtil {
 
         ShipVariantAPI variant = ship.getMutableStats().getVariant();
         if (variant != null) {
-            // adjust threat by certain hullmods that overperform
-            for (Map.Entry<String, Integer> hullmod : overpoweredHullmods.entrySet())
-                if (variant.hasHullMod(hullmod.getKey()))
-                    modifier += hullmod.getValue();
-            // adjust by dmods that actually reduce combat performance
-            for (String whyisthisastring : variant.getHullMods())
-                if (Global.getSettings().getHullModSpec(whyisthisastring).hasTag("dmod") && !dModsExcluded.contains(whyisthisastring))
+            for (String whyisthisastring : variant.getHullMods()) {
+                // adjust by dmods that actually reduce combat performance
+                if (Global.getSettings().getHullModSpec(whyisthisastring).hasTag("dmod") && !dModsExcluded.contains(whyisthisastring)) {
                     modifier -= dmodMod;
-            // and adjust by non-logistic hullmods
+                    continue;
+                }
+                // adjust threat by certain hullmods that overperform
+                if (overpoweredHullmods.containsKey(whyisthisastring))
+                    modifier += overpoweredHullmods.get(whyisthisastring);
+            }
+            // and adjust by non-logistic smods
             for (String whyisthisastring : variant.getSMods())
                 if (!sModsExcluded.contains(whyisthisastring))
                     modifier += smodMod;
@@ -224,9 +226,8 @@ public class sd_fleetadmiralUtil {
             }
         }
         // adjust for fleet admiral's skills
-        PersonAPI commander = ship.getFleetMember().getFleetCommander();
-        if (commander != null)
-            for (SkillLevelAPI skill : commander.getStats().getSkillsCopy()) {
+        if (ship.getFleetMember().getFleetCommander() != null)
+            for (SkillLevelAPI skill : ship.getFleetMember().getFleetCommander().getStats().getSkillsCopy()) {
                 String skillID = skill.getSkill().getId();
                 if (Objects.equals(skillID, Skills.TACTICAL_DRILLS)) {
                     modifier += 5;
@@ -263,11 +264,10 @@ public class sd_fleetadmiralUtil {
         }
 
         // factor disabled weapons
-        List<WeaponAPI> weapons = ship.getAllWeapons();
-        if (!weapons.isEmpty()) {
+        if (!ship.getAllWeapons().isEmpty()) {
             float totalDPS = 0;
             float workingDPS = 0;
-            for (WeaponAPI weapon : weapons) {
+            for (WeaponAPI weapon : ship.getAllWeapons()) {
                 totalDPS += weapon.getSpec().getDerivedStats().getDps();
                 if (!weapon.isDisabled())
                     workingDPS += weapon.getSpec().getDerivedStats().getDps();
@@ -276,11 +276,10 @@ public class sd_fleetadmiralUtil {
         }
 
         // factor disabled engines
-        List<ShipEngineAPI> engines = ship.getEngineController().getShipEngines();
-        if (!engines.isEmpty()) {
+        if (!ship.getEngineController().getShipEngines().isEmpty()) {
             float totalThrust = 0;
             float workingThrust = 0;
-            for (ShipEngineAPI engine : engines) {
+            for (ShipEngineAPI engine : ship.getEngineController().getShipEngines()) {
                 totalThrust += engine.getContribution();
                 if (!engine.isDisabled())
                     workingThrust += engine.getContribution();

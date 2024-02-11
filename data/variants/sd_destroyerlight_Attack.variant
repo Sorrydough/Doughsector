@@ -1,48 +1,47 @@
 {
-    "displayName": "Aegis",
-    "fluxCapacitors": 17,
-    "fluxVents": 0,
+    "displayName": "Attack",
+    "fluxCapacitors": 3,
+    "fluxVents": 20,
     "goalVariant": true,
-    "hullId": "sd_destroyer",
+    "hullId": "sd_destroyerlight",
     "hullMods": [
-        "autorepair",
-        "hardenedshieldemitter",
-        "magazines",
+        "fluxbreakers",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_destroyer_Aegis",
+    "variantId": "sd_destroyerlight_Attack",
     "weaponGroups": [
         {
-            "autofire": false,
-            "mode": "ALTERNATING",
+            "autofire": true,
+            "mode": "LINKED",
             "weapons": {
-                "HRD02": "gazerpod",
-                "HRD01": "gazerpod",
+                "TRT01": "tachyonlance",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "HRD03": "breach",
+                "HRD03": "heatseeker",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "guardian",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "TRT04": "pdburst",
                 "TRT02": "pdburst",
-                "TRT03": "pdburst",
+                "TRT03": "lightmg",
+                "TRT04": "lightmg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD01": "gravitonbeam",
+                "HRD02": "gravitonbeam",
             }
         },
     ],

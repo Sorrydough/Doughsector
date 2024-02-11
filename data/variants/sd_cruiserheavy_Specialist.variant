@@ -1,0 +1,74 @@
+{
+    "displayName": "Specialist",
+    "fluxCapacitors": 6,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "sd_cruiserheavy",
+    "hullMods": [
+        "advancedoptics",
+        "autorepair",
+        "magazines",
+        "targetingunit",
+        "unstable_injector",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "sd_cruiserheavy_Specialist",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD01": "squall",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD02": "dragon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT01": "guardian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT08": "pdburst",
+                "TRT06": "pdburst",
+                "TRT07": "pdburst",
+                "TRT05": "pdburst",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT03": "irautolance",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT04": "irautolance",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT02": "irautolance",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

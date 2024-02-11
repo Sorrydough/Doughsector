@@ -1,47 +1,38 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 3,
-    "fluxVents": 20,
+    "fluxCapacitors": 8,
+    "fluxVents": 10,
     "goalVariant": true,
-    "hullId": "sd_destroyer",
+    "hullId": "sd_frigateadvanced",
     "hullMods": [
+        "auxiliarythrusters",
         "fluxbreakers",
-        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_destroyer_Attack",
+    "variantId": "sd_frigateadvanced_Attack",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "tachyonlance",
+                "TRT02": "railgun",
+                "TRT03": "railgun",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "HRD03": "heatseeker",
+                "HRD01": "breach",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT02": "pdburst",
-                "TRT03": "lightmg",
-                "TRT04": "lightmg",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "HRD01": "gravitonbeam",
-                "HRD02": "gravitonbeam",
+                "TRT01": "irautolance",
             }
         },
     ],

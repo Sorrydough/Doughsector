@@ -36,8 +36,26 @@ public class sd_util {
     }
 
     public static boolean isCombatSituation(ShipAPI ship) {
-        return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOwner() != -1 && ship.getVariant() != null;
+        return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOriginalOwner() != -1 && ship.getVariant() != null;
     }
+
+    public static void blockWeaponFromFiring(WeaponAPI weapon) {
+        ShipAPI ship = weapon.getShip();
+        if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == ShipAPI.HullSize.FRIGATE)) {
+            weapon.setForceNoFireOneFrame(true);
+            if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))))
+                ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
+        }
+        if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
+            return;
+        ShipAPI autofireAITarget = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip(); //autofire is an entirely separate AI from the main ship
+        if (autofireAITarget != null && (autofireAITarget.getShipTarget().getShield() == null || autofireAITarget.getShipTarget().getHullSize() == ShipAPI.HullSize.FRIGATE)) {
+            weapon.setForceNoFireOneFrame(true);
+            if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))))
+                ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
+        }
+    }
+
 
     public static boolean isAutomated(ShipAPI ship) {
         return ship.getHullSpec().getMinCrew() == 0;
@@ -163,10 +181,10 @@ public class sd_util {
         });
     }
 
-    public static boolean canUseSystemThisFrame(ShipAPI ship) { // duplicate of the AIUtils function, but this also works for toggle systems
+    public static boolean canUseSystemThisFrame(ShipAPI ship) { // modification of the AIUtils function, this one also works for toggle systems
         FluxTrackerAPI flux = ship.getFluxTracker();
         ShipSystemAPI system = ship.getSystem();
-        return !(system == null || flux.isOverloadedOrVenting() || system.isOutOfAmmo() || ship.getOwner() == 1
+        return !(system == null || flux.isOverloadedOrVenting() || system.isOutOfAmmo() || ship.getOriginalOwner() == -1
                 // active but can't be toggled off
                 || (system.isActive() && !system.getSpecAPI().isToggle())
                 // chargedown

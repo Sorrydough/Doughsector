@@ -2,11 +2,11 @@
 Attack: Most generic variant, focused on having good flux uptime and decent range.
 Strike: High alpha strike, usually short ranged and needs allied ships to distract for itself.
 Aegis: Focused on being as tanky as possible with good point defense.
-Snare: Specialized against fast ships and typically includes emp.
 Command: Dedicates most of its budget to ECM and nav buoy.
-Elite: Uses s-mods, great at everything.
 Overdriven: Safety Overrides. Usually a variation of a strike loadout.
-
+Specialist: Designed for some niche purpose.
+Snare: Uses extensive crowd control tools to disable opponents.
+Elite: Uses s-mods, great at everything.
 
 Arthr Stuff:
 - Grapeshot art
@@ -28,11 +28,19 @@ Discord Beta stuff:
 - Fix all the variants that I broke
 - Placeholder descriptions
 - Faction flag
+- Faction name - something like "procyon ascendacy"? && custom ship prefix
 - Integrate starficz shield AI
 - Integrate genir autofire AI
 - Ok I actually need to rework aux forge now
-- Troubleshoot strange point defense behavior vs. doom
 - Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
+- Recolor motes and system color to gold?
+- Review conversation with genir to fix weapon firing issue, try an advanceable listener or whatever that other thing was that chat suggested
+- Review conversation with gman to fix ship names
+- Make it so the cruiser +++ frigate don't mind eachother
+- Review ruddy's suggestion to make my code lag less
+- Consider a ship shield improvement to 0.9
+- Add debug code so my game tells me whether am howitzers are being put on autofire
+- Consider configuring my destroyers for salamander spam (they are more efficient at it than the strike frigates, which kinda suck in that fight anyway)
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
@@ -44,6 +52,7 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Add a rawdog config file for non-lunalib-users
 - Reverse-engineer fleet deployment manager
 - Do a manual sprite pass to clean up floaters etc
+- Verify whether I fixed my opengl render radius
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
@@ -62,8 +71,10 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Missile autoforge rework - add a graphical bar above shield strength to show restoration capacity (project solace has an example?)
 - Make motes stop fucking running into asteroids
 - Add a description display to motefield hullmod to show how much the ship's motefield has degraded
-- Do normals properly with modstudio
+- Do normals properly with modlab
 - Add normals for decos
+- Convert my AI code to use AI grids for proximity checks so it can be less laggy maybe
+- Figure out whether I need to use timer.randomize() on all my intervals after they get advanced
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
@@ -97,3 +108,11 @@ Version 3.0 Stuff: (scope creep)
 - Write a guide for shipsystem AI
 - Custom quality captains
 
+
+Code stuff to remember:
+final variable;
+if(something) {
+  variable = a;
+} else {
+  variable = b;
+}

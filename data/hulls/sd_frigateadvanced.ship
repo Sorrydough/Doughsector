@@ -1,8 +1,8 @@
 {
   "hullName": "Absolver",
-  "hullId": "sd_frigateinterference",
+  "hullId": "sd_frigateadvanced",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/sd_frigateinterference.png",
+  "spriteName": "graphics/ships/sd_frigateadvanced.png",
   "style": "SD_TECH",
   "height": 110,
   "width": 100,

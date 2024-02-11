@@ -10,6 +10,7 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import data.graphics.sd_decoSystemRangePlugin;
+import data.sd_util;
 import lunalib.lunaSettings.LunaSettings;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
@@ -38,47 +39,31 @@ public class sd_utilityhullmod extends BaseHullMod {
     static class sd_utilityhullmodPlugin extends BaseEveryFrameCombatPlugin {
         final ShipAPI ship;
         final CombatEngineAPI engine;
+        boolean enabled = false;
         public sd_utilityhullmodPlugin(ShipAPI ship) {
             this.ship = ship;
             this.engine = Global.getCombatEngine();
+            if (Global.getSettings().getModManager().isModEnabled("lunalib"))
+                this.enabled = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enableAITweaks"));
         }
         final IntervalUtil timer = new IntervalUtil (0.5f, 1.5f);
-        final boolean applyAI = false;
         boolean runOnce = true;
-        float maxRange = 0;
         String personality = Personalities.AGGRESSIVE;
         @Override
         public void advance(float amount, List<InputEventAPI> events) {
-            boolean enabled = false;
-            if (Global.getSettings().getModManager().isModEnabled("lunalib"))
-                enabled = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enableAITweaks"));
-
-            if (!enabled || Global.getCombatEngine().isPaused() || ship.getShipAI() == null)
+            if (!enabled || !sd_util.isCombatSituation(ship) || ship.getShipAI() == null)
                 return;
+
             if (runOnce) {
                 if (Global.getCombatEngine().isSimulation() && ship.getHullSize() != ShipAPI.HullSize.CAPITAL_SHIP) {
                     ship.getCaptain().setPersonality(personality);
                     Console.showMessage("Personality for "+ ship.getName() +" overriden to "+ personality);
                 }
-                List<WeaponAPI> loadout = ship.getAllWeapons();
-                if (loadout != null) {
-                    for (WeaponAPI w : loadout) {
-                        if (w.getType() != WeaponAPI.WeaponType.MISSILE) {
-                            if (w.getRange() > maxRange) {
-                                maxRange = w.getRange();
-                            }
-                        }
-                    }
-                }
                 // apply alex's AI behavior overrides
-                if (ship.getHullSize().ordinal() > 3) {
-                    ship.getShipAI().getConfig().alwaysStrafeOffensively = true;
-                } else {
-                    ship.getShipAI().getConfig().alwaysStrafeOffensively = true;
-                    ship.getShipAI().getConfig().turnToFaceWithUndamagedArmor = false;
-                }
+                ship.getShipAI().getConfig().alwaysStrafeOffensively = true;
+                ship.getShipAI().getConfig().turnToFaceWithUndamagedArmor = false;
+
                 runOnce = false;
-                timer.randomize();
             }
 
             ////////////////////////////////////////////////////////
@@ -91,35 +76,6 @@ public class sd_utilityhullmod extends BaseHullMod {
 //                    ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
 //                }
 //            }
-
-            ////////////////////////////
-            //IMPROVES SQUALL BEHAVIOR//
-            ////////////////////////////
-            for (WeaponAPI weapon : ship.getAllWeapons()) {
-                switch (weapon.getType()) { //NPEs can eat my ass
-                    case STATION_MODULE:
-                    case LAUNCH_BAY:
-                    case DECORATIVE:
-                    case SYSTEM:
-                        continue;
-                }
-
-                if (Objects.equals(weapon.getSpec().getWeaponId(), "squall")) {
-                    if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == ShipAPI.HullSize.FRIGATE)) {
-                        weapon.setForceNoFireOneFrame(true);
-                        if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))))
-                            ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
-                    }
-                    if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
-                        continue;
-                    ShipAPI autofireAITarget = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip(); //autofire is an entirely separate AI from the main ship
-                    if (autofireAITarget != null && (autofireAITarget.getShipTarget().getShield() == null || autofireAITarget.getShipTarget().getHullSize() == ShipAPI.HullSize.FRIGATE)) {
-                        weapon.setForceNoFireOneFrame(true);
-                        if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))))
-                            ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
-                    }
-                }
-            }
 
             ////////////////////////////////////////////////////////////
             //TELLS THE SHIP TO BACK OFF IF IT CAN'T SHOOT ITS WEAPONS//
@@ -159,7 +115,7 @@ public class sd_utilityhullmod extends BaseHullMod {
             //////////////////////////// TODO: FIGURE OUT WHY THIS JUST DOESN'T WORK, AND FIGURE OUT WHY IT DOESN'T NPE
             if (ship.hasLaunchBays() && ship.getSharedFighterReplacementRate() < 0.85) {
                 ship.setPullBackFighters(true);
-                ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
+                //ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
             }
 
             /////////////////////////////////////
@@ -168,6 +124,31 @@ public class sd_utilityhullmod extends BaseHullMod {
 //            if (ship.hasLaunchBays() && ship.getVariant().getHints().contains(ShipHullSpecAPI.ShipTypeHints.COMBAT))
 //                if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
 //                    ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
+
+            ////////////////////////////
+            //IMPROVES SQUALL BEHAVIOR//
+            ////////////////////////////
+            for (WeaponAPI weapon : ship.getAllWeapons()) {
+                switch (weapon.getType()) { //NPEs can eat my ass
+                    case STATION_MODULE:
+                    case LAUNCH_BAY:
+                    case DECORATIVE:
+                    case SYSTEM:
+                        continue;
+                }
+
+                if (Objects.equals(weapon.getSpec().getWeaponId(), "squall")) {
+                    ShipAPI target = ship.getShipTarget();
+                    if (ship.getWeaponGroupFor(weapon).isAutofiring())
+                        target = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip();
+
+                    if (target != null && (target.getShield() == null || target.getHullSize() == ShipAPI.HullSize.FRIGATE)) {
+                        weapon.setForceNoFireOneFrame(true);
+                        if (weapon.isInBurst() && (ship.getFluxLevel() > 0.05 && (ship.getFluxLevel() < 0.15 || !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))))
+                            ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
+                    }
+                }
+            }
 
             /////////////////////////////////////////////////
             //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
@@ -197,14 +178,17 @@ public class sd_utilityhullmod extends BaseHullMod {
                             continue;
                     }
 
-                    if (weapon.getCooldown() > 1 || ship.getFluxLevel() < 0.1) { //if the weapon is low rof or our flux is empty, don't shoot at phase ships
-                        //TODO: ^ weapon.usesAmmo() || figure out how to incorporate this but still allow PD to engage missiles
-                        if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() < 0.95)
-                            weapon.setForceNoFireOneFrame(true);
-                        if (!ship.getWeaponGroupFor(weapon).isAutofiring()) //need this to avoid a NPE when the weapon isn't autofiring
-                            continue;
-                        ShipAPI autofireAITarget = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip(); //autofire is an entirely separate AI from the main ship
-                        if (autofireAITarget != null && autofireAITarget.isPhased() && autofireAITarget.getFluxLevel() < 0.95)
+                    // we can shoot it if it's not going to use any flux
+                    if (weapon.getFluxCostToFire() < 1 && weapon.getAmmoPerSecond() > 1)
+                        continue;
+
+                    // if the weapon is low rof or our flux is empty, don't shoot at phased ships
+                    if ((weapon.getCooldown() > 1 || weapon.usesAmmo() || ship.getFluxLevel() < 0.1) && !weapon.hasAIHint(WeaponAPI.AIHints.PD)) {
+                        ShipAPI target = ship.getShipTarget();
+                        if (ship.getWeaponGroupFor(weapon).isAutofiring())
+                            target = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip();
+
+                        if (target != null && target.isPhased() && target.getFluxLevel() < 0.95)
                             weapon.setForceNoFireOneFrame(true);
                     }
                 }

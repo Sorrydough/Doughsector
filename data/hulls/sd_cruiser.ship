@@ -1,8 +1,8 @@
 {
   "hullName": "Serenity",
-  "hullId": "sd_cruiserlight",
+  "hullId": "sd_cruiser",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/sd_cruiserlight.png",
+  "spriteName": "graphics/ships/sd_cruiser.png",
   "style": "SD_TECH",
   "height": 290,
   "width": 140,

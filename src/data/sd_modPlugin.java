@@ -47,6 +47,7 @@ public class sd_modPlugin extends BaseModPlugin {
         sd_weaponsList.add("dragon");
         sd_weaponsList.add("dragonpod");
         sd_weaponsList.add("squall");
+        sd_weaponsList.add("locust");
     }
     @Override
     public void onApplicationLoad() {

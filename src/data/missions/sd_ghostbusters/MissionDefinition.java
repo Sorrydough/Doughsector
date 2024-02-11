@@ -59,18 +59,20 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         BLUFLAGSHIP.setCaptain(BLUADMIRAL);
 
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
-        FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Buster", FleetMemberType.SHIP, "Radial Impulse", true);
-        api.addToFleet(FleetSide.ENEMY, "sd_cruiserlight_Relay", FleetMemberType.SHIP, "Involuted Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Strike", FleetMemberType.SHIP, "Galactic Cloud", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Sonic Disturbance", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Lancer", FleetMemberType.SHIP, "Lightwave Instrument", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Reconstructed Mind", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Sweating Heartbeat", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Direct Path", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Bombarded Signal", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Precisely Certain", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Attack", FleetMemberType.SHIP, "Chilled Nova", false);
+        FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Specialist", FleetMemberType.SHIP, "Radial Impulse", true);
+        api.addToFleet(FleetSide.ENEMY, "sd_cruiser_Specialist", FleetMemberType.SHIP, "Involuted Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Attack", FleetMemberType.SHIP, "Galactic Cloud", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyer_Attack", FleetMemberType.SHIP, "Whispering Light", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyer_Attack", FleetMemberType.SHIP, "Lightwave Instrument", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateadvanced_Attack", FleetMemberType.SHIP, "Sonic Disturbance", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Even Dark", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Deep Blue", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Strike", FleetMemberType.SHIP, "Reconstructed Mind", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Strike", FleetMemberType.SHIP, "Last Heartbeat", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Strike", FleetMemberType.SHIP, "Direct Path", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Strike", FleetMemberType.SHIP, "Bombarded Signal", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_retrofitkite_Command", FleetMemberType.SHIP, "Precisely Certain", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_retrofitkite_Command", FleetMemberType.SHIP, "Chilled Nova", false);
 
         HashMap<String, Integer> REDADMIRALSKILLS = new HashMap<>();
         REDADMIRALSKILLS.put(Skills.POINT_DEFENSE, 2);

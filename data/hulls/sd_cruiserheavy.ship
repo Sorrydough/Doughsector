@@ -51,8 +51,8 @@
       "size": "LARGE",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 255,
-      "angle": 62.5,
+      "arc": 247,
+      "angle": 52.5,
       "locations": [23, 49]
     },
     {
@@ -96,8 +96,8 @@
       "size": "SMALL",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 250,
-      "angle": 28.5,
+      "arc": 236,
+      "angle": 44,
       "locations": [52, 64]
     },
     {
@@ -106,7 +106,7 @@
       "type": "HYBRID",
       "mount": "TURRET",
       "arc": 210,
-      "angle": 142,
+      "angle": 145.5,
       "locations": [-30, 35]
     },
     {

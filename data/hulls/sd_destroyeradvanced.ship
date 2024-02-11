@@ -1,8 +1,8 @@
 {
   "hullName": "Equalizer",
-  "hullId": "sd_destroyersupport",
+  "hullId": "sd_destroyeradvanced",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/sd_destroyersupport.png",
+  "spriteName": "graphics/ships/sd_destroyeradvanced.png",
   "style": "SD_TECH",
   "height": 190,
   "width": 190,
@@ -17,8 +17,8 @@
     "advancedcore"
   ],
   "builtInWeapons": {
-    "DEC01": "sd_destroyersupport_hangar",
-    "DEC02": "sd_destroyersupport_glow",
+    "DEC01": "sd_destroyeradvanced_hangar",
+    "DEC02": "sd_destroyeradvanced_glow",
     "DEC03": "sd_decoBlinker",
     "DEC04": "sd_decoBlinker",
     "DEC05": "sd_decoBlinker",

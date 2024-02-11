@@ -1,8 +1,8 @@
 {
   "hullName": "Oblivion",
-  "hullId": "sd_capitalbattleship",
+  "hullId": "sd_capitalbattlecarrier",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "graphics/ships/sd_capitalbattleship.png",
+  "spriteName": "graphics/ships/sd_capitalbattlecarrier.png",
   "style": "SD_TECH",
   "height": 440,
   "width": 220,
@@ -16,7 +16,7 @@
     "advancedoptics"
   ],
   "builtInWeapons": {
-    "CVR01": "sd_capitalbattleship_cover",
+    "CVR01": "sd_capitalbattlecarrier_cover",
     "DEC01": "sd_decoBlinker",
     "DEC02": "sd_decoBlinker",
     "DEC03": "sd_decoBlinker",
@@ -25,7 +25,7 @@
     "DEC06": "sd_decoBlinker",
     "DEC07": "sd_decoBlinker",
     "DEC08": "sd_decoBlinker",
-    "HGR01": "sd_capitalbattleship_hangar",
+    "HGR01": "sd_capitalbattlecarrier_hangar",
     "THR01": "sd_decoVectorController",
     "THR02": "sd_decoVectorController",
     "THR03": "sd_decoVectorController",
@@ -138,7 +138,7 @@
       "size": "MEDIUM",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 290,
+      "arc": 280,
       "angle": 0,
       "locations": [103, 11]
     },
@@ -192,8 +192,8 @@
       "size": "SMALL",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 265,
-      "angle": -34,
+      "arc": 245,
+      "angle": -35.5,
       "locations": [122, -16]
     },
     {
@@ -201,7 +201,7 @@
       "size": "SMALL",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 149,
+      "arc": 145,
       "angle": -90,
       "locations": [80, -16]
     },
@@ -210,7 +210,7 @@
       "size": "SMALL",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 149,
+      "arc": 145,
       "angle": -90,
       "locations": [38, -16]
     },
