@@ -40,6 +40,10 @@ public class sd_util {
         return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOriginalOwner() != -1 && ship.getVariant() != null;
     }
 
+    public static boolean isPhaseShip(ShipAPI ship) {
+        return ship.getSystem() != null && (ship.getHullSpec().getHints().contains(ShipHullSpecAPI.ShipTypeHints.PHASE) || ship.getSystem().getSpecAPI().isPhaseCloak());
+    }
+
     public static void blockWeaponFromFiring(WeaponAPI weapon) {
         ShipAPI ship = weapon.getShip();
         if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == ShipAPI.HullSize.FRIGATE)) {

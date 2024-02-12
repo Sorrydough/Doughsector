@@ -3,6 +3,7 @@ package data.hullmods;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.PersonalityAPI;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.mission.FleetSide;
@@ -25,7 +26,7 @@ import java.util.Objects;
 public class sd_utilityhullmod extends BaseHullMod {
     List<String> decoSystemRange = Arrays.asList("sd_hackingsuite", "sd_nullifier");
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        Global.getCombatEngine().addPlugin(new sd_utilityhullmodPlugin(ship));
+        ship.addListener(new sd_utilityhullmodListener(ship));
         if (decoSystemRange.contains(ship.getSystem().getId()))
             Global.getCombatEngine().addPlugin(new sd_decoSystemRangePlugin(ship));
     }
@@ -38,11 +39,11 @@ public class sd_utilityhullmod extends BaseHullMod {
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
         return false;
     }
-    static class sd_utilityhullmodPlugin extends BaseEveryFrameCombatPlugin {
+    static class sd_utilityhullmodListener implements AdvanceableListener {
         final ShipAPI ship;
         final CombatEngineAPI engine;
         boolean enabled = false;
-        public sd_utilityhullmodPlugin(ShipAPI ship) {
+        public sd_utilityhullmodListener(ShipAPI ship) {
             this.ship = ship;
             this.engine = Global.getCombatEngine();
             if (Global.getSettings().getModManager().isModEnabled("lunalib"))
@@ -55,7 +56,7 @@ public class sd_utilityhullmod extends BaseHullMod {
         Color engineColor = new Color(255, 146, 115, 155);
         Color engineColor2 = new Color(255, 146, 115, 8);
         @Override
-        public void advance(float amount, List<InputEventAPI> events) {
+        public void advance(float amount) {
 //            ShipEngineControllerAPI engineController = ship.getEngineController();
 //            engineController.fadeToOtherColor("urmum", engineColor, engineColor2, 1, 1);
 
@@ -129,13 +130,6 @@ public class sd_utilityhullmod extends BaseHullMod {
                 //ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
             }
 
-            /////////////////////////////////////
-            //FIXES BATTLECARRIERS RUNNING AWAY// THERE'S AN AI BUG, AND WE NEED TO FIX IT BY TELLING THE CARRIER OT RECALL ITS FIGHTERS IN SPECIFIC CIRCUMSTANCE TO FIX IT
-            ///////////////////////////////////// TODO: DEBUG WHY THIS DOESN'T WORK, ALSO ALEX FIXED IT NEXT UPDATE SO I CAN REMOVE IT LATER
-//            if (ship.hasLaunchBays() && ship.getVariant().getHints().contains(ShipHullSpecAPI.ShipTypeHints.COMBAT))
-//                if (ship.getSharedFighterReplacementRate() > 0.85 && !ship.isPullBackFighters())
-//                    ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_PURSUE);
-
             ////////////////////////////
             //IMPROVES SQUALL BEHAVIOR//
             ////////////////////////////
@@ -162,7 +156,7 @@ public class sd_utilityhullmod extends BaseHullMod {
             }
 
             /////////////////////////////////////////////////
-            //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 5 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
+            //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 8 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
             /////////////////////////////////////////////////
             boolean isPhaseEnemy = false;
             for (ShipAPI enemy : AIUtils.getEnemiesOnMap(ship)) {
@@ -190,17 +184,19 @@ public class sd_utilityhullmod extends BaseHullMod {
                     }
 
                     // we can shoot it if it's not going to use any flux
-                    if (weapon.getFluxCostToFire() < 1 && weapon.getAmmoPerSecond() > 1)
-                        continue;
+//                    if (weapon.getFluxCostToFire() < 1 && (weapon.getAmmoPerSecond() > 1 || !weapon.usesAmmo()))
+//                        continue;
+
 
                     // if the weapon is low rof or our flux is empty, don't shoot at phased ships
                     if ((weapon.getCooldown() > 1 || weapon.usesAmmo() || ship.getFluxLevel() < 0.1) && !weapon.hasAIHint(WeaponAPI.AIHints.PD)) {
                         ShipAPI target = ship.getShipTarget();
+
                         if (ship.getWeaponGroupFor(weapon).isAutofiring())
                             target = ship.getWeaponGroupFor(weapon).getAutofirePlugin(weapon).getTargetShip();
 
                         if (target != null && target.isPhased() && target.getFluxLevel() < 0.95)
-                            weapon.setForceNoFireOneFrame(true);
+                            weapon.setForceNoFireOneFrame(true); // fun fact, this doesn't work if you put it into an EFS. Only works in an advanceable listener. No idea why.
                     }
                 }
             }

@@ -25,24 +25,25 @@ Arthr Stuff:
 Discord Beta stuff:
 - Write AI script for nullifier
 - Do motefield campaign behavior stuff
-- Fix all the variants that I broke
 - Placeholder descriptions
 - Faction flag
-- Faction name - something like "procyon ascendacy"? && custom ship prefix
+- Implement faction - Seraph Synarchy
 - Integrate starficz shield AI
 - Integrate genir autofire AI
 - Ok I actually need to rework aux forge now
 - Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
-- Recolor motes and system color to gold?
-- Review conversation with genir to fix weapon firing issue, try an advanceable listener or whatever that other thing was that chat suggested
-- Review conversation with gman to fix ship names
-- Make it so the cruiser +++ frigate don't mind eachother
-- Review ruddy's suggestion to make my code lag less
+- Figure out how to have my AI fleet commander attach my escort destroyers
 - Consider a ship shield improvement to 0.9
-- Add debug code so my game tells me whether am howitzers are being put on autofire
-- Consider configuring my destroyers for salamander spam (they are more efficient at it than the strike frigates, which kinda suck in that fight anyway)
-- Verify whether I fixed my opengl render radius
-- Fix none of my customdata being applied somehow???
+
+- Add 2 more missions
+
+
+Ghostbusters Stuff:
+- Finish all my variants
+- Figure out how to make the motes way better at taking out doom mines
+- Improve fleet commander to fighter strike where they actually matter
+- Don't shoot antimatters at phase ships that aren't on their phase cooldown (or fluxed out)
+- Try shoving defend orders onto stuff that's getting assfucked
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
@@ -110,7 +111,7 @@ Version 3.0 Stuff: (scope creep)
 - Custom quality captains
 
 Unused names that I want reserved:
-Purifier, Oblivion, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Aviso, Torrent
+Purifier, Oblivion, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Aviso, Torrent, Anthem
 
 Code stuff to remember:
 final variable;

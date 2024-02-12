@@ -1,13 +1,13 @@
 {
     "displayName": "Specialist",
     "fluxCapacitors": 0,
-    "fluxVents": 19,
+    "fluxVents": 11,
     "goalVariant": true,
     "hullId": "sd_cruiser",
     "hullMods": [
         "autorepair",
-        "eccm",
-        "pointdefenseai",
+        "converted_hangar",
+        "sd_beampumps",
         "targetingunit",
     ],
     "permaMods": [],
@@ -15,13 +15,6 @@
     "suppressedMods": [],
     "variantId": "sd_cruiser_Specialist",
     "weaponGroups": [
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "TRT01": "sd_amhowitzer",
-            }
-        },
         {
             "autofire": false,
             "mode": "LINKED",
@@ -40,7 +33,16 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT02": "ionbeam",
+                "TRT01": "gravitonbeam",
+                "TRT02": "gravitonbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT04": "sd_gravlance",
+                "TRT05": "sd_gravlance",
             }
         },
         {
@@ -48,10 +50,14 @@
             "mode": "LINKED",
             "weapons": {
                 "TRT08": "lightmg",
-                "TRT06": "lightdualmg",
                 "TRT07": "lightmg",
-                "TRT04": "lightdualmg",
-                "TRT05": "lightdualmg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT06": "pdburst",
             }
         },
         {
@@ -62,6 +68,8 @@
             }
         },
     ],
-    "wings": [],
+    "wings": [
+        "sd_fighterionWing",
+    ],
     "modules": [],
 }

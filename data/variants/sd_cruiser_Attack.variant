@@ -1,28 +1,26 @@
 {
-    "displayName": "Specialist",
-    "fluxCapacitors": 0,
-    "fluxVents": 6,
+    "displayName": "Attack",
+    "fluxCapacitors": 22,
+    "fluxVents": 0,
     "goalVariant": true,
-    "hullId": "sd_cruiserheavy",
+    "hullId": "sd_cruiser",
     "hullMods": [
-        "advancedoptics",
         "advancedshieldemitter",
         "autorepair",
-        "magazines",
+        "pointdefenseai",
         "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_cruiserheavy_Specialist",
+    "variantId": "sd_cruiser_Attack",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "TRT04": "sd_amhowitzer",
+                "TRT01": "sd_amhowitzer",
                 "TRT02": "sd_amhowitzer",
-                "TRT03": "sd_amhowitzer",
             }
         },
         {
@@ -33,27 +31,28 @@
             }
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "HRD02": "salamanderpod",
+                "HRD02": "heatseeker",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "guardian",
+                "TRT08": "lightdualmg",
+                "TRT06": "lightdualmg",
+                "TRT07": "lightdualmg",
+                "TRT04": "lightdualmg",
+                "TRT05": "lightdualmg",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT08": "pdburst",
-                "TRT06": "pdburst",
-                "TRT07": "pdburst",
-                "TRT05": "pdburst",
+                "TRT03": "heavyburst",
             }
         },
     ],

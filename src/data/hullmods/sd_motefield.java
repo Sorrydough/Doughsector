@@ -136,9 +136,10 @@ public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
                 if (spawnedStarterMotes > motesToSpawn && spawnedReaperMotes > motesToSpawn)
                     return;
 
-                Vector2f randomPoint = getRandomPointOnShip(ship);
-                if (sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid()))
+                if (!wantYolo && sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid()))
                     wantYolo = true;
+
+                Vector2f randomPoint = getRandomPointOnShip(ship);
                 if (spawnedStarterMotes < motesToSpawn) { // todo: make it look like these come from offscreen
                     sd_motearmor.emitMote(ship, randomPoint, false);
                     spawnedStarterMotes ++;
@@ -178,17 +179,16 @@ public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
         if (ship.getFleetMember() != null) {
             for (FleetMemberAPI fleetMember : ship.getFleetMember().getFleetData().getMembersListCopy()) {
                 if (fleetMember.getVariant().getHullMods().contains("sd_motefield") && !Objects.equals(fleetMember.getId(), ship.getFleetMember().getId())
-                        && fleetMember.getHullSpec().getHullSize().ordinal() >= ship.getHullSize().ordinal()) {
+                        && fleetMember.getHullSpec().getHullSize() == ship.getHullSize()) {
                     interferingMotefields.add(fleetMember);
                 }
             }
         }
+        float interferenceStrengthFactor = (float) 1 / Math.max(1, interferingMotefields.size());
         // if CR is 0.1, then readinessStrengthFactor is 0
         // if CR is 0.5, then readinessStrengthFactor is 1
         // Chatgpt wrote this CR math and I didn't doublecheck it, if it doesn't work then we know who to blame
         float readinessStrengthFactor = Math.max(0, (ship.getCurrentCR() - DEPLETED_CR) / (FULL_CR - DEPLETED_CR));
-        float interferenceStrengthFactor = (float) 1 / Math.max(1, interferingMotefields.size());
-
         return (1 * interferenceStrengthFactor * readinessStrengthFactor);
     }
 }

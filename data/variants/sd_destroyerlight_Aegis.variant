@@ -1,13 +1,13 @@
 {
     "displayName": "Aegis",
-    "fluxCapacitors": 17,
-    "fluxVents": 0,
+    "fluxCapacitors": 20,
+    "fluxVents": 3,
     "goalVariant": true,
     "hullId": "sd_destroyerlight",
     "hullMods": [
         "autorepair",
+        "eccm",
         "hardenedshieldemitter",
-        "magazines",
     ],
     "permaMods": [],
     "sMods": [],
@@ -15,18 +15,21 @@
     "variantId": "sd_destroyerlight_Aegis",
     "weaponGroups": [
         {
-            "autofire": false,
-            "mode": "ALTERNATING",
+            "autofire": true,
+            "mode": "LINKED",
             "weapons": {
-                "HRD02": "gazerpod",
-                "HRD01": "gazerpod",
+                "TRT04": "sd_gravlance",
+                "TRT02": "sd_gravlance",
+                "TRT03": "sd_gravlance",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "HRD03": "breach",
+                "HRD02": "salamanderpod",
+                "HRD03": "heatseeker",
+                "HRD01": "salamanderpod",
             }
         },
         {
@@ -34,15 +37,6 @@
             "mode": "LINKED",
             "weapons": {
                 "TRT01": "guardian",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "TRT04": "pdburst",
-                "TRT02": "pdburst",
-                "TRT03": "pdburst",
             }
         },
     ],

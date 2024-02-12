@@ -17,7 +17,7 @@ import org.dark.shaders.distortion.*;
 import data.sd_util;
 
 public class sd_mnemonicarmor extends BaseShipSystemScript {
-	public static final float FLUX_PER_ARMOR = 3, DESTROYED_THRESHOLD = 0.1f;
+	public static final float FLUX_PER_ARMOR = 3, DESTROYED_THRESHOLD = 0.2f;
 	final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		ShipAPI ship = (ShipAPI) stats.getEntity();
