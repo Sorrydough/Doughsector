@@ -8,12 +8,12 @@
 	"center":[2,2],
 	"collisionRadius":11,
 	"collisionClass":"MISSILE_NO_FF",
-	"explosionColor":[60,210,150,155],  # purely visual, will get a white additively blended core on top of this color
+	"explosionColor":[255,250,150,155],  # purely visual, will get a white additively blended core on top of this color
 	"explosionRadius":75, # purely visual
 	"flameoutTime":1, # total time from flameout to full fadeout
 	"noEngineGlowTime":0.5, # time spent without the engine glow being rendered
 	"fadeTime":0.5, # fadeout duration
-	"glowColor":[60,210,150,155],
+	"glowColor":[255,250,150,155],
 	"engineSpec":{"turnAcc":600,
 				  "turnRate":400,
 				  "acc":650,
@@ -23,12 +23,12 @@
 					"loc":[0, 0],
 				    "style":"CUSTOM",
 					"styleSpec":{
-						"engineColor":[60,210,150,155],
+						"engineColor":[255,250,150,155],
 						"contrailParticleSizeMult":10,
 						"contrailParticleDuration":2,
 						"contrailMaxSpeedMult":-0.1,
 						"contrailAngularVelocityMult":0f,
-						"contrailColor":[60,210,150,55],
+						"contrailColor":[255,250,150,55],
 						"type":"GLOW" # GLOW or SMOKE
 					},
 				    #"width":7.0,

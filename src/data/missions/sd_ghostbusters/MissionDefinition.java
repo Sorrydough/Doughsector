@@ -62,8 +62,8 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Specialist", FleetMemberType.SHIP, "Radial Impulse", true);
         api.addToFleet(FleetSide.ENEMY, "sd_cruiser_Specialist", FleetMemberType.SHIP, "Involuted Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Attack", FleetMemberType.SHIP, "Galactic Cloud", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyer_Attack", FleetMemberType.SHIP, "Whispering Light", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyer_Attack", FleetMemberType.SHIP, "Lightwave Instrument", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyerlight_Attack", FleetMemberType.SHIP, "Whispering Light", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyerlight_Attack", FleetMemberType.SHIP, "Lightwave Instrument", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigateadvanced_Attack", FleetMemberType.SHIP, "Sonic Disturbance", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Even Dark", false);
         api.addToFleet(FleetSide.ENEMY, "sd_frigate_Strike", FleetMemberType.SHIP, "Deep Blue", false);

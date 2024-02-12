@@ -2,6 +2,7 @@ package data.shipsystems;
 
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
+import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 
 import com.fs.starfarer.api.Global;
@@ -34,8 +35,8 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 		if (state == State.OUT) // ensures jitter level doesn't deteriorate during OUT
 			jitterLevel *= jitterLevel;
 		float jitterExtra = jitterLevel * 50;
-		ship.setJitter(this, sd_util.factionColor, jitterLevel, 4, 0, jitterExtra);
-		ship.setJitterUnder(this, sd_util.factionUnderColor, jitterLevel, 20, 0, 3 + jitterExtra);
+		ship.setJitter(this, sd_util.systemUnderColor, jitterLevel, 4, 0, jitterExtra);
+		ship.setJitterUnder(this, sd_util.damageColor, jitterLevel, 20, 0, 3 + jitterExtra);
 
 		// apply the effect to the target, note we check effectLevel and not for active state because our system doesn't have an active duration
 		if (ship.getSystem().getEffectLevel() == 1) {
@@ -48,8 +49,8 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			return false;
 		float targetDistance = MathUtils.getDistance(ship, target);
 		float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
-		return target.isAlive() && target.getSystem() != null && !target.getSystem().isOn() && !target.getCustomData().containsKey("sd_hackingsuite")
-				&& !target.isFighter() && !target.isPhased() && target != ship && !target.getFluxTracker().isOverloadedOrVenting()
+		return target.isAlive() && target.getSystem() != null && !target.getSystem().isOn() && !target.isFighter() && !target.isPhased() && target != ship
+				&& !target.getFluxTracker().isOverloadedOrVenting() && target.getMutableStats().getDynamic().getMod("sd_hackingsuite").getFlatBonuses().isEmpty()
 				&& !(targetDistance > systemRange) && target.getOwner() != ship.getOwner() && target.getCurrentCR() > 0;
 	}
 	@Override
@@ -96,7 +97,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 				target.getFluxTracker().playOverloadSound();
 				target.setShipSystemDisabled(true);
 				target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for " + Math.round(duration) + " seconds!", Color.LIGHT_GRAY, 5, true);
-				target.getCustomData().put("sd_hackingsuite", -1);
+				target.getMutableStats().getDynamic().getMod("sd_hackingsuite").modifyFlat("sd_hackingsuite", -1);
 				runOnce = false;
 			}
 			if (engine.isPaused())
@@ -108,7 +109,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 					target.getMutableStats().getAutofireAimAccuracy().unmodifyMult("sd_hackingsuite");
 					if (target.getCurrentCR() > 0)
 						target.setShipSystemDisabled(false);
-					target.getCustomData().remove("sd_hackingsuite");
+					target.getMutableStats().getDynamic().getMod("sd_hackingsuite").unmodify("sd_hackingsuite");
 					engine.removePlugin(this);
 					//return;
 				}

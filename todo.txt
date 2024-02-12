@@ -41,6 +41,8 @@ Discord Beta stuff:
 - Consider a ship shield improvement to 0.9
 - Add debug code so my game tells me whether am howitzers are being put on autofire
 - Consider configuring my destroyers for salamander spam (they are more efficient at it than the strike frigates, which kinda suck in that fight anyway)
+- Verify whether I fixed my opengl render radius
+- Fix none of my customdata being applied somehow???
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
@@ -52,7 +54,6 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Add a rawdog config file for non-lunalib-users
 - Reverse-engineer fleet deployment manager
 - Do a manual sprite pass to clean up floaters etc
-- Verify whether I fixed my opengl render radius
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
@@ -108,6 +109,8 @@ Version 3.0 Stuff: (scope creep)
 - Write a guide for shipsystem AI
 - Custom quality captains
 
+Unused names that I want reserved:
+Purifier, Oblivion, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Aviso, Torrent
 
 Code stuff to remember:
 final variable;

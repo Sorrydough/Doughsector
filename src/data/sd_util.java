@@ -23,11 +23,12 @@ import java.util.*;
 import java.util.List;
 
 public class sd_util {
-    public static final Color factionColor = new Color (250, 235, 215,55), factionUnderColor = new Color (250, 235, 215,155),
+    public static final Color factionColor = new Color (255,240,205, 55), factionUnderColor = new Color (255,240,205,155),
             timeColor =  new Color (100,165,255,55), timeUnderColor = new Color (100,165,255,155),
             phaseColor = new Color(150,100,255, 55), phaseUnderColor = new Color(150,100,255, 155),
             damageColor = new Color (255,120,80,55), damageUnderColor = new Color (255,120,80,155),
-            healColor = new Color (60,210,150,55), healUnderColor = new Color (60,210,150,155);
+            healColor = new Color (60,210,150,55), healUnderColor = new Color (60,210,150,155),
+            systemColor = new Color (255,250,150,55), systemUnderColor = new Color (255,250,150,155);
 
     public static boolean isNumberWithinRange(float numberA, float numberB, float deviationPercent) {
         float lowerBound = numberB - (numberB * (deviationPercent / 100));

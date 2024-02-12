@@ -95,7 +95,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             // We want to use the system if:
             // A valid target is within range, scaled by the target's DP cost, biggest target prioritized, automated or neural linked ships extra preferred
             for (ShipAPI enemy : targets) {
-                if (!sd_hackingsuite.isTargetValid(ship, target)) // doing this again even though we do it earlier because of the slow interval, need to make sure the target isn't dead
+                if (!sd_hackingsuite.isTargetValid(ship, target)) // doing this again even though we do it earlier because of the slow interval, need to make sure the target isn't dead or it npes
                     continue;
                 float enemyDeployCost = getDeploymentCost(enemy);
                 float baseDesire = 150;

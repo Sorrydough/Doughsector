@@ -327,7 +327,7 @@ public class sd_fleetadmiralUtil {
                 strength += getCombatEffectiveness(ship, 0.2f);
         return strength;
     }
-//    public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battlestateTracker battleState) {
+//    public static float calculateThreatLevel(CombatFleetManagerAPI.AssignmentInfo assignment, float radius, sd_battlestateTracker battleState) {a
 //        float threat = 0;
 //        List<ShipAPI> assignedToTarget = new ArrayList<>();
 //        for (Map.Entry<ShipAPI, CombatFleetManagerAPI.AssignmentInfo> ship : battleState.shipsWithTargetAssignments.entrySet()) {

@@ -16,6 +16,8 @@ import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
+import java.awt.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -49,8 +51,14 @@ public class sd_utilityhullmod extends BaseHullMod {
         final IntervalUtil timer = new IntervalUtil (0.5f, 1.5f);
         boolean runOnce = true;
         String personality = Personalities.AGGRESSIVE;
+
+        Color engineColor = new Color(255, 146, 115, 155);
+        Color engineColor2 = new Color(255, 146, 115, 8);
         @Override
         public void advance(float amount, List<InputEventAPI> events) {
+//            ShipEngineControllerAPI engineController = ship.getEngineController();
+//            engineController.fadeToOtherColor("urmum", engineColor, engineColor2, 1, 1);
+
             if (!enabled || !sd_util.isCombatSituation(ship) || ship.getShipAI() == null)
                 return;
 
@@ -65,6 +73,9 @@ public class sd_utilityhullmod extends BaseHullMod {
 
                 runOnce = false;
             }
+
+
+
 
             ////////////////////////////////////////////////////////
             //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//

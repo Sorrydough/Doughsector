@@ -2,6 +2,7 @@ package data.weapons.mote;
 
 import java.awt.Color;
 
+import data.sd_util;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;
@@ -28,7 +29,7 @@ public class sd_moteSuperOnHitEffect implements OnHitEffectPlugin {
 					engine.spawnEmpArcPierceShields(projectile.getSource(), point, target, target,
 							projectile.getDamageType(), projectile.getDamageAmount(), projectile.getEmpAmount(),
 							100000f, "mote_attractor_impact_emp_arc", 20f,
-							new Color(255,100,100,55), new Color(255, 255, 255, 255));
+							sd_util.damageColor, sd_util.factionUnderColor);
 				}
 			} else
 				Global.getCombatEngine().applyDamage(projectile, ship, point, projectile.getDamageAmount(), DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);

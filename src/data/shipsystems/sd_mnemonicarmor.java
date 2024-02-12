@@ -30,7 +30,7 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 			ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
 			return;
 		} else {
-			ship.setJitter(id, sd_util.healColor, effectLevel, 2, 0, 5);
+			ship.setJitter(id, sd_util.systemColor, effectLevel, 2, 0, 5);
 		}
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
