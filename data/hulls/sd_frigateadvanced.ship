@@ -38,8 +38,8 @@
       "size": "SMALL",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 202,
-      "angle": 75.5,
+      "arc": 200,
+      "angle": 80,
       "locations": [-1, 25]
     },
     {
@@ -47,8 +47,8 @@
       "size": "SMALL",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 225,
-      "angle": 24.5,
+      "arc": 145,
+      "angle": 0,
       "locations": [22, -0]
     },
     {

@@ -1,8 +1,8 @@
 name,id,designation,tech/manufacturer,system id,fleet pts,hitpoints,armor rating,max flux,8/6/5/4%,flux dissipation,ordnance points,fighter bays,max speed,acceleration,deceleration,max turn rate,turn acceleration,mass,shield type,defense id,shield arc,shield upkeep,shield efficiency,phase cost,phase upkeep,min crew,max crew,cargo,fuel,fuel/ly,range,max burn,base value,cr %/day,CR to deploy,peak CR sec,CR loss/sec,supplies/rec,supplies/mo,c/s,c/f,f/s,f/f,crew/s,crew/f,hints,tags,rarity,breakProb,minPieces,maxPieces,travel drive,number
-Aria,sd_fightersupport,,???,sd_grapeshotarray,,450,200,200,,50,,,180,180,180,90,90,45,FRONT,,360,0.2,0.9,,,1,1,,,,,,,,,,,,,,,,,,,,module_hull_bar_only,,0,,,,
-Excision,sd_fighterblaster,,???,sd_decoylauncher,,500,175,100,,30,,,220,220,220,110,110,30,FRONT,,360,0.2,0.9,,,0,0,,,,,,,,,,,,,,,,,,,,module_hull_bar_only,,0,,,,
+Aria,sd_fightersupport,,???,sd_grapeshotarray,,450,200,200,,50,,,180,180,180,90,90,45,FRONT,,360,,,,,1,1,,,,,,,,,,,,,,,,,,,,module_hull_bar_only,,0,,,,
+Excision,sd_fighterblaster,,???,sd_decoylauncher,,500,175,100,,30,,,220,220,220,110,110,30,FRONT,,360,,,,,0,0,,,,,,,,,,,,,,,,,,,,module_hull_bar_only,,0,,,,
 Silencer,sd_fighterion,,???,sd_decoylauncher,,150,75,50,,10,,,300,300,300,150,150,15,NONE,,,,,,,0,0,,,,,,,,,,,,,,,,,,,,module_hull_bar_only,,0,,,,
-Hail,sd_fightercanister,,???,,,350,150,100,,20,,,200,200,200,100,100,30,FRONT,,360,0.2,0.9,,,2,2,,,,,,,,,,,,,,,,,,,,module_hull_bar_only,,0,,,,
+Hail,sd_fightercanister,,???,,,350,150,100,,20,,,200,200,200,100,100,30,FRONT,,360,,,,,2,2,,,,,,,,,,,,,,,,,,,,module_hull_bar_only,,0,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Paten,sd_frigatelight,Light Frigate,???,sd_grapeshotarray,3,1300,300,1600,,150,35,,170,160,150,145,140,100,OMNI,,90,0.2,0.9,,,5,10,30,10,0.5,20,11,8500,6,10,180,0.25,3,3,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,
 Genesis,sd_frigate,Frigate,???,sd_mnemonicarmor,5,2000,550,2800,,200,50,,150,145,140,135,130,200,OMNI,,75,0.2,0.9,,,25,50,40,25,1,25,10,12500,6,10,240,0.25,5,5,,,,,,,,"sd_arsenal_package, no_autofit, no_aitweaks",,0.45,2,3,,

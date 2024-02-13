@@ -53,6 +53,7 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Add a rawdog config file for non-lunalib-users
 - Do a manual sprite pass to clean up floaters etc
 - Make it so my custom fleet commander only runs for my fleets
+- Improve the visual communication about the behavior of nullifier
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
