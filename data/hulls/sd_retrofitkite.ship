@@ -13,8 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod",
-    "sd_groundsupport",
-    "nav_relay"
+    "sd_groundsupport"
   ],
   "builtInWings": [
     "sd_fightersupportWing"

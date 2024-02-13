@@ -5,7 +5,7 @@
     "goalVariant": true,
     "hullId": "sd_destroyercarrier",
     "hullMods": [
-        "autorepair",
+        "eccm",
         "ecm",
         "nav_relay",
     ],
@@ -33,7 +33,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT02": "lightdualmg",
+                "TRT02": "lightmg",
                 "TRT03": "lightmg",
             }
         },

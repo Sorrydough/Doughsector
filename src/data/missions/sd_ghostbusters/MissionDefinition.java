@@ -31,19 +31,18 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.setFleetTagline(FleetSide.ENEMY, "Unknown Fleet");
 
         api.addBriefingItem("The best scouting is done with your guns. Force them to fight and test their mettle.");
-        api.addBriefingItem("Some of their ships are tailored to our fleet's weaknesses. You'll need to bring your A-game.");
+        api.addBriefingItem("Some of their ships are tailored to our fleet's weaknesses. There won't be room for mistakes.");
 
         api.getDefaultCommander(FleetSide.PLAYER).getStats().setSkillLevel(Skills.PHASE_CORPS, 1);
         FleetMemberAPI BLUFLAGSHIP = api.addToFleet(FleetSide.PLAYER, "doom_Attack", FleetMemberType.SHIP, "TTS Wraithcaller", true);
         api.addToFleet(FleetSide.PLAYER, "fury_Attack", FleetMemberType.SHIP, "TTS Raging Storm", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.PLAYER, "fury_Attack", FleetMemberType.SHIP, "TTS Eclipsed Justice", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.PLAYER, "afflictor_Strike", FleetMemberType.SHIP, "TTS Soulweaver", false);
-        api.addToFleet(FleetSide.PLAYER, "tempest_Attack", FleetMemberType.SHIP, "TTS Stormbringer", false);
-        api.addToFleet(FleetSide.PLAYER, "omen_PD", FleetMemberType.SHIP, "TTS Archon's Wrath", false);
-        api.addToFleet(FleetSide.PLAYER, "omen_PD", FleetMemberType.SHIP, "TTS Shadow Sentinel", false);
+        api.addToFleet(FleetSide.PLAYER, "tempest_Attack", FleetMemberType.SHIP, "TTS Stormbringer", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.PLAYER, "omen_PD", FleetMemberType.SHIP, "TTS Archon's Wrath", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.PLAYER, "omen_PD", FleetMemberType.SHIP, "TTS Shadow Sentinel", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
 
-
-        //api.defeatOnShipLoss("TTS Wraithcaller");
+        api.defeatOnShipLoss("TTS Wraithcaller");
 
         HashMap<String, Integer> BLUADMIRALSKILLS = new HashMap<>();
         BLUADMIRALSKILLS.put(Skills.HELMSMANSHIP, 2);

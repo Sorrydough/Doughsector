@@ -6,7 +6,7 @@
     "hullId": "sd_cruiserheavy",
     "hullMods": [
         "advancedoptics",
-        "advancedshieldemitter",
+        "pointdefenseai",
         "autorepair",
         "magazines",
         "targetingunit",
@@ -20,9 +20,15 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "TRT04": "sd_amhowitzer",
                 "TRT02": "sd_amhowitzer",
                 "TRT03": "sd_amhowitzer",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT04": "ionbeam",
             }
         },
         {

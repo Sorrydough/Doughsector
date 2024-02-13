@@ -1,7 +1,7 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 3,
-    "fluxVents": 20,
+    "fluxCapacitors": 0,
+    "fluxVents": 19,
     "goalVariant": true,
     "hullId": "sd_destroyerlight",
     "hullMods": [
@@ -32,8 +32,8 @@
             "mode": "LINKED",
             "weapons": {
                 "TRT02": "pdburst",
-                "TRT03": "lightmg",
-                "TRT04": "lightmg",
+                "TRT03": "lightdualmg",
+                "TRT04": "lightdualmg",
             }
         },
         {

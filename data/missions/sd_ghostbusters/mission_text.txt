@@ -3,14 +3,13 @@ Date: 210.03.05
 
 After several skirmishes with ships of unknown design on the frontier, your phase contingent is dispatched to pre-emptively crush this new threat before it can do serious damage.
 
-During routine patrols at an outpost, a small fleet is caught shadowing you.
+During routine patrols at an outpost a small fleet is caught shadowing you.
 The enemy is slippery and escapes to the jump point but the lesson is clear - This system has to be held in hyperspace. A task you're uniquely suited for, an ambush is set.
 
 It only took a couple weeks. You call general quarters as a warfleet screams in at full burn.
 
 4th Wall Analysis:
-- Your Furies are commanded by aggressive crew, and your Afflictors are steady.
-- Your fleet benefits from Phase Coil Tuning. Your flagship has Impact Mitigation, Systems Expertise, Polarized Armor, Elite Helmsmanship and Elite Field Modulation.
-- The opposing fleet has Support Doctrine. The opponent's flagship has Gunnery Implants, Systems Expertise, Helmsmanship, Target Analysis, Missile Specialization and Elite Point Defense.
-- Your enemy has improved ship and fleet command AI, which will show you no mercy.
+- Most of your ships are commanded by aggressive crew.
+- Your fleet benefits from Phase Coil Tuning and the opposing fleet has Support Doctrine.
+- Your enemy has improved ship and fleet command AI which will show you no mercy.
 - This is a symmetrical engagement. Both fleets have the same DP and skill budget.

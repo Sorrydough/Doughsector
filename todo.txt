@@ -6,7 +6,7 @@ Command: Dedicates most of its budget to ECM and nav buoy.
 Overdriven: Safety Overrides. Usually a variation of a strike loadout.
 Specialist: Designed for some niche purpose.
 Snare: Uses extensive crowd control tools to disable opponents.
-Elite: Uses s-mods, great at everything.
+Elite: Uses s-mods as the basis of its fit, great at everything.
 
 Arthr Stuff:
 - Grapeshot art
@@ -14,7 +14,6 @@ Arthr Stuff:
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
 - Export, Pirate, Path skin variants
 - Generalized revision pass
-    Frigate needs to not look like I bashed it (maybe I can fix this?)
     Heavy frigate needs to not look like it got spammed with the clone tool (maybe I can fix this too)
     Heavy cruiser needs to not look unsettling
     Nebula needs salvage gantry
@@ -25,15 +24,13 @@ Arthr Stuff:
 Discord Beta stuff:
 - Write AI script for nullifier
 - Do motefield campaign behavior stuff
-- Placeholder descriptions
+- Description pass on everything
 - Faction flag
-- Implement faction - Seraph Synarchy
+- Implement faction - ??? Synarchy
 - Integrate starficz shield AI
 - Integrate genir autofire AI
 - Ok I actually need to rework aux forge now
 - Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
-- Figure out how to have my AI fleet commander attach my escort destroyers
-- Consider a ship shield improvement to 0.9
 
 - Add 2 more missions
 
@@ -44,6 +41,7 @@ Ghostbusters Stuff:
 - Improve fleet commander to fighter strike where they actually matter
 - Don't shoot antimatters at phase ships that aren't on their phase cooldown (or fluxed out)
 - Try shoving defend orders onto stuff that's getting assfucked
+- Write escort behavior for my fleet commander
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
@@ -53,8 +51,8 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Do another pass on ship stats (armor, dissipation, speed)
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship... or maybe from the perspective of feedback that I've recieved regarding the ship?
 - Add a rawdog config file for non-lunalib-users
-- Reverse-engineer fleet deployment manager
 - Do a manual sprite pass to clean up floaters etc
+- Make it so my custom fleet commander only runs for my fleets
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
@@ -77,6 +75,9 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Add normals for decos
 - Convert my AI code to use AI grids for proximity checks so it can be less laggy maybe
 - Figure out whether I need to use timer.randomize() on all my intervals after they get advanced
+- Figure out whether my autoresolve strength should be higher than average
+- Check whether alex did actually add the system disabled check api call
+- Reverse-engineer fleet deployment manager
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
