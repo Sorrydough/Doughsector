@@ -48,6 +48,9 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
             // 2. We're under attack and flux is escalating
             if (ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))
                 desireNeg -= ship.getFluxLevel() * 50;
+            // 3. We're pulling our fighters back, since we're probably going to restore a bunch of replenishment that way anyway
+            if (ship.isPullBackFighters())
+                desireNeg -= ship.getSharedFighterReplacementRate() * 50;
 
             sd_util.activateSystem(ship, "sd_auxforge", desirePos, desireNeg, false);
         }

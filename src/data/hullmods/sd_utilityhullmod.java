@@ -110,25 +110,16 @@ public class sd_utilityhullmod extends BaseHullMod {
                         if (weapon.getFluxCostToFire() + ship.getFluxTracker().getCurrFlux() > ship.getFluxTracker().getMaxFlux() * 0.85)
                             weapon.setForceNoFireOneFrame(true);
 
-            ///////////////////////////////////////////////////////////
-            //FIXES CARRIERS SENDING STRIKE BOMBERS AGAINST DUMB SHIT//
-            /////////////////////////////////////////////////////////// TODO: THIS
-
-
 
             // FIXES SHIPS BACKING OFF WHILE VENTING EVEN THOUGH THEY'RE IN NO DANGER
             // TODO: THIS
 
 
-
-
             ////////////////////////////
             //FIXES SUICIDING FIGHTERS// IF OUR REPLACEMENT RATE SUCKS THEN PRESERVING IT SHOULD BE OUR TOP PRIORITY
-            //////////////////////////// TODO: FIGURE OUT WHY THIS JUST DOESN'T WORK, AND FIGURE OUT WHY IT DOESN'T NPE
-            if (ship.hasLaunchBays() && ship.getSharedFighterReplacementRate() < 0.85) {
+            //////////////////////////// ALSO RECALL OUR FIGHTERS IF AI JANK IS PUTTING US OUT OF POSITION
+            if (ship.hasLaunchBays() && (ship.getSharedFighterReplacementRate() < 0.85 || (ship.getFluxLevel() < 0.2 && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.BACKING_OFF))))
                 ship.setPullBackFighters(true);
-                //ship.giveCommand(ShipCommand.PULL_BACK_FIGHTERS, null, -1);
-            }
 
             ////////////////////////////
             //IMPROVES SQUALL BEHAVIOR//

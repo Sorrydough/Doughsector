@@ -24,6 +24,7 @@ Arthr Stuff:
 Discord Beta stuff:
 - Write AI script for nullifier
 - Do motefield campaign behavior stuff
+
 - Description pass on everything
 - Faction flag
 - Implement faction - ??? Synarchy
@@ -31,9 +32,6 @@ Discord Beta stuff:
 - Integrate starficz shield AI
 - Integrate genir autofire AI
 - Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
-- Turret arc pass for heavy cruiser & capital
-- Check if I can fix up my janky isUsable() checks with the new api addition
-- Check if I can just look at whether a target's system is disabled directly with the new api addition
 
 - Add 2 more missions
 
@@ -86,6 +84,9 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Reverse-engineer fleet deployment manager
 - Test a longer mote spawn/repair delay on mnemonic armor
 - Fix my ships shooting dragoncocks from out of range
+- Turret arc pass for heavy cruiser & capital
+- Check if I can fix up my janky isUsable() checks with the new api addition
+- Check if I can just look at whether a target's system is disabled directly with the new api addition
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
