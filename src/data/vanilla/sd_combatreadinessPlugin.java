@@ -1,4 +1,4 @@
-package data;
+package data.vanilla;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -9,7 +9,7 @@
 		}
 	},
 	"plugins": {
-		"combatReadinessPlugin":"data.sd_combatreadinessPlugin",
+		"combatReadinessPlugin":"data.vanilla.sd_combatreadinessPlugin",
 		"sd_combatEFSPlugin":"data.sd_combatEFSPlugin"
 	}
 }

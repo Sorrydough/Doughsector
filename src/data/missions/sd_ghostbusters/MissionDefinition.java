@@ -77,7 +77,8 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         HashMap<String, Integer> REDADMIRALSKILLS = new HashMap<>();
         REDADMIRALSKILLS.put(Skills.POINT_DEFENSE, 2);
         REDADMIRALSKILLS.put(Skills.HELMSMANSHIP, 2);
-        REDADMIRALSKILLS.put(Skills.ENERGY_WEAPON_MASTERY, 2);
+        REDADMIRALSKILLS.put(Skills.TARGET_ANALYSIS, 1);
+        REDADMIRALSKILLS.put(Skills.ENERGY_WEAPON_MASTERY, 1);
         REDADMIRALSKILLS.put(Skills.GUNNERY_IMPLANTS, 1);
 
         PersonAPI REDADMIRAL = new MagicCaptainBuilder(Factions.NEUTRAL)

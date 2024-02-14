@@ -5,3 +5,4 @@ sd_generateMoons,Generate Moons,Boolean,TRUE,,Adds moons to planets during mapge
 sd_enableAITweaks,Enable AI Tweaks,Boolean,TRUE,,Enable all AI tweaks on SD ships. Disable for debug.,,,
 sd_enablePlayerAdmiral,Enable player admiral AI,Boolean,FALSE,,Controls whether custom fleet command AI runs for the player fleet.,,,
 sd_enableAIAdmiral,Enable AI admiral,Boolean,TRUE,,Controls whether custom fleet command AI runs for enemy AI fleets.,,,
+sd_nerfArmsDealer,Nerf arms dealer,Boolean,TRUE,,Controls whether the Very High Importance arms dealer knows every blueprint in the entire game.,,,

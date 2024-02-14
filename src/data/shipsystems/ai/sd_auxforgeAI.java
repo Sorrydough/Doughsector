@@ -6,7 +6,7 @@ import data.sd_util;
 import data.shipsystems.sd_auxforge;
 import org.lwjgl.util.vector.Vector2f;
 
-import static data.shipsystems.sd_auxforge.*;
+import java.util.List;
 
 public class sd_auxforgeAI implements ShipSystemAIScript {
     final IntervalUtil interval = new IntervalUtil(0.5f, 1f);
@@ -24,8 +24,9 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
 
         interval.advance(amount);
         if (interval.intervalElapsed()) {
-            if (!canBeUsed(ship))
+            if (!sd_auxforge.canBeUsed(ship))
                 return;
+
             float desirePos = 0;
             float desireNeg = 0;
             // We want to use the system if:
@@ -33,9 +34,9 @@ public class sd_auxforgeAI implements ShipSystemAIScript {
             desirePos += (float) system.getAmmo() / system.getMaxAmmo() * 100;
             // 2. Our missiles are depleted
             boolean willRestoreFighters = sd_auxforge.willRestoreFighters(ship);
-            WeaponAPI missile = getEmptiestMissile(ship);
-            if (canReloadMissile(missile) && !willRestoreFighters)
-                desirePos += (float) (1 - missile.getAmmo() / missile.getMaxAmmo()) * 100;
+            List<WeaponAPI> reloadableMissiles = sd_auxforge.getReloadableMissiles(ship);
+            if (!sd_auxforge.willMissilesOverfill(reloadableMissiles) && !willRestoreFighters)
+                desirePos += sd_auxforge.getAverageMissileFullness(reloadableMissiles) * 100;
             // 3. Our fighters are depleted
             float replacement = ship.getSharedFighterReplacementRate();
             if (replacement < 0.9 && willRestoreFighters)
