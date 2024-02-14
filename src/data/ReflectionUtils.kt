@@ -1,3 +1,5 @@
+package data
+
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType
 
@@ -17,7 +19,7 @@ object ReflectionUtils {
     {
         var field: Any? = null
         try {  field = instanceToModify.javaClass.getField(fieldName) } catch (e: Throwable) {
-            try {  field = instanceToModify.javaClass.getDeclaredField(fieldName) } catch (e: Throwable) { }
+            try {  field = instanceToModify.javaClass.getDeclaredField(fieldName) } catch (_: Throwable) { }
         }
 
         setFieldAccessibleHandle.invoke(field, true)
@@ -27,7 +29,7 @@ object ReflectionUtils {
     fun get(fieldName: String, instanceToGetFrom: Any): Any? {
         var field: Any? = null
         try {  field = instanceToGetFrom.javaClass.getField(fieldName) } catch (e: Throwable) {
-            try {  field = instanceToGetFrom.javaClass.getDeclaredField(fieldName) } catch (e: Throwable) { }
+            try {  field = instanceToGetFrom.javaClass.getDeclaredField(fieldName) } catch (_: Throwable) { }
         }
 
         setFieldAccessibleHandle.invoke(field, true)
@@ -35,7 +37,7 @@ object ReflectionUtils {
     }
 
     fun hasMethodOfName(name: String, instance: Any, contains: Boolean = false) : Boolean {
-        val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredMethods()
+        val instancesOfMethods: Array<out Any> = instance.javaClass.declaredMethods
 
         if (!contains) {
             return instancesOfMethods.any { getMethodNameHandle.invoke(it) == name }
@@ -47,7 +49,7 @@ object ReflectionUtils {
 
     fun hasVariableOfName(name: String, instance: Any) : Boolean {
 
-        val instancesOfFields: Array<out Any> = instance.javaClass.getDeclaredFields()
+        val instancesOfFields: Array<out Any> = instance.javaClass.declaredFields
         return instancesOfFields.any { getFieldNameHandle.invoke(it) == name }
     }
 
@@ -64,7 +66,7 @@ object ReflectionUtils {
 
     @JvmOverloads fun invoke(methodName: String, instance: Any, vararg arguments: Any?, declared: Boolean = false) : Any?
     {
-        var method: Any?
+        val method: Any?
 
         val clazz = instance.javaClass
         val args = arguments.map { it!!::class.javaPrimitiveType ?: it::class.java }
@@ -83,7 +85,7 @@ object ReflectionUtils {
     fun getField(fieldName: String, instanceToGetFrom: Any) : ReflectedField? {
         var field: Any? = null
         try {  field = instanceToGetFrom.javaClass.getField(fieldName) } catch (e: Throwable) {
-            try {  field = instanceToGetFrom.javaClass.getDeclaredField(fieldName) } catch (e: Throwable) { }
+            try {  field = instanceToGetFrom.javaClass.getDeclaredField(fieldName) } catch (_: Throwable) { }
         }
 
         if (field == null) return null
@@ -100,7 +102,7 @@ object ReflectionUtils {
 
         try { method = clazz.getMethod(methodName, *methodType.parameterArray())  }
         catch (e: Throwable) {
-            try {  method = clazz.getDeclaredMethod(methodName, *methodType.parameterArray()) } catch (e: Throwable) { }
+            try {  method = clazz.getDeclaredMethod(methodName, *methodType.parameterArray()) } catch (_: Throwable) { }
         }
 
         if (method == null) return null

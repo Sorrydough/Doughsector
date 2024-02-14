@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="doughsector">
+  <library name="Kotlin-Runtime">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/jars/doughsector.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../LazyLib/jars/lib/Kotlin-Runtime.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

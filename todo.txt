@@ -31,7 +31,6 @@ Discord Beta stuff:
 - Put my names into the name sheet
 - Integrate starficz shield AI
 - Integrate genir autofire AI
-- Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
 
 - Add 2 more missions
 
@@ -54,9 +53,9 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - STRINGS - writing theme: from the perspective of a vanilla faction assessing the ship... or maybe from the perspective of feedback that I've recieved regarding the ship?
 - Add a rawdog config file for non-lunalib-users
 - Do a manual sprite pass to clean up floaters etc
-- Make it so my custom fleet commander only runs for my fleets
+- Expand my custom fleet commander to work outside of missions
 - Improve the visual communication about the behavior of nullifier
-- Turret arc pass for civ ships
+- Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
 
 
 Version 1.5 Stuff: (easy to do, but not a priority)
@@ -87,6 +86,8 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Turret arc pass for heavy cruiser & capital
 - Check if I can fix up my janky isUsable() checks with the new api addition
 - Check if I can just look at whether a target's system is disabled directly with the new api addition
+- Turret arc pass for civ ships
+- Rename my colors in util away from under color etc
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
@@ -122,7 +123,7 @@ Version 3.0 Stuff: (scope creep)
 - Console command to buy stuff and have it shipped to you
 
 Unused names that I want reserved:
-Purifier, Oblivion, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Aviso, Torrent, Anthem
+Purifier, Oblivion, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Torrent, Anthem
 
 Code stuff to remember:
 final variable;

@@ -8,9 +8,13 @@ import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
+import com.fs.starfarer.combat.entities.BallisticProjectile;
+import com.fs.starfarer.combat.entities.MovingRay;
+import com.fs.starfarer.combat.entities.PlasmaShot;
 import data.graphics.sd_decoSystemRangePlugin;
 import data.weapons.mote.sd_moteAIScript;
 import org.lazywizard.console.Console;
+import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
@@ -21,6 +25,9 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+
+import data.ReflectionUtils.*;
+
 
 public class sd_util {
     public static final Color factionColor = new Color (255,240,205, 55), factionUnderColor = new Color (255,240,205,155),
@@ -37,7 +44,7 @@ public class sd_util {
     }
 
     public static boolean isCombatSituation(ShipAPI ship) {
-        return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOriginalOwner() != -1 && ship.getVariant() != null;
+        return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOriginalOwner() != -1 && ship.getVariant() != null && ship.isAlive();
     }
 
     public static boolean isPhaseShip(ShipAPI ship) {
@@ -203,7 +210,9 @@ public class sd_util {
 
 
     // all this shit is from starficz
-    public static class FutureHit {
+    public static final boolean DEBUG_ENABLED = false;
+
+    public static class FutureHit{
         public float timeToHit;
         public float angle;
         public DamageType damageType;
@@ -211,9 +220,10 @@ public class sd_util {
         public float damage;
         public float empDamage;
         public boolean softFlux;
+        public String enemyId;
     }
 
-    public static List<FutureHit> incomingProjectileHits(ShipAPI ship, Vector2f testPoint) {
+    public static List<FutureHit> incomingProjectileHits(ShipAPI ship, Vector2f testPoint){
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
         boolean useBackup = false;
@@ -237,7 +247,10 @@ public class sd_util {
                     float travelTime = 0f;
                     if(MathUtils.isPointWithinCircle(missile.getLocation(), testPoint, shipRadius)) hit = true;
                     else {
-                        travelTime = missileTravelTime(missile.getMoveSpeed(), missile.getMaxSpeed(), missile.getAcceleration(), missile.getMaxTurnRate(),
+                        // I hate mirvs
+                        float missileMaxSpeed = missile.isMirv() ? missile.getMaxSpeed()*4 :  missile.getMaxSpeed();
+                        float missileAccel = missile.isMirv() ? missile.getAcceleration()*4 :  missile.getAcceleration();
+                        travelTime = missileTravelTime(missile.getMoveSpeed(), missileMaxSpeed, missileAccel, missile.getMaxTurnRate(),
                                 VectorUtils.getFacing(missile.getVelocity()), missile.getLocation(), testPoint, shipRadius);
                         if (travelTime < (missile.getMaxFlightTime() - missile.getFlightTime())) hit = true;
                     }
@@ -256,11 +269,10 @@ public class sd_util {
             }
 
             // Non Guided projectiles (including missiles that have stopped tracking)
-            float maxDistance;
-            //if (useBackup) {
+            float maxDistance = 0;
             if (true) {
-                maxDistance = threat.getWeapon().getRange();
                 if (threat.getWeapon() != null) {
+                    maxDistance = threat.getWeapon().getRange();
                     maxDistance -= MathUtils.getDistance(threat.getWeapon().getLocation(), threat.getLocation());
                 }
             }
@@ -270,24 +282,24 @@ public class sd_util {
 //                        MissileAPI missile = (MissileAPI) threat;
 //                        maxDistance = (missile.getMaxFlightTime() - missile.getFlightTime()) * missile.getMaxSpeed();
 //                    }
-//                    else if (threat instanceof PlasmaShot) {
+//                    else if (threat instanceof PlasmaShot){
 //                        PlasmaShot nearbyPlasma = (PlasmaShot) threat;
-//                        float flightTime = (float) ReflectionUtils.INSTANCE.get("flightTime", nearbyPlasma);
-//                        float maxFlightTime = (float) ReflectionUtils.INSTANCE.get("maxFlightTime", nearbyPlasma);
+//                        float flightTime = (float) data.ReflectionUtils.INSTANCE.get("flightTime", nearbyPlasma);
+//                        float maxFlightTime = (float) data.ReflectionUtils.INSTANCE.get("maxFlightTime", nearbyPlasma);
 //                        maxDistance = (maxFlightTime - flightTime) * threat.getMoveSpeed();
 //                    }
 //                    else if (threat instanceof BallisticProjectile) {
 //                        BallisticProjectile nearbyBallistic = (BallisticProjectile) threat;
-//                        com.fs.starfarer.combat.entities.OoOO trailExtender = (com.fs.starfarer.combat.entities.OoOO) ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
+//                        com.fs.starfarer.combat.entities.OoOO trailExtender = (com.fs.starfarer.combat.entities.OoOO) data.ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
 //                        float elapsedLifeTime = trailExtender.Ó00000();
 //                        float maxLifeTime = trailExtender.Õ00000();
 //                        maxDistance = (maxLifeTime - elapsedLifeTime) * threat.getMoveSpeed();
 //                    }
 //                    else if (threat instanceof MovingRay) {
 //                        MovingRay nearbyRay = (MovingRay) threat;
-//                        com.fs.starfarer.combat.entities.L rayExtender = (com.fs.starfarer.combat.entities.L) ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
+//                        com.fs.starfarer.combat.entities.L rayExtender = (com.fs.starfarer.combat.entities.L) data.ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
 //                        float currentRayDistance = rayExtender.Õ00000();
-//                        float maxRayDistance = (float) ReflectionUtils.INSTANCE.get("Ò00000", rayExtender);
+//                        float maxRayDistance = (float) data.ReflectionUtils.INSTANCE.get("Ò00000", rayExtender);
 //                        maxDistance = maxRayDistance - currentRayDistance;
 //                    }
 //                    else continue; // skip if not one of these classes
@@ -427,10 +439,21 @@ public class sd_util {
         for (ShipAPI enemy: nearbyEnemies) {
             enemy.getFluxTracker().getOverloadTimeRemaining();
             enemy.getFluxTracker().isVenting(); enemy.getFluxTracker().getTimeToVent();
+
+            // ignore ship if shooting through other ship
+            boolean occluded = false;
+            for(ShipAPI occlusion : nearbyEnemies){
+                if (occlusion == enemy) continue;
+                Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), enemy.getLocation());
+                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() == null ? false : occlusion.getShield().isOn())){
+                    occluded = true;
+                }
+            }
+            if (occluded) continue;
+
             for (WeaponAPI weapon: enemy.getAllWeapons()){
 
-                if(weapon.isDecorative())
-                    continue;
+                if(weapon.isDecorative()) continue;
 
                 // ignore weapon if out of range
                 float distanceFromWeaponSquared = MathUtils.getDistanceSquared(weapon.getLocation(), testPoint);
@@ -481,6 +504,7 @@ public class sd_util {
                     float currentTime = preAimedTime;
                     while(currentTime < maxTime - beamDelay){
                         FutureHit futurehit = new FutureHit();
+                        futurehit.enemyId = enemy.getId();
                         futurehit.timeToHit = currentTime + beamDelay;
                         futurehit.angle = shipToWeaponAngle;
                         futurehit.damageType = weapon.getDamageType();
@@ -529,6 +553,7 @@ public class sd_util {
                         while (chargeupTime > 0) { // resolve chargeup damage
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = currentTime;
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
@@ -546,6 +571,7 @@ public class sd_util {
                         while (activeTime > 0) { // resolve active damage
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = currentTime;
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
@@ -563,6 +589,7 @@ public class sd_util {
                         while (chargedownTime > 0) { // resolve chargedown damage
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = currentTime;
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
@@ -594,11 +621,19 @@ public class sd_util {
                 float travelTime;
                 MutableShipStatsAPI stats = enemy.getMutableStats();
                 if(weapon.getSpec().getProjectileSpec() instanceof MissileSpecAPI){
-                    ShipHullSpecAPI.EngineSpecAPI missileEngine = ((MissileSpecAPI) weapon.getSpec().getProjectileSpec()).getHullSpec().getEngineSpec();
+                    MissileSpecAPI spec = (MissileSpecAPI) weapon.getSpec().getProjectileSpec();
+                    ShipHullSpecAPI.EngineSpecAPI missileEngine = spec.getHullSpec().getEngineSpec();
                     float launchSpeed = ((MissileSpecAPI) weapon.getSpec().getProjectileSpec()).getLaunchSpeed();
                     float maxSpeed = stats.getMissileMaxSpeedBonus().computeEffective(missileEngine.getMaxSpeed());
                     float acceleration = stats.getMissileAccelerationBonus().computeEffective(missileEngine.getAcceleration());
                     float maxTurnRate = stats.getMissileMaxTurnRateBonus().computeEffective(missileEngine.getMaxTurnRate());
+
+                    // I hate mirvs
+                    if(spec.getBehaviorSpec() != null && spec.getBehaviorSpec().getBehavorString().contains("MIRV")){
+                        maxSpeed *= 3;
+                        acceleration *= 2;
+                        maxTurnRate *= 3;
+                    }
                     travelTime = missileTravelTime(launchSpeed, maxSpeed, acceleration, maxTurnRate, weapon.getCurrAngle(), weapon.getLocation(), ship.getLocation(), targetingRadius);
                 }
                 else {
@@ -628,6 +663,7 @@ public class sd_util {
                         currentTime += chargeupTime;
                         if(currentTime > preAimedTime){
                             FutureHit futurehit = new FutureHit();
+                            futurehit.enemyId = enemy.getId();
                             futurehit.timeToHit = (currentTime + travelTime);
                             futurehit.angle = shipToWeaponAngle;
                             futurehit.damageType = weapon.getDamageType();
@@ -674,6 +710,7 @@ public class sd_util {
                         while(burstTime > 0.01f) { // avoid floating point jank
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = (currentTime + travelTime);
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
@@ -760,7 +797,7 @@ public class sd_util {
 
         return new Pair<>(armorDamage, hullDamage);
     }
-    public static float fluxToShield(DamageType damageType, float damage, float shieldEfficiency, ShipAPI ship){
+    public static float fluxToShield(DamageType damageType, float damage, ShipAPI ship){
         MutableShipStatsAPI stats = ship.getMutableStats();
 
         float shieldMultiplier = stats.getShieldDamageTakenMult().getModifiedValue();
@@ -780,7 +817,7 @@ public class sd_util {
                 break;
         }
 
-        return (damage * shieldEfficiency * shieldMultiplier);
+        return (damage * ship.getShield().getFluxPerPointOfDamage() * shieldMultiplier);
     }
     public static float missileTravelTime(float startingSpeed, float maxSpeed, float acceleration, float maxTurnRate,
                                           float missileStartingAngle, Vector2f missileStartingLocation, Vector2f targetLocation, float targetRadius){
@@ -821,5 +858,341 @@ public class sd_util {
             else
                 return 0;
         }
+    }
+    public static Pair<Vector2f, ShipAPI> getLowestDangerTargetInRange(ShipAPI ship, Map<ShipAPI, Map<String, Float>> nearbyEnemies, float maxAngle, float targetRange, boolean los){
+        float degreeDelta = 10f;
+
+        //get the all the "outside" ships
+        List<ShipAPI> enemyShipsOnConvexHull = getConvexHull(new ArrayList<>(nearbyEnemies.keySet()));
+
+        Map<ShipAPI, List<Vector2f>> targetEnemys = new HashMap<>();
+
+        // add all the target points from enemies on the "outside edges"
+        for(ShipAPI enemy : enemyShipsOnConvexHull){
+            float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
+
+            List<Vector2f> potentialPoints = new ArrayList<>();
+            float enemyAngle = VectorUtils.getAngle(enemy.getLocation(), ship.getLocation());
+            float currentAngle = enemyAngle - maxAngle;
+            while(currentAngle < enemyAngle + maxAngle){
+                potentialPoints.add(MathUtils.getPointOnCircumference(enemy.getLocation(), optimalRange, currentAngle));
+                currentAngle += degreeDelta;
+            }
+            targetEnemys.put(enemy, potentialPoints);
+        }
+
+        // remove the points that requires ship to fly through other ships
+        for(ShipAPI enemy : Global.getCombatEngine().getShips()){
+            if (!MathUtils.isWithinRange(enemy, ship, 3000f) || enemy.isFighter() || enemy == ship || !enemy.isAlive())
+                continue;
+            for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()){
+                List<Vector2f> pointsToRemove = new ArrayList<>();
+                for(Vector2f potentialPoint : targetEnemy.getValue()){
+                    if(!los && targetEnemy.getKey() == enemy) continue;
+                    float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
+                    float minKeepoutRadius = (enemy.getHullLevel() < 0.20f ? enemy.getShipExplosionRadius() + 25f : enemy.getCollisionRadius()) + ship.getCollisionRadius() + 25f;
+                    float keepoutRadius = MathUtils.getDistance(ship.getLocation(), enemy.getLocation()) > optimalRange ? (float) (optimalRange * 0.8) : minKeepoutRadius;
+                    if(CollisionUtils.getCollides(potentialPoint, ship.getLocation(), enemy.getLocation(), keepoutRadius)){
+                        pointsToRemove.add(potentialPoint);
+                    }
+                }
+                targetEnemy.getValue().removeAll(pointsToRemove);
+            }
+        }
+
+        // from the points left, find the safest target to attack and where to strafe to
+        Vector2f optimalStrafePoint = null;
+        ShipAPI target = null;
+        float currentDanger = Float.POSITIVE_INFINITY;
+
+        for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()) {
+            for (Vector2f potentialPoint : targetEnemy.getValue()) {
+                float pointDanger = getPointDanger(nearbyEnemies, potentialPoint);
+
+                if(DEBUG_ENABLED){
+                    Global.getCombatEngine().addFloatingText(potentialPoint, String.valueOf(pointDanger), 10, Color.white, null, 0, 0);
+                }
+
+                if (pointDanger < currentDanger) {
+                    optimalStrafePoint = potentialPoint;
+                    target = targetEnemy.getKey();
+                    currentDanger = pointDanger;
+                }
+            }
+        }
+        return new Pair<>(optimalStrafePoint, target);
+    }
+
+    public static Vector2f getBackingOffStrafePoint(ShipAPI ship){
+
+        float degreeDelta = 5f;
+
+        List<Vector2f> potentialPoints = MathUtils.getPointsAlongCircumference(ship.getLocation(), ship.getCollisionRadius()*2, (int) (360f/degreeDelta), 0);
+        Vector2f safestPoint = null;
+        float furthestPointSumDistance = 0;
+        List<ShipAPI> enemies = AIUtils.getNearbyEnemies(ship, 3000f);
+        for (Vector2f potentialPoint : potentialPoints) {
+            float currentPointSumDistance = 0;
+            for(ShipAPI enemy : enemies){
+                currentPointSumDistance += MathUtils.getDistance(enemy, potentialPoint);
+            }
+            if(currentPointSumDistance > furthestPointSumDistance){
+                furthestPointSumDistance = currentPointSumDistance;
+                safestPoint = potentialPoint;
+            }
+        }
+
+        return safestPoint;
+    }
+
+    public static Map<String, Float> getShipStats(ShipAPI enemy, float defaultRange){
+
+        float deltaAngle = 1f;
+        float currentRelativeAngle = 0f;
+        Map<String, Float> highLowDPS = new HashMap<>();
+        float highestDPS = 0;
+        float lowestDPS = Float.POSITIVE_INFINITY;
+        float highestDPSAngle = 0;
+        float maxRange = 0;
+
+        while(currentRelativeAngle <= 360){
+            float potentialDPS = 0;
+            for (WeaponAPI weapon: enemy.getAllWeapons()){
+                if(!weapon.isDecorative() && weapon.getType() != WeaponAPI.WeaponType.MISSILE){
+                    if((Math.abs(weapon.getArcFacing() - currentRelativeAngle) < weapon.getArc()/2) && (defaultRange < weapon.getRange())){
+                        potentialDPS += Math.max(weapon.getDerivedStats().getDps(), weapon.getDerivedStats().getBurstDamage());
+                    }
+                    maxRange = Math.max(weapon.getRange(), maxRange);
+                }
+            }
+            if(potentialDPS > highestDPS){
+                highestDPS = potentialDPS;
+            }
+            if(potentialDPS < lowestDPS){
+                lowestDPS = potentialDPS;
+            }
+
+            currentRelativeAngle += deltaAngle;
+        }
+
+        currentRelativeAngle = -1f;
+
+        float lastDPS = highestDPS;
+        float highZoneStart = 0;
+        float highZoneEnd = 0;
+
+        while(currentRelativeAngle <= 360){
+            float potentialDPS = 0;
+            for (WeaponAPI weapon: enemy.getAllWeapons()){
+                if(!weapon.isDecorative() && weapon.getType() != WeaponAPI.WeaponType.MISSILE){
+                    if((Math.abs(weapon.getArcFacing() - currentRelativeAngle) < weapon.getArc()/2) && (defaultRange < weapon.getRange())){
+                        potentialDPS += Math.max(weapon.getDerivedStats().getDps(), weapon.getDerivedStats().getBurstDamage());
+                    }
+                    maxRange = Math.max(weapon.getRange(), maxRange);
+                }
+            }
+            if(potentialDPS > highestDPS*0.8f && lastDPS < highestDPS*0.8f){
+                highZoneStart = currentRelativeAngle;
+            }
+            if(potentialDPS < highestDPS*0.8f && lastDPS > highestDPS*0.8f){
+                highZoneEnd = currentRelativeAngle;
+            }
+            lastDPS = potentialDPS;
+            currentRelativeAngle += deltaAngle;
+        }
+
+        highestDPSAngle = highZoneEnd - (highZoneEnd - highZoneStart)/2;
+
+        highLowDPS.put("HighestDPS", highestDPS);
+        highLowDPS.put("LowestDPS", lowestDPS);
+        highLowDPS.put("HighestDPSAngle", highestDPSAngle);
+        highLowDPS.put("MaxRange", maxRange);
+        return highLowDPS;
+    }
+
+
+    public static int orientation(Vector2f p, Vector2f q, Vector2f r) {
+        float val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+        if (val == 0)
+            return 0; // collinear
+        return (val > 0) ? 1 : 2; // clock or counterclockwise
+    }
+
+    public static List<ShipAPI> getConvexHull(List<ShipAPI> ships) {
+        int n = ships.size();
+        if (n < 3)
+            return ships;
+
+        List<ShipAPI> hull = new ArrayList<>();
+
+        // Find the leftmost point
+        int leftmost = 0;
+        for (int i = 1; i < n; i++) {
+            if (ships.get(i).getLocation().x < ships.get(leftmost).getLocation().x)
+                leftmost = i;
+        }
+
+        int p = leftmost, q;
+        do {
+            hull.add(ships.get(p));
+            q = (p + 1) % n;
+            for (int i = 0; i < n; i++) {
+                if (orientation(ships.get(p).getLocation(), ships.get(i).getLocation(), ships.get(q).getLocation()) == 2)
+                    q = i;
+            }
+            p = q;
+        } while (p != leftmost);
+
+        return hull;
+    }
+
+    public static float getPointDanger(Map<ShipAPI, Map<String, Float>> nearbyEnemies, Vector2f testPoint){
+        float currentPointDanger = 0f;
+        if (testPoint == null)
+            return 0f;
+
+        for (ShipAPI enemy: nearbyEnemies.keySet()) {
+
+            //float currentTargetBias = (enemy == target && MathUtils.getDistance(ship.getLocation(), enemy.getLocation()) < targetRange * 1.2) ? 0.1f : 1f;  , ShipAPI ship, float targetRange, ShipAPI target
+            float currentTargetBias = 1;
+
+            float highestDPSAngle = enemy.getFacing() + nearbyEnemies.get(enemy).get("HighestDPSAngle");
+            float alpha = Math.abs(MathUtils.getShortestRotation(VectorUtils.getAngle(enemy.getLocation(), testPoint), highestDPSAngle))/180f;
+
+            float DPSDanger = (1f - alpha) * nearbyEnemies.get(enemy).get("HighestDPS") + alpha * nearbyEnemies.get(enemy).get("LowestDPS");
+
+            float shipDistance = MathUtils.getDistance(enemy.getLocation(), testPoint);
+            float currentlyOccluded = 1;
+            for (ShipAPI otherEnemy: nearbyEnemies.keySet()) {
+                if (otherEnemy != enemy && CollisionUtils.getCollides(enemy.getLocation(), testPoint, otherEnemy.getLocation(), otherEnemy.getCollisionRadius())){
+                    currentlyOccluded = 0;
+                }
+            }
+            if(shipDistance < nearbyEnemies.get(enemy).get("MaxRange")){
+                currentPointDanger += (DPSDanger - shipDistance/100) * (1-enemy.getFluxLevel()) * enemy.getHullLevel() * currentTargetBias * currentlyOccluded;
+            }
+        }
+        return currentPointDanger;
+    }
+
+    public static void strafeToPoint(ShipAPI ship, Vector2f strafePoint){
+        float strafeAngle = VectorUtils.getAngle(ship.getLocation(), strafePoint);
+        float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), strafeAngle);
+
+        if (rotAngle < 67.5f && rotAngle > -67.5f) {
+            ship.giveCommand(ShipCommand.ACCELERATE, null, 0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing());
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        } else{
+            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
+        }
+
+        if (rotAngle > 112.5f || rotAngle < -112.5f){
+            ship.giveCommand(ShipCommand.ACCELERATE_BACKWARDS, null,0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()+180f);
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        }else{
+            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
+        }
+
+        if (rotAngle > 22.5f && rotAngle < 157.5f){
+            ship.giveCommand(ShipCommand.STRAFE_LEFT, null,0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()+90f);
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        }else{
+            ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
+        }
+
+        if (rotAngle < -22.5f && rotAngle > -157.5f){
+            ship.giveCommand(ShipCommand.STRAFE_RIGHT, null,0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()-90f);
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        }else{
+            ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
+        }
+    }
+
+    public static void turnToPoint(ShipAPI ship, Vector2f turnPoint){
+        float turnAngle = VectorUtils.getAngle(ship.getLocation(), turnPoint);
+        float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), turnAngle);
+
+        if (rotAngle > 0) {
+            ship.giveCommand(ShipCommand.TURN_LEFT, null, 0);
+            ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
+        } else{
+            ship.giveCommand(ShipCommand.TURN_RIGHT, null, 0);
+            ship.blockCommandForOneFrame(ShipCommand.TURN_LEFT);
+        }
+    }
+
+
+    public static void stayStill(ShipAPI ship){
+        ship.giveCommand(ShipCommand.DECELERATE, null, 0);
+        ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
+        ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
+        ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
+        ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
+        ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
+        ship.blockCommandForOneFrame(ShipCommand.TURN_LEFT);
+        ship.blockCommandForOneFrame(ShipCommand.USE_SYSTEM);
+    }
+
+    public static void holdFire(ShipAPI ship){
+        for(WeaponAPI weapon : ship.getAllWeapons()){
+            if(!weapon.isDecorative()){
+                weapon.setForceNoFireOneFrame(true);
+            }
+        }
+    }
+
+
+    public static void applyDamper(ShipAPI ship, String id, float level){
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getHullDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getArmorDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getEmpDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getWeaponDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getEngineDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getCombatEngineRepairTimeMult().modifyMult(id, 0.000001f);
+        stats.getCombatWeaponRepairTimeMult().modifyMult(id, 0.000001f);
+
+
+        ship.getShield().toggleOff();
+        ship.fadeToColor(id + ship.getId(), new Color(75,75,75,255), 0.1f, 0.1f, level);
+        ship.setJitterUnder(id + ship.getId(), new Color(100,165,255,255), level, 15, 0f, 15f);
+    }
+
+    public static void unapplyDamper(ShipAPI ship, String id){
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getHullDamageTakenMult().unmodify(id);
+        stats.getArmorDamageTakenMult().unmodify(id);
+        stats.getEmpDamageTakenMult().unmodify(id);
+        stats.getWeaponDamageTakenMult().unmodify(id);
+        stats.getEngineDamageTakenMult().unmodify(id);
+        stats.getCombatEngineRepairTimeMult().unmodify(id);
+        stats.getCombatWeaponRepairTimeMult().unmodify(id);
+        ship.fadeToColor(id + ship.getId(), new Color(75,75,75,255), 0.1f, 0.1f, 0);
+        ship.setJitterUnder(id + ship.getId(), new Color(100,165,255,255), 0, 15, 0f, 15f);
+    }
+
+    public static float lowestWeaponAmmoLevel(ShipAPI ship){
+        float lowestAmmoLevel = 1f;
+        for (WeaponAPI weapon: ship.getAllWeapons()){
+            if(!weapon.isDecorative() && !weapon.hasAIHint(WeaponAPI.AIHints.PD) && (weapon.getType() != WeaponAPI.WeaponType.MISSILE) && weapon.usesAmmo()){
+                float currentAmmoLevel = (float) weapon.getAmmo() / weapon.getMaxAmmo();
+                if (currentAmmoLevel < lowestAmmoLevel){
+                    lowestAmmoLevel = currentAmmoLevel;
+                }
+            }
+        }
+        return lowestAmmoLevel;
     }
 }

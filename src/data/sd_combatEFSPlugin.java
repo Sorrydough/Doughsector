@@ -14,7 +14,7 @@ import java.util.List;
 public class sd_combatEFSPlugin extends BaseEveryFrameCombatPlugin {
     public void advance(float amount, List<InputEventAPI> events) {
         CombatEngineAPI engine = Global.getCombatEngine();
-        if (engine == null || engine.isPaused() || Global.getCurrentState() != GameState.COMBAT)
+        if (engine == null || engine.isPaused() || Global.getCurrentState() != GameState.COMBAT || !engine.isMission())
             return;
 
         boolean enabledNPC = false;
