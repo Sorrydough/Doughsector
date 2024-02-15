@@ -96,7 +96,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 				target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
 				target.getFluxTracker().playOverloadSound();
 				target.setShipSystemDisabled(true);
-				target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for " + Math.round(duration) + " seconds!", Color.LIGHT_GRAY, 5, true);
+				target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for " + Math.round(duration) + " seconds!", Color.LIGHT_GRAY, 12, true);
 				target.getMutableStats().getDynamic().getMod("sd_hackingsuite").modifyFlat("sd_hackingsuite", -1);
 				runOnce = false;
 			}
@@ -105,11 +105,14 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			TIMER.advance(amount);
 			if (TIMER.intervalElapsed()) {
 				time += 1;
+				if (time == duration / 2)
+					target.getFluxTracker().showOverloadFloatyIfNeeded(Math.round(duration / 2) + " seconds until system restoration.", Color.LIGHT_GRAY, 12, true);
 				if (time >= duration) {
 					target.getMutableStats().getAutofireAimAccuracy().unmodifyMult("sd_hackingsuite");
 					if (target.getCurrentCR() > 0)
 						target.setShipSystemDisabled(false);
 					target.getMutableStats().getDynamic().getMod("sd_hackingsuite").unmodify("sd_hackingsuite");
+					target.getFluxTracker().showOverloadFloatyIfNeeded("System functionality restored!", Color.LIGHT_GRAY, 12, true);
 					engine.removePlugin(this);
 					//return;
 				}

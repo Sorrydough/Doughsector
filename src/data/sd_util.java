@@ -42,15 +42,12 @@ public class sd_util {
         float upperBound = numberB + (numberB * (deviationPercent / 100));
         return numberA <= upperBound && numberA >= lowerBound;
     }
-
     public static boolean isCombatSituation(ShipAPI ship) {
         return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOriginalOwner() != -1 && ship.getVariant() != null && ship.isAlive();
     }
-
     public static boolean isPhaseShip(ShipAPI ship) {
         return ship.getSystem() != null && (ship.getHullSpec().getHints().contains(ShipHullSpecAPI.ShipTypeHints.PHASE) || ship.getSystem().getSpecAPI().isPhaseCloak());
     }
-
     public static void blockWeaponFromFiring(WeaponAPI weapon) {
         ShipAPI ship = weapon.getShip();
         if (ship.getShipTarget() != null && (ship.getShipTarget().getShield() == null || ship.getShipTarget().getHullSize() == ShipAPI.HullSize.FRIGATE)) {
@@ -67,14 +64,11 @@ public class sd_util {
                 ship.giveCommand(ShipCommand.VENT_FLUX, null, -1);
         }
     }
-
-
     public static boolean isAutomated(ShipAPI ship) {
         return ship.getHullSpec().getMinCrew() == 0;
         //return ship.getVariant().getHullMods().contains("automated") || ship.getHullSpec().getMinCrew() == 0
         //        || ship.getHullSpec().getTags().contains("auto_rec") || ship.getCaptain().isAICore();
     }
-
     public static boolean isLinked(ShipAPI ship) {
         List<String> neural = Arrays.asList("neural_interface", "neural_integrator");
         for (String hullmod : ship.getVariant().getHullMods())
@@ -82,7 +76,6 @@ public class sd_util {
                 return true;
         return false;
     }
-
     public static void modifyShieldArc(ShipAPI target, float goalShieldArc, float effectLevel) {
         // 1. If the target's shield is still unfolding, don't mess with it
         if (target.getShield() == null || target.getShield().isOff() || target.getShield().getActiveArc() < goalShieldArc)
@@ -93,7 +86,6 @@ public class sd_util {
         // when effectLevel is 0.5, arc should be set to (135 = 180-90/2)
         target.getShield().setActiveArc(Math.max(goalShieldArc, target.getShield().getActiveArc() - goalShieldArc / (1 / effectLevel)));
     }
-
     public static float getOptimalRange(ShipAPI ship) { // chatgpt wrote most of this
         float totalDPS = 0;
         float totalWeightedRange = 0;
@@ -170,16 +162,12 @@ public class sd_util {
             }
         }
     }
-
     public static void applySystemRangeDeco(ShipAPI ship) {
         if (!ship.getCustomData().containsKey("sd_decoSystemRange")) {
             ship.getCustomData().put("sd_decoSystemRange", -1);
             Global.getCombatEngine().addPlugin(new sd_decoSystemRangePlugin(ship));
         }
     }
-
-
-
     public static void sortByDistance(final ShipAPI ship, final List<ShipAPI> ships, final boolean closestFirst) {
         Collections.sort(ships, new Comparator<ShipAPI>() {
             @Override
@@ -192,7 +180,6 @@ public class sd_util {
             }
         });
     }
-
     public static boolean canUseSystemThisFrame(ShipAPI ship) { // modification of the AIUtils function, this one also works for toggle systems
         FluxTrackerAPI flux = ship.getFluxTracker();
         ShipSystemAPI system = ship.getSystem();
@@ -206,8 +193,6 @@ public class sd_util {
                 // fluxed out
                 || !system.isActive() && (system.getFluxPerUse() > (flux.getMaxFlux() - flux.getCurrFlux())));
     }
-
-
 
     // all this shit is from starficz
     public static final boolean DEBUG_ENABLED = false;
@@ -269,46 +254,10 @@ public class sd_util {
             }
 
             // Non Guided projectiles (including missiles that have stopped tracking)
-            float maxDistance = 0;
-            if (true) {
-                if (threat.getWeapon() != null) {
-                    maxDistance = threat.getWeapon().getRange();
-                    maxDistance -= MathUtils.getDistance(threat.getWeapon().getLocation(), threat.getLocation());
-                }
-            }
-//            else {
-//                try { // do really funky reflection to get max distance of the projectile
-//                    if(threat instanceof MissileAPI){
-//                        MissileAPI missile = (MissileAPI) threat;
-//                        maxDistance = (missile.getMaxFlightTime() - missile.getFlightTime()) * missile.getMaxSpeed();
-//                    }
-//                    else if (threat instanceof PlasmaShot){
-//                        PlasmaShot nearbyPlasma = (PlasmaShot) threat;
-//                        float flightTime = (float) data.ReflectionUtils.INSTANCE.get("flightTime", nearbyPlasma);
-//                        float maxFlightTime = (float) data.ReflectionUtils.INSTANCE.get("maxFlightTime", nearbyPlasma);
-//                        maxDistance = (maxFlightTime - flightTime) * threat.getMoveSpeed();
-//                    }
-//                    else if (threat instanceof BallisticProjectile) {
-//                        BallisticProjectile nearbyBallistic = (BallisticProjectile) threat;
-//                        com.fs.starfarer.combat.entities.OoOO trailExtender = (com.fs.starfarer.combat.entities.OoOO) data.ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
-//                        float elapsedLifeTime = trailExtender.Ó00000();
-//                        float maxLifeTime = trailExtender.Õ00000();
-//                        maxDistance = (maxLifeTime - elapsedLifeTime) * threat.getMoveSpeed();
-//                    }
-//                    else if (threat instanceof MovingRay) {
-//                        MovingRay nearbyRay = (MovingRay) threat;
-//                        com.fs.starfarer.combat.entities.L rayExtender = (com.fs.starfarer.combat.entities.L) data.ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
-//                        float currentRayDistance = rayExtender.Õ00000();
-//                        float maxRayDistance = (float) data.ReflectionUtils.INSTANCE.get("Ò00000", rayExtender);
-//                        maxDistance = maxRayDistance - currentRayDistance;
-//                    }
-//                    else continue; // skip if not one of these classes
-//
-//                } catch (Exception e) { // backup use getDistance, switch over to this for all other projectiles if hit exception last time
-//                    useBackup = true;
-//                    continue;
-//                }
-//            }
+            if (threat.getWeapon() == null)
+                continue;
+            float range = threat.getWeapon().getRange();
+            float maxDistance = range - threat.getElapsed() * threat.getMoveSpeed();
 
             // circle-line collision checks for unguided projectiles,
 

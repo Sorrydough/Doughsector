@@ -1,7 +1,7 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 34,
-    "fluxVents": 24,
+    "fluxCapacitors": 30,
+    "fluxVents": 23,
     "goalVariant": true,
     "hullId": "sd_capitalbattlecarrier",
     "hullMods": [
@@ -71,6 +71,7 @@
         },
     ],
     "wings": [
+        "sd_fightersupportWing",
         "sd_fightersupportWing",
         "sd_fightersupportWing",
     ],

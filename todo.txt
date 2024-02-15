@@ -21,6 +21,15 @@ Arthr Stuff:
 - Sprite pass to incorporate capital's more saturated greeble style
 
 
+
+Improve auxforge glow behavior
+add a glib check so game no crash
+hangar glowmaps
+slower mote interval for mnemonic armor
+battlecarrier needs third bay
+
+
+
 Discord Beta stuff:
 - Write AI script for nullifier
 - Do motefield campaign behavior stuff
@@ -31,8 +40,11 @@ Discord Beta stuff:
 - Put my names into the name sheet
 - Integrate starficz shield AI
 - Integrate genir autofire AI
+- Rebalance my capacitor count to hit the intended hardened shields breakpoint
+
 
 - Add 2 more missions
+- Make tachyon lances quit shooting at fighters
 
 
 Ghostbusters Stuff:
@@ -43,6 +55,8 @@ Ghostbusters Stuff:
 - Try shoving defend orders onto stuff that's getting assfucked
 - Write escort behavior for my fleet commander
 - Add some complicated hold fire code to determine whether my weapons will hit the phased target coinciding with the moment it gets forced out of phase space
+- Debug my ships tanking hellbore shots to the face
+- Fix up my attack destroyer fit
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
