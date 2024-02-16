@@ -13,6 +13,7 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import data.graphics.sd_decoSystemRangePlugin;
 import data.sd_util;
+import data.shipsystems.sd_mnemonicarmor;
 import lunalib.lunaSettings.LunaSettings;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
@@ -325,66 +326,38 @@ public class sd_utilityhullmod extends BaseHullMod {
                 lastUpdatedTime = engine.getTotalElapsedTime(false);
                 potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), ship.getFluxTracker().getTimeToVent());
                 potentialHitsForVenting.addAll(incomingProjectileHits(ship, ship.getLocation()));
-                potentialHitsForShield = new ArrayList<>();
-                for (FutureHit hit : potentialHitsForVenting)
-                    if (hit.timeToHit <= ship.getShield().getUnfoldTime() * 2)
-                        potentialHitsForShield.add(hit);
+                if (shield != null) {
+                    potentialHitsForShield = new ArrayList<>();
+                    for (FutureHit hit : potentialHitsForVenting)
+                        if (hit.timeToHit <= ship.getShield().getUnfoldTime() * 2)
+                            potentialHitsForShield.add(hit);
+                }
+                for (FutureHit hit : potentialHitsForShield) {
+                    if (hit.damageType == DamageType.HIGH_EXPLOSIVE) {
+                        engine.addFloatingText(ship.getLocation(), String.valueOf(hit.timeToHit), 20, Color.white, null, 0, 0);
+                    }
+                }
             }
 
-
-
-
-
-
+            if (shield != null) {
+                boolean isArmorDamageAcceptable = isArmorDamageAcceptable(amount, potentialHitsForShield);
+                if (shield.isOn() && isArmorDamageAcceptable) {
+                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+                    engine.addFloatingText(ship.getLocation(), "Shields down!", 20, healColor3, null, 0, 0);
+                }
+                if (shield.isOff() && isArmorDamageAcceptable)
+                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+            }
         }
 
-        private final IntervalUtil incomingHitsTracker = new IntervalUtil(0.15f, 0.3f);
+        private final IntervalUtil incomingHitsTracker = new IntervalUtil(0.05f, 0.05f);
         public float lastUpdatedTime = 0;
         public float lastShieldOnTime = 0;
         public List<FutureHit> potentialHitsForVenting = new ArrayList<>();
         public List<FutureHit> potentialHitsForShield = new ArrayList<>();
         public List<FutureHit> potentialHits = new ArrayList<>();
 
-
-
-        private final IntervalUtil tracker = new IntervalUtil(0.2f, 0.3f); //Seconds
-        public List<Float> omniShieldDirections = new ArrayList<>();
-
-        public boolean wantToShield(float amount) {
-            tracker.advance(amount);
-            if (tracker.intervalElapsed()) {
-                lastUpdatedTime = Global.getCombatEngine().getTotalElapsedTime(false);
-                potentialHits = generatePredictedWeaponHits(ship, ship.getLocation(), shield.getUnfoldTime() * 2);
-                potentialHits.addAll(incomingProjectileHits(ship, ship.getLocation()));
-                float BUFFER_ARC = 10f;
-
-                // prefilter expensive one time functions
-                if (shield.getType() == ShieldAPI.ShieldType.FRONT) {
-                    List<FutureHit> filteredHits = new ArrayList<>();
-                    for (FutureHit hit : potentialHits) {
-                        if (Misc.isInArc(ship.getFacing(), shield.getArc() + BUFFER_ARC, hit.angle)) {
-                            filteredHits.add(hit);
-                        }
-                    }
-                    potentialHits = filteredHits;
-                } else {
-                    List<Float> candidateShieldDirections = new ArrayList<>();
-                    float FUZZY_RANGE = 1f;
-                    for (FutureHit hit : potentialHits) {
-                        boolean tooClose = false;
-                        for (float candidateDirection : candidateShieldDirections) {
-                            if (Math.abs(hit.angle - candidateDirection) < FUZZY_RANGE) {
-                                tooClose = true;
-                                break;
-                            }
-                        }
-                        if (!tooClose)
-                            candidateShieldDirections.add(hit.angle);
-                    }
-                    if (candidateShieldDirections.isEmpty()) candidateShieldDirections.add(ship.getFacing());
-                    omniShieldDirections = candidateShieldDirections;
-                }
-            }
+        public boolean isArmorDamageAcceptable(float amount, List<FutureHit> potentialHits) {
 
             // calculate how much damage the ship would take if shields went down
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
@@ -397,70 +370,148 @@ public class sd_utilityhullmod extends BaseHullMod {
                 lastShieldOnTime = currentTime;
             float delayTime = Math.max(0.5f - (currentTime - lastShieldOnTime), 0f); //TODO: get real shield deactivate time
 
-            float shieldHardFluxSavedIfNoShield = 0f;
-            float armorDamageIfNoShield = Float.POSITIVE_INFINITY;
-            float hullDamageIfNoShield = Float.POSITIVE_INFINITY;
-            float empDamageIfNoShield = 0f;
+            float armorAfterIncoming = armor;
+            float incomingHullDamage = 0;
+            float incomingEMPDamage = 0;
 
-            List<Float> shieldDirections = new ArrayList<>();
-            if (shield.getType() == ShieldAPI.ShieldType.FRONT) shieldDirections.add(ship.getFacing());
-            else shieldDirections.addAll(omniShieldDirections);
-
-            for (float shieldDirection : shieldDirections) {
-                float currentHullDamage = 0f;
-                float currentArmor = armor;
-                float currentShieldHardFluxSaved = 0f;
-                float currentEMPDamage = 0f;
-                float currentBufferTime = Float.POSITIVE_INFINITY;
-                float bestBufferTime = 0f;
-                for (sd_util.FutureHit hit : potentialHits) {
-                    float offAngle = Math.abs(MathUtils.getShortestRotation(shieldDirection, hit.angle));
-                    float timeToBlock = (offAngle / (shield.getArc() / 2)) * unfoldTime + delayTime;
-                    float timeToHit = (hit.timeToHit - timeElapsed);
-                    if (timeToHit < -0.1f) continue; // skip hits that have already happened
-                    if (timeToHit < (timeToBlock + bufferTime)) {
-                        if (!hit.softFlux) currentShieldHardFluxSaved += fluxToShield(hit.damageType, hit.damage, ship);
-                        Pair<Float, Float> trueDamage = damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, currentArmor, ship);
-                        currentArmor = Math.max(currentArmor - trueDamage.one, 0f);
-                        currentHullDamage += trueDamage.two;
-                        currentEMPDamage += hit.empDamage;
-                    } else {
-                        currentBufferTime = Math.min(timeToHit - timeToBlock, currentBufferTime);
-                    }
-                }
-
-                boolean betterDirectionFound = false;
-                if ((armor - currentArmor) < armorDamageIfNoShield) betterDirectionFound = true;
-                else if ((armor - currentArmor) == armorDamageIfNoShield) {
-                    if (currentHullDamage < hullDamageIfNoShield) betterDirectionFound = true;
-                    if (currentHullDamage == hullDamageIfNoShield && currentBufferTime > bestBufferTime) betterDirectionFound = true;
-                }
-
-                if (betterDirectionFound) {
-                    shieldHardFluxSavedIfNoShield = currentShieldHardFluxSaved;
-                    armorDamageIfNoShield = (armor - currentArmor);
-                    hullDamageIfNoShield = currentHullDamage;
-                    empDamageIfNoShield = currentEMPDamage;
+            for (sd_util.FutureHit hit : potentialHits) {
+                float timeToBlock = unfoldTime + delayTime;
+                float timeToHit = (hit.timeToHit - timeElapsed);
+                if (timeToHit < -0.1f)
+                    continue; // skip hits that have already happened
+                if (timeToHit < (timeToBlock + bufferTime)) {
+                    Pair<Float, Float> trueDamage = damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, armorAfterIncoming, ship);
+                    armorAfterIncoming = Math.max(armorAfterIncoming - trueDamage.one, 0);
+                    incomingHullDamage += trueDamage.two;
+                    incomingEMPDamage += hit.empDamage;
                 }
             }
 
-            float lowDamage = 0.001f; // 0.1% hull damage
-            float highDamage = 0.020f; // 2.0% hull damage
+            if (sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid()))
+                return false;
+            boolean isArmorDamageAcceptable = armorAfterIncoming > 0;
+            if (armorAfterIncoming < armor * 0.85)
+                isArmorDamageAcceptable = false;
 
-            // shield based on the current flux level
-            boolean wantToShield = (hullDamageIfNoShield + armorDamageIfNoShield + empDamageIfNoShield / 3) > ship.getHitpoints() * (ship.getFluxLevel() * highDamage + (1 - ship.getFluxLevel()) * lowDamage);
-
-            // if the damage is high enough to shield, but flux is high, armor tank KE
-            if (wantToShield && shieldHardFluxSavedIfNoShield/(hullDamageIfNoShield + armorDamageIfNoShield)  > (ship.getFluxLevel() * 2f + (1 - ship.getFluxLevel()) * 7f))
-                wantToShield = false;
-
-            if ((shieldHardFluxSavedIfNoShield + ship.getCurrFlux()) / ship.getMaxFlux() > 1) // Prevent overloads...
-                wantToShield = false;
-
-            if ((hullDamageIfNoShield + armorDamageIfNoShield) > 4000f) // Unless a reaper is on the way, in that case try and block it no matter what
-                wantToShield = true;
-
-            return wantToShield;
+            return isArmorDamageAcceptable;
         }
     }
+
+
+
+
+
+
+
+//        private final IntervalUtil tracker = new IntervalUtil(0.2f, 0.3f); //Seconds
+//        public List<Float> omniShieldDirections = new ArrayList<>();
+//        public boolean wantToShield(float amount, List<FutureHit> potentialHits) {
+//            tracker.advance(amount);
+//            if (tracker.intervalElapsed()) {
+//                float BUFFER_ARC = 10f;
+//                // prefilter expensive one time functions
+//                if (shield.getType() == ShieldAPI.ShieldType.FRONT) {
+//                    List<FutureHit> filteredHits = new ArrayList<>();
+//                    for (FutureHit hit : potentialHits) {
+//                        if (Misc.isInArc(ship.getFacing(), shield.getArc() + BUFFER_ARC, hit.angle)) {
+//                            filteredHits.add(hit);
+//                        }
+//                    }
+//                    potentialHits = filteredHits;
+//                } else {
+//                    List<Float> candidateShieldDirections = new ArrayList<>();
+//                    float FUZZY_RANGE = 1f;
+//                    for (FutureHit hit : potentialHits) {
+//                        boolean tooClose = false;
+//                        for (float candidateDirection : candidateShieldDirections) {
+//                            if (Math.abs(hit.angle - candidateDirection) < FUZZY_RANGE) {
+//                                tooClose = true;
+//                                break;
+//                            }
+//                        }
+//                        if (!tooClose)
+//                            candidateShieldDirections.add(hit.angle);
+//                    }
+//                    if (candidateShieldDirections.isEmpty()) candidateShieldDirections.add(ship.getFacing());
+//                    omniShieldDirections = candidateShieldDirections;
+//                }
+//            }
+//
+//            // calculate how much damage the ship would take if shields went down
+//            float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
+//            float timeElapsed = currentTime - lastUpdatedTime;
+//            float armor = getWeakestTotalArmor(ship);
+//
+//            float unfoldTime = shield.getUnfoldTime() * 2; // double it to be safe
+//            float bufferTime = unfoldTime / 3; //TODO: get real shield activate delay, unfoldTime / 4 is: "looks about right"
+//            if (shield.isOn())
+//                lastShieldOnTime = currentTime;
+//            float delayTime = Math.max(0.5f - (currentTime - lastShieldOnTime), 0f); //TODO: get real shield deactivate time
+//
+//            float shieldHardFluxSavedIfNoShield = 0f;
+//            float armorDamageIfNoShield = Float.POSITIVE_INFINITY;
+//            float hullDamageIfNoShield = Float.POSITIVE_INFINITY;
+//            float empDamageIfNoShield = 0f;
+//
+//            List<Float> shieldDirections = new ArrayList<>();
+//            if (shield.getType() == ShieldAPI.ShieldType.FRONT) shieldDirections.add(ship.getFacing());
+//            else shieldDirections.addAll(omniShieldDirections);
+//
+//            for (float shieldDirection : shieldDirections) {
+//                float currentHullDamage = 0f;
+//                float currentArmor = armor;
+//                float currentShieldHardFluxSaved = 0f;
+//                float currentEMPDamage = 0f;
+//                float currentBufferTime = Float.POSITIVE_INFINITY;
+//                float bestBufferTime = 0f;
+//                for (sd_util.FutureHit hit : potentialHits) {
+//                    float offAngle = Math.abs(MathUtils.getShortestRotation(shieldDirection, hit.angle));
+//                    float timeToBlock = (offAngle / (shield.getArc() / 2)) * unfoldTime + delayTime;
+//                    float timeToHit = (hit.timeToHit - timeElapsed);
+//                    if (timeToHit < -0.1f) continue; // skip hits that have already happened
+//                    if (timeToHit < (timeToBlock + bufferTime)) {
+//                        if (!hit.softFlux) currentShieldHardFluxSaved += fluxToShield(hit.damageType, hit.damage, ship);
+//                        Pair<Float, Float> trueDamage = damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, currentArmor, ship);
+//                        currentArmor = Math.max(currentArmor - trueDamage.one, 0f);
+//                        currentHullDamage += trueDamage.two;
+//                        currentEMPDamage += hit.empDamage;
+//                    } else {
+//                        currentBufferTime = Math.min(timeToHit - timeToBlock, currentBufferTime);
+//                    }
+//                }
+//
+//                boolean betterDirectionFound = false;
+//                if ((armor - currentArmor) < armorDamageIfNoShield) betterDirectionFound = true;
+//                else if ((armor - currentArmor) == armorDamageIfNoShield) {
+//                    if (currentHullDamage < hullDamageIfNoShield) betterDirectionFound = true;
+//                    if (currentHullDamage == hullDamageIfNoShield && currentBufferTime > bestBufferTime) betterDirectionFound = true;
+//                }
+//
+//                if (betterDirectionFound) {
+//                    shieldHardFluxSavedIfNoShield = currentShieldHardFluxSaved;
+//                    armorDamageIfNoShield = (armor - currentArmor);
+//                    hullDamageIfNoShield = currentHullDamage;
+//                    empDamageIfNoShield = currentEMPDamage;
+//                }
+//            }
+//
+//            float lowDamage = 0.001f; // 0.1% hull damage
+//            float highDamage = 0.020f; // 2.0% hull damage
+//
+//            // shield based on the current flux level
+//            boolean wantToShield = (hullDamageIfNoShield + armorDamageIfNoShield + empDamageIfNoShield / 3) > ship.getHitpoints() * (ship.getFluxLevel() * highDamage + (1 - ship.getFluxLevel()) * lowDamage);
+//
+//            // if the damage is high enough to shield, but flux is high, armor tank KE
+//            if (wantToShield && shieldHardFluxSavedIfNoShield/(hullDamageIfNoShield + armorDamageIfNoShield)  > (ship.getFluxLevel() * 2f + (1 - ship.getFluxLevel()) * 7f))
+//                wantToShield = false;
+//
+//            if ((shieldHardFluxSavedIfNoShield + ship.getCurrFlux()) / ship.getMaxFlux() > 1) // Prevent overloads...
+//                wantToShield = false;
+//
+//            if ((hullDamageIfNoShield + armorDamageIfNoShield) > 4000f) // Unless a reaper is on the way, in that case try and block it no matter what
+//                wantToShield = true;
+//
+//            return wantToShield;
+//        }
+//    }
 }

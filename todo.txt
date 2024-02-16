@@ -22,10 +22,6 @@ Arthr Stuff:
 - Sprite pass to incorporate capital's more saturated greeble style
 
 
-
-Improve auxforge glow behavior
-
-
 Discord Beta stuff:
 - Write AI script for nullifier
 - Do motefield campaign behavior stuff
@@ -33,27 +29,22 @@ Discord Beta stuff:
 - Description pass on everything
 - Faction flag
 - Implement faction - ??? Synarchy
-- Put my names into the name sheet
-- Integrate starficz shield AI
+- Rewrite starficz shield AI & use it for improved vent behavior
 - Integrate genir autofire AI
-- Rebalance my capacitor count to hit the intended hardened shields breakpoint
 
 
 - Add 2 more missions
-- Make tachyon lances quit shooting at fighters
-- Rip TPBAP ironclad engine sounds for my ships' engine loop
+- Rip ironclad engine sounds for my ships' engine loop
 
 
 Ghostbusters Stuff:
-- Finish all my variants
 - Figure out how to make the motes way better at taking out doom mines
 - Improve fleet commander to fighter strike where they actually matter
 - Don't shoot antimatters at phase ships that aren't on their phase cooldown (or fluxed out)
 - Try shoving defend orders onto stuff that's getting assfucked
 - Write escort behavior for my fleet commander
 - Add some complicated hold fire code to determine whether my weapons will hit the phased target coinciding with the moment it gets forced out of phase space
-- Debug my ships tanking hellbore shots to the face
-- Fix up my attack destroyer fit
+- Fix up my destroyer fit
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
@@ -69,8 +60,8 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
 
 
-Version 1.5 Stuff: (easy to do, but not a priority)
-- Commissioned crew effect: Improved CP regeneration
+Version Whatever Stuff: (easy to do, but not a priority)
+- Commissioned crew effect: Dramatically improved CP regeneration
 - Hullmod that adds hardflux dissipation based on the shield arc
 - Debug ship.setForceCarrierPullBackTime()
 - Integrate engine color fade for all systems
@@ -90,6 +81,7 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Convert my AI code to use AI grids for proximity checks so it can be less laggy maybe
 - Figure out whether my autoresolve strength should be higher than average
 - Check whether alex did actually add the system disabled check api call
+- Check whether alex did actually add the ability to look at isUsable from within the ai script
 - Reverse-engineer fleet deployment manager
 - Test a longer mote spawn/repair delay on mnemonic armor
 - Fix my ships shooting dragoncocks from out of range
@@ -98,17 +90,20 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Check if I can just look at whether a target's system is disabled directly with the new api addition
 - Turret arc pass for civ ships
 - Rename my colors in util away from under color etc
+- Revisit my capacitor count to hit the intended hardened shields breakpoint
+- Figure out how to feel about my kite having a builtin wing
+- Improve vent and shield AI to account for scripted damage such as breaches, termination system, emp emitter
+- Make SO count as a dmod
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
-- Improve venting behavior - needs to use starficz' calculate incoming damage utility, account for beams, breaches, termination system
 - Expand upon custom fleet command AI so it can work in campaign
 - When a fleet contests your salvage, options are: Fight them, split it, pay them off, threaten them, or leverage your faction rep (either it being high or low!)
 - Run a checksum on my own mod so I know when people have tampered with it
 - Add a functionality to the attack manager where it chooses between engage or eliminate depending on whether enough ships ar enearby to actually kill the target immediately
 - Check if it's possible to apply an avoid order to a waypoint
-- Make SO count as a dmod
 - Make ships not shoot if asteroid is in the way
+- Rework battleszie to start at 30 and then slowly expand up to a max of 480
 
 
 Version 2.5 Stuff: (Advanced agent interaction)
@@ -133,7 +128,7 @@ Version 3.0 Stuff: (scope creep)
 - Console command to buy stuff and have it shipped to you
 
 Unused names that I want reserved:
-Purifier, Oblivion, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Torrent, Anthem
+Purifier, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Torrent, Anthem
 
 Code stuff to remember:
 final variable;

@@ -33,7 +33,7 @@ public class sd_util {
     public static final Color factionColor1 = new Color (255,240,205, 55), factionColor2 = new Color (255,240,205,155),
             timeColor1 =  new Color (100,165,255,55), timeColor2 = new Color (100,165,255,155),
             phaseColor1 = new Color(150,100,255, 55), phaseColor2 = new Color(150,100,255, 155),
-            damageColor1 = new Color (255,120,80,55), damageColor2 = new Color (255,120,80,155),
+            damageColor1 = new Color (255,120,80,55), damageColor2 = new Color (255,120,80,155), damageColor3 = new Color (255,120,80,255),
             healColor1 = new Color (60,210,150,55), healColor2 = new Color (60,210,150,155), healColor3 = new Color (60,210,150,255),
             systemColor1 = new Color (255,250,150,55), systemColor2 = new Color (255,250,150,155);
 
@@ -196,7 +196,6 @@ public class sd_util {
 
     // all this shit is from starficz
     public static final boolean DEBUG_ENABLED = false;
-
     public static class FutureHit {
         public float timeToHit;
         public float angle;
