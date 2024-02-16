@@ -5,6 +5,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
+import data.graphics.sd_decoSystemRangePlugin;
 import data.sd_util;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 public class sd_nullifier extends BaseShipSystemScript {
     boolean runOnce = true;
+    boolean applyDeco = true;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         ShipAPI ship = (ShipAPI) stats.getEntity();
         if (!sd_util.isCombatSituation(ship))
@@ -28,6 +30,10 @@ public class sd_nullifier extends BaseShipSystemScript {
         }
     }
     public void unapply(MutableShipStatsAPI stats, String id) {
+        if (applyDeco) {
+            Global.getCombatEngine().addPlugin(new sd_decoSystemRangePlugin((ShipAPI) stats.getEntity()));
+            applyDeco = false;
+        }
         runOnce = true;
     }
     public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah, needs to take target as an input to work in the AI script

@@ -31,11 +31,8 @@ import java.util.concurrent.Future;
 import static data.sd_util.*;
 
 public class sd_utilityhullmod extends BaseHullMod {
-    List<String> decoSystemRange = Arrays.asList("sd_hackingsuite", "sd_nullifier");
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ship.addListener(new sd_utilityhullmodListener(ship));
-        if (decoSystemRange.contains(ship.getSystem().getId()))
-            Global.getCombatEngine().addPlugin(new sd_decoSystemRangePlugin(ship));
     }
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
@@ -58,12 +55,10 @@ public class sd_utilityhullmod extends BaseHullMod {
             if (Global.getSettings().getModManager().isModEnabled("lunalib"))
                 this.enabled = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enableAITweaks"));
         }
-        final IntervalUtil timer = new IntervalUtil (0.5f, 1.5f);
         boolean runOnce = true;
         String personality = Personalities.AGGRESSIVE;
         @Override
         public void advance(float amount) {
-
             if (!enabled || !sd_util.isCombatSituation(ship) || ship.getShipAI() == null)
                 return;
 
@@ -196,119 +191,103 @@ public class sd_utilityhullmod extends BaseHullMod {
             //////////////////////////////////////////////////// todo: rework this to use starficz's predictedhits/futurehits function
             //SCY'S VENTING CODE, PRACTICALLY UNCUSTOMIZED YET//
             ////////////////////////////////////////////////////
-            timer.advance(amount);
-            if (timer.intervalElapsed()) {
-                if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getFluxTracker().getFluxLevel() < 0.2 || ship.getSystem().isActive())
-                    return;
-
-                MissileAPI closest = AIUtils.getNearestEnemyMissile(ship);
-                if (closest != null && MathUtils.isWithinRange(ship, closest,500))
-                    return;
-
-                for (WeaponAPI wep : ship.getAllWeapons()) { // wep.isinburst doesn't work for tachyon lance
-                    if (wep.isFiring() && (wep.isBurstBeam() || wep.isInBurst()))
-                        return;
-                }
-
-//                if ( ship.getFluxTracker().getFluxLevel() < 0.5 && AIUtils.getNearbyEnemies(ship, maxRange).size() > 0) {
+//            timer.advance(amount);
+//            if (timer.intervalElapsed()) {
+//                if (ship.getFluxTracker().isOverloadedOrVenting() || ship.getFluxTracker().getFluxLevel() < 0.2 || ship.getSystem().isActive())
 //                    return;
+//
+//                MissileAPI closest = AIUtils.getNearestEnemyMissile(ship);
+//                if (closest != null && MathUtils.isWithinRange(ship, closest,500))
+//                    return;
+//
+//                for (WeaponAPI wep : ship.getAllWeapons()) { // wep.isinburst doesn't work for tachyon lance
+//                    if (wep.isFiring() && (wep.isBurstBeam() || wep.isInBurst()))
+//                        return;
 //                }
-
-                //venting need
-                float ventingNeed;
-                switch (ship.getHullSize()) {
-                    case CAPITAL_SHIP:
-                        ventingNeed = 2*(float) Math.pow(ship.getFluxTracker().getFluxLevel(),5f);
-                        break;
-                    case CRUISER:
-                        ventingNeed = 1.5f*(float) Math.pow(ship.getFluxTracker().getFluxLevel(),4f);
-                        break;
-                    case DESTROYER:
-                        ventingNeed = (float) Math.pow(ship.getFluxTracker().getFluxLevel(),3f);
-                        break;
-                    default:
-                        ventingNeed = (float) Math.pow(ship.getFluxTracker().getFluxLevel(),2f);
-                        break;
-                }
-
-                float hullFactor;
-                switch (ship.getHullSize()) {
-                    case CAPITAL_SHIP:
-                        hullFactor=(float) Math.pow(ship.getHullLevel(),0.4f);
-                        break;
-                    case CRUISER:
-                        hullFactor=(float) Math.pow(ship.getHullLevel(),0.6f);
-                        break;
-                    case DESTROYER:
-                        hullFactor=ship.getHullLevel();
-                        break;
-                    default:
-                        hullFactor=(float) Math.pow(ship.getHullLevel(),2f);
-                        break;
-                }
-
-                //situational danger
-                float dangerFactor = 0;
-                List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship, 2000f);
-                for (ShipAPI enemy : nearbyEnemies) {
-                    //reset often with timid or cautious personalities
-                    FleetSide side = FleetSide.PLAYER;
-                    if (ship.getOriginalOwner() > 0){
-                        side = FleetSide.ENEMY;
-                    }
-                    if(Global.getCombatEngine().getFleetManager(side).getDeployedFleetMember(ship)!=null){
-                        PersonalityAPI personality = (Global.getCombatEngine().getFleetManager(side).getDeployedFleetMember(ship)).getMember().getCaptain().getPersonalityAPI();
-                        if(personality.getId().equals("timid") || personality.getId().equals("cautious")){
-                            if (enemy.getFluxTracker().isOverloaded() && enemy.getFluxTracker().getOverloadTimeRemaining() > ship.getFluxTracker().getTimeToVent()) {
-                                continue;
-                            }
-                            if (enemy.getFluxTracker().isVenting() && enemy.getFluxTracker().getTimeToVent() > ship.getFluxTracker().getTimeToVent()) {
-                                continue;
-                            }
-                        }
-                    }
-
-                    switch (enemy.getHullSize()) {
-                        case CAPITAL_SHIP:
-                            dangerFactor+= Math.max(0, 3f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
-                            break;
-                        case CRUISER:
-                            dangerFactor+= Math.max(0, 2.25f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
-                            break;
-                        case DESTROYER:
-                            dangerFactor+= Math.max(0, 1.5f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
-                            break;
-                        case FRIGATE:
-                            dangerFactor+= Math.max(0, 1f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
-                            break;
-                        default:
-                            dangerFactor+= Math.max(0, 0.5f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/640000));
-                            break;
-                    }
-                }
-
-//                //situational help
-//                float helpFactor = 0;
-//                List<ShipAPI> nearbyAllies = AIUtils.getNearbyAllies(ship, 2000f);
-//                for (ShipAPI ally : nearbyAllies) {
-//                    if (ally.getHullSize()==ShipAPI.HullSize.CAPITAL_SHIP){
-//                        helpFactor+= Math.max(0,2-(MathUtils.getDistanceSquared(ally.getLocation(), ship.getLocation())/1000000));
-//                    } else if (ally.getHullSize()==ShipAPI.HullSize.CRUISER){
-//                        helpFactor+= Math.max(0,2-(MathUtils.getDistanceSquared(ally.getLocation(), ship.getLocation())/800000));
-//                    } else if (ally.getHullSize()==ShipAPI.HullSize.DESTROYER){
-//                        helpFactor+= Math.max(0,2-(MathUtils.getDistanceSquared(ally.getLocation(), ship.getLocation())/600000));
-//                    } else if (ally.getHullSize()==ShipAPI.HullSize.FRIGATE){
-//                        helpFactor+= Math.max(0,2-(MathUtils.getDistanceSquared(ally.getLocation(), ship.getLocation())/400000));
+//
+////                if ( ship.getFluxTracker().getFluxLevel() < 0.5 && AIUtils.getNearbyEnemies(ship, maxRange).size() > 0) {
+////                    return;
+////                }
+//
+//                //venting need
+//                float ventingNeed;
+//                switch (ship.getHullSize()) {
+//                    case CAPITAL_SHIP:
+//                        ventingNeed = 2*(float) Math.pow(ship.getFluxTracker().getFluxLevel(),5f);
+//                        break;
+//                    case CRUISER:
+//                        ventingNeed = 1.5f*(float) Math.pow(ship.getFluxTracker().getFluxLevel(),4f);
+//                        break;
+//                    case DESTROYER:
+//                        ventingNeed = (float) Math.pow(ship.getFluxTracker().getFluxLevel(),3f);
+//                        break;
+//                    default:
+//                        ventingNeed = (float) Math.pow(ship.getFluxTracker().getFluxLevel(),2f);
+//                        break;
+//                }
+//
+//                float hullFactor;
+//                switch (ship.getHullSize()) {
+//                    case CAPITAL_SHIP:
+//                        hullFactor=(float) Math.pow(ship.getHullLevel(),0.4f);
+//                        break;
+//                    case CRUISER:
+//                        hullFactor=(float) Math.pow(ship.getHullLevel(),0.6f);
+//                        break;
+//                    case DESTROYER:
+//                        hullFactor=ship.getHullLevel();
+//                        break;
+//                    default:
+//                        hullFactor=(float) Math.pow(ship.getHullLevel(),2f);
+//                        break;
+//                }
+//
+//                //situational danger
+//                float dangerFactor = 0;
+//                List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship, 2000f);
+//                for (ShipAPI enemy : nearbyEnemies) {
+//                    //reset often with timid or cautious personalities
+//                    FleetSide side = FleetSide.PLAYER;
+//                    if (ship.getOriginalOwner() > 0){
+//                        side = FleetSide.ENEMY;
+//                    }
+//                    if(Global.getCombatEngine().getFleetManager(side).getDeployedFleetMember(ship)!=null){
+//                        PersonalityAPI personality = (Global.getCombatEngine().getFleetManager(side).getDeployedFleetMember(ship)).getMember().getCaptain().getPersonalityAPI();
+//                        if(personality.getId().equals("timid") || personality.getId().equals("cautious")){
+//                            if (enemy.getFluxTracker().isOverloaded() && enemy.getFluxTracker().getOverloadTimeRemaining() > ship.getFluxTracker().getTimeToVent()) {
+//                                continue;
+//                            }
+//                            if (enemy.getFluxTracker().isVenting() && enemy.getFluxTracker().getTimeToVent() > ship.getFluxTracker().getTimeToVent()) {
+//                                continue;
+//                            }
+//                        }
+//                    }
+//
+//                    switch (enemy.getHullSize()) {
+//                        case CAPITAL_SHIP:
+//                            dangerFactor+= Math.max(0, 3f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
+//                            break;
+//                        case CRUISER:
+//                            dangerFactor+= Math.max(0, 2.25f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
+//                            break;
+//                        case DESTROYER:
+//                            dangerFactor+= Math.max(0, 1.5f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
+//                            break;
+//                        case FRIGATE:
+//                            dangerFactor+= Math.max(0, 1f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/1000000));
+//                            break;
+//                        default:
+//                            dangerFactor+= Math.max(0, 0.5f -(MathUtils.getDistanceSquared(enemy.getLocation(), ship.getLocation())/640000));
+//                            break;
 //                    }
 //                }
 //
-//                float decisionLevel= ventingNeed * hullFactor * ((helpFactor+1)/(dangerFactor+1));
-                float decisionLevel = (ventingNeed * hullFactor + 1) / (dangerFactor + 1);
-
-                if (decisionLevel >= 1.5f || (ship.getFluxTracker().getFluxLevel() > 0.1f && dangerFactor == 0)) {
-                    ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
-                }
-            }
+//                float decisionLevel = (ventingNeed * hullFactor + 1) / (dangerFactor + 1);
+//
+//                if (decisionLevel >= 1.5f || (ship.getFluxTracker().getFluxLevel() > 0.1f && dangerFactor == 0)) {
+//                    ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
+//                }
+//            }
 
             ////////////////////////////
             //STARFICZ' SHIELD AI CODE// todo: rework all this shit to be better for my epic agile ships
@@ -332,18 +311,24 @@ public class sd_utilityhullmod extends BaseHullMod {
                         if (hit.timeToHit <= ship.getShield().getUnfoldTime() * 2)
                             potentialHitsForShield.add(hit);
                 }
-                for (FutureHit hit : potentialHitsForShield) {
-                    if (hit.damageType == DamageType.HIGH_EXPLOSIVE) {
-                        engine.addFloatingText(ship.getLocation(), String.valueOf(hit.timeToHit), 20, Color.white, null, 0, 0);
+            }
+
+            if (isArmorDamageAcceptable(amount, potentialHitsForVenting)) {
+                boolean isWeaponFiring = false;
+                for (WeaponAPI weapon : ship.getAllWeapons()) { // wep.isinburst doesn't work for tachyon lance
+                    if (weapon.isFiring() && (weapon.isBurstBeam() || weapon.isInBurst())) {
+                        isWeaponFiring = true;
+                        break;
                     }
                 }
+                if (ship.getFluxLevel() > 0.2 && !isWeaponFiring)
+                    ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
             }
 
             if (shield != null) {
                 boolean isArmorDamageAcceptable = isArmorDamageAcceptable(amount, potentialHitsForShield);
                 if (shield.isOn() && isArmorDamageAcceptable) {
                     ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
-                    engine.addFloatingText(ship.getLocation(), "Shields down!", 20, healColor3, null, 0, 0);
                 }
                 if (shield.isOff() && isArmorDamageAcceptable)
                     ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
@@ -358,17 +343,16 @@ public class sd_utilityhullmod extends BaseHullMod {
         public List<FutureHit> potentialHits = new ArrayList<>();
 
         public boolean isArmorDamageAcceptable(float amount, List<FutureHit> potentialHits) {
-
             // calculate how much damage the ship would take if shields went down
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
             float armor = getWeakestTotalArmor(ship);
 
             float unfoldTime = shield.getUnfoldTime();
-            float bufferTime = unfoldTime / 4; //TODO: get real shield activate delay, unfoldTime / 4 is: "looks about right"
+            float bufferTime = unfoldTime / 4;
             if (shield.isOn())
                 lastShieldOnTime = currentTime;
-            float delayTime = Math.max(0.5f - (currentTime - lastShieldOnTime), 0f); //TODO: get real shield deactivate time
+            float delayTime = Math.max(0.5f - (currentTime - lastShieldOnTime), 0f);
 
             float armorAfterIncoming = armor;
             float incomingHullDamage = 0;

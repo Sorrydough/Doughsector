@@ -29,12 +29,13 @@ Discord Beta stuff:
 - Description pass on everything
 - Faction flag
 - Implement faction - ??? Synarchy
-- Rewrite starficz shield AI & use it for improved vent behavior
 - Integrate genir autofire AI
+- Figure out how to stop my ships from sitting there eating hellbore shots when overloaded
 
 
 - Add 2 more missions
 - Rip ironclad engine sounds for my ships' engine loop
+- Do a pass on infotext and status indicators for all systems now that I know how
 
 
 Ghostbusters Stuff:
@@ -45,6 +46,11 @@ Ghostbusters Stuff:
 - Write escort behavior for my fleet commander
 - Add some complicated hold fire code to determine whether my weapons will hit the phased target coinciding with the moment it gets forced out of phase space
 - Fix up my destroyer fit
+
+
+Damage prediction AI improvement stuff:
+- Add scripted damage check (breach, squall, emp emitter, termination sequence)
+- Add "acceptable hull damage" check to further improve epicness
 
 
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
@@ -72,27 +78,21 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - ensure that two ships don't accidentally use hacking suite on the same target simultaneously
 - add status indicators for mnemonic armor - armor % imbalanced, % armor remaining - maybe use an indicator above the hull bar
 - do another pass to nerf my fighters dissipation & change hexshield to disable the shield until 0 flux, instead of disabling for a flat amount of time
-- make kinetic blaster fighter damage itself
-- Missile autoforge rework - add a graphical bar above shield strength to show restoration capacity (project solace has an example?)
+- make KB fighter damage itself
 - Make motes stop fucking running into asteroids
 - Add a description display to motefield hullmod to show how much the ship's motefield has degraded
 - Do normals properly with modlab
 - Add normals for decos
 - Convert my AI code to use AI grids for proximity checks so it can be less laggy maybe
 - Figure out whether my autoresolve strength should be higher than average
-- Check whether alex did actually add the system disabled check api call
-- Check whether alex did actually add the ability to look at isUsable from within the ai script
 - Reverse-engineer fleet deployment manager
-- Test a longer mote spawn/repair delay on mnemonic armor
 - Fix my ships shooting dragoncocks from out of range
 - Turret arc pass for heavy cruiser & capital
 - Check if I can fix up my janky isUsable() checks with the new api addition
 - Check if I can just look at whether a target's system is disabled directly with the new api addition
 - Turret arc pass for civ ships
-- Rename my colors in util away from under color etc
 - Revisit my capacitor count to hit the intended hardened shields breakpoint
 - Figure out how to feel about my kite having a builtin wing
-- Improve vent and shield AI to account for scripted damage such as breaches, termination system, emp emitter
 - Make SO count as a dmod
 
 

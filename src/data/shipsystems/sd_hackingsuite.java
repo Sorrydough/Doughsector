@@ -2,6 +2,7 @@ package data.shipsystems;
 
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
+import data.graphics.sd_decoSystemRangePlugin;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 
 public class sd_hackingsuite extends BaseShipSystemScript {
 	boolean runOnce = true;
+	boolean applyDeco = true;
 	ShipAPI enemy = null;
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		ShipAPI ship = (ShipAPI) stats.getEntity();
@@ -25,7 +27,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			return;
 
 		// needed to add this because it was possible for the ship to deselect its target during system chargeup, which would pass a null target to the effect plugin
-		if (runOnce && ship.getSystem().getState() == SystemState.IN) {
+		if (runOnce && state == State.IN) {
 			enemy = ship.getShipTarget();
 			runOnce = false;
 		}
@@ -39,10 +41,16 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 		ship.setJitterUnder(this, sd_util.damageColor1, jitterLevel, 20, 0, 3 + jitterExtra);
 
 		// apply the effect to the target, note we check effectLevel and not for active state because our system doesn't have an active duration
-		if (ship.getSystem().getEffectLevel() == 1) {
+		if (ship.getSystem().getEffectLevel() == 1)
 			Global.getCombatEngine().addPlugin(new sd_hackingsuitePlugin(enemy));
-			runOnce = true;
+	}
+	@Override
+	public void unapply(MutableShipStatsAPI stats, String id) {
+		if (applyDeco) {
+			Global.getCombatEngine().addPlugin(new sd_decoSystemRangePlugin((ShipAPI) stats.getEntity()));
+			applyDeco = false;
 		}
+		runOnce = true;
 	}
 	public static boolean isTargetValid(ShipAPI ship, ShipAPI target) { // checks whether the target is in range, blah blah blah
 		if (target == null)                                                // needs to take target as an input to work in the AI script
