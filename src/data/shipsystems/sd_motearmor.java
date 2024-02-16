@@ -14,6 +14,7 @@ import java.util.List;
 
 public class sd_motearmor extends BaseShipSystemScript {
     final IntervalUtil interval = new IntervalUtil(0.015f, 0.15f);
+    final IntervalUtil moteInterval = new IntervalUtil(0.1f, 0.5f);
     final Map<ShipAPI.HullSize, Integer> ARMOR_PER_MOTE = new HashMap<>(); {
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.FRIGATE, 25);
         ARMOR_PER_MOTE.put(ShipAPI.HullSize.DESTROYER, 50);
@@ -35,10 +36,10 @@ public class sd_motearmor extends BaseShipSystemScript {
         ArmorGridAPI grid = ship.getArmorGrid();
 
         if (sd_mnemonicarmor.isArmorGridBalanced(grid)) {
-            ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
+            ship.setJitter(id, sd_util.factionColor1, effectLevel, 2, 0, 5);
             return;
         } else {
-            ship.setJitter(id, sd_util.systemColor, effectLevel, 2, 0, 5);
+            ship.setJitter(id, sd_util.systemColor1, effectLevel, 2, 0, 5);
         }
 
         interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
@@ -82,7 +83,7 @@ public class sd_motearmor extends BaseShipSystemScript {
             float thickness = (2 + amountToTransfer * 2) * intensity;
             if (isToAddInBounds)
                 Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship,
-                        thickness, sd_util.healColor, sd_util.damageUnderColor);
+                        thickness, sd_util.healColor1, sd_util.damageColor2);
             // draw spark effects on the cell if it's within bounds
             if (isToSubtractInBounds)
                 sd_mnemonicarmor.drawVfx(toSubtractLoc, ship, amountToTransfer, intensity);
@@ -98,10 +99,12 @@ public class sd_motearmor extends BaseShipSystemScript {
 
             // some mote stuff
             moteProgress += amountToTransfer;
-            if (moteProgress >= ARMOR_PER_MOTE.get(ship.getHullSize()) && data.motes.size() < MAX_MOTES.get(ship.getHullSize())) {
-                emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship), true);
-                moteProgress -= ARMOR_PER_MOTE.get(ship.getHullSize());
-            }
+            moteInterval.advance(Global.getCombatEngine().getElapsedInLastFrame());
+            if (moteInterval.intervalElapsed())
+                if (moteProgress >= ARMOR_PER_MOTE.get(ship.getHullSize()) && data.motes.size() < MAX_MOTES.get(ship.getHullSize())) {
+                    emitMote(ship, CollisionUtils.getNearestPointOnBounds(toAddLoc, ship), true);
+                    moteProgress -= ARMOR_PER_MOTE.get(ship.getHullSize());
+                }
         }
     }
     public static class SharedMoteAIData {

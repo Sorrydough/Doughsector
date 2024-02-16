@@ -16,7 +16,7 @@ sd_destroyeradvanced,ship,,1,normal,graphics/ships/normals/sd_destroyeradvanced_
 sd_cruiser,ship,,1,normal,graphics/ships/normals/sd_cruiser_normal.png
 sd_cruiserheavy,ship,,1,normal,graphics/ships/normals/sd_cruiserfatfuck_normal.png
 ,,,,,
-sd_capitalbattlecarrier,ship,,1,normal,graphics/ships/normals/sd_capitalbattlecarrier_normal.png
+sd_capitaldreadnought,ship,,1,normal,graphics/ships/normals/sd_capitaldreadnought_normal.png
 ,,,,,
 sd_retrofitkite,ship,,1,normal,graphics/ships/normals/sd_retrofitkite_normal.png
 sd_retrofitnebula,ship,,1,normal,graphics/ships/normals/sd_retrofitnebula_normal.png

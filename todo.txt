@@ -14,6 +14,7 @@ Arthr Stuff:
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
 - Export, Pirate, Path skin variants
 - General revision pass, what remains:
+    Fix aux thrusters on cap and cruiser being in a dumb place
     Fix the shitty looking bashed part on the cruiser & heavy frigate
     Heavy cruiser needs to not look unsettling
     Nebula needs salvage gantry
@@ -23,11 +24,6 @@ Arthr Stuff:
 
 
 Improve auxforge glow behavior
-add a glib check so game no crash
-hangar glowmaps
-slower mote interval for mnemonic armor
-battlecarrier needs third bay
-
 
 
 Discord Beta stuff:
@@ -45,6 +41,7 @@ Discord Beta stuff:
 
 - Add 2 more missions
 - Make tachyon lances quit shooting at fighters
+- Rip TPBAP ironclad engine sounds for my ships' engine loop
 
 
 Ghostbusters Stuff:
@@ -77,7 +74,7 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Hullmod that adds hardflux dissipation based on the shield arc
 - Debug ship.setForceCarrierPullBackTime()
 - Integrate engine color fade for all systems
-- Glowmaps for decos
+- Glowmaps for blinkers & hangar
 - Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
 - Create engine reigniter hullmod
 - Figure out a better way to display skills in main menu missions
@@ -91,7 +88,6 @@ Version 1.5 Stuff: (easy to do, but not a priority)
 - Do normals properly with modlab
 - Add normals for decos
 - Convert my AI code to use AI grids for proximity checks so it can be less laggy maybe
-- Figure out whether I need to use timer.randomize() on all my intervals after they get advanced
 - Figure out whether my autoresolve strength should be higher than average
 - Check whether alex did actually add the system disabled check api call
 - Reverse-engineer fleet deployment manager

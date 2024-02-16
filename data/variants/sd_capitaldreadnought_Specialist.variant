@@ -3,7 +3,7 @@
     "fluxCapacitors": 20,
     "fluxVents": 50,
     "goalVariant": true,
-    "hullId": "sd_capitalbattlecarrier",
+    "hullId": "sd_capitaldreadnought",
     "hullMods": [
         "auxiliarythrusters",
         "eccm",
@@ -14,7 +14,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_capitalbattlecarrier_Specialist",
+    "variantId": "sd_capitaldreadnought_Specialist",
     "weaponGroups": [
         {
             "autofire": false,

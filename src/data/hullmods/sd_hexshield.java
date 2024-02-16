@@ -29,8 +29,8 @@ public class sd_hexshield extends BaseHullMod { //TODO: REWRITE THIS SCRIPT
             return;
         }
         
-        if (ship.getShield().getInnerColor() != sd_util.factionColor)
-            ship.getShield().setInnerColor(sd_util.factionColor);
+        if (ship.getShield().getInnerColor() != sd_util.factionColor1)
+            ship.getShield().setInnerColor(sd_util.factionColor1);
 
         String id1 = "sd_HexShield1_" + ship.getId();
         String id2 = "sd_HexShield2_" + ship.getId();

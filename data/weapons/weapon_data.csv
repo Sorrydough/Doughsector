@@ -19,6 +19,6 @@ Deco Hangar (Kite),sd_retrofitkite_hangar,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYST
 Deco Hangar (Starliner),sd_retrofitstarliner_hangar,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 Deco Hangar (Carrier),sd_destroyercarrier_hangar,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 Deco Hangar (Advanced),sd_destroyeradvanced_hangar,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-Deco Hangar (Battlecarrier),sd_capitalbattlecarrier_hangar,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-Deco Cover,sd_capitalbattlecarrier_cover,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+Deco Hangar (Battlecarrier),sd_capitaldreadnought_hangar,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+Deco Cover,sd_capitaldreadnought_cover,,,,1,1,,,,,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 Deco Temporal Core,sd_destroyeradvanced_glow,,,,1,1,,,,360,,,,,,,,,1,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,

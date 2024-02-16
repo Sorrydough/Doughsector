@@ -17,7 +17,7 @@
 	"hardpointAngleOffsets":[0],
 	"fringeColor":[0,0,0,0],
 	"coreColor":[0,0,0,0],
-	"glowColor":[60,210,150,155],
+	"glowColor":[60,210,150,255],
 	"width":1.0,
 	"textureType":ROUGH,
 	"textureScrollSpeed":1.0,

@@ -27,10 +27,10 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 		ArmorGridAPI grid = ship.getArmorGrid();
 
 		if (isArmorGridBalanced(grid)) {
-			ship.setJitter(id, sd_util.factionColor, effectLevel, 2, 0, 5);
+			ship.setJitter(id, sd_util.factionColor1, effectLevel, 2, 0, 5);
 			return;
 		} else {
-			ship.setJitter(id, sd_util.systemColor, effectLevel, 2, 0, 5);
+			ship.setJitter(id, sd_util.systemColor1, effectLevel, 2, 0, 5);
 		}
 
 		interval.advance(Global.getCombatEngine().getElapsedInLastFrame());
@@ -66,7 +66,7 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 			float thickness = (2 + amountToTransfer * 2) * intensity;
 			if (isToAddInBounds)
 				Global.getCombatEngine().spawnEmpArcVisual(CollisionUtils.getNearestPointOnBounds(toSubtractLoc, ship), ship, toAddLoc, ship,
-						thickness, sd_util.healColor, sd_util.damageUnderColor);
+						thickness, sd_util.healColor1, sd_util.damageColor2);
 			// draw spark effects on the cell if it's within bounds
 			if (isToSubtractInBounds)
 				drawVfx(toSubtractLoc, ship, amountToTransfer, intensity);
@@ -129,14 +129,16 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 			//Console.showMessage("Transferred Sqrt: "+ sizeSqrt +" Particle Size: "+ particleSize +" Particle Duration: "+ particleDuration);
 			Global.getCombatEngine().addSmoothParticle(particleLoc, particleVel, particleSize, intensity, particleDuration, particleColor);
 		}
-		// draw a distortion wave
-		RippleDistortion ripple = new RippleDistortion();
-		ripple.setLocation(loc);
-		ripple.setSize((50 + size) * intensity);
-		ripple.setVelocity(ship.getVelocity());
-		ripple.setLifetime(intensity);
-		ripple.setIntensity(intensity);
-		DistortionShader.addDistortion(ripple);
+		if (Global.getSettings().getModManager().isModEnabled("shaderLib")) {
+			// draw a distortion wave
+			RippleDistortion ripple = new RippleDistortion();
+			ripple.setLocation(loc);
+			ripple.setSize((50 + size) * intensity);
+			ripple.setVelocity(ship.getVelocity());
+			ripple.setLifetime(intensity);
+			ripple.setIntensity(intensity);
+			DistortionShader.addDistortion(ripple);
+		}
 	}
 	public StatusData getStatusData(int index, State state, float effectLevel) {
 		if (index == 0)

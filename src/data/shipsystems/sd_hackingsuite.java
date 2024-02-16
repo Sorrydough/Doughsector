@@ -35,8 +35,8 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 		if (state == State.OUT) // ensures jitter level doesn't deteriorate during OUT
 			jitterLevel *= jitterLevel;
 		float jitterExtra = jitterLevel * 50;
-		ship.setJitter(this, sd_util.systemUnderColor, jitterLevel, 4, 0, jitterExtra);
-		ship.setJitterUnder(this, sd_util.damageColor, jitterLevel, 20, 0, 3 + jitterExtra);
+		ship.setJitter(this, sd_util.systemColor2, jitterLevel, 4, 0, jitterExtra);
+		ship.setJitterUnder(this, sd_util.damageColor1, jitterLevel, 20, 0, 3 + jitterExtra);
 
 		// apply the effect to the target, note we check effectLevel and not for active state because our system doesn't have an active duration
 		if (ship.getSystem().getEffectLevel() == 1) {

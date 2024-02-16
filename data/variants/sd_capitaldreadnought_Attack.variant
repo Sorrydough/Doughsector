@@ -3,7 +3,7 @@
     "fluxCapacitors": 30,
     "fluxVents": 23,
     "goalVariant": true,
-    "hullId": "sd_capitalbattlecarrier",
+    "hullId": "sd_capitaldreadnought",
     "hullMods": [
         "autorepair",
         "eccm",
@@ -13,7 +13,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_capitalbattlecarrier_Attack",
+    "variantId": "sd_capitaldreadnought_Attack",
     "weaponGroups": [
         {
             "autofire": false,

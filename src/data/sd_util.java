@@ -30,12 +30,12 @@ import data.ReflectionUtils.*;
 
 
 public class sd_util {
-    public static final Color factionColor = new Color (255,240,205, 55), factionUnderColor = new Color (255,240,205,155),
-            timeColor =  new Color (100,165,255,55), timeUnderColor = new Color (100,165,255,155),
-            phaseColor = new Color(150,100,255, 55), phaseUnderColor = new Color(150,100,255, 155),
-            damageColor = new Color (255,120,80,55), damageUnderColor = new Color (255,120,80,155),
-            healColor = new Color (60,210,150,55), healUnderColor = new Color (60,210,150,155),
-            systemColor = new Color (255,250,150,55), systemUnderColor = new Color (255,250,150,155);
+    public static final Color factionColor1 = new Color (255,240,205, 55), factionColor2 = new Color (255,240,205,155),
+            timeColor1 =  new Color (100,165,255,55), timeColor2 = new Color (100,165,255,155),
+            phaseColor1 = new Color(150,100,255, 55), phaseColor2 = new Color(150,100,255, 155),
+            damageColor1 = new Color (255,120,80,55), damageColor2 = new Color (255,120,80,155),
+            healColor1 = new Color (60,210,150,55), healColor2 = new Color (60,210,150,155), healColor3 = new Color (60,210,150,255),
+            systemColor1 = new Color (255,250,150,55), systemColor2 = new Color (255,250,150,155);
 
     public static boolean isNumberWithinRange(float numberA, float numberB, float deviationPercent) {
         float lowerBound = numberB - (numberB * (deviationPercent / 100));
@@ -197,7 +197,7 @@ public class sd_util {
     // all this shit is from starficz
     public static final boolean DEBUG_ENABLED = false;
 
-    public static class FutureHit{
+    public static class FutureHit {
         public float timeToHit;
         public float angle;
         public DamageType damageType;
@@ -211,7 +211,6 @@ public class sd_util {
     public static List<FutureHit> incomingProjectileHits(ShipAPI ship, Vector2f testPoint){
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
-        boolean useBackup = false;
 
         Iterator<Object> iterator = Global.getCombatEngine().getAllObjectGrid().getCheckIterator(testPoint, MAX_RANGE * 2, MAX_RANGE * 2);
         while (iterator.hasNext()) {
@@ -222,7 +221,8 @@ public class sd_util {
             if(threat.isFading()) continue;
             if(threat.getOwner() == ship.getOwner()) continue;
 
-            float shipRadius = Misc.getTargetingRadius(threat.getLocation(), ship, false);
+            //float shipRadius = Misc.getTargetingRadius(threat.getLocation(), ship, false);
+            float shipRadius = ship.getShieldRadiusEvenIfNoShield();
             // Guided missiles get dealt with here
             if (threat instanceof MissileAPI){
                 MissileAPI missile = (MissileAPI) threat;

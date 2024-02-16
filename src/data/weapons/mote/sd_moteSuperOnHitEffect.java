@@ -29,7 +29,7 @@ public class sd_moteSuperOnHitEffect implements OnHitEffectPlugin {
 					engine.spawnEmpArcPierceShields(projectile.getSource(), point, target, target,
 							projectile.getDamageType(), projectile.getDamageAmount(), projectile.getEmpAmount(),
 							100000f, "mote_attractor_impact_emp_arc", 20f,
-							sd_util.damageColor, sd_util.factionUnderColor);
+							sd_util.damageColor1, sd_util.factionColor2);
 				}
 			} else
 				Global.getCombatEngine().applyDamage(projectile, ship, point, projectile.getDamageAmount(), DamageType.ENERGY, 0f, false, false, projectile.getSource(), true);

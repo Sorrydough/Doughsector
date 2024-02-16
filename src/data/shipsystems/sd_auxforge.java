@@ -33,7 +33,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
         // Ok update: I had to refactor it again cuz scope changed, so all that complaining was about code that no longer exists. :)))))))
         if (!willRestoreFighters)
             for (WeaponAPI missile : missiles)
-                missile.setGlowAmount(1, sd_util.healUnderColor);
+                missile.setGlowAmount(1, sd_util.healColor3);
 
         // the actual restoration effects occur here
         if (effectLevel == 1) { // need to check effectLevel to prevent the restoration from occurring multiple times
@@ -62,7 +62,7 @@ public class sd_auxforge extends BaseShipSystemScript  {
     public void unapply(MutableShipStatsAPI stats, String id) {
         if (!missiles.isEmpty()) // glow sticks around after the system deactivates otherwise LMAO
             for (WeaponAPI missile : missiles)
-                missile.setGlowAmount(0, sd_util.factionColor);
+                missile.setGlowAmount(0, sd_util.factionColor1);
     }
     public static float getAverageMissileFullness(List<WeaponAPI> missiles) {
         List<Float> fullnesses = new ArrayList<>();

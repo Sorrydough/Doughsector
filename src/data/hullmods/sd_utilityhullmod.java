@@ -78,16 +78,6 @@ public class sd_utilityhullmod extends BaseHullMod {
                 runOnce = false;
             }
 
-            ////////////////////////////
-            //STARFICZ' SHIELD AI CODE// todo: rework all this shit to be better for my epic agile ships
-            ////////////////////////////
-//            if (shield != null) {
-//                if (shield.isOn() ^ wantToShield(amount))
-//                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
-//                else
-//                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
-//            }
-
             ////////////////////////////////////////////////////////
             //INCREDIBLY SIMPLE VENTING BEHAVIOR TO KEEP FLUX DOWN//
             //////////////////////////////////////////////////////// TODO: IMPROVE THIS BEHAVIOR TO ONLY HAPPEN WHEN THE TARGET IS TOO FAR AWAY TO BE THREATENING
@@ -215,7 +205,7 @@ public class sd_utilityhullmod extends BaseHullMod {
                     return;
 
                 for (WeaponAPI wep : ship.getAllWeapons()) { // wep.isinburst doesn't work for tachyon lance
-                    if (wep.isFiring() && wep.isBurstBeam())
+                    if (wep.isFiring() && (wep.isBurstBeam() || wep.isInBurst()))
                         return;
                 }
 
@@ -318,40 +308,69 @@ public class sd_utilityhullmod extends BaseHullMod {
                     ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
                 }
             }
+
+            ////////////////////////////
+            //STARFICZ' SHIELD AI CODE// todo: rework all this shit to be better for my epic agile ships
+            ////////////////////////////
+//            if (shield != null) {
+//                if (shield.isOn() ^ wantToShield(amount))
+//                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+//                else
+//                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+//            }
+
+
+            incomingHitsTracker.advance(amount);
+            if (incomingHitsTracker.intervalElapsed()) {
+                lastUpdatedTime = engine.getTotalElapsedTime(false);
+                potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), ship.getFluxTracker().getTimeToVent());
+                potentialHitsForVenting.addAll(incomingProjectileHits(ship, ship.getLocation()));
+                potentialHitsForShield = new ArrayList<>();
+                for (FutureHit hit : potentialHitsForVenting)
+                    if (hit.timeToHit <= ship.getShield().getUnfoldTime() * 2)
+                        potentialHitsForShield.add(hit);
+            }
+
+
+
+
+
+
         }
 
-        private final IntervalUtil tracker = new IntervalUtil(0.02f, 0.03f); //Seconds
-        public float lastUpdatedTime = 0f;
-        public List<sd_util.FutureHit> incomingProjectiles = new ArrayList<>();
-        public List<sd_util.FutureHit> predictedWeaponHits = new ArrayList<>();
-        public List<sd_util.FutureHit> combinedHits = new ArrayList<>();
+        private final IntervalUtil incomingHitsTracker = new IntervalUtil(0.15f, 0.3f);
+        public float lastUpdatedTime = 0;
+        public float lastShieldOnTime = 0;
+        public List<FutureHit> potentialHitsForVenting = new ArrayList<>();
+        public List<FutureHit> potentialHitsForShield = new ArrayList<>();
+        public List<FutureHit> potentialHits = new ArrayList<>();
+
+
+
+        private final IntervalUtil tracker = new IntervalUtil(0.2f, 0.3f); //Seconds
         public List<Float> omniShieldDirections = new ArrayList<>();
-        public float lastShieldOnTime = 0f;
 
         public boolean wantToShield(float amount) {
             tracker.advance(amount);
             if (tracker.intervalElapsed()) {
                 lastUpdatedTime = Global.getCombatEngine().getTotalElapsedTime(false);
-                incomingProjectiles = incomingProjectileHits(ship, ship.getLocation());
-                predictedWeaponHits = generatePredictedWeaponHits(ship, ship.getLocation(), shield.getUnfoldTime() * 2);
-                combinedHits = new ArrayList<>();
-                combinedHits.addAll(incomingProjectiles);
-                combinedHits.addAll(predictedWeaponHits);
+                potentialHits = generatePredictedWeaponHits(ship, ship.getLocation(), shield.getUnfoldTime() * 2);
+                potentialHits.addAll(incomingProjectileHits(ship, ship.getLocation()));
                 float BUFFER_ARC = 10f;
 
                 // prefilter expensive one time functions
                 if (shield.getType() == ShieldAPI.ShieldType.FRONT) {
                     List<FutureHit> filteredHits = new ArrayList<>();
-                    for (FutureHit hit : combinedHits) {
+                    for (FutureHit hit : potentialHits) {
                         if (Misc.isInArc(ship.getFacing(), shield.getArc() + BUFFER_ARC, hit.angle)) {
                             filteredHits.add(hit);
                         }
                     }
-                    combinedHits = filteredHits;
+                    potentialHits = filteredHits;
                 } else {
                     List<Float> candidateShieldDirections = new ArrayList<>();
                     float FUZZY_RANGE = 1f;
-                    for (FutureHit hit : combinedHits) {
+                    for (FutureHit hit : potentialHits) {
                         boolean tooClose = false;
                         for (float candidateDirection : candidateShieldDirections) {
                             if (Math.abs(hit.angle - candidateDirection) < FUZZY_RANGE) {
@@ -394,7 +413,7 @@ public class sd_utilityhullmod extends BaseHullMod {
                 float currentEMPDamage = 0f;
                 float currentBufferTime = Float.POSITIVE_INFINITY;
                 float bestBufferTime = 0f;
-                for (sd_util.FutureHit hit : combinedHits) {
+                for (sd_util.FutureHit hit : potentialHits) {
                     float offAngle = Math.abs(MathUtils.getShortestRotation(shieldDirection, hit.angle));
                     float timeToBlock = (offAngle / (shield.getArc() / 2)) * unfoldTime + delayTime;
                     float timeToHit = (hit.timeToHit - timeElapsed);

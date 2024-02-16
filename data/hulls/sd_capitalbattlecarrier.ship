@@ -1,8 +1,8 @@
 {
   "hullName": "Emissary",
-  "hullId": "sd_capitalbattlecarrier",
+  "hullId": "sd_capitaldreadnought",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "graphics/ships/sd_capitalbattlecarrier.png",
+  "spriteName": "graphics/ships/sd_capitaldreadnought.png",
   "style": "SD_TECH",
   "height": 440,
   "width": 220,
@@ -16,7 +16,7 @@
     "advancedoptics"
   ],
   "builtInWeapons": {
-    "CVR01": "sd_capitalbattlecarrier_cover",
+    "CVR01": "sd_capitaldreadnought_cover",
     "DEC01": "sd_decoBlinker",
     "DEC02": "sd_decoBlinker",
     "DEC03": "sd_decoBlinker",
@@ -25,7 +25,7 @@
     "DEC06": "sd_decoBlinker",
     "DEC07": "sd_decoBlinker",
     "DEC08": "sd_decoBlinker",
-    "HGR01": "sd_capitalbattlecarrier_hangar",
+    "HGR01": "sd_capitaldreadnought_hangar",
     "THR01": "sd_decoVectorController",
     "THR02": "sd_decoVectorController",
     "THR03": "sd_decoVectorController",

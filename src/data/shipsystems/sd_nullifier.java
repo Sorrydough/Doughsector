@@ -19,8 +19,8 @@ public class sd_nullifier extends BaseShipSystemScript {
         if (!sd_util.isCombatSituation(ship))
             return;
 
-        ship.setJitter(id, sd_util.timeColor, effectLevel, 1, 0, 5);
-        ship.setJitterUnder(id, sd_util.timeUnderColor, effectLevel, 5, 0, 10);
+        ship.setJitter(id, sd_util.timeColor1, effectLevel, 1, 0, 5);
+        ship.setJitterUnder(id, sd_util.timeColor2, effectLevel, 5, 0, 10);
 
         if (runOnce) { // apply our effect plugin to the target
             Global.getCombatEngine().addPlugin(new sd_nullifierPlugin(ship, ship.getShipTarget()));
@@ -85,9 +85,9 @@ public class sd_nullifier extends BaseShipSystemScript {
                 if (nullifier.getValue().getValue() > nullificationLevel)
                     nullificationLevel = nullifier.getValue().getValue();
 
-            target.fadeToColor("sd_nullifier", sd_util.timeUnderColor, 0.25f, 0.25f, 0.66f * nullificationLevel);
-            target.setJitterUnder("sd_nullifier", sd_util.timeUnderColor, nullificationLevel, 10, 0, 10);
-            target.setJitter("sd_nullifier", sd_util.timeColor, nullificationLevel, 1, 0, 5);
+            target.fadeToColor("sd_nullifier", sd_util.timeColor2, 0.25f, 0.25f, 0.66f * nullificationLevel);
+            target.setJitterUnder("sd_nullifier", sd_util.timeColor2, nullificationLevel, 10, 0, 10);
+            target.setJitter("sd_nullifier", sd_util.timeColor1, nullificationLevel, 1, 0, 5);
 
             // 3. Apply our timeflow change according to the biggest effectLevel
             targetStats.getTimeMult().unmodify("sd_nullifier");
