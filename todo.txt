@@ -37,6 +37,8 @@ Discord Beta stuff:
 - Rip ironclad engine sounds for my ships' engine loop
 - Do a pass on infotext and status indicators for all systems now that I know how
 
+- Do extensive de-jankification.
+
 
 Ghostbusters Stuff:
 - Figure out how to make the motes way better at taking out doom mines
