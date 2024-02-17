@@ -2,8 +2,12 @@ package data;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.SettingsAPI;
+import com.fs.starfarer.api.campaign.CampaignPlugin;
 import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.combat.AutofireAIPlugin;
+import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 
 import java.util.ArrayList;
@@ -49,6 +53,16 @@ public class sd_modPlugin extends BaseModPlugin {
         sd_weaponsList.add("squall");
         sd_weaponsList.add("locust");
     }
+
+    @Override
+    public PluginPick<AutofireAIPlugin> pickWeaponAutofireAI(WeaponAPI weapon) {
+        AutofireAIPlugin plugin = null;
+        if (weapon.getShip().getVariant().getHullMods().contains("sd_utilityhullmod") && weapon.getType() != WeaponAPI.WeaponType.MISSILE) {
+            plugin = new data.autofire.features.autofire.AutofireAI(weapon);
+        }
+        return new PluginPick<>(plugin, CampaignPlugin.PickPriority.MOD_SPECIFIC);
+    }
+
     @Override
     public void onApplicationLoad() {
         boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");

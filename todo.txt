@@ -30,7 +30,6 @@ Discord Beta stuff:
 - Faction flag
 - Implement faction - ??? Synarchy
 - Integrate genir autofire AI
-- Figure out how to stop my ships from sitting there eating hellbore shots when overloaded
 
 
 - Add 2 more missions
@@ -96,6 +95,7 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - Revisit my capacitor count to hit the intended hardened shields breakpoint
 - Figure out how to feel about my kite having a builtin wing
 - Make SO count as a dmod
+- Figure out how to stop my ships from sitting there eating hellbore shots when overloaded
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)

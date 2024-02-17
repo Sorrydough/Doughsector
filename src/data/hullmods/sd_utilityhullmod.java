@@ -1,32 +1,22 @@
 package data.hullmods;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.characters.PersonalityAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
-import com.fs.starfarer.api.input.InputEventAPI;
-import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import data.graphics.sd_decoSystemRangePlugin;
 import data.sd_util;
 import data.shipsystems.sd_mnemonicarmor;
 import lunalib.lunaSettings.LunaSettings;
 import org.lazywizard.console.Console;
-import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
-import org.magiclib.util.MagicUI;
-
-import java.awt.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Future;
 
 import static data.sd_util.*;
 
@@ -59,7 +49,7 @@ public class sd_utilityhullmod extends BaseHullMod {
         String personality = Personalities.AGGRESSIVE;
         @Override
         public void advance(float amount) {
-            if (!enabled || !sd_util.isCombatSituation(ship) || ship.getShipAI() == null)
+            if (!sd_util.isCombatSituation(ship) || !enabled || ship.getShipAI() == null)
                 return;
 
             if (runOnce) {
@@ -171,7 +161,6 @@ public class sd_utilityhullmod extends BaseHullMod {
             // CUSTOM VENT AND ARMORTANKING CODE BEYOND THIS PART //
             // USES STARFICZ'S AI UTILS ////////////////////////////
             ////////////////////////////////////////////////////////
-
             incomingHitsTracker.advance(amount);
             if (incomingHitsTracker.intervalElapsed()) {
                 lastUpdatedTime = engine.getTotalElapsedTime(false);
