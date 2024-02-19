@@ -46,7 +46,7 @@ public class sd_util {
         return Global.getCombatEngine() != null && !Global.getCombatEngine().isPaused() && ship.getOriginalOwner() != -1 && ship.getVariant() != null && ship.isAlive();
     }
     public static boolean isPhaseShip(ShipAPI ship) {
-        return ship.getSystem() != null && (ship.getHullSpec().getHints().contains(ShipHullSpecAPI.ShipTypeHints.PHASE) || ship.getSystem().getSpecAPI().isPhaseCloak());
+        return ship.getSystem() != null && (ship.getHullSpec().getHints().contains(ShipHullSpecAPI.ShipTypeHints.PHASE) || ship.getHullSpec().isPhase());
     }
     public static void blockWeaponFromFiring(WeaponAPI weapon) {
         ShipAPI ship = weapon.getShip();
@@ -379,11 +379,11 @@ public class sd_util {
         return baseTime;
     }
 
-    public static List<FutureHit> generatePredictedWeaponHits(ShipAPI ship, Vector2f testPoint, float maxTime){
+    public static List<FutureHit> generatePredictedWeaponHits(ShipAPI ship, Vector2f testPoint, float maxTime) {
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
         float FUZZY_RANGE = 100f;
-        List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship,MAX_RANGE);
+        List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship, MAX_RANGE);
         for (ShipAPI enemy: nearbyEnemies) {
             enemy.getFluxTracker().getOverloadTimeRemaining();
             enemy.getFluxTracker().isVenting(); enemy.getFluxTracker().getTimeToVent();
@@ -399,9 +399,10 @@ public class sd_util {
             }
             if (occluded) continue;
 
-            for (WeaponAPI weapon: enemy.getAllWeapons()){
+            for (WeaponAPI weapon: enemy.getAllWeapons()) {
 
-                if(weapon.isDecorative()) continue;
+                if(weapon.isDecorative())
+                    continue;
 
                 // ignore weapon if out of range
                 float distanceFromWeaponSquared = MathUtils.getDistanceSquared(weapon.getLocation(), testPoint);
@@ -424,8 +425,10 @@ public class sd_util {
                 // if not guided, calculate aim time if in arc, otherwise skip weapon
                 float aimTime = 0f;
                 if(!(weapon.hasAIHint(WeaponAPI.AIHints.DO_NOT_AIM) || weapon.hasAIHint(WeaponAPI.AIHints.GUIDED_POOR))){
-                    if(inArc) aimTime = Math.abs(MathUtils.getShortestRotation(weapon.getCurrAngle(), MathUtils.clampAngle(shipToWeaponAngle + 180f)))/weapon.getTurnRate();
-                    else continue;
+                    if (inArc)
+                        aimTime = Math.abs(MathUtils.getShortestRotation(weapon.getCurrAngle(), MathUtils.clampAngle(shipToWeaponAngle + 180f)))/weapon.getTurnRate();
+                    else
+                        continue;
                 }
                 float preAimedTime = disabledTime + aimTime;
 

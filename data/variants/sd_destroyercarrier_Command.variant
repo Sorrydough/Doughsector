@@ -1,11 +1,10 @@
 {
     "displayName": "Command",
-    "fluxCapacitors": 0,
+    "fluxCapacitors": 2,
     "fluxVents": 0,
     "goalVariant": true,
     "hullId": "sd_destroyercarrier",
     "hullMods": [
-        "eccm",
         "ecm",
         "nav_relay",
     ],
@@ -18,7 +17,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "irautolance",
+                "TRT01": "gravitonbeam",
             }
         },
         {
@@ -39,7 +38,7 @@
         },
     ],
     "wings": [
-        "sd_fighterblasterWing",
+        "sd_fighterionWing",
         "sd_fighterblasterWing",
     ],
     "modules": [],

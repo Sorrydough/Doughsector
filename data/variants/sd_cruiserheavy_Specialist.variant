@@ -1,7 +1,7 @@
 {
     "displayName": "Specialist",
     "fluxCapacitors": 0,
-    "fluxVents": 6,
+    "fluxVents": 5,
     "goalVariant": true,
     "hullId": "sd_cruiserheavy",
     "hullMods": [
@@ -22,13 +22,7 @@
             "weapons": {
                 "TRT02": "sd_amhowitzer",
                 "TRT03": "sd_amhowitzer",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "TRT04": "ionbeam",
+                "TRT04": "sd_amhowitzer",
             }
         },
         {
@@ -36,6 +30,13 @@
             "mode": "LINKED",
             "weapons": {
                 "HRD01": "squall",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT06": "railgun",
             }
         },
         {
@@ -56,10 +57,9 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT08": "pdburst",
-                "TRT06": "pdburst",
-                "TRT07": "pdburst",
                 "TRT05": "pdburst",
+                "TRT07": "pdburst",
+                "TRT08": "pdburst",
             }
         },
     ],

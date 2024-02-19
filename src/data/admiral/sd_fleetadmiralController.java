@@ -67,8 +67,8 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
                 sd_attackManager.manageAttackedEnemies(battleState);
             }
 
-//            for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
-//                engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 1, 5);
+            for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
+                engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 0, 0);
         }
     }
 }

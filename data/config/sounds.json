@@ -42,11 +42,11 @@
 	"sd_engine_accelerate":{
 		"sounds":[{"file":"sounds/sd_tech/sd_engine_accelerate.ogg","pitch":1.0,"volume":0.3}],
 		"SD_TECH":{"sounds":[0], "pitch":0.8, "volume":1},
-		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.3},
-		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
-		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
-		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
-		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1}
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.1},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.5},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.7},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":0.9}
 	},
 
 

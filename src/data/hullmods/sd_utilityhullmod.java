@@ -5,16 +5,21 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.CollisionGridUtil;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
+import com.fs.starfarer.combat.entities.Missile;
 import data.sd_util;
 import data.shipsystems.sd_mnemonicarmor;
 import lunalib.lunaSettings.LunaSettings;
 import org.lazywizard.console.Console;
+import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,6 +52,8 @@ public class sd_utilityhullmod extends BaseHullMod {
         }
         boolean runOnce = true;
         String personality = Personalities.AGGRESSIVE;
+
+        IntervalUtil debugInterval = new IntervalUtil(1.5f, 1.5f);
         @Override
         public void advance(float amount) {
             if (!sd_util.isCombatSituation(ship) || !enabled || ship.getShipAI() == null)
@@ -63,6 +70,12 @@ public class sd_utilityhullmod extends BaseHullMod {
 
                 runOnce = false;
             }
+
+//            debugInterval.advance(amount);
+//            if (debugInterval.intervalElapsed())
+//                if (ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_POTENTIAL_MINE_TRIGGER_NEARBY))
+//                    engine.addFloatingText(ship.getLocation(), "Mine trigger!", 50, Color.WHITE, ship, 0, 0);
+
 
             ////////////////////////////////////////////////////////////
             //TELLS THE SHIP TO BACK OFF IF IT CAN'T SHOOT ITS WEAPONS//
@@ -181,14 +194,13 @@ public class sd_utilityhullmod extends BaseHullMod {
                     break;
                 }
             }
-            if (!isWeaponFiring && isArmorDamageAcceptable(amount, potentialHitsForVenting) && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_POTENTIAL_MINE_TRIGGER_NEARBY)) {
+            if (!isWeaponFiring && isArmorDamageAcceptable(ship, potentialHitsForVenting)) {
                 if (ship.getFluxLevel() > 0.2)
                     ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
             }
 
             if (shield != null) {
-                boolean isArmorDamageAcceptable = isArmorDamageAcceptable(amount, potentialHitsForShield);
-                if (isArmorDamageAcceptable && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_POTENTIAL_MINE_TRIGGER_NEARBY)) {
+                if (isArmorDamageAcceptable(ship, potentialHitsForShield)) {
                     if (shield.isOn())
                         ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
                     if (shield.isOff())
@@ -202,7 +214,9 @@ public class sd_utilityhullmod extends BaseHullMod {
         public List<FutureHit> potentialHitsForVenting = new ArrayList<>();
         public List<FutureHit> potentialHitsForShield = new ArrayList<>();
         public List<FutureHit> potentialHits = new ArrayList<>();
-        public boolean isArmorDamageAcceptable(float amount, List<FutureHit> potentialHits) {
+        public boolean isArmorDamageAcceptable(ShipAPI ship, List<FutureHit> potentialHits) {
+            if (isScriptedNonsenseNearby(ship))
+                return false;
             // calculate how much damage the ship would take if shields went down
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
@@ -238,6 +252,39 @@ public class sd_utilityhullmod extends BaseHullMod {
                 isArmorDamageAcceptable = false;
 
             return isArmorDamageAcceptable;
+        }
+        public boolean isScriptedNonsenseNearby(ShipAPI ship) {
+            // check for scripted ship systems
+            Iterator<Object> iterator = engine.getAiGridShips().getCheckIterator(ship.getLocation(), 2500, 2500);
+            while (iterator.hasNext()) {
+                Object nextObject = iterator.next();
+                if (nextObject instanceof ShipAPI) {
+                    ShipAPI thing = (ShipAPI) nextObject;
+                    if (thing.getOwner() == ship.getOwner() || thing.getSystem() == null || systemsExcluded.contains(thing.getSystem().getId()))
+                        continue;
+
+                    if (thing.getSystem().getSpecAPI().getThreatAmount() > 0 && MathUtils.getDistance(ship, thing) < thing.getSystem().getSpecAPI().getThreatRange(thing.getMutableStats()) * 1.2)
+                        return true;
+                }
+            }
+            //check for mines
+            iterator = engine.getAiGridMissiles().getCheckIterator(ship.getLocation(), 2500, 2500);
+            while (iterator.hasNext()) {
+                Object nextObject = iterator.next();
+                if (nextObject instanceof MissileAPI) {
+                    MissileAPI thing = (MissileAPI) nextObject;
+                    if (thing.getOwner() == ship.getOwner() || !thing.isMine())
+                        continue;
+
+                    if (MathUtils.getDistance(ship, thing) < thing.getMineExplosionRange() * 1.2)
+                        return true;
+                }
+            }
+            return false;
+        }
+        final List<String> systemsExcluded = new ArrayList<>(); { // todo: check vayra dmods
+            systemsExcluded.add("mine_strike");
+            systemsExcluded.add("drone_strike");
         }
     }
 }
