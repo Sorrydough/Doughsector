@@ -181,18 +181,19 @@ public class sd_utilityhullmod extends BaseHullMod {
                     break;
                 }
             }
-            if (!isWeaponFiring && isArmorDamageAcceptable(amount, potentialHitsForVenting)) {
+            if (!isWeaponFiring && isArmorDamageAcceptable(amount, potentialHitsForVenting) && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_POTENTIAL_MINE_TRIGGER_NEARBY)) {
                 if (ship.getFluxLevel() > 0.2)
                     ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
             }
 
             if (shield != null) {
                 boolean isArmorDamageAcceptable = isArmorDamageAcceptable(amount, potentialHitsForShield);
-                if (shield.isOn() && isArmorDamageAcceptable) {
-                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+                if (isArmorDamageAcceptable && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_POTENTIAL_MINE_TRIGGER_NEARBY)) {
+                    if (shield.isOn())
+                        ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+                    if (shield.isOff())
+                        ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
                 }
-                if (shield.isOff() && isArmorDamageAcceptable)
-                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
             }
         }
         private final IntervalUtil incomingHitsTracker = new IntervalUtil(0.05f, 0.05f);

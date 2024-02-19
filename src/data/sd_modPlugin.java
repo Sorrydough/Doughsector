@@ -53,16 +53,13 @@ public class sd_modPlugin extends BaseModPlugin {
         sd_weaponsList.add("squall");
         sd_weaponsList.add("locust");
     }
-
     @Override
     public PluginPick<AutofireAIPlugin> pickWeaponAutofireAI(WeaponAPI weapon) {
         AutofireAIPlugin plugin = null;
-        if (weapon.getShip().getVariant().getHullMods().contains("sd_utilityhullmod") && weapon.getType() != WeaponAPI.WeaponType.MISSILE) {
+        if (weapon.getShip().getVariant().getHullMods().contains("sd_utilityhullmod") && weapon.getType() != WeaponAPI.WeaponType.MISSILE)
             plugin = new data.autofire.features.autofire.AutofireAI(weapon);
-        }
         return new PluginPick<>(plugin, CampaignPlugin.PickPriority.MOD_SPECIFIC);
     }
-
     @Override
     public void onApplicationLoad() {
         boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
@@ -83,7 +80,7 @@ public class sd_modPlugin extends BaseModPlugin {
         final FactionAPI playerFaction = Global.getSector().getPlayerPerson().getFaction();
         // generate moons if someone's loading a save that hasn't had them generated yet
         // we don't need to use an onNewGameAfterProcGen because onGameLoad runs in that case anyway
-        boolean wantMoons = true; // todo: include a settings file, and load the settings file here as the default behavior
+        boolean wantMoons = true;
         if (hasLunaLib)
             wantMoons = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_generateMoons"));
         if (wantMoons && !Global.getSector().getMemoryWithoutUpdate().contains("sd_moons")) {
@@ -91,7 +88,7 @@ public class sd_modPlugin extends BaseModPlugin {
             new sd_moonGeneratorPlugin().generate(Global.getSector());
         }
         // remove baseBP
-        boolean wantRemoveBaseBP = false; // todo: same as above
+        boolean wantRemoveBaseBP = false;
         if (hasLunaLib)
             wantRemoveBaseBP = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_removeBaseBP"));
         if (wantRemoveBaseBP) {

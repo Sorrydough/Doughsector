@@ -6,7 +6,7 @@
                     {"file":"sounds/sfx_systems/mine_strike_explosion_04.ogg","pitch":2.5,"volume":0.15}]
     },
 	"sd_vent_loop":{
-		"sounds":[	{"file":"sounds/sd_tech/sd_vent_loop.ogg","pitch":1,"volume":1}],
+		"sounds":[{"file":"sounds/sd_tech/sd_vent_loop.ogg","pitch":1,"volume":1}],
 		"SD_TECH":{"sounds":[0], "pitch":1, "volume":0.5},
 		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
 		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
@@ -15,7 +15,7 @@
 		"CAPITAL_SHIP":{"sounds":[0], "pitch":0.8, "volume":0.8}
 	},
 	"sd_vent_start":{
-		"sounds":[	{"file":"sounds/sd_tech/sd_vent_start.ogg","pitch":1,"volume":1}],
+		"sounds":[{"file":"sounds/sd_tech/sd_vent_start.ogg","pitch":1,"volume":1}],
 		"SD_TECH":{"sounds":[0], "pitch":1, "volume":0.5},
 		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
 		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
@@ -23,17 +23,38 @@
 		"CRUISER":{"sounds":[0], "pitch":0.9, "volume":0.7},
 		"CAPITAL_SHIP":{"sounds":[0], "pitch":0.8, "volume":0.8}
 	},
+
+	"sd_engine_loop":{
+		"sounds":[
+			{"file":"sounds/sfx_engines/engine_04_omega_00_fighter.ogg","pitch":1,"volume":0.3},
+			{"file":"sounds/sfx_engines/engine_04_omega_01_frigate.ogg","pitch":1,"volume":0.3},
+			{"file":"sounds/sfx_engines/engine_04_omega_02_destroyer.ogg","pitch":1,"volume":1},
+			{"file":"sounds/sfx_engines/engine_04_omega_03_cruiser.ogg","pitch":1,"volume":1},
+			{"file":"sounds/sfx_engines/engine_04_omega_04_capital.ogg","pitch":1,"volume":1}
+			],
+		"SD_TECH":{"sounds":[0,1,2,3,4], "pitch":1, "volume":0.5},
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FRIGATE":{"sounds":[1], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[2], "pitch":1, "volume":0.7},
+		"CRUISER":{"sounds":[3], "pitch":1, "volume":0.7},
+		"CAPITAL_SHIP":{"sounds":[4], "pitch":1, "volume":1}
+	},
+	"sd_engine_accelerate":{
+		"sounds":[{"file":"sounds/sd_tech/sd_engine_accelerate.ogg","pitch":1.0,"volume":0.3}],
+		"SD_TECH":{"sounds":[0], "pitch":0.8, "volume":1},
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.3},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1}
+	},
+
+
 	"music":{
 		"sd_ghostbusters":[{"file":"sd_ghostbusters.ogg","source":"sounds/music/","volume":0.35,"randomStart":false}]
 	},
-	"system_mnemonicarmor":[
-		{"file":"sounds/sfx_systems/damper_field_activate.ogg","pitch":0.8,"volume":0.4},
-	],
-	"system_mnemonicarmor_loop":[
-		{"file":"sounds/sfx_systems/damper_field_loop.ogg","pitch":0.6,"volume":0.7},
-	],
-	"system_mnemonicarmor_off":[
-		{"file":"sounds/sfx_systems/damper_field_deactivate.ogg","pitch":0.6,"volume":0.7},
-	],
+	"system_mnemonicarmor":[{"file":"sounds/sfx_systems/damper_field_activate.ogg","pitch":0.8,"volume":0.4}],
+	"system_mnemonicarmor_loop":[{"file":"sounds/sfx_systems/damper_field_loop.ogg","pitch":0.6,"volume":0.7}],
+	"system_mnemonicarmor_off":[{"file":"sounds/sfx_systems/damper_field_deactivate.ogg","pitch":0.6,"volume":0.7}]
 }
 

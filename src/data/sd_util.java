@@ -690,7 +690,7 @@ public class sd_util {
         }
         ArmorGridAPI armorGrid = ship.getArmorGrid();
         org.lwjgl.util.Point worstPoint = DefenseUtils.getMostDamagedArmorCell(Global.getCombatEngine().getPlayerShip());
-        if(worstPoint != null){
+        if (worstPoint != null) {
             float totalArmor = 0;
             for (int x = 0; x < armorGrid.getGrid().length; x++) {
                 for (int y = 0; y < armorGrid.getGrid()[x].length; y++) {
@@ -703,7 +703,7 @@ public class sd_util {
                 }
             }
             return totalArmor;
-        } else{
+        } else {
             return armorGrid.getMaxArmorInCell() * 15f;
         }
     }

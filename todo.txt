@@ -29,24 +29,22 @@ Discord Beta stuff:
 - Description pass on everything
 - Faction flag
 - Implement faction - ??? Synarchy
-- Integrate genir autofire AI
-
 
 - Add 2 more missions
 - Rip ironclad engine sounds for my ships' engine loop
 - Do a pass on infotext and status indicators for all systems now that I know how
-
-- Do extensive de-jankification.
+- Debug whether the doom itself counts as a potential mine trigger
 
 
 Ghostbusters Stuff:
-- Figure out how to make the motes way better at taking out doom mines
-- Improve fleet commander to fighter strike where they actually matter
-- Don't shoot antimatters at phase ships that aren't on their phase cooldown (or fluxed out)
-- Try shoving defend orders onto stuff that's getting assfucked
-- Write escort behavior for my fleet commander
+- Make the motes way better at taking out doom mines
+- Have the fleet commander send fighters to do shit that actually matters
+- Make it harder to bait out amhowitzers with phase cloak
+- Write escort behavior so my destroyers don't stray too far
+- Make my fleet way more aggressive and always try to suppress something
 - Add some complicated hold fire code to determine whether my weapons will hit the phased target coinciding with the moment it gets forced out of phase space
-- Fix up my destroyer fit
+- Check if there's a mine nearby manually instead of using the AI flag
+- Add some way to check for omen emp emitter etc
 
 
 Damage prediction AI improvement stuff:
@@ -96,6 +94,7 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - Figure out how to feel about my kite having a builtin wing
 - Make SO count as a dmod
 - Figure out how to stop my ships from sitting there eating hellbore shots when overloaded
+- Normalize my armor grid cell locations with the code that xaiier gave me (where was it?)
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)
@@ -130,7 +129,7 @@ Version 3.0 Stuff: (scope creep)
 - Console command to buy stuff and have it shipped to you
 
 Unused names that I want reserved:
-Purifier, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Serenity, Tranquility, Torrent, Anthem
+Purifier, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Oblivion, Tranquility, Torrent, Anthem, Veil
 
 Code stuff to remember:
 final variable;

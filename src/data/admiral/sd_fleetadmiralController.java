@@ -26,7 +26,7 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
         return -1;
     }
     public final sd_fleetadmiralUtil.battlestateTracker battleState = new sd_fleetadmiralUtil.battlestateTracker();
-    private final IntervalUtil interval = new IntervalUtil(0.5f, 2); // variable to approximate human reaction time
+    private final IntervalUtil interval = new IntervalUtil(0.5f, 2); // variable to approximate human reaction time, they don't stare at the tactical map 24/7. I hope.
     private boolean doInit = true;
     @Override
     public void preCombat() {
@@ -67,8 +67,8 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
                 sd_attackManager.manageAttackedEnemies(battleState);
             }
 
-            for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
-                engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 1, 5);
+//            for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
+//                engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 1, 5);
         }
     }
 }
