@@ -20,10 +20,10 @@ public class sd_attackManager {
     public static void manageAttackedEnemies(sd_fleetadmiralUtil.battlestateTracker battleState) {
         // apply orders
         ShipAPI fighterTarget = findTargetForFighters(battleState);
-        ShipAPI primaryFleetTarget = findFleetTarget(battleState);
+//        ShipAPI primaryFleetTarget = findFleetTarget(battleState);
         for (ShipAPI enemy : battleState.deployedEnemyShips) {
-            if (enemy == primaryFleetTarget)
-                sd_fleetadmiralUtil.applyAssignment(battleState.enemyFleetManager.getDeployedFleetMember(enemy), CombatAssignmentType.ENGAGE, battleState.allySide);
+//            if (enemy == primaryFleetTarget)
+//                sd_fleetadmiralUtil.applyAssignment(battleState.enemyFleetManager.getDeployedFleetMember(enemy), CombatAssignmentType.ENGAGE, battleState.allySide);
             if (enemy == fighterTarget)
                 sd_fleetadmiralUtil.applyAssignment(battleState.enemyFleetManager.getDeployedFleetMember(enemy), CombatAssignmentType.STRIKE, battleState.allySide);
             if (isTargetVulnerable(enemy))
@@ -32,9 +32,9 @@ public class sd_attackManager {
         // rescind orders
         for (Map.Entry<AssignmentInfo, Object> assignment : battleState.assignmentsWithTargets.entrySet()) {
             // check if it's time to rescind any attack orders
-            if (assignment.getKey().getType() == CombatAssignmentType.ENGAGE && assignment.getValue() instanceof ShipAPI)
-                if (assignment.getValue() != primaryFleetTarget)
-                    battleState.allyTaskManager.removeAssignment(assignment.getKey());
+//            if (assignment.getKey().getType() == CombatAssignmentType.ENGAGE && assignment.getValue() instanceof ShipAPI)
+//                if (assignment.getValue() != primaryFleetTarget)
+//                    battleState.allyTaskManager.removeAssignment(assignment.getKey());
             if (assignment.getKey().getType() == CombatAssignmentType.STRIKE && assignment.getValue() instanceof ShipAPI)
                 if (assignment.getValue() != fighterTarget)
                     battleState.allyTaskManager.removeAssignment(assignment.getKey());
@@ -51,7 +51,7 @@ public class sd_attackManager {
         ShipAPI fleetTarget = null;
         float speed = Float.MAX_VALUE;
         for (ShipAPI enemy : battleState.deployedEnemyShips)
-            if (enemy.getMaxSpeed() < speed && !sd_util.isPhaseShip(enemy)) {
+            if (enemy.getMaxSpeed() < speed && !enemy.getHullSpec().isPhase()) {
                 speed = enemy.getMaxSpeed();
                 fleetTarget = enemy;
             }
@@ -79,7 +79,7 @@ public class sd_attackManager {
                 if (enemy.getOwner() == goodCarriers.get(0).getOwner())
                     continue;
 
-                if (enemy.getFluxLevel() > fluxLevel && !sd_util.isPhaseShip(enemy)) {
+                if (enemy.getFluxLevel() > fluxLevel && !enemy.getHullSpec().isPhase()) {
                     fluxLevel = enemy.getFluxLevel();
                     bestTarget = enemy;
                 }

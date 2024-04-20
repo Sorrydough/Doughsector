@@ -1,11 +1,12 @@
 {
     "displayName": "Strike",
-    "fluxCapacitors": 4,
+    "fluxCapacitors": 0,
     "fluxVents": 0,
     "goalVariant": true,
     "hullId": "sd_destroyercarrier",
     "hullMods": [
         "autorepair",
+        "eccm",
     ],
     "permaMods": [],
     "sMods": [],
@@ -31,8 +32,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT02": "lightdualmg",
-                "TRT03": "lightdualmg",
+                "TRT02": "lightmg",
+                "TRT03": "lightmg",
             }
         },
     ],

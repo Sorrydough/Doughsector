@@ -1,9 +1,9 @@
 {
-    "displayName": "Attack",
-    "fluxCapacitors": 3,
-    "fluxVents": 30,
+    "displayName": "Specialist",
+    "fluxCapacitors": 2,
+    "fluxVents": 20,
     "goalVariant": true,
-    "hullId": "sd_cruiserheavy",
+    "hullId": "sd_destroyerlight",
     "hullMods": [
         "fluxbreakers",
         "targetingunit",
@@ -11,46 +11,37 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_cruiserheavy_Attack",
+    "variantId": "sd_destroyerlight_Specialist",
     "weaponGroups": [
         {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "HRD02": "gravitonbeam",
+                "HRD01": "gravitonbeam",
+            }
+        },
+        {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "HRD01": "squall",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "HRD02": "dragon",
+                "HRD03": "heatseeker",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "tachyonlance",
+                "TRT01": "hil",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT04": "gravitonbeam",
-                "TRT02": "gravitonbeam",
-                "TRT03": "gravitonbeam",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "TRT08": "pdburst",
-                "TRT06": "pdburst",
-                "TRT07": "pdburst",
-                "TRT05": "pdburst",
+                "TRT04": "pdburst",
+                "TRT02": "pdburst",
+                "TRT03": "pdburst",
             }
         },
     ],

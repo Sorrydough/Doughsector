@@ -1,12 +1,11 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 0,
-    "fluxVents": 17,
+    "fluxCapacitors": 12,
+    "fluxVents": 15,
     "goalVariant": true,
     "hullId": "sd_cruiser",
     "hullMods": [
         "autorepair",
-        "auxiliarythrusters",
         "pointdefenseai",
         "targetingunit",
     ],
@@ -42,6 +41,7 @@
             "mode": "LINKED",
             "weapons": {
                 "TRT04": "railgun",
+                "TRT05": "railgun",
             }
         },
         {
@@ -51,7 +51,6 @@
                 "TRT08": "lightdualmg",
                 "TRT06": "lightdualmg",
                 "TRT07": "lightdualmg",
-                "TRT05": "lightdualmg",
             }
         },
         {

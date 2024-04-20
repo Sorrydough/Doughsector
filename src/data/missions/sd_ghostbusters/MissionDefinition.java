@@ -63,10 +63,10 @@ public class MissionDefinition implements MissionDefinitionPlugin {
         api.getDefaultCommander(FleetSide.ENEMY).getStats().setSkillLevel(Skills.SUPPORT_DOCTRINE, 1);
         FleetMemberAPI REDFLAGSHIP = api.addToFleet(FleetSide.ENEMY, "sd_cruiserheavy_Specialist", FleetMemberType.SHIP, "Radial Impulse", true);
         api.addToFleet(FleetSide.ENEMY, "sd_cruiser_Attack", FleetMemberType.SHIP, "Involuted Mountain", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Command", FleetMemberType.SHIP, "Galactic Cloud", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Command", FleetMemberType.SHIP, "Bombarded Signal", false);
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyerlight_Attack", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
-        api.addToFleet(FleetSide.ENEMY, "sd_destroyerlight_Attack", FleetMemberType.SHIP, "Lightwave Instrument", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyercarrier_Snare", FleetMemberType.SHIP, "Galactic Cloud", false);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyerlight_Specialist", FleetMemberType.SHIP, "Whispering Light", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.ENEMY, "sd_destroyerlight_Specialist", FleetMemberType.SHIP, "Lightwave Instrument", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
+        api.addToFleet(FleetSide.ENEMY, "sd_frigateheavy_Attack", FleetMemberType.SHIP, "Bombarded Signal", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Strike", FleetMemberType.SHIP, "Reconstructed Mind", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Strike", FleetMemberType.SHIP, "Last Heartbeat", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);
         api.addToFleet(FleetSide.ENEMY, "sd_frigatelight_Strike", FleetMemberType.SHIP, "Direct Path", false).getCaptain().setPersonality(Personalities.AGGRESSIVE);

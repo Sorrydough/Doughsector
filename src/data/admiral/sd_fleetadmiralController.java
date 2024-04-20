@@ -28,6 +28,7 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
     public final sd_fleetadmiralUtil.battlestateTracker battleState = new sd_fleetadmiralUtil.battlestateTracker();
     private final IntervalUtil interval = new IntervalUtil(0.5f, 2); // variable to approximate human reaction time, they don't stare at the tactical map 24/7. I hope.
     private boolean doInit = true;
+    private boolean debug = false;
     @Override
     public void preCombat() {
 
@@ -46,6 +47,9 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
 
             doInit = false;
         }
+
+        if (battleState.deployedAllyShips.get(0) != null && battleState.deployedAllyShips.get(0).getFluxLevel() < 0.5)
+            battleState.deployedAllyShips.get(0).getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);
 
         interval.advance(amount);
         if (interval.intervalElapsed()) {
@@ -67,8 +71,9 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
                 sd_attackManager.manageAttackedEnemies(battleState);
             }
 
-            for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
-                engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 0, 0);
+            if (debug)
+                for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
+                    engine.addFloatingText(assignment.getTarget().getLocation(), assignment.getType().name(), 100, Color.LIGHT_GRAY, null, 0, 0);
         }
     }
 }

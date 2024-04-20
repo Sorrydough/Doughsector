@@ -1,7 +1,7 @@
 {
     "displayName": "Specialist",
     "fluxCapacitors": 0,
-    "fluxVents": 5,
+    "fluxVents": 4,
     "goalVariant": true,
     "hullId": "sd_cruiserheavy",
     "hullMods": [
@@ -36,6 +36,7 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
+                "TRT05": "railgun",
                 "TRT06": "railgun",
             }
         },
@@ -57,7 +58,6 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT05": "pdburst",
                 "TRT07": "pdburst",
                 "TRT08": "pdburst",
             }

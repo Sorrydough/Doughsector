@@ -1,32 +1,38 @@
 {
-    "displayName": "Attack",
-    "fluxCapacitors": 7,
-    "fluxVents": 10,
+    "displayName": "Snare",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
     "goalVariant": true,
-    "hullId": "sd_frigate",
+    "hullId": "sd_destroyercarrier",
     "hullMods": [
-        "fluxbreakers",
-        "auxiliarythrusters",
+        "advancedoptics",
+        "autorepair",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "sd_frigate_Attack",
+    "variantId": "sd_destroyercarrier_Snare",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "TRT01": "railgun",
-                "TRT02": "railgun",
+                "TRT01": "ionbeam",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "HRD02": "breach",
-                "HRD01": "breach",
+                "HRD02": "heatseeker",
+                "HRD01": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT02": "sd_gravlance",
             }
         },
         {
@@ -37,6 +43,9 @@
             }
         },
     ],
-    "wings": [],
+    "wings": [
+        "sd_fighterionWing",
+        "sd_fighterionWing",
+    ],
     "modules": [],
 }

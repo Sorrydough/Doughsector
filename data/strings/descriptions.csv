@@ -5,7 +5,7 @@ sd_gravlance,WEAPON,"Although superficially similar to a graviton beam, this sma
 sd_grapeshotrack,WEAPON,Launches proximity-fused canisters of antimatter. Reloading is quite simple compared to other missiles of its size.
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
-sd_grapeshotarray,SHIP_SYSTEM,Dispenses proximity-fused canistersof  antimatter.
+sd_grapeshotarray,SHIP_SYSTEM,Dispenses proximity-fused antimatter canisters.
 sd_auxforge,SHIP_SYSTEM,"Replenishes missiles or fighters, depending on which is more depleted. Generates flux upon activation."
 sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. More flux intensive on heavily armored ships.
 sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and has powerful side-effects. More flux intensive on heavily armored ships.
