@@ -3,8 +3,9 @@
     <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../jre_linux" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <envs>
+      <env name="VK_ICD_FILENAMES" value="/usr/share/vulkan/icd.d/amd_pro_icd64.json" />
       <env name="MESA_LOADER_DRIVER_OVERRIDE" value="zink" />
-      <env name="OBS_VKCAPTURE_LINEAR" value="1" />
+      <env name="ENABLE_VKBASALT" value="1" />
       <env name="OBS_VKCAPTURE" value="1" />
     </envs>
     <option name="MAIN_CLASS_NAME" value="com.fs.starfarer.StarfarerLauncher" />
