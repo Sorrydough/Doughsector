@@ -1,11 +1,11 @@
 {
     "displayName": "Specialist",
-    "fluxCapacitors": 20,
+    "fluxCapacitors": 45,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "sd_capitaldreadnought",
     "hullMods": [
-        "auxiliarythrusters",
+        "advancedshieldemitter",
         "eccm",
         "fluxbreakers",
         "targetingunit",
@@ -42,12 +42,6 @@
             "weapons": {
                 "TRT01": "hil",
                 "TRT02": "hil",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
                 "TRT03": "hil",
             }
         },
@@ -55,6 +49,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "TRT04": "gravitonbeam",
                 "TRT08": "gravitonbeam",
             }
         },
@@ -75,18 +70,9 @@
                 "TRT14": "lightmg",
             }
         },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "TRT04": "heavyburst",
-            }
-        },
     ],
     "wings": [
         "sd_fighterionWing",
-        "sd_fighterionWing",
-        "sd_fightersupportWing",
     ],
     "modules": [],
 }

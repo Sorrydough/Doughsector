@@ -10,7 +10,6 @@ import com.fs.starfarer.api.util.CollisionGridUtil;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import com.fs.starfarer.combat.entities.Missile;
 import data.sd_util;
 import data.shipsystems.sd_mnemonicarmor;
 import lunalib.lunaSettings.LunaSettings;
@@ -62,8 +61,9 @@ public class sd_utilityhullmod extends BaseHullMod {
 
             if (runOnce) {
                 if (Global.getCombatEngine().isSimulation() && ship.getHullSize() != ShipAPI.HullSize.CAPITAL_SHIP) {
-                    ship.getCaptain().setPersonality(personality);
-                    Console.showMessage("Personality for "+ ship.getName() +" overriden to "+ personality);
+                //if (Global.getCombatEngine().isSimulation()) {
+                        ship.getCaptain().setPersonality(personality);
+                        Console.showMessage("Personality for "+ ship.getName() +" overriden to "+ personality);
                 }
                 // apply alex's AI behavior overrides
                 ship.getShipAI().getConfig().alwaysStrafeOffensively = true;

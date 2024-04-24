@@ -17,9 +17,6 @@ Arthr Stuff:
     Fix aux thrusters on cap and cruiser being in a dumb place
     Fix the shitty looking bashed part on the cruiser & heavy frigate
     Heavy cruiser needs to not look unsettling
-    Nebula needs salvage gantry
-
-- Sprite pass to incorporate capital's more saturated greeble style
 
 
 Discord Beta stuff:
@@ -43,8 +40,6 @@ Ghostbusters Stuff:
 - Write escort behavior so my destroyers don't stray too far
 - Make my fleet way more aggressive and always try to suppress something
 - Add some complicated hold fire code to determine whether my weapons will hit the phased target coinciding with the moment it gets forced out of phase space
-- Check if there's a mine nearby manually instead of using the AI flag
-- Add some way to check for omen emp emitter etc
 
 
 Damage prediction AI improvement stuff:
