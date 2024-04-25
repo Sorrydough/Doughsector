@@ -4,9 +4,12 @@ import com.fs.starfarer.api.GameState
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.util.IntervalUtil
-import data.autofire.debugPlugin
-import data.autofire.features.autofire.extensions.*
-import data.autofire.utils.rotateAroundPivot
+import data.autofire.utils.*
+import data.autofire.utils.attack.AttackTarget
+import data.autofire.utils.attack.BallisticParams
+import data.autofire.utils.attack.analyzeHit
+import data.autofire.utils.attack.intercept
+import data.autofire.utils.extensions.*
 import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lazywizard.lazylib.ext.minus
@@ -25,7 +28,6 @@ private var autofireAICount = 0
 class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
     private var target: CombatEntityAPI? = null
     private var prevFrameTarget: CombatEntityAPI? = null
-    private var shipTarget: ShipAPI? = null
 
     private var attackTime: Float = 0f
     private var idleTime: Float = 0f
@@ -35,7 +37,12 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
     private var shouldFireInterval = IntervalUtil(0.1F, 0.2F)
 
     private var shouldHoldFire: HoldFire? = HoldFire.NO_TARGET
-    private var targetLocation: Vector2f? = null
+    private var aimLocation: Vector2f? = null
+
+    // intercept may be different from aim location for hardpoint weapons
+    var intercept: Vector2f? = null
+
+    private val debugIdx = autofireAICount++
 
     override fun advance(timeDelta: Float) {
         if (Global.getCurrentState() == GameState.CAMPAIGN) return
@@ -54,7 +61,7 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
             selectTargetInterval.forceIntervalElapsed()
             target = null
             shouldHoldFire = HoldFire.NO_TARGET
-            targetLocation = null
+            aimLocation = null
             attackTime = 0f
             onTargetTime = 0f
         }
@@ -62,15 +69,14 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
         // Select target.
         selectTargetInterval.advance(timeDelta)
         if (selectTargetInterval.intervalElapsed()) {
-            trackShipTarget()
-            target = SelectTarget(weapon, target, shipTarget, currentParams()).target
+            target = SelectTarget(weapon, target, targetTracker[weapon.ship], currentParams()).target
             if (target == null) {
                 shouldHoldFire = HoldFire.NO_TARGET
                 return
             }
         }
 
-        targetLocation = calculateTargetLocation()
+        updateAimLocation()
 
         // Calculate if weapon should fire.
         shouldFireInterval.advance(timeDelta)
@@ -85,7 +91,7 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
         shouldHoldFire = HoldFire.FORCE_OFF
     }
 
-    override fun getTarget(): Vector2f? = targetLocation
+    override fun getTarget(): Vector2f? = aimLocation
     override fun getTargetShip(): ShipAPI? = target as? ShipAPI
     override fun getWeapon(): WeaponAPI = weapon
     override fun getTargetMissile(): MissileAPI? = target as? MissileAPI
@@ -99,29 +105,9 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
         if (idleTime >= 3f) attackTime = 0f
     }
 
-    /**
-     * ShipAPI is inconsistent when returning maneuver target. It may return null
-     * in some frames, even when the ship has a maneuver target. To avoid this problem,
-     * last non-null maneuver target may be used.
-     *
-     * Even worse, when a ship is assigned an escort duty, maneuver target will always
-     * be null. Then the autofire AI needs to drop the previous target, so it doesn't
-     * get outdated.
-     */
-    private fun trackShipTarget() {
-        val newTarget = weapon.ship.trueShipTarget
-
-        shipTarget = when {
-            newTarget == null && shipTarget != null && weapon.ship.hasEscortAssignment -> null
-            newTarget != null -> newTarget
-            shipTarget?.isValidTarget != true -> null
-            else -> shipTarget
-        }
-    }
-
     private fun calculateShouldFire(timeDelta: Float): HoldFire? {
         if (target == null) return HoldFire.NO_TARGET
-        if (targetLocation == null) return HoldFire.NO_HIT_EXPECTED
+        if (aimLocation == null) return HoldFire.NO_HIT_EXPECTED
 
         // Fire only when the selected target can be hit. That way the weapon doesn't fire
         // on targets that are only briefly in the line of sight, when the weapon is turning.
@@ -132,10 +118,11 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
             return HoldFire.NO_HIT_EXPECTED
         }
 
-        // Hold fire for a period of time after initially
-        // acquiring the target to increase first volley accuracy.
-        if (onTargetTime < min(2f, weapon.firingCycle.duration)) {
-            val angleToTarget = VectorUtils.getFacing(targetLocation!! - weapon.location)
+        // Hold fire for a period of time after initially acquiring
+        // the target to increase first volley accuracy. PD weapons
+        // should fire with no delay.
+        if (!weapon.isPD && onTargetTime < min(2f, weapon.firingCycle.duration)) {
+            val angleToTarget = VectorUtils.getFacing(aimLocation!! - weapon.location)
             val inaccuracy = abs(MathUtils.getShortestRotation(weapon.currAngle, angleToTarget))
             if (inaccuracy > 1f) return HoldFire.STABILIZE_ON_TARGET
         }
@@ -156,22 +143,27 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
             !hit.shieldHit && hit.range > weapon.totalRange -> return HoldFire.OUT_OF_RANGE
         }
 
-        avoidPhased(weapon, hit)?.let { return it }
-        avoidWrongDamageType(weapon, hit, currentParams())?.let { return it }
-
-        return fire
+        return AttackRules(weapon, hit, currentParams()).shouldHoldFire
     }
 
-    private fun calculateTargetLocation(): Vector2f? {
-        if (target == null) return null
+    private fun updateAimLocation() {
+        intercept = null
+        aimLocation = null
 
-        val intercept = intercept(weapon, Target(target!!), currentParams()) ?: return null
-        return if (weapon.slot.isTurret) intercept
-        else aimHardpoint(intercept)
+        if (target == null) return
+
+        intercept = intercept(weapon, AttackTarget(target!!), currentParams()) ?: return
+        aimLocation = if (weapon.slot.isTurret) intercept
+        else aimHardpoint(intercept!!)
     }
 
     /** get current weapon attack parameters */
-    private fun currentParams() = Params(getAccuracy(), weapon.timeToAttack)
+    private fun currentParams() = BallisticParams(
+        getAccuracy(),
+        // Provide weapon attack delay time only for turrets. It's not required for hardpoints,
+        // since the ship rotating to face the target will compensate for the delay.
+        if (weapon.slot.isTurret) weapon.timeToAttack else 0f,
+    )
 
     /**
      * getAccuracy returns current weapon accuracy.
@@ -189,24 +181,16 @@ class AutofireAI(private val weapon: WeaponAPI) : AutofireAIPlugin {
 
     /** predictive aiming for hardpoints */
     private fun aimHardpoint(intercept: Vector2f): Vector2f {
+        // Weapon is already facing the target. Return the
+        // original intercept location to not overcompensate.
+        if (vectorInArc(intercept - weapon.location, Arc(weapon.arc, weapon.absoluteArcFacing)))
+            return intercept
+
         val tgtLocation = target!!.location - weapon.ship.location
         val tgtFacing = VectorUtils.getFacing(tgtLocation)
         val angleToTarget = MathUtils.getShortestRotation(tgtFacing, weapon.ship.facing)
 
-        // Ship is already facing the target. Return the
-        // original target location to not overcompensate.
-        if (abs(angleToTarget) < weapon.arc / 2f) {
-            return intercept
-        }
-
+        // Aim the hardpoint as if the ship was facing the target directly.
         return rotateAroundPivot(intercept, weapon.ship.location, angleToTarget)
-    }
-
-    private var debugIdx = autofireAICount++
-
-    private fun debug(side: Int?, weaponID: String?, vararg values: Any?) {
-        if (side != null && weapon.ship.owner != side) return
-        if (weaponID != null && weapon.spec.weaponId != weaponID) return
-        debugPlugin[debugIdx] = values.fold(weapon.spec.weaponId) { s, it -> "$s $it" }
     }
 }

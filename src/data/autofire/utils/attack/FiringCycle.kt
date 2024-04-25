@@ -1,4 +1,4 @@
-package data.autofire.utils
+package data.autofire.utils.attack
 
 import com.fs.starfarer.api.combat.WeaponAPI
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI

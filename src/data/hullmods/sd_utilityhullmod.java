@@ -178,7 +178,7 @@ public class sd_utilityhullmod extends BaseHullMod {
             incomingHitsTracker.advance(amount);
             if (incomingHitsTracker.intervalElapsed()) {
                 lastUpdatedTime = engine.getTotalElapsedTime(false);
-                potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), ship.getFluxTracker().getTimeToVent());
+                potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), ship.getFluxTracker().getTimeToVent()); // add a flat amount depending on hullsize to account for the ship's outer edges
                 potentialHitsForVenting.addAll(incomingProjectileHits(ship, ship.getLocation()));
                 if (shield != null) {
                     potentialHitsForShield = new ArrayList<>();
