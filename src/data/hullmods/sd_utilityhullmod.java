@@ -42,7 +42,7 @@ public class sd_utilityhullmod extends BaseHullMod {
         private final ShieldAPI shield;
         final ShipAPI ship;
         final CombatEngineAPI engine;
-        boolean enabled = false;
+        boolean enabled = true;
         public sd_utilityhullmodListener(ShipAPI ship) {
             this.ship = ship;
             this.engine = Global.getCombatEngine();
@@ -178,12 +178,12 @@ public class sd_utilityhullmod extends BaseHullMod {
             incomingHitsTracker.advance(amount);
             if (incomingHitsTracker.intervalElapsed()) {
                 lastUpdatedTime = engine.getTotalElapsedTime(false);
-                potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), ship.getFluxTracker().getTimeToVent()); // add a flat amount depending on hullsize to account for the ship's outer edges
+                potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), ship.getShield().getUnfoldTime() + ship.getFluxTracker().getTimeToVent());
                 potentialHitsForVenting.addAll(incomingProjectileHits(ship, ship.getLocation()));
                 if (shield != null) {
                     potentialHitsForShield = new ArrayList<>();
                     for (FutureHit hit : potentialHitsForVenting)
-                        if (hit.timeToHit <= ship.getShield().getUnfoldTime() * 2)
+                        if (hit.timeToHit <= ship.getShield().getUnfoldTime())
                             potentialHitsForShield.add(hit);
                 }
             }

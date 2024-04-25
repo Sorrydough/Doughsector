@@ -31,6 +31,8 @@ Discord Beta stuff:
 - Update genir's autofire code
 - 2nd pass on my engine boost sound
 
+- Convert my EFS plugins to be advanceable listeners instead
+
 
 Ghostbusters Stuff:
 - Make the motes way better at taking out doom mines
@@ -84,8 +86,6 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - Reverse-engineer fleet deployment manager
 - Fix my ships shooting dragoncocks from out of range
 - Turret arc pass for heavy cruiser & capital
-- Check if I can fix up my janky isUsable() checks with the new api addition
-- Check if I can just look at whether a target's system is disabled directly with the new api addition
 - Revisit my capacitor count to hit the intended hardened shields breakpoint
 - Figure out how to feel about my kite having a builtin wing
 - Make SO count as a dmod

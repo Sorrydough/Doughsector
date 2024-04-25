@@ -57,9 +57,9 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			return false;
 		float targetDistance = MathUtils.getDistance(ship, target);
 		float systemRange = ship.getMutableStats().getSystemRangeBonus().computeEffective(sd_util.getOptimalRange(ship) + ship.getCollisionRadius());
-		return target.isAlive() && target.getSystem() != null && !target.getSystem().isOn() && !target.isFighter() && !target.isPhased() && target != ship
-				&& !target.getFluxTracker().isOverloadedOrVenting() && target.getMutableStats().getDynamic().getMod("sd_hackingsuite").getFlatBonuses().isEmpty()
-				&& !(targetDistance > systemRange) && target.getOwner() != ship.getOwner() && target.getCurrentCR() > 0;
+		return target.isAlive() && target.getSystem() != null && !target.isShipSystemDisabled() && !target.getSystem().isOn()
+				&& !target.isFighter() && !target.isPhased() && target != ship && !target.getFluxTracker().isOverloadedOrVenting()
+				&& !(targetDistance > systemRange) && target.getOwner() != ship.getOwner();
 	}
 	@Override
 	public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
@@ -104,8 +104,7 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 				target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
 				target.getFluxTracker().playOverloadSound();
 				target.setShipSystemDisabled(true);
-				target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for " + Math.round(duration) + " seconds!", Color.LIGHT_GRAY, 12, true);
-				target.getMutableStats().getDynamic().getMod("sd_hackingsuite").modifyFlat("sd_hackingsuite", -1);
+				target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for " + Math.round(duration) + " seconds!", Color.LIGHT_GRAY, 14, true);
 				runOnce = false;
 			}
 			if (engine.isPaused())
@@ -114,13 +113,15 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			if (TIMER.intervalElapsed()) {
 				time += 1;
 				if (time == duration / 2)
-					target.getFluxTracker().showOverloadFloatyIfNeeded(Math.round(duration / 2) + " seconds until system restoration.", Color.LIGHT_GRAY, 12, true);
+					target.getFluxTracker().showOverloadFloatyIfNeeded(Math.round(duration / 2) + " seconds until system restoration.", Color.LIGHT_GRAY, 14, true);
 				if (time >= duration) {
 					target.getMutableStats().getAutofireAimAccuracy().unmodifyMult("sd_hackingsuite");
-					if (target.getCurrentCR() > 0)
+					if (target.getCurrentCR() > 0) {
 						target.setShipSystemDisabled(false);
-					target.getMutableStats().getDynamic().getMod("sd_hackingsuite").unmodify("sd_hackingsuite");
-					target.getFluxTracker().showOverloadFloatyIfNeeded("System functionality restored!", Color.LIGHT_GRAY, 12, true);
+						target.getFluxTracker().showOverloadFloatyIfNeeded("System functionality restored!", Color.LIGHT_GRAY, 12, true);
+					} else {
+						target.getFluxTracker().showOverloadFloatyIfNeeded("System critically damaged!", Color.LIGHT_GRAY, 12, true);
+					}
 					engine.removePlugin(this);
 					//return;
 				}
