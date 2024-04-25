@@ -26,14 +26,14 @@
 
 	"sd_engine_loop":{
 		"sounds":[
-			{"file":"sounds/sfx_engines/engine_04_omega_00_fighter.ogg","pitch":1,"volume":0.3},
-			{"file":"sounds/sfx_engines/engine_04_omega_01_frigate.ogg","pitch":1,"volume":0.3},
-			{"file":"sounds/sfx_engines/engine_04_omega_02_destroyer.ogg","pitch":1,"volume":1},
-			{"file":"sounds/sfx_engines/engine_04_omega_03_cruiser.ogg","pitch":1,"volume":1},
-			{"file":"sounds/sfx_engines/engine_04_omega_04_capital.ogg","pitch":1,"volume":1}
+			{"file":"sounds/sd_tech/sd_engine_loop_fighter.ogg","pitch":1,"volume":1},
+			{"file":"sounds/sd_tech/sd_engine_loop_frigate.ogg","pitch":1,"volume":1},
+			{"file":"sounds/sd_tech/sd_engine_loop_destroyer.ogg","pitch":1,"volume":1},
+			{"file":"sounds/sd_tech/sd_engine_loop_cruiser.ogg","pitch":1,"volume":1},
+			{"file":"sounds/sd_tech/sd_engine_loop_capital.ogg","pitch":1,"volume":1}
 			],
 		"SD_TECH":{"sounds":[0,1,2,3,4], "pitch":1, "volume":0.5},
-		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.1},
 		"FRIGATE":{"sounds":[1], "pitch":1, "volume":0.7},
 		"DESTROYER":{"sounds":[2], "pitch":1, "volume":0.7},
 		"CRUISER":{"sounds":[3], "pitch":1, "volume":0.7},

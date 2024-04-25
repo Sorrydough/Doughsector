@@ -61,6 +61,8 @@ public class sd_attackManager {
     private static ShipAPI findTargetForFighters(sd_fleetadmiralUtil.battlestateTracker battleState) {
         // Step 1. Create a list of all carriers that are appropriate for attacking with fighters
         HashMap<ShipAPI, Boolean> allCarriers = getCarriersList(battleState, battleState.allySide);
+        if (allCarriers.isEmpty())
+            return null;
         List<ShipAPI> goodCarriers = new ArrayList<>();
         for (Map.Entry<ShipAPI, Boolean> entry : allCarriers.entrySet())
             if (!entry.getValue())

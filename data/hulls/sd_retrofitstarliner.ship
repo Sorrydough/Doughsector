@@ -3,7 +3,7 @@
   "hullId": "sd_retrofitstarliner",
   "hullSize": "CRUISER",
   "spriteName": "graphics/ships/sd_retrofitstarliner.png",
-  "style": "SD_TECH",
+  "style": "MIDLINE",
   "height": 284,
   "width": 126,
   "center": [63, 140],

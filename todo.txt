@@ -13,9 +13,8 @@ Arthr Stuff:
 - Hullmod icons
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
 - Export, Pirate, Path skin variants
-- General revision pass, what remains:
+- Ship art revision:
     Fix aux thrusters on cap and cruiser being in a dumb place
-    Fix the shitty looking bashed part on the cruiser & heavy frigate
     Heavy cruiser needs to not look unsettling
 
 
@@ -28,9 +27,9 @@ Discord Beta stuff:
 - Implement faction - ??? Synarchy
 
 - Add 2 more missions
-- Rip ironclad engine sounds for my ships' engine loop
 - Do a pass on infotext and status indicators for all systems now that I know how
-- Debug whether the doom itself counts as a potential mine trigger
+- Update genir's autofire code
+- 2nd pass on my engine boost sound
 
 
 Ghostbusters Stuff:
@@ -47,6 +46,13 @@ Damage prediction AI improvement stuff:
 - Add "acceptable hull damage" check to further improve epicness
 
 
+Hullmod stuff:
+- Create engine reigniter hullmod
+- Hullmod that adds hardflux dissipation based on the shield arc
+- Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
+- Commissioned crew effect: Dramatically improved CP regeneration
+
+
 Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Make a placeholder faction
 - Make sure the forum download link is hidden behind a simple riddle
@@ -61,13 +67,9 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 
 
 Version Whatever Stuff: (easy to do, but not a priority)
-- Commissioned crew effect: Dramatically improved CP regeneration
-- Hullmod that adds hardflux dissipation based on the shield arc
 - Debug ship.setForceCarrierPullBackTime()
 - Integrate engine color fade for all systems
 - Glowmaps for blinkers & hangar
-- Hardened Shields Sidegrade: Costs slightly less, makes shields narrower, increases shield efficiency...?
-- Create engine reigniter hullmod
 - Figure out a better way to display skills in main menu missions
 - ensure that two ships don't accidentally use hacking suite on the same target simultaneously
 - add status indicators for mnemonic armor - armor % imbalanced, % armor remaining - maybe use an indicator above the hull bar
@@ -84,7 +86,6 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - Turret arc pass for heavy cruiser & capital
 - Check if I can fix up my janky isUsable() checks with the new api addition
 - Check if I can just look at whether a target's system is disabled directly with the new api addition
-- Turret arc pass for civ ships
 - Revisit my capacitor count to hit the intended hardened shields breakpoint
 - Figure out how to feel about my kite having a builtin wing
 - Make SO count as a dmod
@@ -98,8 +99,8 @@ Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Run a checksum on my own mod so I know when people have tampered with it
 - Add a functionality to the attack manager where it chooses between engage or eliminate depending on whether enough ships ar enearby to actually kill the target immediately
 - Check if it's possible to apply an avoid order to a waypoint
-- Make ships not shoot if asteroid is in the way
-- Rework battleszie to start at 30 and then slowly expand up to a max of 480
+- Make ships not shoot strike weapons if asteroid is in the way
+- Rework battleszie to start at 30 and slowly expand up to a max of 480
 
 
 Version 2.5 Stuff: (Advanced agent interaction)
@@ -122,6 +123,7 @@ Version 3.0 Stuff: (scope creep)
 - Write a guide for shipsystem AI
 - Custom quality captains
 - Console command to buy stuff and have it shipped to you
+
 
 Unused names that I want reserved:
 Purifier, Mercy, Asylum, Restorer, Transcender, Galvanizer, Arcanist, Purger, Patron, Oblivion, Tranquility, Torrent, Anthem, Veil

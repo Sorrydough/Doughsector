@@ -3,7 +3,7 @@
   "hullId": "sd_retrofitnebula",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_retrofitnebula.png",
-  "style": "SD_TECH",
+  "style": "MIDLINE",
   "height": 200,
   "width": 120,
   "center": [60, 100],

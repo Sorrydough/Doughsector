@@ -6,7 +6,7 @@ sd_grapeshotrack,WEAPON,Launches proximity-fused canisters of antimatter. Reload
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
 sd_grapeshotarray,SHIP_SYSTEM,Dispenses proximity-fused antimatter canisters.
-sd_auxforge,SHIP_SYSTEM,"Replenishes missiles or fighters, depending on which is more depleted. Generates flux upon activation."
+sd_auxforge,SHIP_SYSTEM,"Replenishes small missiles or fighters, whichever is more depleted. Generates flux upon activation."
 sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. More flux intensive on heavily armored ships.
 sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and has powerful side-effects. More flux intensive on heavily armored ships.
 sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy. Automated ships suffer additional duration.

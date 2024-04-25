@@ -1,7 +1,7 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 30,
-    "fluxVents": 23,
+    "fluxCapacitors": 15,
+    "fluxVents": 30,
     "goalVariant": true,
     "hullId": "sd_capitaldreadnought",
     "hullMods": [
@@ -16,7 +16,7 @@
     "variantId": "sd_capitaldreadnought_Attack",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "ALTERNATING",
             "weapons": {
                 "TRT01": "tachyonlance",
@@ -33,22 +33,12 @@
         },
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
-                "TRT11": "pdburst",
-                "TRT12": "pdburst",
-                "TRT10": "pdburst",
-                "TRT08": "irautolance",
-                "TRT09": "pdburst",
-                "TRT06": "irautolance",
-                "TRT07": "pdburst",
-                "TRT04": "heavyburst",
-                "TRT15": "lightdualmg",
-                "TRT05": "irautolance",
-                "TRT16": "lightdualmg",
-                "TRT13": "lightdualmg",
-                "TRT03": "guardian",
-                "TRT14": "lightdualmg",
+                "HRD06": "breach",
+                "HRD07": "breach",
+                "HRD08": "breach",
+                "HRD05": "breach",
             }
         },
         {
@@ -60,18 +50,42 @@
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "HRD05": "breach",
-                "HRD06": "breach",
-                "HRD07": "breach",
-                "HRD08": "breach",
+                "TRT08": "irautolance",
+                "TRT06": "irautolance",
+                "TRT05": "irautolance",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT09": "pdburst",
+                "TRT07": "pdburst",
+                "TRT04": "heavyburst",
+                "TRT11": "lightdualmg",
+                "TRT12": "lightdualmg",
+                "TRT03": "guardian",
+                "TRT15": "lightmg",
+                "TRT16": "lightmg",
+                "TRT13": "lightmg",
+                "TRT14": "lightmg",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "TRT10": "amblaster",
             }
         },
     ],
     "wings": [
-        "sd_fightersupportWing",
+        "sd_fighterblasterWing",
+        "sd_fighterblasterWing",
+        "sd_fighterblasterWing",
     ],
     "modules": [],
 }

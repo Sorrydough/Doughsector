@@ -28,7 +28,7 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
     public final sd_fleetadmiralUtil.battlestateTracker battleState = new sd_fleetadmiralUtil.battlestateTracker();
     private final IntervalUtil interval = new IntervalUtil(0.5f, 2); // variable to approximate human reaction time, they don't stare at the tactical map 24/7. I hope.
     private boolean doInit = true;
-    private boolean debug = false;
+    private boolean debug = true;
     @Override
     public void preCombat() {
 
@@ -41,7 +41,8 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
 
         if (doInit) {
             battleState.updateState(engine, allySide, enemySide); // player side is 0, AI side is 1
-            Console.showMessage("Admiral Controller mounted for fleet side " + battleState.allySide);
+            if (debug)
+                Console.showMessage("Admiral Controller mounted for fleet side " + battleState.allySide);
             for (CombatFleetManagerAPI.AssignmentInfo assignment : battleState.allyTaskManager.getAllAssignments())
                 battleState.allyTaskManager.removeAssignment(assignment); // need to wipe all assignments that might've been created by alex or the player before the controller was mounted
 
