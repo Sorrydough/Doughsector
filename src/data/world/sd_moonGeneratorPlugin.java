@@ -5,6 +5,7 @@ import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.econ.MarketConditionAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.procgen.PlanetConditionGenerator;
+import com.fs.starfarer.api.impl.campaign.procgen.PlanetGenDataSpec;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
     final float MIN_RADIUS_FOR_MOON_GEN = 150; //minimum radius a planet must have before the generator tries to put moons around it
     final float DIVISOR = 100; //higher number means lower probability to generate moons
     final float SPECIAL_PROBABILITY = 10; //higher is lower chance for habitable or toxic planets
+    boolean isUnknownSkies = Global.getSettings().getModManager().isModEnabled("US");
     final List<String> freezingPlanets = new ArrayList<>(); {
         freezingPlanets.add("frozen");
         freezingPlanets.add("frozen1");
@@ -29,7 +31,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
         freezingPlanets.add("cryovolcanic");
         freezingPlanets.add("toxic_cold");
         freezingPlanets.add("rocky_ice");
-        if (Global.getSettings().getModManager().isModEnabled("US")) {
+        if (isUnknownSkies) {
             freezingPlanets.add("US_iceA");
             freezingPlanets.add("US_iceB");
             freezingPlanets.add("US_green");
@@ -43,7 +45,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
         hotPlanets.add("lava_minor");
         hotPlanets.add("toxic");
         hotPlanets.add("irradiated");
-        if (Global.getSettings().getModManager().isModEnabled("US")) {
+        if (isUnknownSkies) {
             hotPlanets.add("US_lava");
             hotPlanets.add("US_volcanic");
             hotPlanets.add("US_acid");
@@ -60,7 +62,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
         neutralPlanets.add("barren_castiron");
         neutralPlanets.add("barren_venuslike");
         neutralPlanets.add("rocky_metallic");
-        if (Global.getSettings().getModManager().isModEnabled("US")) {
+        if (isUnknownSkies) {
             neutralPlanets.add("US_barrenA");
             neutralPlanets.add("US_barrenB");
             neutralPlanets.add("US_barrenC");
@@ -76,7 +78,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
     final List<String> warmHabitablePlanets = new ArrayList<>(); { //hab offset of -1:0 or warmer
         warmHabitablePlanets.add("desert");
         warmHabitablePlanets.add("desert1");
-        if (Global.getSettings().getModManager().isModEnabled("US")) {
+        if (isUnknownSkies) {
             warmHabitablePlanets.add("US_lifeless");
             warmHabitablePlanets.add("US_desertA");
             warmHabitablePlanets.add("US_desertB");
@@ -86,7 +88,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
     final List<String> coldHabitablePlanets = new ArrayList<>(); { //hab offset of 0:1 or colder
         coldHabitablePlanets.add("tundra");
         coldHabitablePlanets.add("barren-desert");
-        if (Global.getSettings().getModManager().isModEnabled("US")) {
+        if (isUnknownSkies) {
             coldHabitablePlanets.add("US_red");      //crimson
             coldHabitablePlanets.add("US_redWind");
             coldHabitablePlanets.add("US_water");
@@ -100,7 +102,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
         neutralHabitablePlanets.add("arid");
         neutralHabitablePlanets.add("water");
         neutralHabitablePlanets.add("jungle");
-        if (Global.getSettings().getModManager().isModEnabled("US")) {
+        if (isUnknownSkies) {
             neutralHabitablePlanets.add("US_alkali");
             neutralHabitablePlanets.add("US_jungle");
             neutralHabitablePlanets.add("US_auric");
@@ -200,6 +202,9 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
 
                             PlanetAPI moon = system.addPlanet("sd_moon_" + i + "_" + planet.hashCode(), planet, planet.getFullName() + " M-" + toRoman(i + 1), type, planet.getSpec().getPitch(), radius, orbitRadius, orbitDays);
                             PlanetConditionGenerator.generateConditionsForPlanet(moon, system.getAge());
+                            PlanetGenDataSpec spec = (PlanetGenDataSpec) Global.getSettings().getSpec(PlanetGenDataSpec.class, moon.getSpec().getPlanetType(), false);
+                            //StarGenDataSpec starData = (StarGenDataSpec)Global.getSettings().getSpec(StarGenDataSpec.class, star.getSpec().getPlanetType(), false);
+
                         }
                     }
                 }
