@@ -202,9 +202,9 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
 
                             PlanetAPI moon = system.addPlanet("sd_moon_" + i + "_" + planet.hashCode(), planet, planet.getFullName() + " M-" + toRoman(i + 1), type, planet.getSpec().getPitch(), radius, orbitRadius, orbitDays);
                             PlanetConditionGenerator.generateConditionsForPlanet(moon, system.getAge());
-                            PlanetGenDataSpec spec = (PlanetGenDataSpec) Global.getSettings().getSpec(PlanetGenDataSpec.class, moon.getSpec().getPlanetType(), false);
+                            //PlanetGenDataSpec spec = (PlanetGenDataSpec) Global.getSettings().getSpec(PlanetGenDataSpec.class, moon.getSpec().getPlanetType(), false);
                             //StarGenDataSpec starData = (StarGenDataSpec)Global.getSettings().getSpec(StarGenDataSpec.class, star.getSpec().getPlanetType(), false);
-
+                            // todo: make this work
                         }
                     }
                 }

@@ -121,46 +121,43 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
     }
 
     public static void sortByPriority(final List<ShipAPI> ships) { // chatgpt wrote this, it only had one minor bug where it inverted some true/false checks
-        Collections.sort(ships, new Comparator<ShipAPI>() {
-            @Override
-            public int compare(ShipAPI ship1, ShipAPI ship2) {
-                // Check if ships are neural-linked and crewed
-                boolean isNeuralLinked1 = sd_util.isLinked(ship1);
-                boolean isNeuralLinked2 = sd_util.isLinked(ship2);
-                boolean isCrewed1 = !sd_util.isAutomated(ship1);
-                boolean isCrewed2 = !sd_util.isAutomated(ship2);
+        ships.sort((ship1, ship2) -> {
+            // Check if ships are neural-linked and crewed
+            boolean isNeuralLinked1 = sd_util.isLinked(ship1);
+            boolean isNeuralLinked2 = sd_util.isLinked(ship2);
+            boolean isCrewed1 = !sd_util.isAutomated(ship1);
+            boolean isCrewed2 = !sd_util.isAutomated(ship2);
 
-                // Priority order: Neural-linked Automated, Neural-linked Crewed, Automated, Crewed
-                if (isNeuralLinked1 && isCrewed1) {
-                    if (isNeuralLinked2 && isCrewed2) {
-                        // Both neural-linked crewed ships, compare by deployment cost
-                        return Float.compare(getDeploymentCost(ship2), getDeploymentCost(ship1));
-                    } else if (isNeuralLinked2) {
-                        // Only ship1 is neural-linked crewed, but ship2 is neural-linked automated
-                        return 1;
-                    } else {
-                        // Only ship1 is neural-linked crewed, and ship2 is not neural-linked
-                        return -1;
-                    }
-                } else if (isNeuralLinked2 && isCrewed2) {
-                    // Only ship2 is neural-linked crewed
-                    return 1;
-                } else if (isNeuralLinked1) {
-                    // Only ship1 is neural-linked automated
-                    return -1;
+            // Priority order: Neural-linked Automated, Neural-linked Crewed, Automated, Crewed
+            if (isNeuralLinked1 && isCrewed1) {
+                if (isNeuralLinked2 && isCrewed2) {
+                    // Both neural-linked crewed ships, compare by deployment cost
+                    return Float.compare(getDeploymentCost(ship2), getDeploymentCost(ship1));
                 } else if (isNeuralLinked2) {
-                    // Only ship2 is neural-linked automated
-                    return 1;
-                } else if (!isCrewed1) {
-                    // Only ship1 is automated
-                    return -1;
-                } else if (!isCrewed2) {
-                    // Only ship2 is automated
+                    // Only ship1 is neural-linked crewed, but ship2 is neural-linked automated
                     return 1;
                 } else {
-                    // Neither ships are automated, compare by deployment cost
-                    return Float.compare(getDeploymentCost(ship2), getDeploymentCost(ship1));
+                    // Only ship1 is neural-linked crewed, and ship2 is not neural-linked
+                    return -1;
                 }
+            } else if (isNeuralLinked2 && isCrewed2) {
+                // Only ship2 is neural-linked crewed
+                return 1;
+            } else if (isNeuralLinked1) {
+                // Only ship1 is neural-linked automated
+                return -1;
+            } else if (isNeuralLinked2) {
+                // Only ship2 is neural-linked automated
+                return 1;
+            } else if (!isCrewed1) {
+                // Only ship1 is automated
+                return -1;
+            } else if (!isCrewed2) {
+                // Only ship2 is automated
+                return 1;
+            } else {
+                // Neither ships are automated, compare by deployment cost
+                return Float.compare(getDeploymentCost(ship2), getDeploymentCost(ship1));
             }
         });
     }
