@@ -61,7 +61,7 @@ public class sd_fleetadmiralUtil {
             }
 
             for (ShipAPI ship : engine.getShips())
-                if (sd_fleetadmiralUtil.isDeployedShip(ship))
+                if (sd_fleetadmiralUtil.isActualShip(ship))
                     deployedShips.add(ship);
 
             for (BattleObjectiveAPI objective : engine.getObjectives())
@@ -167,7 +167,7 @@ public class sd_fleetadmiralUtil {
         return Math.max(stats.getSuppliesToRecover().base, stats.getDynamic().getMod(Stats.DEPLOYMENT_POINTS_MOD).computeEffective(stats.getSuppliesToRecover().modified));
     }
 
-    public static boolean isDeployedShip(ShipAPI ship) {
+    public static boolean isActualShip(ShipAPI ship) {
         return !ship.isStationModule() && !ship.isHulk() && !ship.isShuttlePod() && !ship.isFighter();
     }
 

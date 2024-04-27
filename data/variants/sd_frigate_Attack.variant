@@ -1,12 +1,12 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 7,
+    "fluxCapacitors": 8,
     "fluxVents": 10,
     "goalVariant": true,
     "hullId": "sd_frigate",
     "hullMods": [
         "fluxbreakers",
-        "auxiliarythrusters",
+        "armoredweapons",
     ],
     "permaMods": [],
     "sMods": [],

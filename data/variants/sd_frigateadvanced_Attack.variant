@@ -5,7 +5,7 @@
     "goalVariant": true,
     "hullId": "sd_frigateadvanced",
     "hullMods": [
-        "auxiliarythrusters",
+        "targetingunit",
         "fluxbreakers",
     ],
     "permaMods": [],

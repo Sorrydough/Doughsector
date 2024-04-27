@@ -19,7 +19,10 @@ Arthr Stuff:
 
 
 Discord Beta stuff:
-- Write AI script for nullifier
+- Fix my ships letting themselves get shot by AMBs somehow
+- Fix range ring on nullifier being incorrect
+- Debug nullifier AI script
+
 - Do motefield campaign behavior stuff
 
 - Description pass on everything

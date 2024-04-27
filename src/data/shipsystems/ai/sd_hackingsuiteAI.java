@@ -45,7 +45,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             // check if the enemy has anything we might want to save charges for
             List<ShipAPI> deployedEnemyShips = new ArrayList<>();
             for (ShipAPI other : Global.getCombatEngine().getShips())
-                if (sd_fleetadmiralUtil.isDeployedShip(other) && other.getOwner() != ship.getOwner())
+                if (sd_fleetadmiralUtil.isActualShip(other) && other.getOwner() != ship.getOwner())
                     deployedEnemyShips.add(other);
 
             for (ShipAPI enemy : deployedEnemyShips) {
@@ -72,10 +72,9 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
             for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, systemRange))
                 if (!targets.contains(enemy) && sd_hackingsuite.isTargetValid(ship, enemy))
                     targets.add(enemy);
+            // somehow system becomes null when a ship dies fun fact
             if (!targets.isEmpty())
-                for (ShipAPI enemy : new ArrayList<>(targets)) // doing some shenanigans to bypass a concurrent modification exception
-                    if (!sd_hackingsuite.isTargetValid(ship, enemy)) // somehow system becomes null when a ship dies fun fact
-                        targets.remove(enemy);
+                targets.removeIf(enemy -> !sd_hackingsuite.isTargetValid(ship, enemy));
         }
         // no point going any further if we have no targets ))))
         if (targets.isEmpty())
@@ -113,7 +112,7 @@ public class sd_hackingsuiteAI implements ShipSystemAIScript {
                 if (desireToAttack + desireNeg >= 100) {
                     ship.setShipTarget(target);
                     desirePos += desireToAttack;
-                    break; // break when a target has been selected, the list of potential targets is sorted by highest DP first so we know we're always selecting the best target
+                    break; // break when a target has been selected, the list of potential targets is sorted so we know we're always selecting the best target
                 }
             }
             sd_util.activateSystem(ship, "sd_hackingsuite", desirePos, desireNeg, false);

@@ -109,7 +109,7 @@ public class sd_nullifier extends BaseShipSystemScript {
             ship.getFluxTracker().increaseFlux((modificationPercent * FLUX_PER_TIMEFLOW * effectLevel * amount) / numApplied, true); // divide by numApplied to share flux load
 
             if (effectLevel == 0) { // cleanup
-                Console.showMessage("Doing nullifier cleanup for target "+ target.getName());
+                //Console.showMessage("Doing nullifier cleanup for target "+ target.getName());
                 targetDynamic.getMod("sd_nullifier").unmodifyFlat(id);
                 targetStats.getCRLossPerSecondPercent().unmodifyMult(id);
                 if (targetDynamic.getMod("sd_nullifier").getFlatBonuses().isEmpty()) {
