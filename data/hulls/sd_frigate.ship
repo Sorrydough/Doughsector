@@ -3,7 +3,7 @@
   "hullId": "sd_frigate",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_frigate.png",
-  "style": "SD_TECH",
+  "style": "SD_MILTECH",
   "height": 112,
   "width": 70,
   "center": [37, 55],

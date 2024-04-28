@@ -3,7 +3,7 @@
   "hullId": "sd_retrofitkite",
   "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/sd_retrofitkite.png",
-  "style": "MIDLINE",
+  "style": "SD_CIVTECH",
   "height": 66,
   "width": 82,
   "center": [41, 27],

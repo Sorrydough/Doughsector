@@ -3,7 +3,7 @@
   "hullId": "sd_retrofitnebula",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_retrofitnebula.png",
-  "style": "MIDLINE",
+  "style": "SD_CIVTECH",
   "height": 200,
   "width": 120,
   "center": [60, 100],

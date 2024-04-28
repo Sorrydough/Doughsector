@@ -7,14 +7,14 @@
 		"engineColor":[255,235,205,255],
 		"glowAlternateColor":[255,235,205,150],
 		"engineCampaignColor":[255,235,205,255],
-		"contrailCampaignColor":[255,235,205,75],
-		"contrailColor":[255,235,205,7],
-		"contrailParticleSizeMult":8,
-		"contrailParticleDuration":1.5,
-		"contrailParticleFinalSizeMult":1.5,
+		"contrailColor":[50,50,50,50],
+		"contrailCampaignColor":[200,90,70,75],
+		"contrailParticleSizeMult":3,
+		"contrailParticleDuration":2,
+		"contrailParticleFinalSizeMult":3,
 		"contrailMaxSpeedMult":0.5,
 		"contrailAngularVelocityMult":0.5,
-		"type":"GLOW"
+		"type":"SMOKE"
 	},
 	"sd_flare":{
 		"engineColor":[255,235,205,255],

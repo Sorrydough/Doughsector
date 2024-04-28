@@ -2,7 +2,7 @@
 	"id":"sd_doughsector",
 	"name":"Doughpack",
 	"author":"Sorrydough",
-	"version":"69",
+	"version":"01.28",
 	"description":"Lol quirky self-insert faction",
     "gameVersion": "0.97",
   	"jars":["jars/doughsector.jar"],

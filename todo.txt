@@ -16,17 +16,17 @@ Arthr Stuff:
 - Ship art revision:
     Fix aux thrusters on cap and cruiser being in a dumb place
     Heavy cruiser needs to not look unsettling
+    Third hangar on crapital
 
 
 Discord Beta stuff:
-- Fix my ships letting themselves get shot by AMBs somehow
+- Fix my ships being really stupid when a shot would bring their armor down to 0
 - Fix range ring on nullifier being incorrect
 - Debug nullifier AI script
-- Civgrade hullstyle
 - Nullifier status indicator
 - Stop eating salamanders
-- Insulated engines on little doodes?
 - Change engines to smoke instead of glow
+- Insulated engines on little dood variants?
 - Hullsize-appropriate engine boost sounds
 - Migrate brdy to new install (and others..?)
 - Adjust acceptable hull and armor damage by time and flux level

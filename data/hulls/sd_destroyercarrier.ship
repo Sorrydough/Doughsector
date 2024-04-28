@@ -3,7 +3,7 @@
   "hullId": "sd_destroyercarrier",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_destroyercarrier.png",
-  "style": "SD_TECH",
+  "style": "SD_MILTECH",
   "height": 192,
   "width": 92,
   "center": [45, 96],

@@ -7,7 +7,8 @@
     },
 	"sd_vent_loop":{
 		"sounds":[{"file":"sounds/sd_tech/sd_vent_loop.ogg","pitch":1,"volume":1}],
-		"SD_TECH":{"sounds":[0], "pitch":1, "volume":0.5},
+		"SD_MILTECH":{"sounds":[0], "pitch":1, "volume":0.5},
+		"SD_CIVTECH":{"sounds":[0], "pitch":1, "volume":0.5},
 		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
 		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
 		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.6},
@@ -16,7 +17,8 @@
 	},
 	"sd_vent_start":{
 		"sounds":[{"file":"sounds/sd_tech/sd_vent_start.ogg","pitch":1,"volume":1}],
-		"SD_TECH":{"sounds":[0], "pitch":1, "volume":0.5},
+		"SD_MILTECH":{"sounds":[0], "pitch":1, "volume":0.5},
+		"SD_CIVTECH":{"sounds":[0], "pitch":1, "volume":0.5},
 		"FIGHTER":{"sounds":[0], "pitch":1.2, "volume":0.2},
 		"FRIGATE":{"sounds":[0], "pitch":1.1, "volume":0.5},
 		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.6},
@@ -32,7 +34,7 @@
 			{"file":"sounds/sd_tech/sd_engine_loop_cruiser.ogg","pitch":1,"volume":1},
 			{"file":"sounds/sd_tech/sd_engine_loop_capital.ogg","pitch":1,"volume":1}
 			],
-		"SD_TECH":{"sounds":[0,1,2,3,4], "pitch":1, "volume":0.5},
+		"SD_MILTECH":{"sounds":[0,1,2,3,4], "pitch":1, "volume":0.5},
 		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.1},
 		"FRIGATE":{"sounds":[1], "pitch":1, "volume":0.7},
 		"DESTROYER":{"sounds":[2], "pitch":1, "volume":0.7},
@@ -41,7 +43,7 @@
 	},
 	"sd_engine_accelerate":{
 		"sounds":[{"file":"sounds/sd_tech/sd_engine_accelerate.ogg","pitch":1.0,"volume":0.3}],
-		"SD_TECH":{"sounds":[0], "pitch":0.8, "volume":1},
+		"SD_MILTECH":{"sounds":[0], "pitch":0.8, "volume":1},
 		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.1},
 		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.5},
 		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.7},

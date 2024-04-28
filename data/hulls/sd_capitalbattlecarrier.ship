@@ -3,7 +3,7 @@
   "hullId": "sd_capitaldreadnought",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "graphics/ships/sd_capitaldreadnought.png",
-  "style": "SD_TECH",
+  "style": "SD_MILTECH",
   "height": 440,
   "width": 220,
   "center": [110, 223],

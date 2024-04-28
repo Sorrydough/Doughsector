@@ -3,7 +3,7 @@
   "hullId": "sd_destroyeradvanced",
   "hullSize": "DESTROYER",
   "spriteName": "graphics/ships/sd_destroyeradvanced.png",
-  "style": "SD_TECH",
+  "style": "SD_MILTECH",
   "height": 190,
   "width": 190,
   "center": [95, 95],

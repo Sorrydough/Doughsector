@@ -3,7 +3,7 @@
   "hullId": "sd_fightersupport",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/sd_fightersupport.png",
-  "style": "SD_TECH",
+  "style": "SD_MILTECH",
   "height": 36,
   "width": 36,
   "center": [18, 19],

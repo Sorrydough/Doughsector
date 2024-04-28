@@ -3,7 +3,7 @@
   "hullId": "sd_cruiser",
   "hullSize": "CRUISER",
   "spriteName": "graphics/ships/sd_cruiser.png",
-  "style": "SD_TECH",
+  "style": "SD_MILTECH",
   "height": 290,
   "width": 140,
   "center": [72, 145],
