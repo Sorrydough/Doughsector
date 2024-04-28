@@ -18,11 +18,10 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
 
+import static com.fs.starfarer.api.combat.ShipEngineControllerAPI.*;
 import static data.sd_util.*;
 
 public class sd_utilityhullmod extends BaseHullMod {
@@ -195,13 +194,13 @@ public class sd_utilityhullmod extends BaseHullMod {
                     break;
                 }
             }
-            if (!isWeaponFiring && isArmorDamageAcceptable(ship, potentialHitsForVenting)) {
+            if (!isWeaponFiring && isDamageAcceptable(ship, potentialHitsForVenting)) {
                 if (ship.getFluxLevel() > 0.2)
                     ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
             }
 
             if (shield != null) {
-                if (isArmorDamageAcceptable(ship, potentialHitsForShield)) {
+                if (isDamageAcceptable(ship, potentialHitsForShield)) {
                     if (shield.isOn())
                         ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
                     if (shield.isOff())
@@ -214,8 +213,7 @@ public class sd_utilityhullmod extends BaseHullMod {
         public float lastShieldOnTime = 0;
         public List<FutureHit> potentialHitsForVenting = new ArrayList<>();
         public List<FutureHit> potentialHitsForShield = new ArrayList<>();
-        public List<FutureHit> potentialHits = new ArrayList<>();
-        public boolean isArmorDamageAcceptable(ShipAPI ship, List<FutureHit> potentialHits) {
+        public boolean isDamageAcceptable(ShipAPI ship, List<FutureHit> potentialHits) {
             if (isScriptedNonsenseNearby(ship))
                 return false;
             // calculate how much damage the ship would take if shields went down
@@ -246,13 +244,34 @@ public class sd_utilityhullmod extends BaseHullMod {
                 }
             }
 
-            if (sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid()))
-                return false;
-            boolean isArmorDamageAcceptable = armorAfterIncoming > 0;
-            if (armorAfterIncoming < armor * 0.85)
-                isArmorDamageAcceptable = false;
+            boolean isArmorDamageAcceptable = armorAfterIncoming > armor * 0.9;
+            boolean isHullDamageAcceptable = incomingHullDamage < ship.getHitpoints() * 0.05;
 
-            return isArmorDamageAcceptable;
+            boolean isEMPDamageAcceptable = true;
+            if (!ship.getEngineController().getShipEngines().isEmpty()) {
+                List<ShipEngineAPI> thrusters = ship.getEngineController().getShipEngines();
+                sortByContribution(thrusters);
+                int i = 0;
+                for (ShipEngineAPI thruster : thrusters) {
+                    if (i < Math.ceil((double) thrusters.size() / 2)) {
+                        if (thruster.getHitpoints() < incomingEMPDamage) {
+                            isEMPDamageAcceptable = false;
+                            break;
+                        }
+                        i++;
+                    }
+                }
+            }
+
+
+            return isHullDamageAcceptable && isArmorDamageAcceptable && isEMPDamageAcceptable;
+        }
+        public static void sortByContribution(final List<ShipEngineAPI> thrusters) {
+            thrusters.sort((thruster1, thruster2) -> {
+                float contribution1 = thruster1.getContribution();
+                float contribution2 = thruster2.getContribution();
+                return Float.compare(contribution2, contribution1);
+            });
         }
         public boolean isScriptedNonsenseNearby(ShipAPI ship) {
             // check for scripted ship systems

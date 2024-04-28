@@ -739,9 +739,8 @@ public class sd_util {
 
         float armorDamage = damage * armorMultiplier;
         float hullDamage = 0;
-        if (armorDamage > armorValue){
-            hullDamage = ((armorDamage - armorValue)/armorDamage) * damage * hullMultiplier;
-        }
+        if (armorDamage > armorValue)
+            hullDamage = ((armorDamage - armorValue) / armorDamage) * damage * hullMultiplier;
 
         return new Pair<>(armorDamage, hullDamage);
     }

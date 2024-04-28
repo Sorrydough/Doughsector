@@ -22,6 +22,14 @@ Discord Beta stuff:
 - Fix my ships letting themselves get shot by AMBs somehow
 - Fix range ring on nullifier being incorrect
 - Debug nullifier AI script
+- Civgrade hullstyle
+- Nullifier status indicator
+- Stop eating salamanders
+- Insulated engines on little doodes?
+- Change engines to smoke instead of glow
+- Hullsize-appropriate engine boost sounds
+- Migrate brdy to new install (and others..?)
+- Adjust acceptable hull and armor damage by time and flux level
 
 - Do motefield campaign behavior stuff
 
