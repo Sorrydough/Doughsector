@@ -23,13 +23,11 @@ Discord Beta stuff:
 - Fix my ships being really stupid when a shot would bring their armor down to 0
 - Fix range ring on nullifier being incorrect
 - Debug nullifier AI script
-- Nullifier status indicator
 - Stop eating salamanders
-- Change engines to smoke instead of glow
 - Insulated engines on little dood variants?
 - Hullsize-appropriate engine boost sounds
-- Migrate brdy to new install (and others..?)
 - Adjust acceptable hull and armor damage by time and flux level
+- Figure out yellow shields
 
 - Do motefield campaign behavior stuff
 
@@ -39,7 +37,6 @@ Discord Beta stuff:
 
 - Add 2 more missions
 - Do a pass on infotext and status indicators for all systems now that I know how
-- Update genir's autofire code
 - 2nd pass on my engine boost sound
 
 - Convert my EFS plugins to be advanceable listeners instead
