@@ -47,10 +47,7 @@ public class sd_motearmor extends BaseShipSystemScript {
 
             // keeps the list of motes attached to this ship cleaned up
             SharedMoteAIData data = getSharedData(ship);
-            Iterator<MissileAPI> iter = data.motes.iterator();
-            while (iter.hasNext())
-                if (!Global.getCombatEngine().isMissileAlive(iter.next()))
-                    iter.remove();
+            data.motes.removeIf(missileAPI -> !Global.getCombatEngine().isMissileAlive(missileAPI));
 
             // while I could rebalance the armor grid all at once, I want it to look nice and happen only one cell at a time, so that complicates everything
             // firstly we need to calculate the average hp of the grid which is done elsewhere with the getAverageArmorPerCell function

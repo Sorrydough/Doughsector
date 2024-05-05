@@ -210,7 +210,7 @@ public class sd_moteAIScript implements MissileAIPlugin {
 		boolean hardAvoiding = false;
 		for (CombatEntityAPI other : hardAvoidList) {
 			float dist = Misc.getDistance(missile.getLocation(), other.getLocation());
-			float hardAvoidRange = other.getCollisionRadius() + avoidRange + 50f;
+			float hardAvoidRange = other.getCollisionRadius() + avoidRange + 100f;
 			if (dist < hardAvoidRange) {
 				Vector2f dir = Misc.getUnitVectorAtDegreeAngle(Misc.getAngleInDegrees(other.getLocation(), missile.getLocation()));
 				float f = 1f - dist / (hardAvoidRange);

@@ -21,13 +21,10 @@ Arthr Stuff:
 
 Discord Beta stuff:
 - Fix my ships being really stupid when a shot would bring their armor down to 0
-- Fix range ring on nullifier being incorrect
 - Debug nullifier AI script
 - Stop eating salamanders
 - Insulated engines on little dood variants?
-- Hullsize-appropriate engine boost sounds
 - Adjust acceptable hull and armor damage by time and flux level
-- Figure out yellow shields
 
 - Do motefield campaign behavior stuff
 
@@ -37,7 +34,6 @@ Discord Beta stuff:
 
 - Add 2 more missions
 - Do a pass on infotext and status indicators for all systems now that I know how
-- 2nd pass on my engine boost sound
 
 - Convert my EFS plugins to be advanceable listeners instead
 
@@ -77,6 +73,8 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 
 
 Version Whatever Stuff: (easy to do, but not a priority)
+- Fix range ring on nullifier being incorrect
+- Hullsize-appropriate engine boost sounds
 - Debug ship.setForceCarrierPullBackTime()
 - Integrate engine color fade for all systems
 - Glowmaps for blinkers & hangar
@@ -85,7 +83,6 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - add status indicators for mnemonic armor - armor % imbalanced, % armor remaining - maybe use an indicator above the hull bar
 - do another pass to nerf my fighters dissipation & change hexshield to disable the shield until 0 flux, instead of disabling for a flat amount of time
 - make KB fighter damage itself
-- Make motes stop fucking running into asteroids
 - Add a description display to motefield hullmod to show how much the ship's motefield has degraded
 - Do normals properly with modlab
 - Add normals for decos
