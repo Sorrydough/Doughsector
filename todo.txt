@@ -25,6 +25,7 @@ Discord Beta stuff:
 - Stop eating salamanders
 - Insulated engines on little dood variants?
 - Adjust acceptable hull and armor damage by time and flux level
+- Adjust acceptable EMP damage by engine and weapon hp
 
 - Do motefield campaign behavior stuff
 
@@ -32,10 +33,12 @@ Discord Beta stuff:
 - Faction flag
 - Implement faction - ??? Synarchy
 
-- Add 2 more missions
+- Make ghostbusters actually difficult - placeholder simple fleet and admiral for first release?
 - Do a pass on infotext and status indicators for all systems now that I know how
 
 - Convert my EFS plugins to be advanceable listeners instead
+
+- Refer to my custom motes as "LF"
 
 
 Ghostbusters Stuff:
@@ -73,6 +76,9 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 
 
 Version Whatever Stuff: (easy to do, but not a priority)
+- Add more menu missions
+- Make the kite small mount shroud actually be a shroud
+- Have motes phase in out of nowhere instead of coming from the ship
 - Fix range ring on nullifier being incorrect
 - Hullsize-appropriate engine boost sounds
 - Debug ship.setForceCarrierPullBackTime()
@@ -81,8 +87,8 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - Figure out a better way to display skills in main menu missions
 - ensure that two ships don't accidentally use hacking suite on the same target simultaneously
 - add status indicators for mnemonic armor - armor % imbalanced, % armor remaining - maybe use an indicator above the hull bar
-- do another pass to nerf my fighters dissipation & change hexshield to disable the shield until 0 flux, instead of disabling for a flat amount of time
-- make KB fighter damage itself
+- rework hexshield behavior to be one-time-use, check if concord can explain to me how to get them to rearm it
+- make KB fighter randomly vanish from existence when the gun shoots - maybe do emp or something
 - Add a description display to motefield hullmod to show how much the ship's motefield has degraded
 - Do normals properly with modlab
 - Add normals for decos
@@ -104,7 +110,7 @@ Version 2.0 Stuff: (agent fleet, proper colony behavior)
 - Run a checksum on my own mod so I know when people have tampered with it
 - Add a functionality to the attack manager where it chooses between engage or eliminate depending on whether enough ships ar enearby to actually kill the target immediately
 - Check if it's possible to apply an avoid order to a waypoint
-- Make ships not shoot strike weapons if asteroid is in the way
+- Make ships not shoot strike weapons if asteroid is in the way, use firstShipAlongLineOfFire
 - Rework battleszie to start at 30 and slowly expand up to a max of 480
 
 

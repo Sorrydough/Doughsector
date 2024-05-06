@@ -83,8 +83,8 @@ public class sd_modPlugin extends BaseModPlugin {
         boolean wantMoons = true;
         if (hasLunaLib)
             wantMoons = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_generateMoons"));
-        if (wantMoons && !Global.getSector().getMemoryWithoutUpdate().contains("sd_moons")) {
-            Global.getSector().getMemoryWithoutUpdate().set("sd_moons", true);
+        if (wantMoons && !Global.getSector().getMemoryWithoutUpdate().contains("$sd_moons")) {
+            Global.getSector().getMemoryWithoutUpdate().set("$sd_moons", true);
             new sd_moonGeneratorPlugin().generate(Global.getSector());
         }
         // remove baseBP
