@@ -40,6 +40,10 @@ Discord Beta stuff:
 
 - Refer to my custom motes as "LF"
 
+- Fix custom start
+
+- Add custom behavior to make ion beam super ultra mega epic
+
 
 Ghostbusters Stuff:
 - Make the motes way better at taking out doom mines

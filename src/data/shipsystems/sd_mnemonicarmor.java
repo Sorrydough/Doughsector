@@ -45,7 +45,7 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 			Vector2f cellToSubtract = cellsAboveAverage.get(new Random().nextInt(cellsAboveAverage.size()));
 			Vector2f cellToAdd = cellsBelowAverage.get(new Random().nextInt(cellsBelowAverage.size()));
 
-			// find the amount we need to subtract from the cell - this the maximum of the amount needed or the amount the cell can provide
+			// find the amount we need to subtract from the cell - this is the maximum of the amount needed or the amount the cell can provide
 			float amountNeededToTransfer = ship.getArmorGrid().getMaxArmorInCell() - ship.getArmorGrid().getArmorValue((int) cellToAdd.x, (int) cellToAdd.y);
 			float amountAbleToTransfer = (ship.getArmorGrid().getArmorValue((int) cellToSubtract.x, (int) cellToSubtract.y) - averageArmorPerCell);
 			if (amountAbleToTransfer <= 0)
