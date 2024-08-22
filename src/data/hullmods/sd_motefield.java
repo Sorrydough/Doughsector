@@ -76,8 +76,8 @@ public class sd_motefield extends BaseHullMod implements HullModFleetEffect {
         tooltip.addPara("Upon arrival in combat the ship is accompanied by a number of motes. When the system rebalances its armor, these motes regenerate.",5f);
         tooltip.addPara("The fleet recieves a 0.5%% improvement to their ECM rating per mote present on the battlefield.", 2f, Misc.getHighlightColor(), "0.5%");
         tooltip.addPara("Out of combat, an obscuring effect is also observed:", 5f);
-        tooltip.addPara("This ship reduces the sensor signature of 1 ship larger than itself and 3 ships of at most the same size by 50% OR to this ship's sensor signature, whichever is the weaker bonus.", 2f);
-        tooltip.addPara("All aforementioned effects degrade as more ships of the type become present in the fleet and as this ship's combat readiness slides into malfunction range.", 5f);
+        tooltip.addPara("This ship reduces the sensor signature of 1 ship larger than itself and 3 ships of at most the same size by 50%% OR to this ship's sensor signature, whichever is the weaker bonus.", 2f, Misc.getHighlightColor(), "1", "3", "50%");
+        tooltip.addPara("All effects degrade as more ships of the type become present in the fleet and as this ship's combat readiness slides past malfunction range.", 5f);
     }
     @Override
     public boolean withAdvanceInCampaign() {
