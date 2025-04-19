@@ -174,6 +174,8 @@ public class sd_utilityhullmod extends BaseHullMod {
             // CUSTOM VENT AND ARMORTANKING CODE BEYOND THIS PART //
             // USES STARFICZ'S AI UTILS ////////////////////////////
             ////////////////////////////////////////////////////////
+            if (ship.getShield() == null)
+                return;
             incomingHitsTracker.advance(amount);
             if (incomingHitsTracker.intervalElapsed()) {
                 lastUpdatedTime = engine.getTotalElapsedTime(false);

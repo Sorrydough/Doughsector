@@ -32,51 +32,6 @@
       "locations": [-3, -0]
     },
     {
-      "id": "SYS10",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 10,
-      "angle": -170,
-      "locations": [-11, -12]
-    },
-    {
-      "id": "SYS08",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 10,
-      "angle": -125.5,
-      "locations": [-8, -14]
-    },
-    {
-      "id": "SYS07",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 10,
-      "angle": 125.5,
-      "locations": [-8, 14]
-    },
-    {
-      "id": "SYS09",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 10,
-      "angle": 170,
-      "locations": [-11, 12]
-    },
-    {
-      "id": "SYS04",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 10,
-      "angle": 90,
-      "locations": [23, 9]
-    },
-    {
       "id": "SYS01",
       "size": "SMALL",
       "type": "SYSTEM",
@@ -84,15 +39,6 @@
       "arc": 10,
       "angle": 45,
       "locations": [26, 9]
-    },
-    {
-      "id": "SYS05",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 10,
-      "angle": 15,
-      "locations": [23, 6]
     },
     {
       "id": "SYS02",
@@ -113,6 +59,24 @@
       "locations": [26, 3]
     },
     {
+      "id": "SYS04",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 90,
+      "locations": [23, 9]
+    },
+    {
+      "id": "SYS05",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 15,
+      "locations": [23, 6]
+    },
+    {
       "id": "SYS06",
       "size": "SMALL",
       "type": "SYSTEM",
@@ -120,6 +84,42 @@
       "arc": 10,
       "angle": -90,
       "locations": [23, 3]
+    },
+    {
+      "id": "SYS07",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 125.5,
+      "locations": [-8, 14]
+    },
+    {
+      "id": "SYS08",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": -125.5,
+      "locations": [-8, -14]
+    },
+    {
+      "id": "SYS09",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 170,
+      "locations": [-11, 12]
+    },
+    {
+      "id": "SYS10",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": -170,
+      "locations": [-11, -12]
     },
     {
       "id": "DEC01",
@@ -131,15 +131,6 @@
       "locations": [35, -5.5]
     },
     {
-      "id": "THR02",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": -45,
-      "locations": [-7, -19]
-    },
-    {
       "id": "THR01",
       "size": "SMALL",
       "type": "DECORATIVE",
@@ -147,6 +138,15 @@
       "arc": 0,
       "angle": 45,
       "locations": [-7, 19]
+    },
+    {
+      "id": "THR02",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -45,
+      "locations": [-7, -19]
     },
     {
       "id": "THR03",
@@ -198,7 +198,7 @@
       "width": 2,
       "angle": 135,
       "contrailSize": 2,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     },
     {
       "location": [-25, -13],
@@ -206,7 +206,7 @@
       "width": 2,
       "angle": -135,
       "contrailSize": 2,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     },
     {
       "location": [-7, 19],
@@ -214,7 +214,7 @@
       "width": 2,
       "angle": 45,
       "contrailSize": 2,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     },
     {
       "location": [-7, -19],
@@ -222,7 +222,7 @@
       "width": 2,
       "angle": -45,
       "contrailSize": 2,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     }
   ],
   "bounds": [

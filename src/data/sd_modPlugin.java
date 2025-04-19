@@ -1,24 +1,25 @@
 package data;
 
-import com.fs.starfarer.api.BaseModPlugin;
-import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.PluginPick;
-import com.fs.starfarer.api.SettingsAPI;
+import com.fs.starfarer.api.*;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
 import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.combat.AutofireAIPlugin;
 import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.loading.Description;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import lunalib.lunaSettings.LunaSettings;
+import org.apache.log4j.Level;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 
 import data.world.sd_moonGeneratorPlugin;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 @SuppressWarnings("unused")
 public class sd_modPlugin extends BaseModPlugin {

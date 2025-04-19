@@ -5,18 +5,18 @@ Aegis: Focused on being as tanky as possible with good point defense.
 Command: Dedicates most of its budget to ECM and nav buoy.
 Overdriven: Safety Overrides. Usually a variation of a strike loadout.
 Specialist: For some niche purpose.
-Snare: Uses extensive crowd control tools to disable opponents.
+Snare: Uses crowd control tools to disable opponents.
 Elite: Uses s-mods as the basis of its fit, great at everything.
+Surplus: Starter variant with basic stuff.
 
-Arthr Stuff:
+Art/Collab Stuff:
 - Grapeshot art
-- Hullmod icons
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
 - Export, Pirate, Path skin variants
 - Ship art revision:
     Fix aux thrusters on cap and cruiser being in a dumb place
     Heavy cruiser needs to not look unsettling
-    Third hangar on crapital
+
 
 
 Discord Beta stuff:
@@ -27,8 +27,6 @@ Discord Beta stuff:
 - Adjust acceptable hull and armor damage by time and flux level
 - Adjust acceptable EMP damage by engine and weapon hp
 
-- Do motefield campaign behavior stuff
-
 - Description pass on everything
 - Faction flag
 - Implement faction - ??? Synarchy
@@ -38,15 +36,16 @@ Discord Beta stuff:
 
 - Convert my EFS plugins to be advanceable listeners instead
 
-- Refer to my custom motes as "LF"
-
 - Fix custom start
 
 - Add custom behavior to make ion beam super ultra mega epic
 
+- Make my ships spawn randomly as fleet encounters in systems with inactive gates
+- Do a proper blueprint package instead of janky shit
+- Set everything up for the codex
+
 
 Ghostbusters Stuff:
-- Make the motes way better at taking out doom mines
 - Have the fleet commander send fighters to do shit that actually matters
 - Make it harder to bait out amhowitzers with phase cloak
 - Write escort behavior so my destroyers don't stray too far
@@ -82,18 +81,17 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 Version Whatever Stuff: (easy to do, but not a priority)
 - Add more menu missions
 - Make the kite small mount shroud actually be a shroud
-- Have motes phase in out of nowhere instead of coming from the ship
 - Fix range ring on nullifier being incorrect
 - Hullsize-appropriate engine boost sounds
 - Debug ship.setForceCarrierPullBackTime()
 - Integrate engine color fade for all systems
 - Glowmaps for blinkers & hangar
+- Do blinkers that don't blow ass
 - Figure out a better way to display skills in main menu missions
 - ensure that two ships don't accidentally use hacking suite on the same target simultaneously
 - add status indicators for mnemonic armor - armor % imbalanced, % armor remaining - maybe use an indicator above the hull bar
 - rework hexshield behavior to be one-time-use, check if concord can explain to me how to get them to rearm it
 - make KB fighter randomly vanish from existence when the gun shoots - maybe do emp or something
-- Add a description display to motefield hullmod to show how much the ship's motefield has degraded
 - Do normals properly with modlab
 - Add normals for decos
 - Convert my AI code to use AI grids for proximity checks so it can be less laggy maybe
@@ -128,6 +126,7 @@ Version 2.5 Stuff: (Advanced agent interaction)
 Version 3.0 Stuff: (scope creep)
 - Modify tags on various vanilla weapons to improve AI behavior - squalls & breach srms for starters
 - Interfere with commissioned crews and substance abuse somehow
+- Drink effect: Duplicates the bonuses of whatever the enemy fleet has
 - In my discord, have a bot command that mutes your target for 5 minutes at the cost of muting you for 15 minutes
 - Crew overflow marginally improves PPT and module repair speed (enemies always get full crew lol)
 - Global combatplugin for RTS mode: 5% range?, very good autofire accuracy?, 25% less recoil?

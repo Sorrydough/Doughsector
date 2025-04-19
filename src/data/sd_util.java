@@ -189,6 +189,8 @@ public class sd_util {
                 || !system.isActive() && system.getCooldownRemaining() > 0
                 // fluxed out
                 || !system.isActive() && (system.getFluxPerUse() > (flux.getMaxFlux() - flux.getCurrFlux())));
+                // venting?
+                //|| flux.isVenting());
     }
 
     // all this shit is from starficz

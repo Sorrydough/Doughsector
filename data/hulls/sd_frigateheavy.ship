@@ -45,15 +45,6 @@
       "locations": [35, 20]
     },
     {
-      "id": "TRT03",
-      "size": "SMALL",
-      "type": "HYBRID",
-      "mount": "TURRET",
-      "arc": 234,
-      "angle": 77,
-      "locations": [8, 26]
-    },
-    {
       "id": "TRT02",
       "size": "SMALL",
       "type": "HYBRID",
@@ -63,6 +54,15 @@
       "locations": [14, -19]
     },
     {
+      "id": "TRT03",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 234,
+      "angle": 77,
+      "locations": [8, 26]
+    },
+    {
       "id": "TRT04",
       "size": "SMALL",
       "type": "HYBRID",
@@ -70,15 +70,6 @@
       "arc": 360,
       "angle": 0,
       "locations": [-14, -0]
-    },
-    {
-      "id": "DEC03",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": 0,
-      "locations": [25.5, -37.5]
     },
     {
       "id": "DEC01",
@@ -99,6 +90,15 @@
       "locations": [38.5, 34.5]
     },
     {
+      "id": "DEC03",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [25.5, -37.5]
+    },
+    {
       "id": "DEC04",
       "size": "SMALL",
       "type": "DECORATIVE",
@@ -117,15 +117,6 @@
       "locations": [-20.5, 28.5]
     },
     {
-      "id": "THR04",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": -140,
-      "locations": [-46.5, -30.5]
-    },
-    {
       "id": "THR02",
       "size": "SMALL",
       "type": "DECORATIVE",
@@ -142,6 +133,15 @@
       "arc": 0,
       "angle": 135,
       "locations": [-46.5, 30.5]
+    },
+    {
+      "id": "THR04",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -140,
+      "locations": [-46.5, -30.5]
     }
   ],
   "engineSlots": [
@@ -247,7 +247,7 @@
       "width": 3,
       "angle": 135,
       "contrailSize": 3,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     },
     {
       "location": [-46.5, -30.5],
@@ -255,7 +255,7 @@
       "width": 3,
       "angle": -135,
       "contrailSize": 3,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     },
     {
       "location": [-20.5, 28.5],
@@ -263,7 +263,7 @@
       "width": 3,
       "angle": 45,
       "contrailSize": 3,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     },
     {
       "location": [-20.5, -28.5],
@@ -271,7 +271,7 @@
       "width": 3,
       "angle": -45,
       "contrailSize": 3,
-      "style": "sd_blockThruster"
+      "style": "sd_blockThruster_aux"
     }
   ],
   "bounds": [

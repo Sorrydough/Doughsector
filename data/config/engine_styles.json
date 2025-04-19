@@ -16,6 +16,23 @@
 		"contrailAngularVelocityMult":0.5,
 		"type":"SMOKE"
 	},
+		"sd_blockThruster_aux":{
+		"glowSprite":"graphics/fx/thrusters/sd_blockThruster.png",
+		"glowOutline":"graphics/fx/thrusters/sd_blockThruster.png",
+		"omegaMode":true,
+		"glowSizeMult":0.85,
+		"engineColor":[255,235,205,255],
+		"glowAlternateColor":[255,235,205,150],
+		"engineCampaignColor":[0,0,0,0],
+		"contrailColor":[50,50,50,50],
+		"contrailCampaignColor":[200,90,70,75],
+		"contrailParticleSizeMult":3,
+		"contrailParticleDuration":2,
+		"contrailParticleFinalSizeMult":3,
+		"contrailMaxSpeedMult":0.5,
+		"contrailAngularVelocityMult":0.5,
+		"type":"SMOKE"
+	},
 	"sd_flare":{
 		"engineColor":[255,235,205,255],
 		"glowAlternateColor":[255,235,205,100],
