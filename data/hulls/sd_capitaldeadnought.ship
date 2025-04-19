@@ -677,7 +677,7 @@
             "width": 5,
             "angle": 135,
             "contrailSize": 5,
-            "style": "sd_blockThruster"
+            "style": "sd_blockThruster_aux"
         },
         {
             "location": [
@@ -687,7 +687,7 @@
             "width": 5,
             "angle": -135,
             "contrailSize": 5,
-            "style": "sd_blockThruster"
+            "style": "sd_blockThruster_aux"
         },
         {
             "location": [
@@ -697,7 +697,7 @@
             "width": 4,
             "angle": 0,
             "contrailSize": 4,
-            "style": "sd_blockThruster"
+            "style": "sd_blockThruster_aux"
         },
         {
             "location": [
@@ -707,7 +707,7 @@
             "width": 4,
             "angle": 0,
             "contrailSize": 4,
-            "style": "sd_blockThruster"
+            "style": "sd_blockThruster_aux"
         },
         {
             "location": [
@@ -717,7 +717,7 @@
             "width": 4,
             "angle": 90,
             "contrailSize": 4,
-            "style": "sd_blockThruster"
+            "style": "sd_blockThruster_aux"
         },
         {
             "location": [
@@ -727,7 +727,7 @@
             "width": 4,
             "angle": -90,
             "contrailSize": 4,
-            "style": "sd_blockThruster"
+            "style": "sd_blockThruster_aux"
         }
     ],
     "bounds": [

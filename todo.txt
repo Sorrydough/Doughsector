@@ -27,6 +27,8 @@ Discord Beta stuff:
 - Adjust acceptable hull and armor damage by time and flux level
 - Adjust acceptable EMP damage by engine and weapon hp
 
+- Fix aux engines visible on starmap
+
 - Description pass on everything
 - Faction flag
 - Implement faction - ??? Synarchy
