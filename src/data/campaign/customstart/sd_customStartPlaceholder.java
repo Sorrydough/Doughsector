@@ -20,9 +20,7 @@ import exerelin.utilities.StringHelper;
 import org.magiclib.util.MagicCampaign;
 import org.magiclib.util.MagicVariables;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //Placeholder start for mod testing. Start with a small fleet, a blueprint package, and near a random gate in the sector.
 @SuppressWarnings("unused")
@@ -33,45 +31,68 @@ public class sd_customStartPlaceholder extends CustomStart {
 
         PlayerFactionStore.setPlayerFactionIdNGC(Factions.PLAYER);
 
-        data.addScriptBeforeTimePass(new Script() {
+        data.addScriptBeforeTimePass(
+                new Script() {
                     @Override
                     public void run() {
-                        //pick random location
-                        SectorEntityToken location = null;
-                        for (int i = 0; i < 9; i++) {
+                        List<String> notThemes = Arrays.asList(
+                                MagicVariables.AVOID_COLONIZED_SYSTEM,
+                                MagicVariables.AVOID_BLACKHOLE_PULSAR,
+                                "theme_hidden"
+                        );
 
-                            List<String> themes = new ArrayList<>();
-                            themes.add(Tags.THEME_REMNANT_SUPPRESSED);
-                            themes.add(Tags.THEME_REMNANT_NO_FLEETS);
-                            themes.add(Tags.THEME_REMNANT_DESTROYED);
+                        List<String> entities = Collections.singletonList(Tags.GATE);
 
-                            List<String> notThemes = new ArrayList<>();
-                            notThemes.add(MagicVariables.AVOID_COLONIZED_SYSTEM);
-                            notThemes.add(MagicVariables.AVOID_BLACKHOLE_PULSAR);
-                            notThemes.add("theme_hidden");
+                        List<String> remnantThemes = Arrays.asList(
+                                Tags.THEME_REMNANT_SUPPRESSED,
+                                Tags.THEME_REMNANT_NO_FLEETS,
+                                Tags.THEME_REMNANT_DESTROYED,
+                                Tags.THEME_REMNANT_SECONDARY,
+                                Tags.THEME_REMNANT_RESURGENT
+                        );
 
-                            List<String> entities = new ArrayList<>();
-                            entities.add(Tags.GATE);
+                        List<String> derelictThemes = Arrays.asList(
+                                Tags.THEME_DERELICT,
+                                Tags.THEME_DERELICT_MOTHERSHIP,
+                                Tags.THEME_DERELICT_CRYOSLEEPER,
+                                Tags.THEME_DERELICT_SURVEY_SHIP,
+                                Tags.THEME_DERELICT_PROBES
+                        );
 
-                            SectorEntityToken token = MagicCampaign.findSuitableTarget(
+                        SectorEntityToken location = MagicCampaign.findSuitableTarget(
+                                null,
+                                null,
+                                "CLOSE",
+                                remnantThemes,
+                                notThemes,
+                                entities,
+                                false,
+                                true,
+                                false
+                        );
+
+                        if (location == null) {
+                            location = MagicCampaign.findSuitableTarget(
                                     null,
                                     null,
                                     "CLOSE",
-                                    themes,
+                                    derelictThemes,
                                     notThemes,
                                     entities,
                                     false,
                                     true,
                                     false
                             );
-
-                            if (token != null) {
-                                location = token;
-                                break;
-                            }
                         }
-                        //spawn location
-                        assert location != null;
+
+                        if (location == null) {
+                            String msg = "Critical failure: expected to find an inactive gate in a derelict or remnant system.\n"
+                                    + "This is most likely caused by another mod that removes or alters this object.\n"
+                                    + "Please report this issue to Sorrydough on Discord with how to reproduce.\n"
+                                    + "If you can't reproduce it, you probably just got astronomically unlucky and can ignore this.";
+                            throw new RuntimeException(msg);
+                        }
+
                         Global.getSector().getMemoryWithoutUpdate().set("$nex_startLocation", location.getId());
                     }
                 }
@@ -81,11 +102,11 @@ public class sd_customStartPlaceholder extends CustomStart {
         CampaignFleetAPI tempFleet = FleetFactoryV3.createEmptyFleet(
                 PlayerFactionStore.getPlayerFactionIdNGC(), FleetTypes.PATROL_SMALL, null);
 
-        addFleetMember("sd_retrofitstarliner_Standard", dialog, data, tempFleet, "none");
-        addFleetMember("sd_frigate_Attack", dialog, data, tempFleet, "flagship");
-        addFleetMember("sd_frigatelight_Strike", dialog, data, tempFleet, "none");
-        addFleetMember("sd_frigatelight_Strike", dialog, data, tempFleet, "none");
-        addFleetMember("sd_retrofitkite_Attack", dialog, data, tempFleet, "none");
+        addFleetMember("sd_retrofitstarliner_Surplus", dialog, data, tempFleet, "none");
+        addFleetMember("sd_frigate_Surplus", dialog, data, tempFleet, "flagship");
+        addFleetMember("sd_frigatelight_Surplus", dialog, data, tempFleet, "none");
+        addFleetMember("sd_frigatelight_Surplus", dialog, data, tempFleet, "none");
+        addFleetMember("sd_retrofitkite_Surplus", dialog, data, tempFleet, "none");
 
 
         data.getStartingCargo().getCredits().add(10000);
@@ -102,7 +123,7 @@ public class sd_customStartPlaceholder extends CustomStart {
         int supplies = 0;
         int machinery = 0;
         for (FleetMemberAPI member : tempFleet.getFleetData().getMembersListCopy()) {
-            crew += member.getMinCrew() * 1.5;
+            crew += (int) member.getMinCrew() * 1.5;
             fuel += (int) member.getFuelCapacity() * 0.75;
             supplies += (int) member.getBaseDeploymentCostSupplies() * 3;
             machinery += (int) member.getBaseDeploymentCostSupplies() * 2;

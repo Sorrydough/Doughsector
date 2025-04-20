@@ -1,0 +1,19 @@
+{
+    "displayName": "Surplus",
+    "fluxCapacitors": 10,
+    "fluxVents": 7,
+    "hullId": "sd_frigatelight",
+    "hullMods": [
+        "sd_antispall",
+        "autorepair",
+        "auxiliarythrusters"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigatelight_Surplus",
+    "weaponGroups": [{
+        "autofire": true,
+        "mode": "LINKED",
+        "weapons": {"TRT01": "gravitonbeam"}
+    }]
+}

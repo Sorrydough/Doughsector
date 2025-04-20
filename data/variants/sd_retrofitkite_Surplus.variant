@@ -1,0 +1,27 @@
+{
+    "displayName": "Surplus",
+    "fluxCapacitors": 8,
+    "fluxVents": 3,
+    "hullId": "sd_retrofitkite",
+    "hullMods": [
+        "sd_antispall",
+        "autorepair",
+        "auxiliarythrusters"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_retrofitkite_Surplus",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"HRD02": "railgun"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"HRD01": "heatseeker"}
+        }
+    ],
+    "wings": []
+}

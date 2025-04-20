@@ -7,7 +7,7 @@ Overdriven: Safety Overrides. Usually a variation of a strike loadout.
 Specialist: For some niche purpose.
 Snare: Uses crowd control tools to disable opponents.
 Elite: Uses s-mods as the basis of its fit, great at everything.
-Surplus: Starter variant with basic stuff.
+Surplus: Starter variant with basic trash.
 
 Art/Collab Stuff:
 - Grapeshot art

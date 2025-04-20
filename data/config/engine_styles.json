@@ -25,7 +25,7 @@
 		"glowAlternateColor":[255,235,205,150],
 		"engineCampaignColor":[0,0,0,0],
 		"contrailColor":[50,50,50,50],
-		"contrailCampaignColor":[200,90,70,75],
+		"contrailCampaignColor":[0,0,0,0],
 		"contrailParticleSizeMult":3,
 		"contrailParticleDuration":2,
 		"contrailParticleFinalSizeMult":3,

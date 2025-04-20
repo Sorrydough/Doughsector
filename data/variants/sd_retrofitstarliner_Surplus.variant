@@ -1,0 +1,41 @@
+{
+    "displayName": "Surplus",
+    "fluxCapacitors": 0,
+    "fluxVents": 16,
+    "hullId": "sd_retrofitstarliner",
+    "hullMods": [
+        "sd_antispall",
+        "dedicated_targeting_core",
+        "heavyarmor"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_retrofitstarliner_Surplus",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT01": "railgun",
+                "TRT02": "railgun"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "HRD01": "heatseeker",
+                "HRD02": "heatseeker"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT03": "lightmg",
+                "TRT04": "lightmg"
+            }
+        }
+    ],
+    "wings": ["sd_fightersupportWing"]
+}

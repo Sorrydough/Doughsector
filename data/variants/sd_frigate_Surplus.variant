@@ -1,0 +1,38 @@
+{
+    "displayName": "Surplus",
+    "fluxCapacitors": 8,
+    "fluxVents": 6,
+    "hullId": "sd_frigate",
+    "hullMods": [
+        "sd_antispall",
+        "autorepair",
+        "auxiliarythrusters",
+        "missleracks"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "sd_frigate_Surplus",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "TRT01": "sd_gravlance",
+                "TRT02": "sd_gravlance"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "HRD01": "sd_grapeshotrack",
+                "HRD02": "sd_grapeshotrack"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"TRT03": "lightdualmg"}
+        }
+    ]
+}
