@@ -87,7 +87,7 @@ public class sd_customStartPlaceholder extends CustomStart {
 
                         if (location == null) {
                             String msg = "Critical failure: expected to find an inactive gate in a derelict or remnant system.\n"
-                                    + "This is most likely caused by another mod that removes or alters this object.\n"
+                                    + "This is most likely caused by another mod that removes or alters these objects.\n"
                                     + "Please report this issue to Sorrydough on Discord with how to reproduce.\n"
                                     + "If you can't reproduce it, you probably just got astronomically unlucky and can ignore this.";
                             throw new RuntimeException(msg);
@@ -99,8 +99,7 @@ public class sd_customStartPlaceholder extends CustomStart {
         );
 
 
-        CampaignFleetAPI tempFleet = FleetFactoryV3.createEmptyFleet(
-                PlayerFactionStore.getPlayerFactionIdNGC(), FleetTypes.PATROL_SMALL, null);
+        CampaignFleetAPI tempFleet = FleetFactoryV3.createEmptyFleet(PlayerFactionStore.getPlayerFactionIdNGC(), FleetTypes.PATROL_SMALL, null);
 
         addFleetMember("sd_retrofitstarliner_Surplus", dialog, data, tempFleet, "none");
         addFleetMember("sd_frigate_Surplus", dialog, data, tempFleet, "flagship");

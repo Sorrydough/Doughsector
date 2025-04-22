@@ -119,7 +119,7 @@ public class sd_mnemonicarmor extends BaseShipSystemScript {
 	}
 	public static void drawVfx(Vector2f loc, ShipAPI ship, float size, float intensity) {
 		float sizeSqrt = (float) Math.sqrt(size);
-		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 255));
+		Color particleColor = new Color(255,120,80, (int) Math.min(205 + (ship.getFluxLevel() * 50), 254)); // 255 caused a crash I think?
 		for (int i = 0; i < (2 + Math.round(sizeSqrt * 3)); i++) {
 			// sparks
 			float particleSize = 0.5f + MathUtils.getRandomNumberInRange(sizeSqrt * 2, sizeSqrt * 4);
