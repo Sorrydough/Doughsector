@@ -6,10 +6,9 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import data.admiral.sd_fleetadmiralUtil;
 import data.shipsystems.sd_hackingsuite;
 
-import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
-import data.sd_util;
+import data.util.sd_util;
 
 import java.util.*;
 import java.util.List;

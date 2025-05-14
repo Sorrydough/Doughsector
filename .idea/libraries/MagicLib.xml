@@ -1,14 +1,14 @@
 <component name="libraryTable">
   <library name="MagicLib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/MagicLib/jars/MagicLib.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/MagicLib/jars/MagicLib-Kotlin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/MagicLib/jars/MagicLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/MagicLib/jars/MagicLib-Kotlin.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/MagicLib/jars/MagicLib.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/MagicLib/jars/MagicLib.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/MagicLib/jars/MagicLib-Kotlin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/MagicLib/jars/MagicLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/MagicLib/jars/MagicLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/MagicLib/jars/MagicLib-Kotlin.jar!/" />
     </SOURCES>
   </library>
 </component>

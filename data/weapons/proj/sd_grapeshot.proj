@@ -5,9 +5,9 @@
 	"sprite":"graphics/missiles/sd_grapeshot_base.png",
     #"glowSprite":"graphics/missiles/sd_grapeshot_glow.png",
     #"glowColor":[155,100,255,255],
-    "size":[6,8],
-    "center":[3,4],
-    "collisionRadius":8,
+    "size":[8,10],
+    "center":[4,5],
+    "collisionRadius":10,
 	"collisionClass":"MISSILE_NO_FF",
 	"explosionSpec":{
 			"duration":0.15f,

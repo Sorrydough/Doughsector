@@ -1,11 +1,8 @@
 package data.shipsystems;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import data.sd_util;
-import org.lazywizard.console.Console;
+import data.util.sd_util;
 
 import java.util.ArrayList;
 import java.util.List;

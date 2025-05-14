@@ -1,8 +1,6 @@
 package data.weapons.mote;
 
-import java.awt.Color;
-
-import data.sd_util;
+import data.util.sd_util;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;

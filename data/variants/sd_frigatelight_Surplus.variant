@@ -1,12 +1,12 @@
 {
     "displayName": "Surplus",
     "fluxCapacitors": 10,
-    "fluxVents": 7,
+    "fluxVents": 6,
     "hullId": "sd_frigatelight",
     "hullMods": [
-        "sd_antispall",
+        "auxiliary_fuel_tanks",
         "autorepair",
-        "auxiliarythrusters"
+        "surveying_equipment"
     ],
     "permaMods": [],
     "sMods": [],

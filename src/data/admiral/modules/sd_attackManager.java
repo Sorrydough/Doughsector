@@ -4,15 +4,9 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatAssignmentType;
 import com.fs.starfarer.api.combat.CombatFleetManagerAPI.*;
 import com.fs.starfarer.api.combat.FighterWingAPI;
-import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.loading.WingRole;
-import com.fs.starfarer.combat.entities.Ship;
-import data.admiral.sd_fleetadmiralController;
 import data.admiral.sd_fleetadmiralUtil;
-import data.sd_util;
-import org.lazywizard.console.Console;
-import org.lazywizard.lazylib.MathUtils;
 
 import java.util.*;
 

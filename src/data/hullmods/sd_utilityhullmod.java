@@ -4,30 +4,29 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
-import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import com.fs.starfarer.api.util.CollisionGridUtil;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import data.sd_util;
+import com.fs.starfarer.loading.specs.EngineSlot;
+import data.util.sd_util;
 import data.shipsystems.sd_mnemonicarmor;
 import lunalib.lunaSettings.LunaSettings;
 import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 import static com.fs.starfarer.api.combat.ShipEngineControllerAPI.*;
-import static data.sd_util.*;
+import static data.util.StarficzAIUtils.*;
 
 public class sd_utilityhullmod extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ship.addListener(new sd_utilityhullmodListener(ship));
     }
+
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         tooltip.addPara("Utility hullmod to make ships look and behave correctly. You shouldn't be able to see this.", 5f,
@@ -67,6 +66,11 @@ public class sd_utilityhullmod extends BaseHullMod {
                 // apply alex's AI behavior overrides
                 ship.getShipAI().getConfig().alwaysStrafeOffensively = true;
                 ship.getShipAI().getConfig().turnToFaceWithUndamagedArmor = false;
+
+                for (ShipEngineAPI engine : ship.getEngineController().getShipEngines()) {
+                    EngineSlot slot = (EngineSlot) engine.getEngineSlot();
+                    slot.setSystemActivated(false);
+                }
 
                 runOnce = false;
             }
@@ -144,7 +148,7 @@ public class sd_utilityhullmod extends BaseHullMod {
                 if (ship.getShipTarget() != null && ship.getShipTarget().isPhased() && ship.getShipTarget().getFluxLevel() > 0.85 && ship.getFluxLevel() < 0.75) {
                     ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);  //REALLY horny to get overextended phase ships
                     ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.PURSUING);
-                    if (!ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE))
+                    if (!ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.HAS_INCOMING_DAMAGE) && ship.getShield() != null)
                         ship.getShield().toggleOff(); //Combines with later behavior to cause ships to preserve their 0-flux boost when chasing phased ships
                 }
 
@@ -174,17 +178,18 @@ public class sd_utilityhullmod extends BaseHullMod {
             // CUSTOM VENT AND ARMORTANKING CODE BEYOND THIS PART //
             // USES STARFICZ'S AI UTILS ////////////////////////////
             ////////////////////////////////////////////////////////
-            if (ship.getShield() == null)
-                return;
+            float unfoldTime = 0;
+            if (shield != null)
+                unfoldTime = shield.getUnfoldTime();
             incomingHitsTracker.advance(amount);
             if (incomingHitsTracker.intervalElapsed()) {
                 lastUpdatedTime = engine.getTotalElapsedTime(false);
-                potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), ship.getShield().getUnfoldTime() + ship.getFluxTracker().getTimeToVent());
+                potentialHitsForVenting = generatePredictedWeaponHits(ship, ship.getLocation(), unfoldTime + ship.getFluxTracker().getTimeToVent());
                 potentialHitsForVenting.addAll(incomingProjectileHits(ship, ship.getLocation()));
                 if (shield != null) {
                     potentialHitsForShield = new ArrayList<>();
                     for (FutureHit hit : potentialHitsForVenting)
-                        if (hit.timeToHit <= ship.getShield().getUnfoldTime())
+                        if (hit.timeToHit <= ship.getShield().getUnfoldTime() + (shield.getUnfoldTime() / 3)) // slight buffer factor so the ship isn't forced to be as risky as physically possible with shield use
                             potentialHitsForShield.add(hit);
                 }
             }
@@ -215,16 +220,17 @@ public class sd_utilityhullmod extends BaseHullMod {
         public float lastShieldOnTime = 0;
         public List<FutureHit> potentialHitsForVenting = new ArrayList<>();
         public List<FutureHit> potentialHitsForShield = new ArrayList<>();
+
         public boolean isDamageAcceptable(ShipAPI ship, List<FutureHit> potentialHits) {
             if (isScriptedNonsenseNearby(ship))
                 return false;
             // calculate how much damage the ship would take if shields went down
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
-            float armor = getWeakestTotalArmor(ship);
+            float armor = getCurrentArmorRating(ship);
 
             float unfoldTime = shield.getUnfoldTime();
-            float bufferTime = unfoldTime / 4;
+            float bufferTime = unfoldTime / 3;
             if (shield.isOn())
                 lastShieldOnTime = currentTime;
             float delayTime = Math.max(0.5f - (currentTime - lastShieldOnTime), 0f);
@@ -233,12 +239,12 @@ public class sd_utilityhullmod extends BaseHullMod {
             float incomingHullDamage = 0;
             float incomingEMPDamage = 0;
 
-            for (sd_util.FutureHit hit : potentialHits) {
+            for (FutureHit hit : potentialHits) {
                 float timeToBlock = unfoldTime + delayTime;
                 float timeToHit = (hit.timeToHit - timeElapsed);
                 if (timeToHit < -0.1f)
                     continue; // skip hits that have already happened
-                if (timeToHit < (timeToBlock + bufferTime)) {
+                if (timeToHit <= (timeToBlock + bufferTime)) {
                     Pair<Float, Float> trueDamage = damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, armorAfterIncoming, ship);
                     armorAfterIncoming = Math.max(armorAfterIncoming - trueDamage.one, 0);
                     incomingHullDamage += trueDamage.two;
@@ -246,7 +252,7 @@ public class sd_utilityhullmod extends BaseHullMod {
                 }
             }
 
-            boolean isArmorDamageAcceptable = armorAfterIncoming > armor * 0.9;
+            boolean isArmorDamageAcceptable = (armorAfterIncoming > armor * 0.9) && !sd_mnemonicarmor.isArmorGridDestroyed(ship.getArmorGrid());
             boolean isHullDamageAcceptable = incomingHullDamage < ship.getHitpoints() * 0.05;
 
             boolean isEMPDamageAcceptable = true;
@@ -264,7 +270,6 @@ public class sd_utilityhullmod extends BaseHullMod {
                     }
                 }
             }
-
 
             return isHullDamageAcceptable && isArmorDamageAcceptable && isEMPDamageAcceptable;
         }

@@ -1,19 +1,14 @@
 package data.shipsystems.ai;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.admiral.sd_fleetadmiralUtil;
-import data.sd_util;
-import data.shipsystems.sd_hackingsuite;
+import data.util.sd_util;
 import data.shipsystems.sd_nullifier;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static data.admiral.sd_fleetadmiralUtil.getDeploymentCost;
 

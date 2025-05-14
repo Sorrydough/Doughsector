@@ -3,14 +3,13 @@ package data.shipsystems;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import data.graphics.sd_decoSystemRangePlugin;
-import org.lazywizard.console.Console;
 import org.lazywizard.lazylib.MathUtils;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipSystemAPI.SystemState;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import data.sd_util;
+import data.util.sd_util;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -99,9 +98,10 @@ public class sd_hackingsuite extends BaseShipSystemScript {
 			target.fadeToColor(this, fadeColor, 0.5f, 0.5f, 0.75f);
 			if (runOnce) {
 				duration += DURATION.get(target.getHullSize()) + target.getSystem().getCooldownRemaining();
-				if (sd_util.isAutomated(target))
+				if (sd_util.isAutomated(target)) {
 					duration *= 1.5;
-				target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
+					target.getMutableStats().getAutofireAimAccuracy().modifyMult("sd_hackingsuite", AUTOFIRE_PENALTY);
+				}
 				target.getFluxTracker().playOverloadSound();
 				target.setShipSystemDisabled(true);
 				target.getFluxTracker().showOverloadFloatyIfNeeded("System disabled for " + Math.round(duration) + " seconds!", Color.LIGHT_GRAY, 14, true);

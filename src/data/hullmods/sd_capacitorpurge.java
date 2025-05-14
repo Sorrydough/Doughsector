@@ -1,14 +1,10 @@
 package data.hullmods;
 
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import data.sd_util;
-
-import java.util.HashMap;
 
 public class sd_capacitorpurge extends BaseHullMod {
     static final float CAPACITOR_CONVERSION = 0.1f;

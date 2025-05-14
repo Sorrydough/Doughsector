@@ -14,7 +14,7 @@ import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.dark.shaders.distortion.*;
-import data.sd_util;
+import data.util.sd_util;
 
 public class sd_mnemonicarmor extends BaseShipSystemScript {
 	public static final float FLUX_PER_ARMOR = 3, DESTROYED_THRESHOLD = 0.2f;

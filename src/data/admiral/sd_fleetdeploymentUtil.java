@@ -5,7 +5,7 @@ import com.fs.starfarer.api.fleet.FleetGoal;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.combat.CombatEngine;
 import com.fs.starfarer.combat.CombatFleetManager;
-import com.fs.starfarer.combat.ai.C;
+//import com.fs.starfarer.combat.ai.C;
 import com.fs.starfarer.settings.StarfarerSettings;
 import com.fs.starfarer.combat.CombatFleetManager;
 

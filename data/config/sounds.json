@@ -57,6 +57,7 @@
 	},
 	"system_mnemonicarmor":[{"file":"sounds/sfx_systems/damper_field_activate.ogg","pitch":0.8,"volume":0.4}],
 	"system_mnemonicarmor_loop":[{"file":"sounds/sfx_systems/damper_field_loop.ogg","pitch":0.6,"volume":0.7}],
-	"system_mnemonicarmor_off":[{"file":"sounds/sfx_systems/damper_field_deactivate.ogg","pitch":0.6,"volume":0.7}]
+	"system_mnemonicarmor_off":[{"file":"sounds/sfx_systems/damper_field_deactivate.ogg","pitch":0.6,"volume":0.7}],
+	"sd_gate-asplode":[{"file":"sounds/misc/sd_gate-asplode.ogg","pitch":1,"volume":1}]
 }
 

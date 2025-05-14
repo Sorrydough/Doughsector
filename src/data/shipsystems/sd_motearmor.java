@@ -4,7 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.sd_util;
+import data.util.sd_util;
 import data.weapons.mote.sd_moteAIScript;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lwjgl.util.vector.Vector2f;

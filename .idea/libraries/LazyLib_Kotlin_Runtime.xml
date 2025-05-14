@@ -1,16 +1,16 @@
 <component name="libraryTable">
   <library name="LazyLib-Kotlin-Runtime">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/LazyLib/jars/internal/Kotlin-Runtime.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/LazyLib/jars/internal/LazyLib-Console.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/LazyLib/jars/LazyLib-Kotlin.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/LazyLib/jars/LazyLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/LazyLib/jars/internal/Kotlin-Runtime.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/LazyLib/jars/internal/LazyLib-Console.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/LazyLib/jars/LazyLib-Kotlin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/LazyLib/jars/LazyLib.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/LazyLib/jars/LazyLib-Kotlin.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/LazyLib/jars/LazyLib.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/LazyLib/jars/LazyLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/LazyLib/jars/LazyLib-Kotlin.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/LazyLib/jars/LazyLib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/LazyLib/jars/LazyLib.jar!/" />
     </SOURCES>
   </library>
 </component>

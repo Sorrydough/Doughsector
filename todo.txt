@@ -10,22 +10,33 @@ Elite: Uses s-mods as the basis of its fit, great at everything.
 Surplus: Starter variant with basic trash.
 
 Art/Collab Stuff:
-- Grapeshot art
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
 - Export, Pirate, Path skin variants
 - Ship art revision:
     Fix aux thrusters on cap and cruiser being in a dumb place
     Heavy cruiser needs to not look unsettling
+    Fix capital greeb looking fucked up
 
+Custom Start finalization reqs:
+1. Initialize the custom faction and use its naming scheme for the ships
+9. Name the fucking start correctly
+12. Add a faction flag
+- Mix gate idle sound into the gate wind down sound so it has more greeble
+
+
+
+
+- Custom start blueprints finalization. Add a script that manages the following:
+
+1. Derelict ships appear occasionally at the gate you spawned at, and you get an intel spike pointing it out.
+2. These ships can contain data packages: Hullmods, hulls, fighters, weapons.
+3. Need to figure out how to hide these packages from the codex since they're scripted.
 
 
 Discord Beta stuff:
-- Fix my ships being really stupid when a shot would bring their armor down to 0
 - Debug nullifier AI script
 - Stop eating salamanders
-- Insulated engines on little dood variants?
-- Adjust acceptable hull and armor damage by time and flux level
-- Adjust acceptable EMP damage by engine and weapon hp
+
 
 - Fix aux engines visible on starmap
 
@@ -38,14 +49,13 @@ Discord Beta stuff:
 
 - Convert my EFS plugins to be advanceable listeners instead
 
-- Fix custom start
-
-- Add custom behavior to make ion beam super ultra mega epic
+- Finalize custom start
 
 - Make my ships spawn randomly as fleet encounters in systems with inactive gates
 - Do a proper blueprint package instead of janky shit
 - Set everything up for the codex
 
+- Add custom behavior to make ion beam super ultra mega epic
 
 Ghostbusters Stuff:
 - Have the fleet commander send fighters to do shit that actually matters
@@ -53,12 +63,16 @@ Ghostbusters Stuff:
 - Write escort behavior so my destroyers don't stray too far
 - Make my fleet way more aggressive and always try to suppress something
 - Add some complicated hold fire code to determine whether my weapons will hit the phased target coinciding with the moment it gets forced out of phase space
-
+- Make hacking suite fuck up phase cooldown
+- Make blaster fighter randomly damage itself and/or vanish
+- Make drone fighter engagement range impacted by ECM
 
 Damage prediction AI improvement stuff:
+- Refactor to improve performance
 - Add scripted damage check (breach, squall, emp emitter, termination sequence)
 - Add "acceptable hull damage" check to further improve epicness
-
+- Adjust acceptable hull and armor damage by time and flux level
+- Adjust acceptable EMP damage by engine and weapon hp
 
 Hullmod stuff:
 - Create engine reigniter hullmod

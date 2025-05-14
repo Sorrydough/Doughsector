@@ -4,7 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.sd_util;
+import data.util.sd_util;
 import org.lazywizard.lazylib.opengl.DrawUtils;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;

@@ -159,7 +159,7 @@ public class sd_moonGeneratorPlugin implements SectorGeneratorPlugin {
     @Override
     public void generate(SectorAPI sector) {
         for (StarSystemAPI system : sector.getStarSystems()) {
-            if (system.isProcgen()) {
+            if (system.isProcgen() && system.getAge() != null) {
                 CopyOnWriteArrayList<SectorEntityToken> entityTokens = new CopyOnWriteArrayList<>(system.getAllEntities());
 
                 for (SectorEntityToken token : entityTokens) {

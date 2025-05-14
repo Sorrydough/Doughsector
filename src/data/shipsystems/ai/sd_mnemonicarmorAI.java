@@ -4,7 +4,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import data.shipsystems.sd_mnemonicarmor;
 import org.lwjgl.util.vector.Vector2f;
-import data.sd_util;
+import data.util.sd_util;
 
 public class sd_mnemonicarmorAI implements ShipSystemAIScript {
     final IntervalUtil interval = new IntervalUtil(0.5f, 1f);

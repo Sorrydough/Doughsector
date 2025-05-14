@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="GraphicsLib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../games/starsector/mods/GraphicsLib/jars/Graphics.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../starsector/mods/GraphicsLib/jars/Graphics.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

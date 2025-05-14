@@ -1,13 +1,18 @@
 id,type,text1
 sd_ionbeam_fighter,WEAPON,An ion beam unremarkable in all ways other than its miniaturization.
 sd_kineticblaster_fighter,WEAPON,"Developed independently to the kinetic blaster present in the persean sector, this inferior version has a variety of unresolved side effects restricting its practical use exclusively to disposable drone fighters."
-sd_gravlance,WEAPON,"Although superficially similar to a graviton beam, this smaller version exhibits dramatically different behavior more similar in function to a classical needler."
-sd_grapeshotrack,WEAPON,Launches proximity-fused canisters of antimatter. Reloading is quite simple compared to other missiles of its size.
+sd_gravlance,WEAPON,"Although superficially similar to a graviton beam, this smaller version exhibits different behavior more similar to a needler."
+sd_grapeshotrack,WEAPON,Dispenses proximity-fused antimatter canisters. Reloading is quite simple compared to other missiles of its size.
 ,,
 sd_decoylauncher,SHIP_SYSTEM,Launches flares that interfere with point-defenses.
 sd_grapeshotarray,SHIP_SYSTEM,Dispenses proximity-fused antimatter canisters.
 sd_auxforge,SHIP_SYSTEM,"Replenishes small missiles or fighters, whichever is more depleted. Generates flux upon activation."
 sd_mnemonicarmor,SHIP_SYSTEM,Rebalances the ship’s armor grid. More flux intensive on heavily armored ships.
 sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and has powerful side-effects. More flux intensive on heavily armored ships.
-sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem and autofire accuracy. Automated ships suffer additional duration.
+sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem. Especially dangerous to automated ships.
 sd_nullifier,SHIP_SYSTEM,Accelerates the decay of the target’s combat readiness and normalizes their timeflow with that of realspace. Generates flux according to the magnitude of the timeflow correction.
+,,
+sd_fightersupport,SHIP,
+sd_fighterblaster,SHIP,"The Excision mounts a crude kinetic blaster. Its prototype characteristics dictate the fighter’s design profile: catastrophic weapon malfunctions are the norm, necessitating an uncrewed drone chassis. The need for a commlink to the host ship hinders the fighter’s engagement range."
+sd_fighterion,SHIP,
+sd_fightercanister,SHIP,"While lacking the firepower that other bombers provide at this logistics profile, the Hail is durable and easy to rearm, making it quite effective at keeping the pressure up in protracted engagements with its versatile bombload."

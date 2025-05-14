@@ -10,7 +10,7 @@ import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags;
 import java.awt.Color;
 
-import data.sd_util;
+import data.util.sd_util;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.entities.SimpleEntity;
@@ -28,7 +28,7 @@ public class sd_hexshield extends BaseHullMod { //TODO: REWRITE THIS SCRIPT
         if ((ship.getShield() == null) || (Global.getCombatEngine() == null)) {
             return;
         }
-        
+
         if (ship.getShield().getInnerColor() != sd_util.factionColor1)
             ship.getShield().setInnerColor(sd_util.factionColor1);
 

@@ -9,7 +9,7 @@ import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import data.sd_util;
+import data.util.sd_util;
 import data.weapons.mote.sd_moteAIScript;
 import data.shipsystems.sd_mnemonicarmor;
 import data.shipsystems.sd_motearmor;

@@ -1,13 +1,9 @@
 {
     "displayName": "Surplus",
-    "fluxCapacitors": 8,
-    "fluxVents": 3,
+    "fluxCapacitors": 10,
+    "fluxVents": 8,
     "hullId": "sd_retrofitkite",
-    "hullMods": [
-        "sd_antispall",
-        "autorepair",
-        "auxiliarythrusters"
-    ],
+    "hullMods": ["autorepair"],
     "permaMods": [],
     "sMods": [],
     "variantId": "sd_retrofitkite_Surplus",
@@ -20,7 +16,7 @@
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"HRD01": "heatseeker"}
+            "weapons": {"HRD01": "sd_grapeshotrack"}
         }
     ],
     "wings": []

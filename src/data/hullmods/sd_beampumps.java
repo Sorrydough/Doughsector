@@ -1,22 +1,10 @@
 package data.hullmods;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
-import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
-import com.fs.starfarer.api.combat.listeners.WeaponBaseRangeModifier;
-import com.fs.starfarer.api.impl.campaign.ids.HullMods;
-import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import data.sd_util;
-import org.lazywizard.lazylib.*;
-import org.lwjgl.util.vector.Vector2f;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class sd_beampumps extends BaseHullMod {
 	static final int RANGE_THRESHOLD = 500;

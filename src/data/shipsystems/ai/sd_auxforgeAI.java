@@ -2,7 +2,7 @@ package data.shipsystems.ai;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
-import data.sd_util;
+import data.util.sd_util;
 import data.shipsystems.sd_auxforge;
 import org.lwjgl.util.vector.Vector2f;
 

@@ -1,4 +1,4 @@
-package data
+package data.util
 
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType

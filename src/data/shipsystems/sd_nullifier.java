@@ -6,8 +6,7 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.DynamicStatsAPI;
 import data.graphics.sd_decoSystemRangePlugin;
-import data.sd_util;
-import org.lazywizard.console.Console;
+import data.util.sd_util;
 import org.lazywizard.lazylib.MathUtils;
 
 import java.util.List;
