@@ -21,10 +21,6 @@ Custom Start finalization reqs:
 1. Initialize the custom faction and use its naming scheme for the ships
 9. Name the fucking start correctly
 12. Add a faction flag
-- Mix gate idle sound into the gate wind down sound so it has more greeble
-
-
-
 
 - Custom start blueprints finalization. Add a script that manages the following:
 
@@ -37,9 +33,6 @@ Discord Beta stuff:
 - Debug nullifier AI script
 - Stop eating salamanders
 
-
-- Fix aux engines visible on starmap
-
 - Description pass on everything
 - Faction flag
 - Implement faction - ??? Synarchy
@@ -51,7 +44,7 @@ Discord Beta stuff:
 
 - Finalize custom start
 
-- Make my ships spawn randomly as fleet encounters in systems with inactive gates
+- Make my ships spawn randomly as fleet encounters in systems with inactive gates and no remmies
 - Do a proper blueprint package instead of janky shit
 - Set everything up for the codex
 

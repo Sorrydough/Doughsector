@@ -310,32 +310,32 @@
       "length": 36,
       "width": 4,
       "angle": 135,
-      "contrailSize": 4,
-      "style": "sd_blockThruster_aux"
+      "contrailSize": 128,
+      "style": "sd_blockThruster"
     },
     {
       "location": [-101.5, -40.5],
       "length": 36,
       "width": 4,
       "angle": -135,
-      "contrailSize": 4,
-      "style": "sd_blockThruster_aux"
+      "contrailSize": 128,
+      "style": "sd_blockThruster"
     },
     {
       "location": [138.5, 26.5],
       "length": 36,
       "width": 4,
       "angle": 45,
-      "contrailSize": 4,
-      "style": "sd_blockThruster_aux"
+      "contrailSize": 128,
+      "style": "sd_blockThruster"
     },
     {
       "location": [138.5, -26.5],
       "length": 36,
       "width": 4,
       "angle": -45,
-      "contrailSize": 4,
-      "style": "sd_blockThruster_aux"
+      "contrailSize": 128,
+      "style": "sd_blockThruster"
     }
   ],
   "bounds": [

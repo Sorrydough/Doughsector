@@ -49,11 +49,21 @@ public class sd_utilityhullmod extends BaseHullMod {
                 this.enabled = Boolean.parseBoolean(LunaSettings.getString("sd_doughsector", "sd_enableAITweaks"));
         }
         boolean runOnce = true;
+        boolean fixEngines = true;
         String personality = Personalities.AGGRESSIVE;
 
         IntervalUtil debugInterval = new IntervalUtil(1.5f, 1.5f);
         @Override
         public void advance(float amount) {
+
+            if (fixEngines && sd_util.isCombatSituation(ship)) {
+                for (ShipEngineAPI engine : ship.getEngineController().getShipEngines()) {
+                    EngineSlot slot = (EngineSlot) engine.getEngineSlot();
+                    slot.setSystemActivated(false);
+                }
+                fixEngines = false;
+            }
+
             if (!sd_util.isCombatSituation(ship) || !enabled || ship.getShipAI() == null)
                 return;
 
@@ -66,11 +76,6 @@ public class sd_utilityhullmod extends BaseHullMod {
                 // apply alex's AI behavior overrides
                 ship.getShipAI().getConfig().alwaysStrafeOffensively = true;
                 ship.getShipAI().getConfig().turnToFaceWithUndamagedArmor = false;
-
-                for (ShipEngineAPI engine : ship.getEngineController().getShipEngines()) {
-                    EngineSlot slot = (EngineSlot) engine.getEngineSlot();
-                    slot.setSystemActivated(false);
-                }
 
                 runOnce = false;
             }
@@ -106,7 +111,7 @@ public class sd_utilityhullmod extends BaseHullMod {
             //FIXES SUICIDING FIGHTERS// IF OUR REPLACEMENT RATE SUCKS THEN PRESERVING IT SHOULD BE OUR TOP PRIORITY
             //////////////////////////// ALSO RECALL OUR FIGHTERS IF AI JANK IS PUTTING US OUT OF POSITION
             if (ship.hasLaunchBays() && (ship.getSharedFighterReplacementRate() < 0.85 || (ship.getFluxLevel() < 0.2 && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.BACKING_OFF))))
-                ship.setPullBackFighters(true);
+                ship.setForceCarrierPullBackTime(1);
 
             ////////////////////////////
             //IMPROVES SQUALL BEHAVIOR//
@@ -134,7 +139,7 @@ public class sd_utilityhullmod extends BaseHullMod {
             }
 
             /////////////////////////////////////////////////
-            //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 8 HOURS IN TOTAL FOR ME TO MAKE THROUGH VARIOUS ITERATIONS AND DEBUGGING BTW
+            //FIXES SHOOTING STRIKE WEAPONS AT PHASED SHIPS// THIS TOOK 8 HOURS IN TOTAL BTW
             /////////////////////////////////////////////////
             boolean isPhaseEnemy = false;
             for (ShipAPI enemy : AIUtils.getEnemiesOnMap(ship)) {
