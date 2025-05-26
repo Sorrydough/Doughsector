@@ -12,43 +12,26 @@ Surplus: Starter variant with basic trash.
 Art/Collab Stuff:
 - Deco addons according to hullmod upgrades, ie additional shield emitters, beefier thrusters, converted hangar, etc
 - Export, Pirate, Path skin variants
-- Ship art revision:
-    Fix aux thrusters on cap and cruiser being in a dumb place
-    Heavy cruiser needs to not look unsettling
-    Fix capital greeb looking fucked up
-
-Custom Start finalization reqs:
-1. Initialize the custom faction and use its naming scheme for the ships
-9. Name the fucking start correctly
-12. Add a faction flag
-
-- Custom start blueprints finalization. Add a script that manages the following:
-
-1. Derelict ships appear occasionally at the gate you spawned at, and you get an intel spike pointing it out.
-2. These ships can contain data packages: Hullmods, hulls, fighters, weapons.
-3. Need to figure out how to hide these packages from the codex since they're scripted.
-
 
 Discord Beta stuff:
-- Debug nullifier AI script
-- Stop eating salamanders
+    Custom Start finalization reqs:
+    1. Initialize the custom faction and use its naming scheme for the ships
+    2. Name the fucking start correctly
+
+    Custom start blueprints finalization. Add a script that manages the following:
+    1. Derelict ships appear occasionally at the gate you spawned at, and you get an intel spike pointing it out.
+    2. These ships can contain data packages: Hullmods, hulls, fighters, weapons.
+    3. Need to figure out how to hide these packages from the codex since they're scripted.
 
 - Description pass on everything
-- Faction flag
-- Implement faction - ??? Synarchy
 
 - Make ghostbusters actually difficult - placeholder simple fleet and admiral for first release?
-- Do a pass on infotext and status indicators for all systems now that I know how
-
-- Convert my EFS plugins to be advanceable listeners instead
-
-- Finalize custom start
 
 - Make my ships spawn randomly as fleet encounters in systems with inactive gates and no remmies
-- Do a proper blueprint package instead of janky shit
 - Set everything up for the codex
 
-- Add custom behavior to make ion beam super ultra mega epic
+- Playtest to debug nullifier AI script
+- Playtest everything !!
 
 Ghostbusters Stuff:
 - Have the fleet commander send fighters to do shit that actually matters
@@ -85,6 +68,14 @@ Version 1.0 Stuff: (first 'official' release, no advanced campaign mechanics)
 - Expand my custom fleet commander to work outside of missions
 - Improve the visual communication about the behavior of nullifier
 - Create a csv with variants attached to a captain personality, maybe also mad skillz. Will need a util class to interpret
+    3. Name the faction and preliminary implementation - ??? Synarchy
+    4. Add a faction flag
+
+Fighter stuff:
+- Make engagement range dependent on ECM rating
+- Make support fighter benefit from parent's multiplicative range bonuses
+- Update hexshield to be single-use and need to be rearmed, and add custom auto-rearm behavior to damaged fighters (look at how concord does it?)
+- Make KB fighter gun disable itself and/or entire thing randomly vanish from existence when the gun shoots
 
 
 Version Whatever Stuff: (easy to do, but not a priority)
@@ -99,8 +90,6 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - Figure out a better way to display skills in main menu missions
 - ensure that two ships don't accidentally use hacking suite on the same target simultaneously
 - add status indicators for mnemonic armor - armor % imbalanced, % armor remaining - maybe use an indicator above the hull bar
-- rework hexshield behavior to be one-time-use, check if concord can explain to me how to get them to rearm it
-- make KB fighter randomly vanish from existence when the gun shoots - maybe do emp or something
 - Do normals properly with modlab
 - Add normals for decos
 - Convert my AI code to use AI grids for proximity checks so it can be less laggy maybe
@@ -110,9 +99,14 @@ Version Whatever Stuff: (easy to do, but not a priority)
 - Turret arc pass for heavy cruiser & capital
 - Revisit my capacitor count to hit the intended hardened shields breakpoint
 - Figure out how to feel about my kite having a builtin wing
-- Make SO count as a dmod
+- Make SO count as a dmod (so it gets removed when you restore a hull o have dmod restoration)
 - Figure out how to stop my ships from sitting there eating hellbore shots when overloaded
 - Normalize my armor grid cell locations with the code that xaiier gave me (where was it?)
+- Convert my EFS plugins to be advanceable listeners instead
+- Stop eating salamanders
+- Add custom behavior to make ion beam super ultra mega epic (whatever that means)
+- Do a pass on infotext and status indicators for all systems now that I know how
+- Fix aux thrusters on the advanced destroyer and light cruiser being dumb af
 
 
 Version 2.0 Stuff: (agent fleet, proper colony behavior)

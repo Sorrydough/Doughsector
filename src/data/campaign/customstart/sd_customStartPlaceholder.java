@@ -2,15 +2,11 @@ package data.campaign.customstart;
 
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.Script;
-import com.fs.starfarer.api.SettingsAPI;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.rules.MemKeys;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.CharacterCreationData;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
-import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.impl.campaign.GateEntityPlugin;
@@ -18,26 +14,23 @@ import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.rulecmd.AddRemoveCommodity;
 import com.fs.starfarer.api.impl.campaign.rulecmd.NGCAddStandardStartingScript;
-import com.fs.starfarer.ui.P;
 import exerelin.campaign.ExerelinSetupData;
 import exerelin.campaign.PlayerFactionStore;
 import exerelin.campaign.customstart.CustomStart;
 import exerelin.utilities.StringHelper;
-import org.lazywizard.console.Console;
 import org.magiclib.util.MagicCampaign;
 import org.magiclib.util.MagicVariables;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-//Placeholder start for mod testing. Start with a small fleet, a blueprint package, and near a random gate in the sector.
+// Start with a small fleet near a random gate in the sector.
 @SuppressWarnings("unused")
 public class sd_customStartPlaceholder extends CustomStart {
 
     SectorEntityToken loc = null;
     GateEntityPlugin gate = null;
-    String flagship = null;
+    String flagshipHullID = null;
 
     @Override
     public void execute(InteractionDialogAPI dialog, Map<String, MemoryAPI> memoryMap) {
@@ -98,7 +91,7 @@ public class sd_customStartPlaceholder extends CustomStart {
                     }
 
                     if (location == null) {
-                        String msg = "Critical error: expected to find an inactive gate in a derelict or remnant system.\n"
+                        String msg = "Error: expected to find an inactive gate in a derelict or remnant system.\n"
                                 + "This is most likely caused by another mod that removes or alters these objects.\n"
                                 + "Please make an issue ticket on Sorrydough's github repo with info on how to reproduce.\n"
                                 + "If you can't reproduce it, you probably just got astronomically unlucky and can ignore this.";
@@ -160,9 +153,7 @@ public class sd_customStartPlaceholder extends CustomStart {
 
         data.addScript(() -> {
             CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
-
             NGCAddStandardStartingScript.adjustStartingHulls(fleet);
-
             fleet.getFleetData().ensureHasFlagship();
 
             for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
@@ -183,7 +174,7 @@ public class sd_customStartPlaceholder extends CustomStart {
                 @Override
                 public void advance(float amount) {
                     for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
-                        if (Objects.equals(member.getHullSpec().getDParentHullId(), flagship)) { // fml for needing to do this
+                        if (Objects.equals(getOriginalHullID(member), flagshipHullID)) { // fml for needing to do this
                             fleet.getFleetData().setFlagship(member);
                             member.setCaptain(fleet.getCommander());
                             break;
@@ -198,8 +189,7 @@ public class sd_customStartPlaceholder extends CustomStart {
             });
         });
 
-        dialog.getVisualPanel().showFleetInfo(StringHelper.getString("exerelin_ngc", "playerFleet", true),
-                tempFleet, null, null);
+        dialog.getVisualPanel().showFleetInfo(StringHelper.getString("exerelin_ngc", "playerFleet", true), tempFleet, null, null);
 
         dialog.getOptionPanel().addOption(StringHelper.getString("done", true), "nex_NGCDone");
         dialog.getOptionPanel().addOption(StringHelper.getString("back", true), "nex_NGCStartBack");
@@ -214,8 +204,13 @@ public class sd_customStartPlaceholder extends CustomStart {
         if (special.equals("flagship")) {
             fleet.getFleetData().setFlagship(temp);
             temp.setCaptain(data.getPerson());
-            flagship = temp.getHullId(); // if this looks arbitrary and janky, you're right. You can blame alex for making d-mod hullspecs different from non-dmod.
+
+            flagshipHullID = getOriginalHullID(temp); // thank you alex for gracing us with dmod hullspecs
         }
         AddRemoveCommodity.addFleetMemberGainText(temp.getVariant(), dialog.getTextPanel());
+    }
+
+    public String getOriginalHullID(FleetMemberAPI fleetMember) {
+        return fleetMember.getHullSpec().getDParentHullId() != null ? fleetMember.getHullSpec().getDParentHullId() : fleetMember.getHullId();
     }
 }

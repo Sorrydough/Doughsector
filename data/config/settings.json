@@ -2,12 +2,12 @@
 	"designTypeColors":{
 		"???":[250, 235, 215, 255]
 	},
-	"graphics": {
-		"characters": {
-			"sd_ghostbusters1":"graphics/portraits/sd_app_092.png",
-			"sd_ghostbusters2":"graphics/portraits/sd_app_087.png"
-		}
-	},
+	#"graphics": {
+	#	"characters": {
+	#		"sd_ghostbusters1":"",
+	#		"sd_ghostbusters2":""
+	#	}
+	#},
 	"plugins": {
 		"combatReadinessPlugin":"data.vanilla.sd_combatreadinessPlugin",
 		"sd_combatEFSPlugin":"data.sd_combatEFSPlugin"

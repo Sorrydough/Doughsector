@@ -12,7 +12,7 @@ sd_motearmor,SHIP_SYSTEM,Rebalances the ship’s armor grid and has powerful sid
 sd_hackingsuite,SHIP_SYSTEM,Interferes with the target’s shipsystem. Especially dangerous to automated ships.
 sd_nullifier,SHIP_SYSTEM,Accelerates the decay of the target’s combat readiness and normalizes their timeflow with that of realspace. Generates flux according to the magnitude of the timeflow correction.
 ,,
-sd_fightersupport,SHIP,
-sd_fighterblaster,SHIP,"The Excision mounts a crude kinetic blaster. Its prototype characteristics dictate the fighter’s design profile: catastrophic weapon malfunctions are the norm, necessitating an uncrewed drone chassis. The need for a commlink to the host ship hinders the fighter’s engagement range."
-sd_fighterion,SHIP,
-sd_fightercanister,SHIP,"While lacking the firepower that other bombers provide at this logistics profile, the Hail is durable and easy to rearm, making it quite effective at keeping the pressure up in protracted engagements with its versatile bombload."
+sd_fightersupport,SHIP,"An advanced support fighter, it also benefits from its parent ship’s range bonuses."
+sd_fighterblaster,SHIP,"Experimental and notably unstable, the Excision mounts a prototype kinetic blaster inherently unsuitable for manned deployment. Linked to its carrier via a neural interface to avoid direct operator exposure, the system is vulnerable to disruption and limited by the fleet’s electronic warfare capabilities."
+sd_fighterion,SHIP,"Functionally a swarm of tiny ion beams, this expendable remote-controlled drone fighter excels at disabling isolated targets or distracting for other smart weapons. The need for a realtime commlink to the host ship makes its engagement range dependent on the fleet’s electronic warfare capabilities."
+sd_fightercanister,SHIP,"While lacking the firepower that other bombers provide at this logistics profile, the Hail is durable and easy to rearm, allowing it to keep the pressure up in protracted engagements with its versatile bombload."

@@ -3,7 +3,7 @@
     "hullId": "sd_capitaldreadnought",
     "hullSize": "CAPITAL_SHIP",
     "style": "SD_MILTECH",
-    "spriteName": "mods/Doughsector/graphics/ships/sd_capitaldreadnought.png",
+    "spriteName": "graphics/ships/sd_capitaldreadnought.png",
     "height": 440,
     "width": 220,
     "center": [
