@@ -13,7 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "sd_utilityhullmod",
-    "sd_motefield"
+    "delicate"
   ],
   "builtInWeapons": {
     "DEC01": "sd_decoBlinker",

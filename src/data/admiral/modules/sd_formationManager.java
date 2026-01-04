@@ -30,22 +30,22 @@ public class sd_formationManager {
             sd_fleetadmiralUtil.applyAssignment(battleState.allyFleetManager.getDeployedFleetMember(battleState.deployedAllyShips.get(0)), CombatAssignmentType.DEFEND, battleState.allySide);
     }
 
-    private void assignDestroyersToEscort(sd_fleetadmiralUtil.battlestateTracker battleState) {
-        List<ShipAPI> destroyers = new ArrayList<>();
-        List<ShipAPI> potentialTargets = new ArrayList<>();
-        for (ShipAPI ship : battleState.deployedAllyShips) {
-            if (ship.getHullSize().ordinal() > ShipAPI.HullSize.DESTROYER.ordinal())
-                potentialTargets.add(ship);
-            else if (ship.getHullSize() == ShipAPI.HullSize.DESTROYER)
-                destroyers.add(ship);
-        }
-        //potentialTargets.reversed();
-
-        //distribute destroyers among allied ships, we reversed the list so we start at the smallest cruiser and then move to the biggest capital
-        //biggest capital gets 2, the rest each get 1. Then if we still have destroyers left over, restart the allocation.
-
-
-    }
+//    private void assignDestroyersToEscort(sd_fleetadmiralUtil.battlestateTracker battleState) {
+//        List<ShipAPI> destroyers = new ArrayList<>();
+//        List<ShipAPI> potentialTargets = new ArrayList<>();
+//        for (ShipAPI ship : battleState.deployedAllyShips) {
+//            if (ship.getHullSize().ordinal() > ShipAPI.HullSize.DESTROYER.ordinal())
+//                potentialTargets.add(ship);
+//            else if (ship.getHullSize() == ShipAPI.HullSize.DESTROYER)
+//                destroyers.add(ship);
+//        }
+//        //potentialTargets.reversed();
+//
+//        //distribute destroyers among allied ships, we reversed the list so we start at the smallest cruiser and then move to the biggest capital
+//        //biggest capital gets 2, the rest each get 1. Then if we still have destroyers left over, restart the allocation.
+//
+//
+//    }
 
 
         // todo: check for the largest ship that isn't out of position, instead of the largest ship generally

@@ -85,7 +85,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
                 .setLevel(4)
                 .setGender(FullName.Gender.MALE)
                 .setPersonality(Personalities.AGGRESSIVE)
-                .setPortraitId("graphics/portraits/godiva.jpg")
+                .setPortraitId("graphics/portraits/sd_placeholder.png")
                 .setSkillLevels(REDADMIRALSKILLS)
                 .create();
         REDFLAGSHIP.setCaptain(REDADMIRAL);

@@ -35,6 +35,7 @@ public class sd_objectiveManager {
         if (!doHaveAllObjectives && !isAttackingObjective)
             attackObjective(battleState.allySide);
     }
+
     private static void attackObjective(int owner) {
         for (BattleObjectiveAPI objective : Global.getCombatEngine().getObjectives()) {
             if (Objects.equals(objective.getType(), BattleObjectives.SENSOR_JAMMER) && objective.getOwner() != owner) {

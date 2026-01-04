@@ -49,8 +49,8 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
             doInit = false;
         }
 
-        if (battleState.deployedAllyShips.get(0) != null && battleState.deployedAllyShips.get(0).getFluxLevel() < 0.5)
-            battleState.deployedAllyShips.get(0).getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);
+//        if (battleState.deployedAllyShips.get(0) != null && battleState.deployedAllyShips.get(0).getFluxLevel() < 0.5)
+//            battleState.deployedAllyShips.get(0).getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);
 
         interval.advance(amount);
         if (interval.intervalElapsed()) {
@@ -69,7 +69,7 @@ public class sd_fleetadmiralController implements AdmiralAIPlugin {
             if (!battleState.deployedAllyShips.isEmpty()) {
                 sd_formationManager.manageFormation(battleState);
                 sd_objectiveManager.manageAttackedObjectives(battleState);
-                sd_attackManager.manageAttackedEnemies(battleState);
+                //sd_attackManager.manageAttackedEnemies(battleState);
             }
 
             if (debug)

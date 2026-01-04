@@ -3,6 +3,8 @@ package data.campaign.customstart;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.campaign.econ.EconomyAPI;
+import com.fs.starfarer.api.campaign.listeners.EconomyTickListener;
 import com.fs.starfarer.api.campaign.rules.MemKeys;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.characters.CharacterCreationData;
@@ -12,6 +14,7 @@ import com.fs.starfarer.api.fleet.FleetMemberType;
 import com.fs.starfarer.api.impl.campaign.GateEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.impl.campaign.rulecmd.AddRemoveCommodity;
 import com.fs.starfarer.api.impl.campaign.rulecmd.NGCAddStandardStartingScript;
 import exerelin.campaign.ExerelinSetupData;
@@ -173,6 +176,11 @@ public class sd_customStartPlaceholder extends CustomStart {
 
                 @Override
                 public void advance(float amount) {
+                    if (!Global.getSector().getIntelManager().hasIntelOfClass(sd_CustomStartManager.class)) {
+                        sd_CustomStartManager intel = new sd_CustomStartManager(loc);
+                        Global.getSector().getIntelManager().addIntel(intel, false);
+                    }
+
                     for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
                         if (Objects.equals(getOriginalHullID(member), flagshipHullID)) { // fml for needing to do this
                             fleet.getFleetData().setFlagship(member);
@@ -194,6 +202,40 @@ public class sd_customStartPlaceholder extends CustomStart {
         dialog.getOptionPanel().addOption(StringHelper.getString("done", true), "nex_NGCDone");
         dialog.getOptionPanel().addOption(StringHelper.getString("back", true), "nex_NGCStartBack");
     }
+
+    public static class sd_CustomStartManager extends BaseIntelPlugin implements EconomyTickListener {
+
+        final float BASE_CHANCE = 1f / 30f; // do thing every 30 ticks on average
+        boolean finished = false;
+        private final SectorEntityToken gateToken;
+
+        
+
+
+        public sd_CustomStartManager(SectorEntityToken gateToken) {
+            this.gateToken = gateToken;
+        }
+
+
+        float accumulatedChance = 0f;
+        @Override
+        public void reportEconomyTick(int iterIndex) {
+            accumulatedChance += BASE_CHANCE;
+            if (Math.random() < accumulatedChance) {
+                accumulatedChance = 0f;
+                //spawnThing();
+            }
+
+        }
+
+        public boolean isDone() {
+            return finished;
+        }
+        @Override
+        public void reportEconomyMonthEnd() {}
+    }
+
+
 
     public void addFleetMember(String vid, InteractionDialogAPI dialog, CharacterCreationData data, CampaignFleetAPI fleet, String special) {
         data.addStartingFleetMember(vid, FleetMemberType.SHIP);
