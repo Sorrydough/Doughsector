@@ -11,16 +11,21 @@ import com.fs.starfarer.api.characters.CharacterCreationData;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberType;
+import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.GateEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.rulecmd.AddRemoveCommodity;
 import com.fs.starfarer.api.impl.campaign.rulecmd.NGCAddStandardStartingScript;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
+import com.fs.starfarer.api.util.Misc;
 import exerelin.campaign.ExerelinSetupData;
 import exerelin.campaign.PlayerFactionStore;
 import exerelin.campaign.customstart.CustomStart;
 import exerelin.utilities.StringHelper;
+import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
 import org.magiclib.util.MagicVariables;
 
@@ -224,6 +229,11 @@ public class sd_customStartPlaceholder extends CustomStart {
             if (Math.random() < accumulatedChance) {
                 accumulatedChance = 0f;
                 //spawnThing();
+                //thing.setcircularOrbit(gateToken.getLocation(), MathUtils.getRandomNumberInRange(0f, 360f), MathUtils.getRandomNumberInRange(20f, 150f), 30f);
+                //add cargo like this but make it not kotlin:
+                //val cargo = Global.getFactory().createCargo(false);
+                //cargo.addSpecial(SpecialItemData("ship_bp", "apogee"), 1f);
+                //BaseSalvageSpecial.addExtraSalvage(ship, cargo);
             }
 
         }
@@ -255,4 +265,49 @@ public class sd_customStartPlaceholder extends CustomStart {
     public String getOriginalHullID(FleetMemberAPI fleetMember) {
         return fleetMember.getHullSpec().getDParentHullId() != null ? fleetMember.getHullSpec().getDParentHullId() : fleetMember.getHullId();
     }
+
+    public static SectorEntityToken cs_createDerelict(
+            String variantId,
+            String name,
+            LocationAPI location,
+            ShipRecoverySpecial.ShipCondition condition,
+            boolean unscrappable) {
+
+        // Base ship data
+        ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData(variantId, condition, 0f);
+
+        if (name != null) {
+            ship.shipName = name;
+            ship.nameAlwaysKnown = true;
+        }
+
+        // Wrap it as a derelict entity
+        DerelictShipEntityPlugin.DerelictShipData derelictData = new DerelictShipEntityPlugin.DerelictShipData(ship, false);
+
+        CustomCampaignEntityAPI entity = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
+                        location,
+                        Entities.WRECK,
+                        Factions.NEUTRAL,
+                        derelictData);
+
+        // Salvage special setup
+        ShipRecoverySpecial.ShipRecoverySpecialData salvageData = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
+
+        salvageData.notNowOptionExits = unscrappable;
+        salvageData.noDescriptionText = unscrappable;
+
+        // Clone the ship so it is fully recoverable
+        DerelictShipEntityPlugin plugin = (DerelictShipEntityPlugin) entity.getCustomPlugin();
+
+        ShipRecoverySpecial.PerShipData copy = plugin.getData().ship.clone();
+
+        copy.variant = Global.getSettings().getVariant(copy.variantId).clone();
+        copy.variantId = null;
+
+        salvageData.addShip(copy);
+        Misc.setSalvageSpecial(entity, salvageData);
+
+        return entity;
+    }
+
 }
